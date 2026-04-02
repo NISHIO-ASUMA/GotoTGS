@@ -59,8 +59,8 @@
 //*********************************************************
 // クリア変数マクロ定義
 //*********************************************************
-#define VECTOR3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// VECTOR3座標初期化
-#define VECTOR4_NULL (D3DXVECTOR4(0.0f, 0.0f, 0.0f,0.0f))	// VECTOR4座標初期化
+#define VEC3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// VECTOR3座標初期化
+#define VEC4_NULL (D3DXVECTOR4(0.0f, 0.0f, 0.0f,0.0f))	// VECTOR4座標初期化
 #define INITSCALE (D3DXVECTOR3(1.0f, 1.0f, 1.0f))			// 初期拡大率
 #define CENTERPOS (D3DXVECTOR3(640.0f, 360.0f, 0.0f))		// 画面の中心座標
 #define HALFWIDTH (SCREEN_WIDTH * 0.5f)						// スクリーンの横幅の半分
@@ -72,17 +72,16 @@
 //*********************************************************
 // カラーマクロ定義
 //*********************************************************
-#define COLOR_BLACK (D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f))		// 黒
-#define COLOR_CLEAR (D3DXCOLOR(1.0f,1.0f,1.0f,0.0f))		// 透明
-#define COLOR_WHITE (D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f))		// 白
-#define COLOR_RED	(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f))		// 赤
-#define COLOR_GREEN (D3DXCOLOR(0.0f, 1.0f, 0.0f, 0.75f))	// 緑
-#define COLOR_YERROW (D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f))	// 黄色
-#define COLOR_BLUE	 (D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f))	// 青
-#define COLOR_PURPLE (D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f))	// 紫
-#define COLOR_GLAY	 (D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f))	// グレー
-#define LASER		 (D3DXCOLOR(0.05f, 0.05f, 1.0f, 1.0f))	// レーザーカラー
-#define COLOR_NULL	 (D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f))	// 完全透明
+#define COLOR_BLACK (D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f))			// 黒
+#define COLOR_CLEAR (D3DXCOLOR(1.0f,1.0f,1.0f,0.0f))			// 透明
+#define COLOR_WHITE (D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f))			// 白
+#define COLOR_RED	(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f))			// 赤
+#define COLOR_GREEN (D3DXCOLOR(0.0f, 1.0f, 0.0f, 0.75f))		// 緑
+#define COLOR_YERROW (D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f))		// 黄色
+#define COLOR_BLUE	 (D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f))		// 青
+#define COLOR_PURPLE (D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f))		// 紫
+#define COLOR_GLAY	 (D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f))		// グレー
+#define COLOR_NULL	 (D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f))		// 完全透明
 #define V_COLOR_WHITE (D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 1.0f))	// モデルのカラー白
 #define V_COLOR_RED (D3DCOLORVALUE(1.0f, 0.0f, 0.0f, 1.0f))		// モデルのカラー赤
 #define OUTLINE_COLOR (D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f))		// アウトライン基準カラー
