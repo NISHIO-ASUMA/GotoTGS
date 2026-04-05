@@ -13,15 +13,735 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\MainLoop">
+      <UniqueIdentifier>{34bc77cb-a693-4ffa-bd5c-cd8bb2a1c17a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MainLoop">
+      <UniqueIdentifier>{bd986d5d-be20-42b8-a56d-4e426e362d50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager">
+      <UniqueIdentifier>{ee72c989-c514-4b31-b65b-2702ab4ba31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager">
+      <UniqueIdentifier>{8c8dd9aa-9104-496d-a34a-6a871882f2c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\Systems">
+      <UniqueIdentifier>{ded893fb-b3fd-4a0c-b601-9065128e2c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager\Systems">
+      <UniqueIdentifier>{a282952b-7f4c-49da-8d7a-021c33fc9f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Manager\other">
+      <UniqueIdentifier>{061f7114-3d08-4f9b-b3fc-1ddcf53513fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\other">
+      <UniqueIdentifier>{85d72adc-98a6-4608-97a9-cda1e973b8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Physics">
+      <UniqueIdentifier>{4ced9aff-93a3-4ef2-8484-da55939681f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Physics\Collider">
+      <UniqueIdentifier>{718bb2e4-85e5-4fd5-aae6-348d253f8dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Physics\Collision">
+      <UniqueIdentifier>{3743c366-a2c3-4724-8d8c-5800b522ec9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass">
+      <UniqueIdentifier>{182d87d0-7aa9-4344-aaf4-9473325d52d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass\2D">
+      <UniqueIdentifier>{8499fae9-b10f-4c35-876a-a863a54de858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass\3D">
+      <UniqueIdentifier>{99fda056-ec81-4c86-a2ba-86c07924b00a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass\Charactor">
+      <UniqueIdentifier>{3ab170a7-c848-40b4-bf56-d9cee67635ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass\XFile">
+      <UniqueIdentifier>{b20c4292-8cb1-404c-83bf-764e9397160c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectClass\Base">
+      <UniqueIdentifier>{63e5dbee-f164-40ab-b661-61d95792c456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass">
+      <UniqueIdentifier>{2276367c-b10c-4149-a50c-24665a8befae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass\2D">
+      <UniqueIdentifier>{11cf7e89-d09d-4b58-89ed-27715c2ffb7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass\3D">
+      <UniqueIdentifier>{6a4b5a48-51bc-4acb-85a4-28322b673c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass\Charactor">
+      <UniqueIdentifier>{24d74c26-0c83-4b48-b63e-e2a2ddb96218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass\Base">
+      <UniqueIdentifier>{2c2c4ab9-171d-4bfd-b100-4c3589235718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Physics">
+      <UniqueIdentifier>{76eb5756-d393-42f9-83a6-b50e420f86cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Physics\Collider">
+      <UniqueIdentifier>{26a62782-028e-4d5e-b6d8-19b3b9295d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Physics\Collision">
+      <UniqueIdentifier>{7bcfabfb-1fd4-4e32-a15d-b6b6bd1d884f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ObjectClass\XFile">
+      <UniqueIdentifier>{c610c6b7-aff2-4cb3-bc7e-0a91227cf098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Effect">
+      <UniqueIdentifier>{86c1a98c-432b-4f61-98e8-5baf8b58507c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Effect">
+      <UniqueIdentifier>{f70fbd5f-fb8a-41b3-a482-248a3c626c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\XFileModel">
+      <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\JsonUtil">
+      <UniqueIdentifier>{db469dad-13e4-4145-95d9-2b0d5bfaca49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Support">
+      <UniqueIdentifier>{11a8552a-90bf-4753-8163-8294aa9fa7ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Support">
+      <UniqueIdentifier>{4d6b68cb-cee8-4d3b-8afc-8b78c12f6369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\JsonUtil">
+      <UniqueIdentifier>{7494d62e-c2eb-4813-b98c-3684c09ad04c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\JsonUtil\BaseClass">
+      <UniqueIdentifier>{bb4907c7-c811-49cf-9139-09f86a79a7ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\JsonUtil\CreateClass">
+      <UniqueIdentifier>{77690179-afe8-4990-8b6a-e48f18e4c1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\JsonUtil\BaseClass">
+      <UniqueIdentifier>{8446ad35-e908-4775-a2b2-8a2ed5471d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\JsonUtil\CreateClass">
+      <UniqueIdentifier>{271b53ee-7085-4684-82ea-99e62e581769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{e38d91c0-8549-4622-bfe5-8331417dc457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneBase">
+      <UniqueIdentifier>{bfa731c4-3178-4dec-9606-ebb290c46b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneManager">
+      <UniqueIdentifier>{f885a96a-aee4-43d4-8feb-82d2ffa77040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneObject">
+      <UniqueIdentifier>{829b1b55-2d1d-48b2-bad3-537d90e26849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\OutSide">
+      <UniqueIdentifier>{14ab50ab-462f-4023-adf3-fdb91b1de846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\OutSide">
+      <UniqueIdentifier>{c1dd2297-7972-4d27-9269-2045efecf5e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{f754e39f-01a8-46b5-abd0-e9899acb4650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\BaseClass">
+      <UniqueIdentifier>{65d9530e-69ef-43b6-8d68-601036f50e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneManager">
+      <UniqueIdentifier>{f6fdbb15-c6b0-495a-b227-2c75579cf8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneObject">
+      <UniqueIdentifier>{683c49bb-1da9-4e84-a52b-3e8260f7b6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{e40c7464-82fe-4bd4-ad9c-ea0925589371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Shader">
+      <UniqueIdentifier>{6647cf30-3f1d-4600-a13f-8117de95b310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Motion">
+      <UniqueIdentifier>{ef748a83-2e7f-4e83-aa34-ad660316ead3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Number">
+      <UniqueIdentifier>{19d2da06-350b-42ea-ab3d-4d9b29dc3254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Number\BaseClass">
+      <UniqueIdentifier>{bbaa430a-2b5c-47e4-9a2b-e781979c57a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Motion">
+      <UniqueIdentifier>{9c6e2e21-8000-439a-9ba9-43cafd00ed58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\XFile">
+      <UniqueIdentifier>{14e79e0f-1c48-4493-9489-d0bdf75f6a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Number">
+      <UniqueIdentifier>{1a2533f7-d3b5-4ab2-bd75-8861bb141c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Number\BaseClass">
+      <UniqueIdentifier>{1749b79a-9fc0-4ec5-a900-98a7a1957d9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Mesh">
+      <UniqueIdentifier>{b58e6343-7fb4-4c56-a939-f0aa3b9dd4b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Mesh">
+      <UniqueIdentifier>{3c16922c-423e-4508-80a4-9b45e83d3904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Ui">
+      <UniqueIdentifier>{23a8b35f-160b-42e4-8d14-094b51a42acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Ui">
+      <UniqueIdentifier>{a462e96b-e678-4e07-85b0-93e62905ab5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Pause">
+      <UniqueIdentifier>{7ec24cfe-7112-4c93-afa1-7aadba9a08c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Pause">
+      <UniqueIdentifier>{c8ffdcfe-d19a-45af-9c4a-ff9cc4fc0966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State">
+      <UniqueIdentifier>{339d424a-6210-4e27-80a4-0fa9832ab69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\BaseClass">
+      <UniqueIdentifier>{632b8a83-3b20-4649-91a1-e6caf7fd8478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\CreateClass">
+      <UniqueIdentifier>{f7a82e4b-7400-48e1-a844-ed291dc31cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\State">
+      <UniqueIdentifier>{42deee99-4075-4809-ae12-dec5bc8649bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\State\BaseState">
+      <UniqueIdentifier>{6b42bd53-40d0-4d61-b544-e6b1ebddf982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\State\CreateClass">
+      <UniqueIdentifier>{6a3bddf1-057f-4fee-b629-884a4ea77c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Shadow">
+      <UniqueIdentifier>{3ccd4fc2-7077-4c9f-a021-cf9efcea0785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shadow">
+      <UniqueIdentifier>{3ce96109-4c94-4372-ae77-89bd50524ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Number\Score">
+      <UniqueIdentifier>{add0e4e2-eead-4ff3-a1e6-1b67d9436d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Number\Score">
+      <UniqueIdentifier>{317dccb2-a0e0-4a08-9229-b6b900642260}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\MainLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\main.cpp">
+      <Filter>ソース ファイル\MainLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\billboard.cpp">
+      <Filter>ソース ファイル\ObjectClass\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\collider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\collision.cpp">
+      <Filter>ソース ファイル\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\collisionbox.cpp">
+      <Filter>ソース ファイル\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\collisionsphere.cpp">
+      <Filter>ソース ファイル\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\objectX.cpp">
+      <Filter>ソース ファイル\ObjectClass\XFile</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\renderer.cpp">
+      <Filter>ソース ファイル\MainLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\nomovecharactor.cpp">
+      <Filter>ソース ファイル\ObjectClass\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\movecharactor.cpp">
+      <Filter>ソース ファイル\ObjectClass\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\manager.cpp">
+      <Filter>ソース ファイル\MainLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\object3D.cpp">
+      <Filter>ソース ファイル\ObjectClass\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\object2D.cpp">
+      <Filter>ソース ファイル\ObjectClass\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\object.cpp">
+      <Filter>ソース ファイル\ObjectClass\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\animationobject2d.cpp">
+      <Filter>ソース ファイル\ObjectClass\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\block.cpp">
+      <Filter>ソース ファイル\XFileModel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\easing.cpp">
+      <Filter>ソース ファイル\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\debugproc.cpp">
+      <Filter>ソース ファイル\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\jsonmanager.cpp">
+      <Filter>ソース ファイル\JsonUtil\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\jsonconverter.cpp">
+      <Filter>ソース ファイル\JsonUtil\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonblock.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonblocknormal.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsoncharactor.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonmeshdome.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonmeshfield.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonnomove.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonui.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonwall.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\scene.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\fade.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\sound.cpp">
+      <Filter>ソース ファイル\OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\texture.cpp">
+      <Filter>ソース ファイル\OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\camera.cpp">
+      <Filter>ソース ファイル\OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\input.cpp">
+      <Filter>ソース ファイル\OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\light.cpp">
+      <Filter>ソース ファイル\OutSide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\xfilemanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\modelmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\model.cpp">
+      <Filter>ソース ファイル\XFileModel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\outline.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\boxtospherecollision.cpp">
+      <Filter>ソース ファイル\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\instancemodel.cpp">
+      <Filter>ソース ファイル\XFileModel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\motion.cpp">
+      <Filter>ソース ファイル\Motion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\motioninstancing.cpp">
+      <Filter>ソース ファイル\Motion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\number.cpp">
+      <Filter>ソース ファイル\Number\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\instancemodelmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\instancing.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\instancingcharactor.cpp">
+      <Filter>ソース ファイル\ObjectClass\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meshcylinder.cpp">
+      <Filter>ソース ファイル\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meshdome.cpp">
+      <Filter>ソース ファイル\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meshfield.cpp">
+      <Filter>ソース ファイル\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meshimpact.cpp">
+      <Filter>ソース ファイル\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meshpiler.cpp">
+      <Filter>ソース ファイル\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutorial.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\game.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ranking.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\result.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\title.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\ui.cpp">
+      <Filter>ソース ファイル\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\pause.cpp">
+      <Filter>ソース ファイル\Pause</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\pausemanager.cpp">
+      <Filter>ソース ファイル\Pause</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\load.cpp">
+      <Filter>ソース ファイル\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutorialmanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gamemanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\rankingmanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultmanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\titlemanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gamesceneobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\rankingobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\titleobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutorialobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gamestate.cpp">
+      <Filter>ソース ファイル\State\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\score.cpp">
+      <Filter>ソース ファイル\Number\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\shadow.cpp">
+      <Filter>ソース ファイル\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\shadowstencil.cpp">
+      <Filter>ソース ファイル\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\rankingscore.cpp">
+      <Filter>ソース ファイル\Number\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultscore.cpp">
+      <Filter>ソース ファイル\Number\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultscoremanager.cpp">
+      <Filter>ソース ファイル\Number\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\motionmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\instancemotionmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\blockmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gamewallmodel.cpp">
+      <Filter>ソース ファイル\XFileModel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\worldwallmanager.cpp">
+      <Filter>ソース ファイル\Manager\other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\MainLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\main.h">
+      <Filter>ヘッダー ファイル\MainLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\billboard.h">
+      <Filter>ヘッダー ファイル\ObjectClass\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\collider.h">
+      <Filter>ヘッダー ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\collision.h">
+      <Filter>ヘッダー ファイル\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\collisionbox.h">
+      <Filter>ヘッダー ファイル\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\collisionsphere.h">
+      <Filter>ヘッダー ファイル\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\manager.h">
+      <Filter>ヘッダー ファイル\MainLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\renderer.h">
+      <Filter>ヘッダー ファイル\MainLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\objectX.h">
+      <Filter>ヘッダー ファイル\ObjectClass\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\object3D.h">
+      <Filter>ヘッダー ファイル\ObjectClass\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\movecharactor.h">
+      <Filter>ヘッダー ファイル\ObjectClass\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\nomovecharactor.h">
+      <Filter>ヘッダー ファイル\ObjectClass\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\object.h">
+      <Filter>ヘッダー ファイル\ObjectClass\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\object2D.h">
+      <Filter>ヘッダー ファイル\ObjectClass\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\easing.h">
+      <Filter>ヘッダー ファイル\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\debugproc.h">
+      <Filter>ヘッダー ファイル\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\block.h">
+      <Filter>ヘッダー ファイル\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\animationobject2d.h">
+      <Filter>ヘッダー ファイル\ObjectClass\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\jsonconverter.h">
+      <Filter>ヘッダー ファイル\JsonUtil\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\jsoncreator.h">
+      <Filter>ヘッダー ファイル\JsonUtil\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\jsonmanager.h">
+      <Filter>ヘッダー ファイル\JsonUtil\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonblock.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonblocknormal.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsoncharactor.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonmeshdome.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonmeshfield.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonnomove.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonui.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonwall.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\texture.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\sound.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\template.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\camera.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\input.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\light.h">
+      <Filter>ヘッダー ファイル\OutSide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\fade.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\scene.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\outline.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\model.h">
+      <Filter>ヘッダー ファイル\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\modelmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\xfilemanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\boxtospherecollision.h">
+      <Filter>ヘッダー ファイル\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\motion.h">
+      <Filter>ヘッダー ファイル\Motion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\instancemodelmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\instancemotionmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\motionmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\motioninstancing.h">
+      <Filter>ヘッダー ファイル\Motion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\instancemodel.h">
+      <Filter>ヘッダー ファイル\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\number.h">
+      <Filter>ヘッダー ファイル\Number\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\instancing.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\instancingcharactor.h">
+      <Filter>ヘッダー ファイル\ObjectClass\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meshcylinder.h">
+      <Filter>ヘッダー ファイル\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meshdome.h">
+      <Filter>ヘッダー ファイル\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meshfield.h">
+      <Filter>ヘッダー ファイル\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meshimpact.h">
+      <Filter>ヘッダー ファイル\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meshpiler.h">
+      <Filter>ヘッダー ファイル\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ui.h">
+      <Filter>ヘッダー ファイル\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\game.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ranking.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\result.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\title.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorial.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\pause.h">
+      <Filter>ヘッダー ファイル\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\pausemanager.h">
+      <Filter>ヘッダー ファイル\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\load.h">
+      <Filter>ヘッダー ファイル\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorialmanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gamemanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\rankingmanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultmanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titlemanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorialobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gamesceneobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\rankingobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titleobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gamestate.h">
+      <Filter>ヘッダー ファイル\State\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\score.h">
+      <Filter>ヘッダー ファイル\Number\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\shadow.h">
+      <Filter>ヘッダー ファイル\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\shadowstencil.h">
+      <Filter>ヘッダー ファイル\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\rankingscore.h">
+      <Filter>ヘッダー ファイル\Number\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultscoremanager.h">
+      <Filter>ヘッダー ファイル\Number\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultscore.h">
+      <Filter>ヘッダー ファイル\Number\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\blockmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gamewallmodel.h">
+      <Filter>ヘッダー ファイル\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\worldwallmanager.h">
+      <Filter>ヘッダー ファイル\Manager\other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

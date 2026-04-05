@@ -13,8 +13,6 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include <winsock2.h>
-#include <ws2tcpip.h>
 #include <windows.h>
 #include "d3dx9.h"
 #include "d3d9.h"
@@ -59,8 +57,8 @@
 //*********************************************************
 // クリア変数マクロ定義
 //*********************************************************
-#define VEC3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// VECTOR3座標初期化
-#define VEC4_NULL (D3DXVECTOR4(0.0f, 0.0f, 0.0f,0.0f))	// VECTOR4座標初期化
+#define VECTOR3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// VECTOR3座標初期化
+#define VECTOR4_NULL (D3DXVECTOR4(0.0f, 0.0f, 0.0f,0.0f))	// VECTOR4座標初期化
 #define INITSCALE (D3DXVECTOR3(1.0f, 1.0f, 1.0f))			// 初期拡大率
 #define CENTERPOS (D3DXVECTOR3(640.0f, 360.0f, 0.0f))		// 画面の中心座標
 #define HALFWIDTH (SCREEN_WIDTH * 0.5f)						// スクリーンの横幅の半分
