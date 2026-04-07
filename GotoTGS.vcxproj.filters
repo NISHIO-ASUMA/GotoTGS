@@ -229,6 +229,12 @@
     <Filter Include="ヘッダー ファイル\Number\Score">
       <UniqueIdentifier>{317dccb2-a0e0-4a08-9229-b6b900642260}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Charactor">
+      <UniqueIdentifier>{583a06ec-ea67-4918-b764-58d30280e892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Charactor">
+      <UniqueIdentifier>{97497e45-38b1-4832-b440-84a43e3b1e4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -482,6 +488,12 @@
     </ClCompile>
     <ClCompile Include="src\cpp\worldwallmanager.cpp">
       <Filter>ソース ファイル\Manager\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\boxcollider.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\spherecollider.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -742,6 +754,12 @@
     </ClInclude>
     <ClInclude Include="src\include\worldwallmanager.h">
       <Filter>ヘッダー ファイル\Manager\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\boxcollider.h">
+      <Filter>ヘッダー ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\spherecollider.h">
+      <Filter>ヘッダー ファイル\Physics\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

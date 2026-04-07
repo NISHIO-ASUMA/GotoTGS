@@ -14,7 +14,6 @@
 // インクルードファイル
 //*********************************************************
 #include "number.h"
-#include "network.h"
 #include "manager.h"
 
 //=========================================================
@@ -98,7 +97,7 @@ HRESULT CRankingScore::Init(void)
 			m_apNumber[nRank][nDigit]->SetSize(fTexPos, m_fHeight);
 
 			// カラー設定
-			m_apNumber[nRank][nDigit]->SetCol(SCORECOLOR);
+			m_apNumber[nRank][nDigit]->SetCol(COLOR_WHITE);
 
 			// テクスチャ設定
 			m_apNumber[nRank][nDigit]->SetTexture(Config::TEXNAME);
@@ -172,22 +171,5 @@ void CRankingScore::Draw(void)
 //=========================================================
 void CRankingScore::Load(void)
 {
-	// Networkクラス取得
-	CNetWork* pNetWork = CManager::GetInstance()->GetNetWork();
-	if (!pNetWork) return;
-
-	// サーバー接続チェック
-	if (!pNetWork->GetIsConnect()) return;
-
-	// 受信用配列
-	int recvData[Config::RANKING_MAX] = {};
-
-	// ランキングデータを受信出来なかったら
-	if (!pNetWork->RecvInt(recvData)) return;
-
-	// メンバ変数へコピー
-	for (int nRecvScore = 0; nRecvScore < Config::RANKING_MAX; nRecvScore++)
-	{
-		m_aRankData[nRecvScore] = recvData[nRecvScore];
-	}
+	// 読み込み処理をloadクラスに変更
 }

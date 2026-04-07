@@ -13,7 +13,6 @@
 //*******************************************************************
 // インクルードファイル
 //*******************************************************************
-#include "queen.h"
 #include "jsonconverter.h"
 
 //===================================================================
@@ -29,10 +28,4 @@ void CJsonCreateNoMove::Create(const JsonNoMove::json& Jsondata)
 
 	// 角度情報の設定
 	D3DXVECTOR3 rot = CJsonConverter::ConverterVec3(Jsondata, "Rot");
-
-	// 実際の生成処理
-	if (type == "Queen")
-	{
-		CQueen::Create(pos, rot);
-	}
 }

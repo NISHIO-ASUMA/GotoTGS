@@ -16,7 +16,6 @@
 #include "motion.h"
 #include "shadowstencil.h"
 #include "manager.h"
-#include "blackboard.h"
 #include "outline.h"
 
 //=========================================================

@@ -27,8 +27,6 @@
 //*********************************************************
 class CShadowStencil;
 class CModel;
-class CBlackBoard;
-class CNode;
 
 //*********************************************************
 // 動くキャラクタークラスを定義
@@ -69,11 +67,6 @@ public:
 	/// <param name=""></param>
 	/// <returns>
 	inline CMotion* GetMotion(void) { return m_pMotion.get(); }
-
-protected:
-
-	CBlackBoard* m_pBlackBoard = nullptr; // 共通ブラックボード
-	CNode* m_pBehaviorTree = nullptr;	  // ツリーノード
 
 private:
 

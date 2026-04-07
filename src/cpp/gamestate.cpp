@@ -18,9 +18,7 @@
 #include "fade.h"
 #include "result.h"
 #include "gamemanager.h"
-#include "loseresult.h"
 #include "score.h"
-#include "queen.h"
 
 //*********************************************************
 // 定数名前空間
@@ -90,7 +88,6 @@ void CGameState::OnUpdate()
 
 			// スコア情報の書き出し
 			CGameSceneObject::GetInstance()->GetScore()->SaveScore();
-			CGameSceneObject::GetInstance()->GetQueen()->SaveHp();
 
 			// フェードが取得できたら
 			if (pFade != nullptr)
@@ -117,8 +114,8 @@ void CGameState::OnUpdate()
 			// フェードが取得できたら
 			if (pFade != nullptr)
 			{
-				// 負けリザルトシーンに遷移
-				pFade->SetFade(std::make_unique<CLoseResult>());
+				// リザルトシーンに遷移
+				pFade->SetFade(std::make_unique<CResult>());
 			}
 		}
 		break;

@@ -21,7 +21,7 @@
 #include "camera.h"
 #include "result.h"
 #include "fade.h"
-#include "gametime.h"
+//#include "gametime.h"
 
 #ifdef _DEBUG
 #include "debugproc.h"
@@ -135,13 +135,13 @@ void CGame::Update(void)
 		// ゲームオブジェクト更新
 		CGameSceneObject::GetInstance()->Update();
 
-		// 時間が0になったら
-		if (CGameSceneObject::GetInstance()->GetTime()->GetToAll() <= 0)
-		{
-			// ゲーム終了状態に設定
-			m_pState->SetProgress(CGameState::PROGRESS_END);
-			return;
-		}
+		//// 時間が0になったら
+		//if (CGameSceneObject::GetInstance()->GetTime()->GetToAll() <= 0)
+		//{
+		//	// ゲーム終了状態に設定
+		//	m_pState->SetProgress(CGameState::PROGRESS_END);
+		//	return;
+		//}
 
 		// ゲーム終了フラグが有効なら
 		if (CGameManager::GetInstance()->GetIsGameEnd())

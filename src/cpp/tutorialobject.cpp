@@ -15,14 +15,8 @@
 //*********************************************************
 #include "manager.h"
 #include "blockmanager.h"
-#include "queen.h"
-#include "tutoarrayant.h"
-#include "tutorialtopant.h"
-#include "feed.h"
 #include "jsonmanager.h"
-#include "tutorialuimanager.h"
 #include "worldwallmanager.h"
-#include "basemapfeed.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -44,10 +38,7 @@ namespace TUTORIALOBJECT
 // コンストラクタ
 //=========================================================
 CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr),
-m_pTopAnt(nullptr),
-m_pWorldWall(nullptr),
-m_pArrayAnt(nullptr),
-m_pFeed(nullptr)
+m_pWorldWall(nullptr)
 {
 	
 }
@@ -72,22 +63,6 @@ HRESULT CTutorialObject::Init(void)
 	JsonManager->SetBlockManager(m_pBlockManager.get());
 	m_pBlockManager->Init();
 
-	// チュートリアルuiマネージャー
-	CTutorialUiManager::GetInstance()->Init();
-
-	// 基準の餌を生成する
-	CBaseMapFeed::GetInstance()->Init();
-
-	// チュートリアルトップアリの生成
-	m_pTopAnt = CTutoTopAnt::Create(TUTORIALOBJECT::TopAntPos);
-	
-	// 仲間の黒アリ生成
-	m_pArrayAnt = CTutoArrayAnt::Create(TUTORIALOBJECT::ArrayAntPos);
-
-	// 餌を生成
-	m_pFeed = CFeed::Create(TUTORIALOBJECT::FeedPos, VECTOR3_NULL, INITSCALE);
-
-
 	return S_OK;
 }
 //=========================================================
@@ -101,12 +76,6 @@ void CTutorialObject::Uninit(void)
 	// 世界の壁の破棄
 	m_pWorldWall.reset();
 
-	// uiマネージャーの終了
-	CTutorialUiManager::GetInstance()->Uninit();
-
-	// 基準の餌を破棄する
-	//CBaseMapFeed::GetInstance()->Uninit();
-
 	// インスタンスの破棄
 	if (m_pInstance)
 	{
@@ -119,8 +88,6 @@ void CTutorialObject::Uninit(void)
 //=========================================================
 void CTutorialObject::Update(void)
 {
-	// uiマネージャーの更新
-	CTutorialUiManager::GetInstance()->Update();
 }
 //=========================================================
 // インスタンス取得

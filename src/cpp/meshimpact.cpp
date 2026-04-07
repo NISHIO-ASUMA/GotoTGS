@@ -15,8 +15,6 @@
 //*********************************************************
 #include "manager.h"
 #include "debugproc.h"
-#include "player.h"
-#include "effect.h"
 #include "gamemanager.h"
 
 //*********************************************************

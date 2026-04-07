@@ -15,7 +15,6 @@
 //*********************************************************
 #include "manager.h"
 #include "jsonmanager.h"
-#include "titleantmanager.h"
 #include "worldwallmanager.h"
 
 //*********************************************************
@@ -35,8 +34,7 @@ namespace TITLEOBJECT
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTitleObject::CTitleObject() : m_pWallManager(nullptr),
-m_pTitleAntManager(nullptr)
+CTitleObject::CTitleObject() : m_pWallManager(nullptr)
 {
 	
 }
@@ -61,10 +59,6 @@ HRESULT CTitleObject::Init(void)
 	JsonManager->SetWorldWallManager(m_pWallManager.get());
 	m_pWallManager->Init(TITLEOBJECT::WallName);
 
-	// タイトルのアリ生成
-	m_pTitleAntManager = std::make_unique<CTitleAntManager>();
-	m_pTitleAntManager->Init();
-
 	return S_OK;
 }
 //=========================================================
@@ -74,9 +68,6 @@ void CTitleObject::Uninit(void)
 {
 	// タイトルの壁の破棄
 	m_pWallManager.reset();
-
-	// タイトルのアリたちの破棄
-	m_pTitleAntManager.reset();
 
 	// インスタンスの破棄
 	if (m_pInstance)
@@ -90,8 +81,6 @@ void CTitleObject::Uninit(void)
 //=========================================================
 void CTitleObject::Update(void)
 {
-	// タイトルのアリ管理クラスの更新
-	if (m_pTitleAntManager) m_pTitleAntManager->Update();
 }
 //=========================================================
 // シングルトン取得処理

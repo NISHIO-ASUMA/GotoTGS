@@ -14,8 +14,6 @@
 // インクルードファイル
 //*******************************************************************
 #include "manager.h"
-#include "blackboard.h"
-#include "node.h"
 #include "motionmanager.h"
 #include "outline.h"
 #include "motioninstancing.h"
@@ -98,22 +96,6 @@ void CInstancingCharactor::Uninit(void)
 
 	// ポインタ破棄
 	m_pMotion.reset();
-
-	// ノードクラスツリーの破棄
-	if (m_pBehaviorTree)
-	{
-		m_pBehaviorTree->Exit();
-		delete m_pBehaviorTree;
-		m_pBehaviorTree = nullptr;
-	}
-
-	// ブラックボードポインタの破棄
-	if (m_pBlackBoard)
-	{
-		m_pBlackBoard->Clear();
-		delete m_pBlackBoard;
-		m_pBlackBoard = nullptr;
-	}
 
 	// 自身の破棄
 	CObject::Release();

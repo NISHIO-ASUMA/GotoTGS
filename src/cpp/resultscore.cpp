@@ -20,7 +20,6 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "network.h"
 #include "load.h"
 #include "number.h"
 #include "easing.h"
@@ -159,18 +158,6 @@ void CResultScore::Save(void)
 
 	// バイナリ数値データを保存
 	m_pLoad->SaveInt(Config::SAVEFILE, m_nLoadScore);
-
-	// 通信サーバー設定
-	CNetWork* pNetWork = CManager::GetInstance()->GetNetWork();
-	if (!pNetWork) return;
-
-	// 接続していなかったら
-	if (!pNetWork->Connect()) return;
-
-	// サーバーに送信する
-	{
-		pNetWork->SendInt(m_nLoadScore);
-	}
 }
 //=========================================================
 // アニメーション更新関数
