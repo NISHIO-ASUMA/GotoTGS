@@ -97,9 +97,6 @@
     <Filter Include="ヘッダー ファイル\Effect">
       <UniqueIdentifier>{f70fbd5f-fb8a-41b3-a482-248a3c626c89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\XFileModel">
-      <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\JsonUtil">
       <UniqueIdentifier>{db469dad-13e4-4145-95d9-2b0d5bfaca49}</UniqueIdentifier>
     </Filter>
@@ -235,6 +232,9 @@
     <Filter Include="ヘッダー ファイル\Charactor">
       <UniqueIdentifier>{97497e45-38b1-4832-b440-84a43e3b1e4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\XFile">
+      <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -286,7 +286,7 @@
       <Filter>ソース ファイル\ObjectClass\2D</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\block.cpp">
-      <Filter>ソース ファイル\XFileModel</Filter>
+      <Filter>ソース ファイル\XFile</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\easing.cpp">
       <Filter>ソース ファイル\Support</Filter>
@@ -352,7 +352,7 @@
       <Filter>ソース ファイル\Manager\other</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\model.cpp">
-      <Filter>ソース ファイル\XFileModel</Filter>
+      <Filter>ソース ファイル\XFile</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\outline.cpp">
       <Filter>ソース ファイル\Shader</Filter>
@@ -361,7 +361,7 @@
       <Filter>ソース ファイル\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\instancemodel.cpp">
-      <Filter>ソース ファイル\XFileModel</Filter>
+      <Filter>ソース ファイル\XFile</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\motion.cpp">
       <Filter>ソース ファイル\Motion</Filter>
@@ -484,16 +484,16 @@
       <Filter>ソース ファイル\Manager\other</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\gamewallmodel.cpp">
-      <Filter>ソース ファイル\XFileModel</Filter>
+      <Filter>ソース ファイル\XFile</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\worldwallmanager.cpp">
       <Filter>ソース ファイル\Manager\other</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\boxcollider.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\spherecollider.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\boxcollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

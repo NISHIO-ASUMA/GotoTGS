@@ -17,6 +17,7 @@
 #include "blockmanager.h"
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
+#include "meshfield.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -54,14 +55,17 @@ CTutorialObject::~CTutorialObject()
 //=========================================================
 HRESULT CTutorialObject::Init(void)
 {
-	// チュートリアルで使うオブジェクトの読み込み
-	auto JsonManager = CManager::GetInstance()->GetJsonManager();
-	JsonManager->Load(TUTORIALOBJECT::LoadName);
+	// メッシュ生成
+	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
 
-	// ステージマップ読み込み
-	m_pBlockManager = std::make_unique<CBlockManager>();
-	JsonManager->SetBlockManager(m_pBlockManager.get());
-	m_pBlockManager->Init();
+	//// チュートリアルで使うオブジェクトの読み込み
+	//auto JsonManager = CManager::GetInstance()->GetJsonManager();
+	//JsonManager->Load(TUTORIALOBJECT::LoadName);
+
+	//// ステージマップ読み込み
+	//m_pBlockManager = std::make_unique<CBlockManager>();
+	//JsonManager->SetBlockManager(m_pBlockManager.get());
+	//m_pBlockManager->Init();
 
 	return S_OK;
 }

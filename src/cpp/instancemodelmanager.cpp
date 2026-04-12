@@ -53,7 +53,7 @@ CInstanceModelManager::~CInstanceModelManager()
 HRESULT CInstanceModelManager::Load(void)
 {
 	// jsonƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-	LoadJson();
+	//LoadJson();
 
 	return S_OK;
 }

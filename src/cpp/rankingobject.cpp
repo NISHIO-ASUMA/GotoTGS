@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "rankingscore.h"
 #include "jsonmanager.h"
+#include "ui.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -56,8 +57,11 @@ HRESULT CRankingObject::Init(void)
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(RANKINGOBJECT::LoadName);
 
+	// 背景設定
+	CUi::Create(CENTERPOS,0,HALFWIDTH,HALFHEIGHT,"rankingback.jpg",false);
+
 	// ランキングスコア生成
-	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
+	//CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
 	return S_OK;
 }

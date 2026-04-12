@@ -77,7 +77,7 @@ void CTutorialManager::Uninit(void)
 void CTutorialManager::Update(void)
 {
 	// 画面遷移キー
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_TAB) || 
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_RETURN) || 
 		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START))
 	{
 		// ゲームシーンに遷移する

@@ -54,10 +54,10 @@ HRESULT CTitleObject::Init(void)
 	auto JsonManager = CManager::GetInstance()->GetJsonManager();
 	JsonManager->Load(TITLEOBJECT::LoadName);
 
-	// Œ©‚¦‚È‚¢•Ç¶¬
-	m_pWallManager = std::make_unique<CWorldWallManager>();
-	JsonManager->SetWorldWallManager(m_pWallManager.get());
-	m_pWallManager->Init(TITLEOBJECT::WallName);
+	//// Œ©‚¦‚È‚¢•Ç¶¬
+	//m_pWallManager = std::make_unique<CWorldWallManager>();
+	//JsonManager->SetWorldWallManager(m_pWallManager.get());
+	//m_pWallManager->Init(TITLEOBJECT::WallName);
 
 	return S_OK;
 }
@@ -81,6 +81,7 @@ void CTitleObject::Uninit(void)
 //=========================================================
 void CTitleObject::Update(void)
 {
+
 }
 //=========================================================
 // ƒVƒ“ƒOƒ‹ƒgƒ“æ“¾ˆ—
