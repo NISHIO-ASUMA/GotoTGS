@@ -235,6 +235,18 @@
     <Filter Include="ソース ファイル\XFile">
       <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Charactor\Player">
+      <UniqueIdentifier>{f6dcf11d-ee5a-44fa-99ba-61c04601f1c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Charactor\Enemy">
+      <UniqueIdentifier>{052f2e9d-19da-4ca1-b15c-5035da6f2992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Charactor\Player">
+      <UniqueIdentifier>{61b2d422-c895-469f-b808-ad12ef318882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Charactor\Enemy">
+      <UniqueIdentifier>{9f206bbc-994f-4b44-be1b-26734d76b972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -489,10 +501,10 @@
     <ClCompile Include="src\cpp\worldwallmanager.cpp">
       <Filter>ソース ファイル\Manager\other</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\spherecollider.cpp">
-      <Filter>ソース ファイル\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\boxcollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\spherecollider.cpp">
       <Filter>ソース ファイル\Physics\Collider</Filter>
     </ClCompile>
   </ItemGroup>
