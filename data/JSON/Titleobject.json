@@ -30,5 +30,41 @@
     "IsFlash": false,
     "EnableAlpha": false,
     "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 500.0, 360.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 50.0,
+    "Height": 50.0,
+    "Texture": "deskwork_UI.png",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 640.0, 360.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 50.0,
+    "Height": 50.0,
+    "Texture": "deskwork_UI.png",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 780.0, 360.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 50.0,
+    "Height": 50.0,
+    "Texture": "deskwork_UI.png",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
   }
 ]
