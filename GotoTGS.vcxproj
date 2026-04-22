@@ -177,6 +177,7 @@
     <ClCompile Include="src\cpp\createjsonwall.cpp" />
     <ClCompile Include="src\cpp\debugproc.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
+    <ClCompile Include="src\cpp\event.cpp" />
     <ClCompile Include="src\cpp\fade.cpp" />
     <ClCompile Include="src\cpp\game.cpp" />
     <ClCompile Include="src\cpp\gamemanager.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="src\include\createjsonwall.h" />
     <ClInclude Include="src\include\debugproc.h" />
     <ClInclude Include="src\include\easing.h" />
+    <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\fade.h" />
     <ClInclude Include="src\include\game.h" />
     <ClInclude Include="src\include\gamemanager.h" />
