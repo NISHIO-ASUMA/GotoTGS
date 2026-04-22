@@ -522,6 +522,9 @@
     <ClCompile Include="src\cpp\gauge.cpp">
       <Filter>ソース ファイル\Ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -790,6 +793,9 @@
     </ClInclude>
     <ClInclude Include="src\include\gauge.h">
       <Filter>ヘッダー ファイル\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
