@@ -183,6 +183,7 @@
     <ClCompile Include="src\cpp\gamesceneobject.cpp" />
     <ClCompile Include="src\cpp\gamestate.cpp" />
     <ClCompile Include="src\cpp\gamewallmodel.cpp" />
+    <ClCompile Include="src\cpp\gauge.cpp" />
     <ClCompile Include="src\cpp\input.cpp" />
     <ClCompile Include="src\cpp\instancemodel.cpp" />
     <ClCompile Include="src\cpp\instancemodelmanager.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="src\include\gamesceneobject.h" />
     <ClInclude Include="src\include\gamestate.h" />
     <ClInclude Include="src\include\gamewallmodel.h" />
+    <ClInclude Include="src\include\gauge.h" />
     <ClInclude Include="src\include\input.h" />
     <ClInclude Include="src\include\instancemodel.h" />
     <ClInclude Include="src\include\instancemodelmanager.h" />

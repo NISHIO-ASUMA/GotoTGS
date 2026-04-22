@@ -62,8 +62,8 @@ public:
 	CModelManager* GetModelManagere(void) { return m_pModelManager.get(); }
 	CJsonManager* GetJsonManager(void) { return m_pJsonManager.get(); }
 	CXfileManager* GetXManager(void) { return m_pXfileManager.get(); }
-	CRenderer* GetRenderer(void) { return m_pRenderer.get(); }
 	CInputMouse* GetMouse(void) { return m_pInputMouse.get(); }
+	CRenderer* GetRenderer(void) { return m_pRenderer.get(); }
 	CTexture* GetTexture(void) { return m_pTexture.get(); }
 	CJoyPad* GetJoyPad(void) { return m_pJoyPad.get(); }
 	CCamera* GetCamera(void) { return m_pCamera.get(); }

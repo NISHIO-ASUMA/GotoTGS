@@ -247,6 +247,18 @@
     <Filter Include="ヘッダー ファイル\Charactor\Enemy">
       <UniqueIdentifier>{9f206bbc-994f-4b44-be1b-26734d76b972}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Charactor\boss">
+      <UniqueIdentifier>{43218d2c-9988-4951-a62e-9abb5dc0bb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Charactor\boss">
+      <UniqueIdentifier>{b8748ade-aa36-43fa-8f20-af1a9948ed15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Charactor\friend">
+      <UniqueIdentifier>{44fab2a6-d893-44b5-b6c0-ab15cdc8248f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Charactor\friend">
+      <UniqueIdentifier>{11cb81b3-aad0-4436-8d17-034cf2fb43bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -506,6 +518,9 @@
     </ClCompile>
     <ClCompile Include="src\cpp\spherecollider.cpp">
       <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gauge.cpp">
+      <Filter>ソース ファイル\Ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -772,6 +787,9 @@
     </ClInclude>
     <ClInclude Include="src\include\spherecollider.h">
       <Filter>ヘッダー ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gauge.h">
+      <Filter>ヘッダー ファイル\Ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

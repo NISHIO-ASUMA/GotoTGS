@@ -87,8 +87,8 @@ private:
 	bool m_isDeviceLost;				// デバイスロスト対処
 
 	D3DPRESENT_PARAMETERS m_d3dpp;		// プレゼンテーションパラメータ
-	UINT m_Width;						// 横幅
-	UINT m_Height;						// 高さ
+	UINT m_Width;						// ウィンドウ横幅
+	UINT m_Height;						// ウィンドウ高さ
 
 	LPDIRECT3DVERTEXBUFFER9 m_instanceVB;	// インスタンシング用頂点バッファ
 	std::unordered_map<int, std::vector<CInstanceModel*>> m_RegisterInstObject = {}; // インスタンシング登録配列

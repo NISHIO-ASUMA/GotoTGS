@@ -160,7 +160,7 @@ void CUi::UpdateAlphaEnable(void)
 	float fAlpha = 0.0f;
 
 	// フェードイン
-	if (fMathAlpha < 0.5f)
+	if (fMathAlpha < HALF)
 	{
 		fAlpha = fMathAlpha * 2.0f;
 	}
