@@ -2,7 +2,12 @@
 //
 // プレイヤー処理 [ player.cpp ]
 // Author: Shouya Chikada
-//
+// 
+// NOTE : 近田君へ
+//		  球形コライダーを追加すること
+//		  定数などがあればstatic constexpr で追加すること 構造体にまとめてもいい
+//		  cppのほうの実装は一度仮組出来たら教えろください
+// 
 //=========================================================
 
 //*********************************************************
@@ -40,7 +45,8 @@ public:
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
 	/// <returns></returns>
-	static CPlayer* Create(
+	static CPlayer* Create
+	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot
 	);
