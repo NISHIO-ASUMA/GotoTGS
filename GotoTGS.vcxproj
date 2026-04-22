@@ -241,6 +241,7 @@
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
     <ClCompile Include="src\cpp\sound.cpp" />
     <ClCompile Include="src\cpp\spherecollider.cpp" />
+    <ClCompile Include="src\cpp\statemachine.cpp" />
     <ClCompile Include="src\cpp\texture.cpp" />
     <ClCompile Include="src\cpp\title.cpp" />
     <ClCompile Include="src\cpp\titlemanager.cpp" />
@@ -334,6 +335,8 @@
     <ClInclude Include="src\include\shadowstencil.h" />
     <ClInclude Include="src\include\sound.h" />
     <ClInclude Include="src\include\spherecollider.h" />
+    <ClInclude Include="src\include\statebase.h" />
+    <ClInclude Include="src\include\statemachine.h" />
     <ClInclude Include="src\include\template.h" />
     <ClInclude Include="src\include\texture.h" />
     <ClInclude Include="src\include\title.h" />
