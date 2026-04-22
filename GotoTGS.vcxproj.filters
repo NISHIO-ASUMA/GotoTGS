@@ -525,9 +525,12 @@
     <ClCompile Include="src\cpp\event.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-	  <ClCompile Include="src\cpp\player.cpp">
+    <ClCompile Include="src\cpp\player.cpp">
       <Filter>ソース ファイル</Filter>
-	</ClCompile>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskwork.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -799,8 +802,11 @@
     </ClInclude>
     <ClInclude Include="src\include\event.h">
       <Filter>ヘッダー ファイル</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="src\include\player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\deskwork.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
