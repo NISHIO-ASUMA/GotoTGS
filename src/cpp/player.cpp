@@ -34,3 +34,25 @@ CPlayer::~CPlayer()
 {
 
 }
+
+HRESULT CPlayer::Init(void)
+{
+	return E_NOTIMPL;
+}
+
+void CPlayer::Uninit(void)
+{
+}
+
+void CPlayer::Update(void)
+{
+}
+
+void CPlayer::Draw(void)
+{
+}
+
+CPlayer* CPlayer::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+{
+	return nullptr;
+}

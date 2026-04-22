@@ -61,7 +61,7 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CDeskwork::Init(void)
 {
-
+	return S_OK;
 }
 
 //=========================================================

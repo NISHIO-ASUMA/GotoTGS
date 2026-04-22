@@ -11,5 +11,6 @@
   { "Texture": "data/TEXTURE/coron.png" },
   { "Texture": "data/TEXTURE/backboard.png" },
   { "Texture": "data/TEXTURE/time.png" },
-  { "Texture": "data/TEXTURE/number003.png" }
+  { "Texture": "data/TEXTURE/number003.png" },
+  { "Texture": "data/TEXTURE/deskwork_background.jpg" }
 ]
