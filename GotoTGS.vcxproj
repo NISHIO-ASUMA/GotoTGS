@@ -223,6 +223,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\cpp\player.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
     <ClCompile Include="src\cpp\rankingmanager.cpp" />
     <ClCompile Include="src\cpp\rankingobject.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="src\include\pause.h" />
     <ClInclude Include="src\include\pausemanager.h" />
     <ClInclude Include="src\include\pch.h" />
+    <ClInclude Include="src\include\player.h" />
     <ClInclude Include="src\include\ranking.h" />
     <ClInclude Include="src\include\rankingmanager.h" />
     <ClInclude Include="src\include\rankingobject.h" />

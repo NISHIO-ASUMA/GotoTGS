@@ -796,6 +796,9 @@
     </ClInclude>
     <ClInclude Include="src\include\event.h">
       <Filter>ヘッダー ファイル</Filter>
+      </ClInclude>
+    <ClInclude Include="src\include\player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
