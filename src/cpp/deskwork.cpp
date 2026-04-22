@@ -1,6 +1,6 @@
 //=========================================================
 //
-// タスク処理 [ deskwork.h ]
+// タスク処理 [ deskwork.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -36,7 +36,7 @@ CDeskwork::~CDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskwork* CDeskwork::Create(const D3DXVECTOR3 pos)
+CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
 	CDeskwork* pDeskwork = new CDeskwork;

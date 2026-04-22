@@ -26,7 +26,7 @@ public:
 	void Draw(void);
 
 	// ¶¬ˆ—
-	static CDeskwork* Create(const D3DXVECTOR3 pos);
+	static CDeskwork* Create(const D3DXVECTOR3& pos);
 
 private:
 
