@@ -1,7 +1,7 @@
 //=========================================================
 //
 // イベント処理 [ event.h ]
-// Author: 
+// Author: Asuma Nishio
 //
 //=========================================================
 
@@ -11,7 +11,7 @@
 #pragma once
 
 //*********************************************************
-// ブロックオブジェクトクラスを定義
+// イベント一個に対するクラスを定義
 //*********************************************************
 class CEvent
 {
@@ -20,20 +20,22 @@ public:
 	CEvent();
 	~CEvent();
 
-	// メンバ関数
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	// 静的メンバ関数
+	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
+	inline D3DXVECTOR3 GetPos(void) const { return  m_pos; }
+
+	/// <summary>
+	/// イベント生成関数
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	/// <returns></returns>
+	static CEvent* Create(const D3DXVECTOR3& pos);
 
 private:
 
-	// メンバ変数
-	int m_kari;
-
-	// 静的メンバ変数
-	static int m_kariS;
-
+	D3DXVECTOR3 m_pos; // イベントを起こす座標
 };
