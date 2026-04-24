@@ -24,6 +24,7 @@
 // 前方宣言
 //*********************************************************
 class CBoxCollider;
+class CSphereCollider;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -50,6 +51,20 @@ public:
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot
 	);
+
+public:
+	//************************
+	// モーション列挙型
+	//************************
+	enum MOTION
+	{
+		NEUTRAL,
+		MOVE,
+		MAX
+	};
+
 private:
-	std::unique_ptr<CBoxCollider> m_pCollider;	// 矩形のコライダー
+	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
+	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
+
 };

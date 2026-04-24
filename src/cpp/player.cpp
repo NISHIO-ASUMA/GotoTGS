@@ -16,13 +16,15 @@
 #include "manager.h"
 #include "xfilemanager.h"
 #include "boxcollider.h"
+#include "spherecollider.h"
 #include "collisionbox.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CPlayer::CPlayer(int nPriority) : CMoveCharactor(nPriority),
-m_pCollider(nullptr)
+m_pBoxCollider(nullptr),
+m_pSphereCollider(nullptr)
 {
 
 }
@@ -35,24 +37,73 @@ CPlayer::~CPlayer()
 
 }
 
-HRESULT CPlayer::Init(void)
-{
-	return E_NOTIMPL;
-}
-
-void CPlayer::Uninit(void)
-{
-}
-
-void CPlayer::Update(void)
-{
-}
-
-void CPlayer::Draw(void)
-{
-}
-
+//=========================================================
+// 生成処理
+//=========================================================
 CPlayer* CPlayer::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 {
-	return nullptr;
+	// インスタンス生成
+	CPlayer* pPlayer = new CPlayer;
+	if(pPlayer == nullptr)return nullptr;
+
+	// オブジェクト設定
+	pPlayer->SetPos(pos);
+	pPlayer->SetRot(rot);
+	pPlayer->SetUseStencil(true);
+
+	// 初期化失敗時
+	if (FAILED(pPlayer->Init()))return nullptr;
+
+	return pPlayer;
+}
+
+//=========================================================
+// 初期化処理
+//=========================================================
+HRESULT CPlayer::Init(void)
+{
+	// 親クラスの初期化処理
+	CMoveCharactor::Init();
+
+	// モーション読み込み
+	MotionLoad("data/MOTION/PlayerMotion.txt",MAX,false);
+
+	// ボックスコライダーの生成
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f,50.0f,50.0f));
+
+	// スフィアコライダーの生成
+	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
+
+	return S_OK;
+}
+
+//=========================================================
+// 終了処理
+//=========================================================
+void CPlayer::Uninit(void)
+{
+	// 親クラスの終了処理
+	CMoveCharactor::Uninit();
+}
+
+//=========================================================
+// 更新処理
+//=========================================================
+void CPlayer::Update(void)
+{
+	// 座標の更新
+	CMoveCharactor::UpdatePosition();
+
+	// 親クラスの更新処理
+	CMoveCharactor::Update();
+
+}
+
+//=========================================================
+// 描画処理
+//=========================================================
+void CPlayer::Draw(void)
+{
+	// 親クラスの描画処理
+	CMoveCharactor::Draw();
 }
