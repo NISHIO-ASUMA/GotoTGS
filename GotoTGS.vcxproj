@@ -161,6 +161,7 @@
     <ClCompile Include="src\cpp\billboard.cpp" />
     <ClCompile Include="src\cpp\block.cpp" />
     <ClCompile Include="src\cpp\blockmanager.cpp" />
+    <ClCompile Include="src\cpp\boss.cpp" />
     <ClCompile Include="src\cpp\boxcollider.cpp" />
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
     <ClCompile Include="src\cpp\camera.cpp" />
@@ -229,6 +230,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\cpp\player.cpp" />
+    <ClCompile Include="src\cpp\playerstatebase.cpp" />
+    <ClCompile Include="src\cpp\playerstateneutral.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
     <ClCompile Include="src\cpp\rankingmanager.cpp" />
     <ClCompile Include="src\cpp\rankingobject.cpp" />
@@ -263,6 +266,7 @@
     <ClInclude Include="src\include\billboard.h" />
     <ClInclude Include="src\include\block.h" />
     <ClInclude Include="src\include\blockmanager.h" />
+    <ClInclude Include="src\include\boss.h" />
     <ClInclude Include="src\include\boxcollider.h" />
     <ClInclude Include="src\include\boxtospherecollision.h" />
     <ClInclude Include="src\include\camera.h" />
@@ -327,6 +331,8 @@
     <ClInclude Include="src\include\pausemanager.h" />
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\player.h" />
+    <ClInclude Include="src\include\playerstatebase.h" />
+    <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\ranking.h" />
     <ClInclude Include="src\include\rankingmanager.h" />
     <ClInclude Include="src\include\rankingobject.h" />
