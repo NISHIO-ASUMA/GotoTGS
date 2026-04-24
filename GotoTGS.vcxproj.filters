@@ -546,14 +546,19 @@
     <ClCompile Include="src\cpp\alert.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-	<ClCompile Include="src\cpp\boss.cpp">
+    <ClCompile Include="src\cpp\boss.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>	<ClCompile Include="src\cpp\playerstatebase.cpp">
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatebase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\playerstateneutral.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatemove.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
       <Filter>ヘッダー ファイル\MainLoop</Filter>
@@ -849,12 +854,17 @@
     <ClInclude Include="src\include\alert.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-	<ClInclude Include="src\include\boss.h">
+    <ClInclude Include="src\include\boss.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>	<ClInclude Include="src\include\playerstatebase.h">
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatebase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\playerstateneutral.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>  </ItemGroup>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatemove.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
