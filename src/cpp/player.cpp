@@ -18,13 +18,17 @@
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "collisionbox.h"
+#include "playerstatebase.h"
+#include "playerstateneutral.h"
+#include "statemachine.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CPlayer::CPlayer(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
-m_pSphereCollider(nullptr)
+m_pSphereCollider(nullptr),
+m_pMachine(nullptr)
 {
 
 }
@@ -65,6 +69,12 @@ HRESULT CPlayer::Init(void)
 	// モーション読み込み
 	MotionLoad("data/MOTION/PlayerMotion.txt",MAX,false);
 
+	// インスタンス生成
+	m_pMachine = new CStateMachine;
+
+	// 初期ステートをセット
+	ChangeState(new CPlayerStateNeutral(), CPlayerStateBase::ID_NEUTRAL);
+
 	// ボックスコライダーの生成
 	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f,50.0f,50.0f));
 
@@ -78,6 +88,20 @@ HRESULT CPlayer::Init(void)
 //=========================================================
 void CPlayer::Uninit(void)
 {
+	// ステートマシンの破棄
+	if (m_pMachine)
+	{
+		m_pMachine->OnExit();
+		delete m_pMachine;
+		m_pMachine = nullptr;
+	}
+	
+	// ボックスコライダーの破棄
+	m_pBoxCollider.reset();
+
+	// スフィアコライダーの破棄
+	m_pSphereCollider.reset();	
+
 	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
 }
@@ -86,7 +110,10 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	// 座標の更新
+	// ステートマシンの更新処理
+	m_pMachine->Update();
+
+	// 座標の更新処理
 	CMoveCharactor::UpdatePosition();
 
 	// 親クラスの更新処理
@@ -111,4 +138,18 @@ bool CPlayer::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 
 	// 矩形同士の当たり判定を返す
 	return CCollisionBox::Collision(m_pBoxCollider.get(), pOther, OutPos);
+}
+//=========================================================
+// ステート変更処理
+//=========================================================
+void CPlayer::ChangeState(CPlayerStateBase* pState, int nID)
+{
+	// 自分自身のポインタを設定
+	pState->SetOwner(this);
+
+	// IDの設定
+	pState->SetID(nID);
+
+	// ステート変更
+	m_pMachine->ChangeState(pState);
 }

@@ -25,6 +25,8 @@
 //*********************************************************
 class CBoxCollider;
 class CSphereCollider;
+class CPlayerStateBase;
+class CStateMachine;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -40,7 +42,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
-
+	void ChangeState(CPlayerStateBase* pState, int nID);
 	/// <summary>
 	/// プレイヤー生成処理
 	/// </summary>
@@ -64,11 +66,12 @@ public:
 	{
 		NEUTRAL,
 		MOVE,
+		ACTION,
 		MAX
 	};
 
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
-
+	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 };
