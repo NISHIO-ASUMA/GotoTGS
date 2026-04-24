@@ -39,6 +39,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
 
 	/// <summary>
 	/// ƒvƒŒƒCƒ„[¶¬ˆ—
@@ -51,6 +52,9 @@ public:
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot
 	);
+
+	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
+	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
 public:
 	//************************
