@@ -38,19 +38,19 @@ CEventUI::~CEventUI()
 CEventUI* CEventUI::Create(void)
 {
 	// インスタンス生成
-	CEventUI* pAlert = new CEventUI;
+	CEventUI* pEventUI = new CEventUI;
 
-	if (pAlert == nullptr)
+	if (pEventUI == nullptr)
 	{// ヌルチェック
 		return nullptr;
 	}
 
-	if (FAILED(pAlert->Init()))
+	if (FAILED(pEventUI->Init()))
 	{// 初期化が失敗した場合
 		return nullptr;
 	}
 
-	return pAlert;
+	return pEventUI;
 }
 //=========================================================
 // 初期化処理

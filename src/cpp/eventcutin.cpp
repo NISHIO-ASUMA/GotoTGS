@@ -38,19 +38,19 @@ CEventcutin::~CEventcutin()
 CEventcutin* CEventcutin::Create(void)
 {
 	// インスタンス生成
-	CEventcutin* pAlert = new CEventcutin;
+	CEventcutin* pEventcutin = new CEventcutin;
 
-	if (pAlert == nullptr)
+	if (pEventcutin == nullptr)
 	{// ヌルチェック
 		return nullptr;
 	}
 
-	if (FAILED(pAlert->Init()))
+	if (FAILED(pEventcutin->Init()))
 	{// 初期化が失敗した場合
 		return nullptr;
 	}
 
-	return pAlert;
+	return pEventcutin;
 }
 //=========================================================
 // 初期化処理
