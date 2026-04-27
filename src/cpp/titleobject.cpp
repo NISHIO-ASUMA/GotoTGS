@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
+#include "gametime.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -53,6 +54,9 @@ HRESULT CTitleObject::Init(void)
 	// タイトルで使うオブジェクトの読み込み
 	auto JsonManager = CManager::GetInstance()->GetJsonManager();
 	JsonManager->Load(TITLEOBJECT::LoadName);
+
+	//// タイマー生成
+	//CGametime::Create(D3DXVECTOR3(1000.0f,60.0f,0.0f),60.0f,45.0f);
 
 	//// 見えない壁生成
 	//m_pWallManager = std::make_unique<CWorldWallManager>();
