@@ -52,7 +52,7 @@ CGametime* CGametime::Create(const D3DXVECTOR3& pos, float fWidth, float fHeight
 	// インスタンス生成
 	CGametime* pGametime = new CGametime;
 
-	if (pGametime == nullptr)
+	if (pGametime == nullptr) 
 	{// ヌルチェック
 		return nullptr;
 	}
@@ -168,7 +168,7 @@ void CGametime::Uninit(void)
 //=========================================================
 void CGametime::Update(void)
 {
-	if (m_nCounter <= 0)
+	if (m_nCounter < 0)
 	{
 		// カウンターを0にする
 		m_nCounter = 0;
