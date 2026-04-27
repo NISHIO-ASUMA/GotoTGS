@@ -230,6 +230,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\cpp\player.cpp" />
+    <ClCompile Include="src\cpp\playerstateaction.cpp" />
     <ClCompile Include="src\cpp\playerstatebase.cpp" />
     <ClCompile Include="src\cpp\playerstatemove.cpp" />
     <ClCompile Include="src\cpp\playerstateneutral.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="src\include\pausemanager.h" />
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\player.h" />
+    <ClInclude Include="src\include\playerstateaction.h" />
     <ClInclude Include="src\include\playerstatebase.h" />
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
