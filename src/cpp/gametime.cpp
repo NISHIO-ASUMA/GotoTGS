@@ -220,7 +220,6 @@ void CGametime::Draw(void)
 		// ƒiƒ“ƒo[‚Ì•`‰æˆ—
 		m_pNumberMinutes[nDigit]->Draw();
 		m_pNumberSeconds[nDigit]->Draw();
-
 	}
 }
 

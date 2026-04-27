@@ -13,5 +13,7 @@
   { "Texture": "data/TEXTURE/time.png" },
   { "Texture": "data/TEXTURE/number003.png" },
   { "Texture": "data/TEXTURE/deskwork_background.jpg" },
-  { "Texture": "data/TEXTURE/deskwork_UI.png" }
+  { "Texture": "data/TEXTURE/deskwork_UI.png" },
+  { "Texture": "data/TEXTURE/coron.png" }
+
 ]
