@@ -66,5 +66,17 @@
     "IsFlash": false,
     "EnableAlpha": false,
     "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 780.0, 360.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 50.0,
+    "Height": 50.0,
+    "Texture": "coron.png",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
   }
 ]
