@@ -184,6 +184,7 @@
     <ClCompile Include="src\cpp\eventcutin.cpp" />
     <ClCompile Include="src\cpp\eventUi.cpp" />
     <ClCompile Include="src\cpp\fade.cpp" />
+    <ClCompile Include="src\cpp\friend.cpp" />
     <ClCompile Include="src\cpp\game.cpp" />
     <ClCompile Include="src\cpp\gamemanager.cpp" />
     <ClCompile Include="src\cpp\gamesceneobject.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="src\include\eventcutin.h" />
     <ClInclude Include="src\include\eventUi.h" />
     <ClInclude Include="src\include\fade.h" />
+    <ClInclude Include="src\include\friend.h" />
     <ClInclude Include="src\include\game.h" />
     <ClInclude Include="src\include\gamemanager.h" />
     <ClInclude Include="src\include\gamesceneobject.h" />

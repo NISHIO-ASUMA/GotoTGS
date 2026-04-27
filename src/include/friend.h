@@ -1,11 +1,9 @@
 //=========================================================
 //
-// プレイヤー処理 [ player.cpp ]
+// 同僚処理 [ friend.cpp ]
 // Author: Shouya Chikada
 // 
-// NOTE : 近田君へ
-//		  定数などがあればstatic constexpr で追加すること 構造体にまとめてもいい
-//		  cppのほうの実装は一度仮組出来たら教えろください
+// NOTE : 
 // 
 //=========================================================
 
@@ -17,38 +15,35 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "movecharactor.h"
+#include "nomovecharactor.h"
 
 //*********************************************************
 // 前方宣言
 //*********************************************************
 class CBoxCollider;
 class CSphereCollider;
-class CPlayerStateBase;
-class CStateMachine;
 
 //*********************************************************
-// プレイヤーオブジェクトクラスを定義
+// 同僚オブジェクトクラスを定義
 //*********************************************************
-class CPlayer : public CMoveCharactor
+class CFriend : public CNoMoveCharactor
 {
 public:
-	CPlayer(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
-	~CPlayer();
+	CFriend(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
+	~CFriend();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
-	void ChangeState(CPlayerStateBase* pState, int nID);
 	/// <summary>
-	/// プレイヤー生成処理
+	/// 同僚生成処理
 	/// </summary>
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
 	/// <returns></returns>
-	static CPlayer* Create
+	static CFriend* Create
 	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot
@@ -64,13 +59,10 @@ public:
 	enum MOTION
 	{
 		NEUTRAL,
-		MOVE,
-		ACTION,
 		MAX
 	};
 
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
-	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 };
