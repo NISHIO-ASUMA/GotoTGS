@@ -1,6 +1,6 @@
 //=========================================================
 //
-// タスク処理 [ deskwork.cpp ]
+// タスクUI処理 [ deskworkUI.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,7 +8,7 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "deskwork.h"
+#include "deskworkUI.h"
 
 //*********************************************************
 // インクルードファイル
@@ -18,7 +18,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
+CDeskworkUI::CDeskworkUI(int nPriority) : CObject2D(nPriority),
 m_pos(VECTOR3_NULL)
 {
 
@@ -27,7 +27,7 @@ m_pos(VECTOR3_NULL)
 //=========================================================
 // デストラクタ
 //=========================================================
-CDeskwork::~CDeskwork()
+CDeskworkUI::~CDeskworkUI()
 {
 
 
@@ -36,38 +36,34 @@ CDeskwork::~CDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
+CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const KEYTYPE& kyetype)
 {
 	// インスタンス生成
-	CDeskwork* pDeskwork = new CDeskwork;
+	CDeskworkUI* pDeskworkUI = new CDeskworkUI;
 
 	// ヌルチェック
-	if (pDeskwork == nullptr) return nullptr;
+	if (pDeskworkUI == nullptr) return nullptr;
 
 	// 各種値の設定
-	pDeskwork->SetPos(pos);
+	pDeskworkUI->SetPos(pos);
+	pDeskworkUI->SetSize(fWidth, fHeight);
+	pDeskworkUI->SetKyeType(kyetype);
 
 	// 初期化が失敗した場合
-	if (FAILED(pDeskwork->Init())) return nullptr;
+	if (FAILED(pDeskworkUI->Init())) return nullptr;
 
-	return pDeskwork;
+	return pDeskworkUI;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CDeskwork::Init(void)
+HRESULT CDeskworkUI::Init(void)
 {
-	// 背景の各種設定
-	SetSize(Config::WIDTH, Config::HEIGHT);	// サイズ設定
-	SetCol(COLOR_WHITE);					// カラー設定
-	SetTexture(Config::TEXNAME);			// テクスチャ設定
+	// タスクUIの各種設定
+	SetCol(COLOR_WHITE);			// カラー設定
+	SetTexture(Config::TEXNAME);	// テクスチャ設定
 
-	// UIを生成
-	for (int nCount = 0;nCount < Config::UI_WORK;nCount++)
-	{
-		// UIのポインタを入れる
-	}
 
 	return S_OK;
 }
@@ -75,7 +71,7 @@ HRESULT CDeskwork::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CDeskwork::Uninit(void)
+void CDeskworkUI::Uninit(void)
 {
 
 }
@@ -83,7 +79,7 @@ void CDeskwork::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CDeskwork::Update(void)
+void CDeskworkUI::Update(void)
 {
 
 }
@@ -91,7 +87,7 @@ void CDeskwork::Update(void)
 //=========================================================
 // 描画処理
 //=========================================================
-void CDeskwork::Draw(void)
+void CDeskworkUI::Draw(void)
 {
 
 }
