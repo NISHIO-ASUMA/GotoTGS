@@ -18,10 +18,10 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskwork::CDeskwork()
+CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
+m_pos(VECTOR3_NULL)
 {
-	// 値の初期値を設定
-	m_pos = VECTOR3_NULL;
+
 }
 
 //=========================================================
@@ -41,26 +41,34 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 	// インスタンス生成
 	CDeskwork* pDeskwork = new CDeskwork;
 
-	if (pDeskwork == nullptr)
-	{// ヌルチェック
-		return nullptr;
-	}
+	// ヌルチェック
+	if (pDeskwork == nullptr) return nullptr;
 
-	// テクスチャ座標設定
-	pDeskwork->m_pos = pos;
+	// 各種値の設定
+	pDeskwork->SetPos(pos);
 
-	if (FAILED(pDeskwork->Init()))
-	{// 初期化が失敗した場合
-		return nullptr;
-	}
+	// 初期化が失敗した場合
+	if (FAILED(pDeskwork->Init())) return nullptr;
 
 	return pDeskwork;
 }
+
 //=========================================================
 // 初期化処理
 //=========================================================
 HRESULT CDeskwork::Init(void)
 {
+	// 背景の各種設定
+	SetSize(Config::WIDTH, Config::HEIGHT);	// サイズ設定
+	SetCol(COLOR_WHITE);					// カラー設定
+	SetTexture(Config::TEXNAME);			// テクスチャ設定
+
+	// UIを生成
+	for (int nCount = 0;nCount < Config::UI_WORK;nCount++)
+	{
+
+	}
+
 	return S_OK;
 }
 
