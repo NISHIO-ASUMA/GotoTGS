@@ -58,7 +58,6 @@ HRESULT CBoss::Init(void)
 	// キャラクター初期化
 	CMoveCharactor::Init();
 
-
 	return S_OK;
 }
 //========================================================
