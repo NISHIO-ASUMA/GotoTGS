@@ -14,6 +14,7 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "input.h"
 
 //=========================================================
 // コンストラクタ
@@ -64,7 +65,6 @@ HRESULT CDeskworkUI::Init(void)
 	SetCol(COLOR_WHITE);			// カラー設定
 	SetTexture(Config::TEXNAME);	// テクスチャ設定
 
-
 	return S_OK;
 }
 
@@ -73,7 +73,8 @@ HRESULT CDeskworkUI::Init(void)
 //=========================================================
 void CDeskworkUI::Uninit(void)
 {
-
+	// オブジェクト自身の破棄
+	CObject::Release();
 }
 
 //=========================================================
@@ -81,7 +82,29 @@ void CDeskworkUI::Uninit(void)
 //=========================================================
 void CDeskworkUI::Update(void)
 {
+	if (m_Kyetype == DRAWTYPE_W &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_W))
+	{// Wを押した時
 
+	}
+
+	if (m_Kyetype == DRAWTYPE_A &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_A))
+	{// Aを押した時
+
+	}
+
+	if (m_Kyetype == DRAWTYPE_S &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_S))
+	{// Sを押した時
+
+	}
+
+	if (m_Kyetype == DRAWTYPE_D &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_D))
+	{// Dを押した時
+
+	}
 }
 
 //=========================================================
