@@ -137,7 +137,8 @@ void CDeskworkUI::Uninit(void)
 //=========================================================
 void CDeskworkUI::Update(void)
 {
-
+	// UVê›íË
+	SetDigit(m_Kyetype);
 }
 
 //=========================================================

@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CWorldWallManager;
+class CDeskworkUIManager;
 
 //*********************************************************
 // タイトルオブジェクト管理クラスを定義
@@ -45,4 +46,5 @@ private:
 
 	std::unique_ptr<CWorldWallManager>m_pWallManager; // 壁管理クラスポインタ
 
+	static CDeskworkUIManager* m_pDeskworkUIManager;
 };

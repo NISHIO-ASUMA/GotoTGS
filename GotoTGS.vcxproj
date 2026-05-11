@@ -254,6 +254,7 @@
     <ClCompile Include="src\cpp\sound.cpp" />
     <ClCompile Include="src\cpp\spherecollider.cpp" />
     <ClCompile Include="src\cpp\statemachine.cpp" />
+    <ClCompile Include="src\cpp\taskcommand.cpp" />
     <ClCompile Include="src\cpp\texture.cpp" />
     <ClCompile Include="src\cpp\title.cpp" />
     <ClCompile Include="src\cpp\titlemanager.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="src\include\collision.h" />
     <ClInclude Include="src\include\collisionbox.h" />
     <ClInclude Include="src\include\collisionsphere.h" />
+    <ClInclude Include="src\include\command.h" />
     <ClInclude Include="src\include\createjsonblock.h" />
     <ClInclude Include="src\include\createjsonblocknormal.h" />
     <ClInclude Include="src\include\createjsoncharactor.h" />
@@ -361,6 +363,7 @@
     <ClInclude Include="src\include\spherecollider.h" />
     <ClInclude Include="src\include\statebase.h" />
     <ClInclude Include="src\include\statemachine.h" />
+    <ClInclude Include="src\include\taskcommand.h" />
     <ClInclude Include="src\include\template.h" />
     <ClInclude Include="src\include\texture.h" />
     <ClInclude Include="src\include\title.h" />

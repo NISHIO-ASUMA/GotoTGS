@@ -14,6 +14,8 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "input.h"
+//#include "taskcommand.h"
 
 //=========================================================
 // コンストラクタ
@@ -28,7 +30,7 @@ CDeskworkUIManager::CDeskworkUIManager()
 //=========================================================
 CDeskworkUIManager::~CDeskworkUIManager()
 {
-	Uninit();
+
 }
 
 //=========================================================
@@ -52,19 +54,26 @@ CDeskworkUIManager* CDeskworkUIManager::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CDeskworkUIManager::Init(void)
 {
+	srand((unsigned int)time(0));
+
+	// 現在選択されているUIの番号の初期化
+	m_nNowIdx = 0;
+
+	// クールタイムが始まっていない状態にする
+	m_bTime = false;
+
 	// 位置
 	D3DXVECTOR3 pos = m_pos;
 	pos.x = m_pos.x - Config::VALUE_WIDTH;
 
 	// キーの種類
 	CDeskworkUI::KEYTYPE keytype[Config::UI_NUM];
-	keytype[0] = CDeskworkUI::KEYTYPE::DRAWTYPE_W;
-	keytype[1] = CDeskworkUI::KEYTYPE::DRAWTYPE_S;
-	keytype[2] = CDeskworkUI::KEYTYPE::DRAWTYPE_D;
-
 
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
+		// タスクをランダムに設定
+		keytype[nCount] = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+
 		// UIの生成処理
 		m_pDeskworkUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, keytype[nCount], nCount);
 
@@ -80,10 +89,7 @@ HRESULT CDeskworkUIManager::Init(void)
 //=========================================================
 void CDeskworkUIManager::Uninit(void)
 {
-	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
-	{// タスクUIの終了処理
-		m_pDeskworkUI[nCount] = nullptr;
-	}
+
 }
 
 //=========================================================
@@ -91,10 +97,69 @@ void CDeskworkUIManager::Uninit(void)
 //=========================================================
 void CDeskworkUIManager::Update(void)
 {
-	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
-	{// タスクUIの更新処理
-		m_pDeskworkUI[nCount]->Update();
+	srand((unsigned int)time(0));
+
+	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+
+	if (pKeyboard == nullptr)
+	{// ヌルチェック
+		return;
 	}
+
+	if (m_bTime == false)
+	{// クールタイムが始まっていないなら
+
+		// 現在のタスクUIの更新処理
+		m_pDeskworkUI[m_nNowIdx]->Update();
+
+		if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
+			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
+			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
+			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
+		{// 正解を押した時
+
+			// 色を半透明にする
+			m_pDeskworkUI[m_nNowIdx]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
+
+			// 次のタスクに移る
+			m_nNowIdx++;
+		}
+
+		// タスクが終わっていないなら
+		if (m_nNowIdx < Config::UI_NUM)
+		{
+			return;
+		}
+
+	}
+	
+	// クールタイムを始める
+	m_bTime = true;
+
+	if (m_nCountTime <= Config::TIME_COOL)
+	{// クールタイムを数える
+		m_nCountTime++;
+
+		return;
+	}
+
+	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	{
+		// タスクをランダムに設定
+		m_pDeskworkUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+
+		// 色を不透明にする
+		m_pDeskworkUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	}
+	
+	// 現在選択している番号を初期化
+	m_nNowIdx = 0;
+
+	// クールタイムを初期化
+	m_nCountTime = 0;
+
+	// クールタイムが始まっていない状態にする
+	m_bTime = false;
 }
 
 //=========================================================

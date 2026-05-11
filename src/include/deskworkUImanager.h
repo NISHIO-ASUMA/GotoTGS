@@ -48,9 +48,13 @@ private:
 		static constexpr int UI_NUM  = 3;							// UIの数
 		static constexpr float UI_WIDTH = 100.0f;					// UIの横幅
 		static constexpr float UI_HEIGHT = 100.0f;					// UIの縦幅
+		static constexpr int TIME_COOL = 60;							// クールタイム
 	};
 
 	// メンバ変数
 	D3DXVECTOR3 m_pos;								// 座標
 	CDeskworkUI* m_pDeskworkUI[Config::UI_NUM];		// UIのポインタ
+	int m_nNowIdx;									// 現在選択している番号
+	int m_nCountTime;								// タイマーカウント
+	bool m_bTime;									// クールタイムが始まっているかどうか
 };
