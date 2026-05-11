@@ -16,7 +16,8 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
-#include "gametime.h"
+//#include "gametime.h"
+#include "deskworkUImanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -62,6 +63,9 @@ HRESULT CTitleObject::Init(void)
 	//m_pWallManager = std::make_unique<CWorldWallManager>();
 	//JsonManager->SetWorldWallManager(m_pWallManager.get());
 	//m_pWallManager->Init(TITLEOBJECT::WallName);
+
+	// タスクUIマネージャーの生成
+	CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
 	return S_OK;
 }

@@ -591,6 +591,9 @@
     <ClCompile Include="src\cpp\deskworkUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\deskworkUImanager.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -907,6 +910,9 @@
     </ClInclude>
     <ClInclude Include="src\include\statebase.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\deskworkUImanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
