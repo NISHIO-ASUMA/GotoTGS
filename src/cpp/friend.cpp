@@ -14,7 +14,6 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "xfilemanager.h"
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "collisionbox.h"

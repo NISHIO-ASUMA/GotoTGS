@@ -45,7 +45,7 @@ public:
 	inline int GetNowTime(void) const { return m_nSeconds; }
 
 	// ¶¬ˆ—
-	static CGametime* Create(const D3DXVECTOR3& pos,float fWidth, float fHeight);
+	static CGametime* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
 
 private:
 
@@ -68,8 +68,8 @@ private:
 	};
 
 	// ƒƒ“ƒoŠÖ”
-	void Seconds(void);
-	void Minutes(void);
+	void Minutes(void);	// •ª”ˆ—
+	void Seconds(void);	// •b”ˆ—
 
 	// ƒƒ“ƒo•Ï”
 	int m_nAllTime;		// ‘S‘Ì‚ÌŠÔ

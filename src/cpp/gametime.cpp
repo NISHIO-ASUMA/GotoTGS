@@ -29,7 +29,7 @@ m_fWidth(NULL),
 m_fHeight(NULL),
 m_pos(VECTOR3_NULL)
 {
-
+	// ポインタをNULLにする
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		m_pNumberMinutes[nDigit] = nullptr;
@@ -47,25 +47,21 @@ CGametime::~CGametime()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CGametime* CGametime::Create(const D3DXVECTOR3& pos, float fWidth, float fHeight)
+CGametime* CGametime::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
 {
 	// インスタンス生成
 	CGametime* pGametime = new CGametime;
 
-	if (pGametime == nullptr) 
-	{// ヌルチェック
-		return nullptr;
-	}
+	// ヌルチェック
+	if (pGametime == nullptr) return nullptr;
 
 	// 引数を設定
 	pGametime->SetPos(pos);
 	pGametime->SetWidth(fWidth);
 	pGametime->SetHeight(fHeight);
 
-	if (FAILED(pGametime->Init()))
-	{// 初期化が失敗した場合
-		return nullptr;
-	}
+	// 初期化が失敗した場合
+	if (FAILED(pGametime->Init())) return nullptr;
 
 	return pGametime;
 }
@@ -92,9 +88,10 @@ HRESULT CGametime::Init(void)
 		m_pNumberMinutes[nDigit] = new CNumber;
 
 		// ナンバーの初期化処理
-		m_pNumberMinutes[nDigit]->Init(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),		// 位置
-			fTexpos,																										// 一桁分の横幅
-			m_fHeight);																										// 縦幅
+		m_pNumberMinutes[nDigit]->Init
+		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),		// 位置
+		fTexpos,																				// 一桁分の横幅
+		m_fHeight);																				// 縦幅
 
 		// サイズ設定
 		m_pNumberMinutes[nDigit]->SetSize(fTexpos, m_fHeight);
@@ -115,9 +112,10 @@ HRESULT CGametime::Init(void)
 		m_pNumberSeconds[nDigit] = new CNumber;
 
 		// ナンバーの初期化処理
-		m_pNumberSeconds[nDigit]->Init(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),		// 位置
-			fTexpos,																										// 一桁分の横幅
-			m_fHeight);																										// 縦幅
+		m_pNumberSeconds[nDigit]->Init
+		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),	// 位置
+		fTexpos,																			// 一桁分の横幅
+		m_fHeight);																			// 縦幅
 
 		// サイズ設定
 		m_pNumberSeconds[nDigit]->SetSize(fTexpos, m_fHeight);

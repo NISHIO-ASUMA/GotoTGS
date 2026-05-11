@@ -1,6 +1,6 @@
 //=========================================================
 //
-// タスク処理 [ deskwork.cpp ]
+// タスクUI処理 [ deskworkUI.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,17 +8,18 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "deskwork.h"
+#include "deskworkUI.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "input.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
+CDeskworkUI::CDeskworkUI(int nPriority) : CObject2D(nPriority),
 m_pos(VECTOR3_NULL)
 {
 
@@ -27,7 +28,7 @@ m_pos(VECTOR3_NULL)
 //=========================================================
 // デストラクタ
 //=========================================================
-CDeskwork::~CDeskwork()
+CDeskworkUI::~CDeskworkUI()
 {
 
 
@@ -36,38 +37,33 @@ CDeskwork::~CDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
+CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const KEYTYPE& kyetype)
 {
 	// インスタンス生成
-	CDeskwork* pDeskwork = new CDeskwork;
+	CDeskworkUI* pDeskworkUI = new CDeskworkUI;
 
 	// ヌルチェック
-	if (pDeskwork == nullptr) return nullptr;
+	if (pDeskworkUI == nullptr) return nullptr;
 
 	// 各種値の設定
-	pDeskwork->SetPos(pos);
+	pDeskworkUI->SetPos(pos);
+	pDeskworkUI->SetSize(fWidth, fHeight);
+	pDeskworkUI->SetKyeType(kyetype);
 
 	// 初期化が失敗した場合
-	if (FAILED(pDeskwork->Init())) return nullptr;
+	if (FAILED(pDeskworkUI->Init())) return nullptr;
 
-	return pDeskwork;
+	return pDeskworkUI;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CDeskwork::Init(void)
+HRESULT CDeskworkUI::Init(void)
 {
-	// 背景の各種設定
-	SetSize(Config::WIDTH, Config::HEIGHT);	// サイズ設定
-	SetCol(COLOR_WHITE);					// カラー設定
-	SetTexture(Config::TEXNAME);			// テクスチャ設定
-
-	// UIを生成
-	for (int nCount = 0;nCount < Config::UI_WORK;nCount++)
-	{
-		// UIのポインタを入れる
-	}
+	// タスクUIの各種設定
+	SetCol(COLOR_WHITE);			// カラー設定
+	SetTexture(Config::TEXNAME);	// テクスチャ設定
 
 	return S_OK;
 }
@@ -75,23 +71,46 @@ HRESULT CDeskwork::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CDeskwork::Uninit(void)
+void CDeskworkUI::Uninit(void)
 {
-
+	// オブジェクト自身の破棄
+	CObject::Release();
 }
 
 //=========================================================
 // 更新処理
 //=========================================================
-void CDeskwork::Update(void)
+void CDeskworkUI::Update(void)
 {
+	if (m_Kyetype == DRAWTYPE_W &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_W))
+	{// Wを押した時
 
+	}
+
+	if (m_Kyetype == DRAWTYPE_A &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_A))
+	{// Aを押した時
+
+	}
+
+	if (m_Kyetype == DRAWTYPE_S &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_S))
+	{// Sを押した時
+
+	}
+
+	if (m_Kyetype == DRAWTYPE_D &&
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_D))
+	{// Dを押した時
+
+	}
 }
 
 //=========================================================
 // 描画処理
 //=========================================================
-void CDeskwork::Draw(void)
+void CDeskworkUI::Draw(void)
 {
 
 }

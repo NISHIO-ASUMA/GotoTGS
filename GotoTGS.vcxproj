@@ -179,6 +179,7 @@
     <ClCompile Include="src\cpp\createjsonwall.cpp" />
     <ClCompile Include="src\cpp\debugproc.cpp" />
     <ClCompile Include="src\cpp\deskwork.cpp" />
+    <ClCompile Include="src\cpp\deskworkUI.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
     <ClCompile Include="src\cpp\event.cpp" />
     <ClCompile Include="src\cpp\eventcutin.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="src\include\createjsonwall.h" />
     <ClInclude Include="src\include\debugproc.h" />
     <ClInclude Include="src\include\deskwork.h" />
+    <ClInclude Include="src\include\deskworkUI.h" />
     <ClInclude Include="src\include\easing.h" />
     <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\eventcutin.h" />

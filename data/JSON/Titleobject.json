@@ -69,10 +69,10 @@
   },
   {
     "ObjectTag": "Ui",
-    "Pos": [ 780.0, 360.0, 0.0 ],
+    "Pos": [ 1105.0, 60.0, 0.0 ],
     "FlashFrame": 0,
-    "Width": 50.0,
-    "Height": 50.0,
+    "Width": 10.0,
+    "Height": 35.0,
     "Texture": "coron.png",
     "AlphaTest": true,
     "IsFlash": false,
