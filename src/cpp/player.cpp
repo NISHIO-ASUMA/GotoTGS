@@ -20,14 +20,15 @@
 #include "playerstatebase.h"
 #include "playerstateneutral.h"
 #include "statemachine.h"
-#include "manager.h"
 #include "input.h"
 #include "camera.h"
 
+//*********************************************************
+// インクルードファイル
+//*********************************************************
 namespace player
 {
 	constexpr float fSpeed = 5.0f;		// プレイヤーの移動スピード
-	constexpr float fHalf = 0.5f;		// プレイヤーの向きの半分
 	constexpr float fInput = 0.0001f;	// 移動処理に使うキーが入力されてるか比較する用の変数
 
 };
@@ -140,7 +141,7 @@ void CPlayer::Draw(void)
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
 
-#ifndef Debug
+#ifdef _DEBUG
 	// モーションのデバッグ表示
 	GetMotion()->Debug();
 #endif
@@ -225,12 +226,12 @@ void CPlayer::MoveBasedOnCamera(float speed)
 	if (pKeyboard->GetPress(DIK_D) == true)
 	{
 		moveDir += camRight;
-		RotDest.y = rot.y - D3DX_PI * player::fHalf;
+		RotDest.y = rot.y - D3DX_PI * HALF;
 	}
 	if (pKeyboard->GetPress(DIK_A) == true)
 	{
 		moveDir -= camRight;
-		RotDest.y = rot.y + D3DX_PI * player::fHalf;
+		RotDest.y = rot.y + D3DX_PI * HALF;
 	}
 
 	// 移動入力がある場合
