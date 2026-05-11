@@ -9,7 +9,10 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "playerstateneutral.h"
+#include "playerstatemove.h"
 #include "player.h"
+#include "manager.h"
+#include "input.h"
 
 //=========================================================
 // コンストラクタ
@@ -40,7 +43,12 @@ void CPlayerStateNeutral::OnStart()
 //=========================================================
 void CPlayerStateNeutral::OnUpdate()
 {
-
+	// 移動判定がtrueだったら
+	if (m_pPlayer->GetMoveCheck())
+	{
+		// ステートを移動にチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateMove(), ID_MOVE);
+	}
 }
 
 //=========================================================

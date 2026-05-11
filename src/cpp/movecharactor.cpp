@@ -137,7 +137,7 @@ void CMoveCharactor::Update(void)
 	// ワールド行列を計算する
 	m_mtxworld = mtxScal * mtxRot * mtxTrans;
 
-#ifdef NDEBUG
+#ifdef _DEBUG
 	// モーションとモデルの更新
 	if (m_pMotion) 
 		m_pMotion->Update(m_pModel);

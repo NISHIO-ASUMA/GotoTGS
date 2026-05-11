@@ -20,14 +20,25 @@
 #include "playerstatebase.h"
 #include "playerstateneutral.h"
 #include "statemachine.h"
+#include "manager.h"
+#include "input.h"
+#include "camera.h"
 
+namespace player
+{
+	constexpr float fSpeed = 5.0f;		// プレイヤーの移動スピード
+	constexpr float fHalf = 0.5f;		// プレイヤーの向きの半分
+	constexpr float fInput = 0.0001f;	// 移動処理に使うキーが入力されてるか比較する用の変数
+
+};
 //=========================================================
 // コンストラクタ
 //=========================================================
 CPlayer::CPlayer(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
-m_pMachine(nullptr)
+m_pMachine(nullptr),
+m_bMove(false)
 {
 
 }
@@ -66,7 +77,7 @@ HRESULT CPlayer::Init(void)
 	CMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad("data/MOTION/PlayerMotion.txt",MAX,false);
+	MotionLoad("data/MOTION/Player/PlayerMotion.txt",MAX,false);
 
 	// インスタンス生成
 	m_pMachine = new CStateMachine;
@@ -112,6 +123,8 @@ void CPlayer::Update(void)
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
+	MoveBasedOnCamera(player::fSpeed);
+
 	// 座標の更新処理
 	CMoveCharactor::UpdatePosition();
 
@@ -126,6 +139,11 @@ void CPlayer::Draw(void)
 {
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
+
+#ifndef Debug
+	// モーションのデバッグ表示
+	GetMotion()->Debug();
+#endif
 }
 //=========================================================
 // 当たり判定
@@ -151,4 +169,91 @@ void CPlayer::ChangeState(CPlayerStateBase* pState, int nID)
 
 	// ステート変更
 	m_pMachine->ChangeState(pState);
+}
+//=================================================
+// プレイヤー移動処理
+//=================================================
+void CPlayer::MoveBasedOnCamera(float speed)
+{
+	// キーボードのポインタ
+	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+
+	// ジョイパッドのポインタ
+	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+
+	// カメラのポインタ
+	CCamera* pCamera = CManager::GetInstance()->GetCamera();
+
+	// 向きの取得
+	D3DXVECTOR3 rot = pCamera->GetRot();
+
+	// ビューマトリックスの取得
+	auto ViewMatrix = pCamera->GetView();
+
+	// ビュー行列の逆行列を計算
+	D3DXMATRIX invViewMat;
+	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
+
+	// 逆行列からカメラの方向ベクトルを抽出
+	D3DXVECTOR3 camForward = D3DXVECTOR3(invViewMat._31, invViewMat._32, invViewMat._33);
+	D3DXVECTOR3 camRight = D3DXVECTOR3(invViewMat._11, invViewMat._12, invViewMat._13);
+
+	// XZ平面の移動にするため、Y成分を0にする
+	camForward.y = NULL;
+	camRight.y = NULL;
+
+	// 方向ベクトルの正規化
+	D3DXVec3Normalize(&camForward, &camForward);
+	D3DXVec3Normalize(&camRight, &camRight);
+
+	// 移動方向の計算
+	D3DXVECTOR3 moveDir = VECTOR3_NULL;
+
+	// 目的の向き
+	D3DXVECTOR3 RotDest = GetRotDest();
+
+	if (pKeyboard->GetPress(DIK_W) == true)
+	{
+		moveDir += camForward;
+		RotDest.y = rot.y + D3DX_PI;
+	}
+	if (pKeyboard->GetPress(DIK_S) == true)
+	{
+		moveDir -= camForward;
+		RotDest.y = rot.y;
+	}
+	if (pKeyboard->GetPress(DIK_D) == true)
+	{
+		moveDir += camRight;
+		RotDest.y = rot.y - D3DX_PI * player::fHalf;
+	}
+	if (pKeyboard->GetPress(DIK_A) == true)
+	{
+		moveDir -= camRight;
+		RotDest.y = rot.y + D3DX_PI * player::fHalf;
+	}
+
+	// 移動入力がある場合
+	if (D3DXVec3LengthSq(&moveDir) > player::fInput)
+	{
+		// 移動の正規化
+		D3DXVec3Normalize(&moveDir, &moveDir);
+
+		// モーション設定
+		//m_pMotion->Set(CMotion::MOTIONTYPE_MOVE);
+
+		// 位置の更新
+		SetMove(moveDir * speed);
+
+		// 目的の向きを設定
+		SetRotDest(RotDest);
+
+		// 移動判定をtrueに
+		m_bMove = true;
+	}
+	else
+	{
+		// 移動判定をfalseに
+		m_bMove = false;
+	}
 }

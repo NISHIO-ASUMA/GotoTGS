@@ -32,7 +32,7 @@ CPlayerStateAction::~CPlayerStateAction()
 //=========================================================
 void CPlayerStateAction::OnStart()
 {
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::ACTION);
+	//m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::ACTION);
 }
 
 //=========================================================

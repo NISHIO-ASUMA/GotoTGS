@@ -42,6 +42,7 @@ public:
 	void Draw(void) override;
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
 	void ChangeState(CPlayerStateBase* pState, int nID);
+	void MoveBasedOnCamera(float speed);
 	/// <summary>
 	/// プレイヤー生成処理
 	/// </summary>
@@ -54,6 +55,8 @@ public:
 		const D3DXVECTOR3& rot
 	);
 
+	bool GetMoveCheck(void) { return m_bMove; }
+
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
@@ -65,7 +68,6 @@ public:
 	{
 		NEUTRAL,
 		MOVE,
-		ACTION,
 		MAX
 	};
 
@@ -73,4 +75,5 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
+	bool m_bMove;										// 移動したかどうかの判定変数
 };

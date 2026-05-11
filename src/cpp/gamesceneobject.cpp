@@ -23,6 +23,7 @@
 #include "worldwallmanager.h"
 #include "ui.h"
 #include "meshfield.h"
+#include "player.h"
 
 //*********************************************************
 // 静的メンバ変数
@@ -75,6 +76,8 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 HRESULT CGameSceneObject::Init(void)
 {
 	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
+
+	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
 
 	// ゲームで使うオブジェクトの読み込み
 	//auto jsonmanager = CManager::GetInstance()->GetJsonManager();
