@@ -597,11 +597,16 @@
     <ClCompile Include="src\cpp\taskcommand.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\cpp\desk.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\deskmanager.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+=======
+    <ClCompile Include="src\cpp\enemy.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+>>>>>>> f8668d44f0b7db6928ee647ef67f2a5925d019af
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -929,11 +934,16 @@
     <ClInclude Include="src\include\taskcommand.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="src\include\desk.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
     <ClInclude Include="src\include\deskmanager.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+=======
+    <ClInclude Include="src\include\enemy.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+>>>>>>> f8668d44f0b7db6928ee647ef67f2a5925d019af
     </ClInclude>
   </ItemGroup>
 </Project>

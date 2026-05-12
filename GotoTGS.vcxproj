@@ -184,6 +184,7 @@
     <ClCompile Include="src\cpp\deskworkUI.cpp" />
     <ClCompile Include="src\cpp\deskworkUImanager.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
+    <ClCompile Include="src\cpp\enemy.cpp" />
     <ClCompile Include="src\cpp\event.cpp" />
     <ClCompile Include="src\cpp\eventcutin.cpp" />
     <ClCompile Include="src\cpp\eventUi.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="src\include\deskworkUI.h" />
     <ClInclude Include="src\include\deskworkUImanager.h" />
     <ClInclude Include="src\include\easing.h" />
+    <ClInclude Include="src\include\enemy.h" />
     <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\eventcutin.h" />
     <ClInclude Include="src\include\eventUi.h" />

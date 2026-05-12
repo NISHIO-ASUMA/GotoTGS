@@ -115,7 +115,7 @@ public:
 	/// </summary>
 	/// <param name="nIdx">æ“¾‚·‚éƒ‚[ƒVƒ‡ƒ“”Ô†</param>
 	/// <returns></returns>
-	const MOTIONFILE GetFileDataIdx(const int &nIdx) { return m_FileData[nIdx]; }
+	const MOTIONFILE& GetFileDataIdx(const int &nIdx) { return m_FileData[nIdx]; }
 
 private:
 
