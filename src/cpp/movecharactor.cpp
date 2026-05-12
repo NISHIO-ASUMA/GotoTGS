@@ -149,7 +149,7 @@ void CMoveCharactor::Update(void)
 void CMoveCharactor::Draw(void)
 {
 	// デバイス取得
-	auto Rendere = CManager::GetInstance()->GetRenderer();
+	const auto& Rendere = CManager::GetInstance()->GetRenderer();
 	LPDIRECT3DDEVICE9 pDevice = Rendere->GetDevice();
 
 	// ワールドマトリックスの設定

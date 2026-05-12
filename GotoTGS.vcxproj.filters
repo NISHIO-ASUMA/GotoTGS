@@ -597,6 +597,9 @@
     <ClCompile Include="src\cpp\taskcommand.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\enemy.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -922,6 +925,9 @@
     </ClInclude>
     <ClInclude Include="src\include\taskcommand.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemy.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
