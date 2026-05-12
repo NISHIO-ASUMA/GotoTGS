@@ -16,18 +16,6 @@
 #include "manager.h"
 #include "texture.h"
 
-////*********************************************************
-//// 定数宣言
-////*********************************************************
-//namespace MESHFIELD
-//{
-//	constexpr int XVTX = 5;								// X方向の分割数
-//	constexpr int ZVTX = 5;								// Z方向の分割数
-//	constexpr int VERTEX = ((XVTX + 1) * (ZVTX + 1));	// 頂点数
-//	constexpr int POLYGON = (((XVTX * ZVTX) * 2)) + (4 * (ZVTX - 1)); // ポリゴン数
-//	constexpr int INDEX = POLYGON + 2;					// インデックス数
-//};
-
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -337,5 +325,5 @@ void CMeshField::SetTexture(void)
 	CTexture* pTexture = CManager::GetInstance()->GetInstance()->GetTexture();
 
 	// 割り当て
-	m_MeshFiled.nTexIdx = pTexture->Register("data/TEXTURE/field.jpg");
+	m_MeshFiled.nTexIdx = pTexture->Register("data/TEXTURE/field00.jpg");
 }

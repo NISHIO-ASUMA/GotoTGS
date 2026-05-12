@@ -24,11 +24,7 @@
 // インクルードファイル
 //*********************************************************
 #include "model.h"
-
-//*********************************************************
-// 前方宣言
-//*********************************************************
-class CMotionManager;
+#include "motionmanager.h"
 
 //*********************************************************
 // モーションクラスを定義
@@ -40,9 +36,7 @@ public:
 	CMotion();
 	~CMotion();
 
-	void Update(std::vector<CModel*> pModel);
-	void UpdateCurrentMotion(CMotionManager * pMption,CModel** ppModel, int nModelCount);
-	void UpdateBlend(CMotionManager* pMption,CModel** ppModel, int nModelCount);
+	void Update(const std::vector<CModel*>& pModel);
 	void Debug(void);
 	bool CheckFrame(int nStartMotion, int nEndMotion, int nMotionType);
 
@@ -79,6 +73,25 @@ public:
 	);
 
 private:
+
+	/// <summary>
+	/// 現在モーション更新関数
+	/// </summary>
+	/// <param name="info">マネージャーから取得した情報</param>
+	/// <param name="pModel">モデルのポインタ</param>
+	/// <param name="idx">モデルのカウント番号</param>
+	/// <param name="fRate">補完係数</param>
+	void UpdateCurrentMotionOptimized(const CMotionManager::INFO& info, CModel* pModel, int idx, float fRate);
+
+	/// <summary>
+	/// ブレンドモーション更新関数
+	/// </summary>
+	/// <param name="info">マネージャーから取得した情報</param>
+	/// <param name="pModel">モデルのポインタ</param>
+	/// <param name="idx">モデルのカウント番号</param>
+	/// <param name="fRate">補完係数</param>
+	/// <param name="fRate">ブレンド補完係数</param>
+	void UpdateBlendOptimized(const CMotionManager::MOTIONFILE& info, CModel* pModel, int idx, float fRate, float fBlendRate);
 
 	int m_nCounterMotion;	// モーションのカウンター
 	int m_nKey;				// 現在のキーNo

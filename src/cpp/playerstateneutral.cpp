@@ -35,7 +35,7 @@ CPlayerStateNeutral::~CPlayerStateNeutral()
 //=========================================================
 void CPlayerStateNeutral::OnStart()
 {
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL);
+	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL,true,5);
 }
 
 //=========================================================
