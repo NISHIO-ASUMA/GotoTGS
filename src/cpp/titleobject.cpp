@@ -16,14 +16,11 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
-//#include "gametime.h"
-#include "deskworkUImanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
 //*********************************************************
 CTitleObject* CTitleObject::m_pInstance = nullptr;					// シングルトン変数
-CDeskworkUIManager* CTitleObject::m_pDeskworkUIManager = nullptr;	// タスクUIマネージャーのポインタ
 
 //*********************************************************
 // 定数宣言空間
@@ -57,19 +54,14 @@ HRESULT CTitleObject::Init(void)
 	auto JsonManager = CManager::GetInstance()->GetJsonManager();
 	JsonManager->Load(TITLEOBJECT::LoadName);
 
-	//// タイマー生成
-	//CGametime::Create(D3DXVECTOR3(1000.0f,60.0f,0.0f),60.0f,45.0f);
-
 	//// 見えない壁生成
 	//m_pWallManager = std::make_unique<CWorldWallManager>();
 	//JsonManager->SetWorldWallManager(m_pWallManager.get());
 	//m_pWallManager->Init(TITLEOBJECT::WallName);
 
-	// タスクUIマネージャーの生成
-	m_pDeskworkUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
-
 	return S_OK;
 }
+
 //=========================================================
 // 終了処理
 //=========================================================
@@ -84,22 +76,16 @@ void CTitleObject::Uninit(void)
 		delete m_pInstance;
 		m_pInstance = nullptr;
 	}
-
-	// タスクUIマネージャーの破棄
-	if (m_pDeskworkUIManager)
-	{
-		m_pDeskworkUIManager->Uninit();
-		//delete m_pDeskworkUIManager;
-		m_pDeskworkUIManager = nullptr;
-	}
 }
+
 //=========================================================
 // 更新処理
 //=========================================================
 void CTitleObject::Update(void)
 {
-	m_pDeskworkUIManager->Update();
+
 }
+
 //=========================================================
 // シングルトン取得処理
 //=========================================================
