@@ -149,11 +149,11 @@ void CGameSceneObject::CreatePointer(void)
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
-	// スコア生成
-	m_pScore = CScore::Create(VECTOR3_NULL);
+	//// スコア生成
+	//m_pScore = CScore::Create(VECTOR3_NULL);
 
-	// タスクUIマネージャーの生成 Misaki
-	m_pDeskworkUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+	//// タスクUIマネージャーの生成 Misaki
+	//m_pDeskworkUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
 	//// 世界の壁管理クラスの生成
 	//m_pWorldWallManager = std::make_unique<CWorldWallManager>();
