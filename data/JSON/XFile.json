@@ -14,5 +14,8 @@
   { "XFile": "data/MODEL/STAGEOBJ/Side_Alpha.x" },
   { "XFile": "data/MODEL/STAGEOBJ/SpawnBase.x" },
   { "XFile": "data/MODEL/STAGEOBJ/Side_Alpha.x" },
-  { "XFile": "data/MODEL/STAGEOBJ/desk00.x" }
+  { "XFile": "data/MODEL/STAGEOBJ/desk00.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/desk01.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/chair00.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/pc00.x" }
 ]

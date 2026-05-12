@@ -81,9 +81,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
 
-	// ゲームで使うオブジェクトの読み込み
-	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	jsonmanager->Load(GAMEOBJECT::LoadName);
+	//// ゲームで使うオブジェクトの読み込み
+	////auto jsonmanager = CManager::GetInstance()->GetJsonManager();
+	////jsonmanager->Load(GAMEOBJECT::LoadName);
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -143,11 +143,11 @@ void CGameSceneObject::Draw(void)
 //=========================================================
 void CGameSceneObject::CreatePointer(void)
 {
-	//// ブロックマネージャー生成
-	//m_pBlocks = std::make_unique<CBlockManager>();
-	//auto jsonManager = CManager::GetInstance()->GetJsonManager();
-	//jsonManager->SetBlockManager(m_pBlocks.get());
-	//m_pBlocks->Init();
+	// ブロックマネージャー生成
+	m_pBlocks = std::make_unique<CBlockManager>();
+	auto jsonManager = CManager::GetInstance()->GetJsonManager();
+	jsonManager->SetBlockManager(m_pBlocks.get());
+	m_pBlocks->Init();
 
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);

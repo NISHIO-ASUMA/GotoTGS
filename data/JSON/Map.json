@@ -1,31 +1,30 @@
 [
   {
     "ObjectTag": "Block",
-    "filepath": "data/MODEL/STAGEOBJ/desk01.x",
+    "filepath": "STAGEOBJ/desk01.x",
     "pos": [ 0.0, 15.0, 280.0 ],
     "rot": [ 0.0, 3.14, 0.0 ],
     "scale": [ 1.0, 1.0, 1.0 ]
   },
   {
     "ObjectTag": "Block",
-    "filepath": "data/MODEL/STAGEOBJ/desk00.x",
+    "filepath": "STAGEOBJ/desk00.x",
     "pos": [ -25.0, 15.0, 180.0 ],
     "rot": [ 0.0, 1.56, 0.0 ],
     "scale": [ 1.0, 1.0, 1.0 ]
   },
   {
     "ObjectTag": "Block",
-    "filepath": "data/MODEL/STAGEOBJ/chair00.x",
+    "filepath": "STAGEOBJ/chair00.x",
     "pos": [ -60.0, 15.0, 180.0 ],
     "rot": [ 0.0, -1.53, 0.0 ],
     "scale": [ 1.0, 1.0, 1.0 ]
   },
   {
     "ObjectTag": "Block",
-    "filepath": "data/MODEL/STAGEOBJ/pc00.x",
+    "filepath": "STAGEOBJ/pc00.x",
     "pos": [ -21.0, 45.0, 175.0 ],
     "rot": [ 0.0, 1.56, 0.0 ],
     "scale": [ 1.0, 1.0, 1.0 ]
   }
-
 ]
