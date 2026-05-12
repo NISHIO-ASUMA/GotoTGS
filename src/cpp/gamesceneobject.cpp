@@ -16,7 +16,6 @@
 #include "manager.h"
 #include "input.h"
 #include "blockmanager.h"
-//#include "gametime.h"
 #include "score.h"
 #include "gamemanager.h"
 #include "jsonmanager.h"
@@ -24,11 +23,13 @@
 #include "ui.h"
 #include "meshfield.h"
 #include "player.h"
+#include "gametime.h"				// Misaki
+#include "deskworkUImanager.h"		// Misaki
 
 //*********************************************************
 // 静的メンバ変数
 //*********************************************************
-CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;			// シングルトン変数
+CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;				// シングルトン変数
 
 //*********************************************************
 // 定数名前空間
@@ -48,6 +49,7 @@ namespace GAMEOBJECT
 CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
+m_pDeskworkUIManager(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -80,11 +82,11 @@ HRESULT CGameSceneObject::Init(void)
 	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
 
 	// ゲームで使うオブジェクトの読み込み
-	//auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	//jsonmanager->Load(GAMEOBJECT::LoadName);
+	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
+	jsonmanager->Load(GAMEOBJECT::LoadName);
 
-	//// 各種ポインタクラスの生成
-	//CreatePointer();
+	// 各種ポインタクラスの生成
+	CreatePointer();
 
 	//// スコア初期化
 	//m_pScore->DeleteScore();
@@ -108,38 +110,54 @@ void CGameSceneObject::Uninit(void)
 		delete m_pInstance;
 		m_pInstance = nullptr;
 	}
+
+	// タスクUIマネージャーを破棄
+	if (m_pDeskworkUIManager)
+	{
+		m_pDeskworkUIManager->Uninit();
+		m_pDeskworkUIManager = nullptr;
+	}
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CGameSceneObject::Update(void)
 {
+	// タスクUIマネージャーの更新処理 Msaki
+	m_pDeskworkUIManager->Update();
 }
+
 //=========================================================
 // 描画処理
 //=========================================================
 void CGameSceneObject::Draw(void)
 {
+
 }
+
 //=========================================================
 // ポインタの生成を行う関数
 //=========================================================
 void CGameSceneObject::CreatePointer(void)
 {
-	// ブロックマネージャー生成
-	m_pBlocks = std::make_unique<CBlockManager>();
-	auto jsonManager = CManager::GetInstance()->GetJsonManager();
-	jsonManager->SetBlockManager(m_pBlocks.get());
-	m_pBlocks->Init();
+	//// ブロックマネージャー生成
+	//m_pBlocks = std::make_unique<CBlockManager>();
+	//auto jsonManager = CManager::GetInstance()->GetJsonManager();
+	//jsonManager->SetBlockManager(m_pBlocks.get());
+	//m_pBlocks->Init();
 
-	// タイマー生成
-	//m_pTimer = CGameTime::Create(GAMEOBJECT::TimerPos);
+	// タイマー生成 Misaki
+	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
-	// スコア生成
-	m_pScore = CScore::Create(VECTOR3_NULL);
+	//// スコア生成
+	//m_pScore = CScore::Create(VECTOR3_NULL);
 
-	// 世界の壁管理クラスの生成
-	m_pWorldWallManager = std::make_unique<CWorldWallManager>();
-	jsonManager->SetWorldWallManager(m_pWorldWallManager.get());
-	m_pWorldWallManager->Init(GAMEOBJECT::WallName);
+	//// タスクUIマネージャーの生成 Misaki
+	//m_pDeskworkUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+
+	//// 世界の壁管理クラスの生成
+	//m_pWorldWallManager = std::make_unique<CWorldWallManager>();
+	//jsonManager->SetWorldWallManager(m_pWorldWallManager.get());
+	//m_pWorldWallManager->Init(GAMEOBJECT::WallName);
+
 }

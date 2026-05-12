@@ -14,18 +14,6 @@
   },
   {
     "ObjectTag": "Ui",
-    "Pos": [ 1125.0, 60.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 15.0,
-    "Height": 30.0,
-    "Texture": "coron.png",
-    "AlphaTest": true,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
-  },
-  {
-    "ObjectTag": "Ui",
     "Pos": [ 1125.0, 55.0, 0.0 ],
     "FlashFrame": 0,
     "Width": 140.0,
@@ -35,5 +23,30 @@
     "IsFlash": false,
     "EnableAlpha": false,
     "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 640.0, 360.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 500.0,
+    "Height": 200.0,
+    "Texture": "deskwork_background.jpg",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 1125.0, 60.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 10.0,
+    "Height": 35.0,
+    "Texture": "coron.png",
+    "AlphaTest": true,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
   }
+
 ]
