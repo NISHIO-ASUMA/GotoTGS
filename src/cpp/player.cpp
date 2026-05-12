@@ -124,6 +124,7 @@ void CPlayer::Update(void)
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
+	// カメラ基準の移動処理
 	MoveBasedOnCamera(player::fSpeed);
 
 	// 座標の更新処理
@@ -240,11 +241,11 @@ void CPlayer::MoveBasedOnCamera(float speed)
 		// 移動の正規化
 		D3DXVec3Normalize(&moveDir, &moveDir);
 
-		// モーション設定
-		//m_pMotion->Set(CMotion::MOTIONTYPE_MOVE);
-
 		// 位置の更新
 		SetMove(moveDir * speed);
+
+		// 移動方向から向きを計算
+		RotDest.y = atan2f(-moveDir.x, -moveDir.z);
 
 		// 目的の向きを設定
 		SetRotDest(RotDest);
