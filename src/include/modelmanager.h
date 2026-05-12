@@ -45,7 +45,6 @@ public:
 		std::vector<int>pTexture;	// テクスチャの動的ポインタ
 		std::string FilePath;		// ファイル名
 		int nParnent;				// 親を持つ
-		bool isInstancing;			// インスタンシング判断
 		MODEL_DATA modelData;		// 構造体変数
 	};
 
@@ -79,8 +78,8 @@ public:
 
 private:
 
-	HRESULT LoadJson(void);						// jsonfile読み込み関数
-	void LoadModel(const char* pModelName,bool &LoadFlags); // モデル登録関数
+	HRESULT LoadJson(void);					// jsonfile読み込み関数
+	void LoadModel(const char* pModelName); // モデル登録関数
 
 	std::vector<ModelManagerInfo>m_aModelData;	// モデルデータ管理配列
 	static int m_nNumAll;						// モデルの総数

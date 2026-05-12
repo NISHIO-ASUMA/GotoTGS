@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CBlockManager;
+class CPlayer;				// [ Asuma add ]
 class CGametime;
 class CScore;
 class CDeskworkUIManager;	// Misaki
@@ -40,6 +41,8 @@ public:
 	
 	CGametime* GetTime(void) const { return m_pTimer; }
 	CScore* GetScore(void) const { return m_pScore; }
+	CPlayer* GetPlayer(void) const { return m_pPlayer; } // [ Asuma add ]
+
 	CDeskworkUIManager* GetDeskUIManager(void) const { return m_pDeskworkUIManager; }	// Misaki
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
 
@@ -57,11 +60,13 @@ private:
 	CGameSceneObject();			// コンストラクタ
 	void CreatePointer(void);	// 初期化処理関数分け
 
+private:
+
 	CScore* m_pScore;								// スコアクラスのポインタ
 	CGametime* m_pTimer;							// タイマークラスのポインタ
 	CDeskworkUIManager* m_pDeskworkUIManager;		// タスクUIマネージャーのポインタ Misaki
+	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ [ Asuma add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ
-
 };

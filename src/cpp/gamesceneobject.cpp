@@ -77,9 +77,11 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 //=========================================================
 HRESULT CGameSceneObject::Init(void)
 {
+	// メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
 
-	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
 
 	//// ゲームで使うオブジェクトの読み込み
 	////auto jsonmanager = CManager::GetInstance()->GetJsonManager();
@@ -125,7 +127,7 @@ void CGameSceneObject::Update(void)
 {
 	if (m_pDeskworkUIManager != nullptr)
 	{
-		// タスクUIマネージャーの更新処理 Msaki
+		// タスクUIマネージャーの更新処理 Misaki
 		m_pDeskworkUIManager->Update();
 	}
 }

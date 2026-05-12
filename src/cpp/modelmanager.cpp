@@ -53,7 +53,7 @@ CModelManager::~CModelManager()
 HRESULT CModelManager::Load(void)
 {
 	// jsonファイルロード
-	//LoadJson();
+	LoadJson();
 
 	// 初期化結果を返す
 	return S_OK;
@@ -234,16 +234,11 @@ HRESULT CModelManager::LoadJson(void)
 		// jsonからファイルパス取得
 		std::string filePath = entry["Model"].get<std::string>();
 
-		if (!entry.contains("Instancing"))continue;
-
-		// インスタンスフラグ
-		bool isInstancing = entry["Instancing"].get<bool>();
-
-		if (filePath.empty())
-			continue;
-
+		// ファイルパスが無かったら
+		if (filePath.empty()) continue;
+		
 		// モデル読み込み
-		LoadModel(filePath.c_str(), isInstancing);
+		LoadModel(filePath.c_str());
 
 		// 総数加算
 		m_nNumAll++;
@@ -254,7 +249,7 @@ HRESULT CModelManager::LoadJson(void)
 //=========================================================
 // 関数分け読み込み
 //=========================================================
-void CModelManager::LoadModel(const char* pModelName, bool& LoadFlags)
+void CModelManager::LoadModel(const char* pModelName)
 {
 	// 格納用変数
 	ModelManagerInfo NewModelInfo = {};
@@ -378,9 +373,6 @@ void CModelManager::LoadModel(const char* pModelName, bool& LoadFlags)
 			}
 		}
 	}
-
-	// フラグ情報を格納
-	NewModelInfo.isInstancing = LoadFlags;
 
 	// 配列に登録する
 	m_aModelData.push_back(NewModelInfo);

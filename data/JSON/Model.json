@@ -1,0 +1,62 @@
+[
+  {
+    "Model": "data/MODEL/ENEMY/00_Enemy_body.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/01_Enemy_head.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/02_Enemy_armR.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/03_Enemy_handR.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/04_Enemy_armL.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/05_Enemy_handL.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/06_Enemy_legR.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/07_Enemy_footR.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/08_Enemy_legL.x"
+  },
+  {
+    "Model": "data/MODEL/ENEMY/09_Enemy_footL.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/00_Player_body.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/01_Player_head.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/02_Player_armR.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/03_Player_handR.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/04_Player_armL.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/05_Player_handL.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/06_Player_legR.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/07_Player_footR.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/08_Player_legL.x"
+  },
+  {
+    "Model": "data/MODEL/PLAYER/09_Player_footL.x"
+  }
+]

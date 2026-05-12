@@ -121,7 +121,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	m_pXfileManager = std::make_unique <CXfileManager>();
 	if (FAILED(m_pXfileManager->Load())) return E_FAIL;
 
-	// キャラクターモデル管理クラスの生成処理
+	// モデル管理クラスの生成処理
 	m_pModelManager = std::make_unique<CModelManager>();
 	if (FAILED(m_pModelManager->Load())) return E_FAIL;
 
