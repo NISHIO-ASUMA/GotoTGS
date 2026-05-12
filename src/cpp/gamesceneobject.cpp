@@ -123,8 +123,11 @@ void CGameSceneObject::Uninit(void)
 //=========================================================
 void CGameSceneObject::Update(void)
 {
-	// タスクUIマネージャーの更新処理 Msaki
-	m_pDeskworkUIManager->Update();
+	if (m_pDeskworkUIManager != nullptr)
+	{
+		// タスクUIマネージャーの更新処理 Msaki
+		m_pDeskworkUIManager->Update();
+	}
 }
 
 //=========================================================
