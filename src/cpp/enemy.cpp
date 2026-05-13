@@ -71,8 +71,14 @@ HRESULT CEnemy::Init(void)
 	// モーションファイルロード
 	MotionLoad("data/MOTION/Enemy/EnemyMotion.txt", MOTION::MAX, true);
 
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+
+	// X, Y, Zの回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
 	// 矩形コライダー生成
-	m_pBoxColiider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(Config::BOX_RANGE, Config::BOX_RANGE, Config::BOX_RANGE));
+	m_pBoxColiider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(Config::BOX_RANGE, Config::BOX_RANGE, Config::BOX_RANGE),matRot);
 
 	// 球形コライダー生成
 	m_pSphereColiider = CSphereCollider::Create(GetPos(),Config::SPHERE_RANGE);
@@ -158,5 +164,5 @@ bool CEnemy::Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos)
 	if (!m_pBoxColiider) return false;
 
 	// 当たり判定処理
-	return CCollisionBox::Collision(m_pBoxColiider.get(), pOther, pOutPos);
+	return CCollisionBox::CollisionEx(m_pBoxColiider.get(), pOther, pOutPos);
 }

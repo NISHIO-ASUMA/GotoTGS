@@ -59,6 +59,16 @@ public:
 	);
 
 private:
+
+	//********************************
+	// 定数構造体
+	//********************************
+	struct Config
+	{
+		static constexpr float VALUESIZE = 10.0f;
+	};
+
+private:
 	std::unique_ptr<CBoxCollider> m_pCollider;	// 矩形のコライダー
 };
 

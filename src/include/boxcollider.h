@@ -32,8 +32,9 @@ public:
 	//*********************************
 	struct BoxColliderInfo
 	{
-		D3DXVECTOR3 posOld;// 前回の座標
-		D3DXVECTOR3 Size;  // コライダーの大きさ
+		D3DXVECTOR3 posOld;		// 前回の座標
+		D3DXVECTOR3 Size;		// コライダーの大きさ
+		D3DXMATRIX MtxRotation; // 回転軸
 	};
 	
 	CBoxCollider();
@@ -48,12 +49,14 @@ public:
 	/// <param name="pos">生成座標</param>
 	/// <param name="posold">1フレーム前の過去座標</param>
 	/// <param name="size">コリジョンサイズ</param>
+	/// <param name="mtxRotation">回転軸</param>
 	/// <returns></returns>
 	static std::unique_ptr<CBoxCollider>Create
 	(
 		const D3DXVECTOR3& pos, 
 		const D3DXVECTOR3& posold, 
-		const D3DXVECTOR3& size
+		const D3DXVECTOR3& size,
+		const D3DXMATRIX& mtxRotation
 	);
 
 private:

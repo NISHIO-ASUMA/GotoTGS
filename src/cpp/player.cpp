@@ -88,8 +88,14 @@ HRESULT CPlayer::Init(void)
 	// 初期ステートをセット
 	ChangeState(new CPlayerStateNeutral(), CPlayerStateBase::ID_NEUTRAL);
 
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+
+	// X, Y, Zの回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(50.0f,50.0f,50.0f));
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(45.0f, 45.0f,45.0f),matRot);
 
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
@@ -123,24 +129,56 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
+	// 現在の座標取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 oldpos = GetOldPos();
+
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
 	// カメラ基準の移動処理
 	MoveBasedOnCamera(player::fSpeed);
 
-	// 現在の座標取得
-	D3DXVECTOR3 pos = GetPos();
-
 	// コライダー座標の更新
-	if (m_pBoxCollider) m_pBoxCollider->SetPos(pos);
+	if (m_pBoxCollider)
+	{
+		m_pBoxCollider->SetPos(pos);
+		m_pBoxCollider->SetPosOld(oldpos);
+	}
 
 	// 座標の更新処理
 	CMoveCharactor::UpdatePosition();
 
+	// 更新後の座標取得
+	auto UpdatePos = GetPos();
+
+	// jsonmanagerからブロックを取得
+	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (BlockManager == nullptr) return;
+
+	// 最大ブロックを取得する
+	for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
+	{
+		// 各ブロックを取得し判定を生成
+		auto IdxBlock = BlockManager->GetBlock(nCnt);
+
+		// コライダー取得とnullチェック
+		CBoxCollider * Collider = IdxBlock->GetCollider();
+		if (Collider == nullptr) continue;
+
+		// 当たり判定の実行
+		if (Collision(Collider, &UpdatePos))
+		{
+			// 当たった点の座標セット
+			SetPos(UpdatePos);
+
+			// コライダーと現在座標の更新をする
+			m_pBoxCollider->SetPos(UpdatePos);
+		}
+	}
+
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
-
 }
 //=========================================================
 // 描画処理

@@ -36,17 +36,23 @@ CBlock::~CBlock()
 //=========================================================
 // 生成処理
 //=========================================================
-CBlock* CBlock::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3DXVECTOR3& scale, const char* pModelName)
+CBlock* CBlock::Create
+(
+	const D3DXVECTOR3& pos, 
+	const D3DXVECTOR3& rot, 
+	const D3DXVECTOR3& scale, 
+	const char* pModelName
+)
 {
 	// インスタンス生成
 	CBlock* pBlock = new CBlock;
 	if (pBlock == nullptr) return nullptr;
 
 	// オブジェクト設定
+	pBlock->SetFilePass(pModelName);
 	pBlock->SetPos(pos);
 	pBlock->SetRot(rot);
 	pBlock->SetScale(scale);
-	pBlock->SetFilePass(pModelName);
 
 	// 初期化失敗時
 	if (FAILED(pBlock->Init())) return nullptr;
@@ -54,7 +60,7 @@ CBlock* CBlock::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3D
 	return pBlock;
 }
 //=========================================================
-// 初期化処理
+// ブロックの初期化処理
 //=========================================================
 HRESULT CBlock::Init(void)
 {
@@ -72,17 +78,33 @@ HRESULT CBlock::Init(void)
 	// モデルのパス取得
 	std::string str = pXManager->GetInfo(nModelIdx).FilePath;
 
-	// コライダーの設定
-	if (str == "data/MODEL/STAGEOBJ/Reef.x") m_pCollider = nullptr;
-	else
-		m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size);
-	
-	// マトリックスシャドウを有効化する
-	if (str == "data/MODEL/STAGEOBJ/wallback.x")
-		SetShadow(false);
-	else
-		SetShadow(true);
+	// 特定のモデルのサイズ調整
+	if (str == "data/MODEL/STAGEOBJ/desk00.x")
+	{
+		// デスクの当たり判定を少し大きくする
+		Size.x += Config::VALUESIZE;
+		Size.y += Config::VALUESIZE;
+		Size.z += Config::VALUESIZE;
+	}
 
+	// オブジェクトの回転角度を取得
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot(); 
+
+	// 回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
+	// 特定のオブジェクトの当たり判定を消す
+	if (str == "data/MODEL/STAGEOBJ/chair00.x" || str == "data/MODEL/STAGEOBJ/pc00.x")
+	{
+		m_pCollider = nullptr;
+	}
+	else
+	{
+		// 矩形コライダー生成処理
+		m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size, matRot);
+	}
+	
 	return S_OK;
 }
 //=========================================================
