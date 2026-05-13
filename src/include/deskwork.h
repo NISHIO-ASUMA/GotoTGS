@@ -16,6 +16,11 @@
 #include "object2D.h"
 
 //*********************************************************
+// 前方宣言
+//*********************************************************
+class CDeskworkUIManager;
+
+//*********************************************************
 // タスククラスを定義
 //*********************************************************
 class CDeskwork :public CObject2D
@@ -33,6 +38,9 @@ public:
 	// 生成処理
 	static CDeskwork* Create(const D3DXVECTOR3& pos);
 
+	// 情報取得処理
+	CDeskworkUIManager* GetDeskUIManager(void) const { return m_pDeskUIManager; }
+
 private:
 
 	//************************************
@@ -40,17 +48,12 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr float WIDTH = 800.0f;				// 横幅
-		static constexpr float HEIGHT = 450.0f;				// 縦幅
+		static constexpr float WIDTH = 500.0f;								// 横幅
+		static constexpr float HEIGHT = 200.0f;								// 縦幅
 		static constexpr const char* TEXNAME = "deskwork_background.jpg";	// テクスチャ名
-		static constexpr int UI_WORK = 3;									// 表示するUIの数
-		static constexpr float VALUE_WIDTH = Config::WIDTH * 0.125;			// 横幅の増加する幅
 
 	};
 
 	// メンバ変数
-	D3DXVECTOR3 m_pos;	// 座標
-	float m_fWIdth;		// 横幅
-	float m_fHeight;	// 縦幅
-
+	CDeskworkUIManager* m_pDeskUIManager;	// デスクUIマネージャーのポインタ
 };
