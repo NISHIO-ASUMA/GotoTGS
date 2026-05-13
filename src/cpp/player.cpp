@@ -22,6 +22,8 @@
 #include "statemachine.h"
 #include "input.h"
 #include "camera.h"
+#include "blockmanager.h"
+#include "jsonmanager.h"
 
 //*********************************************************
 // インクルードファイル
@@ -87,7 +89,7 @@ HRESULT CPlayer::Init(void)
 	ChangeState(new CPlayerStateNeutral(), CPlayerStateBase::ID_NEUTRAL);
 
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f,50.0f,50.0f));
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(50.0f,50.0f,50.0f));
 
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
@@ -126,6 +128,12 @@ void CPlayer::Update(void)
 
 	// カメラ基準の移動処理
 	MoveBasedOnCamera(player::fSpeed);
+
+	// 現在の座標取得
+	D3DXVECTOR3 pos = GetPos();
+
+	// コライダー座標の更新
+	if (m_pBoxCollider) m_pBoxCollider->SetPos(pos);
 
 	// 座標の更新処理
 	CMoveCharactor::UpdatePosition();
