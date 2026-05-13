@@ -75,8 +75,14 @@ HRESULT CGameWallModel::Init(void)
 	int nModelIdx = GetModelIdx();
 	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
 
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+
+	// X, Y, Zの回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
 	// コライダー生成
-	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size);
+	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size,matRot);
 
 	// マトリックスシャドウを無効にする
 	SetShadow(false);

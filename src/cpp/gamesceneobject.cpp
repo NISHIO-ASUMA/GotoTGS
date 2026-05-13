@@ -23,8 +23,8 @@
 #include "ui.h"
 #include "meshfield.h"
 #include "player.h"
-#include "gametime.h"				// Misaki
-#include "deskworkUImanager.h"		// Misaki
+#include "gametime.h"	// Misaki
+#include "deskwork.h"	// Misaki
 #include <enemy.h>
 
 //*********************************************************
@@ -50,7 +50,7 @@ namespace GAMEOBJECT
 CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
-m_pDeskworkUIManager(nullptr),
+m_pDeskwork(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -88,8 +88,8 @@ HRESULT CGameSceneObject::Init(void)
 	CEnemy::Create(D3DXVECTOR3(-800.0f,0.0f,250.0f),VECTOR3_NULL);
 
 	//// ゲームで使うオブジェクトの読み込み
-	////auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	////jsonmanager->Load(GAMEOBJECT::LoadName);
+	//auto jsonmanager = CManager::GetInstance()->GetJsonManager();
+	//jsonmanager->Load(GAMEOBJECT::LoadName);
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -116,24 +116,13 @@ void CGameSceneObject::Uninit(void)
 		delete m_pInstance;
 		m_pInstance = nullptr;
 	}
-
-	// タスクUIマネージャーを破棄
-	if (m_pDeskworkUIManager)
-	{
-		m_pDeskworkUIManager->Uninit();
-		m_pDeskworkUIManager = nullptr;
-	}
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CGameSceneObject::Update(void)
 {
-	if (m_pDeskworkUIManager != nullptr)
-	{
-		// タスクUIマネージャーの更新処理 Misaki
-		m_pDeskworkUIManager->Update();
-	}
+
 }
 
 //=========================================================
@@ -161,8 +150,8 @@ void CGameSceneObject::CreatePointer(void)
 	//// スコア生成
 	//m_pScore = CScore::Create(VECTOR3_NULL);
 
-	//// タスクUIマネージャーの生成 Misaki
-	//m_pDeskworkUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+	// タスクの生成 Misaki
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
 	//// 世界の壁管理クラスの生成
 	//m_pWorldWallManager = std::make_unique<CWorldWallManager>();

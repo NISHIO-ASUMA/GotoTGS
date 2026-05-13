@@ -22,7 +22,7 @@ class CBlockManager;
 class CPlayer;				// [ Asuma add ]
 class CGametime;
 class CScore;
-class CDeskworkUIManager;	// Misaki
+class CDeskwork;			// Misaki
 class CWorldWallManager;
 
 //*********************************************************
@@ -43,7 +43,7 @@ public:
 	CScore* GetScore(void) const { return m_pScore; }
 	CPlayer* GetPlayer(void) const { return m_pPlayer; } // [ Asuma add ]
 
-	CDeskworkUIManager* GetDeskUIManager(void) const { return m_pDeskworkUIManager; }	// Misaki
+	CDeskwork* GetDesk(void) const { return m_pDeskwork; }	// Misaki
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
 
 	/// <summary>
@@ -62,10 +62,10 @@ private:
 
 private:
 
-	CScore* m_pScore;								// スコアクラスのポインタ
-	CGametime* m_pTimer;							// タイマークラスのポインタ
-	CDeskworkUIManager* m_pDeskworkUIManager;		// タスクUIマネージャーのポインタ Misaki
-	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ [ Asuma add ]
+	CScore* m_pScore;			// スコアクラスのポインタ
+	CGametime* m_pTimer;		// タイマークラスのポインタ
+	CDeskwork* m_pDeskwork;		// タスクのポインタ Misaki
+	CPlayer* m_pPlayer;			// プレイヤーのクラスポインタ [ Asuma add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ
