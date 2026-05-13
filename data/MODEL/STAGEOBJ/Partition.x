@@ -279,7 +279,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Downloads\\ƒhƒLƒ…ƒƒ“ƒgˆê®\\Visual Studio 2019\\DirectX03\\data\\TEXTURE\\Metal.png";
+    "data\\TEXTURE\\Metal.png";
    }
   }
  }
