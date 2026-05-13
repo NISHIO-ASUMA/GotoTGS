@@ -25,6 +25,7 @@
 #include "player.h"
 #include "gametime.h"				// Misaki
 #include "deskworkUImanager.h"		// Misaki
+#include <enemy.h>
 
 //*********************************************************
 // 静的メンバ変数
@@ -82,6 +83,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL);
+
+	// 敵生成
+	CEnemy::Create(D3DXVECTOR3(-800.0f,0.0f,250.0f),VECTOR3_NULL);
 
 	//// ゲームで使うオブジェクトの読み込み
 	////auto jsonmanager = CManager::GetInstance()->GetJsonManager();
