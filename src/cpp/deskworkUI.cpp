@@ -276,7 +276,7 @@ void CDeskworkUI::SetFlash(const int& nStartFrame, const int& nEndFrame, const D
 //==========================================================
 // UV設定処理
 //==========================================================
-void CDeskworkUI::SetDigit(int nDigit)
+void CDeskworkUI::SetDigit(KEYTYPE nDigit)
 {
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -285,7 +285,7 @@ void CDeskworkUI::SetDigit(int nDigit)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// テクスチャ座標の計算
-	float fTexU = nDigit * Config::DIGIT_VALUE;
+	float fTexU = (float)(nDigit) * Config::DIGIT_VALUE;
 
 	// テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(fTexU, 0.0f);

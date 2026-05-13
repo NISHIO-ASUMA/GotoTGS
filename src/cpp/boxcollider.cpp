@@ -31,7 +31,8 @@ std::unique_ptr<CBoxCollider> CBoxCollider::Create
 (
 	const D3DXVECTOR3& pos, 
 	const D3DXVECTOR3& posold, 
-	const D3DXVECTOR3& size
+	const D3DXVECTOR3& size,
+	const D3DXMATRIX& mtxRotation
 )
 {
 	// インスタンス生成
@@ -42,6 +43,7 @@ std::unique_ptr<CBoxCollider> CBoxCollider::Create
 	pCollider->SetPos(pos);
 	pCollider->m_BoxInfo.posOld = posold;
 	pCollider->m_BoxInfo.Size = size;
+	pCollider->m_BoxInfo.MtxRotation = mtxRotation;
 
 	// 生成されたポインタを返す
 	return pCollider;

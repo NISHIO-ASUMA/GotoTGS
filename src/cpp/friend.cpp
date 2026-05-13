@@ -64,8 +64,14 @@ HRESULT CFriend::Init(void)
 	// モーション読み込み
 	MotionLoad("data/MOTION/FriendMotion.txt", MAX, false);
 
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+
+	// X, Y, Zの回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f, 50.0f, 50.0f));
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f, 50.0f, 50.0f),matRot);
 
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);

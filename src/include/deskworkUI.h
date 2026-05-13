@@ -45,8 +45,8 @@ public:
 
 	// 設定処理
 	void SetTexture(const char* pTexName);												// テクスチャ設定
-	void SetSize(float fWidth, float fHeight);											// サイズ設定
-	void SetDigit(int nDigit);															// UV設定
+	void SetSize(const float fWidth, const float fHeight);								// サイズ設定
+	void SetDigit(const KEYTYPE nDigit);												// UV設定
 	void ChangeCol(const D3DXCOLOR& col);												// カラー設定
 	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
 
@@ -61,6 +61,8 @@ public:
 	inline KEYTYPE GetKyeType(void) const { return m_Kyetype; }
 	inline float GetWidth(void) const { return m_fWidth; }
 	inline float GetHeight(void) const { return m_fHeight; }
+	inline int GetIdx(void) const { return m_nIdx; }
+	inline D3DXCOLOR GetCol(void) const { return m_col; }
 
 	// 生成処理
 	static CDeskworkUI* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const KEYTYPE& kyetype, const int& nIdx);
