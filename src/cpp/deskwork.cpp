@@ -14,12 +14,13 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "deskworkUImanager.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
-m_pos(VECTOR3_NULL)
+m_pDeskUIManager(nullptr)
 {
 
 }
@@ -30,7 +31,6 @@ m_pos(VECTOR3_NULL)
 CDeskwork::~CDeskwork()
 {
 
-
 }
 
 //=========================================================
@@ -38,7 +38,7 @@ CDeskwork::~CDeskwork()
 //=========================================================
 CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 {
-	// インスタンス生成
+	// ポインタ生成
 	CDeskwork* pDeskwork = new CDeskwork;
 
 	// ヌルチェック
@@ -63,10 +63,10 @@ HRESULT CDeskwork::Init(void)
 	SetCol(COLOR_WHITE);					// カラー設定
 	SetTexture(Config::TEXNAME);			// テクスチャ設定
 
-	// UIを生成
-	for (int nCount = 0;nCount < Config::UI_WORK;nCount++)
+	if (m_pDeskUIManager == nullptr)
 	{
-		// UIのポインタを入れる
+		// タスクUIマネージャーの生成 Misaki
+		m_pDeskUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 	}
 
 	return S_OK;
@@ -77,7 +77,12 @@ HRESULT CDeskwork::Init(void)
 //=========================================================
 void CDeskwork::Uninit(void)
 {
-
+	// タスクUIマネージャーを破棄
+	if (m_pDeskUIManager)
+	{
+		m_pDeskUIManager->Uninit();
+		m_pDeskUIManager = nullptr;
+	}
 }
 
 //=========================================================
@@ -85,7 +90,11 @@ void CDeskwork::Uninit(void)
 //=========================================================
 void CDeskwork::Update(void)
 {
-
+	if (m_pDeskUIManager != nullptr)
+	{
+		// タスクUIマネージャーの更新処理
+		m_pDeskUIManager->Update();
+	}
 }
 
 //=========================================================

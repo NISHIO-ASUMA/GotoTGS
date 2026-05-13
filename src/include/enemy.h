@@ -40,6 +40,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	/// <summary>
 	/// 生成処理
@@ -61,7 +62,17 @@ public:
 		MAX
 	};
 
+	//***************************
+	// モーション列挙型
+	//***************************
+	struct Config
+	{
+		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
+		static constexpr float BOX_RANGE = 60.0f;	 // 矩形範囲
+	};
+
 private:
+
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
 };
