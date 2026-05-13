@@ -82,9 +82,9 @@ HRESULT CBlock::Init(void)
 	if (str == "data/MODEL/STAGEOBJ/desk00.x")
 	{
 		// デスクの当たり判定を少し大きくする
-		Size.x += Config::VALUESIZE;
-		Size.y += Config::VALUESIZE;
-		Size.z += Config::VALUESIZE;
+		Size.x *= Config::VALUESIZE;
+		Size.y *= Config::VALUESIZE;
+		Size.z *= Config::VALUESIZE;
 	}
 
 	// オブジェクトの回転角度を取得

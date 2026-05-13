@@ -95,7 +95,7 @@ HRESULT CPlayer::Init(void)
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(45.0f, 45.0f,45.0f),matRot);
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(50.0f, 50.0f, 50.0f),matRot);
 
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
@@ -152,6 +152,13 @@ void CPlayer::Update(void)
 	// 更新後の座標取得
 	auto UpdatePos = GetPos();
 
+	// コライダー座標の更新
+	if (m_pBoxCollider)
+	{
+		m_pBoxCollider->SetPos(UpdatePos);
+		m_pBoxCollider->SetPosOld(GetOldPos());
+	}
+
 	// jsonmanagerからブロックを取得
 	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
 	if (BlockManager == nullptr) return;
@@ -174,6 +181,7 @@ void CPlayer::Update(void)
 
 			// コライダーと現在座標の更新をする
 			m_pBoxCollider->SetPos(UpdatePos);
+			m_pBoxCollider->SetPosOld(UpdatePos);
 		}
 	}
 
@@ -202,7 +210,7 @@ bool CPlayer::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 	if (m_pBoxCollider == nullptr) return false;
 
 	// 矩形同士の当たり判定を返す
-	return CCollisionBox::Collision(m_pBoxCollider.get(), pOther, OutPos);
+	return CCollisionBox::CollisionEx(m_pBoxCollider.get(), pOther, OutPos);
 }
 //=========================================================
 // ステート変更処理

@@ -65,7 +65,7 @@ private:
 	//********************************
 	struct Config
 	{
-		static constexpr float VALUESIZE = 10.0f;
+		static constexpr float VALUESIZE = 0.9f;
 	};
 
 private:

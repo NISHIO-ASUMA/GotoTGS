@@ -20,7 +20,7 @@
 //*********************************************************
 namespace BOXINFO
 {
-	constexpr float PUSHVALUE = 0.1f;		// 押し出し加算値
+	constexpr float PUSHVALUE = 0.05f;		// 押し出し加算値
 };
 
 //=========================================================
@@ -243,8 +243,11 @@ bool CCollisionBox::CollisionEx(CBoxCollider* thisCollider, CBoxCollider* OtherC
 			return false; // 隙間があるので当たっていない
 		}
 
+		// --- ブルブル防止の重み付け ---
+		float weight = (nAxis < CROSS_AXIS) ? 1.0f : 1.1f;
+
 		// 最小の重なりを更新
-		if (fOverlap < fMinOverlap)
+		if (fOverlap * weight < fMinOverlap)
 		{
 			fMinOverlap = fOverlap;
 			pushAxis = unitAxis;

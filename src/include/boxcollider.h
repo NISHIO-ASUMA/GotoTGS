@@ -36,11 +36,12 @@ public:
 		D3DXVECTOR3 Size;		// コライダーの大きさ
 		D3DXMATRIX MtxRotation; // 回転軸
 	};
+
 	
 	CBoxCollider();
 	~CBoxCollider();
 
-	void SetPosOld(const D3DXVECTOR3 posold) { m_BoxInfo.posOld = posold; }
+	void SetPosOld(const D3DXVECTOR3& posold) { m_BoxInfo.posOld = posold; }
 	BoxColliderInfo GetInfo(void) const { return m_BoxInfo; }
 
 	/// <summary>
