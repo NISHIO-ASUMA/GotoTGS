@@ -15,7 +15,6 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
-//#include "taskcommand.h"
 
 //=========================================================
 // コンストラクタ
@@ -75,7 +74,10 @@ HRESULT CDeskworkUIManager::Init(void)
 		keytype[nCount] = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
 
 		// UIの生成処理
-		m_pDeskworkUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, keytype[nCount], nCount);
+		m_pDeskUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, keytype[nCount], nCount);
+
+		// 色を透明にする
+		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
 
 		// UIの位置をずらす
 		pos.x += Config::VALUE_WIDTH;
@@ -110,16 +112,16 @@ void CDeskworkUIManager::Update(void)
 	{// クールタイムが始まっていないなら
 
 		// 現在のタスクUIの更新処理
-		m_pDeskworkUI[m_nNowIdx]->Update();
+		m_pDeskUI[m_nNowIdx]->Update();
 
-		if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
-			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
-			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
-			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskworkUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
+		if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
+			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
+			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
+			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
 		{// 正解を押した時
 
 			// 色を半透明にする
-			m_pDeskworkUI[m_nNowIdx]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
+			m_pDeskUI[m_nNowIdx]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
 
 			// 次のタスクに移る
 			m_nNowIdx++;
@@ -146,10 +148,10 @@ void CDeskworkUIManager::Update(void)
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
 		// タスクをランダムに設定
-		m_pDeskworkUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+		m_pDeskUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
 
 		// 色を不透明にする
-		m_pDeskworkUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	
 	// 現在選択している番号を初期化
@@ -169,6 +171,37 @@ void CDeskworkUIManager::Draw(void)
 {
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{// タスクUIの描画処理
-		m_pDeskworkUI[nCount]->Draw();
+		m_pDeskUI[nCount]->Draw();
+	}
+}
+
+//=========================================================
+// 透明度の処理
+//=========================================================
+void CDeskworkUIManager::SetAlphaUI(const bool bUse)
+{
+	if (bUse == false)
+	{
+		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+		{
+			// 色を透明にする
+			m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+		}
+
+		return;
+	}
+
+	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	{
+		if (nCount < m_nNowIdx)
+		{
+			// 色を半透明にする
+			m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
+
+			continue;
+		}
+
+		// 色を不透明にする
+		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 }
