@@ -1,5 +1,5 @@
 {
-   "AllObject": 42,
+   "AllObject": 56,
    "SetObjects": [
       {
          "idx": 0,
@@ -24,9 +24,9 @@
       {
          "idx": 1,
          "pos": [
-            -24.06999969482422,
+            -27.06999969482422,
             15.0,
-            167.11000061035156
+            168.11000061035156
          ],
          "rot": [
             0.0,
@@ -39,7 +39,7 @@
             1.0
          ],
          "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/desk00.x"
+         "filepath": "data/MODEL/STAGEOBJ/desk01.x"
       },
       {
          "idx": 2,
@@ -84,9 +84,9 @@
       {
          "idx": 4,
          "pos": [
-            4.0,
+            6.0,
             15.0,
-            167.0
+            168.0
          ],
          "rot": [
             0.0,
@@ -204,7 +204,7 @@
       {
          "idx": 10,
          "pos": [
-            4.420000076293945,
+            6.0,
             15.0,
             106.0
          ],
@@ -218,7 +218,7 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/desk00.x"
       },
       {
@@ -264,7 +264,7 @@
       {
          "idx": 13,
          "pos": [
-            -24.899999618530273,
+            -27.0,
             15.0,
             106.0
          ],
@@ -524,26 +524,6 @@
       {
          "idx": 26,
          "pos": [
-            180.82000732421875,
-            23.0,
-            357.5299987792969
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/copy_machine.x"
-      },
-      {
-         "idx": 27,
-         "pos": [
             -35.220001220703125,
             31.0,
             178.10000610351563
@@ -562,7 +542,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
       },
       {
-         "idx": 28,
+         "idx": 27,
          "pos": [
             -35.77000045776367,
             31.0,
@@ -582,7 +562,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
       },
       {
-         "idx": 29,
+         "idx": 28,
          "pos": [
             -34.630001068115234,
             31.0,
@@ -602,7 +582,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
       },
       {
-         "idx": 30,
+         "idx": 29,
          "pos": [
             12.279999732971191,
             31.0,
@@ -622,7 +602,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
       },
       {
-         "idx": 31,
+         "idx": 30,
          "pos": [
             -261.8800048828125,
             12.0,
@@ -642,7 +622,7 @@
          "filepath": "data/MODEL/STAGEOBJ/TVbase.x"
       },
       {
-         "idx": 32,
+         "idx": 31,
          "pos": [
             -261.8800048828125,
             44.0,
@@ -662,7 +642,7 @@
          "filepath": "data/MODEL/STAGEOBJ/TV.x"
       },
       {
-         "idx": 33,
+         "idx": 32,
          "pos": [
             -5.25,
             34.0,
@@ -682,7 +662,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
       },
       {
-         "idx": 34,
+         "idx": 33,
          "pos": [
             -5.360000133514404,
             37.5,
@@ -702,7 +682,7 @@
          "filepath": "data/MODEL/STAGEOBJ/DeskLight.x"
       },
       {
-         "idx": 35,
+         "idx": 34,
          "pos": [
             13.010000228881836,
             31.5,
@@ -722,7 +702,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
       },
       {
-         "idx": 36,
+         "idx": 35,
          "pos": [
             -23.43000030517578,
             33.5,
@@ -742,7 +722,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
       },
       {
-         "idx": 37,
+         "idx": 36,
          "pos": [
             -33.43000030517578,
             35.5,
@@ -762,7 +742,7 @@
          "filepath": "data/MODEL/STAGEOBJ/snack_bowl.x"
       },
       {
-         "idx": 38,
+         "idx": 37,
          "pos": [
             -16.3799991607666,
             37.5,
@@ -782,7 +762,7 @@
          "filepath": "data/MODEL/STAGEOBJ/DeskLight.x"
       },
       {
-         "idx": 39,
+         "idx": 38,
          "pos": [
             75.20999908447266,
             27.5,
@@ -802,7 +782,7 @@
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       },
       {
-         "idx": 40,
+         "idx": 39,
          "pos": [
             -74.87999725341797,
             27.5,
@@ -822,7 +802,7 @@
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       },
       {
-         "idx": 41,
+         "idx": 40,
          "pos": [
             -292.0799865722656,
             27.5,
@@ -840,6 +820,306 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
+      },
+      {
+         "idx": 41,
+         "pos": [
+            210.0,
+            27.5,
+            80.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/magazine_rack.x"
+      },
+      {
+         "idx": 42,
+         "pos": [
+            210.0,
+            27.5,
+            115.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/magazine_rack.x"
+      },
+      {
+         "idx": 43,
+         "pos": [
+            250.0,
+            27.5,
+            98.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
+      },
+      {
+         "idx": 44,
+         "pos": [
+            290.0,
+            27.5,
+            80.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/magazine_rack.x"
+      },
+      {
+         "idx": 45,
+         "pos": [
+            290.0,
+            27.5,
+            115.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/magazine_rack.x"
+      },
+      {
+         "idx": 46,
+         "pos": [
+            300.0,
+            18.0,
+            -110.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Conferencedesk.x"
+      },
+      {
+         "idx": 47,
+         "pos": [
+            456.9100036621094,
+            28.0,
+            -110.0
+         ],
+         "rot": [
+            0.0,
+            1.559999942779541,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Whiteboard.x"
+      },
+      {
+         "idx": 48,
+         "pos": [
+            335.0,
+            25.0,
+            70.0
+         ],
+         "rot": [
+            0.0,
+            1.559999942779541,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/coat_rack001.x"
+      },
+      {
+         "idx": 49,
+         "pos": [
+            335.0,
+            25.0,
+            120.0
+         ],
+         "rot": [
+            0.0,
+            1.559999942779541,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/coat_rack000.x"
+      },
+      {
+         "idx": 50,
+         "pos": [
+            360.0,
+            25.0,
+            95.0
+         ],
+         "rot": [
+            0.0,
+            1.559999942779541,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/coat_rack002.x"
+      },
+      {
+         "idx": 51,
+         "pos": [
+            375.0,
+            18.0,
+            300.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
+      },
+      {
+         "idx": 52,
+         "pos": [
+            295.0,
+            18.0,
+            300.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
+      },
+      {
+         "idx": 53,
+         "pos": [
+            450.0,
+            18.0,
+            300.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
+      },
+      {
+         "idx": 54,
+         "pos": [
+            130.0,
+            55.0,
+            -192.0
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 55,
+         "pos": [
+            130.0,
+            55.0,
+            -137.5
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
       }
    ]
 }

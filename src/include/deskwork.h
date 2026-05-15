@@ -18,7 +18,7 @@
 //*********************************************************
 // 前方宣言
 //*********************************************************
-class CDeskworkUIManager;
+class CPCDeskwork;
 
 //*********************************************************
 // タスククラスを定義
@@ -36,12 +36,10 @@ public:
 	void Draw(void) override;
 
 	// 設定処理
-	inline void SetUse(const bool bUse) { m_bUse = bUse; }
 	inline void SetAlpha(const bool bUse);
 
 	// 情報取得処理
-	CDeskworkUIManager* GetDeskUIManager(void) const { return m_pDeskUIManager; }
-	inline bool GetUse(void) const { return m_bUse; }
+	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
 
 	// 生成処理
 	static CDeskwork* Create(const D3DXVECTOR3& pos);
@@ -56,11 +54,9 @@ private:
 		static constexpr float WIDTH = 500.0f;								// 横幅
 		static constexpr float HEIGHT = 200.0f;								// 縦幅
 		static constexpr const char* TEXNAME = "deskwork_background.jpg";	// テクスチャ名
-		static constexpr int UI_NUM = 3;									// UIの数
-
 	};
 
 	// メンバ変数
-	CDeskworkUIManager* m_pDeskUIManager;	// タスクUIマネージャーのポインタ
-	bool m_bUse;							// タスクをしているかしていないか
+	CPCDeskwork* m_pPCDeskUI;	// PCタスクUIのポインタ
+	//CDeskworkUIManager* m_pDeskUIManager;	// コピータスクUIのポインタ
 };
