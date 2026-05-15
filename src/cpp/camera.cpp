@@ -27,7 +27,7 @@ namespace CAMERAINFO
 	constexpr float MAX_VIEWDOWN = 0.1f;		// カメラの角度制限値
 	constexpr float NorRot = D3DX_PI * 2.0f;	// 正規化値
 
-	const D3DXVECTOR3 InitPos = { 0.0f, 1450.0f, -1350.0f }; // カメラ初期座標
+	const D3DXVECTOR3 InitPos = { 0.0f, 1000.0f, -800.0f }; // カメラ初期座標
 	const D3DXVECTOR3 InitRot = { D3DX_PI * 0.6f, 0.0f, 0.0f }; // カメラ初期角度
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };		 // 初期ベクトル
 }
@@ -78,6 +78,7 @@ void CCamera::Uninit(void)
 //=========================================================
 void CCamera::Update(void)
 {
+#if 0
 	// モード取得
 	auto SceneMode = CManager::GetInstance()->GetScene();
 
@@ -90,14 +91,16 @@ void CCamera::Update(void)
 	{
 		SetResultCamara();
 	}
+#endif
 
 #ifdef _DEBUG
 	// カメラ更新
 	MouseView(CManager::GetInstance()->GetMouse());
 
+	// TAB入力
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_TAB))
 	{
-		// 初期化
+		// カメラの初期化ショートカットキー
 		Init();
 	}
 

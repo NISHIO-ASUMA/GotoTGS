@@ -95,7 +95,7 @@ HRESULT CBlock::Init(void)
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// 特定のオブジェクトの当たり判定を消す
-	if (str == "data/MODEL/STAGEOBJ/chair00.x" || str == "data/MODEL/STAGEOBJ/pc00.x")
+	if (str == "data/MODEL/STAGEOBJ/pc00.x")
 	{
 		m_pCollider = nullptr;
 	}
