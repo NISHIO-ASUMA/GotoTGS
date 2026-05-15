@@ -137,7 +137,7 @@ void CDeskwork::Draw(void)
 //=========================================================
 // îwåiÇÃêFÇÃèàóù
 //=========================================================
-void CDeskwork::SetAlpha(const bool bUse)
+void CDeskwork::SetAlpha(const bool &bUse)
 {
 	if (bUse != false)
 	{
@@ -148,5 +148,5 @@ void CDeskwork::SetAlpha(const bool bUse)
 	}
 
 	// ìßñæÇ…Ç∑ÇÈ
-	SetCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+	SetCol(COLOR_NULL);
 }

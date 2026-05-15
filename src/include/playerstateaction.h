@@ -16,7 +16,7 @@
 #include "playerstatebase.h"
 
 //*********************************************************
-// プレイヤーステートニュートラルクラスを定義
+// プレイヤーステートアクションクラスを定義
 //*********************************************************
 class CPlayerStateAction : public CPlayerStateBase
 {
@@ -27,7 +27,6 @@ public:
 	void OnStart(void) override;
 	void OnUpdate(void) override;
 	void OnExit(void) override;
-
 
 private:
 

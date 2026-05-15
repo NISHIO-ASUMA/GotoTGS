@@ -36,7 +36,7 @@ public:
 	void Draw(void) override;
 
 	// İ’èˆ—
-	inline void SetAlpha(const bool bUse);
+	inline void SetAlpha(const bool &bUse);
 
 	// î•ñæ“¾ˆ—
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }

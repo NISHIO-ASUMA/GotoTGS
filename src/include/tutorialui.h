@@ -39,7 +39,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool Collision(CSphereCollider* pOther, D3DXVECTOR3* OutPos);
+	bool Collision(CSphereCollider* pOther);
 	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
 
 	/// <summary>

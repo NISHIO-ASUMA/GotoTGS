@@ -21,9 +21,9 @@
   {
     "ObjectTag": "Block",
     "pos": [
-      -24.06999969482422,
+      -27.06999969482422,
       15.0,
-      167.11000061035156
+      168.11000061035156
     ],
     "rot": [
       0.0,
@@ -35,7 +35,7 @@
       1.0,
       1.0
     ],
-    "filepath": "STAGEOBJ/desk00.x"
+    "filepath": "STAGEOBJ/desk01.x"
   },
   {
     "ObjectTag": "Block",
@@ -78,9 +78,9 @@
   {
     "ObjectTag": "Block",
     "pos": [
-      4.0,
+      6.0,
       15.0,
-      167.0
+      168.0
     ],
     "rot": [
       0.0,
@@ -192,7 +192,7 @@
   {
     "ObjectTag": "Block",
     "pos": [
-      4.420000076293945,
+      6.0,
       15.0,
       106.0
     ],
@@ -249,7 +249,7 @@
   {
     "ObjectTag": "Block",
     "pos": [
-      -24.899999618530273,
+      -27.0,
       15.0,
       106.0
     ],
@@ -492,25 +492,6 @@
       1.0
     ],
     "filepath": "STAGEOBJ/chair01.x"
-  },
-  {
-    "ObjectTag": "Block",
-    "pos": [
-      180.82000732421875,
-      23.0,
-      357.5299987792969
-    ],
-    "rot": [
-      0.0,
-      0.0,
-      0.0
-    ],
-    "scale": [
-      1.0,
-      1.0,
-      1.0
-    ],
-    "filepath": "STAGEOBJ/copy_machine.x"
   },
   {
     "ObjectTag": "Block",
@@ -796,5 +777,290 @@
       1.0
     ],
     "filepath": "STAGEOBJ/houseplant.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      210.0,
+      27.5,
+      80.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/magazine_rack.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      210.0,
+      27.5,
+      115.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/magazine_rack.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      250.0,
+      27.5,
+      98.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/houseplant.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      290.0,
+      27.5,
+      80.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/magazine_rack.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      290.0,
+      27.5,
+      115.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/magazine_rack.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      300.0,
+      18.0,
+      -110.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Conferencedesk.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      456.9100036621094,
+      28.0,
+      -110.0
+    ],
+    "rot": [
+      0.0,
+      1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Whiteboard.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      335.0,
+      25.0,
+      70.0
+    ],
+    "rot": [
+      0.0,
+      1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/coat_rack001.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      335.0,
+      25.0,
+      120.0
+    ],
+    "rot": [
+      0.0,
+      1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/coat_rack000.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      360.0,
+      25.0,
+      95.0
+    ],
+    "rot": [
+      0.0,
+      1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/coat_rack002.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      375.0,
+      18.0,
+      300.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Ashtray.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      295.0,
+      18.0,
+      300.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Ashtray.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      450.0,
+      18.0,
+      300.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Ashtray.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      130.0,
+      55.0,
+      -192.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      130.0,
+      55.0,
+      -137.5
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Wall01.x"
   }
 ]

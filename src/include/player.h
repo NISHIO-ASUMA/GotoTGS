@@ -43,6 +43,7 @@ public:
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
 	void ChangeState(CPlayerStateBase* pState, int nID);
 	void MoveBasedOnCamera(float speed);
+
 	/// <summary>
 	/// ƒvƒŒƒCƒ„[¶¬ˆ—
 	/// </summary>

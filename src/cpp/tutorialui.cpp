@@ -15,11 +15,14 @@
 //*********************************************************
 #include "manager.h"
 #include "texture.h"
+#include "spherecollider.h"
+#include "collisionsphere.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialUI::CTutorialUI(int nPriority) : CBillboard(nPriority)
+CTutorialUI::CTutorialUI(int nPriority) : CBillboard(nPriority),
+m_pCollider(nullptr)
 {
 
 }
@@ -85,4 +88,15 @@ void CTutorialUI::Draw(void)
 {
 	// 親クラスの描画処理
 	CBillboard::Draw();
+}
+//=========================================================
+// 球形当たり判定処理
+//=========================================================
+bool CTutorialUI::Collision(CSphereCollider* pOther)
+{
+	// nullなら
+	if (m_pCollider == nullptr) return;
+
+	// 球形同士の当たり判定処理結果を返す
+	return CCollisionSphere::Collision(m_pCollider.get(),pOther);
 }

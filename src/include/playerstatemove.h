@@ -16,18 +16,18 @@
 #include "playerstatebase.h"
 
 //*********************************************************
-// プレイヤーステートニュートラルクラスを定義
+// プレイヤーステートムーブクラスを定義
 //*********************************************************
 class CPlayerStateMove : public CPlayerStateBase
 {
 public:
+
 	CPlayerStateMove();
 	~CPlayerStateMove();
 
 	void OnStart(void) override;
 	void OnUpdate(void) override;
 	void OnExit(void) override;
-
 
 private:
 

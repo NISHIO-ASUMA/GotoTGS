@@ -22,12 +22,15 @@ class CDeskworkUIManager
 {
 public:
 
+	//**********************
 	// ƒ^ƒXƒN‚ÌŽí—Þ
+	//**********************
 	enum DESKWORK
 	{
 		DESKWORK_NONE = 0,
 		DESKWORK_PC,
 		DESKWORK_COPY,
+		DESKWORK_MAX
 	};
 
 	CDeskworkUIManager();
