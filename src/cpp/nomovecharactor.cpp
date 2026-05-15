@@ -32,6 +32,7 @@ m_pMotion{},
 m_pShadowS{},
 m_isStencilUse(false),
 m_isOutLine(false),
+m_fOutLineSize(0.44f),
 m_mtxworld{}
 {
 }
@@ -152,7 +153,7 @@ void CNoMoveCharactor::Draw(void)
 	// アウトラインの描画
 	for (auto& model : m_pModel)
 	{
-		model->DrawOutLine(D3DXVECTOR4(1.0f, 0.65f, 0.2f, 1.0f));
+		model->DrawOutLine(D3DXVECTOR4(0.65f, 1.0f, 0.2f, 1.0f), m_fOutLineSize);
 	}
 
 	// シェーダー終了

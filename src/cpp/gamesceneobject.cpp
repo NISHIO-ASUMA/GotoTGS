@@ -83,7 +83,7 @@ HRESULT CGameSceneObject::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
 
 	// ÉvÉåÉCÉÑÅ[ê∂ê¨
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-30.0f, 0.0f, 0.0f), VECTOR3_NULL);
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-100.0f, 0.0f, 0.0f), VECTOR3_NULL);
 
 	// ìGê∂ê¨
 	CEnemy::Create(D3DXVECTOR3(-800.0f,0.0f,250.0f),VECTOR3_NULL);

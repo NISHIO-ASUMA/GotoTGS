@@ -3,8 +3,6 @@
 // 同僚処理 [ friend.h ]
 // Author: Shouya Chikada
 // 
-// NOTE : 
-// 
 //=========================================================
 
 //*********************************************************
@@ -37,6 +35,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+
 	/// <summary>
 	/// 同僚生成処理
 	/// </summary>
@@ -53,6 +52,7 @@ public:
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
 public:
+
 	//************************
 	// モーション列挙型
 	//************************
@@ -66,6 +66,8 @@ public:
 	};
 
 private:
+
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
+	int m_nChangeTime;									// モーション切り替えカウント変数
 };
