@@ -14,10 +14,10 @@ NUM_MODEL = 4
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/Colleague000/00_Colleague000_body.x		# [0]体
-MODEL_FILENAME = data/MODEL/Colleague000/01_Colleague000_head.x		# [1]頭
-MODEL_FILENAME = data/MODEL/Colleague000/02_Colleague000_armR.x		# [2]右腕
-MODEL_FILENAME = data/MODEL/Colleague000/03_Colleague000_armL.x		# [3]左腕
+MODEL_FILENAME = data/MODEL/COLLEAGUE/00_Colleague000_body.x		# [0]体
+MODEL_FILENAME = data/MODEL/COLLEAGUE/01_Colleague000_head.x		# [1]頭
+MODEL_FILENAME = data/MODEL/COLLEAGUE/02_Colleague000_armR.x		# [2]右腕
+MODEL_FILENAME = data/MODEL/COLLEAGUE/03_Colleague000_armL.x		# [3]左腕
 
 #------------------------------------------------------------------------------
 # キャラクター情報

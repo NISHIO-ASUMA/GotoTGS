@@ -62,7 +62,7 @@ HRESULT CFriend::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad("data/MOTION/FriendMotion.txt", MAX, false);
+	MotionLoad("data/MOTION/Friend/FriendMotion.txt", MAX, false);
 
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
@@ -99,7 +99,6 @@ void CFriend::Update(void)
 {
 	// 親クラスの更新処理
 	CNoMoveCharactor::Update();
-
 }
 //=========================================================
 // 描画処理
