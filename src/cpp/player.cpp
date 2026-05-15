@@ -26,6 +26,7 @@
 #include "jsonmanager.h"
 #include "deskwork.h"
 #include "gamesceneobject.h"
+#include "debugproc.h"
 
 //*********************************************************
 // インクルードファイル
@@ -202,6 +203,10 @@ void CPlayer::Draw(void)
 {
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
+
+	// プレイヤー座標のデバッグ表示
+	CDebugproc::Print("[プレイヤーの位置] { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
+	CDebugproc::Draw(0, 180);
 
 #ifdef _DEBUG
 	// モーションのデバッグ表示
