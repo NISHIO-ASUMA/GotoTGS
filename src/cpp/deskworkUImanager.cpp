@@ -19,7 +19,9 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskworkUIManager::CDeskworkUIManager()
+CDeskworkUIManager::CDeskworkUIManager() :
+m_pos(VECTOR3_NULL),
+m_bUse(false)
 {
 
 }
@@ -33,37 +35,79 @@ CDeskworkUIManager::~CDeskworkUIManager()
 }
 
 //=========================================================
-// 生成処理処理
+// 初期化処理
 //=========================================================
-CDeskworkUIManager* CDeskworkUIManager::Create(const D3DXVECTOR3& pos)
+HRESULT CDeskworkUIManager::Init(void)
 {
-	static CDeskworkUIManager pDeskworkUIManager;
+	// 乱数の種
+	srand((unsigned int)time(0));
 
-	// 設定処理
-	pDeskworkUIManager.SetPos(pos);
-
-	// 初期化が失敗した場合
-	if (FAILED(pDeskworkUIManager.Init())) return nullptr;
-
-	return &pDeskworkUIManager;
+	return S_OK;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CDeskworkUIManager::Init(void)
+void CDeskworkUIManager::Update(void)
 {
+	// 乱数の種
 	srand((unsigned int)time(0));
+
+}
+
+//*********************************************************
+// 
+// PCタスク処理
+// 
+//*********************************************************
+
+//=========================================================
+// コンストラクタ
+//=========================================================
+CPCDeskwork::CPCDeskwork()
+{
+
+}
+
+//=========================================================
+// デストラクタ
+//=========================================================
+CPCDeskwork::~CPCDeskwork()
+{
+
+}
+
+//=========================================================
+// 生成処理処理
+//=========================================================
+CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos)
+{
+	// PCタスクのポインタ
+	static CPCDeskwork pPCDeskwork;
+
+	// 設定処理
+	pPCDeskwork.SetPos(pos);
+
+	// 初期化が失敗した場合
+	if (FAILED(pPCDeskwork.Init())) return nullptr;
+
+	return &pPCDeskwork;
+}
+
+//=========================================================
+// 初期化処理
+//=========================================================
+HRESULT CPCDeskwork::Init(void)
+{
+	// クールタイムが始まっていない状態にする
+	m_bTime = false;
 
 	// 現在選択されているUIの番号の初期化
 	m_nNowIdx = 0;
 
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
-
 	// 位置
-	D3DXVECTOR3 pos = m_pos;
-	pos.x = m_pos.x - Config::VALUE_WIDTH;
+	D3DXVECTOR3 pos = GetPos();
+	pos.x = GetPos().x - Config::VALUE_WIDTH;
 
 	// キーの種類
 	CDeskworkUI::KEYTYPE keytype[Config::UI_NUM];
@@ -89,7 +133,7 @@ HRESULT CDeskworkUIManager::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CDeskworkUIManager::Uninit(void)
+void CPCDeskwork::Uninit(void)
 {
 
 }
@@ -97,10 +141,9 @@ void CDeskworkUIManager::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CDeskworkUIManager::Update(void)
+void CPCDeskwork::Update(void)
 {
-	srand((unsigned int)time(0));
-
+	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 
 	if (pKeyboard == nullptr)
@@ -134,7 +177,7 @@ void CDeskworkUIManager::Update(void)
 		}
 
 	}
-	
+
 	// クールタイムを始める
 	m_bTime = true;
 
@@ -153,7 +196,7 @@ void CDeskworkUIManager::Update(void)
 		// 色を不透明にする
 		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
-	
+
 	// 現在選択している番号を初期化
 	m_nNowIdx = 0;
 
@@ -167,7 +210,7 @@ void CDeskworkUIManager::Update(void)
 //=========================================================
 // 描画処理
 //=========================================================
-void CDeskworkUIManager::Draw(void)
+void CPCDeskwork::Draw(void)
 {
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{// タスクUIの描画処理
@@ -178,10 +221,14 @@ void CDeskworkUIManager::Draw(void)
 //=========================================================
 // 透明度の処理
 //=========================================================
-void CDeskworkUIManager::SetAlphaUI(const bool bUse)
+void CPCDeskwork::SetAlphaUI(void)
 {
-	if (bUse == false)
-	{
+	// 使っていいるかどうかを設定する
+	SetUse(GetUse() ? false : true);
+
+	if (GetUse() != true)
+	{// 使っていない状態の場合
+
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 		{
 			// 色を透明にする
