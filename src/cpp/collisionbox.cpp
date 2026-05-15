@@ -243,7 +243,7 @@ bool CCollisionBox::CollisionEx(CBoxCollider* thisCollider, CBoxCollider* OtherC
 			return false; // 隙間があるので当たっていない
 		}
 
-		// --- ブルブル防止の重み付け ---
+		// ブルブル防止の重み付け
 		float weight = (nAxis < CROSS_AXIS) ? 1.0f : 1.1f;
 
 		// 最小の重なりを更新

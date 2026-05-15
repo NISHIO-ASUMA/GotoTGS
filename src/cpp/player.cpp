@@ -24,6 +24,8 @@
 #include "camera.h"
 #include "blockmanager.h"
 #include "jsonmanager.h"
+#include "deskwork.h"
+#include "gamesceneobject.h"
 
 //*********************************************************
 // インクルードファイル
@@ -129,64 +131,69 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	// 現在の座標取得
-	D3DXVECTOR3 pos = GetPos();
-	D3DXVECTOR3 oldpos = GetOldPos();
+	bool pDeskwork = CGameSceneObject::GetInstance()->GetDesk()->GetUse();
 
-	// ステートマシンの更新処理
-	m_pMachine->Update();
-
-	// カメラ基準の移動処理
-	MoveBasedOnCamera(player::fSpeed);
-
-	// コライダー座標の更新
-	if (m_pBoxCollider)
+	if (!pDeskwork)
 	{
-		m_pBoxCollider->SetPos(pos);
-		m_pBoxCollider->SetPosOld(oldpos);
-	}
+		// 現在の座標取得
+		D3DXVECTOR3 pos = GetPos();
+		D3DXVECTOR3 oldpos = GetOldPos();
 
-	// 座標の更新処理
-	CMoveCharactor::UpdatePosition();
+		// カメラ基準の移動処理
+		MoveBasedOnCamera(player::fSpeed);
 
-	// 更新後の座標取得
-	auto UpdatePos = GetPos();
+		// ステートマシンの更新処理
+		m_pMachine->Update();
 
-	// コライダー座標の更新
-	if (m_pBoxCollider)
-	{
-		m_pBoxCollider->SetPos(UpdatePos);
-		m_pBoxCollider->SetPosOld(GetOldPos());
-	}
-
-	// jsonmanagerからブロックを取得
-	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
-	if (BlockManager == nullptr) return;
-
-	// 最大ブロックを取得する
-	for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
-	{
-		// 各ブロックを取得し判定を生成
-		auto IdxBlock = BlockManager->GetBlock(nCnt);
-
-		// コライダー取得とnullチェック
-		CBoxCollider * Collider = IdxBlock->GetCollider();
-		if (Collider == nullptr) continue;
-
-		// 当たり判定の実行
-		if (Collision(Collider, &UpdatePos))
+		// コライダー座標の更新
+		if (m_pBoxCollider)
 		{
-			// 当たった点の座標セット
-			SetPos(UpdatePos);
-
-			// コライダーと現在座標の更新をする
-			m_pBoxCollider->SetPos(UpdatePos);
-			m_pBoxCollider->SetPosOld(UpdatePos);
+			m_pBoxCollider->SetPos(pos);
+			m_pBoxCollider->SetPosOld(oldpos);
 		}
-	}
 
-	// 親クラスの更新処理
-	CMoveCharactor::Update();
+		// 座標の更新処理
+		CMoveCharactor::UpdatePosition();
+
+		// 更新後の座標取得
+		auto UpdatePos = GetPos();
+
+		// コライダー座標の更新
+		if (m_pBoxCollider)
+		{
+			m_pBoxCollider->SetPos(UpdatePos);
+			m_pBoxCollider->SetPosOld(GetOldPos());
+		}
+
+		// jsonmanagerからブロックを取得
+		const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+		if (BlockManager == nullptr) return;
+
+		// 最大ブロックを取得する
+		for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
+		{
+			// 各ブロックを取得し判定を生成
+			auto IdxBlock = BlockManager->GetBlock(nCnt);
+
+			// コライダー取得とnullチェック
+			CBoxCollider* Collider = IdxBlock->GetCollider();
+			if (Collider == nullptr) continue;
+
+			// 当たり判定の実行
+			if (Collision(Collider, &UpdatePos))
+			{
+				// 当たった点の座標セット
+				SetPos(UpdatePos);
+
+				// コライダーと現在座標の更新をする
+				m_pBoxCollider->SetPos(UpdatePos);
+				m_pBoxCollider->SetPosOld(UpdatePos);
+			}
+		}
+
+		// 親クラスの更新処理
+		CMoveCharactor::Update();
+	}
 }
 //=========================================================
 // 描画処理
@@ -306,6 +313,7 @@ void CPlayer::MoveBasedOnCamera(float speed)
 
 		// 移動判定をtrueに
 		m_bMove = true;
+
 	}
 	else
 	{
