@@ -1,0 +1,177 @@
+[
+  {
+    "ObjectTag": "Block",
+    "pos": [ 0.0,15.0, 284.0],
+    "rot": [ 0.0,3.14, 0.0],
+    "scale": [ 1.0,1.0,1.0],
+    "filepath": "STAGEOBJ/desk01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-28.0,15.0,180.0],
+    "rot": [0.0,1.57,0.0],
+    "scale": [1.0,1.0,1.0],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -63.0,15.0,183.0],
+    "rot": [0.0,-1.53,0.0],
+    "scale": [1.0,1.0,1.0],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-21.5,45.0,173.8],
+    "rot": [0.0, 1.57, 0.0 ],
+    "scale": [1.0,1.0,1.0],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ 4.0,15.0,167.0],
+    "rot": [0.0,-1.57,0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [38.8,15.0, 162.5],
+    "rot": [ 0.0, 1.57, 0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -0.86, 45.0, 166.5 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -61.0, 15.0, 123.9 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -59.1, 15.0, -13.8 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -60.9, 15.0, -73.8 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ 4.0, 15.0, 106.2 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ 4.0, 15.0, -31.1 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ 4.0, 15.0, -92.5 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-28.0,15.0,119.0 ],
+    "rot": [ 0.0, 1.57,0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-28.0,15.0,-18.0 ],
+    "rot": [ 0.0,1.57, 0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-28.0,15.0, -80.0],
+    "rot": [ 0.0,1.57, 0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/desk00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [38.1,15.0,100.0 ],
+    "rot": [ 0.0, 1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [38.6, 15.0, -30.62 ],
+    "rot": [0.0,1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [35.9,15.0, -95.5 ],
+    "rot": [0.0,1.57,0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/chair00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-21.9, 45.0,  115.0],
+    "rot": [ 0.0, 1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -22.0, 45.0, -20.1],
+    "rot": [ 0.0, 1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -19.8, 45.0, -85.2 ],
+    "rot": [ 0.0, 1.57, 0.0],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -3.0, 45.0, 109.4 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [-0.93,45.0, -23.7 ],
+    "rot": [ 0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [ -1.08, 45.0, -86.9 ],
+    "rot": [  0.0, -1.57, 0.0 ],
+    "scale": [ 1.0, 1.0, 1.0 ],
+    "filepath": "STAGEOBJ/pc00.x"
+  }
+]
