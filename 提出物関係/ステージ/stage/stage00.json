@@ -1,5 +1,5 @@
 {
-   "AllObject": 54,
+   "AllObject": 56,
    "SetObjects": [
       {
          "idx": 0,
@@ -1080,6 +1080,46 @@
          ],
          "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
+      },
+      {
+         "idx": 54,
+         "pos": [
+            130.0,
+            55.0,
+            -192.0
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 55,
+         "pos": [
+            130.0,
+            55.0,
+            -137.5
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
       }
    ]
 }
