@@ -59,6 +59,9 @@ public:
 	enum MOTION
 	{
 		NEUTRAL,
+		GESTURE1,
+		GESTURE2,
+		GESTURE3,
 		MAX
 	};
 
