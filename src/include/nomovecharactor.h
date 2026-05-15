@@ -50,6 +50,7 @@ public:
 	inline void SetOldPos(const D3DXVECTOR3& posOld) { m_posOld = posOld; }
 	inline void SetUseStencil(const bool isUse = false) { m_isStencilUse = isUse; }
 	inline void SetUseOutLine(const bool isUse = false) { m_isOutLine = isUse; }
+	inline void SetOutLineSize(const float& fSize = 0.44f) { m_fOutLineSize = fSize; }
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	inline D3DXVECTOR3 GetOldPos(void) const { return m_posOld; }
@@ -78,4 +79,5 @@ private:
 
 	bool m_isStencilUse;				// ステンシルを使うかどうか
 	bool m_isOutLine;					// アウトラインを入れるかどうか
+	float m_fOutLineSize;				// アウトラインのサイズ
 };

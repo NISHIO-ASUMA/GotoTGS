@@ -17,13 +17,25 @@
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "collisionbox.h"
+#include "motion.h"
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace FRIENDINFO
+{
+	constexpr int CHANGETIME_MAX = 600; // モーション変更カウント 
+	constexpr float OUTLINESIZE = 0.96f; // アウトラインサイズ
+	constexpr const char* SCRIPT = "data/MOTION/Friend/FriendMotion.txt"; // モーションファイル
+};
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CFriend::CFriend(int nPriority) : CNoMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
-m_pSphereCollider(nullptr)
+m_pSphereCollider(nullptr),
+m_nChangeTime(NULL)
 {
 
 }
@@ -46,7 +58,8 @@ CFriend* CFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pFriend->SetPos(pos);
 	pFriend->SetRot(rot);
-	pFriend->SetUseStencil(true);
+	pFriend->SetUseOutLine(true);
+	pFriend->SetOutLineSize(FRIENDINFO::OUTLINESIZE);
 
 	// 初期化失敗時
 	if (FAILED(pFriend->Init()))return nullptr;
@@ -62,7 +75,7 @@ HRESULT CFriend::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad("data/MOTION/Friend/FriendMotion.txt", MAX, false);
+	MotionLoad(FRIENDINFO::SCRIPT, MAX, false);
 
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
@@ -97,6 +110,22 @@ void CFriend::Uninit(void)
 //=========================================================
 void CFriend::Update(void)
 {
+	// 一定間隔でモーションのランダム更新
+	m_nChangeTime++;
+	
+	// 10秒たったら更新
+	if (m_nChangeTime >= FRIENDINFO::CHANGETIME_MAX)
+	{
+		// ローカルランダム数
+		int nRand = rand() % MOTION::MAX;
+
+		// モーションセット
+		GetMotion()->SetMotion(nRand,true,10);
+
+		// 変更時間を初期化する
+		m_nChangeTime = NULL;
+	}
+
 	// 親クラスの更新処理
 	CNoMoveCharactor::Update();
 }

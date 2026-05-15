@@ -52,7 +52,6 @@ CEnemy* CEnemy::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
-	pEnemy->SetUseStencil(true);
 	pEnemy->SetUseOutLine(true);
 
 	// 初期化設定時
