@@ -72,6 +72,6 @@ public:
 
 private:
 
-	static constexpr const char* FILE_NAME = "data/JSON/Map.json";	// ファイル名
+	static constexpr const char* FILE_NAME = "data/JSON/GameMap.json";	// ファイル名
 	std::vector<CBlock*>m_pBlocks;									// 配置するブロックの動的配列
 };

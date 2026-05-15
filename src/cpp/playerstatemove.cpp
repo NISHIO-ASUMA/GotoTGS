@@ -46,7 +46,6 @@ void CPlayerStateMove::OnUpdate()
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
 	}
-
 }
 
 //=========================================================
