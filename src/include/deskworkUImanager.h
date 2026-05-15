@@ -44,7 +44,7 @@ public:
 
 	// î•ñæ“¾ˆ—
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
-	inline bool GetUse(void) const { return m_bUse; }
+	bool GetUse(void) const { return m_bUse; }
 
 private:
 
