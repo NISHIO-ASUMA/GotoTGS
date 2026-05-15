@@ -275,29 +275,48 @@ void CPlayer::MoveBasedOnCamera(float speed)
 	// –Ú“I‚ÌŒü‚«
 	D3DXVECTOR3 RotDest = GetRotDest();
 
-	if (pKeyboard->GetPress(DIK_W) == true)
+	if (pKeyboard->GetPress(DIK_W))
 	{
 		moveDir += camForward;
 		RotDest.y = rot.y + D3DX_PI;
+
+		// ˆÚ“®”»’è‚ðtrue‚É
+		m_bMove = true;
 	}
-	if (pKeyboard->GetPress(DIK_S) == true)
+	if (pKeyboard->GetPress(DIK_S))
 	{
 		moveDir -= camForward;
 		RotDest.y = rot.y;
+
+		// ˆÚ“®”»’è‚ðtrue‚É
+		m_bMove = true;
 	}
-	if (pKeyboard->GetPress(DIK_D) == true)
+	if (pKeyboard->GetPress(DIK_D))
 	{
 		moveDir += camRight;
 		RotDest.y = rot.y - D3DX_PI * HALF;
+		
+		// ˆÚ“®”»’è‚ðtrue‚É
+		m_bMove = true;
 	}
-	if (pKeyboard->GetPress(DIK_A) == true)
+	if (pKeyboard->GetPress(DIK_A))
 	{
 		moveDir -= camRight;
 		RotDest.y = rot.y + D3DX_PI * HALF;
+
+		// ˆÚ“®”»’è‚ðtrue‚É
+		m_bMove = true;
 	}
 
+	if (!pKeyboard->GetPress(DIK_W) &&
+		!pKeyboard->GetPress(DIK_S) &&
+		!pKeyboard->GetPress(DIK_D) &&
+		!pKeyboard->GetPress(DIK_A))
+	{
+		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL);
+	}
 	// ˆÚ“®“ü—Í‚ª‚ ‚éê‡
-	if (D3DXVec3LengthSq(&moveDir) > player::fInput)
+	else if (m_bMove)
 	{
 		// ˆÚ“®‚Ì³‹K‰»
 		D3DXVec3Normalize(&moveDir, &moveDir);
@@ -311,13 +330,6 @@ void CPlayer::MoveBasedOnCamera(float speed)
 		// –Ú“I‚ÌŒü‚«‚ðÝ’è
 		SetRotDest(RotDest);
 
-		// ˆÚ“®”»’è‚ðtrue‚É
-		m_bMove = true;
-
-	}
-	else
-	{
-		// ˆÚ“®”»’è‚ðfalse‚É
-		m_bMove = false;
+		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
 	}
 }
