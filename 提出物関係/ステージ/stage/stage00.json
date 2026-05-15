@@ -1,5 +1,5 @@
 {
-   "AllObject": 31,
+   "AllObject": 39,
    "SetObjects": [
       {
          "idx": 0,
@@ -64,9 +64,9 @@
       {
          "idx": 3,
          "pos": [
-            -21.510000228881836,
+            -7.090000152587891,
             45.0,
-            167.88999938964844
+            167.11000061035156
          ],
          "rot": [
             0.0,
@@ -78,7 +78,7 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/pc00.x"
       },
       {
@@ -124,9 +124,9 @@
       {
          "idx": 6,
          "pos": [
-            -0.8600000143051147,
-            45.0,
-            166.55999755859375
+            5.139999866485596,
+            31.0,
+            160.55999755859375
          ],
          "rot": [
             0.0,
@@ -139,7 +139,7 @@
             1.0
          ],
          "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/pc00.x"
+         "filepath": "data/MODEL/STAGEOBJ/NotePC.x"
       },
       {
          "idx": 7,
@@ -404,9 +404,9 @@
       {
          "idx": 20,
          "pos": [
-            -22.040000915527344,
-            45.0,
-            -20.139999389648438
+            -28.040000915527344,
+            31.0,
+            -6.139999866485596
          ],
          "rot": [
             0.0,
@@ -419,7 +419,7 @@
             1.0
          ],
          "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/pc00.x"
+         "filepath": "data/MODEL/STAGEOBJ/NotePC.x"
       },
       {
          "idx": 21,
@@ -620,6 +620,166 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
+      },
+      {
+         "idx": 31,
+         "pos": [
+            -261.8800048828125,
+            12.0,
+            287.30999755859375
+         ],
+         "rot": [
+            0.0,
+            -0.8700000047683716,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/TVbase.x"
+      },
+      {
+         "idx": 32,
+         "pos": [
+            -261.8800048828125,
+            44.0,
+            287.30999755859375
+         ],
+         "rot": [
+            0.0,
+            -0.8700000047683716,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/TV.x"
+      },
+      {
+         "idx": 33,
+         "pos": [
+            -5.25,
+            34.0,
+            -62.220001220703125
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
+      },
+      {
+         "idx": 34,
+         "pos": [
+            -5.360000133514404,
+            37.5,
+            184.1199951171875
+         ],
+         "rot": [
+            0.0,
+            -0.75,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/DeskLight.x"
+      },
+      {
+         "idx": 35,
+         "pos": [
+            13.010000228881836,
+            31.5,
+            99.29000091552734
+         ],
+         "rot": [
+            0.0,
+            -1.590000033378601,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Keyboard.x"
+      },
+      {
+         "idx": 36,
+         "pos": [
+            -23.43000030517578,
+            33.5,
+            -25.489999771118164
+         ],
+         "rot": [
+            0.0,
+            -1.590000033378601,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
+      },
+      {
+         "idx": 37,
+         "pos": [
+            -33.43000030517578,
+            33.5,
+            151.69000244140625
+         ],
+         "rot": [
+            0.0,
+            -1.590000033378601,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/snack_bowl.x"
+      },
+      {
+         "idx": 38,
+         "pos": [
+            -16.3799991607666,
+            37.5,
+            -38.13999938964844
+         ],
+         "rot": [
+            0.0,
+            2.2799999713897705,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/DeskLight.x"
       }
    ]
 }
