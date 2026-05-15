@@ -21,8 +21,7 @@
 // コンストラクタ
 //=========================================================
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
-m_pDeskUIManager(nullptr),
-m_bUse(false)
+m_pPCDeskUI(nullptr)
 {
 
 }
@@ -49,8 +48,8 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 	// 各種値の設定
 	pDeskwork->SetPos(pos);
 	pDeskwork->SetSize(Config::WIDTH, Config::HEIGHT);	// サイズ設定
-	pDeskwork->SetCol(COLOR_WHITE);					// カラー設定
-	pDeskwork->SetTexture(Config::TEXNAME);			// テクスチャ設定
+	pDeskwork->SetCol(COLOR_WHITE);						// カラー設定
+	pDeskwork->SetTexture(Config::TEXNAME);				// テクスチャ設定
 
 	// 初期化が失敗した場合
 	if (FAILED(pDeskwork->Init())) return nullptr;
@@ -66,10 +65,10 @@ HRESULT CDeskwork::Init(void)
 	// 親の初期化処理
 	CObject2D::Init();
 
-	if (m_pDeskUIManager == nullptr)
+	if (m_pPCDeskUI == nullptr)
 	{
-		// タスクUIマネージャーの生成 Misaki
-		m_pDeskUIManager = CDeskworkUIManager::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+		// PCタスクUIの生成 Misaki
+		m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 	}
 
 	return S_OK;
@@ -84,10 +83,10 @@ void CDeskwork::Uninit(void)
 	CObject2D::Uninit();
 
 	// タスクUIマネージャーを破棄
-	if (m_pDeskUIManager)
+	if (m_pPCDeskUI)
 	{
-		m_pDeskUIManager->Uninit();
-		m_pDeskUIManager = nullptr;
+		m_pPCDeskUI->Uninit();
+		m_pPCDeskUI = nullptr;
 	}
 }
 
@@ -96,19 +95,17 @@ void CDeskwork::Uninit(void)
 //=========================================================
 void CDeskwork::Update(void)
 {
+	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 
-	if (pKeyboard->GetTrigger(DIK_TAB) == true)
-	{// TABキーを押したら
-		// 使っていいるかどうかを設定する
-		m_bUse = m_bUse ? false : true;
-		
-		// 透明度を設定
-		m_pDeskUIManager->SetAlphaUI(m_bUse);
-		SetAlpha(m_bUse);
+	if (pKeyboard->GetTrigger(DIK_F) == true)
+	{// Fキーを押したら
+		// 使っていいるかどうかで透明度を設定
+		m_pPCDeskUI->SetAlphaUI();
+		SetAlpha(m_pPCDeskUI->GetUse());
 	}
 
-	if (m_bUse != true)
+	if (m_pPCDeskUI->GetUse() != true && m_pPCDeskUI->GetUse() != true)
 	{
 		return;
 	}
@@ -116,10 +113,10 @@ void CDeskwork::Update(void)
 	// 親の更新処理
 	CObject2D::Update();
 
-	if (m_pDeskUIManager != nullptr)
+	if (m_pPCDeskUI != nullptr)
 	{
 		// タスクUIマネージャーの更新処理
-		m_pDeskUIManager->Update();
+		m_pPCDeskUI->Update();
 	}
 }
 
@@ -128,7 +125,7 @@ void CDeskwork::Update(void)
 //=========================================================
 void CDeskwork::Draw(void)
 {
-	if (m_bUse == false)
+	if (m_pPCDeskUI->GetUse() != true)
 	{
 		return;
 	}

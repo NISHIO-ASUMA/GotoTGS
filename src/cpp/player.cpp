@@ -27,6 +27,7 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
+#include "deskworkUImanager.h"
 
 //*********************************************************
 // インクルードファイル
@@ -132,9 +133,9 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	bool pDeskwork = CGameSceneObject::GetInstance()->GetDesk()->GetUse();
+	bool pPCDeskwork = CGameSceneObject::GetInstance()->GetDesk()->GetPCDeskUI()->GetUse();
 
-	if (!pDeskwork)
+	if (!pPCDeskwork)
 	{
 		// 現在の座標取得
 		D3DXVECTOR3 pos = GetPos();

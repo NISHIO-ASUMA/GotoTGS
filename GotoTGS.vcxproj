@@ -263,6 +263,7 @@
     <ClCompile Include="src\cpp\tutorial.cpp" />
     <ClCompile Include="src\cpp\tutorialmanager.cpp" />
     <ClCompile Include="src\cpp\tutorialobject.cpp" />
+    <ClCompile Include="src\cpp\tutorialui.cpp" />
     <ClCompile Include="src\cpp\ui.cpp" />
     <ClCompile Include="src\cpp\worldwallmanager.cpp" />
     <ClCompile Include="src\cpp\xfilemanager.cpp" />
@@ -374,6 +375,7 @@
     <ClInclude Include="src\include\tutorial.h" />
     <ClInclude Include="src\include\tutorialmanager.h" />
     <ClInclude Include="src\include\tutorialobject.h" />
+    <ClInclude Include="src\include\tutorialui.h" />
     <ClInclude Include="src\include\ui.h" />
     <ClInclude Include="src\include\worldwallmanager.h" />
     <ClInclude Include="src\include\xfilemanager.h" />
