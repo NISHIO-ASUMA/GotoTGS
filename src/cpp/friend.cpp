@@ -26,7 +26,11 @@ namespace FRIENDINFO
 {
 	constexpr int CHANGETIME_MAX = 600; // モーション変更カウント 
 	constexpr float OUTLINESIZE = 0.96f; // アウトラインサイズ
+	constexpr float SPHERE_SIZE = 60.0f; // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Friend/FriendMotion.txt"; // モーションファイル
+
+	const D3DXVECTOR3 BOX_SIZE = { 50.0f,50.0f,50.0f };  // 矩形サイズ
+
 };
 
 //=========================================================
@@ -84,10 +88,10 @@ HRESULT CFriend::Init(void)
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), D3DXVECTOR3(50.0f, 50.0f, 50.0f),matRot);
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), FRIENDINFO::BOX_SIZE,matRot);
 
 	// スフィアコライダーの生成
-	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
+	m_pSphereCollider = CSphereCollider::Create(GetPos(), FRIENDINFO::SPHERE_SIZE);
 
 	return S_OK;
 }
@@ -140,7 +144,7 @@ void CFriend::Draw(void)
 //=========================================================
 // 当たり判定
 //=========================================================
-bool CFriend::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
+bool CFriend::CollisionBox(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 {
 	// nullチェック
 	if (m_pBoxCollider == nullptr) return false;

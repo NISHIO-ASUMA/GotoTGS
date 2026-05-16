@@ -34,7 +34,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
-	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+	bool CollisionBox(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
 
 	/// <summary>
 	/// “¯—»¶¬ˆ—

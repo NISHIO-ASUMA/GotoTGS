@@ -601,7 +601,7 @@
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\tutorialui.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -933,7 +933,7 @@
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
     <ClInclude Include="src\include\tutorialui.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

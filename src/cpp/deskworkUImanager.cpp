@@ -121,7 +121,7 @@ HRESULT CPCDeskwork::Init(void)
 		m_pDeskUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, keytype[nCount], nCount);
 
 		// 色を透明にする
-		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+		m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
 
 		// UIの位置をずらす
 		pos.x += Config::VALUE_WIDTH;
@@ -164,7 +164,7 @@ void CPCDeskwork::Update(void)
 		{// 正解を押した時
 
 			// 色を半透明にする
-			m_pDeskUI[m_nNowIdx]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
+			m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_HALFVALUE);
 
 			// 次のタスクに移る
 			m_nNowIdx++;
@@ -193,8 +193,8 @@ void CPCDeskwork::Update(void)
 		// タスクをランダムに設定
 		m_pDeskUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
 
-		// 色を不透明にする
-		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		// 色を元に戻す(通常色)
+		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
 	}
 
 	// 現在選択している番号を初期化
@@ -232,7 +232,7 @@ void CPCDeskwork::SetAlphaUI(void)
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 		{
 			// 色を透明にする
-			m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
 		}
 
 		return;
@@ -243,12 +243,12 @@ void CPCDeskwork::SetAlphaUI(void)
 		if (nCount < m_nNowIdx)
 		{
 			// 色を半透明にする
-			m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f));
+			m_pDeskUI[nCount]->ChangeCol(COLOR_HALFVALUE);
 
 			continue;
 		}
 
-		// 色を不透明にする
-		m_pDeskUI[nCount]->ChangeCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		// 色を不透明にする(通常色)
+		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
 	}
 }
