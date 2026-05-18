@@ -58,7 +58,7 @@ public:
 		const D3DXVECTOR3& rot,
 		float fWidth,
 		float fHeight,
-		const char* pModelName
+		const char* pTexName
 	);
 
 private:
