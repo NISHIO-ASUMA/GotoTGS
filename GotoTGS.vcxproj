@@ -252,10 +252,10 @@
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
+    <ClCompile Include="src\cpp\smokefriend.cpp" />
     <ClCompile Include="src\cpp\sound.cpp" />
     <ClCompile Include="src\cpp\spherecollider.cpp" />
     <ClCompile Include="src\cpp\statemachine.cpp" />
-    <ClCompile Include="src\cpp\taskcommand.cpp" />
     <ClCompile Include="src\cpp\texture.cpp" />
     <ClCompile Include="src\cpp\title.cpp" />
     <ClCompile Include="src\cpp\titlemanager.cpp" />
@@ -265,6 +265,7 @@
     <ClCompile Include="src\cpp\tutorialobject.cpp" />
     <ClCompile Include="src\cpp\tutorialui.cpp" />
     <ClCompile Include="src\cpp\ui.cpp" />
+    <ClCompile Include="src\cpp\worldUIcollision.cpp" />
     <ClCompile Include="src\cpp\worldwallmanager.cpp" />
     <ClCompile Include="src\cpp\xfilemanager.cpp" />
   </ItemGroup>
@@ -282,7 +283,6 @@
     <ClInclude Include="src\include\collision.h" />
     <ClInclude Include="src\include\collisionbox.h" />
     <ClInclude Include="src\include\collisionsphere.h" />
-    <ClInclude Include="src\include\command.h" />
     <ClInclude Include="src\include\createjsonblock.h" />
     <ClInclude Include="src\include\createjsonblocknormal.h" />
     <ClInclude Include="src\include\createjsoncharactor.h" />
@@ -362,11 +362,11 @@
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
+    <ClInclude Include="src\include\smokefriend.h" />
     <ClInclude Include="src\include\sound.h" />
     <ClInclude Include="src\include\spherecollider.h" />
     <ClInclude Include="src\include\statebase.h" />
     <ClInclude Include="src\include\statemachine.h" />
-    <ClInclude Include="src\include\taskcommand.h" />
     <ClInclude Include="src\include\template.h" />
     <ClInclude Include="src\include\texture.h" />
     <ClInclude Include="src\include\title.h" />
@@ -377,6 +377,7 @@
     <ClInclude Include="src\include\tutorialobject.h" />
     <ClInclude Include="src\include\tutorialui.h" />
     <ClInclude Include="src\include\ui.h" />
+    <ClInclude Include="src\include\worldUIcollision.h" />
     <ClInclude Include="src\include\worldwallmanager.h" />
     <ClInclude Include="src\include\xfilemanager.h" />
   </ItemGroup>

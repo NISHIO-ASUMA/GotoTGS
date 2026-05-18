@@ -594,14 +594,17 @@
     <ClCompile Include="src\cpp\deskworkUImanager.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\taskcommand.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+ <ClCompile Include="src\cpp\smokefriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\enemy.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\tutorialui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\worldUIcollision.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -923,17 +926,17 @@
     <ClInclude Include="src\include\deskworkUImanager.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\command.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\taskcommand.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
+</ClInclude>
+    <ClInclude Include="src\include\smokefriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     <ClInclude Include="src\include\enemy.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
     <ClInclude Include="src\include\tutorialui.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\worldUIcollision.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

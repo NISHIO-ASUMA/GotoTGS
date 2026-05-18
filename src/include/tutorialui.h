@@ -64,5 +64,6 @@ public:
 private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
 	bool m_bLook;									// 見えるかどうかの判定変数
+	bool m_bTime;									// タイムの判定
 };
 
