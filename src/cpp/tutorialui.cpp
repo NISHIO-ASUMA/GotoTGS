@@ -49,6 +49,7 @@ CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,
 	pTutorialUI->SetSize(fWidth, fHeight);
 	pTutorialUI->SetRot(rot);
 	pTutorialUI->SetTexture(pTexName);
+	pTutorialUI->SetEnableZtest(true);
 
 	// ‰Šú‰»¸”s
 	if (FAILED(pTutorialUI->Init())) return nullptr;
@@ -63,6 +64,9 @@ HRESULT CTutorialUI::Init(void)
 {
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
 	CBillboard::Init();
+
+	m_pCollider = CSphereCollider::Create(GetPos(),50.0f);
+
 	return S_OK;
 }
 //=========================================================
