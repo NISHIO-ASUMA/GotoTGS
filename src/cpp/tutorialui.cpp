@@ -17,12 +17,15 @@
 #include "texture.h"
 #include "spherecollider.h"
 #include "collisionsphere.h"
+#include "player.h"
+#include "gamesceneobject.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CTutorialUI::CTutorialUI(int nPriority) : CBillboard(nPriority),
-m_pCollider(nullptr)
+m_pCollider(nullptr),
+m_bLook(false)
 {
 
 }
@@ -49,6 +52,7 @@ CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,
 	pTutorialUI->SetSize(fWidth, fHeight);
 	pTutorialUI->SetRot(rot);
 	pTutorialUI->SetTexture(pTexName);
+	pTutorialUI->SetEnableZtest(true);
 
 	// 初期化失敗時
 	if (FAILED(pTutorialUI->Init())) return nullptr;
@@ -63,6 +67,9 @@ HRESULT CTutorialUI::Init(void)
 {
 	// 親クラスの初期化処理
 	CBillboard::Init();
+
+	m_pCollider = CSphereCollider::Create(GetPos(),50.0f);
+
 	return S_OK;
 }
 //=========================================================
@@ -72,12 +79,33 @@ void CTutorialUI::Uninit(void)
 {
 	// 親クラスの終了処理
 	CBillboard::Uninit();
+
+	// スフィアコライダーの破棄
+	m_pCollider.reset();
+
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CTutorialUI::Update(void)
 {
+	// 各ブロックを取得し判定を生成
+	auto pPlayer = CGameSceneObject::GetInstance()->GetPlayer();
+
+	// コライダー取得とnullチェック
+	CSphereCollider* Collider = pPlayer->GetSphereCollider();
+	if (Collider == nullptr) return;
+
+	// 当たり判定の実行
+	if (Collision(Collider))
+	{
+		m_bLook = true;
+	}
+	else
+	{
+		m_bLook = false;
+	}
+
 	// 親クラスの更新処理
 	CBillboard::Update();
 }
@@ -87,7 +115,7 @@ void CTutorialUI::Update(void)
 void CTutorialUI::Draw(void)
 {
 	// 親クラスの描画処理
-	CBillboard::Draw();
+	if(m_bLook)	CBillboard::Draw();
 }
 //=========================================================
 // 球形当たり判定処理

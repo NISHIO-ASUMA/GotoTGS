@@ -147,11 +147,18 @@ void CPlayer::Update(void)
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
-	// コライダー座標の更新
+	// ボックスコライダー座標の更新
 	if (m_pBoxCollider)
 	{
 		m_pBoxCollider->SetPos(pos);
 		m_pBoxCollider->SetPosOld(oldpos);
+	}
+
+	// スフィアコライダー座標の更新
+	if (m_pSphereCollider)
+	{
+		m_pSphereCollider->SetPos(pos);
+		m_pSphereCollider->SetRadius(30.0f);
 	}
 
 	// 座標の更新処理

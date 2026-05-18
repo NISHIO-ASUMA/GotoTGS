@@ -48,7 +48,6 @@ public:
 		MODEL_DATA modelData;		// 構造体変数
 	};
 
-
 	CModelManager();
 	~CModelManager();
 
@@ -67,7 +66,7 @@ public:
 	/// </summary>
 	/// <param name="nIdx">取得するオブジェクトインデックス</param>
 	/// <returns>インデックス番号に応じたデータ</returns>
-	inline const ModelManagerInfo GetInfo(int nIdx) const { return m_aModelData[nIdx]; }
+	inline const ModelManagerInfo& GetInfo(const int& nIdx) const { return m_aModelData[nIdx]; }
 
 	/// <summary>
 	/// 動的配列の取得
