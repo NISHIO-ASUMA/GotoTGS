@@ -27,6 +27,7 @@
 #include "deskwork.h"	// Misaki
 #include <enemy.h>
 #include "friend.h"
+#include "tutorialui.h"
 
 //*********************************************************
 // 静的メンバ変数
@@ -52,6 +53,7 @@ CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
+m_pTutorialUI(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -90,6 +92,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	// 同僚
 	CFriend::Create(D3DXVECTOR3(40.0f, 15.0f, 162.5f), D3DXVECTOR3(0.0f,1.57f,0.0f));
+
+	// チュートリアルUI
+	m_pTutorialUI = CTutorialUI::Create(D3DXVECTOR3(-45.0f, 50.0f, 180.0f), VECTOR3_NULL, 15.0f, 15.0f, "Fbutton.png");
 
 	//// ゲームで使うオブジェクトの読み込み
 	//auto jsonmanager = CManager::GetInstance()->GetJsonManager();

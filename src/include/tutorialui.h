@@ -58,10 +58,12 @@ public:
 		const D3DXVECTOR3& rot,
 		float fWidth,
 		float fHeight,
-		const char* pModelName
+		const char* pTexName
 	);
 
 private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
+	bool m_bLook;									// 見えるかどうかの判定変数
+	bool m_bTime;									// タイムの判定
 };
 

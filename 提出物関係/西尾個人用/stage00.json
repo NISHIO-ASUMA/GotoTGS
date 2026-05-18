@@ -1,5 +1,5 @@
 {
-   "AllObject": 76,
+   "AllObject": 59,
    "SetObjects": [
       {
          "idx": 0,
@@ -616,7 +616,7 @@
          "scale": [
             1.0,
             1.0,
-            1.0
+            0.5
          ],
          "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/TVbase.x"
@@ -938,7 +938,7 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Conferencedesk.x"
       },
       {
@@ -1124,7 +1124,7 @@
       {
          "idx": 56,
          "pos": [
-            261.0,
+            263.05999755859375,
             55.0,
             -4.0
          ],
@@ -1138,13 +1138,13 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
       },
       {
          "idx": 57,
          "pos": [
-            229.0,
+            226.0,
             55.0,
             305.0
          ],
@@ -1164,7 +1164,7 @@
       {
          "idx": 58,
          "pos": [
-            388.0,
+            400.0,
             55.0,
             233.0
          ],
@@ -1174,347 +1174,7 @@
             0.0
          ],
          "scale": [
-            3.4000000953674316,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 59,
-         "pos": [
-            483.0,
-            55.0,
-            112.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/door.x"
-      },
-      {
-         "idx": 60,
-         "pos": [
-            260.0,
-            55.0,
-            230.0
-         ],
-         "rot": [
-            0.0,
-            3.140000104904175,
-            0.0
-         ],
-         "scale": [
-            1.25,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/door.x"
-      },
-      {
-         "idx": 61,
-         "pos": [
-            175.0,
-            55.0,
-            -3.0
-         ],
-         "rot": [
-            0.0,
-            3.140000104904175,
-            0.0
-         ],
-         "scale": [
-            1.5,
-            1.0,
-            1.0
-         ],
-         "Flags": false,
-         "filepath": "data/MODEL/STAGEOBJ/door.x"
-      },
-      {
-         "idx": 62,
-         "pos": [
-            377.1199951171875,
-            40.0,
-            -128.0
-         ],
-         "rot": [
-            0.0,
-            -1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/projector.x"
-      },
-      {
-         "idx": 63,
-         "pos": [
-            6.0,
-            55.0,
-            -223.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/WallWindow.x"
-      },
-      {
-         "idx": 64,
-         "pos": [
-            -210.0,
-            55.0,
-            -223.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/WallWindow.x"
-      },
-      {
-         "idx": 65,
-         "pos": [
-            220.0,
-            55.0,
-            -223.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 66,
-         "pos": [
-            405.0,
-            55.0,
-            -223.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            2.799999952316284,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 67,
-         "pos": [
-            483.0,
-            55.0,
-            -118.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 68,
-         "pos": [
-            483.0,
-            55.0,
-            36.689998626708984
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            1.75,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 69,
-         "pos": [
-            483.0,
-            55.0,
-            260.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            4.400000095367432,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 70,
-         "pos": [
-            350.0,
-            55.0,
-            384.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            5.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 71,
-         "pos": [
-            76.0,
-            55.0,
-            384.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            5.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
-      },
-      {
-         "idx": 72,
-         "pos": [
-            -323.0,
-            55.0,
-            270.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/WallWindow.x"
-      },
-      {
-         "idx": 73,
-         "pos": [
-            -323.0,
-            55.0,
-            51.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            4.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/WallWindow.x"
-      },
-      {
-         "idx": 74,
-         "pos": [
-            -323.0,
-            55.0,
-            -139.0
-         ],
-         "rot": [
-            0.0,
-            1.5700000524520874,
-            0.0
-         ],
-         "scale": [
             3.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/WallWindow.x"
-      },
-      {
-         "idx": 75,
-         "pos": [
-            -189.0,
-            55.0,
-            384.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            5.0,
             1.0,
             1.0
          ],

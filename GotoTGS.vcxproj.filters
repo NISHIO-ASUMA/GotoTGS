@@ -594,6 +594,9 @@
     <ClCompile Include="src\cpp\deskworkUImanager.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+ <ClCompile Include="src\cpp\smokefriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
     <ClCompile Include="src\cpp\enemy.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
@@ -923,6 +926,9 @@
     <ClInclude Include="src\include\deskworkUImanager.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
+</ClInclude>
+    <ClInclude Include="src\include\smokefriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     <ClInclude Include="src\include\enemy.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
