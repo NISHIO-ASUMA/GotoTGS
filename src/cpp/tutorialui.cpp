@@ -71,7 +71,7 @@ HRESULT CTutorialUI::Init(void)
 	CBillboard::Init();
 
 	// 球形コライダーを生成
-	m_pCollider = CSphereCollider::Create(GetPos(),50.0f);
+	m_pCollider = CSphereCollider::Create(GetPos(),75.0f);
 
 	return S_OK;
 }
