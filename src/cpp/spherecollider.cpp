@@ -39,7 +39,7 @@ std::unique_ptr<CSphereCollider>CSphereCollider::Create
 
 	// 値をセット
 	pSphere->SetPos(pos);
-	pSphere->m_fRadius = fRadius;
+	pSphere->SetRadius(fRadius);
 
 	// 生成されたポインタ
 	return pSphere;
