@@ -147,11 +147,18 @@ void CPlayer::Update(void)
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
-	// コライダー座標の更新
+	// ボックスコライダー座標の更新
 	if (m_pBoxCollider)
 	{
 		m_pBoxCollider->SetPos(pos);
 		m_pBoxCollider->SetPosOld(oldpos);
+	}
+
+	// スフィアコライダー座標の更新
+	if (m_pSphereCollider)
+	{
+		m_pSphereCollider->SetPos(pos);
+		m_pSphereCollider->SetRadius(30.0f);
 	}
 
 	// 座標の更新処理
@@ -206,7 +213,7 @@ void CPlayer::Draw(void)
 	CMoveCharactor::Draw();
 
 	// プレイヤー座標のデバッグ表示
-	CDebugproc::Print("[プレイヤーの位置] { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
+	CDebugproc::Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
 	CDebugproc::Draw(0, 180);
 
 #ifdef _DEBUG
