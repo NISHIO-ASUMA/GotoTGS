@@ -23,14 +23,13 @@ class CDeskworkUIManager
 public:
 
 	//**********************
-	// ƒ^ƒXƒN‚ÌŽí—Þ
+	// UI‚ÌŽí—Þ
 	//**********************
-	enum DESKWORK
+	enum TYPE
 	{
-		DESKWORK_NONE = 0,
-		DESKWORK_PC,
-		DESKWORK_COPY,
-		DESKWORK_MAX
+		TYPE_PC = 0,
+		TYPE_COPY,
+		TYPE_MAX
 	};
 
 	CDeskworkUIManager();
