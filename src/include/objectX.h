@@ -42,8 +42,10 @@ public:
 	inline void SetShadow(const bool &isFlags) { m_isShadow = isFlags; }
 	inline void SetIsOutLine(const bool& isOutLine) { m_isOutLine = isOutLine; }
 	inline void SetOutLineColor(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f));
-	inline D3DXVECTOR3 GetPos(void) const { return m_pos; };
-	inline D3DXVECTOR3 GetRot(void) const { return m_rot; };
+
+	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
+	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }
+	inline D3DXVECTOR3 GetScale(void) const { return m_Scale; }
 	inline D3DXMATRIX GetMtxWorld(void) const { return m_mtxWorld; }
 	inline D3DCOLORVALUE GetCol(void) const { return m_col; }
 	inline int GetModelIdx(void) const { return m_nIdxModel; }

@@ -71,20 +71,37 @@ HRESULT CBlock::Init(void)
 	CXfileManager* pXManager = CManager::GetInstance()->GetXManager();
 	if (pXManager == nullptr) return E_FAIL;
 
-	// インデックス番号を取得
+	// インデックス番号のモデルを取得
 	int nModelIdx = GetModelIdx();
+
+	// モデルの拡大率と既存の拡大率を合わせる
+	D3DXVECTOR3 Scale = GetScale();
 	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
+
+	// 反映計算メソッド
+	{
+		Size.x = Size.x * Scale.x;
+		Size.y = Size.y * Scale.y; 
+		Size.z = Size.z * Scale.z;
+	}
+
 
 	// モデルのパス取得
 	std::string str = pXManager->GetInfo(nModelIdx).FilePath;
 
+	// 変更用の入れ物
+	D3DXVECTOR3 ChangeSize = Size;
+
 	// 特定のモデルのサイズ調整
 	if (str == "data/MODEL/STAGEOBJ/desk00.x")
 	{
-		// デスクの当たり判定を少し大きくする
-		Size.x *= Config::VALUESIZE;
-		Size.y *= Config::VALUESIZE;
-		Size.z *= Config::VALUESIZE;
+		// デスクの当たり判定を少し小さくする
+		ChangeSize.x *= Config::VALUESIZE;
+		ChangeSize.y *= Config::VALUESIZE;
+		ChangeSize.z *= Config::VALUESIZE;
+
+		// 大きさを実際に変更
+		Size = ChangeSize;
 	}
 
 	// オブジェクトの回転角度を取得
