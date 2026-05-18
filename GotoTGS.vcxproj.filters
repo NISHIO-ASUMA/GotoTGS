@@ -603,6 +603,9 @@
     <ClCompile Include="src\cpp\tutorialui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\smokefriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -934,6 +937,9 @@
     </ClInclude>
     <ClInclude Include="src\include\tutorialui.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\smokefriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
