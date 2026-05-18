@@ -18,7 +18,8 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CWorldUICollision::CWorldUICollision(void) : m_nType(TYPE_MAX)
+CWorldUICollision::CWorldUICollision() : m_nType(TYPE_MAX),
+m_SphereColliderUI{}
 {
 
 }
@@ -48,8 +49,29 @@ CWorldUICollision* CWorldUICollision::Create(const D3DXVECTOR3& pos, const float
 	// 各種値の設定
 	pCollider->m_SphereColliderUI.push_back(CSphereCollider::Create(pos, fRadius));
 	pCollider->m_nType = type;
+	pCollider->SetActionTask(type);
 
 	return pCollider;
+}
+
+//=========================================================
+// 事前のタスク設定関数
+//=========================================================
+void CWorldUICollision::SetActionTask(const TYPE& type)
+{
+	// タスクの種類決め
+	switch (type)
+	{
+	case CWorldUICollision::TYPE_PC: // パソコン作業
+
+		break;
+	case CWorldUICollision::TYPE_COPY: // コピー機作業
+
+		break;
+
+	default:
+		break;
+	}
 }
 
 //=========================================================
@@ -57,6 +79,8 @@ CWorldUICollision* CWorldUICollision::Create(const D3DXVECTOR3& pos, const float
 //=========================================================
 HRESULT CWorldUICollision::Init(void)
 {
+	// 配列のクリア処理
+	m_SphereColliderUI.clear();
 
 	return S_OK;
 }

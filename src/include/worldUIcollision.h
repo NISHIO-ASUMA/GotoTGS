@@ -33,12 +33,11 @@ public:
 	//**********************
 	enum TYPE
 	{
-		TYPE_PC = 0,
+		TYPE_PC,
 		TYPE_COPY,
 		TYPE_MAX
 	};
 
-	CWorldUICollision();
 	~CWorldUICollision();
 
 	HRESULT Init(void);
@@ -47,9 +46,27 @@ public:
 
 	// 情報取得処理
 	const CSphereCollider* SphereColliderUI(const int& nIdx) {return m_SphereColliderUI[nIdx].get();}
+	const TYPE& GetType(void) const { return m_nType; }
 
 	// 生成処理
 	static CWorldUICollision* Create(const D3DXVECTOR3& pos, const float& fRadius,const TYPE& type);
+
+	/// <summary>
+	/// シングルトン取得処理
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	static CWorldUICollision* GetInstance(void)
+	{
+		static CWorldUICollision Instance;
+		return &Instance;
+	};
+
+private:
+
+	// 格納コンストラクタ
+	CWorldUICollision();
+	void SetActionTask(const TYPE& type);
 
 private:
 
