@@ -40,6 +40,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	bool Collision(CSphereCollider* pOther);
+
 	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
 
 	/// <summary>

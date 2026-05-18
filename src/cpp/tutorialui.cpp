@@ -95,8 +95,8 @@ void CTutorialUI::Draw(void)
 bool CTutorialUI::Collision(CSphereCollider* pOther)
 {
 	// null‚È‚ç
-	if (m_pCollider == nullptr) return;
+	if (!m_pCollider) return false;
 
-	// ‹…Œ`“¯m‚Ì“–‚½‚è”»’èˆ—Œ‹‰Ê‚ğ•Ô‚·
+	//‹…Œ`“–‚½‚è”»’è‚ğ•Ô‚·
 	return CCollisionSphere::Collision(m_pCollider.get(),pOther);
 }
