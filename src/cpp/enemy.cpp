@@ -24,6 +24,14 @@
 #include "input.h"
 #include "debugproc.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace EnemyInfo
+{
+	constexpr const char* SCRIPT = "data/MOTION/Enemy/EnemyMotion.txt"; // モーションファイル
+};
+
 //========================================================
 // コンストラクタ
 //========================================================
@@ -68,10 +76,11 @@ HRESULT CEnemy::Init(void)
 	CMoveCharactor::Init();
 
 	// モーションファイルロード
-	MotionLoad("data/MOTION/Enemy/EnemyMotion.txt", MOTION::MAX, true);
+	MotionLoad(EnemyInfo::SCRIPT, MOTION::MAX, true);
 
+	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
-	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+	D3DXVECTOR3 rot = GetRot(); 
 
 	// X, Y, Zの回転を合成して回転行列を作成
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
