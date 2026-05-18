@@ -217,11 +217,11 @@ void CObjectX::DrawShadow(void)
 	if (!pXMgr) return;
 
 	// 配列情報の取得
-	auto& fileData = pXMgr->GetList();
+	const auto& fileData = pXMgr->GetList();
 	if (m_nIdxModel < NULL || m_nIdxModel >= static_cast<int>(fileData.size())) return;
 
 	// モデル要素を取得
-	auto& model = fileData[m_nIdxModel];
+	const auto& model = fileData[m_nIdxModel];
 	if (!model.pMesh) return;
 
 	// ライト方向
@@ -274,11 +274,11 @@ void CObjectX::DrawOutLine(const D3DXVECTOR4& color)
 	if (!pXMgr) return;
 
 	// 配列情報
-	auto& fileData = pXMgr->GetList();
+	const auto& fileData = pXMgr->GetList();
 	if (m_nIdxModel >= static_cast<int>(fileData.size())) return;
 
 	// 配列
-	auto& model = fileData[m_nIdxModel];
+	const auto& model = fileData[m_nIdxModel];
 	if (!model.pMesh) return;
 
 	// デバイスポインタを宣言
