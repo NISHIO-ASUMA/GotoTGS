@@ -43,6 +43,8 @@ public:
 
 	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
 
+	void Easing(float fWidth,float fHeight);
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -65,5 +67,9 @@ private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
 	bool m_bLook;									// 見えるかどうかの判定変数
 	bool m_bTime;									// タイムの判定
+
+	bool m_bEasing;									// イージング用切り替え判定変数
+	float m_fCountFrame;								// イージング用フレームカウント変数
+	float m_fMaxFrame;								// イージング用マックスフレーム変数
 };
 
