@@ -3,38 +3,57 @@
     "ObjectTag": "MeshField",
     "Pos": [ 0.0, 0.0, 0.0 ],
     "RadiusX": 4000.0,
-    "RadiusZ": 2000.0,
+    "RadiusZ": 4000.0,
     "SegmentX": 1,
     "SegmentZ": 1
   },
   {
-    "ObjectTag": "MeshDome",
-    "Pos": [ 0.0, -20.0, 0.0 ],
-    "Radius": 80.0
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ 40.0, 17.2, 162.5 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
   },
   {
-    "ObjectTag": "Ui",
-    "Pos": [ 1125.0, 55.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 140.0,
-    "Height": 55.0,
-    "Texture": "Time_frame.png",
-    "AlphaTest": true,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ 40.0, 17.2, 100.5 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
   },
   {
-    "ObjectTag": "Ui",
-    "Pos": [ 1125.0, 60.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 10.0,
-    "Height": 35.0,
-    "Texture": "coron.png",
-    "AlphaTest": true,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ -66.0, 17.2, 115.5 ],
+    "Rot": [ 0.0, -1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ 40.0, 17.2, -28.5 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ 40.0, 17.2, -91.0 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ -66.0, 17.2, -13.5 ],
+    "Rot": [ 0.0, -1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "Friend",
+    "Pos": [ -66.0, 17.2, -74.0 ],
+    "Rot": [ 0.0, -1.57, 0.0 ]
   }
-
 ]

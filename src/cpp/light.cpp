@@ -49,18 +49,9 @@ HRESULT CLight::Init(void)
 	}
 
 	// ライトの位置
-	//m_aLight[0].Position = D3DXVECTOR3(0.22f, -0.87f, 0.44f);
-	//m_aLight[1].Position = D3DXVECTOR3(-0.18f, 0.88f, -0.44f);
-	//m_aLight[2].Position = D3DXVECTOR3(0.89f, 0.11f, 0.44f);
-
 	m_aLight[0].Position = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	m_aLight[1].Position = D3DXVECTOR3(0.65f, 0.65f, 0.65f);
 	m_aLight[2].Position = D3DXVECTOR3(0.15f, 0.15f, 0.15f);
-
-	//// ライトの方向設定 ( ベクトル )
-	//m_vecDir[0] = D3DXVECTOR3(1.0f,1.0f,1.0f);
-	//m_vecDir[1] = D3DXVECTOR3(0.65f,0.65f,0.65f);
-	//m_vecDir[2] = D3DXVECTOR3(0.15f,0.15f, 0.15f);
 
 	// ライトの方向設定 ( ベクトル )
 	m_vecDir[0] = D3DXVECTOR3(0.13f, -0.53f, 0.76f);
@@ -74,16 +65,10 @@ HRESULT CLight::Init(void)
 		D3DXVec3Normalize(&m_vecDir[nCnt], &m_vecDir[nCnt]); 
 
 		m_aLight[nCnt].Direction = m_vecDir[nCnt];
-
-		// ライトの設定
-		pDevice->SetLight(nCnt, &m_aLight[nCnt]);
-
-		// ライトを有効化
-		pDevice->LightEnable(nCnt, TRUE);
 	}
 
 	int pIdx = 3; // インデックス
-	m_aLight[pIdx].Type = D3DLIGHT_POINT; //ポイントに変更
+	m_aLight[pIdx].Type = D3DLIGHT_POINT; // ポイントに変更
 
 	// ライトの色
 	m_aLight[pIdx].Diffuse = COLOR_WHITE;

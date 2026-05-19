@@ -1195,7 +1195,7 @@
       1.0
     ],
 
-    "filepath": "STAGEOBJ/door.x"
+    "filepath": "STAGEOBJ/Door.x"
   },
   {
     "ObjectTag": "Block",
@@ -1215,7 +1215,7 @@
       1.0
     ],
 
-    "filepath": "STAGEOBJ/door.x"
+    "filepath": "STAGEOBJ/Door.x"
   },
   {
     "ObjectTag": "Block",
@@ -1235,7 +1235,7 @@
       1.0
     ],
 
-    "filepath": "STAGEOBJ/door.x"
+    "filepath": "STAGEOBJ/Door.x"
   },
   {
     "ObjectTag": "Block",
@@ -1861,7 +1861,7 @@
     "ObjectTag": "Block",
     "pos": [
       208.0,
-      24.0,
+      15.0,
       255.2899932861328
     ],
     "rot": [
