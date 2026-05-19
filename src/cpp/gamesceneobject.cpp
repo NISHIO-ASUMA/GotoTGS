@@ -28,6 +28,8 @@
 #include <enemy.h>
 #include "friend.h"
 #include "tutorialui.h"
+#include "worldUIcollision.h" // 西尾追加
+
 
 //*********************************************************
 // 静的メンバ変数
@@ -84,17 +86,17 @@ HRESULT CGameSceneObject::Init(void)
 	// メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
 
-	// プレイヤー生成
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-100.0f, 0.0f, 0.0f), VECTOR3_NULL);
+	// タスクの判定を取る球形コライダー管理クラスを生成
+	CWorldUICollision::GetInstance()->Init();
 
-	// 敵生成
-	CEnemy::Create(D3DXVECTOR3(-800.0f,0.0f,250.0f),VECTOR3_NULL);
-
-	// 同僚
+	// 同僚生成
 	CFriend::Create(D3DXVECTOR3(40.0f, 15.0f, 162.5f), D3DXVECTOR3(0.0f,1.57f,0.0f));
 
 	// チュートリアルUI
 	m_pTutorialUI = CTutorialUI::Create(D3DXVECTOR3(-45.0f, 50.0f, 180.0f), VECTOR3_NULL, 15.0f, 15.0f, "Fbutton.png");
+	
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-100.0f, 0.0f, 0.0f), VECTOR3_NULL);
 
 	//// ゲームで使うオブジェクトの読み込み
 	//auto jsonmanager = CManager::GetInstance()->GetJsonManager();
@@ -113,6 +115,11 @@ HRESULT CGameSceneObject::Init(void)
 //=========================================================
 void CGameSceneObject::Uninit(void)
 {
+	//*************************************
+	// ADD : 西尾
+	// タスクの判定を取る球形コライダー管理クラスを破棄
+	CWorldUICollision::GetInstance()->Uninit();
+
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
 
@@ -131,7 +138,10 @@ void CGameSceneObject::Uninit(void)
 //=========================================================
 void CGameSceneObject::Update(void)
 {
-
+	//****************************************
+	// ADD : 西尾
+	// タスクの判定を取る球形コライダー管理クラスを更新
+	CWorldUICollision::GetInstance()->Update();
 }
 
 //=========================================================
@@ -161,10 +171,4 @@ void CGameSceneObject::CreatePointer(void)
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
-
-	//// 世界の壁管理クラスの生成
-	//m_pWorldWallManager = std::make_unique<CWorldWallManager>();
-	//jsonManager->SetWorldWallManager(m_pWorldWallManager.get());
-	//m_pWorldWallManager->Init(GAMEOBJECT::WallName);
-
 }
