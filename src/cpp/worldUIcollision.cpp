@@ -19,11 +19,6 @@
 #include <sstream>
 
 //*********************************************************
-// インクルードファイル
-//*********************************************************
-#include "collisionsphere.h"
-
-//*********************************************************
 // 名前空間を定義
 //*********************************************************
 namespace CollisionJson
@@ -145,7 +140,7 @@ void CWorldUICollision::LoadJson(void)
 				float fRadius = item["Radius"].get<float>();
 
 				// タスク情報
-				TYPE type = static_cast<TYPE>(item["Type"].get<int>()); // int型で取得し、TYPE型にキャスト
+				TYPE type = static_cast<TYPE>(item["Type"].get<int>());
 
 				// 登録処理でリストに追加
 				AddInteractEvent(pos, fRadius, type);
@@ -154,5 +149,5 @@ void CWorldUICollision::LoadJson(void)
 	}
 	
 	// ファイルを閉じる
-	file.close();	
+	file.close();
 }

@@ -27,7 +27,7 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
-#include "deskworkUImanager.h"
+#include "PCdeskwork.h"
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 
@@ -77,7 +77,8 @@ CPlayer* CPlayer::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pPlayer->SetPos(pos);
 	pPlayer->SetRot(rot);
-	pPlayer->SetUseStencil(true);
+	pPlayer->SetUseOutLine(true);
+	pPlayer->SetOutlineColor(D3DXVECTOR4(0.46f, 0.81f, 1.0f, 1.0f));
 
 	// 初期化失敗時
 	if (FAILED(pPlayer->Init()))return nullptr;

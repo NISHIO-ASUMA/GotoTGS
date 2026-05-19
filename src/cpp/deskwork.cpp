@@ -14,7 +14,7 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "deskworkUImanager.h"
+#include "PCdeskwork.h"
 #include "input.h"
 
 //=========================================================

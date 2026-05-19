@@ -54,6 +54,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -73,6 +74,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -92,6 +94,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -111,6 +114,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -130,6 +134,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -149,6 +154,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -168,6 +174,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -187,6 +194,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -206,6 +214,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -225,6 +234,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -244,6 +254,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -263,6 +274,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -282,6 +294,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -301,6 +314,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -320,6 +334,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -339,6 +354,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -358,6 +374,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -377,6 +394,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -396,6 +414,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -415,6 +434,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -434,6 +454,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -453,6 +474,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -472,6 +494,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -491,6 +514,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/chair01.x"
   },
   {
@@ -510,6 +534,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -529,6 +554,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -548,6 +574,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -567,6 +594,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -584,8 +612,9 @@
     "scale": [
       1.0,
       1.0,
-      0.5
+      1.0
     ],
+
     "filepath": "STAGEOBJ/TVbase.x"
   },
   {
@@ -605,6 +634,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/TV.x"
   },
   {
@@ -624,6 +654,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
@@ -643,6 +674,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/DeskLight.x"
   },
   {
@@ -662,6 +694,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -681,6 +714,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
@@ -700,6 +734,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/snack_bowl.x"
   },
   {
@@ -719,6 +754,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/DeskLight.x"
   },
   {
@@ -738,6 +774,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -757,6 +794,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -776,6 +814,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -795,6 +834,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -814,14 +854,15 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      250.0,
+      198.1699981689453,
       27.5,
-      98.0
+      108.88999938964844
     ],
     "rot": [
       0.0,
@@ -833,6 +874,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -852,6 +894,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -871,6 +914,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -890,6 +934,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Conferencedesk.x"
   },
   {
@@ -909,6 +954,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Whiteboard.x"
   },
   {
@@ -928,6 +974,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/coat_rack001.x"
   },
   {
@@ -947,6 +994,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/coat_rack000.x"
   },
   {
@@ -966,6 +1014,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/coat_rack002.x"
   },
   {
@@ -985,6 +1034,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1004,6 +1054,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1023,6 +1074,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1042,6 +1094,7 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1061,12 +1114,13 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      263.05999755859375,
+      261.0,
       55.0,
       -4.0
     ],
@@ -1080,12 +1134,13 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      226.0,
+      229.0,
       55.0,
       305.0
     ],
@@ -1099,12 +1154,13 @@
       1.0,
       1.0
     ],
+
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      400.0,
+      388.0,
       55.0,
       233.0
     ],
@@ -1114,10 +1170,890 @@
       0.0
     ],
     "scale": [
+      3.4000000953674316,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      483.0,
+      55.0,
+      112.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Door.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      260.0,
+      55.0,
+      230.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.25,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Door.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      175.0,
+      55.0,
+      -3.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Door.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      377.1199951171875,
+      40.0,
+      -128.0
+    ],
+    "rot": [
+      0.0,
+      -1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/projector.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      6.0,
+      55.0,
+      -223.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/WallWindow.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -210.0,
+      55.0,
+      -223.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/WallWindow.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      220.0,
+      55.0,
+      -223.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      405.0,
+      55.0,
+      -223.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      2.8,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      483.0,
+      55.0,
+      -118.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      483.0,
+      55.0,
+      36.689998626708984
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.75,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      483.0,
+      55.0,
+      260.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      4.400000095367432,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      350.0,
+      55.0,
+      384.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      5.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      76.0,
+      55.0,
+      384.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      5.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -323.0,
+      55.0,
+      270.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/WallWindow.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -323.0,
+      55.0,
+      51.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      4.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/WallWindow.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -323.0,
+      55.0,
+      -139.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
       3.0,
       1.0,
       1.0
     ],
+
+    "filepath": "STAGEOBJ/WallWindow.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -189.0,
+      55.0,
+      384.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      5.0,
+      1.0,
+      1.0
+    ],
+
     "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      219.61000061035156,
+      13.0,
+      -181.10000610351563
+    ],
+    "rot": [
+      0.0,
+      -2.9200000762939453,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      254.60000610351563,
+      13.0,
+      -181.8800048828125
+    ],
+    "rot": [
+      0.0,
+      3.0299999713897705,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      289.5899963378906,
+      13.0,
+      -182.66000366210938
+    ],
+    "rot": [
+      0.0,
+      -3.130000114440918,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      329.5799865722656,
+      13.0,
+      -183.55999755859375
+    ],
+    "rot": [
+      0.0,
+      -2.8299999237060547,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      369.57000732421875,
+      13.0,
+      -184.4600067138672
+    ],
+    "rot": [
+      0.0,
+      2.940000057220459,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      377.0299987792969,
+      13.0,
+      -74.5999984741211
+    ],
+    "rot": [
+      0.0,
+      -0.009999999776482582,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      337.0400085449219,
+      13.0,
+      -73.69999694824219
+    ],
+    "rot": [
+      0.0,
+      -0.4300000071525574,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      297.04998779296875,
+      13.0,
+      -72.80000305175781
+    ],
+    "rot": [
+      0.0,
+      0.25999999046325684,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      257.05999755859375,
+      13.0,
+      -71.91000366210938
+    ],
+    "rot": [
+      0.0,
+      -0.4300000071525574,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      217.07000732421875,
+      13.0,
+      -71.01000213623047
+    ],
+    "rot": [
+      0.0,
+      0.14000000059604645,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/ConferenceChair.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -200.0,
+      32.0,
+      -210.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      1.5
+    ],
+
+    "filepath": "STAGEOBJ/Cupboard.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -293.8699951171875,
+      14.0,
+      -202.30999755859375
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/trash_can.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -257.0299987792969,
+      32.0,
+      -205.14999389648438
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/Water_Server.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -172.0399932861328,
+      32.0,
+      -208.02000427246094
+    ],
+    "rot": [
+      0.0,
+      -3.0199999809265137,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/CoffeeMaker.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -221.24000549316406,
+      37.0,
+      -205.8000030517578
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/snack_bowl.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -180.0,
+      16.0,
+      -210.0
+    ],
+    "rot": [
+      0.0,
+      3.119999885559082,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/microwave00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -141.38999938964844,
+      24.0,
+      -200.6199951171875
+    ],
+    "rot": [
+      0.0,
+      3.119999885559082,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/houseplant.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      208.0,
+      15.0,
+      255.2899932861328
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/shredder.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      358.5899963378906,
+      34.0,
+      -155.6300048828125
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/NotePC.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      255.52000427246094,
+      34.0,
+      -156.30999755859375
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/NotePC.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      333.9700012207031,
+      34.0,
+      -100.0
+    ],
+    "rot": [
+      0.0,
+      3.0899999141693115,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/NotePC.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      297.5799865722656,
+      34.0,
+      -99.02999877929688
+    ],
+    "rot": [
+      0.0,
+      3.0899999141693115,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/NotePC.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      187.27000427246094,
+      24.0,
+      109.27999877929688
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/poster002.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      395.0,
+      62.0,
+      238.0
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/poster001.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      50.0,
+      68.0,
+      379.20001220703125
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/poster000.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      335.0,
+      68.0,
+      -8.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+
+    "filepath": "STAGEOBJ/poster000.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      -101.79000091552734,
+      68.0,
+      -217.50999450683594
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/poster001.x"
   }
 ]
