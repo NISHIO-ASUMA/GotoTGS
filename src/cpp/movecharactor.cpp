@@ -29,6 +29,7 @@ m_move(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_rotDest(VECTOR3_NULL),
 m_scale(INITSCALE),
+m_OutLineColor(OUTLINE_COLOR),
 m_pModel{},
 m_pMotion{},
 m_pShadowS{},
@@ -137,11 +138,9 @@ void CMoveCharactor::Update(void)
 	// ワールド行列を計算する
 	m_mtxworld = mtxScal * mtxRot * mtxTrans;
 
-#ifdef _DEBUG
 	// モーションとモデルの更新
 	if (m_pMotion) 
 		m_pMotion->Update(m_pModel);
-#endif
 }
 //=========================================================
 // 描画処理
@@ -177,7 +176,7 @@ void CMoveCharactor::Draw(void)
 	// アウトラインシェーダー関数
 	for (auto& model : m_pModel)
 	{
-		model->DrawOutLine();
+		model->DrawOutLine(m_OutLineColor);
 	}
 
 	// シェーダー終了

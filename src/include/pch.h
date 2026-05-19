@@ -85,7 +85,7 @@
 
 #define V_COLOR_WHITE (D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 1.0f))	// モデルのカラー白
 #define V_COLOR_RED (D3DCOLORVALUE(1.0f, 0.0f, 0.0f, 1.0f))		// モデルのカラー赤
-#define OUTLINE_COLOR (D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f))		// アウトライン基準カラー
+#define OUTLINE_COLOR (D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f))		// アウトライン基準カラー
 
 //*********************************************************
 // 頂点情報[2D]の構造体

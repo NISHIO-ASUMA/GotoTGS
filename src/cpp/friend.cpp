@@ -64,6 +64,7 @@ CFriend* CFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	pFriend->SetRot(rot);
 	pFriend->SetUseOutLine(true);
 	pFriend->SetOutLineSize(FRIENDINFO::OUTLINESIZE);
+	pFriend->SetOutLineColor();
 
 	// ‰Šú‰»Ž¸”sŽž
 	if (FAILED(pFriend->Init()))return nullptr;
