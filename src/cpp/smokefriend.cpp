@@ -16,6 +16,14 @@
 #include "manager.h"
 #include "motion.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace SMOKEFRIEND
+{
+	constexpr const char* SCRIPT = "data/MOTION/Smoke/SmokeMotion.txt"; // モーションファイル
+};
+
 //========================================================
 // コンストラクタ
 //========================================================
@@ -44,6 +52,7 @@ CSmokeFriend* CSmokeFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& ro
 	pSmoke->SetPos(pos);
 	pSmoke->SetRot(rot);
 	pSmoke->SetUseOutLine(true);
+	pSmoke->SetOutLineColor(D3DXVECTOR4(0.0f,0.0f,0.0f,1.0f));
 
 	// 初期化失敗時
 	if (FAILED(pSmoke->Init())) return nullptr;
@@ -59,7 +68,7 @@ HRESULT CSmokeFriend::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーションロード
-	MotionLoad("data/MOTION/Smoke/SmokeMotion.txt", MOTION::MAX,false);
+	MotionLoad(SMOKEFRIEND::SCRIPT, MOTION::MAX,false);
 
 	return S_OK;
 }
