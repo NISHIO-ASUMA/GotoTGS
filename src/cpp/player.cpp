@@ -27,7 +27,7 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
-#include "deskworkUImanager.h"
+#include "PCdeskwork.h"
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 
