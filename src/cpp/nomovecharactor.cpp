@@ -27,6 +27,7 @@ m_posOld(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_rotDest(VECTOR3_NULL),
 m_scale(INITSCALE),
+m_OutLineColor(OUTLINE_COLOR),
 m_pModel{},
 m_pMotion{},
 m_pShadowS{},
@@ -153,7 +154,7 @@ void CNoMoveCharactor::Draw(void)
 	// アウトラインの描画
 	for (auto& model : m_pModel)
 	{
-		model->DrawOutLine(D3DXVECTOR4(0.65f, 1.0f, 0.2f, 1.0f), m_fOutLineSize);
+		model->DrawOutLine(m_OutLineColor, m_fOutLineSize);
 	}
 
 	// シェーダー終了

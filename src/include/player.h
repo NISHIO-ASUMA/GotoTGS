@@ -41,6 +41,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+	bool CollisionSphere(CSphereCollider* pOther);
 	void ChangeState(CPlayerStateBase* pState, int nID);
 	void MoveBasedOnCamera(float speed);
 

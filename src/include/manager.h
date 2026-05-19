@@ -67,10 +67,10 @@ public:
 	CTexture* GetTexture(void) { return m_pTexture.get(); }
 	CJoyPad* GetJoyPad(void) { return m_pJoyPad.get(); }
 	CCamera* GetCamera(void) { return m_pCamera.get(); }
+	CScene* GetSceneRaw(void) { return m_pScene.get(); }
 	CSound* GetSound(void) { return m_pSound.get(); }
 	CLight* GetLight(void) { return m_pLight.get(); }
 	CFade* GetFade(void) { return m_pFade.get(); }
-	CScene* GetSceneRaw(void) { return m_pScene.get(); }
 
 	static CManager* GetInstance(void);
 
