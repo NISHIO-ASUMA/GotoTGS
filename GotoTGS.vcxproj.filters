@@ -606,6 +606,12 @@
     <ClCompile Include="src\cpp\worldUIcollision.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\PCdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\COPYdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -937,6 +943,12 @@
     </ClInclude>
     <ClInclude Include="src\include\statemachine.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\PCdeskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\COPYdeskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
