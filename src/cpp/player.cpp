@@ -27,7 +27,8 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
-#include "PCdeskwork.h"
+#include "PCdeskwork.h"			// Misaki
+#include "COPYdeskwork.h"		// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 
@@ -146,10 +147,15 @@ void CPlayer::Update(void)
 	//******************************************************
 	// NOTE : 西尾追記 2026/05/18
 	//        今はPCの作業のみだけどこれから複数のタスクの判定も組んであげる形に変更になる
+	//		　髙橋追記 2026/05/19
+	//		　コピー機用の処理を追加しました
 
-	// 現在タスク中（PC作業中）かどうかを取得
+	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
-	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;
+
+	// 各タスクの使用中かどうか
+	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;			// PCタスク
+	bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;		// コピー機タスク [add Misaki]
 
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
@@ -157,13 +163,21 @@ void CPlayer::Update(void)
 	//*********************************************************
 	// ADD: 西尾 タスク中にFキーが押されたら、タスクを閉じる
 	//*********************************************************
-	if (isPcDeskWork)
+	if (isPcDeskWork || isCopyDeskWork)
 	{
-		// 終了キー
-		if (Key->GetTrigger(DIK_F))
-		{
-			// タスクを非アクティブにする
+		if (!Key->GetTrigger(DIK_F))
+		{// 終了キーを押していない場合
+			return;
+		}
+
+		// 起動したタスクを非アクティブにする [add Misaki]
+		if (isPcDeskWork)
+		{// PCタスクの場合
 			pDesk->GetPCDeskUI()->SetAlphaUI();
+		}
+		else if (isCopyDeskWork)
+		{// コピー機タスクの場合
+			pDesk->GetCOPYDeskUI()->SetAlphaUI();
 		}
 
 		// タスク中は移動や他の当たり判定をさせないためにリターン
@@ -225,14 +239,14 @@ void CPlayer::Update(void)
 			// 当たっている かつ Fキー入力
 			if (Key->GetTrigger(DIK_F))
 			{
+				// タスク取得
+				auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+
 				switch (Colliders->nType)
 				{
 				case CWorldUICollision::TYPE_PC: // パソコンタスク
 				{
-					// PCタスク取得
-					auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
-
-					// 両方がnullじゃなければ
+					// 両方がnullじゃない状態
 					if (pDesk && pDesk->GetPCDeskUI())
 					{
 						pDesk->GetPCDeskUI()->SetAlphaUI();
@@ -240,7 +254,14 @@ void CPlayer::Update(void)
 				}
 					break;
 
-				case CWorldUICollision::TYPE_COPY: // コピー機作業
+				case CWorldUICollision::TYPE_COPY: // コピー機作業 [add Misaki]
+
+					// 両方がnullじゃない状態
+					if (pDesk && pDesk->GetCOPYDeskUI())
+					{
+						pDesk->GetCOPYDeskUI()->SetAlphaUI();
+					}
+
 					break;
 
 				default:

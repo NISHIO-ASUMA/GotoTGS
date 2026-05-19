@@ -18,12 +18,12 @@
 //*********************************************************
 // コピー機タスククラスを定義
 //*********************************************************
-class CCOPYdeskwork :public CDeskworkUIManager
+class CCOPYDeskwork :public CDeskworkUIManager
 {
 public:
 
-	CCOPYdeskwork();
-	~CCOPYdeskwork();
+	CCOPYDeskwork();
+	~CCOPYDeskwork();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
@@ -37,7 +37,7 @@ public:
 	CDeskworkUI* GetDeskUI(const int nIdx) const { return m_pDeskUI; }
 
 	// 生成処理
-	static CCOPYdeskwork* Create(const D3DXVECTOR3& pos);
+	static CCOPYDeskwork* Create(const D3DXVECTOR3& pos);
 
 private:
 
@@ -46,8 +46,8 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr float POS_X = 200.0f;			// X軸の位置
-		static constexpr float POS_Y = 200.0f;			// Y軸の位置
+		static constexpr float POS_X = HALFWIDTH;		// X軸の位置
+		static constexpr float POS_Y = HALFHEIGHT;		// Y軸の位置
 		static constexpr float VALUE_TEXU = 0.25f;		// テクスチャのUV座標
 		static constexpr float UI_WIDTH = 100.0f;		// UIの横幅
 		static constexpr float UI_HEIGHT = 100.0f;		// UIの縦幅

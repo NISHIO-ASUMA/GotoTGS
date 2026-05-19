@@ -19,7 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CCOPYdeskwork::CCOPYdeskwork()
+CCOPYDeskwork::CCOPYDeskwork()
 {
 
 }
@@ -27,7 +27,7 @@ CCOPYdeskwork::CCOPYdeskwork()
 //=========================================================
 // デストラクタ
 //=========================================================
-CCOPYdeskwork::~CCOPYdeskwork()
+CCOPYDeskwork::~CCOPYDeskwork()
 {
 
 }
@@ -35,10 +35,10 @@ CCOPYdeskwork::~CCOPYdeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CCOPYdeskwork* CCOPYdeskwork::Create(const D3DXVECTOR3& pos)
+CCOPYDeskwork* CCOPYDeskwork::Create(const D3DXVECTOR3& pos)
 {
 	// PCタスクのポインタ
-	static CCOPYdeskwork pPCDeskwork;
+	static CCOPYDeskwork pPCDeskwork;
 
 	// 設定処理
 	pPCDeskwork.SetPos(pos);
@@ -52,13 +52,13 @@ CCOPYdeskwork* CCOPYdeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CCOPYdeskwork::Init(void)
+HRESULT CCOPYDeskwork::Init(void)
 {
 	// クールタイムが始まっていない状態にする
 	m_bTime = false;
 
 	// 位置
-	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 pos = D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f);
 
 	// キーの種類
 	CDeskworkUI::KEYTYPE keytype = CDeskworkUI::DRAWTYPE_A;
@@ -78,7 +78,7 @@ HRESULT CCOPYdeskwork::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CCOPYdeskwork::Uninit(void)
+void CCOPYDeskwork::Uninit(void)
 {
 
 }
@@ -86,7 +86,7 @@ void CCOPYdeskwork::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CCOPYdeskwork::Update(void)
+void CCOPYDeskwork::Update(void)
 {
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
@@ -96,50 +96,67 @@ void CCOPYdeskwork::Update(void)
 		return;
 	}
 
-	if (m_bTime == false)
-	{// クールタイムが始まっていないなら
+	if (m_bTime != false)
+	{// クールタイムが始まっているなら
 
-		// 現在のタスクUIの更新処理
-		m_pDeskUI->Update();
+		if (m_nCountTime <= Config::TIME_COOL)
+		{// クールタイムを数える
+			m_nCountTime++;
 
-		if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
-			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
-			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
-			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
-		{// 正解を押した時
-
-			// 色を半透明にする
-			m_pDeskUI->ChangeCol(COLOR_HALFVALUE);
+			return;
 		}
+
+		// タスクをランダムに設定
+		m_pDeskUI->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+
+		// 色を元に戻す(通常色)
+		m_pDeskUI->ChangeCol(COLOR_WHITE);
+
+		// クールタイムを初期化
+		m_nCountTime = 0;
+
+		// クールタイムが始まっていない状態にする
+		m_bTime = false;
 	}
+
+	// クールタイムが始まっていないなら
+	// 現在のタスクUIの更新処理
+	m_pDeskUI->Update();
+
+	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
+		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
+		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
+		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
+	{// 正解を押した時
+		// 色をグレーにする
+		m_pDeskUI->ChangeCol(COLOR_GLAY);
+
+		// カウントを一つ進める
+		m_nCountTime++;
+	}
+	else
+	{
+		// 色を元に戻す(通常色)
+		m_pDeskUI->ChangeCol(COLOR_WHITE);
+	}
+
+	if (m_nCountTime <= Config::TIME_PUSH)
+	{
+		return;
+	}
+
+	// カウントを初期化
+	m_nCountTime = 0;
 
 	// クールタイムを始める
 	m_bTime = true;
 
-	if (m_nCountTime <= Config::TIME_COOL)
-	{// クールタイムを数える
-		m_nCountTime++;
-
-		return;
-	}
-
-	// タスクをランダムに設定
-	m_pDeskUI->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
-
-	// 色を元に戻す(通常色)
-	m_pDeskUI->ChangeCol(COLOR_WHITE);
-
-	// クールタイムを初期化
-	m_nCountTime = 0;
-
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
 }
 
 //=========================================================
 // 描画処理
 //=========================================================
-void CCOPYdeskwork::Draw(void)
+void CCOPYDeskwork::Draw(void)
 {
 	// タスクUIの描画処理
 	m_pDeskUI->Draw();
@@ -148,7 +165,7 @@ void CCOPYdeskwork::Draw(void)
 //=========================================================
 // 透明度の処理
 //=========================================================
-void CCOPYdeskwork::SetAlphaUI(void)
+void CCOPYDeskwork::SetAlphaUI(void)
 {
 	// 使っていいるかどうかを設定する
 	SetUse(GetUse() ? false : true);

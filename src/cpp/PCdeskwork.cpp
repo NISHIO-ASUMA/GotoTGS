@@ -106,60 +106,61 @@ void CPCDeskwork::Update(void)
 		return;
 	}
 
-	if (m_bTime == false)
-	{// クールタイムが始まっていないなら
+	if (m_bTime != false)
+	{// クールタイムが始まったなら
 
-		// 現在のタスクUIの更新処理
-		m_pDeskUI[m_nNowIdx]->Update();
+		if (m_nCountTime <= Config::TIME_COOL)
+		{// クールタイムを数える
+			m_nCountTime++;
 
-		if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
-			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
-			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
-			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
-		{// 正解を押した時
-
-			// 色を半透明にする
-			m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_HALFVALUE);
-
-			// 次のタスクに移る
-			m_nNowIdx++;
-		}
-
-		// タスクが終わっていないなら
-		if (m_nNowIdx < Config::UI_NUM)
-		{
 			return;
 		}
 
+		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+		{
+			// タスクをランダムに設定
+			m_pDeskUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+
+			// 色を元に戻す(通常色)
+			m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
+		}
+
+		// 現在選択している番号を初期化
+		m_nNowIdx = 0;
+
+		// クールタイムを初期化
+		m_nCountTime = 0;
+
+		// クールタイムが始まっていない状態にする
+		m_bTime = false;
+
+	}
+
+	// クールタイムが始まっていないなら
+	// 現在のタスクUIの更新処理
+	m_pDeskUI[m_nNowIdx]->Update();
+
+	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
+		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
+		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
+		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
+	{// 正解を押した時
+
+		// 色を半透明にする
+		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_HALFVALUE);
+
+		// 次のタスクに移る
+		m_nNowIdx++;
+	}
+
+	// タスクが終わっていないなら
+	if (m_nNowIdx < Config::UI_NUM)
+	{
+		return;
 	}
 
 	// クールタイムを始める
 	m_bTime = true;
-
-	if (m_nCountTime <= Config::TIME_COOL)
-	{// クールタイムを数える
-		m_nCountTime++;
-
-		return;
-	}
-
-	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
-	{
-		// タスクをランダムに設定
-		m_pDeskUI[nCount]->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
-
-		// 色を元に戻す(通常色)
-		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
-	}
-
-	// 現在選択している番号を初期化
-	m_nNowIdx = 0;
-
-	// クールタイムを初期化
-	m_nCountTime = 0;
-
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
 }
 
 //=========================================================

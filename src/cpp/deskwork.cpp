@@ -15,13 +15,15 @@
 //*********************************************************
 #include "manager.h"
 #include "PCdeskwork.h"
+#include "COPYdeskwork.h"
 #include "input.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
-m_pPCDeskUI(nullptr)
+m_pPCDeskUI(nullptr),
+m_pCOPYDeskUI(nullptr)
 {
 
 }
@@ -65,11 +67,18 @@ HRESULT CDeskwork::Init(void)
 	// 親の初期化処理
 	CObject2D::Init();
 
-	if (m_pPCDeskUI == nullptr)
-	{
-		// PCタスクUIの生成 Misaki
-		m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr)
+	{// どれかのポインタに中身が入っているなら
+		// ポインタを初期化
+		m_pPCDeskUI = nullptr;
+		m_pCOPYDeskUI = nullptr;
 	}
+
+	// PCタスクUIの生成
+	m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+
+	// コピー機タスクUIの生成
+	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
 	return S_OK;
 }
@@ -82,11 +91,18 @@ void CDeskwork::Uninit(void)
 	// 親の終了処理
 	CObject2D::Uninit();
 
-	// タスクUIマネージャーを破棄
+	// PCタスクUIを破棄
 	if (m_pPCDeskUI)
 	{
 		m_pPCDeskUI->Uninit();
 		m_pPCDeskUI = nullptr;
+	}
+
+	// コピー機タスクUIを破棄
+	if (m_pCOPYDeskUI)
+	{
+		m_pCOPYDeskUI->Uninit();
+		m_pCOPYDeskUI = nullptr;
 	}
 }
 
@@ -95,8 +111,9 @@ void CDeskwork::Uninit(void)
 //=========================================================
 void CDeskwork::Update(void)
 {
-	// 有効状態ではないなら
-	if (m_pPCDeskUI->GetUse() != true)
+	// ポインタがヌルかつ有効状態ではないなら
+	if (m_pPCDeskUI != nullptr && m_pCOPYDeskUI != nullptr &&
+		m_pPCDeskUI->GetUse() != true && m_pCOPYDeskUI->GetUse() != true)
 	{
 		return;
 	}
@@ -104,11 +121,18 @@ void CDeskwork::Update(void)
 	// 親の更新処理
 	CObject2D::Update();
 
-	if (m_pPCDeskUI != nullptr)
-	{
-		// タスクUIマネージャーの更新処理
+	if (m_pCOPYDeskUI->GetUse() != true)
+	{// 他のタスクが起動していないなら
+		// PCタスクUIの更新処理
 		m_pPCDeskUI->Update();
 	}
+
+	if (m_pPCDeskUI->GetUse() != true)
+	{// 他のタスクが起動していないなら
+		// コピー機タスクUIの更新処理
+		m_pCOPYDeskUI->Update();
+	}
+
 }
 
 //=========================================================
@@ -116,7 +140,8 @@ void CDeskwork::Update(void)
 //=========================================================
 void CDeskwork::Draw(void)
 {
-	if (m_pPCDeskUI->GetUse() != true)
+	// 有効状態ではないなら
+	if (m_pPCDeskUI->GetUse() != true && m_pCOPYDeskUI->GetUse() != true)
 	{
 		return;
 	}

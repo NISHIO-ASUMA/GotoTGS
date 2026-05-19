@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CPCDeskwork;
+class CCOPYDeskwork;
 
 //*********************************************************
 // タスククラスを定義
@@ -40,6 +41,7 @@ public:
 
 	// 情報取得処理
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
+	CCOPYDeskwork* GetCOPYDeskUI(void) const { return m_pCOPYDeskUI; }
 
 	// 生成処理
 	static CDeskwork* Create(const D3DXVECTOR3& pos);
@@ -57,6 +59,6 @@ private:
 	};
 
 	// メンバ変数
-	CPCDeskwork* m_pPCDeskUI;	// PCタスクUIのポインタ
-	//CDeskworkUIManager* m_pDeskUIManager;	// コピータスクUIのポインタ
+	CPCDeskwork* m_pPCDeskUI;		// PCタスクUIのポインタ
+	CCOPYDeskwork* m_pCOPYDeskUI;	// コピー機タスクUIのポインタ
 };
