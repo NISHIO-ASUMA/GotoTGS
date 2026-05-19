@@ -169,6 +169,7 @@
     <ClCompile Include="src\cpp\collision.cpp" />
     <ClCompile Include="src\cpp\collisionbox.cpp" />
     <ClCompile Include="src\cpp\collisionsphere.cpp" />
+    <ClCompile Include="src\cpp\COPYdeskwork.cpp" />
     <ClCompile Include="src\cpp\createjsonblock.cpp" />
     <ClCompile Include="src\cpp\createjsonblocknormal.cpp" />
     <ClCompile Include="src\cpp\createjsoncharactor.cpp" />
@@ -227,6 +228,7 @@
     <ClCompile Include="src\cpp\outline.cpp" />
     <ClCompile Include="src\cpp\pause.cpp" />
     <ClCompile Include="src\cpp\pausemanager.cpp" />
+    <ClCompile Include="src\cpp\PCdeskwork.cpp" />
     <ClCompile Include="src\cpp\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
@@ -283,6 +285,7 @@
     <ClInclude Include="src\include\collision.h" />
     <ClInclude Include="src\include\collisionbox.h" />
     <ClInclude Include="src\include\collisionsphere.h" />
+    <ClInclude Include="src\include\COPYdeskwork.h" />
     <ClInclude Include="src\include\createjsonblock.h" />
     <ClInclude Include="src\include\createjsonblocknormal.h" />
     <ClInclude Include="src\include\createjsoncharactor.h" />
@@ -342,6 +345,7 @@
     <ClInclude Include="src\include\outline.h" />
     <ClInclude Include="src\include\pause.h" />
     <ClInclude Include="src\include\pausemanager.h" />
+    <ClInclude Include="src\include\PCdeskwork.h" />
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\player.h" />
     <ClInclude Include="src\include\playerstateaction.h" />

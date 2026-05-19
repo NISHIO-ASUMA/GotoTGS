@@ -1,0 +1,62 @@
+//=========================================================
+//
+// コピー機タスク処理 [ COPYdeskwork.h ]
+// Author: Takahashi Misaki
+//
+//=========================================================
+
+//*********************************************************
+// インクルードガード
+//*********************************************************
+#pragma once
+
+//*********************************************************
+// インクルード
+//*********************************************************
+#include "deskworkUImanager.h"
+
+//*********************************************************
+// コピー機タスククラスを定義
+//*********************************************************
+class CCOPYdeskwork :public CDeskworkUIManager
+{
+public:
+
+	CCOPYdeskwork();
+	~CCOPYdeskwork();
+
+	HRESULT Init(void) override;
+	void Uninit(void) override;
+	void Update(void) override;
+	void Draw(void) override;
+
+	// 設定処理
+	void SetAlphaUI(void);
+
+	// 情報取得処理
+	CDeskworkUI* GetDeskUI(const int nIdx) const { return m_pDeskUI; }
+
+	// 生成処理
+	static CCOPYdeskwork* Create(const D3DXVECTOR3& pos);
+
+private:
+
+	//************************************
+	// 定数構造体宣言
+	//************************************
+	struct Config
+	{
+		static constexpr float POS_X = 200.0f;			// X軸の位置
+		static constexpr float POS_Y = 200.0f;			// Y軸の位置
+		static constexpr float VALUE_TEXU = 0.25f;		// テクスチャのUV座標
+		static constexpr float UI_WIDTH = 100.0f;		// UIの横幅
+		static constexpr float UI_HEIGHT = 100.0f;		// UIの縦幅
+		static constexpr int TIME_PUSH = 120;			// ボタンを押す時間
+		static constexpr int TIME_COOL = 60;			// クールタイム
+	};
+
+	// メンバ変数
+	CDeskworkUI* m_pDeskUI;		// UIのポインタ
+	int m_nCountTime;			// タイマーカウント
+	bool m_bTime;				// クールタイムが始まっているかどうか
+};
