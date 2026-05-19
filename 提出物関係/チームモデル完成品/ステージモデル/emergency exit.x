@@ -281,7 +281,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "pictogram.png";
+    "C:\\Users\\student\\Desktop\\GotoTGS\\data\\TEXTURE\\pictogram.png";
    }
   }
  }
