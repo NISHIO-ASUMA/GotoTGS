@@ -28,6 +28,8 @@
 #include "gamesceneobject.h"
 #include "debugproc.h"
 #include "deskworkUImanager.h"
+#include "worldUIcollision.h"
+#include "collisionsphere.h"
 
 //*********************************************************
 // インクルードファイル
@@ -36,6 +38,13 @@ namespace player
 {
 	constexpr float fSpeed = 5.0f;		// プレイヤーの移動スピード
 	constexpr float fInput = 0.0001f;	// 移動処理に使うキーが入力されてるか比較する用の変数
+
+	/// <summary>
+	/// 以下、西尾追加
+	/// </summary>
+	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
+	constexpr float SphereSize = 60.0f;									  // 球形サイズ
+	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 
 };
 //=========================================================
@@ -84,7 +93,7 @@ HRESULT CPlayer::Init(void)
 	CMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad("data/MOTION/Player/PlayerMotion.txt",MAX,false);
+	MotionLoad(player::SCRIPT,MAX,false);
 
 	// インスタンス生成
 	m_pMachine = new CStateMachine;
@@ -99,10 +108,10 @@ HRESULT CPlayer::Init(void)
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(50.0f, 50.0f, 50.0f),matRot);
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(player::BoxSize, player::BoxSize, player::BoxSize),matRot);
 
 	// スフィアコライダーの生成
-	m_pSphereCollider = CSphereCollider::Create(GetPos(), 60.0f);
+	m_pSphereCollider = CSphereCollider::Create(GetPos(), player::SphereSize);
 
 	return S_OK;
 }
@@ -123,7 +132,7 @@ void CPlayer::Uninit(void)
 	m_pBoxCollider.reset();
 
 	// スフィアコライダーの破棄
-	m_pSphereCollider.reset();	
+	m_pSphereCollider.reset();
 
 	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
@@ -133,9 +142,32 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	// タスク中かどうかを判別し、trueなら以下の処理をしない
-	bool isPcDeskWork = CGameSceneObject::GetInstance()->GetDesk()->GetPCDeskUI()->GetUse();
-	if (isPcDeskWork) return;
+	//******************************************************
+	// NOTE : 西尾追記 2026/05/18
+	//        今はPCの作業のみだけどこれから複数のタスクの判定も組んであげる形に変更になる
+
+	// 現在タスク中（PC作業中）かどうかを取得
+	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;
+
+	// キー入力取得
+	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
+
+	//*********************************************************
+	// ADD: 西尾 タスク中にFキーが押されたら、タスクを閉じる
+	//*********************************************************
+	if (isPcDeskWork)
+	{
+		// 終了キー
+		if (Key->GetTrigger(DIK_F))
+		{
+			// タスクを非アクティブにする
+			pDesk->GetPCDeskUI()->SetAlphaUI();
+		}
+
+		// タスク中は移動や他の当たり判定をさせないためにリターン
+		return;
+	}
 
 	// 現在の座標取得
 	D3DXVECTOR3 pos = GetPos();
@@ -158,7 +190,6 @@ void CPlayer::Update(void)
 	if (m_pSphereCollider)
 	{
 		m_pSphereCollider->SetPos(pos);
-		m_pSphereCollider->SetRadius(30.0f);
 	}
 
 	// 座標の更新処理
@@ -167,13 +198,62 @@ void CPlayer::Update(void)
 	// 更新後の座標取得
 	auto UpdatePos = GetPos();
 
-	// コライダー座標の更新
+	// ボックスコライダー座標の更新
 	if (m_pBoxCollider)
 	{
 		m_pBoxCollider->SetPos(UpdatePos);
 		m_pBoxCollider->SetPosOld(GetOldPos());
 	}
 
+//*************************************************
+// ADD : 西尾追加 タスクを起こせる球との当たり判定をとり、その時のキー入力でタスク発生(指定したもの)
+
+	// インスタンス取得
+	const auto& InteractPoint = CWorldUICollision::GetInstance()->GetInteractPoints();
+	if (!&InteractPoint) return;
+
+	// 最大数と判定をする
+	for (const auto& Colliders : InteractPoint)
+	{
+		// nullチェック
+		if (Colliders == nullptr || Colliders->pCollider == nullptr) continue;
+
+		// プレイヤーの球と判定し、有効なら
+		if (CollisionSphere(Colliders->pCollider.get()))
+		{
+			// 当たっている かつ Fキー入力
+			if (Key->GetTrigger(DIK_F))
+			{
+				switch (Colliders->nType)
+				{
+				case CWorldUICollision::TYPE_PC: // パソコンタスク
+				{
+					// PCタスク取得
+					auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+
+					// 両方がnullじゃなければ
+					if (pDesk && pDesk->GetPCDeskUI())
+					{
+						pDesk->GetPCDeskUI()->SetAlphaUI();
+					}
+				}
+					break;
+
+				case CWorldUICollision::TYPE_COPY: // コピー機作業
+					break;
+
+				default:
+					break;
+				}
+
+				// タスク起動したら抜ける
+				break;
+			}
+		}
+	}
+
+
+//*************************************************
 	// jsonmanagerからブロックを取得
 	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
 	if (BlockManager == nullptr) return;
@@ -202,7 +282,6 @@ void CPlayer::Update(void)
 
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
-	
 }
 //=========================================================
 // 描画処理
@@ -231,6 +310,17 @@ bool CPlayer::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 
 	// 矩形同士の当たり判定を返す
 	return CCollisionBox::CollisionEx(m_pBoxCollider.get(), pOther, OutPos);
+}
+//=========================================================
+// 球形当たり判定
+//=========================================================
+bool CPlayer::CollisionSphere(CSphereCollider* pOther)
+{
+	// nullチェック
+	if (m_pSphereCollider == nullptr) return false;
+
+	// 矩形同士の当たり判定を返す
+	return CCollisionSphere::Collision(m_pSphereCollider.get(), pOther);
 }
 //=========================================================
 // ステート変更処理

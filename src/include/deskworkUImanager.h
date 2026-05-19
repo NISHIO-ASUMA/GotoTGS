@@ -101,5 +101,4 @@ private:
 	int m_nNowIdx;								// 現在選択している番号
 	int m_nCountTime;							// タイマーカウント
 	bool m_bTime;								// クールタイムが始まっているかどうか
-
 };
