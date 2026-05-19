@@ -95,17 +95,8 @@ void CDeskwork::Uninit(void)
 //=========================================================
 void CDeskwork::Update(void)
 {
-	// キーボードのポインタ
-	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
-
-	if (pKeyboard->GetTrigger(DIK_F) == true)
-	{// Fキーを押したら
-		// 使っていいるかどうかで透明度を設定
-		m_pPCDeskUI->SetAlphaUI();
-		SetAlpha(m_pPCDeskUI->GetUse());
-	}
-
-	if (m_pPCDeskUI->GetUse() != true && m_pPCDeskUI->GetUse() != true)
+	// 有効状態ではないなら
+	if (m_pPCDeskUI->GetUse() != true)
 	{
 		return;
 	}
