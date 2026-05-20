@@ -56,5 +56,10 @@ public:
 	};
 
 private:
+
+	void RandomChange(void);
+
+private:
 	int m_nChangeCount; // モーション切り替えカウント
+	int m_nNextChangeCount; // 次の変更までのカウント
 };
