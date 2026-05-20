@@ -1,6 +1,6 @@
 //=========================================================
 //
-// チュートリアルUI処理 [ tutorialui.h ]
+// PCUI処理 [ pcui.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -18,7 +18,7 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "billboard.h"
+#include "tutorialui.h"
 
 //*********************************************************
 // 前方宣言
@@ -28,20 +28,17 @@ class CSphereCollider;
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CTutorialUI : public CBillboard
+class CPcUI : public CTutorialUI
 {
 public:
 
-	CTutorialUI(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
-	~CTutorialUI();
+	CPcUI(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
+	~CPcUI();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool Collision(CSphereCollider* pOther);
-
-	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
 
 	/// <summary>
 	/// 生成処理
@@ -52,7 +49,7 @@ public:
 	/// <param name="fHeight">高さ</param>
 	/// <param name="pTexName">テクスチャファイル名</param>
 	/// <returns></returns>
-	static CTutorialUI* Create
+	static CPcUI* Create
 	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot,
@@ -60,10 +57,5 @@ public:
 		float fHeight,
 		const char* pTexName
 	);
-
-private:
-	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
-	bool m_bLook;									// 見えるかどうかの判定変数
-	bool m_bTime;									// タイムの判定
 };
 

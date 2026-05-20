@@ -27,7 +27,7 @@
 #include "deskwork.h"	// Misaki
 #include <enemy.h>
 #include "friend.h"
-#include "tutorialui.h"
+#include "pcui.h"
 #include "worldUIcollision.h" // 西尾追加
 
 
@@ -55,7 +55,6 @@ CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
-m_pTutorialUI(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -90,8 +89,8 @@ HRESULT CGameSceneObject::Init(void)
 	// タスクの判定を取る球形コライダー管理クラスを生成
 	CWorldUICollision::GetInstance()->Init();
 
-	// チュートリアルUI
-	m_pTutorialUI = CTutorialUI::Create(D3DXVECTOR3(-45.0f, 50.0f, 180.0f), VECTOR3_NULL, 15.0f, 15.0f, "Fbutton.png");
+	// pcUI
+	CPcUI::Create(D3DXVECTOR3(-45.0f, 50.0f, 170.0f), VECTOR3_NULL, 15.0f, 15.0f, "Fbutton.png");
 	
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-100.0f, 0.0f, 0.0f), VECTOR3_NULL);
