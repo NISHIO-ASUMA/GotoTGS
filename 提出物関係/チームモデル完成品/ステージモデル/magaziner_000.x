@@ -177,7 +177,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "magaziner_0.jpg";
+    "C:\\Users\\student\\Desktop\\GotoTGS\\data\\TEXTURE\\magaziner_0.jpg";
    }
   }
   Material {
