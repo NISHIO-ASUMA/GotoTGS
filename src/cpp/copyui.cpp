@@ -1,6 +1,6 @@
 //=========================================================
 //
-// PC用UI処理 [ pcui.cpp ]
+// コピー機用UI処理 [ copyui.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,7 +8,7 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "pcui.h"
+#include "copyui.h"
 
 //*********************************************************
 // インクルードファイル
@@ -19,7 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPcUI::CPcUI(int nPriority) : CTutorialUI(nPriority)
+CCopyUI::CCopyUI(int nPriority) : CTutorialUI(nPriority)
 {
 
 }
@@ -27,7 +27,7 @@ CPcUI::CPcUI(int nPriority) : CTutorialUI(nPriority)
 //=========================================================
 // デストラクタ
 //=========================================================
-CPcUI::~CPcUI()
+CCopyUI::~CCopyUI()
 {
 
 }
@@ -35,30 +35,30 @@ CPcUI::~CPcUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CPcUI* CPcUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
+CCopyUI* CCopyUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
 {
 	// インスタンス生成
-	CPcUI* pCpUI = new CPcUI;
-	if (pCpUI == nullptr) return nullptr;
+	CCopyUI* pCopyUI = new CCopyUI;
+	if (pCopyUI == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pCpUI->SetPos(pos);
-	pCpUI->SetSize(fWidth, fHeight);
-	pCpUI->SetRot(rot);
-	pCpUI->SetRadius(fRadius);
-	pCpUI->SetTexture(pTexName);
-	pCpUI->SetEnableZtest(true);
+	pCopyUI->SetPos(pos);
+	pCopyUI->SetSize(fWidth, fHeight);
+	pCopyUI->SetRot(rot);
+	pCopyUI->SetRadius(fRadius);
+	pCopyUI->SetTexture(pTexName);
+	pCopyUI->SetEnableZtest(true);
 
 	// 初期化失敗時
-	if (FAILED(pCpUI->Init())) return nullptr;
+	if (FAILED(pCopyUI->Init())) return nullptr;
 
 	// チュートリアルUIのポインタを返す
-	return pCpUI;
+	return pCopyUI;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CPcUI::Init(void)
+HRESULT CCopyUI::Init(void)
 {
 	// 親クラスの初期化処理
 	CTutorialUI::Init();
@@ -68,7 +68,7 @@ HRESULT CPcUI::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CPcUI::Uninit(void)
+void CCopyUI::Uninit(void)
 {
 	// 親クラスの終了処理
 	CTutorialUI::Uninit();
@@ -76,7 +76,7 @@ void CPcUI::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CPcUI::Update(void)
+void CCopyUI::Update(void)
 {
 	// 親クラスの更新処理
 	CTutorialUI::Update();
@@ -84,7 +84,7 @@ void CPcUI::Update(void)
 //=========================================================
 // 描画処理
 //=========================================================
-void CPcUI::Draw(void)
+void CCopyUI::Draw(void)
 {
 	// 親クラスの描画処理
 	CTutorialUI::Draw();

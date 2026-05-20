@@ -36,6 +36,7 @@ namespace UI
 CTutorialUI::CTutorialUI(int nPriority) : CBillboard(nPriority),
 m_pCollider(nullptr),
 m_bLook(false),
+m_fRadius(NULL),
 m_bTime(true)
 {
 
@@ -52,7 +53,7 @@ CTutorialUI::~CTutorialUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, float fWidth, float fHeight, const char* pTexName)
+CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
 {
 	// インスタンス生成
 	CTutorialUI* pTutorialUI = new CTutorialUI;
@@ -62,6 +63,7 @@ CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,
 	pTutorialUI->SetPos(pos);
 	pTutorialUI->SetSize(fWidth, fHeight);
 	pTutorialUI->SetRot(rot);
+	pTutorialUI->SetRadius(fRadius);
 	pTutorialUI->SetTexture(pTexName);
 	pTutorialUI->SetEnableZtest(true);
 
@@ -80,7 +82,7 @@ HRESULT CTutorialUI::Init(void)
 	CBillboard::Init();
 
 	// 球形コライダーを生成
-	m_pCollider = CSphereCollider::Create(GetPos(),45.0f);
+	m_pCollider = CSphereCollider::Create(GetPos(), m_fRadius);
 
 	return S_OK;
 }
