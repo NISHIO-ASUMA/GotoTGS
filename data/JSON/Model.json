@@ -70,5 +70,27 @@
   },
   {
     "Model": "data/MODEL/COLLEAGUE/03_Colleague000_armL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/00_ColleagueSmoke000_body.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/01_ColleagueSmoke000_head.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/02_ColleagueSmoke000_armR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/03_ColleagueSmoke000_handR.x"
+  },
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/04_ColleagueSmoke000_armL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/05_ColleagueSmoke000_handL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE/smoke.x"
   }
 ]
