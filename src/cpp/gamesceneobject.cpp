@@ -92,10 +92,10 @@ HRESULT CGameSceneObject::Init(void)
 	CWorldUICollision::GetInstance()->Init();
 
 	// パソコン用チュートリアルUIの生成
-	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL, 15.0f, 15.0f, 45.0f,"Fbutton.png");
+	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL, "Fbutton.png");
 	
 	// コピー機用チュートリアルUIの生成
-	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL, 15.0f, 15.0f, 30.0f, "Fbutton.png");
+	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL, "Fbutton.png");
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
