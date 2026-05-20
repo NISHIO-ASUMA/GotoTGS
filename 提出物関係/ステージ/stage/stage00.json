@@ -1,5 +1,5 @@
 {
-   "AllObject": 139,
+   "AllObject": 154,
    "SetObjects": [
       {
          "idx": 0,
@@ -518,7 +518,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/chair01.x"
       },
       {
@@ -764,9 +764,9 @@
       {
          "idx": 38,
          "pos": [
-            75.20999908447266,
+            77.20999908447266,
             27.5,
-            359.19000244140625
+            365.0
          ],
          "rot": [
             0.0,
@@ -778,15 +778,15 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       },
       {
          "idx": 39,
          "pos": [
-            -74.87999725341797,
+            -60.0,
             27.5,
-            362.70001220703125
+            365.0
          ],
          "rot": [
             0.0,
@@ -798,7 +798,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       },
       {
@@ -864,9 +864,9 @@
       {
          "idx": 43,
          "pos": [
-            198.1699981689453,
+            252.0500030517578,
             27.5,
-            108.88999938964844
+            93.4800033569336
          ],
          "rot": [
             0.0,
@@ -878,7 +878,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       },
       {
@@ -1524,9 +1524,9 @@
       {
          "idx": 76,
          "pos": [
-            219.61000061035156,
+            218.38999938964844,
             13.0,
-            -181.10000610351563
+            -183.00999450683594
          ],
          "rot": [
             0.0,
@@ -1538,7 +1538,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1558,7 +1558,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1578,15 +1578,15 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
          "idx": 79,
          "pos": [
-            329.5799865722656,
+            333.0299987792969,
             13.0,
-            -183.55999755859375
+            -184.77000427246094
          ],
          "rot": [
             0.0,
@@ -1598,7 +1598,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1618,7 +1618,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1658,7 +1658,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1678,7 +1678,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1698,7 +1698,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
@@ -1718,15 +1718,15 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/ConferenceChair.x"
       },
       {
          "idx": 86,
          "pos": [
-            -200.0,
+            -196.39999389648438,
             32.0,
-            -210.0
+            -208.27000427246094
          ],
          "rot": [
             0.0,
@@ -1738,7 +1738,7 @@
             2.0,
             1.5
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/Cupboard.x"
       },
       {
@@ -1778,7 +1778,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/Water_Server.x"
       },
       {
@@ -1866,7 +1866,7 @@
          "pos": [
             208.0,
             15.0,
-            255.2899932861328
+            287.2900085449219
          ],
          "rot": [
             0.0,
@@ -1878,7 +1878,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/shredder.x"
       },
       {
@@ -2098,7 +2098,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/extinguisher00.x"
       },
       {
@@ -2158,7 +2158,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/houseplant001.x"
       },
       {
@@ -2258,7 +2258,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/File_rack000.x"
       },
       {
@@ -2298,7 +2298,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/File_rack002.x"
       },
       {
@@ -2306,7 +2306,7 @@
          "pos": [
             -300.0,
             15.0,
-            -26.0
+            -25.0
          ],
          "rot": [
             0.0,
@@ -2318,7 +2318,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/PrivateWorkBooth.x"
       },
       {
@@ -2386,11 +2386,11 @@
          "pos": [
             -144.1300048828125,
             42.0,
-            -28.770000457763672
+            -32.0
          ],
          "rot": [
             0.0,
-            2.2799999713897705,
+            2.190000057220459,
             0.0
          ],
          "scale": [
@@ -2398,7 +2398,7 @@
             0.800000011920929,
             0.800000011920929
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/pc00.x"
       },
       {
@@ -2618,7 +2618,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/File_rack000.x"
       },
       {
@@ -2780,6 +2780,306 @@
          ],
          "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/File_rack001.x"
+      },
+      {
+         "idx": 139,
+         "pos": [
+            -318.0,
+            72.0,
+            -112.02999877929688
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/calendar.x"
+      },
+      {
+         "idx": 140,
+         "pos": [
+            310.0,
+            72.0,
+            -218.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/calendar.x"
+      },
+      {
+         "idx": 141,
+         "pos": [
+            -90.0,
+            100.0,
+            380.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.25,
+            1.25,
+            1.25
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/clock00.x"
+      },
+      {
+         "idx": 142,
+         "pos": [
+            -222.5399932861328,
+            16.0,
+            -203.2100067138672
+         ],
+         "rot": [
+            0.0,
+            -1.6299999952316284,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            0.8999999761581421,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/kettle00.x"
+      },
+      {
+         "idx": 143,
+         "pos": [
+            -303.2699890136719,
+            42.0,
+            -10.640000343322754
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/File_rack001.x"
+      },
+      {
+         "idx": 144,
+         "pos": [
+            -270.7799987792969,
+            34.0,
+            -47.06999969482422
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            0.8999999761581421,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
+      },
+      {
+         "idx": 145,
+         "pos": [
+            -173.3699951171875,
+            34.0,
+            -38.2599983215332
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            0.8999999761581421,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Penholder.x"
+      },
+      {
+         "idx": 146,
+         "pos": [
+            -137.35000610351563,
+            37.0,
+            -1.9199999570846558
+         ],
+         "rot": [
+            0.0,
+            0.8100000023841858,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/DeskLight.x"
+      },
+      {
+         "idx": 147,
+         "pos": [
+            -266.17999267578125,
+            31.0,
+            125.43000030517578
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/NotePC.x"
+      },
+      {
+         "idx": 148,
+         "pos": [
+            -304.7799987792969,
+            25.0,
+            223.1199951171875
+         ],
+         "rot": [
+            0.0,
+            1.590000033378601,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/coat_rack000.x"
+      },
+      {
+         "idx": 149,
+         "pos": [
+            -206.69000244140625,
+            51.0,
+            189.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/poster002.x"
+      },
+      {
+         "idx": 150,
+         "pos": [
+            -138.33999633789063,
+            33.0,
+            29.059999465942383
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/houseplant001.x"
+      },
+      {
+         "idx": 151,
+         "pos": [
+            -278.67999267578125,
+            33.0,
+            153.66000366210938
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Whiteboard.x"
+      },
+      {
+         "idx": 152,
+         "pos": [
+            202.27999877929688,
+            33.0,
+            245.36000061035156
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/houseplant001.x"
+      },
+      {
+         "idx": 153,
+         "pos": [
+            461.45001220703125,
+            33.0,
+            15.880000114440918
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/houseplant.x"
       }
    ]
 }

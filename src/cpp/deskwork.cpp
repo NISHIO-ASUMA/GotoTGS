@@ -112,8 +112,10 @@ void CDeskwork::Uninit(void)
 void CDeskwork::Update(void)
 {
 	// ポインタがヌルかつ有効状態ではないなら
-	if (m_pPCDeskUI != nullptr && m_pCOPYDeskUI != nullptr &&
-		m_pPCDeskUI->GetUse() != true && m_pCOPYDeskUI->GetUse() != true)
+	if (m_pPCDeskUI != nullptr && 
+		m_pCOPYDeskUI != nullptr &&
+		m_pPCDeskUI->GetUse() != true && 
+		m_pCOPYDeskUI->GetUse() != true)
 	{
 		return;
 	}
