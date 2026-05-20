@@ -28,6 +28,7 @@
 #include <enemy.h>
 #include "friend.h"
 #include "pcui.h"
+#include "copyui.h"
 #include "worldUIcollision.h" // ¼”ö’Ç‰Á
 
 
@@ -42,8 +43,9 @@ CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;				// ƒVƒ“ƒOƒ‹ƒgƒ“•Ï
 namespace GAMEOBJECT
 {
 	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };		// ƒ^ƒCƒ}[‚ÌÀ•W
-	const D3DXVECTOR3 TopAntPos		= { 0.0f, 0.0f, -450.0f };		// ‘€ìƒAƒŠ‚ÌÀ•W
-	const D3DXVECTOR3 QueenPos		= { 0.0f, 55.0f, 0.0f };		// —‰¤ƒAƒŠ‚ÌÀ•W
+	const D3DXVECTOR3 PcUIPos		= { -45.0f, 50.0f, 170.0f };	// PCUI‚ÌÀ•W
+	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 50.0f, 355.0f };	// ƒRƒs[‹@UI‚ÌÀ•W
+	const D3DXVECTOR3 PlayerPos	    = { -100.0f, 0.0f, 0.0f };		// ƒvƒŒƒCƒ„[‚ÌÀ•W
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";	// “Ç‚İ‚İjsonƒtƒ@ƒCƒ‹–¼
 	constexpr const char* WallName	= "data/JSON/GameWall.json";	// “Ç‚İ‚İjsonƒtƒ@ƒCƒ‹–¼
 };
@@ -89,11 +91,14 @@ HRESULT CGameSceneObject::Init(void)
 	// ƒ^ƒXƒN‚Ì”»’è‚ğæ‚é‹…Œ`ƒRƒ‰ƒCƒ_[ŠÇ—ƒNƒ‰ƒX‚ğ¶¬
 	CWorldUICollision::GetInstance()->Init();
 
-	// pcUI
-	CPcUI::Create(D3DXVECTOR3(-45.0f, 50.0f, 170.0f), VECTOR3_NULL, 15.0f, 15.0f, "Fbutton.png");
+	// ƒpƒ\ƒRƒ“—pƒ`ƒ…[ƒgƒŠƒAƒ‹UI‚Ì¶¬
+	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL, "Fbutton.png");
 	
+	// ƒRƒs[‹@—pƒ`ƒ…[ƒgƒŠƒAƒ‹UI‚Ì¶¬
+	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL, "Fbutton.png");
+
 	// ƒvƒŒƒCƒ„[¶¬
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(-100.0f, 0.0f, 0.0f), VECTOR3_NULL);
+	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
 	// Šeíƒ|ƒCƒ“ƒ^ƒNƒ‰ƒX‚Ì¶¬
 	CreatePointer();
