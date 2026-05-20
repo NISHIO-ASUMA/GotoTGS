@@ -24,7 +24,6 @@ class CGametime;
 class CScore;
 class CDeskwork;			// Misaki
 class CWorldWallManager;
-class CTutorialUI;
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
@@ -45,7 +44,6 @@ public:
 	CPlayer* GetPlayer(void) const { return m_pPlayer; } // [ Asuma add ]
 
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }	// Misaki
-	CTutorialUI* GetTutorialUI(void)const { return m_pTutorialUI; }
 
 
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
@@ -70,7 +68,6 @@ private:
 	CGametime* m_pTimer;		// タイマークラスのポインタ
 	CDeskwork* m_pDeskwork;		// タスクのポインタ Misaki
 	CPlayer* m_pPlayer;			// プレイヤーのクラスポインタ [ Asuma add ]
-	CTutorialUI* m_pTutorialUI;	// チュートリアルUIのクラスポインタ
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ
