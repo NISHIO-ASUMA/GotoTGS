@@ -615,6 +615,9 @@
     <ClCompile Include="src\cpp\deskworkUImanager.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\copyui.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -954,6 +957,9 @@
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
     <ClInclude Include="src\include\pcui.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\copyui.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

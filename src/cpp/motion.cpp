@@ -194,7 +194,6 @@ void CMotion::Update(const std::vector<CModel*>& pModel)
 	}
 	else
 	{
-		// 通常再生中：カウンタ加算
 		m_nCounterMotion++;
 		m_nAllFrameCount++;
 
@@ -207,18 +206,11 @@ void CMotion::Update(const std::vector<CModel*>& pModel)
 			// モーションループ判定
 			if (m_nKey >= CurrentMotionInfo.nNumKey)
 			{
+				m_isFinishMotion = true; // 1ループフラグ
 				m_nKey = 0;
 				m_nAllFrameCount = 0;
 			}
 		}
-	}
-
-	// モーション終了判定
-	int nLastKey = CurrentMotionInfo.nNumKey - 1;
-
-	if (m_nKey >= nLastKey && m_nCounterMotion >= CurrentMotionInfo.aKeyInfo[m_nKey].nFrame)
-	{
-		m_isFinishMotion = true;
 	}
 
 	// 全体フレームカウント計算用

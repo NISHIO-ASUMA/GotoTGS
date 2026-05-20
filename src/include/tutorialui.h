@@ -40,8 +40,10 @@ public:
 	void Update(void);
 	void Draw(void);
 	bool Collision(CSphereCollider* pOther);
-
+	
 	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
+
+	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 
 	/// <summary>
 	/// 生成処理
@@ -56,13 +58,15 @@ public:
 	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot,
-		float fWidth,
-		float fHeight,
+		const float& fWidth,
+		const float& fHeight,
+		const float& fRadius,
 		const char* pTexName
 	);
 
 private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
+	float m_fRadius;								// UI表示範囲の半径用変数
 	bool m_bLook;									// 見えるかどうかの判定変数
 	bool m_bTime;									// タイムの判定
 };
