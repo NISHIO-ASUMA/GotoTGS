@@ -585,15 +585,6 @@
     <ClCompile Include="src\cpp\alert.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\deskwork.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\deskworkUI.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\deskworkUImanager.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\smokefriend.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
@@ -606,14 +597,23 @@
     <ClCompile Include="src\cpp\worldUIcollision.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\PCdeskwork.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    <ClCompile Include="src\cpp\pcui.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\COPYdeskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\pcui.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\cpp\PCdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskworkUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskworkUImanager.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
