@@ -281,7 +281,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "Cup of Coffee.jpg";
+    "C:\\Users\\student\\Desktop\\GotoTGS\\data\\TEXTURE\\Cup of Coffee.jpg";
    }
   }
  }
