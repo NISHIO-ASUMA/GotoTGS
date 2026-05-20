@@ -57,9 +57,9 @@ public:
 
 private:
 
-	void RandomChange(void);
-
 private:
-	int m_nChangeCount; // モーション切り替えカウント
-	int m_nNextChangeCount; // 次の変更までのカウント
+	int m_nChangeCount;			// モーション切り替えカウント
+	int m_nNextChangeCount;		// 次の変更までのカウント
+	int m_nLoopCount;			// 現在のモーション再生回数
+	int m_nTargetLoopCount;		// タバコを何回繰り返すかの目標回数
 };

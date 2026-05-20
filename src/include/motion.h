@@ -42,8 +42,9 @@ public:
 
 	void SetMotion(int motiontype);
 	void SetMotion(int nMotionType, bool isBlend, int nBlendFrame);
-	inline void SetResetFrame(int nFrame) { m_nCounterMotion = nFrame;}
+	void SetFinishMotion(const bool& isFinish) { m_isFinishMotion = isFinish; }
 
+	inline void SetResetFrame(int nFrame) { m_nCounterMotion = nFrame;}
 	inline int GetMotionType(void) { return m_motiontype; }
 	inline bool GetFinishMotion(void) { return m_isFinishMotion; }
 
