@@ -170,6 +170,7 @@
     <ClCompile Include="src\cpp\collisionbox.cpp" />
     <ClCompile Include="src\cpp\collisionsphere.cpp" />
     <ClCompile Include="src\cpp\COPYdeskwork.cpp" />
+    <ClCompile Include="src\cpp\copyui.cpp" />
     <ClCompile Include="src\cpp\createjsonblock.cpp" />
     <ClCompile Include="src\cpp\createjsonblocknormal.cpp" />
     <ClCompile Include="src\cpp\createjsoncharactor.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="src\include\collisionbox.h" />
     <ClInclude Include="src\include\collisionsphere.h" />
     <ClInclude Include="src\include\COPYdeskwork.h" />
+    <ClInclude Include="src\include\copyui.h" />
     <ClInclude Include="src\include\createjsonblock.h" />
     <ClInclude Include="src\include\createjsonblocknormal.h" />
     <ClInclude Include="src\include\createjsoncharactor.h" />

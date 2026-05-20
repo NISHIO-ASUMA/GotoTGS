@@ -1,6 +1,6 @@
 //=========================================================
 //
-// PCUI処理 [ pcui.h ]
+// コピー機用UI処理 [ copyui.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -23,12 +23,12 @@
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CPcUI : public CTutorialUI
+class CCopyUI : public CTutorialUI
 {
 public:
 
-	CPcUI(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
-	~CPcUI();
+	CCopyUI(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
+	~CCopyUI();
 
 	HRESULT Init(void);
 	void Uninit(void);
@@ -44,7 +44,7 @@ public:
 	/// <param name="fHeight">高さ</param>
 	/// <param name="pTexName">テクスチャファイル名</param>
 	/// <returns></returns>
-	static CPcUI* Create
+	static CCopyUI* Create
 	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot,
@@ -54,4 +54,3 @@ public:
 		const char* pTexName
 	);
 };
-
