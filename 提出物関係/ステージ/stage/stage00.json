@@ -1,5 +1,5 @@
 {
-   "AllObject": 168,
+   "AllObject": 172,
    "SetObjects": [
       {
          "idx": 0,
@@ -3360,6 +3360,86 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/copy_machine.x"
+      },
+      {
+         "idx": 168,
+         "pos": [
+            116.44000244140625,
+            116.0,
+            -205.2100067138672
+         ],
+         "rot": [
+            -0.47999998927116394,
+            2.5199999809265137,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
+      },
+      {
+         "idx": 169,
+         "pos": [
+            214.0,
+            116.0,
+            366.5
+         ],
+         "rot": [
+            -0.44999998807907104,
+            0.7200000286102295,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
+      },
+      {
+         "idx": 170,
+         "pos": [
+            465.7099914550781,
+            116.0,
+            215.52999877929688
+         ],
+         "rot": [
+            -0.44999998807907104,
+            0.7200000286102295,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
+      },
+      {
+         "idx": 171,
+         "pos": [
+            -303.3299865722656,
+            116.0,
+            82.4800033569336
+         ],
+         "rot": [
+            -0.5699999928474426,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
       }
    ]
 }
