@@ -48,9 +48,6 @@ public:
 	(
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot,
-		const float& fWidth,
-		const float& fHeight,
-		const float& fRadius,
 		const char* pTexName
 	);
 };
