@@ -14,6 +14,7 @@
 // インクルードファイル
 //*********************************************************
 #include "nomovecharactor.h"
+#include <string>
 
 //*********************************************************
 // 前方宣言
@@ -35,6 +36,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	bool CollisionBox(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+	void SetMotionPath(const std::string& MotionPath) { m_MotionPath = MotionPath; }
 
 	/// <summary>
 	/// 同僚生成処理
@@ -45,7 +47,8 @@ public:
 	static CFriend* Create
 	(
 		const D3DXVECTOR3& pos,
-		const D3DXVECTOR3& rot
+		const D3DXVECTOR3& rot,
+		const std::string& Path
 	);
 
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
@@ -70,4 +73,5 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	int m_nChangeTime;									// モーション切り替えカウント変数
+	std::string m_MotionPath;							// モーションパス情報
 };

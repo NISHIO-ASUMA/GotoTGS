@@ -27,7 +27,6 @@ namespace FRIENDINFO
 	constexpr int CHANGETIME_MAX = 600; // モーション変更カウント 
 	constexpr float OUTLINESIZE = 0.96f; // アウトラインサイズ
 	constexpr float SPHERE_SIZE = 60.0f; // 球形サイズ
-	constexpr const char* SCRIPT = "data/MOTION/Friend/FriendMotion.txt"; // モーションファイル
 
 	const D3DXVECTOR3 BOX_SIZE = { 50.0f,50.0f,50.0f };  // 矩形サイズ
 
@@ -39,7 +38,8 @@ namespace FRIENDINFO
 CFriend::CFriend(int nPriority) : CNoMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
-m_nChangeTime(NULL)
+m_nChangeTime(NULL),
+m_MotionPath{}
 {
 
 }
@@ -53,7 +53,7 @@ CFriend::~CFriend()
 //=========================================================
 // 生成処理
 //=========================================================
-CFriend* CFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CFriend* CFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const std::string& Path)
 {
 	// インスタンス生成
 	CFriend* pFriend = new CFriend;
@@ -62,6 +62,7 @@ CFriend* CFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pFriend->SetPos(pos);
 	pFriend->SetRot(rot);
+	pFriend->SetMotionPath(Path);
 	pFriend->SetUseOutLine(true);
 	pFriend->SetOutLineSize(FRIENDINFO::OUTLINESIZE);
 	pFriend->SetOutLineColor();
@@ -80,7 +81,7 @@ HRESULT CFriend::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad(FRIENDINFO::SCRIPT, MAX, false);
+	MotionLoad(m_MotionPath.c_str(), MAX, false);
 
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得

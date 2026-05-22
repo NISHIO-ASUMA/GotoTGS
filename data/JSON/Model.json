@@ -71,6 +71,43 @@
   {
     "Model": "data/MODEL/COLLEAGUE/03_Colleague000_armL.x"
   },
+
+  {
+    "Model": "data/MODEL/COLLEAGUE001/00_Colleague001_body.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE001/01_Colleague001_head.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE001/02_Colleague001_armR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE001/03_Colleague001_armL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE002/00_Colleague002_body.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE002/01_Colleague002_head.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE002/02_Colleague002_armR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE002/03_Colleague002_armL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE003/00_Colleague003_body.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE003/01_Colleague003_head.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE003/02_Colleague003_armR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUE003/03_Colleague003_armL.x"
+  },
   {
     "Model": "data/MODEL/COLLEAGUESMOKE/00_ColleagueSmoke000_body.x"
   },

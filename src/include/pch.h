@@ -57,6 +57,7 @@
 //*********************************************************
 // クリア変数マクロ定義
 //*********************************************************
+#define VECTOR2_NULL (D3DXVECTOR2(0.0f, 0.0f))				// VECTOR2座標初期化
 #define VECTOR3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// VECTOR3座標初期化
 #define VECTOR4_NULL (D3DXVECTOR4(0.0f, 0.0f, 0.0f,0.0f))	// VECTOR4座標初期化
 #define INITSCALE (D3DXVECTOR3(1.0f, 1.0f, 1.0f))			// 初期拡大率

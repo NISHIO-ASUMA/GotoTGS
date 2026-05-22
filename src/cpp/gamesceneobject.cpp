@@ -103,6 +103,9 @@ HRESULT CGameSceneObject::Init(void)
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
+	// 敵生成
+	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
 	//// スコア初期化
 	//m_pScore->DeleteScore();
 

@@ -2,6 +2,8 @@
 //
 // 敵の処理 [ enemy.h ]
 // Author: Asuma Nishio
+// 
+// NOTE : プレイヤーを疑っているモーションを追加する
 //
 //========================================================
 
@@ -40,6 +42,8 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	void DrawEyeSight(void);
+	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	/// <summary>
@@ -69,6 +73,16 @@ public:
 	{
 		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
 		static constexpr float BOX_RANGE = 60.0f;	 // 矩形範囲
+	};
+
+	//***************************
+	// 扇形の当たり判定
+	//***************************
+	struct Eyesight
+	{
+		static constexpr float EYE_RADIUS = 120.0f;		// 視界の届く距離
+		static constexpr float EYE_ANGLE = 50.0f;		// 視野角
+		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
 private:
