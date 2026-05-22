@@ -19,7 +19,9 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CCOPYDeskwork::CCOPYDeskwork()
+CCOPYDeskwork::CCOPYDeskwork() :CDeskworkUIManager(),
+m_nCountTime(0),
+m_bTime(false)
 {
 
 }
@@ -54,23 +56,36 @@ CCOPYDeskwork* CCOPYDeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CCOPYDeskwork::Init(void)
 {
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
+	// メンバ変数の初期化
+	m_nCountTime = 0;	// 現在のカウント
+	m_bTime = false;	// クールタイム
 
-	// 位置
-	D3DXVECTOR3 pos = D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f);
-
-	// キーの種類
-	CDeskworkUI::KEYTYPE Type = CDeskworkUI::DRAWTYPE_A;
-
-	// タスクをランダムに設定
-	Type = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+	// UIの情報
+	CDeskworkUI::UI ui;
+	ui.pos = D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f);
+	ui.col = D3DXCOLOR(COLOR_NULL);
+	ui.VTXtype = CDeskworkUI::VTXTYPE_CENTER;
+	ui.fWidth = Config::UI_WIDTH;
+	ui.fHeight = Config::UI_HEIGHT;
+	ui.fDigit = Config::VALUE_TEXU;
+	ui.nKeytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+	ui.nIdx = TEXTURE_KEY;
 
 	// UIの生成処理
-	m_pDeskUI = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, Config::VALUE_TEXU, Type, NULL);
+	m_pDeskUI[TEXTURE_KEY] = CDeskworkUI::Create(ui);
 
-	// 色を透明にする
-	m_pDeskUI->ChangeCol(COLOR_NULL);
+	// ゲージ用に設定する
+	ui.pos.x -= Config::GAGE_WIDTH * 0.5f;
+	ui.pos.y += Config::VALUE_Y;
+	ui.VTXtype = CDeskworkUI::VTXTYPE_LEFT;
+	ui.fWidth = 0.0f;
+	ui.fHeight = Config::GAGE_HEIGHT;
+	ui.fDigit = 1.0f;
+	ui.nKeytype = CDeskworkUI::DRAWTYPE_NONE;
+	ui.nIdx = TEXTURE_GAGE;
+
+	// ゲージUIの生成処理
+	m_pDeskUI[TEXTURE_GAGE] = CDeskworkUI::Create(ui);
 
 	return S_OK;
 }
@@ -107,37 +122,52 @@ void CCOPYDeskwork::Update(void)
 		}
 
 		// タスクをランダムに設定
-		m_pDeskUI->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+		m_pDeskUI[TEXTURE_KEY]->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
 
 		// 色を元に戻す(通常色)
-		m_pDeskUI->ChangeCol(COLOR_WHITE);
+		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
 
 		// クールタイムを初期化
 		m_nCountTime = 0;
+
+		// 横幅を初期化
+		m_pDeskUI[TEXTURE_GAGE]->SetWidth(0.0f);
 
 		// クールタイムが始まっていない状態にする
 		m_bTime = false;
 	}
 
 	// クールタイムが始まっていないなら
-	// 現在のタスクUIの更新処理
-	m_pDeskUI->Update();
 
-	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
-		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
-		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_S) ||
-		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_D))
+	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
+		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
+		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_S) ||
+		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_D))
 	{// 正解を押した時
 		// 色をグレーにする
-		m_pDeskUI->ChangeCol(COLOR_GLAY);
+		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);
 
 		// カウントを一つ進める
 		m_nCountTime++;
+
+		// 進行度に応じて横幅を計算
+		float fWidth = 0.0f;
+		fWidth = Config::GAGE_WIDTH * ((float)m_nCountTime / (float)Config::TIME_PUSH);
+
+		// 横幅を設定
+		m_pDeskUI[TEXTURE_GAGE]->SetWidth(fWidth);
+
 	}
 	else
 	{
 		// 色を元に戻す(通常色)
-		m_pDeskUI->ChangeCol(COLOR_WHITE);
+		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+	}
+
+	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	{
+		// タスクUIの更新処理
+		m_pDeskUI[nCount]->Update();
 	}
 
 	if (m_nCountTime <= Config::TIME_PUSH)
@@ -158,8 +188,11 @@ void CCOPYDeskwork::Update(void)
 //=========================================================
 void CCOPYDeskwork::Draw(void)
 {
-	// タスクUIの描画処理
-	m_pDeskUI->Draw();
+	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	{
+		// タスクUIの描画処理
+		m_pDeskUI[nCount]->Draw();
+	}
 }
 
 //=========================================================
@@ -173,12 +206,19 @@ void CCOPYDeskwork::SetAlphaUI(void)
 	if (GetUse() != true)
 	{// 使っていない状態の場合
 
-		// 色を透明にする
-		m_pDeskUI->ChangeCol(COLOR_NULL);
+		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+		{
+			// 色を透明にする
+			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+		}
 
 		return;
 	}
 
 	// 色を不透明にする(通常色)
-	m_pDeskUI->ChangeCol(COLOR_WHITE);
+	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+
+	// ゲージの色を赤にする
+	m_pDeskUI[TEXTURE_GAGE]->ChangeCol(COLOR_RED);
+
 }

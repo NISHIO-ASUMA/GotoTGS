@@ -28,11 +28,23 @@ public:
 	//****************************
 	enum KEYTYPE
 	{		
+		DRAWTYPE_NONE = -1,
 		DRAWTYPE_A,
 		DRAWTYPE_S,
 		DRAWTYPE_W,
 		DRAWTYPE_D,
 		DRAWTYPE_MAX,
+	};
+
+	//****************************
+	// 頂点ポイント
+	//****************************
+	enum VTXTYPE
+	{
+		VTXTYPE_CENTER,
+		VTXTYPE_LEFT,
+		VTXTYPE_RIGHT,
+		VTXTYPE_MAX,
 	};
 
 	//****************************
@@ -44,6 +56,21 @@ public:
 		DOCUMENT_BLUE,
 		DOCUMENT_YELLOW,
 		DOCUMENT_MAX,
+	};
+
+	//****************************
+	// UIの構造体
+	//****************************
+	struct UI
+	{
+		D3DXVECTOR3 pos;
+		D3DXCOLOR col;			// 色情報
+		VTXTYPE VTXtype;
+		float fWidth;
+		float fHeight;
+		float fDigit;
+		int nKeytype;
+		int nIdx;
 	};
 
 	CDeskworkUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
@@ -60,26 +87,28 @@ public:
 	void SetDigit(const int& nType, const float& nDigit);								// UV設定
 	void ChangeCol(const D3DXCOLOR& col);												// カラー設定
 	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
+	void SetVTX(const VTXTYPE& VTXtype);												// 頂点ポイント設定
 
-	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
-	inline void SetCol(const D3DXCOLOR& col) { m_col = col; }
-	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
-	inline void SetHeight(const float& fHeight) { m_fHeight = fHeight; }
-	inline void SetDigit(const float& fDigit) { m_fDigit = fDigit; }
-	inline void SetKeyType(const int& keytype) { m_nType = keytype; }
-	inline void SetIdx(const int& nIdx) { m_nIdx = nIdx; }
+	inline void SetPos(const D3DXVECTOR3& pos) { m_ui.pos = pos; }
+	inline void SetCol(const D3DXCOLOR& col) { m_ui.col = col; }
+	inline void SetWidth(const float& fWidth) { m_ui.fWidth = fWidth; }
+	inline void SetHeight(const float& fHeight) { m_ui.fHeight = fHeight; }
+	inline void SetDigit(const float& fDigit) { m_ui.fDigit = fDigit; }
+	inline void SetKeyType(const int& keytype) { m_ui.nKeytype = keytype; }
+	inline void SetIdx(const int& nIdx) { m_ui.nIdx = nIdx; }
+	inline void SetVTXtype(const VTXTYPE& VTXtype) { m_ui.VTXtype = VTXtype; }
 
 	// 情報取得処理
-	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
-	inline D3DXCOLOR GetCol(void) const { return m_col; }
-	inline float GetWidth(void) const { return m_fWidth; }
-	inline float GetHeight(void) const { return m_fHeight; }
-	inline float GetDigit(void) const { return m_fDigit; }
-	inline int GetKeyType(void) const { return m_nType; }
-	inline int GetIdx(void) const { return m_nIdx; }
+	inline D3DXVECTOR3 GetPos(void) const { return m_ui.pos; }
+	inline D3DXCOLOR GetCol(void) const { return m_ui.col; }
+	inline float GetWidth(void) const { return m_ui.fWidth; }
+	inline float GetHeight(void) const { return m_ui.fHeight; }
+	inline float GetDigit(void) const { return m_ui.fDigit; }
+	inline int GetKeyType(void) const { return m_ui.nKeytype; }
+	inline int GetIdx(void) const { return m_ui.nIdx; }
 
 	// 生成処理
-	static CDeskworkUI* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const float& fDigit, const int& ntype, const int& nIdx);
+	static CDeskworkUI* Create(const UI& ui);
 
 private:
 
@@ -88,20 +117,17 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME = "deskwork_UI.png";	// テクスチャ名
-		static constexpr float END_FLOAT = 1.0f;					// 補完割合値
-		static constexpr float RATIO = 2.0f;						// 補完率
+		static constexpr const char* TEXNAME_KEYTYPE = "deskwork_UI.png";	// キーのテクスチャ名
+		static constexpr const char* TEXNAME_GAGE = "gage000.jpg";			// ゲージのテクスチャ名
+		static constexpr float END_FLOAT = 1.0f;							// 補完割合値
+		static constexpr float RATIO = 2.0f;								// 補完率
 	};
 
 	// メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファのポインタ
-	D3DXVECTOR3 m_pos;						// 座標
-	D3DXCOLOR m_col;						// 色情報
-	float m_fWidth, m_fHeight;				// 横幅、縦幅
+
+	UI m_ui;								// UIの情報
 	float m_TexU, m_TexU1, m_TexV;			// テクスチャ座標
-	float m_fDigit;							// テクスチャの分割数
-	int m_nType;							// UIの種類
-	int m_nIdx;								// 番号
 	int m_nIdxTexture;						// テクスチャの番号
 	int n_nColorCount;						// 色変更カウント
 };

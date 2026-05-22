@@ -19,13 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskworkUI::CDeskworkUI(int nPriority) : CObject(nPriority),
-m_pos(VECTOR3_NULL),
-m_fWidth(0.0f),
-m_fHeight(0.0f),
-m_fDigit(0.0f),
-m_nType(0),
-m_nIdx(0)
+CDeskworkUI::CDeskworkUI(int nPriority) : CObject(nPriority)
 {
 
 }
@@ -42,7 +36,7 @@ CDeskworkUI::~CDeskworkUI()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const float& fDigit, const int& ntype, const int& nIdx)
+CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 {
 	// インスタンス生成
 	CDeskworkUI* pDeskworkUI = new CDeskworkUI;
@@ -51,13 +45,25 @@ CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, co
 	if (pDeskworkUI == nullptr) return nullptr;
 
 	// 各種値の設定
-	pDeskworkUI->SetPos(pos);
-	pDeskworkUI->SetCol(COLOR_WHITE);
-	pDeskworkUI->SetWidth(fWidth);
-	pDeskworkUI->SetHeight(fHeight);
-	pDeskworkUI->SetDigit(fDigit);
-	pDeskworkUI->SetKeyType(ntype);
-	pDeskworkUI->SetIdx(nIdx);
+	pDeskworkUI->SetPos(ui.pos);			// 位置
+	pDeskworkUI->SetCol(ui.col);			// 色
+	pDeskworkUI->SetWidth(ui.fWidth);		// 横幅
+	pDeskworkUI->SetHeight(ui.fHeight);		// 縦幅
+	pDeskworkUI->SetDigit(ui.fDigit);		// 分割数
+	pDeskworkUI->SetKeyType(ui.nKeytype);	// キーの種類
+	pDeskworkUI->SetIdx(ui.nIdx);			// 番号
+	pDeskworkUI->SetVTXtype(ui.VTXtype);	// 頂点ポイント
+
+	if (ui.nKeytype != DRAWTYPE_NONE)
+	{// キータイプを指定しているなら
+		// テクスチャの設定
+		pDeskworkUI->SetTexture(Config::TEXNAME_KEYTYPE);
+	}
+	else
+	{
+		// テクスチャの設定
+		pDeskworkUI->SetTexture(Config::TEXNAME_GAGE);
+	}
 
 	// 初期化が失敗した場合
 	if (FAILED(pDeskworkUI->Init())) return nullptr;
@@ -87,11 +93,8 @@ HRESULT CDeskworkUI::Init(void)
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// 頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
+	// 頂点ポイントの設定処理
+	SetVTXtype(m_ui.VTXtype);
 
 	// rhwの設定(1.0fで固定)
 	pVtx[0].rhw =
@@ -103,16 +106,13 @@ HRESULT CDeskworkUI::Init(void)
 	pVtx[0].col =
 	pVtx[1].col =
 	pVtx[2].col =
-	pVtx[3].col = m_col;
+	pVtx[3].col = m_ui.col;
 
 	// UV設定
-	SetDigit(m_nType, m_fDigit);
+	SetDigit(m_ui.nKeytype, m_ui.fDigit);
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
-
-	// テクスチャを設定
-	SetTexture(Config::TEXNAME);
 
 	return S_OK;
 }
@@ -138,8 +138,15 @@ void CDeskworkUI::Uninit(void)
 //=========================================================
 void CDeskworkUI::Update(void)
 {
+	// 位置設定
+	SetPos(m_ui.pos);
+
+	// サイズ設定
+	SetSize(m_ui.fWidth, m_ui.fHeight);
+
 	// UV設定
-	SetDigit(m_nType, m_fDigit);
+	SetDigit(m_ui.nKeytype, m_ui.fDigit);
+
 }
 
 //=========================================================
@@ -187,8 +194,8 @@ void CDeskworkUI::SetTexture(const char* pTexName)
 void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 {
 	// メンバに格納
-	m_fWidth = fWidth;
-	m_fHeight = fHeight;
+	m_ui.fWidth = fWidth;
+	m_ui.fHeight = fHeight;
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -196,11 +203,39 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 	// 頂点バッファをロック
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// 座標更新
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - fWidth, m_pos.y - fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + fWidth, m_pos.y - fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - fWidth, m_pos.y + fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + fWidth, m_pos.y + fHeight, 0.0f);
+	switch (m_ui.VTXtype)
+	{
+	case VTXTYPE_CENTER:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	case VTXTYPE_LEFT:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	case VTXTYPE_RIGHT:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	}
 
 	// 頂点バッファのアンロック
 	m_pVtxBuff->Unlock();
@@ -212,7 +247,7 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 {
 	// メンバに格納
-	m_col = col;
+	m_ui.col = col;
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -224,7 +259,7 @@ void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 	pVtx[0].col =
 	pVtx[1].col =
 	pVtx[2].col =
-	pVtx[3].col = m_col;
+	pVtx[3].col = m_ui.col;
 
 	// 頂点バッファのアンロック
 	m_pVtxBuff->Unlock();
@@ -297,4 +332,54 @@ void CDeskworkUI::SetDigit(const int& nType, const float& nDigit)
 
 	// 頂点バッファのアンロック
 	m_pVtxBuff->Unlock();
+}
+
+//==========================================================
+// 頂点ポイント処理
+//==========================================================
+void CDeskworkUI::SetVTX(const VTXTYPE& VTXtype)
+{
+	// 頂点情報のポインタ
+	VERTEX_2D* pVtx = nullptr;
+
+	// 頂点バッファのロック
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	switch (VTXtype)
+	{
+	case VTXTYPE_CENTER:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	case VTXTYPE_LEFT:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x			  , m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x			  , m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	case VTXTYPE_RIGHT:
+
+		// 頂点座標の設定
+		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x			   , m_ui.pos.y - m_ui.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x			   , m_ui.pos.y + m_ui.fHeight, 0.0f);
+
+		break;
+
+	}
+
+	// 頂点バッファのアンロック
+	m_pVtxBuff->Unlock();
+
 }

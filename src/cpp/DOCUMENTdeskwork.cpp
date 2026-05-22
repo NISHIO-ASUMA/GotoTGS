@@ -19,7 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDOCUMENTDeskwork::CDOCUMENTDeskwork()
+CDOCUMENTDeskwork::CDOCUMENTDeskwork() :CDeskworkUIManager()
 {
 
 }
@@ -64,22 +64,25 @@ HRESULT CDOCUMENTDeskwork::Init(void)
 	D3DXVECTOR3 pos = GetPos();
 	pos.x = GetPos().x - Config::VALUE_WIDTH;
 
-	// 書類の種類
-	CDeskworkUI::DOCUMENT Type[Config::UI_NUM];
+	// UIの情報
+	CDeskworkUI::UI ui;
+	ui.pos = pos;
+	ui.col = D3DXCOLOR(COLOR_NULL);
+	ui.VTXtype = CDeskworkUI::VTXTYPE_CENTER;
+	ui.fWidth = Config::UI_WIDTH;
+	ui.fHeight = Config::UI_HEIGHT;
+	ui.fDigit = Config::VALUE_TEXU;
 
-	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
 		// タスクをランダムに設定
-		Type[nCount] = (CDeskworkUI::DOCUMENT)(rand() % CDeskworkUI::DOCUMENT_MAX);
+		ui.nKeytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
 
 		// UIの生成処理
-		m_pDeskUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, Config::VALUE_TEXU, Type[nCount], nCount);
-
-		// 色を透明にする
-		m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+		m_pDeskUI[ui.nIdx] = CDeskworkUI::Create(ui);
 
 		// UIの位置をずらす
-		pos.x += Config::VALUE_WIDTH;
+		ui.pos.x += Config::VALUE_WIDTH;
 	}
 
 	return S_OK;
