@@ -283,6 +283,30 @@
     <Filter Include="ソース ファイル\AddFile\Chikada">
       <UniqueIdentifier>{925bc5aa-12ac-4875-b23a-4f35bf249bc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Deskwork">
+      <UniqueIdentifier>{e0c4187c-fe0e-477a-a8ec-2b0a9af2a5c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Deskwork">
+      <UniqueIdentifier>{ab7f43b3-39b3-4d29-90ce-c8b4f74e3c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Deskwork\Manager">
+      <UniqueIdentifier>{3f304c40-63dd-470c-bb59-f8d8417b5148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI">
+      <UniqueIdentifier>{52ca01aa-ad1a-46c6-a8bb-3103dbd59404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task">
+      <UniqueIdentifier>{78735b5c-9639-4120-8c4a-583560ff3cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Deskwork\Manager">
+      <UniqueIdentifier>{6c8ac3dd-e30e-4d57-81fb-75bb4a310b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Deskwork\UI">
+      <UniqueIdentifier>{31d63d12-7fa1-4577-b8c0-38b067a39f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Deskwork\Task">
+      <UniqueIdentifier>{6851dc28-3ec6-469a-8433-6fe4e8edea60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -600,23 +624,26 @@
     <ClCompile Include="src\cpp\pcui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\COPYdeskwork.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\PCdeskwork.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\deskwork.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\deskworkUI.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\deskworkUImanager.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\copyui.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskworkUImanager.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\deskworkUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\COPYdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\PCdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -911,12 +938,6 @@
     <ClInclude Include="src\include\playerstateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\deskwork.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\deskworkUI.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\event.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
@@ -931,9 +952,6 @@
     </ClInclude>
     <ClInclude Include="src\include\statebase.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\deskworkUImanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
     <ClInclude Include="src\include\smokefriend.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
@@ -950,17 +968,29 @@
     <ClInclude Include="src\include\statemachine.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\PCdeskwork.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\COPYdeskwork.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\pcui.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\copyui.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\deskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\deskworkUImanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\deskworkUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\COPYdeskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\PCdeskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\DOCUMENTdeskwork.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

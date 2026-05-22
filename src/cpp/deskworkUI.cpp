@@ -23,7 +23,8 @@ CDeskworkUI::CDeskworkUI(int nPriority) : CObject(nPriority),
 m_pos(VECTOR3_NULL),
 m_fWidth(0.0f),
 m_fHeight(0.0f),
-m_Kyetype(DRAWTYPE_MAX),
+m_fDigit(0.0f),
+m_nType(0),
 m_nIdx(0)
 {
 
@@ -41,7 +42,7 @@ CDeskworkUI::~CDeskworkUI()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const KEYTYPE& kyetype, const int& nIdx)
+CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const float& fDigit, const int& ntype, const int& nIdx)
 {
 	// インスタンス生成
 	CDeskworkUI* pDeskworkUI = new CDeskworkUI;
@@ -54,7 +55,8 @@ CDeskworkUI* CDeskworkUI::Create(const D3DXVECTOR3& pos, const float& fWidth, co
 	pDeskworkUI->SetCol(COLOR_WHITE);
 	pDeskworkUI->SetWidth(fWidth);
 	pDeskworkUI->SetHeight(fHeight);
-	pDeskworkUI->SetKyeType(kyetype);
+	pDeskworkUI->SetDigit(fDigit);
+	pDeskworkUI->SetKeyType(ntype);
 	pDeskworkUI->SetIdx(nIdx);
 
 	// 初期化が失敗した場合
@@ -104,7 +106,7 @@ HRESULT CDeskworkUI::Init(void)
 	pVtx[3].col = m_col;
 
 	// UV設定
-	SetDigit(m_Kyetype);
+	SetDigit(m_nType, m_fDigit);
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
@@ -137,7 +139,7 @@ void CDeskworkUI::Uninit(void)
 void CDeskworkUI::Update(void)
 {
 	// UV設定
-	SetDigit(m_Kyetype);
+	SetDigit(m_nType, m_fDigit);
 }
 
 //=========================================================
@@ -182,7 +184,7 @@ void CDeskworkUI::SetTexture(const char* pTexName)
 //==========================================================
 // サイズ処理
 //==========================================================
-void CDeskworkUI::SetSize(float fWidth, float fHeight)
+void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 {
 	// メンバに格納
 	m_fWidth = fWidth;
@@ -276,7 +278,7 @@ void CDeskworkUI::SetFlash(const int& nStartFrame, const int& nEndFrame, const D
 //==========================================================
 // UV設定処理
 //==========================================================
-void CDeskworkUI::SetDigit(KEYTYPE nDigit)
+void CDeskworkUI::SetDigit(const int& nType, const float& nDigit)
 {
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -285,13 +287,13 @@ void CDeskworkUI::SetDigit(KEYTYPE nDigit)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// テクスチャ座標の計算
-	float fTexU = (float)(nDigit) * Config::DIGIT_VALUE;
+	float fTexU = (float)(nType) * nDigit;
 
 	// テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(fTexU, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(fTexU + Config::DIGIT_VALUE, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(fTexU + nDigit, 0.0f);
 	pVtx[2].tex = D3DXVECTOR2(fTexU, Config::END_FLOAT);
-	pVtx[3].tex = D3DXVECTOR2(fTexU + Config::DIGIT_VALUE, Config::END_FLOAT);
+	pVtx[3].tex = D3DXVECTOR2(fTexU + nDigit, Config::END_FLOAT);
 
 	// 頂点バッファのアンロック
 	m_pVtxBuff->Unlock();

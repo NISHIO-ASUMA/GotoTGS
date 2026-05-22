@@ -61,13 +61,13 @@ HRESULT CCOPYDeskwork::Init(void)
 	D3DXVECTOR3 pos = D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f);
 
 	// キーの種類
-	CDeskworkUI::KEYTYPE keytype = CDeskworkUI::DRAWTYPE_A;
+	CDeskworkUI::KEYTYPE Type = CDeskworkUI::DRAWTYPE_A;
 
 	// タスクをランダムに設定
-	keytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+	Type = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
 
 	// UIの生成処理
-	m_pDeskUI = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, keytype, NULL);
+	m_pDeskUI = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, Config::VALUE_TEXU, Type, NULL);
 
 	// 色を透明にする
 	m_pDeskUI->ChangeCol(COLOR_NULL);
@@ -107,7 +107,7 @@ void CCOPYDeskwork::Update(void)
 		}
 
 		// タスクをランダムに設定
-		m_pDeskUI->SetKyeType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+		m_pDeskUI->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
 
 		// 色を元に戻す(通常色)
 		m_pDeskUI->ChangeCol(COLOR_WHITE);
@@ -123,10 +123,10 @@ void CCOPYDeskwork::Update(void)
 	// 現在のタスクUIの更新処理
 	m_pDeskUI->Update();
 
-	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_W) ||
-		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_A) ||
-		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_S) ||
-		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI->GetKyeType() == CDeskworkUI::DRAWTYPE_D))
+	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
+		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
+		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_S) ||
+		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI->GetKeyType() == CDeskworkUI::DRAWTYPE_D))
 	{// 正解を押した時
 		// 色をグレーにする
 		m_pDeskUI->ChangeCol(COLOR_GLAY);

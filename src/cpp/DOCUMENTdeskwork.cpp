@@ -1,6 +1,6 @@
 //=========================================================
 //
-// PCタスク処理 [ PCdeskwork.cpp ]
+// 書類タスク処理 [ DOCUMENTdeskwork.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,7 +8,7 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "PCdeskwork.h"
+#include "DOCUMENTdeskwork.h"
 
 //*********************************************************
 // インクルードファイル
@@ -19,7 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPCDeskwork::CPCDeskwork()
+CDOCUMENTDeskwork::CDOCUMENTDeskwork()
 {
 
 }
@@ -27,7 +27,7 @@ CPCDeskwork::CPCDeskwork()
 //=========================================================
 // デストラクタ
 //=========================================================
-CPCDeskwork::~CPCDeskwork()
+CDOCUMENTDeskwork::~CDOCUMENTDeskwork()
 {
 
 }
@@ -35,24 +35,24 @@ CPCDeskwork::~CPCDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos)
+CDOCUMENTDeskwork* CDOCUMENTDeskwork::Create(const D3DXVECTOR3& pos)
 {
-	// PCタスクのポインタ
-	static CPCDeskwork pPCDeskwork;
+	// 書類タスクのポインタ
+	static CDOCUMENTDeskwork pDOCUMENTDeskwork;
 
 	// 設定処理
-	pPCDeskwork.SetPos(pos);
+	pDOCUMENTDeskwork.SetPos(pos);
 
 	// 初期化が失敗した場合
-	if (FAILED(pPCDeskwork.Init())) return nullptr;
+	if (FAILED(pDOCUMENTDeskwork.Init())) return nullptr;
 
-	return &pPCDeskwork;
+	return &pDOCUMENTDeskwork;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CPCDeskwork::Init(void)
+HRESULT CDOCUMENTDeskwork::Init(void)
 {
 	// クールタイムが始まっていない状態にする
 	m_bTime = false;
@@ -64,16 +64,16 @@ HRESULT CPCDeskwork::Init(void)
 	D3DXVECTOR3 pos = GetPos();
 	pos.x = GetPos().x - Config::VALUE_WIDTH;
 
-	// キーの種類
-	CDeskworkUI::KEYTYPE keytype[Config::UI_NUM];
+	// 書類の種類
+	CDeskworkUI::DOCUMENT Type[Config::UI_NUM];
 
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
 		// タスクをランダムに設定
-		keytype[nCount] = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+		Type[nCount] = (CDeskworkUI::DOCUMENT)(rand() % CDeskworkUI::DOCUMENT_MAX);
 
 		// UIの生成処理
-		m_pDeskUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, Config::VALUE_TEXU, keytype[nCount], nCount);
+		m_pDeskUI[nCount] = CDeskworkUI::Create(pos, Config::UI_WIDTH, Config::UI_HEIGHT, Config::VALUE_TEXU, Type[nCount], nCount);
 
 		// 色を透明にする
 		m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
@@ -88,7 +88,7 @@ HRESULT CPCDeskwork::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CPCDeskwork::Uninit(void)
+void CDOCUMENTDeskwork::Uninit(void)
 {
 
 }
@@ -96,7 +96,7 @@ void CPCDeskwork::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CPCDeskwork::Update(void)
+void CDOCUMENTDeskwork::Update(void)
 {
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
@@ -166,7 +166,7 @@ void CPCDeskwork::Update(void)
 //=========================================================
 // 描画処理
 //=========================================================
-void CPCDeskwork::Draw(void)
+void CDOCUMENTDeskwork::Draw(void)
 {
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{// タスクUIの描画処理
@@ -177,7 +177,7 @@ void CPCDeskwork::Draw(void)
 //=========================================================
 // 透明度の処理
 //=========================================================
-void CPCDeskwork::SetAlphaUI(void)
+void CDOCUMENTDeskwork::SetAlphaUI(void)
 {
 	// 使っていいるかどうかを設定する
 	SetUse(GetUse() ? false : true);
