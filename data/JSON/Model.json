@@ -128,5 +128,35 @@
   },
   {
     "Model": "data/MODEL/COLLEAGUESMOKE/smoke.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/00_Boss_body.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/01_Boss_head.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/02_Boss_armR.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/03_Boss_handR.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/04_Boss_armL.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/05_Boss_handL.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/06_Boss_legR.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/07_Boss_footR.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/08_Boss_legL.x"
+  },
+  {
+    "Model": "data/MODEL/BOSS/09_Boss_footL.x"
   }
 ]
