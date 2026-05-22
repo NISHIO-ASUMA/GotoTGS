@@ -16,6 +16,16 @@
 #include "manager.h"
 #include "texture.h"
 
+//*********************************************************
+// 名前空間
+//*********************************************************
+namespace PcUI
+{
+	constexpr float fWidth = 15.0f;		// UIの横幅の値
+	constexpr float fHeight = 15.0f;	// UIの縦幅の値
+	constexpr float fRadius = 45.0f;	// UIの範囲表示の半径の値
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -35,7 +45,7 @@ CPcUI::~CPcUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CPcUI* CPcUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
+CPcUI* CPcUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* pTexName)
 {
 	// インスタンス生成
 	CPcUI* pCpUI = new CPcUI;
@@ -43,9 +53,9 @@ CPcUI* CPcUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float
 
 	// オブジェクトセット
 	pCpUI->SetPos(pos);
-	pCpUI->SetSize(fWidth, fHeight);
+	pCpUI->SetSize(PcUI::fWidth, PcUI::fHeight);
 	pCpUI->SetRot(rot);
-	pCpUI->SetRadius(fRadius);
+	pCpUI->SetRadius(PcUI::fRadius);
 	pCpUI->SetTexture(pTexName);
 	pCpUI->SetEnableZtest(true);
 

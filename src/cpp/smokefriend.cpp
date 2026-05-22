@@ -31,8 +31,8 @@ namespace SMOKEFRIEND
 {
 	constexpr const char* SCRIPT = "data/MOTION/Smoke/SmokeMotion.txt"; // モーションファイル
 	constexpr int BLEND = 5;											// ブレンド
-	constexpr int MIN_CHANGETIME = 6;
-	constexpr int MAX_CHANGETIME = 8;
+	constexpr int MIN_CHANGETIME = 3;									// 最小ループ
+	constexpr int MAX_CHANGETIME = 6;									// 最大ループ
 	constexpr int MAX_COUNT = 120;
 };
 
@@ -85,6 +85,16 @@ HRESULT CSmokeFriend::Init(void)
 	// モーションロード
 	MotionLoad(SMOKEFRIEND::SCRIPT, MOTION::MAX,false);
 
+	// ランダム設定
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> disLoop(SMOKEFRIEND::MIN_CHANGETIME, SMOKEFRIEND::MAX_CHANGETIME);
+	m_nTargetLoopCount = disLoop(gen);
+
+	// ランダム設定
+	std::uniform_int_distribution<> disTime(60, SMOKEFRIEND::MAX_COUNT);
+	m_nNextChangeCount = disTime(gen);
+
 	return S_OK;
 }
 //========================================================
@@ -108,7 +118,8 @@ void CSmokeFriend::Update(void)
 	{
 		m_nChangeCount++;
 
-		if (m_nChangeCount >= SMOKEFRIEND::MAX_COUNT)
+		// 変更カウントになったら
+		if (m_nChangeCount >= m_nNextChangeCount)
 		{
 			// タバコモーションへ移行
 			GetMotion()->SetMotion(MOTION::ACTION, true, SMOKEFRIEND::BLEND);
@@ -116,19 +127,14 @@ void CSmokeFriend::Update(void)
 			// 変数の初期化
 			m_nChangeCount = 0;
 			m_nLoopCount = 0;
-
-			// タバコを何回繰り返すかをランダムで決定
-			static std::random_device rd;
-			static std::mt19937 gen(rd());
-			std::uniform_int_distribution<> dis(SMOKEFRIEND::MIN_CHANGETIME, SMOKEFRIEND::MAX_CHANGETIME);
-			m_nTargetLoopCount = dis(gen);
 		}
 	}
 	else if (nMotionType == MOTION::ACTION)
 	{
 		if (GetMotion()->GetFinishMotion())
 		{
-			m_nLoopCount++; // ループ回数を加算
+			// ループ回数を加算
+			m_nLoopCount++;
 
 			// リセット
 			GetMotion()->SetFinishMotion(false);
@@ -138,6 +144,18 @@ void CSmokeFriend::Update(void)
 			{
 				// モーション変更
 				GetMotion()->SetMotion(MOTION::NEUTRAL, true, SMOKEFRIEND::BLEND);
+
+				// 再抽選
+				std::random_device rd;
+				std::mt19937 gen(rd());
+
+				// ループ数
+				std::uniform_int_distribution<> disLoop(SMOKEFRIEND::MIN_CHANGETIME, SMOKEFRIEND::MAX_CHANGETIME);
+				m_nTargetLoopCount = disLoop(gen);
+
+				// 待機カウント数
+				std::uniform_int_distribution<> disTime(60, SMOKEFRIEND::MAX_COUNT);
+				m_nNextChangeCount = disTime(gen);
 			}
 		}
 	}

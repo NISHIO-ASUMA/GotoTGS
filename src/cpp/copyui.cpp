@@ -16,6 +16,16 @@
 #include "manager.h"
 #include "texture.h"
 
+//*********************************************************
+// 名前空間
+//*********************************************************
+namespace CopyUI
+{
+	constexpr float fWidth = 15.0f;		// UIの横幅の値
+	constexpr float fHeight = 15.0f;	// UIの縦幅の値
+	constexpr float fRadius = 45.0f;	// UIの範囲表示の半径の値
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -35,7 +45,7 @@ CCopyUI::~CCopyUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CCopyUI* CCopyUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
+CCopyUI* CCopyUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* pTexName)
 {
 	// インスタンス生成
 	CCopyUI* pCopyUI = new CCopyUI;
@@ -43,9 +53,9 @@ CCopyUI* CCopyUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const f
 
 	// オブジェクトセット
 	pCopyUI->SetPos(pos);
-	pCopyUI->SetSize(fWidth, fHeight);
+	pCopyUI->SetSize(CopyUI::fWidth, CopyUI::fHeight);
 	pCopyUI->SetRot(rot);
-	pCopyUI->SetRadius(fRadius);
+	pCopyUI->SetRadius(CopyUI::fRadius);
 	pCopyUI->SetTexture(pTexName);
 	pCopyUI->SetEnableZtest(true);
 
