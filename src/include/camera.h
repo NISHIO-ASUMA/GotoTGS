@@ -28,8 +28,8 @@ public:
 	enum MODE
 	{
 		MODE_NONE,
+		MODE_THIRD,
 		MODE_MOUSE,
-		MODE_SHAKE,
 		MODE_MAX
 	};
 
@@ -55,25 +55,40 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void SetCamera(void);
-	void SetResultCamara(void);
-	void SetTitleCamara(void);
-
 	void MouseView(CInputMouse* pMouse);
 	void WheelMouse(int nDelta);
 
-	void SetMode(int nMode) { m_pCamera.nMode = nMode; }
-	void SetRot(D3DXVECTOR3 rot) { m_pCamera.rot = rot; }
+	void ThirdPersonView(void);
 
-	inline D3DXVECTOR3 GetRot(void) { return m_pCamera.rot; }
-	inline D3DXVECTOR3 GetPos(void) { return m_pCamera.posV; }
-	inline D3DXVECTOR3 GetPosR(void) { return m_pCamera.posR; }
-	inline D3DXMATRIX GetMtxProjection(void) { return m_pCamera.mtxprojection; }
-	inline D3DXMATRIX GetView(void) { return m_pCamera.mtxView; }
+	/// <summary>
+	/// 西尾追加 : 三人称カメラに関する設定処理
+	/// </summary>
+	/// <param name="target">追従対象の座標</param>
+	void SetTargetPersonPos(const D3DXVECTOR3& target = VECTOR3_NULL) 
+	{
+		m_pThirdPersonPos = target;  // ターゲットの値を設定
+		m_pThirdPersonPos.y = 50.0f; // 高さの値を少し上に
+		m_pCamera.nMode = MODE_THIRD;// カメラモードを切り替え
+		m_pCamera.fDistance = 130.0f;// 距離を設定
+	}
 
-	int GetMode(void) { return m_pCamera.nMode; }
+public:
+
+	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
+	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
+	inline D3DXVECTOR3 GetRot(void) const { return m_pCamera.rot; }
+	inline D3DXVECTOR3 GetPos(void) const { return m_pCamera.posV; }
+	inline D3DXVECTOR3 GetPosR(void) const { return m_pCamera.posR; }
+	inline D3DXMATRIX GetMtxProjection(void) const { return m_pCamera.mtxprojection; }
+	inline D3DXMATRIX GetView(void) const { return m_pCamera.mtxView; }
+
+	int GetMode(void) const { return m_pCamera.nMode; }
 
 private:
 
 	Camera ClearDefault(void);	// クリア用関数
-	Camera m_pCamera;			// カメラ構造体変数
+
+private:
+	Camera m_pCamera;				// カメラ構造体変数
+	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
 };

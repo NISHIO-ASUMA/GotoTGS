@@ -139,11 +139,13 @@ void CScore::Update(void)
 //=========================================================
 void CScore::Draw(void)
 {
-	for (int nCntScore = 0; nCntScore < Config::NUM_SCORE; nCntScore++)
+#ifdef _DEBUG
+	// 数字の描画
+	for (auto number : m_apNumber)
 	{
-		// ナンバーの更新
-		m_apNumber[nCntScore]->Draw();
+		number->Draw();
 	}
+#endif // _DEBUG
 }
 //=========================================================
 // スコア加算処理
@@ -163,8 +165,8 @@ void CScore::DeleteScore(void)
 //=========================================================
 // スコア書き出し処理
 //=========================================================
-void CScore::SaveScore(void)
+void CScore::SaveScore(const char* SaveName)
 {
 	// 一個の数値を書き出す
-	m_pLoad->SaveInt(Config::SAVE_NAME, m_nScore);
+	m_pLoad->SaveInt(SaveName, m_nScore);
 }

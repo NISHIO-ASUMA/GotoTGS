@@ -61,7 +61,7 @@ HRESULT CResultObject::Init(void)
 	jsonmanager->Load(RESULTOBJECT::LoadName);
 
 	// リザルトのスコア生成
-	//CResultScoreManager::GetInstancce()->Init();
+	CResultScoreManager::GetInstancce()->Init();
 
 	return S_OK;
 }
@@ -71,7 +71,7 @@ HRESULT CResultObject::Init(void)
 void CResultObject::Uninit(void)
 {
 	// リザルトのスコア破棄
-	//CResultScoreManager::GetInstancce()->Uninit();
+	CResultScoreManager::GetInstancce()->Uninit();
 
 	// ステージマップの破棄
 	m_pBlock.reset();
