@@ -645,6 +645,9 @@
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\enemystatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -991,6 +994,9 @@
     </ClInclude>
     <ClInclude Include="src\include\DOCUMENTdeskwork.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

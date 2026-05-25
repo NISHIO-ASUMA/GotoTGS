@@ -265,6 +265,7 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 
 	// 高さの判定
 	float heightDiff = fabsf(TargetPos.y - enemyPos.y);
+
 	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
 	{
 		return false; // 高さが範囲外
@@ -303,7 +304,7 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
 	float cosHalfAngle = cosf(halfAngleRad);
 
-	// 内積の結果が、コサイン以上なら視界内
+	// 内積判定
 	if (dot >= cosHalfAngle)
 	{
 		return true; // 視界に入っている

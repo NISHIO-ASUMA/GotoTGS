@@ -80,8 +80,8 @@ public:
 	//***************************
 	struct Eyesight
 	{
-		static constexpr float EYE_RADIUS = 120.0f;		// ‹ŠE‚Ì“Í‚­‹——£
-		static constexpr float EYE_ANGLE = 50.0f;		// ‹–ìŠp
+		static constexpr float EYE_RADIUS = 100.0f;		// ‹ŠE‚Ì“Í‚­‹——£
+		static constexpr float EYE_ANGLE = 45.0f;		// ‹–ìŠp
 		static constexpr float EYE_HEIGHT = 50.0f;		// ‹ŠE‚Ì‚‚³§ŒÀ
 	};
 
