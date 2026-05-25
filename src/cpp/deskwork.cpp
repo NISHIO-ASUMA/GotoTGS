@@ -80,6 +80,10 @@ HRESULT CDeskwork::Init(void)
 	// コピー機タスクUIの生成
 	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
+	// フラグを初期化
+	m_pPCDeskUI->SetUse(false);
+	m_pCOPYDeskUI->SetUse(false);
+
 	return S_OK;
 }
 

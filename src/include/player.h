@@ -3,10 +3,6 @@
 // プレイヤー処理 [ player.cpp ]
 // Author: Shouya Chikada
 // 
-// NOTE : 近田君へ
-//		  定数などがあればstatic constexpr で追加すること 構造体にまとめてもいい
-//		  cppのほうの実装は一度仮組出来たら教えろください
-// 
 //=========================================================
 
 //*********************************************************
@@ -56,13 +52,14 @@ public:
 		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot
 	);
-
+	
 	bool GetMoveCheck(void) { return m_bMove; }
 
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
 public:
+
 	//************************
 	// モーション列挙型
 	//************************
