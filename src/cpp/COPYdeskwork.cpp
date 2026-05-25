@@ -15,6 +15,8 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
+#include "gamesceneobject.h"
+#include "score.h"
 
 //=========================================================
 // コンストラクタ
@@ -180,6 +182,12 @@ void CCOPYDeskwork::Update(void)
 
 	// クールタイムを始める
 	m_bTime = true;
+
+	// スコアの情報を取得
+	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+
+	// スコア加算
+	pScore->AddScore(100);
 
 }
 

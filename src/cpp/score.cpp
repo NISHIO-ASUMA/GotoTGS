@@ -139,7 +139,11 @@ void CScore::Update(void)
 //=========================================================
 void CScore::Draw(void)
 {
-	
+	for (int nCntScore = 0; nCntScore < Config::NUM_SCORE; nCntScore++)
+	{
+		// ナンバーの更新
+		m_apNumber[nCntScore]->Draw();
+	}
 }
 //=========================================================
 // スコア加算処理
