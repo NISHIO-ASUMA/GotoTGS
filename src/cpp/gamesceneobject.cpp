@@ -106,8 +106,8 @@ HRESULT CGameSceneObject::Init(void)
 	// 敵生成
 	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
-	//// スコア初期化
-	//m_pScore->DeleteScore();
+	// スコア初期化
+	m_pScore->DeleteScore();
 
 	return S_OK;
 }
@@ -167,8 +167,8 @@ void CGameSceneObject::CreatePointer(void)
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
-	//// スコア生成
-	//m_pScore = CScore::Create(VECTOR3_NULL);
+	// スコア生成
+	m_pScore = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.f, 80.0f);
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));

@@ -76,7 +76,7 @@ HRESULT CDOCUMENTDeskwork::Init(void)
 	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
 		// タスクをランダムに設定
-		ui.nKeytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+		ui.nKeytype = (CDeskworkUI::DOCUMENT)(rand() % CDeskworkUI::DOCUMENT_MAX);
 
 		// UIの生成処理
 		m_pDeskUI[ui.nIdx] = CDeskworkUI::Create(ui);
