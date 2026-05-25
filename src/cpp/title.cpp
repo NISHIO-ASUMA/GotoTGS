@@ -15,6 +15,8 @@
 //*********************************************************
 #include "titlemanager.h"
 #include "titleobject.h"
+#include "manager.h"
+#include "camera.h"
 
 //=========================================================
 // コンストラクタ
@@ -35,6 +37,9 @@ CTitle::~CTitle()
 //=========================================================
 HRESULT CTitle::Init(void)
 {
+	// カメラ初期化
+	CManager::GetInstance()->GetCamera()->Init();
+
 	// マネージャー初期化処理
 	CTitleManager::GetInstance()->Init();
 

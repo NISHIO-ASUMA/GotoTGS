@@ -15,6 +15,8 @@
 //*********************************************************
 #include "resultmanager.h"
 #include "resultobject.h"
+#include <manager.h>
+#include "camera.h"
 
 //=========================================================
 // オーバーロードコンストラクタ
@@ -35,6 +37,9 @@ CResult::~CResult()
 //=========================================================
 HRESULT CResult::Init(void)
 {
+	// カメラ初期化
+	CManager::GetInstance()->GetCamera()->Init();
+
 	// リザルトマネージャーの初期化
 	CResultManager::GetInstance()->Init();
 
