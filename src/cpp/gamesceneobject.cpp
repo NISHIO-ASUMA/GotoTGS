@@ -3,6 +3,9 @@
 // ゲームのオブジェクト管理処理 [ gamesceneobject.cpp ]
 // Author: Asuma Nishio
 //
+// 
+// NOTE : 上司のかご置く所のオブジェクトをどうするか → 適当に配置します
+//
 //=========================================================
 
 //*********************************************************
@@ -105,9 +108,12 @@ HRESULT CGameSceneObject::Init(void)
 
 	// 敵生成
 	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), VECTOR3_NULL);
-
+	
 	// カメラのターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
+
+	// 仮配置 : 上司のデスクのかご
+	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
 
 	// スコア初期化
 	m_pScore->DeleteScore();
