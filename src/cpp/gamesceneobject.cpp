@@ -25,17 +25,17 @@
 #include "player.h"
 #include "gametime.h"	// Misaki
 #include "deskwork.h"	// Misaki
-#include <enemy.h>
+#include "enemy.h"
 #include "friend.h"
 #include "pcui.h"
 #include "copyui.h"
 #include "worldUIcollision.h" // 西尾追加
-
+#include "camera.h"			  // 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
 //*********************************************************
-CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;				// シングルトン変数
+CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;			// シングルトン変数
 
 //*********************************************************
 // 定数名前空間
@@ -45,7 +45,7 @@ namespace GAMEOBJECT
 	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };		// タイマーの座標
 	const D3DXVECTOR3 PcUIPos		= { -45.0f, 50.0f, 170.0f };	// PCUIの座標
 	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 50.0f, 355.0f };	// コピー機UIの座標
-	const D3DXVECTOR3 PlayerPos	    = { -100.0f, 0.0f, 0.0f };		// プレイヤーの座標
+	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };		// プレイヤーの座標
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";	// 読み込みjsonファイル名
 	constexpr const char* WallName	= "data/JSON/GameWall.json";	// 読み込みjsonファイル名
 };
@@ -104,7 +104,10 @@ HRESULT CGameSceneObject::Init(void)
 	CreatePointer();
 
 	// 敵生成
-	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), VECTOR3_NULL);
+
+	// カメラのターゲット設定
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	// スコア初期化
 	m_pScore->DeleteScore();
@@ -139,10 +142,23 @@ void CGameSceneObject::Uninit(void)
 //=========================================================
 void CGameSceneObject::Update(void)
 {
+	// カメラのターゲット設定
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
+
 	//****************************************
 	// ADD : 西尾
 	// タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
+
+#ifdef _DEBUG
+	// スコアの保存処理の検証
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F2))
+	{
+		// 書き出し処理
+		m_pScore->SaveScore("data/SCORE/LazyScore.bin");
+	}
+#endif // _DEBUG
+
 }
 
 //=========================================================

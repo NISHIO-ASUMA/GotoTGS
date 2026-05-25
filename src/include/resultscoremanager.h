@@ -59,23 +59,20 @@ private:
 	//***************************
 	struct Config
 	{
-		static constexpr int IDX_FEED			  = 0;			// 餌スコアインデックス
-		static constexpr int IDX_QUEEN			  = 1;			// 防衛スコアインデックス
+		static constexpr int IDX_LAZY			  = 0;			// サボりスコアインデックス
+		static constexpr int IDX_TASK			  = 1;			// タスクスコアインデックス
 		static constexpr int IDX_ALL			  = 2;			// 最終スコアインデックス
-		static constexpr int SCORELISTNUM		  = 3;			// 配列の最大数
-		static constexpr int MAX_MATHSCORE		  = 2000000;	// 最大加算値
-		static constexpr int QUEEN_HP			  = 200;		// 基準の体力値
-		static constexpr const char* FEEDSCORE	  = "data/SCORE/GameScore.bin";		// ゲームのスコア
-		static constexpr const char* DEFENCESCORE = "data/SCORE/QueenLastHp.bin";	// 女王の体力スコア
+		static constexpr const char* LAZYSCORE	  = "data/SCORE/LazyScore.bin";		// サボりのスコア
+		static constexpr const char* TASKSCORE	  = "data/SCORE/TaskScore.bin";		// タスクのスコア
+		static constexpr const char* ALLSCORE	  = "data/SCORE/AllScore.bin";		// 最終スコア
 	};
 
-	int MathRateScore(void); // 計算関数
+private:
 
-	int m_nFeedScore;		// 餌スコアを格納
-	int m_nDefenceScore;	// 防衛スコアを格納
+	int m_nLazyScore;		// サボりスコアを格納
+	int m_nTaskScore;		// タスクスコアを格納
 	int m_nLastScore;		// 最終スコアを格納
-	int m_nMathScore;		// 計算用スコア
 
-	std::array<CResultScore*, Config::SCORELISTNUM>m_pResultScore;	// リザルトスコアポインタ
-	std::unique_ptr<CLoad>m_pLoad;									// ロードクラスのポインタ
+	std::array<CResultScore*, Config::IDX_TASK>m_pResultScore;	// リザルトスコアポインタ
+	std::unique_ptr<CLoad>m_pLoad;								// ロードクラスのポインタ
 };

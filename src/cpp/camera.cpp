@@ -27,15 +27,16 @@ namespace CAMERAINFO
 	constexpr float MAX_VIEWDOWN = 0.1f;		// カメラの角度制限値
 	constexpr float NorRot = D3DX_PI * 2.0f;	// 正規化値
 
-	const D3DXVECTOR3 InitPos = { 0.0f, 1000.0f, -800.0f }; // カメラ初期座標
+	const D3DXVECTOR3 InitPos = { 0.0f, 1000.0f, -800.0f };		// カメラ初期座標
 	const D3DXVECTOR3 InitRot = { D3DX_PI * 0.6f, 0.0f, 0.0f }; // カメラ初期角度
-	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };		 // 初期ベクトル
+	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 }
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CCamera::CCamera() : m_pCamera(ClearDefault())
+CCamera::CCamera() : m_pCamera(ClearDefault()),
+m_pThirdPersonPos(VECTOR3_NULL)
 {
 	
 }
@@ -78,24 +79,13 @@ void CCamera::Uninit(void)
 //=========================================================
 void CCamera::Update(void)
 {
-#if 0
-	// モード取得
-	auto SceneMode = CManager::GetInstance()->GetScene();
-
-	// タイトル用に配置
-	if (SceneMode == CScene::MODE_TITLE)
-	{
-		SetTitleCamara();
-	}
-	else if (SceneMode == CScene::MODE_RESULT)
-	{
-		SetResultCamara();
-	}
-#endif
-
-#ifdef _DEBUG
 	// カメラ更新
 	MouseView(CManager::GetInstance()->GetMouse());
+
+	// 追従モードなら
+	if (m_pCamera.nMode == MODE_THIRD) ThirdPersonView();
+
+#ifdef _DEBUG
 
 	// TAB入力
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_TAB))
@@ -103,6 +93,7 @@ void CCamera::Update(void)
 		// カメラの初期化ショートカットキー
 		Init();
 	}
+#endif
 
 	// 角度の正規化
 	if (m_pCamera.rot.y > D3DX_PI)
@@ -115,7 +106,6 @@ void CCamera::Update(void)
 	{// D3DX_PIより小さくなったら
 		m_pCamera.rot.y += CAMERAINFO::NorRot;
 	}
-#endif
 }
 //=========================================================
 // カメラをセット
@@ -151,7 +141,7 @@ void CCamera::SetCamera(void)
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_pCamera.mtxprojection);
 
 #ifdef _DEBUG
-	// フォントセット
+	// デバッグ表示
 	CDebugproc::Print("Camera : PosV [ %.2f, %.2f, %.2f ]\n", m_pCamera.posV.x, m_pCamera.posV.y, m_pCamera.posV.z);
 	CDebugproc::Draw(0, 20);
 
@@ -161,46 +151,6 @@ void CCamera::SetCamera(void)
 	CDebugproc::Print("Camera : Rot [ %.2f, %.2f, %.2f ]\n", m_pCamera.rot.x, m_pCamera.rot.y, m_pCamera.rot.z);
 	CDebugproc::Draw(0, 80);
 #endif // _DEBUG
-}
-//==============================================================
-// タイトルカメラ
-//==============================================================
-void CCamera::SetTitleCamara(void)
-{
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 1050.0f, -600.0f);		// カメラの位置
-	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
-	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
-	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
-
-	// 距離を計算
-	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
-	float fRoty = m_pCamera.posV.y - m_pCamera.posR.y;
-	float fRotz = m_pCamera.posV.z - m_pCamera.posR.z;
-
-	// 視点から注視点までの距離
-	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
-}
-//==============================================================
-// リザルトカメラ
-//==============================================================
-void CCamera::SetResultCamara(void)
-{
-	// カメラ位置
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 5.0f, -190.0f);
-
-	// 見上げたい対象
-	m_pCamera.posR = D3DXVECTOR3(80.0f, 50.0f, 0.0f);
-
-	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-
-	// 回転
-	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.3f,0.0f,0.0f);
-
-	float fPosx = m_pCamera.posV.x - m_pCamera.posR.x;
-	float fPosy = m_pCamera.posV.y - m_pCamera.posR.y;
-	float fPosz = m_pCamera.posV.z - m_pCamera.posR.z;
-
-	m_pCamera.fDistance = sqrtf(fPosx * fPosx + fPosy * fPosy + fPosz * fPosz);
 }
 //==============================================================
 // マウス操作の視点移動
@@ -302,6 +252,19 @@ void CCamera::WheelMouse(int nDelta)
 	}
 
 	// カメラの視点の情報
+	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+}
+//==============================================================
+// 三人称視点カメラ
+//==============================================================
+void CCamera::ThirdPersonView(void)
+{
+	// カメラの注視点座標を設定
+	m_pCamera.posR = m_pThirdPersonPos;
+
+	//カメラの設定
 	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
