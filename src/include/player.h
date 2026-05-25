@@ -70,6 +70,9 @@ public:
 	{
 		NEUTRAL,
 		MOVE,
+		ACTION1,
+		ACTION2,
+		ACTION3,
 		MAX
 	};
 
