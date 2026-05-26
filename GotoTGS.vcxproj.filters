@@ -648,6 +648,9 @@
     <ClCompile Include="src\cpp\enemystatebase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\enemystateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -996,6 +999,9 @@
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClInclude>
     <ClInclude Include="src\include\enemystatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>

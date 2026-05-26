@@ -1,77 +1,55 @@
 //=========================================================
 //
-// リザルトシーン処理 [ result.cpp ]
-// Author: Asuma Nishio
+// 敵の通常状態クラス [ enemystateneutral.cpp ]
+// Author : Asuma Nishio
 // 
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "result.h"
+#include "enemystateneutral.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "resultmanager.h"
-#include "resultobject.h"
+#include "enemy.h"
 #include "manager.h"
-#include "camera.h"
+#include "input.h"
 
 //=========================================================
-// オーバーロードコンストラクタ
+// コンストラクタ
 //=========================================================
-CResult::CResult() : CScene(CScene::MODE_RESULT)
+CEnemyStateNeutral::CEnemyStateNeutral()
 {
-
+	SetID(ID_NEUTRAL);
 }
 //=========================================================
 // デストラクタ
 //=========================================================
-CResult::~CResult()
+CEnemyStateNeutral::~CEnemyStateNeutral()
 {
-	
+
 }
 //=========================================================
-// 初期化処理
+// 状態開始
 //=========================================================
-HRESULT CResult::Init(void)
+void CEnemyStateNeutral::OnStart()
 {
-	// カメラ初期化
-	CManager::GetInstance()->GetCamera()->Init();
-
-	// リザルトマネージャーの初期化
-	CResultManager::GetInstance()->Init();
-
-	// リザルトオブジェクトの初期化
-	CResultObject::GetInstance()->Init();
-
-	// 初期化結果を返す
-	return S_OK;
+	// モーションセット
+	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true, 5);
 }
 //=========================================================
-// 終了処理
+// 状態更新
 //=========================================================
-void CResult::Uninit(void)
+void CEnemyStateNeutral::OnUpdate()
 {
-	// リザルトオブジェクトの破棄
-	CResultObject::GetInstance()->Uninit();
 
-	// リザルトマネージャーの終了処理
-	CResultManager::GetInstance()->Uninit();
 }
 //=========================================================
-// 更新処理
+// 状態終了
 //=========================================================
-void CResult::Update(void)
+void CEnemyStateNeutral::OnExit()
 {
-	// リザルトマネージャーの更新処理
-	CResultManager::GetInstance()->Update();
-}
-//=========================================================
-// 描画処理
-//=========================================================
-void CResult::Draw(void)
-{
-	
+
 }

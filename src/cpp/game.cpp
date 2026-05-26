@@ -51,6 +51,9 @@ CGame::~CGame()
 //=========================================================
 HRESULT CGame::Init(void)
 {
+	// カーソルの非表示
+	CManager::GetInstance()->GetMouse()->SetCursorVisibility(false);
+
 	// カメラ初期化
 	auto pCamera = CManager::GetInstance()->GetCamera();
 	pCamera->Init();
