@@ -63,14 +63,14 @@ public:
 	//****************************
 	struct UI
 	{
-		D3DXVECTOR3 pos;
+		D3DXVECTOR3 pos;		// 位置
 		D3DXCOLOR col;			// 色情報
-		VTXTYPE VTXtype;
-		float fWidth;
-		float fHeight;
-		float fDigit;
-		int nKeytype;
-		int nIdx;
+		VTXTYPE VTXtype;		// 頂点座標のタイプ
+		float fWidth;			// 横幅
+		float fHeight;			// 縦幅
+		float fDigit;			// テクスチャの分割数
+		int nKeytype;			// キータイプ
+		int nIdx;				// 番号
 	};
 
 	CDeskworkUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
@@ -82,21 +82,21 @@ public:
 	void Draw(void);
 
 	// 設定処理
-	void SetTexture(const char* pTexName);												// テクスチャ設定
+	void ChangeCol(const D3DXCOLOR& col);												// カラー設定
+	void SetVTX(const VTXTYPE& VTXtype);												// 頂点ポイント設定
 	void SetSize(const float& fWidth, const float& fHeight);							// サイズ設定
 	void SetDigit(const int& nType, const float& nDigit);								// UV設定
-	void ChangeCol(const D3DXCOLOR& col);												// カラー設定
+	void SetTexture(const char* pTexName);												// テクスチャ設定
 	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
-	void SetVTX(const VTXTYPE& VTXtype);												// 頂点ポイント設定
 
 	inline void SetPos(const D3DXVECTOR3& pos) { m_ui.pos = pos; }
 	inline void SetCol(const D3DXCOLOR& col) { m_ui.col = col; }
+	inline void SetVTXtype(const VTXTYPE& VTXtype) { m_ui.VTXtype = VTXtype; }
 	inline void SetWidth(const float& fWidth) { m_ui.fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_ui.fHeight = fHeight; }
 	inline void SetDigit(const float& fDigit) { m_ui.fDigit = fDigit; }
 	inline void SetKeyType(const int& keytype) { m_ui.nKeytype = keytype; }
 	inline void SetIdx(const int& nIdx) { m_ui.nIdx = nIdx; }
-	inline void SetVTXtype(const VTXTYPE& VTXtype) { m_ui.VTXtype = VTXtype; }
 
 	// 情報取得処理
 	inline D3DXVECTOR3 GetPos(void) const { return m_ui.pos; }
@@ -125,7 +125,6 @@ private:
 
 	// メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファのポインタ
-
 	UI m_ui;								// UIの情報
 	float m_TexU, m_TexU1, m_TexV;			// テクスチャ座標
 	int m_nIdxTexture;						// テクスチャの番号

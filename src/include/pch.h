@@ -78,7 +78,7 @@
 #define COLOR_BLACK (D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f))			// çï
 #define COLOR_WHITE (D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f))			// îí
 #define COLOR_RED	(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f))			// ê‘
-#define COLOR_GREEN (D3DXCOLOR(0.0f, 1.0f, 0.0f, 0.75f))		// óŒ
+#define COLOR_GREEN (D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f))			// óŒ
 #define COLOR_YERROW (D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f))		// â©êF
 #define COLOR_BLUE	 (D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f))		// ê¬
 #define COLOR_PURPLE (D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f))		// éá
