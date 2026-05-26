@@ -61,6 +61,7 @@ public:
 	void WheelMouse(int nDelta);
 
 	void ThirdPersonView(void);
+	void ResultCamera(void);
 
 	/// <summary>
 	/// ¼”ö’Ç‰Á : OlÌƒJƒƒ‰‚ÉŠÖ‚·‚éİ’èˆ—

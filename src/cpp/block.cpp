@@ -24,7 +24,9 @@
 // コンストラクタ
 //=========================================================
 CBlock::CBlock(int nPriority) : CObjectX(nPriority),
-m_pCollider(nullptr)
+m_pCollider(nullptr),
+m_Size(VECTOR3_NULL),
+m_isZTestEneble(false)
 {
 	
 }
@@ -105,6 +107,9 @@ HRESULT CBlock::Init(void)
 		Size = ChangeSize;
 	}
 
+	// サイズをセット
+	m_Size = Size;
+
 	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot(); 
@@ -152,8 +157,26 @@ void CBlock::Update(void)
 //=========================================================
 void CBlock::Draw(void)
 {
+	// デバイス取得
+	const auto& pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+
+	// 有効状態なら
+	if (m_isZTestEneble)
+	{
+		// Zバッファの比較はするが、自分のZ値は書き込まない設定にする
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	}
+
 	// 親クラスの描画処理
 	CObjectX::Draw();
+
+	// 有効状態なら
+	if (m_isZTestEneble)
+	{
+		// 設定を戻す
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	}
+
 }
 //=========================================================
 // 当たり判定

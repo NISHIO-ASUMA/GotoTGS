@@ -3,9 +3,6 @@
 // ゲームのオブジェクト管理処理 [ gamesceneobject.cpp ]
 // Author: Asuma Nishio
 //
-// 
-// NOTE : 上司のかご置く所のオブジェクトをどうするか → 適当に配置します
-//
 //=========================================================
 
 //*********************************************************
@@ -39,7 +36,7 @@
 //*********************************************************
 // 静的メンバ変数
 //*********************************************************
-CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;			// シングルトン変数
+CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;		// シングルトン変数
 
 //*********************************************************
 // 定数名前空間
@@ -101,20 +98,21 @@ HRESULT CGameSceneObject::Init(void)
 	// コピー機用チュートリアルUIの生成
 	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL, "Fbutton.png");
 
-	// プレイヤー生成
-	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
-
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
 	// 敵生成
 	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), VECTOR3_NULL);
 	
-	// カメラのターゲット設定
-	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
-
 	// 仮配置 : 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
+
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
+	m_pBlocks->SetPlayerPoint(m_pPlayer);
+
+	// カメラのターゲット設定
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	// スコア初期化
 	m_pScore->DeleteScore();
@@ -157,6 +155,9 @@ void CGameSceneObject::Update(void)
 	// タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
 
+	// ブロック管理クラスの更新処理 : 問題の処理
+	if (m_pBlocks) m_pBlocks->Update();
+
 #ifdef _DEBUG
 	// スコアの保存処理の検証
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F2))
@@ -167,7 +168,6 @@ void CGameSceneObject::Update(void)
 #endif // _DEBUG
 
 }
-
 //=========================================================
 // 描画処理
 //=========================================================
@@ -175,16 +175,17 @@ void CGameSceneObject::Draw(void)
 {
 
 }
-
 //=========================================================
 // ポインタの生成を行う関数
 //=========================================================
 void CGameSceneObject::CreatePointer(void)
 {
-	// ブロックマネージャー生成
+	// ブロックマネージャー生成 追加 : 西尾
 	m_pBlocks = std::make_unique<CBlockManager>();
-	auto jsonManager = CManager::GetInstance()->GetJsonManager();
+	const auto& jsonManager = CManager::GetInstance()->GetJsonManager();
 	jsonManager->SetBlockManager(m_pBlocks.get());
+
+	// 初期化とポインタセット
 	m_pBlocks->Init();
 
 	// タイマー生成 Misaki
