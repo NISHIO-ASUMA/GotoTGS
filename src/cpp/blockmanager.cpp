@@ -104,11 +104,13 @@ void CBlockManager::Update(void)
 		{
 			// 対象モデルの透明度を設定する
 			Blocks->SetCol(D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 0.3f));
+			Blocks->SetZEneble(true);
 		}
 		else
 		{
 			// デフォルトのカラーを使う
-			Blocks->SetCol();
+			Blocks->SetCol(); 
+			Blocks->SetZEneble(false);
 		}
 	}
 }

@@ -288,8 +288,7 @@ bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
 
 	// 判定ブロック情報
 	const auto& BlockPos = pBlock->GetPos();
-	int nIdx = pBlock->GetModelIdx();
-	const auto& BlockSize = CManager::GetInstance()->GetXManager()->GetInfo(nIdx).Size;
+	const auto& BlockSize = pBlock->GetSize();
 
 	// ベクトル線分情報
 	D3DXVECTOR3 VecDir = PlayerPos - m_pCamera.posV;
@@ -302,7 +301,7 @@ bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
 	D3DXVec3Normalize(&VecDir, &VecDir);
 
 	// モデルのサイズ判定
-	float radius = max(BlockSize.x, max(BlockSize.y * 1.5f, BlockSize.z)) * 0.5f;
+	float radius = max(BlockSize.x, max(BlockSize.y, BlockSize.z)) * 0.5f;
 
 	// 線分と球の最短距離を判定する
 	D3DXVECTOR3 MathLength = BlockPos - m_pCamera.posV;
