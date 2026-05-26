@@ -23,16 +23,18 @@
 //*********************************************************
 #include "jsonmanager.h"
 #include "manager.h"
+#include "camera.h"
 
 //*********************************************************
 // 使用名前空間
 //*********************************************************
-using json = nlohmann::json;
+using json = nlohmann::json; // jsonクラスの使用
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CBlockManager::CBlockManager() : m_pBlocks{}
+CBlockManager::CBlockManager() : m_pBlocks{},
+m_pPlayer(nullptr)
 {
 
 }
@@ -48,9 +50,9 @@ CBlockManager::~CBlockManager()
 //=========================================================
 CBlock* CBlockManager::CreateManager
 (
-	const D3DXVECTOR3& pos, 
-	const D3DXVECTOR3& rot, 
-	const D3DXVECTOR3& scale, 
+	const D3DXVECTOR3& pos,
+	const D3DXVECTOR3& rot,
+	const D3DXVECTOR3& scale,
 	const char* pModelName
 )
 {
@@ -88,7 +90,27 @@ void CBlockManager::Uninit(void)
 //=========================================================
 void CBlockManager::Update(void)
 {
-	
+	// ポインタがnullなら
+	if (!m_pPlayer) return;
+
+	// カメラ取得
+	const auto& Camera = CManager::GetInstance()->GetCamera();
+
+	// 判定式生成
+	for (auto Blocks : m_pBlocks)
+	{
+		// カメラの透過条件に入っているかチェック
+		if (Camera->CollisionTorayBlock(m_pPlayer, Blocks))
+		{
+			// 対象モデルの透明度を設定する
+			Blocks->SetCol(D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 0.3f));
+		}
+		else
+		{
+			// デフォルトのカラーを使う
+			Blocks->SetCol();
+		}
+	}
 }
 //=========================================================
 // json読み込み

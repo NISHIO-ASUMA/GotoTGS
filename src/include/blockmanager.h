@@ -24,6 +24,7 @@
 // 前方宣言
 //*********************************************************
 class CBoxCollider;
+class CPlayer;
 
 //*********************************************************
 // ブロック一括管理クラスを定義
@@ -43,7 +44,6 @@ public:
 	/// <summary>
 	/// 配列のサイズを取得する
 	/// </summary>
-	/// <param name=""></param>
 	/// <returns></returns>
 	inline int GetAll(void) { return static_cast<int>(m_pBlocks.size()); }
 
@@ -70,8 +70,18 @@ public:
 		const char* pModelName
 	);
 
+public:
+
+	/// <summary>
+	/// プレイヤーのポインタを格納する
+	/// </summary>
+	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
+	/// <returns></returns>
+	void SetPlayerPoint(CPlayer* pPlayer = nullptr) { m_pPlayer = pPlayer; }
+
 private:
 
 	static constexpr const char* FILE_NAME = "data/JSON/GameMap.json";	// ファイル名
-	std::vector<CBlock*>m_pBlocks;									// 配置するブロックの動的配列
+	std::vector<CBlock*>m_pBlocks;										// 配置するブロックの動的配列
+	CPlayer* m_pPlayer;													// プレイヤー格納ポインタ
 };

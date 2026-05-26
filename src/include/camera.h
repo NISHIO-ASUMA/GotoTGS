@@ -14,6 +14,8 @@
 // 前方宣言
 //*********************************************************
 class CInputMouse;
+class CPlayer;
+class CBlock;
 
 //*********************************************************
 // カメラクラスを定義
@@ -71,6 +73,14 @@ public:
 		m_pCamera.nMode = MODE_THIRD;// カメラモードを切り替え
 		m_pCamera.fDistance = 130.0f;// 距離を設定
 	}
+
+	/// <summary>
+	/// 西尾追加 : カメラから見たプレイヤーとの透過オブジェクト判定
+	/// </summary>
+	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
+	/// <param name="pBlock">判定するブロックの外部ポインタ</param>
+	/// <returns></returns>
+	bool CollisionTorayBlock(CPlayer* pPlayer = nullptr,CBlock * pBlock = nullptr);
 
 public:
 

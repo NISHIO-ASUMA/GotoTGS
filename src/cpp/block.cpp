@@ -87,7 +87,6 @@ HRESULT CBlock::Init(void)
 		Size.z = Size.z * Scale.z;
 	}
 
-
 	// ƒ‚ƒfƒ‹‚ÌƒpƒXŽæ“¾
 	std::string str = pXManager->GetInfo(nModelIdx).FilePath;
 

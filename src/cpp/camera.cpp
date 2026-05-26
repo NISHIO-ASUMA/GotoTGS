@@ -17,6 +17,9 @@
 #include "input.h"
 #include "debugproc.h"
 #include "template.h"
+#include "player.h"
+#include "block.h"
+#include "xfilemanager.h"
 
 //*********************************************************
 // 定数宣言
@@ -268,6 +271,64 @@ void CCamera::ThirdPersonView(void)
 	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+}
+//==============================================================
+// カメラから見て透過させる時の当たり判定関数
+//==============================================================
+bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
+{
+	// null値チェック
+	if (!pPlayer || !pBlock) return false;
+
+	// 判定用変数
+	bool isCollision = false;
+
+	// プレイヤー情報取得
+	const auto& PlayerPos = pPlayer->GetPos();
+
+	// 判定ブロック情報
+	const auto& BlockPos = pBlock->GetPos();
+	int nIdx = pBlock->GetModelIdx();
+	const auto& BlockSize = CManager::GetInstance()->GetXManager()->GetInfo(nIdx).Size;
+
+	// ベクトル線分情報
+	D3DXVECTOR3 VecDir = PlayerPos - m_pCamera.posV;
+
+	// 長さを取得
+	float fLength = D3DXVec3Length(&VecDir);
+	if (fLength < 1e-6f) return false;
+
+	// ベクトルの正規化
+	D3DXVec3Normalize(&VecDir, &VecDir);
+
+	// モデルのサイズ判定
+	float radius = max(BlockSize.x, max(BlockSize.y * 1.5f, BlockSize.z)) * 0.5f;
+
+	// 線分と球の最短距離を判定する
+	D3DXVECTOR3 MathLength = BlockPos - m_pCamera.posV;
+	float MathDot = D3DXVec3Dot(&MathLength, &VecDir);
+	MathDot = max(0.0f, min(fLength, MathDot));
+
+	// ベクトル分の計算
+	D3DXVECTOR3 close = m_pCamera.posV + VecDir * MathDot;
+
+	// 差分を計算
+	D3DXVECTOR3 Diff = close - BlockPos;
+
+	// 長さの2剰計算
+	float distSq = D3DXVec3LengthSq(&Diff);
+
+	// 長さが以下だったら
+	if (distSq <= (radius * radius))
+	{
+		isCollision = true;
+	}
+	else
+	{
+		isCollision = false;
+	}
+
+	return isCollision;
 }
 //==============================================================
 // 値のクリア関数
