@@ -17,6 +17,7 @@
 #include "input.h"
 #include "gamesceneobject.h"
 #include "score.h"
+#include "progressgauge.h"
 
 //=========================================================
 // コンストラクタ
@@ -157,6 +158,20 @@ void CPCDeskwork::Update(void)
 		// 次のタスクに移る
 		m_nNowIdx++;
 	}
+	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_W) ||
+		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_A) ||
+		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_S) ||
+		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_D))
+	{// 不正解を押した時
+
+		// 色を赤にする
+		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED);
+
+		// クールタイムを始める
+		m_bTime = true;
+
+		return;
+	}
 
 	// タスクが終わっていないなら
 	if (m_nNowIdx < Config::UI_NUM)
@@ -167,8 +182,12 @@ void CPCDeskwork::Update(void)
 	// クールタイムを始める
 	m_bTime = true;
 
-	// スコアの情報を取得
+	// スコアと進捗ゲージの情報を取得
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+
+	// こなしたタスクの数を増やす
+	pProgressgauge->AddTask();
 
 	// スコア加算
 	pScore->AddScore(100);

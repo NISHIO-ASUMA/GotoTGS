@@ -17,6 +17,7 @@
 #include "input.h"
 #include "gamesceneobject.h"
 #include "score.h"
+#include "progressgauge.h"
 
 //=========================================================
 // コンストラクタ
@@ -183,12 +184,15 @@ void CCOPYDeskwork::Update(void)
 	// クールタイムを始める
 	m_bTime = true;
 
-	// スコアの情報を取得
+	// スコアと進捗ゲージの情報を取得
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
 
 	// スコア加算
 	pScore->AddScore(100);
 
+	// こなしたさぼりの数を増やす（仮）
+	pProgressgauge->AddAFK();
 }
 
 //=========================================================

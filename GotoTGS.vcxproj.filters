@@ -648,6 +648,9 @@
     <ClCompile Include="src\cpp\enemystatebase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\progressgauge.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+	</ClCompile>
     <ClCompile Include="src\cpp\enemystateneutral.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
@@ -1001,6 +1004,9 @@
     <ClInclude Include="src\include\enemystatebase.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\progressgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+	</ClInclude>
     <ClInclude Include="src\include\enemystateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>

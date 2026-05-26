@@ -38,7 +38,7 @@ public:
 	inline void SetScale(const D3DXVECTOR3& scale = INITSCALE) { m_Scale = scale; }
 	inline void SetMtxWorld(const D3DXMATRIX &mtxworld) { m_mtxWorld = mtxworld; }
 	inline void SetCol(const D3DCOLORVALUE& color = V_COLOR_WHITE) { m_col = color; }
-	inline void SetModelIdx(const int nIdx) { m_nIdxModel = nIdx; }
+	inline void SetModelIdx(const int& nIdx) { m_nIdxModel = nIdx; }
 	inline void SetShadow(const bool &isFlags) { m_isShadow = isFlags; }
 	inline void SetIsOutLine(const bool& isOutLine) { m_isOutLine = isOutLine; }
 	inline void SetOutLineColor(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f));
