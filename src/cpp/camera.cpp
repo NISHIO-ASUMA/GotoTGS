@@ -82,21 +82,15 @@ void CCamera::Uninit(void)
 //=========================================================
 void CCamera::Update(void)
 {
-	// カメラ更新
+#ifdef _DEBUG
+
+	// マウスでのカメラ更新
 	MouseView(CManager::GetInstance()->GetMouse());
+
+#endif
 
 	// 追従モードなら
 	if (m_pCamera.nMode == MODE_THIRD) ThirdPersonView();
-
-#ifdef _DEBUG
-
-	// TAB入力
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_TAB))
-	{
-		// カメラの初期化ショートカットキー
-		Init();
-	}
-#endif
 
 	// 角度の正規化
 	if (m_pCamera.rot.y > D3DX_PI)
