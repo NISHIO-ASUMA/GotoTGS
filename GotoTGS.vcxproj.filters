@@ -648,6 +648,9 @@
     <ClCompile Include="src\cpp\enemystatebase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\progressgauge.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -997,6 +1000,9 @@
     </ClInclude>
     <ClInclude Include="src\include\enemystatebase.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\progressgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

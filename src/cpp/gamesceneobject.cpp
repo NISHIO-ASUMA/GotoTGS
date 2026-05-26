@@ -26,8 +26,9 @@
 #include "ui.h"
 #include "meshfield.h"
 #include "player.h"
-#include "gametime.h"	// Misaki
-#include "deskwork.h"	// Misaki
+#include "gametime.h"		// Misaki
+#include "deskwork.h"		// Misaki
+#include "progressgauge.h"	// Misaki
 #include "enemy.h"
 #include "friend.h"
 #include "pcui.h"
@@ -194,4 +195,7 @@ void CGameSceneObject::CreatePointer(void)
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+
+	// 進捗ゲージの生成 Misaki
+	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);
 }
