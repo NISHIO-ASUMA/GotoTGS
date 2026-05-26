@@ -73,6 +73,7 @@ public:
 	{
 		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
 		static constexpr float BOX_RANGE = 60.0f;	 // 矩形範囲
+		static constexpr int DIVIDE = 16;			 // メッシュの分割数
 	};
 
 	//***************************

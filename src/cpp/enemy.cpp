@@ -2,7 +2,7 @@
 //
 // 敵の処理 [ enemy.cpp ]
 // Author: Asuma Nishio
-// NOTE : こいつを基本動く敵にする
+// NOTE : 徘徊する上司のクラス
 // 
 //========================================================
 
@@ -150,9 +150,6 @@ void CEnemy::Draw(void)
 //========================================================
 void CEnemy::DrawEyeSight(void)
 {
-	// 分割数
-	constexpr int DIVIDE = 16;
-
 	// 現在の設定を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 rot = GetRot();
@@ -209,7 +206,7 @@ void CEnemy::DrawEyeSight(void)
 	//==========================================
 	// 頂点バッファの構築と描画
 	//==========================================
-	std::vector<VERTEX_3D> vFan(1 + (DIVIDE + 1));
+	std::vector<VERTEX_3D> vFan(1 + (Config::DIVIDE + 1));
 
 	// 中心点
 	vFan[0].pos = D3DXVECTOR3(enemyPos.x, enemyPos.y + 0.1f, enemyPos.z);
@@ -218,9 +215,9 @@ void CEnemy::DrawEyeSight(void)
 	vFan[0].tex = VECTOR2_NULL;
 
 	// 外周点
-	for (int i = 0; i <= DIVIDE; ++i)
+	for (int i = 0; i <= Config::DIVIDE; ++i)
 	{
-		float t = (float)i / (float)DIVIDE;
+		float t = (float)i / (float)Config::DIVIDE;
 		float currentAngle = rot.y - halfAngle + (D3DXToRadian(Eyesight::EYE_ANGLE) * t);
 
 		D3DXVECTOR3 dir(-sinf(currentAngle), 0.0f, -cosf(currentAngle));
@@ -234,7 +231,7 @@ void CEnemy::DrawEyeSight(void)
 
 	// 頂点フォーマットの設定	
 	pDevice->SetFVF(FVF_VERTEX_3D);
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, DIVIDE, &vFan[0], sizeof(VERTEX_3D));
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, Config::DIVIDE, &vFan[0], sizeof(VERTEX_3D));
 
 	//==========================================
 	// すべてのデバイス設定を完全に元に戻す
