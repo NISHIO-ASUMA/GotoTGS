@@ -55,7 +55,7 @@ HRESULT CGame::Init(void)
 	CManager::GetInstance()->GetMouse()->SetCursorVisibility(false);
 
 	// カメラ初期化
-	auto pCamera = CManager::GetInstance()->GetCamera();
+	const auto& pCamera = CManager::GetInstance()->GetCamera();
 	pCamera->Init();
 
 	// ポーズマネージャー生成

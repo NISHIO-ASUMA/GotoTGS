@@ -68,6 +68,9 @@ HRESULT CCamera::Init(void)
 	// 視点から注視点までの距離
 	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
 
+	// 移動フラグ
+	m_isMove = false;
+
 	return S_OK;
 }
 //=========================================================
