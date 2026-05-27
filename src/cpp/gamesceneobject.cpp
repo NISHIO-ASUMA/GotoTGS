@@ -188,14 +188,14 @@ void CGameSceneObject::CreatePointer(void)
 	// 初期化とポインタセット
 	m_pBlocks->Init();
 
+	// タスクの生成 Misaki
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
 	// スコア生成
 	m_pScore = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.f, 80.0f);
-
-	// タスクの生成 Misaki
-	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
 
 	// 進捗ゲージの生成 Misaki
 	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);

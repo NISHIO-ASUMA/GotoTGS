@@ -89,23 +89,23 @@ public:
 	void SetTexture(const char* pTexName);												// テクスチャ設定
 	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
 
-	inline void SetPos(const D3DXVECTOR3& pos) { m_ui.pos = pos; }
-	inline void SetCol(const D3DXCOLOR& col) { m_ui.col = col; }
-	inline void SetVTXtype(const VTXTYPE& VTXtype) { m_ui.VTXtype = VTXtype; }
-	inline void SetWidth(const float& fWidth) { m_ui.fWidth = fWidth; }
-	inline void SetHeight(const float& fHeight) { m_ui.fHeight = fHeight; }
-	inline void SetDigit(const float& fDigit) { m_ui.fDigit = fDigit; }
-	inline void SetKeyType(const int& keytype) { m_ui.nKeytype = keytype; }
-	inline void SetIdx(const int& nIdx) { m_ui.nIdx = nIdx; }
+	inline void SetPos(const D3DXVECTOR3& pos) { m_UI.pos = pos; }
+	inline void SetCol(const D3DXCOLOR& col) { m_UI.col = col; }
+	inline void SetVTXtype(const VTXTYPE& VTXtype) { m_UI.VTXtype = VTXtype; }
+	inline void SetWidth(const float& fWidth) { m_UI.fWidth = fWidth; }
+	inline void SetHeight(const float& fHeight) { m_UI.fHeight = fHeight; }
+	inline void SetDigit(const float& fDigit) { m_UI.fDigit = fDigit; }
+	inline void SetKeyType(const int& keytype) { m_UI.nKeytype = keytype; }
+	inline void SetIdx(const int& nIdx) { m_UI.nIdx = nIdx; }
 
 	// 情報取得処理
-	inline D3DXVECTOR3 GetPos(void) const { return m_ui.pos; }
-	inline D3DXCOLOR GetCol(void) const { return m_ui.col; }
-	inline float GetWidth(void) const { return m_ui.fWidth; }
-	inline float GetHeight(void) const { return m_ui.fHeight; }
-	inline float GetDigit(void) const { return m_ui.fDigit; }
-	inline int GetKeyType(void) const { return m_ui.nKeytype; }
-	inline int GetIdx(void) const { return m_ui.nIdx; }
+	inline D3DXVECTOR3 GetPos(void) const { return m_UI.pos; }
+	inline D3DXCOLOR GetCol(void) const { return m_UI.col; }
+	inline float GetWidth(void) const { return m_UI.fWidth; }
+	inline float GetHeight(void) const { return m_UI.fHeight; }
+	inline float GetDigit(void) const { return m_UI.fDigit; }
+	inline int GetKeyType(void) const { return m_UI.nKeytype; }
+	inline int GetIdx(void) const { return m_UI.nIdx; }
 
 	// 生成処理
 	static CDeskworkUI* Create(const UI& ui);
@@ -125,7 +125,7 @@ private:
 
 	// メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファのポインタ
-	UI m_ui;								// UIの情報
+	UI m_UI;								// UIの情報
 	float m_TexU, m_TexU1, m_TexV;			// テクスチャ座標
 	int m_nIdxTexture;						// テクスチャの番号
 	int n_nColorCount;						// 色変更カウント
