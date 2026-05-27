@@ -88,6 +88,14 @@ public:
 
 private:
 
+	void UpdateMoveViewPoint(void);
+
+private:
+
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+
+	bool m_isCheckPoint;								// ポイントに到着したかどうか
+	int m_nStopTime;									// 停止しているカウント
+	int m_nTargetIdx;									// 向かう目的地のインデックス
 };
