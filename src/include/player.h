@@ -69,7 +69,7 @@ public:
 		NEUTRAL,
 		MOVE,
 		SMOKE,
-		ACTION2,
+		DITCH,
 		ACTION3,
 		MAX
 	};
