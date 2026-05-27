@@ -621,12 +621,6 @@
     <ClCompile Include="src\cpp\worldUIcollision.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\pcui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\copyui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\deskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork</Filter>
     </ClCompile>
@@ -650,9 +644,21 @@
     </ClCompile>
     <ClCompile Include="src\cpp\progressgauge.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="src\cpp\enemystateneutral.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\copyui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\pcui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\walkingfriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonmove.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1006,9 +1012,15 @@
     </ClInclude>
     <ClInclude Include="src\include\progressgauge.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="src\include\enemystateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\walkingfriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonmove.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

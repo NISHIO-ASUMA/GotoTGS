@@ -23,7 +23,7 @@ namespace CopyUI
 {
 	constexpr float fWidth = 15.0f;		// UIの横幅の値
 	constexpr float fHeight = 15.0f;	// UIの縦幅の値
-	constexpr float fRadius = 45.0f;	// UIの範囲表示の半径の値
+	constexpr float fRadius = 40.0f;	// UIの範囲表示の半径の値
 };
 
 //=========================================================

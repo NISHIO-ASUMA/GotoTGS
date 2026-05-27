@@ -58,9 +58,15 @@ public:
 	void Update(void);
 	void SetCamera(void);
 	void MouseView(CInputMouse* pMouse);
+	void FollowMouse(void);
 	void WheelMouse(int nDelta);
 
 	void ThirdPersonView(void);
+
+	/// <summary>
+	/// ¼”ö’Ç‰Á : ƒŠƒUƒ‹ƒg‚ÌƒJƒƒ‰ˆ—
+	/// </summary>
+	/// <param name=""></param>
 	void ResultCamera(void);
 
 	/// <summary>

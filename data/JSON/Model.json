@@ -71,7 +71,6 @@
   {
     "Model": "data/MODEL/COLLEAGUE/03_Colleague000_armL.x"
   },
-
   {
     "Model": "data/MODEL/COLLEAGUE001/00_Colleague001_body.x"
   },
@@ -158,5 +157,35 @@
   },
   {
     "Model": "data/MODEL/BOSS/09_Boss_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/00_Mobcast000_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/01_Mobcast000_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/02_Mobcast000_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/03_Mobcast000_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/04_Mobcast000_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/05_Mobcast000_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/06_Mobcast000_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/07_Mobcast000_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/08_Mobcast000_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST000/09_Mobcast000_footL.x"
   }
 ]
