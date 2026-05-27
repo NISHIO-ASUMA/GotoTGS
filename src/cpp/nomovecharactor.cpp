@@ -115,11 +115,9 @@ void CNoMoveCharactor::Update(void)
 	// 行列計算
 	m_mtxworld = mtxScal * mtxRot * mtxTrans;
 
-#ifdef _DEBUG
 	// モーションの更新処理
 	if (m_pMotion)
 		m_pMotion->Update(m_pModel);
-#endif // _NDEBUG
 }
 //=========================================================
 // 描画処理
