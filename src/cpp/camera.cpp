@@ -19,7 +19,6 @@
 #include "template.h"
 #include "player.h"
 #include "block.h"
-#include "xfilemanager.h"
 
 //*********************************************************
 // 定数宣言
@@ -83,14 +82,25 @@ void CCamera::Uninit(void)
 void CCamera::Update(void)
 {
 #ifdef _DEBUG
-
 	// マウスでのカメラ更新
 	MouseView(CManager::GetInstance()->GetMouse());
-
 #endif
 
-	// 追従モードなら
-	if (m_pCamera.nMode == MODE_THIRD) ThirdPersonView();
+	// ゲームのみ追従カメラ設定
+	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME)
+	{
+		// 追従モードならそのカメラに設定
+		if (m_pCamera.nMode == MODE_THIRD)
+		{
+			ThirdPersonView();
+			FollowMouse();
+		}
+	}
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)
+	{
+		// 固定カメラに設定
+		ResultCamera();
+	}
 
 	// 角度の正規化
 	if (m_pCamera.rot.y > D3DX_PI)
@@ -230,6 +240,63 @@ void CCamera::MouseView(CInputMouse * pMouse)
 	}
 }
 //==============================================================
+// マウスのフリック移動更新
+//==============================================================
+void CCamera::FollowMouse(void)
+{
+	// マウス状態を設定
+	DIMOUSESTATE mouseState;
+
+	// マウスの軸移動設定
+	if (CManager::GetInstance()->GetMouse()->GetState(&mouseState))
+	{
+		static POINT prevCursorPos = { (long)SCREEN_WIDTH / (long)1.5f,(long)SCREEN_HEIGHT / (long)1.5f };
+
+		POINT cursorPos;
+		GetCursorPos(&cursorPos);
+
+		float X = (float)cursorPos.x - prevCursorPos.x;
+		float Y = (float)cursorPos.y - prevCursorPos.y;
+
+		const float mouseSensitivity = 0.00045f;
+
+		X *= mouseSensitivity;
+		Y *= mouseSensitivity;
+
+		m_pCamera.rot.y += X;
+		m_pCamera.rot.x += Y;
+
+		if (m_pCamera.rot.y < -D3DX_PI)
+		{
+			m_pCamera.rot.y += D3DX_PI * 2.0f;
+		}
+		else if (m_pCamera.rot.y > D3DX_PI)
+		{
+			m_pCamera.rot.y += -D3DX_PI * 2.0f;
+		}
+
+		if (m_pCamera.rot.x < -D3DX_PI)
+		{
+			m_pCamera.rot.x += D3DX_PI * 2.0f;
+		}
+		else if (m_pCamera.rot.x > D3DX_PI)
+		{
+			m_pCamera.rot.x += -D3DX_PI * 2.0f;
+		}
+
+		if (m_pCamera.rot.x > 3.00f)
+		{
+			m_pCamera.rot.x -= Y;
+		}
+		else if (m_pCamera.rot.x < 0.1f)
+		{
+			m_pCamera.rot.x -= Y;
+		}
+
+		SetCursorPos((long)SCREEN_WIDTH / (long)1.5f, (long)SCREEN_HEIGHT / (long)1.5f);
+	}
+}
+//==============================================================
 // マウスホイール処理
 //==============================================================
 void CCamera::WheelMouse(int nDelta)
@@ -265,6 +332,24 @@ void CCamera::ThirdPersonView(void)
 	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+}
+//==============================================================
+// リザルトのカメラ処理
+//==============================================================
+void CCamera::ResultCamera(void)
+{
+	m_pCamera.posV = CAMERAINFO::InitPos;	// カメラの位置
+	m_pCamera.posR = VECTOR3_NULL;			// カメラの見ている位置
+	m_pCamera.vecU = CAMERAINFO::InitVecU;	// 上方向ベクトル
+	m_pCamera.rot = CAMERAINFO::InitRot;	// 角度
+
+	// 距離を計算
+	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
+	float fRoty = m_pCamera.posV.y - m_pCamera.posR.y;
+	float fRotz = m_pCamera.posV.z - m_pCamera.posR.z;
+
+	// 視点から注視点までの距離
+	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
 }
 //==============================================================
 // カメラから見て透過させる時の当たり判定関数
