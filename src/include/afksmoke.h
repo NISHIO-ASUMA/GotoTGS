@@ -28,26 +28,29 @@ class CSphereCollider;
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfksmoke : public CAfksmoke
+class CAfksmoke : public CAfk
 {
 public:
 
-	CAfk();
-	~CAfk();
+	CAfksmoke();
+	~CAfksmoke();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
-	bool Collision(CSphereCollider* pOther);
-
-	inline CSphereCollider* GetCollider(void) { return m_pCollider.get(); }
-
-	void SetRadius(float fRadius) { m_fRadius = fRadius; }
-	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
+	
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="pos">生成処理</param>
+	/// <param name="radius">半径</param>
+	/// <returns></returns>
+	static CAfksmoke* Create
+	(
+		const D3DXVECTOR3& pos,
+		const float& fRadius
+	);
 
 private:
-	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
-	D3DXVECTOR3 m_pos;								// 位置
-	float m_fRadius;								// UI表示範囲の半径用変数
 };
 
