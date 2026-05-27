@@ -31,6 +31,7 @@
 #include "COPYdeskwork.h"		// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
+#include "camera.h"
 
 //*********************************************************
 // インクルードファイル
@@ -149,6 +150,8 @@ void CPlayer::Update(void)
 	//        今はPCの作業のみだけどこれから複数のタスクの判定も組んであげる形に変更になる
 	//		　髙橋追記 2026/05/19
 	//		　コピー機用の処理を追加しました
+	//		  
+	//        西尾追記 : カメラの固定化する処理を追加したよ
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
@@ -161,7 +164,7 @@ void CPlayer::Update(void)
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
 
 	//*********************************************************
-	// ADD: 西尾 タスク中にFキーが押されたら、タスクを閉じる
+	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
 	//*********************************************************
 	if (isPcDeskWork || isCopyDeskWork)
 	{
@@ -174,10 +177,14 @@ void CPlayer::Update(void)
 		if (isPcDeskWork)
 		{// PCタスクの場合
 			pDesk->GetPCDeskUI()->SetAlphaUI();
+			// カメラ固定フラグ無効化
+			CManager::GetInstance()->GetCamera()->SetCameraMove(false);
 		}
 		else if (isCopyDeskWork)
 		{// コピー機タスクの場合
 			pDesk->GetCOPYDeskUI()->SetAlphaUI();
+			// カメラ固定フラグ無効化
+			CManager::GetInstance()->GetCamera()->SetCameraMove(false);
 		}
 
 		// タスク中は移動や他の当たり判定をさせないためにリターン
@@ -239,6 +246,9 @@ void CPlayer::Update(void)
 			// 当たっている かつ Fキー入力
 			if (Key->GetTrigger(DIK_F))
 			{
+				// カメラ固定フラグ有効化
+				CManager::GetInstance()->GetCamera()->SetCameraMove(true);
+				
 				// タスク取得
 				auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 

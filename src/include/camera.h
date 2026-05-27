@@ -93,6 +93,8 @@ public:
 
 	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
 	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
+	void SetCameraMove(const bool& isMove) { m_isMove = isMove; }
+
 	inline D3DXVECTOR3 GetRot(void) const { return m_pCamera.rot; }
 	inline D3DXVECTOR3 GetPos(void) const { return m_pCamera.posV; }
 	inline D3DXVECTOR3 GetPosR(void) const { return m_pCamera.posR; }
@@ -108,4 +110,5 @@ private:
 private:
 	Camera m_pCamera;				// カメラ構造体変数
 	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
+	bool m_isMove;					// カメラ動かせるかどうかのフラグ
 };

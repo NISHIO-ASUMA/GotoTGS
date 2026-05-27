@@ -29,6 +29,7 @@ class CStateMachine;
 class CPlayer : public CMoveCharactor
 {
 public:
+
 	CPlayer(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
 	~CPlayer();
 
@@ -67,7 +68,7 @@ public:
 	{
 		NEUTRAL,
 		MOVE,
-		ACTION1,
+		SMOKE,
 		ACTION2,
 		ACTION3,
 		MAX

@@ -44,7 +44,7 @@ public:
 	CScore* GetScore(void) const { return m_pScore; }
 	CPlayer* GetPlayer(void) const { return m_pPlayer; } // [ Asuma add ]
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }	// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; } // Misaki
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
 
 	/// <summary>

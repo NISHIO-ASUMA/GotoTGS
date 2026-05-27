@@ -104,11 +104,13 @@ HRESULT CGameSceneObject::Init(void)
 	// 敵生成
 	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), VECTOR3_NULL);
 	
-	// 仮配置 : 上司のデスクのかご
+	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
+
+	// ブロックマネージャーにｎ生成されたプレイヤーのポインタをセット
 	m_pBlocks->SetPlayerPoint(m_pPlayer);
 
 	// カメラのターゲット設定
