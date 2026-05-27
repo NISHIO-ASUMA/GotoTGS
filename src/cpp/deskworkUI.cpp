@@ -94,7 +94,7 @@ HRESULT CDeskworkUI::Init(void)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点ポイントの設定処理
-	SetVTXtype(m_ui.VTXtype);
+	SetVTXtype(m_UI.VTXtype);
 
 	// rhwの設定(1.0fで固定)
 	pVtx[0].rhw =
@@ -106,10 +106,10 @@ HRESULT CDeskworkUI::Init(void)
 	pVtx[0].col =
 	pVtx[1].col =
 	pVtx[2].col =
-	pVtx[3].col = m_ui.col;
+	pVtx[3].col = m_UI.col;
 
 	// UV設定
-	SetDigit(m_ui.nKeytype, m_ui.fDigit);
+	SetDigit(m_UI.nKeytype, m_UI.fDigit);
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
@@ -139,13 +139,13 @@ void CDeskworkUI::Uninit(void)
 void CDeskworkUI::Update(void)
 {
 	// 位置設定
-	SetPos(m_ui.pos);
+	SetPos(m_UI.pos);
 
 	// サイズ設定
-	SetSize(m_ui.fWidth, m_ui.fHeight);
+	SetSize(m_UI.fWidth, m_UI.fHeight);
 
 	// UV設定
-	SetDigit(m_ui.nKeytype, m_ui.fDigit);
+	SetDigit(m_UI.nKeytype, m_UI.fDigit);
 
 }
 
@@ -194,8 +194,8 @@ void CDeskworkUI::SetTexture(const char* pTexName)
 void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 {
 	// メンバに格納
-	m_ui.fWidth = fWidth;
-	m_ui.fHeight = fHeight;
+	m_UI.fWidth = fWidth;
+	m_UI.fHeight = fHeight;
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -203,35 +203,35 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 	// 頂点バッファをロック
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	switch (m_ui.VTXtype)
+	switch (m_UI.VTXtype)
 	{
 	case VTXTYPE_CENTER:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
 	case VTXTYPE_LEFT:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
 	case VTXTYPE_RIGHT:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
@@ -247,7 +247,7 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 {
 	// メンバに格納
-	m_ui.col = col;
+	m_UI.col = col;
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -259,7 +259,7 @@ void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 	pVtx[0].col =
 	pVtx[1].col =
 	pVtx[2].col =
-	pVtx[3].col = m_ui.col;
+	pVtx[3].col = m_UI.col;
 
 	// 頂点バッファのアンロック
 	m_pVtxBuff->Unlock();
@@ -350,30 +350,30 @@ void CDeskworkUI::SetVTX(const VTXTYPE& VTXtype)
 	case VTXTYPE_CENTER:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
 	case VTXTYPE_LEFT:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x			  , m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x			  , m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x + m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
 	case VTXTYPE_RIGHT:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_ui.pos.x			   , m_ui.pos.y - m_ui.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_ui.pos.x - m_ui.fWidth, m_ui.pos.y + m_ui.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_ui.pos.x			   , m_ui.pos.y + m_ui.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x			   , m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x			   , m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 

@@ -20,12 +20,11 @@
 #include "collisionsphere.h"
 #include "blockmanager.h"
 #include "block.h"
-#include "jsonmanager.h"
 #include "manager.h"
-#include "input.h"
 #include "debugproc.h"
 #include "gamesceneobject.h"
 #include "player.h"
+#include "template.h"
 
 //*********************************************************
 // 定数名前空間
@@ -33,6 +32,19 @@
 namespace EnemyInfo
 {
 	constexpr const char* SCRIPT = "data/MOTION/Enemy/EnemyMotion.txt"; // モーションファイル
+	constexpr int VIEWPOINT = 4; // ポイント数
+
+	constexpr float SPEED = 1.0f; // 移動速度
+	constexpr float RANGE = 2.0f; // 判定範囲
+
+	// ビューポイント配列
+	const D3DXVECTOR3 ViewPoint[VIEWPOINT] =
+	{
+		{-95.0f, 0.0f, 235.5f},
+		{120.8f ,0.0f, 225.0f},
+		{81.0f, 0.0f, -150.0f},
+		{-110.0f,0.0f,-145.0f}
+	};
 };
 
 //========================================================
@@ -40,7 +52,10 @@ namespace EnemyInfo
 //========================================================
 CEnemy::CEnemy(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxColiider(nullptr),
-m_pSphereColiider(nullptr)
+m_pSphereColiider(nullptr),
+m_isCheckPoint(false),
+m_nStopTime(NULL),
+m_nTargetIdx(NULL)
 {
 
 }
@@ -83,9 +98,9 @@ HRESULT CEnemy::Init(void)
 
 	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
-	D3DXVECTOR3 rot = GetRot(); 
+	D3DXVECTOR3 rot = GetRot();
 
-	// X, Y, Zの回転を合成して回転行列を作成
+	// 回転行列を作成
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// 矩形コライダー生成
@@ -113,23 +128,11 @@ void CEnemy::Uninit(void)
 //========================================================
 void CEnemy::Update(void)
 {
+	// ビューポイント追従更新関数
+	UpdateMoveViewPoint();
+
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
-
-	// プレイヤーの取得
-	auto Player = CGameSceneObject::GetInstance()->GetPlayer();
-	if (Player == nullptr) return;
-
-	// 判別する
-	if (CheckEyesight(Player->GetPos()))
-	{
-		// モーション変更
-		GetMotion()->SetMotion(MOTION::MOVE);
-	}
-	else
-	{
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
-	}
 
 	// キャラクター全体更新
 	CMoveCharactor::Update();
@@ -144,6 +147,71 @@ void CEnemy::Draw(void)
 
 	// 扇形メッシュの描画
 	DrawEyeSight();
+}
+//========================================================
+// ビューポイント追従処理
+//========================================================
+void CEnemy::UpdateMoveViewPoint(void)
+{
+	// 停止カウント中の処理
+	if (m_nStopTime > 0)
+	{
+		m_nStopTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = EnemyInfo::ViewPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= EnemyInfo::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nStopTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, EnemyInfo::VIEWPOINT - 1);
+
+		// 目的地に到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= EnemyInfo::SPEED;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
 }
 //========================================================
 // 視界の扇形の描画処理

@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cpp\afk.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="src\cpp\player.cpp" />
     <ClCompile Include="src\cpp\playerstateaction.cpp" />
     <ClCompile Include="src\cpp\playerstatebase.cpp" />
+    <ClCompile Include="src\cpp\playerstateditch.cpp" />
     <ClCompile Include="src\cpp\playerstatemove.cpp" />
     <ClCompile Include="src\cpp\playerstateneutral.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
@@ -280,6 +282,7 @@
     <ClCompile Include="src\cpp\xfilemanager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\include\afk.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\billboard.h" />
@@ -364,6 +367,7 @@
     <ClInclude Include="src\include\player.h" />
     <ClInclude Include="src\include\playerstateaction.h" />
     <ClInclude Include="src\include\playerstatebase.h" />
+    <ClInclude Include="src\include\playerstateditch.h" />
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\progressgauge.h" />

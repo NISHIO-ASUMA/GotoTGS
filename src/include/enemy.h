@@ -3,7 +3,8 @@
 // 敵の処理 [ enemy.h ]
 // Author: Asuma Nishio
 // 
-// NOTE : プレイヤーを疑っているモーションを追加する
+// NOTE : プレイヤーを疑っているモーションを追加して切り替えを作る
+//        プレイヤーにつかまった判定を作らなあかん
 //
 //========================================================
 
@@ -63,6 +64,7 @@ public:
 	{
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動
+		//SEARCH    // 疑いモーション
 		MAX
 	};
 
@@ -88,6 +90,14 @@ public:
 
 private:
 
+	void UpdateMoveViewPoint(void);
+
+private:
+
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+
+	bool m_isCheckPoint;								// ポイントに到着したかどうか
+	int m_nStopTime;									// 停止しているカウント
+	int m_nTargetIdx;									// 向かう目的地のインデックス
 };

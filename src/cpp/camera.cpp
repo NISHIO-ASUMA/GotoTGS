@@ -38,7 +38,8 @@ namespace CAMERAINFO
 // コンストラクタ
 //=========================================================
 CCamera::CCamera() : m_pCamera(ClearDefault()),
-m_pThirdPersonPos(VECTOR3_NULL)
+m_pThirdPersonPos(VECTOR3_NULL),
+m_isMove(false)
 {
 	
 }
@@ -93,7 +94,9 @@ void CCamera::Update(void)
 		if (m_pCamera.nMode == MODE_THIRD)
 		{
 			ThirdPersonView();
-			FollowMouse();
+
+			// 移動フラグがfalseならフリック対応
+			if (!m_isMove) FollowMouse();
 		}
 	}
 	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)

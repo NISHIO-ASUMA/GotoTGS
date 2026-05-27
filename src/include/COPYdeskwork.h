@@ -56,17 +56,16 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr float POS_X = HALFWIDTH;		// X軸の位置
-		static constexpr float POS_Y = HALFHEIGHT;		// Y軸の位置
-		static constexpr float VALUE_Y = 150.0f;		// Y軸の位置の増加分
-		static constexpr float VALUE_TEXU = 0.25f;		// テクスチャのUV座標
-		static constexpr int UI_NUM = TEXTURE_MAX;		// UIの数
-		static constexpr float UI_WIDTH = 100.0f;		// UIの横幅
-		static constexpr float UI_HEIGHT = 100.0f;		// UIの縦幅
-		static constexpr float GAGE_WIDTH = 600.0f;		// ゲージの横幅
-		static constexpr float GAGE_HEIGHT = 25.0f;		// ゲージの縦幅
-		static constexpr int TIME_PUSH = 120;			// ボタンを押す時間
-		static constexpr int TIME_COOL = 60;			// クールタイム
+		static constexpr float VALUE_X = 6.0f;		// X軸の位置の増加分
+		static constexpr float VALUE_Y = 250.0f;	// Y軸の位置の増加分
+		static constexpr float VALUE_TEXU = 0.25f;	// テクスチャのUV座標
+		static constexpr int UI_NUM = TEXTURE_MAX;	// UIの数
+		static constexpr float UI_WIDTH = 100.0f;	// UIの横幅
+		static constexpr float UI_HEIGHT = 100.0f;	// UIの縦幅
+		static constexpr float GAGE_WIDTH = 927.0f;	// ゲージの横幅
+		static constexpr float GAGE_HEIGHT = 24.5f;	// ゲージの縦幅
+		static constexpr int TIME_PUSH = 120;		// ボタンを押す時間
+		static constexpr int TIME_COOL = 60;		// クールタイム
 	};
 
 	// メンバ変数
