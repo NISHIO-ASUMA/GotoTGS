@@ -165,7 +165,7 @@ void CPlayer::Update(void)
 	//*********************************************************
 	if (isPcDeskWork || isCopyDeskWork)
 	{
-		if (!Key->GetTrigger(DIK_F))
+		if (!Key->GetTrigger(DIK_TAB))
 		{// I—¹ƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢ê‡
 			return;
 		}

@@ -65,7 +65,7 @@ HRESULT CCOPYDeskwork::Init(void)
 
 	// UIÇÃèÓïÒ
 	CDeskworkUI::UI ui;
-	ui.pos = D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f);
+	ui.pos = GetPos();
 	ui.col = D3DXCOLOR(COLOR_NULL);
 	ui.VTXtype = CDeskworkUI::VTXTYPE_CENTER;
 	ui.fWidth = Config::UI_WIDTH;
@@ -78,8 +78,8 @@ HRESULT CCOPYDeskwork::Init(void)
 	m_pDeskUI[TEXTURE_KEY] = CDeskworkUI::Create(ui);
 
 	// ÉQÅ[ÉWópÇ…ê›íËÇ∑ÇÈ
-	ui.pos.x -= Config::GAGE_WIDTH * 0.5f;
-	ui.pos.y += Config::VALUE_Y;
+	ui.pos.x -= (Config::GAGE_WIDTH * 0.5f + Config::VALUE_X);
+	ui.pos.y -= Config::VALUE_Y;
 	ui.VTXtype = CDeskworkUI::VTXTYPE_LEFT;
 	ui.fWidth = 0.0f;
 	ui.fHeight = Config::GAGE_HEIGHT;

@@ -1,0 +1,225 @@
+﻿  alert.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\alert.cpp(11,10): fatal error C1083: include ファイルを開けません。'alert.h':No such file or directory
+  animationobject2d.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\animationobject2d.cpp(11,10): fatal error C1083: include ファイルを開けません。'animationobject2d.h':No such file or directory
+  billboard.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\billboard.cpp(11,10): fatal error C1083: include ファイルを開けません。'billboard.h':No such file or directory
+  block.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\block.cpp(11,10): fatal error C1083: include ファイルを開けません。'block.h':No such file or directory
+  blockmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\blockmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'blockmanager.h':No such file or directory
+  boss.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\boss.cpp(11,10): fatal error C1083: include ファイルを開けません。'boss.h':No such file or directory
+  boxcollider.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\boxcollider.cpp(11,10): fatal error C1083: include ファイルを開けません。'boxcollider.h':No such file or directory
+  boxtospherecollision.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\boxtospherecollision.cpp(11,10): fatal error C1083: include ファイルを開けません。'boxtospherecollision.h':No such file or directory
+  camera.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\camera.cpp(11,10): fatal error C1083: include ファイルを開けません。'camera.h':No such file or directory
+  collider.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\collider.cpp(11,10): fatal error C1083: include ファイルを開けません。'collider.h':No such file or directory
+  collision.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\collision.cpp(11,10): fatal error C1083: include ファイルを開けません。'collision.h':No such file or directory
+  collisionbox.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\collisionbox.cpp(11,10): fatal error C1083: include ファイルを開けません。'collisionbox.h':No such file or directory
+  collisionsphere.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\collisionsphere.cpp(11,10): fatal error C1083: include ファイルを開けません。'collisionsphere.h':No such file or directory
+  createjsonblock.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonblock.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonblock.h':No such file or directory
+  createjsonblocknormal.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonblocknormal.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonblocknormal.h':No such file or directory
+  createjsoncharactor.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsoncharactor.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsoncharactor.h':No such file or directory
+  createjsonmeshdome.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonmeshdome.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonmeshdome.h':No such file or directory
+  createjsonmeshfield.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonmeshfield.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonmeshfield.h':No such file or directory
+  createjsonnomove.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonnomove.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonnomove.h':No such file or directory
+  createjsonui.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonui.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonui.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  createjsonwall.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\createjsonwall.cpp(11,10): fatal error C1083: include ファイルを開けません。'createjsonwall.h':No such file or directory
+  debugproc.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\debugproc.cpp(11,10): fatal error C1083: include ファイルを開けません。'debugproc.h':No such file or directory
+  deskwork.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\deskwork.cpp(11,10): fatal error C1083: include ファイルを開けません。'deskwork.h':No such file or directory
+  deskworkUI.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\deskworkUI.cpp(11,10): fatal error C1083: include ファイルを開けません。'deskworkUI.h':No such file or directory
+  deskworkUImanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\deskworkUImanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'deskworkUImanager.h':No such file or directory
+  easing.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\easing.cpp(11,10): fatal error C1083: include ファイルを開けません。'easing.h':No such file or directory
+  enemy.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\enemy.cpp(11,10): fatal error C1083: include ファイルを開けません。'enemy.h':No such file or directory
+  event.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\event.cpp(11,10): fatal error C1083: include ファイルを開けません。'event.h':No such file or directory
+  eventcutin.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\eventcutin.cpp(11,10): fatal error C1083: include ファイルを開けません。'eventcutin.h':No such file or directory
+  eventUi.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\eventUi.cpp(11,10): fatal error C1083: include ファイルを開けません。'eventUI.h':No such file or directory
+  fade.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\fade.cpp(11,10): fatal error C1083: include ファイルを開けません。'fade.h':No such file or directory
+  friend.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\friend.cpp(11,10): fatal error C1083: include ファイルを開けません。'friend.h':No such file or directory
+  game.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\game.cpp(11,10): fatal error C1083: include ファイルを開けません。'game.h':No such file or directory
+  gamemanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gamemanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'gamemanager.h':No such file or directory
+  gamesceneobject.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gamesceneobject.cpp(11,10): fatal error C1083: include ファイルを開けません。'gamesceneobject.h':No such file or directory
+  gamestate.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gamestate.cpp(11,10): fatal error C1083: include ファイルを開けません。'gamestate.h':No such file or directory
+  gametime.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gametime.cpp(11,10): fatal error C1083: include ファイルを開けません。'gametime.h':No such file or directory
+  gamewallmodel.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gamewallmodel.cpp(11,10): fatal error C1083: include ファイルを開けません。'gamewallmodel.h':No such file or directory
+  gauge.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\gauge.cpp(11,10): fatal error C1083: include ファイルを開けません。'gauge.h':No such file or directory
+  input.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\input.cpp(11,10): fatal error C1083: include ファイルを開けません。'input.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  instancemodel.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\instancemodel.cpp(11,10): fatal error C1083: include ファイルを開けません。'instancemodel.h':No such file or directory
+  instancemodelmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\instancemodelmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'instancemodelmanager.h':No such file or directory
+  instancemotionmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\instancemotionmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'instancemotionmanager.h':No such file or directory
+  instancing.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\instancing.cpp(11,10): fatal error C1083: include ファイルを開けません。'instancing.h':No such file or directory
+  instancingcharactor.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\instancingcharactor.cpp(11,10): fatal error C1083: include ファイルを開けません。'instancingcharactor.h':No such file or directory
+  jsonconverter.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\jsonconverter.cpp(11,10): fatal error C1083: include ファイルを開けません。'jsonconverter.h':No such file or directory
+  jsonmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\jsonmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'jsonmanager.h':No such file or directory
+  light.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\light.cpp(11,10): fatal error C1083: include ファイルを開けません。'light.h':No such file or directory
+  load.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\load.cpp(11,10): fatal error C1083: include ファイルを開けません。'load.h':No such file or directory
+  main.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\main.cpp(11,10): fatal error C1083: include ファイルを開けません。'main.h':No such file or directory
+  manager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\manager.cpp(11,10): fatal error C1083: include ファイルを開けません。'manager.h':No such file or directory
+  meshcylinder.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\meshcylinder.cpp(11,10): fatal error C1083: include ファイルを開けません。'meshcylinder.h':No such file or directory
+  meshdome.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\meshdome.cpp(11,10): fatal error C1083: include ファイルを開けません。'meshdome.h':No such file or directory
+  meshfield.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\meshfield.cpp(11,10): fatal error C1083: include ファイルを開けません。'meshfield.h':No such file or directory
+  meshimpact.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\meshimpact.cpp(11,10): fatal error C1083: include ファイルを開けません。'meshimpact.h':No such file or directory
+  meshpiler.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\meshpiler.cpp(11,10): fatal error C1083: include ファイルを開けません。'meshpiler.h':No such file or directory
+  model.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\model.cpp(11,10): fatal error C1083: include ファイルを開けません。'model.h':No such file or directory
+  modelmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\modelmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'modelmanager.h':No such file or directory
+  motion.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\motion.cpp(11,10): fatal error C1083: include ファイルを開けません。'motion.h':No such file or directory
+  motioninstancing.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\motioninstancing.cpp(11,10): fatal error C1083: include ファイルを開けません。'motioninstancing.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  motionmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\motionmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'motionmanager.h':No such file or directory
+  movecharactor.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\movecharactor.cpp(11,10): fatal error C1083: include ファイルを開けません。'movecharactor.h':No such file or directory
+  nomovecharactor.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\nomovecharactor.cpp(11,10): fatal error C1083: include ファイルを開けません。'nomovecharactor.h':No such file or directory
+  number.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\number.cpp(11,10): fatal error C1083: include ファイルを開けません。'number.h':No such file or directory
+  object.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\object.cpp(11,10): fatal error C1083: include ファイルを開けません。'object.h':No such file or directory
+  object2D.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\object2D.cpp(11,10): fatal error C1083: include ファイルを開けません。'object2D.h':No such file or directory
+  object3D.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\object3D.cpp(11,10): fatal error C1083: include ファイルを開けません。'object3D.h':No such file or directory
+  objectX.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\objectX.cpp(11,10): fatal error C1083: include ファイルを開けません。'objectX.h':No such file or directory
+  outline.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\outline.cpp(11,10): fatal error C1083: include ファイルを開けません。'outline.h':No such file or directory
+  pause.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\pause.cpp(11,10): fatal error C1083: include ファイルを開けません。'pause.h':No such file or directory
+  pausemanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\pausemanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'pausemanager.h':No such file or directory
+  pch.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\pch.cpp(11,10): fatal error C1083: include ファイルを開けません。'pch.h':No such file or directory
+  player.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\player.cpp(11,10): fatal error C1083: include ファイルを開けません。'player.h':No such file or directory
+  playerstateaction.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\playerstateaction.cpp(11,10): fatal error C1083: include ファイルを開けません。'playerstateaction.h':No such file or directory
+  playerstatebase.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\playerstatebase.cpp(11,10): fatal error C1083: include ファイルを開けません。'playerstatebase.h':No such file or directory
+  playerstatemove.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\playerstatemove.cpp(11,10): fatal error C1083: include ファイルを開けません。'playerstatemove.h':No such file or directory
+  playerstateneutral.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\playerstateneutral.cpp(11,10): fatal error C1083: include ファイルを開けません。'playerstateneutral.h':No such file or directory
+  ranking.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\ranking.cpp(11,10): fatal error C1083: include ファイルを開けません。'ranking.h':No such file or directory
+  rankingmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\rankingmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'rankingmanager.h':No such file or directory
+  rankingobject.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\rankingobject.cpp(11,10): fatal error C1083: include ファイルを開けません。'rankingobject.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  rankingscore.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\rankingscore.cpp(11,10): fatal error C1083: include ファイルを開けません。'rankingscore.h':No such file or directory
+  renderer.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\renderer.cpp(11,10): fatal error C1083: include ファイルを開けません。'renderer.h':No such file or directory
+  result.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\result.cpp(11,10): fatal error C1083: include ファイルを開けません。'result.h':No such file or directory
+  resultmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\resultmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'resultmanager.h':No such file or directory
+  resultobject.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\resultobject.cpp(11,10): fatal error C1083: include ファイルを開けません。'resultobject.h':No such file or directory
+  resultscore.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\resultscore.cpp(11,10): fatal error C1083: include ファイルを開けません。'resultscore.h':No such file or directory
+  resultscoremanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\resultscoremanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'resultscoremanager.h':No such file or directory
+  scene.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\scene.cpp(11,10): fatal error C1083: include ファイルを開けません。'scene.h':No such file or directory
+  score.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\score.cpp(11,10): fatal error C1083: include ファイルを開けません。'score.h':No such file or directory
+  shadow.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\shadow.cpp(11,10): fatal error C1083: include ファイルを開けません。'shadow.h':No such file or directory
+  shadowstencil.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\shadowstencil.cpp(11,10): fatal error C1083: include ファイルを開けません。'shadowstencil.h':No such file or directory
+  smokefriend.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\smokefriend.cpp(11,10): fatal error C1083: include ファイルを開けません。'smokefriend.h':No such file or directory
+  sound.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\sound.cpp(11,10): fatal error C1083: include ファイルを開けません。'sound.h':No such file or directory
+  spherecollider.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\spherecollider.cpp(11,10): fatal error C1083: include ファイルを開けません。'spherecollider.h':No such file or directory
+  statemachine.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\statemachine.cpp(11,10): fatal error C1083: include ファイルを開けません。'statemachine.h':No such file or directory
+  texture.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\texture.cpp(11,10): fatal error C1083: include ファイルを開けません。'texture.h':No such file or directory
+  title.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\title.cpp(11,10): fatal error C1083: include ファイルを開けません。'title.h':No such file or directory
+  titlemanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\titlemanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'titlemanager.h':No such file or directory
+  titleobject.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\titleobject.cpp(11,10): fatal error C1083: include ファイルを開けません。'titleobject.h':No such file or directory
+  tutorial.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\tutorial.cpp(11,10): fatal error C1083: include ファイルを開けません。'tutorial.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  tutorialmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\tutorialmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'tutorialmanager.h':No such file or directory
+  tutorialobject.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\tutorialobject.cpp(11,10): fatal error C1083: include ファイルを開けません。'tutorialobject.h':No such file or directory
+  tutorialui.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\tutorialui.cpp(11,10): fatal error C1083: include ファイルを開けません。'tutorialui.h':No such file or directory
+  ui.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\ui.cpp(11,10): fatal error C1083: include ファイルを開けません。'ui.h':No such file or directory
+  worldUIcollision.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\worldUIcollision.cpp(11,10): fatal error C1083: include ファイルを開けません。'worldUIcollision.h':No such file or directory
+  worldwallmanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\worldwallmanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'worldwallmanager.h':No such file or directory
+  xfilemanager.cpp
+C:\Users\student\Documents\Git\GotoTGS\src\cpp\xfilemanager.cpp(11,10): fatal error C1083: include ファイルを開けません。'xfilemanager.h':No such file or directory
+  コードを生成中...

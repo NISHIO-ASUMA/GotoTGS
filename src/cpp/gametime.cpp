@@ -166,6 +166,13 @@ void CGametime::Uninit(void)
 //=========================================================
 void CGametime::Update(void)
 {
+	// 最大時間が0なら処理を通さない
+	if (m_nAllTime <= 0)
+	{
+		m_nAllTime = 0;
+		return;
+	}
+
 	if (m_nCounter < 0)
 	{
 		// カウンターを0にする

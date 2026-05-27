@@ -49,9 +49,9 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 
 	// 各種値の設定
 	pDeskwork->SetPos(pos);
-	pDeskwork->SetSize(Config::WIDTH, Config::HEIGHT);	// サイズ設定
-	pDeskwork->SetCol(COLOR_WHITE);						// カラー設定
-	pDeskwork->SetTexture(Config::TEXNAME);				// テクスチャ設定
+	pDeskwork->SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);	// サイズ設定
+	pDeskwork->SetCol(COLOR_WHITE);								// カラー設定
+	pDeskwork->SetTexture(Config::PC_TEXNAME);					// テクスチャ設定
 
 	// 初期化が失敗した場合
 	if (FAILED(pDeskwork->Init())) return nullptr;
@@ -75,10 +75,10 @@ HRESULT CDeskwork::Init(void)
 	}
 
 	// PCタスクUIの生成
-	m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+	m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT - Config::PC_VALUE_Y, 0.0f));
 
 	// コピー機タスクUIの生成
-	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f));
+	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + Config::COPY_VALUE_Y, 0.0f));
 
 	// フラグを初期化
 	m_pPCDeskUI->SetUse(false);
@@ -115,11 +115,11 @@ void CDeskwork::Uninit(void)
 //=========================================================
 void CDeskwork::Update(void)
 {
-	// ポインタがヌルかつ有効状態ではないなら
-	if (m_pPCDeskUI != nullptr && 
-		m_pCOPYDeskUI != nullptr &&
-		m_pPCDeskUI->GetUse() != true && 
-		m_pCOPYDeskUI->GetUse() != true)
+	// ポインタがヌルではなく有効状態ではないなら
+	if ((m_pPCDeskUI != nullptr && 
+		m_pCOPYDeskUI != nullptr) &&
+		(m_pPCDeskUI->GetUse() != true && 
+		m_pCOPYDeskUI->GetUse() != true))
 	{
 		return;
 	}
@@ -129,14 +129,24 @@ void CDeskwork::Update(void)
 
 	if (m_pCOPYDeskUI->GetUse() != true)
 	{// 他のタスクが起動していないなら
+
 		// PCタスクUIの更新処理
 		m_pPCDeskUI->Update();
+
+		// テクスチャをPC用に設定
+		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
+		SetTexture(Config::PC_TEXNAME);
 	}
 
 	if (m_pPCDeskUI->GetUse() != true)
 	{// 他のタスクが起動していないなら
+
 		// コピー機タスクUIの更新処理
 		m_pCOPYDeskUI->Update();
+	
+		// テクスチャをコピー機用に設定
+		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
+		SetTexture(Config::COPY_TEXNAME);
 	}
 
 }
