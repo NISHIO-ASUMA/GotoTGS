@@ -20,9 +20,7 @@
 #include "collisionsphere.h"
 #include "blockmanager.h"
 #include "block.h"
-#include "jsonmanager.h"
 #include "manager.h"
-#include "input.h"
 #include "debugproc.h"
 #include "gamesceneobject.h"
 #include "player.h"
@@ -33,7 +31,6 @@
 //*********************************************************
 namespace EnemyInfo
 {
-
 	constexpr const char* SCRIPT = "data/MOTION/Enemy/EnemyMotion.txt"; // モーションファイル
 	constexpr int VIEWPOINT = 4; // ポイント数
 
