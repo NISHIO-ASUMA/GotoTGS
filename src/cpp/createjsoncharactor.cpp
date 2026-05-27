@@ -14,6 +14,7 @@
 // インクルードファイル
 //*******************************************************************
 #include "createjsonnomove.h"
+#include "createjsonmove.h"
 
 //===================================================================
 // 生成処理
@@ -25,4 +26,5 @@ void CJsonCreateCharactor::Create(const json& Jsondata)
 
 	// 動かないキャラクターの生成
 	if (type == "NoMove") CJsonCreateNoMove::Create(Jsondata);
+	else if (type == "Move") CJsonCreateMove::Create(Jsondata);
 }
