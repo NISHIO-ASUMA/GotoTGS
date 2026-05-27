@@ -26,8 +26,11 @@
 //*********************************************************
 namespace UI
 {
-	float fMaxFrame = 120.0f;	// イージング用マックスフレーム変数
+#ifdef _DEBUG
 	int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
+#else
+	int nDeleteTime = 140;		// チュートリアル用UIの表示の仕方を切り替えるための時間
+#endif
 };
 
 //=========================================================
@@ -117,7 +120,7 @@ void CTutorialUI::Update(void)
 	// 現在の時間を取得
 	int nNowTime = CGameSceneObject::GetInstance()->GetTime()->GetAllTime();
 
-	// タイムが570秒以下だったら
+	// タイムが以下だったら
 	if (nNowTime <= UI::nDeleteTime)m_bTime = false;
 	
 	// 親クラスの更新処理
