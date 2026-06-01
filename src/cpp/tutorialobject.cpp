@@ -56,7 +56,7 @@ CTutorialObject::~CTutorialObject()
 HRESULT CTutorialObject::Init(void)
 {
 	// メッシュ生成
-	CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
+	//CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
 
 	//// チュートリアルで使うオブジェクトの読み込み
 	//auto JsonManager = CManager::GetInstance()->GetJsonManager();

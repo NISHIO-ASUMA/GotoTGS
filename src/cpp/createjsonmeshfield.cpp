@@ -32,6 +32,9 @@ void CJsonCreateMeshField::Create(const json& Jsondata)
 	int nSegmentX = CJsonConverter::ConverterInt(Jsondata, "SegmentX");
 	int nSegmentZ = CJsonConverter::ConverterInt(Jsondata, "SegmentZ");
 
+	// テクスチャ設定
+	std::string str = CJsonConverter::ConverterPath(Jsondata, "Texture");
+
 	// 実際のオブジェクト生成
-	CMeshField::Create(pos, fRadiusX, fRadiusZ, nSegmentX, nSegmentZ);
+	CMeshField::Create(pos, fRadiusX, fRadiusZ, nSegmentX, nSegmentZ, str.c_str());
 }
