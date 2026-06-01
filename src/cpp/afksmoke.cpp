@@ -16,12 +16,18 @@
 #include "spherecollider.h"
 #include "collisionsphere.h"
 
+//=================================================
+// 静的メンバ変数
+//=================================================
+CAfksmoke* CAfksmoke::m_pInstance = nullptr; // インスタンス変数
+
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace UI
+namespace AFKSMOKE
 {
-
+	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
+	float fRadius = 25.0f;								// 範囲の半径
 };
 
 //=========================================================
@@ -43,15 +49,15 @@ CAfksmoke::~CAfksmoke()
 //=========================================================
 // 生成処理
 //=========================================================
-CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
+CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
 	CAfksmoke* pAfkSmoke = new CAfksmoke;
 	if (pAfkSmoke == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pAfkSmoke->SetPos(pos);
-	pAfkSmoke->SetRadius(fRadius);
+	pAfkSmoke->SetPos(AFKSMOKE::Pos);
+	pAfkSmoke->SetRadius(AFKSMOKE::fRadius);
 
 	// 初期化失敗時
 	if (FAILED(pAfkSmoke->Init())) return nullptr;
@@ -65,7 +71,7 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
 HRESULT CAfksmoke::Init(void)
 {
 	// 親クラスの初期化処理
-	CAfk::Init();
+	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
 	return S_OK;
 }
 //=========================================================
@@ -75,6 +81,13 @@ void CAfksmoke::Uninit(void)
 {
 	// 親クラスの終了処理
 	CAfk::Uninit();
+
+	// シングルトンの破棄
+	if (m_pInstance)
+	{
+		delete m_pInstance;
+		m_pInstance = nullptr;
+	}
 }
 //=========================================================
 // 更新処理
@@ -83,7 +96,15 @@ void CAfksmoke::Update(void)
 {
 	// 親クラスの更新処理
 	CAfk::Update();
+}
+//=================================================
+// インスタンス取得処理
+//=================================================
+CAfksmoke* CAfksmoke::Instance(void)
+{
+	// nullチェック
+	if (m_pInstance == nullptr)m_pInstance = new CAfksmoke;
 
-	
-
+	// 生成されたインスタンスを返す
+	return m_pInstance;
 }

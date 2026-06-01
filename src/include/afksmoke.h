@@ -31,8 +31,6 @@ class CSphereCollider;
 class CAfksmoke : public CAfk
 {
 public:
-
-	CAfksmoke();
 	~CAfksmoke();
 
 	HRESULT Init(void);
@@ -47,10 +45,15 @@ public:
 	/// <returns></returns>
 	static CAfksmoke* Create
 	(
-		const D3DXVECTOR3& pos,
-		const float& fRadius
+		const D3DXVECTOR3& pos
 	);
 
+	// インスタンス生成用関数
+	static CAfksmoke* Instance(void);
+
 private:
+	CAfksmoke();				// コンストラクタ格納
+	static CAfksmoke* m_pInstance;	// シングルトン変数
+
 };
 

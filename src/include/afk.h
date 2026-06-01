@@ -26,11 +26,21 @@ class CSphereCollider;
 class CAfk
 {
 public:
-
 	CAfk();
 	~CAfk();
 
-	HRESULT Init(void);
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="fRadius">半径</param>
+	/// <returns></returns>
+	HRESULT Init
+	(
+		const D3DXVECTOR3& pos,
+		const float& fRadius
+	);
+
 	void Uninit(void);
 	void Update(void);
 	bool Collision(CSphereCollider* pOther);
@@ -39,6 +49,7 @@ public:
 
 	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
+	bool GetAfk(void) { return m_bAfk; }
 
 private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
