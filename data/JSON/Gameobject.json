@@ -67,6 +67,7 @@
     "ObjectTag": "Charactor",
     "Charactortag": "NoMove",
     "CharactorName": "SmokeFirend",
+    "MotionName": "data/MOTION/Smoke/SmokeMotion.txt",
     "Pos": [ 450.0, 0.0, 355.0 ],
     "Rot": [ 0.0, 0.0, 0.0 ]
   },
@@ -74,6 +75,7 @@
     "ObjectTag": "Charactor",
     "Charactortag": "NoMove",
     "CharactorName": "SmokeFirend",
+    "MotionName": "data/MOTION/Smoke/SmokeMotion.txt",
     "Pos": [ 375.0, 0.0, 355.0 ],
     "Rot": [ 0.0, 0.0, 0.0 ]
   },
@@ -81,6 +83,7 @@
     "ObjectTag": "Charactor",
     "Charactortag": "NoMove",
     "CharactorName": "SmokeFirend",
+    "MotionName": "data/MOTION/Smoke/SmokeMotion001.txt",
     "Pos": [ 403.0, 0.0, 320.0 ],
     "Rot": [ 0.0, 1.57, 0.0 ]
   }

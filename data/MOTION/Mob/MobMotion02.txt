@@ -1,6 +1,6 @@
 #==============================================================================
 #
-# 『モーションビューワ』スクリプトファイル [ PlayerMotion.txt ]
+# 『モーションビューワ』スクリプトファイル [ SmokeMotion02.txt ]
 # Author : AKIRA TANAKA
 #
 #==============================================================================
@@ -14,16 +14,16 @@ NUM_MODEL = 10
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/MOBCAST000/00_Mobcast000_body.x		# [0]体
-MODEL_FILENAME = data/MODEL/MOBCAST000/01_Mobcast000_head.x		# [1]頭
-MODEL_FILENAME = data/MODEL/MOBCAST000/02_Mobcast000_armR.x		# [2]右腕
-MODEL_FILENAME = data/MODEL/MOBCAST000/03_Mobcast000_handR.x	# [3]右手
-MODEL_FILENAME = data/MODEL/MOBCAST000/04_Mobcast000_armL.x		# [4]左腕
-MODEL_FILENAME = data/MODEL/MOBCAST000/05_Mobcast000_handL.x	# [5]左手
-MODEL_FILENAME = data/MODEL/MOBCAST000/06_Mobcast000_legR.x		# [6]右腿
-MODEL_FILENAME = data/MODEL/MOBCAST000/07_Mobcast000_footR.x	# [7]右足
-MODEL_FILENAME = data/MODEL/MOBCAST000/08_Mobcast000_legL.x		# [8]左腿
-MODEL_FILENAME = data/MODEL/MOBCAST000/09_Mobcast000_footL.x	# [9]左足
+MODEL_FILENAME = data/MODEL/MOBCAST002/00_Mobcast002_body.x		# [0]体
+MODEL_FILENAME = data/MODEL/MOBCAST002/01_Mobcast002_head.x		# [1]頭
+MODEL_FILENAME = data/MODEL/MOBCAST002/02_Mobcast002_armR.x		# [2]右腕
+MODEL_FILENAME = data/MODEL/MOBCAST002/03_Mobcast002_handR.x	# [3]右手
+MODEL_FILENAME = data/MODEL/MOBCAST002/04_Mobcast002_armL.x		# [4]左腕
+MODEL_FILENAME = data/MODEL/MOBCAST002/05_Mobcast002_handL.x	# [5]左手
+MODEL_FILENAME = data/MODEL/MOBCAST002/06_Mobcast002_legR.x		# [6]右腿
+MODEL_FILENAME = data/MODEL/MOBCAST002/07_Mobcast002_footR.x	# [7]右足
+MODEL_FILENAME = data/MODEL/MOBCAST002/08_Mobcast002_legL.x		# [8]左腿
+MODEL_FILENAME = data/MODEL/MOBCAST002/09_Mobcast002_footL.x	# [9]左足
 
 #------------------------------------------------------------------------------
 # キャラクター情報

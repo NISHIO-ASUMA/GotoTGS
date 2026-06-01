@@ -45,7 +45,7 @@ void CJsonCreateNoMove::Create(const JsonNoMove::json& Jsondata)
 	}
 	else if (type == "SmokeFirend")
 	{// 煙草同僚生成
-		CSmokeFriend::Create(pos, rot);
+		CSmokeFriend::Create(pos, rot,str.c_str());
 	}
 	else if (type == "MeetingFriend")
 	{// 会議室キャラクター

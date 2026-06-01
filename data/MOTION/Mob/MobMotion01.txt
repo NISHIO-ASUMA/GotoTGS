@@ -14,16 +14,16 @@ NUM_MODEL = 10
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/MOBCAST000/00_Mobcast000_body.x		# [0]体
-MODEL_FILENAME = data/MODEL/MOBCAST000/01_Mobcast000_head.x		# [1]頭
-MODEL_FILENAME = data/MODEL/MOBCAST000/02_Mobcast000_armR.x		# [2]右腕
-MODEL_FILENAME = data/MODEL/MOBCAST000/03_Mobcast000_handR.x	# [3]右手
-MODEL_FILENAME = data/MODEL/MOBCAST000/04_Mobcast000_armL.x		# [4]左腕
-MODEL_FILENAME = data/MODEL/MOBCAST000/05_Mobcast000_handL.x	# [5]左手
-MODEL_FILENAME = data/MODEL/MOBCAST000/06_Mobcast000_legR.x		# [6]右腿
-MODEL_FILENAME = data/MODEL/MOBCAST000/07_Mobcast000_footR.x	# [7]右足
-MODEL_FILENAME = data/MODEL/MOBCAST000/08_Mobcast000_legL.x		# [8]左腿
-MODEL_FILENAME = data/MODEL/MOBCAST000/09_Mobcast000_footL.x	# [9]左足
+MODEL_FILENAME = data/MODEL/MOBCAST001/00_Mobcast001_body.x		# [0]体
+MODEL_FILENAME = data/MODEL/MOBCAST001/01_Mobcast001_head.x		# [1]頭
+MODEL_FILENAME = data/MODEL/MOBCAST001/02_Mobcast001_armR.x		# [2]右腕
+MODEL_FILENAME = data/MODEL/MOBCAST001/03_Mobcast001_handR.x	# [3]右手
+MODEL_FILENAME = data/MODEL/MOBCAST001/04_Mobcast001_armL.x		# [4]左腕
+MODEL_FILENAME = data/MODEL/MOBCAST001/05_Mobcast001_handL.x	# [5]左手
+MODEL_FILENAME = data/MODEL/MOBCAST001/06_Mobcast001_legR.x		# [6]右腿
+MODEL_FILENAME = data/MODEL/MOBCAST001/07_Mobcast001_footR.x	# [7]右足
+MODEL_FILENAME = data/MODEL/MOBCAST001/08_Mobcast001_legL.x		# [8]左腿
+MODEL_FILENAME = data/MODEL/MOBCAST001/09_Mobcast001_footL.x	# [9]左足
 
 #------------------------------------------------------------------------------
 # キャラクター情報

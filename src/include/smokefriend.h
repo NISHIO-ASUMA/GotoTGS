@@ -40,8 +40,9 @@ public:
 	/// </summary>
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
+	/// <param name= "Path">モーションファイル名</param>
 	/// <returns></returns>
-	static CSmokeFriend* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot);
+	static CSmokeFriend* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const char * Path);
 
 public:
 
@@ -62,4 +63,5 @@ private:
 	int m_nNextChangeCount;		// 次の変更までのカウント
 	int m_nLoopCount;			// 現在のモーション再生回数
 	int m_nTargetLoopCount;		// タバコを何回繰り返すかの目標回数
+	const char* m_pMotionName;	// スクリプトファイル名
 };
