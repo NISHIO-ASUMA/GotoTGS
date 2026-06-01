@@ -64,7 +64,7 @@ public:
 	{
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動
-		//SEARCH    // 疑いモーション
+		SEARCH,		// 疑いモーション
 		MAX
 	};
 

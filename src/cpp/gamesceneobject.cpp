@@ -85,6 +85,7 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 //=========================================================
 HRESULT CGameSceneObject::Init(void)
 {
+#if 1
 	// ゲームで使うオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(GAMEOBJECT::LoadName);
@@ -110,7 +111,7 @@ HRESULT CGameSceneObject::Init(void)
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
-	// ブロックマネージャーにｎ生成されたプレイヤーのポインタをセット
+	// ブロックマネージャーに生成されたプレイヤーのポインタをセット
 	m_pBlocks->SetPlayerPoint(m_pPlayer);
 
 	// カメラのターゲット設定
@@ -119,6 +120,7 @@ HRESULT CGameSceneObject::Init(void)
 	// スコア初期化
 	m_pScore->DeleteScore();
 
+#endif
 	return S_OK;
 }
 //=========================================================
