@@ -47,28 +47,28 @@ CAfksmoke::~CAfksmoke()
 //=========================================================
 CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
 {
-	//// インスタンス生成
-	//CTutorialUI* pTutorialUI = new CTutorialUI;
-	//if (pTutorialUI == nullptr) return nullptr;
+	// インスタンス生成
+	CAfksmoke* pAfkSmoke = new CAfksmoke;
+	//if (pAfkSmoke == nullptr) return nullptr;
 
 	//// オブジェクトセット
-	//pTutorialUI->SetPos(pos);
-	//pTutorialUI->SetSize(fWidth, fHeight);
-	//pTutorialUI->SetRot(rot);
-	//pTutorialUI->SetRadius(fRadius);
-	//pTutorialUI->SetTexture(pTexName);
-	//pTutorialUI->SetEnableZtest(true);
+	//pAfkSmoke->SetPos(pos);
+	//pAfkSmoke->SetSize(fWidth, fHeight);
+	//pAfkSmoke->SetRot(rot);
+	//pAfkSmoke->SetRadius(fRadius);
+	//pAfkSmoke->SetTexture(pTexName);
+	//pAfkSmoke->SetEnableZtest(true);
 
 	//// 初期化失敗時
 	//if (FAILED(pTutorialUI->Init())) return nullptr;
 
-	//// チュートリアルUIのポインタを返す
-	//return pTutorialUI;
+	// チュートリアルUIのポインタを返す
+	return pAfkSmoke;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CTutorialUI::Init(void)
+HRESULT CAfksmoke::Init(void)
 {
 	//// 親クラスの初期化処理
 	//CBillboard::Init();
