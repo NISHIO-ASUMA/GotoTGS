@@ -40,7 +40,8 @@ CSmokeFriend::CSmokeFriend(int nPriority) : CNoMoveCharactor(nPriority),
 m_nChangeCount(NULL),
 m_nNextChangeCount(NULL),
 m_nLoopCount(NULL),
-m_nTargetLoopCount(NULL)
+m_nTargetLoopCount(NULL),
+m_pMotionName{}
 {
 
 }
@@ -54,7 +55,7 @@ CSmokeFriend::~CSmokeFriend()
 //========================================================
 // 生成処理
 //========================================================
-CSmokeFriend* CSmokeFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CSmokeFriend* CSmokeFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* Path)
 {
 	// インスタンス生成
 	CSmokeFriend* pSmoke = new CSmokeFriend;
@@ -63,6 +64,7 @@ CSmokeFriend* CSmokeFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& ro
 	// オブジェクト設定
 	pSmoke->SetPos(pos);
 	pSmoke->SetRot(rot);
+	pSmoke->m_pMotionName = Path;
 	pSmoke->SetUseOutLine(true);
 	pSmoke->SetOutLineColor(D3DXVECTOR4(1.0f,0.0f,1.0f,1.0f));
 
@@ -80,7 +82,7 @@ HRESULT CSmokeFriend::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーションロード
-	MotionLoad(SMOKEFRIEND::SCRIPT, MOTION::MAX,false);
+	MotionLoad(m_pMotionName, MOTION::MAX,false);
 
 	// ランダム設定
 	std::random_device rd;

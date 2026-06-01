@@ -5,7 +5,8 @@
     "RadiusX": 4000.0,
     "RadiusZ": 2000.0,
     "SegmentX": 1,
-    "SegmentZ": 1
+    "SegmentZ": 1,
+    "Texture": "data/TEXTURE/field.jpg"
   },
   {
     "ObjectTag": "MeshDome",

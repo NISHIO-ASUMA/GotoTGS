@@ -24,7 +24,7 @@
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace UI
+namespace TutorialUI
 {
 #ifdef _DEBUG
 	int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
@@ -121,7 +121,7 @@ void CTutorialUI::Update(void)
 	int nNowTime = CGameSceneObject::GetInstance()->GetTime()->GetAllTime();
 
 	// タイムが以下だったら
-	if (nNowTime <= UI::nDeleteTime)m_bTime = false;
+	if (nNowTime <= TutorialUI::nDeleteTime)m_bTime = false;
 	
 	// 親クラスの更新処理
 	CBillboard::Update();

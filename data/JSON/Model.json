@@ -126,7 +126,25 @@
     "Model": "data/MODEL/COLLEAGUESMOKE/05_ColleagueSmoke000_handL.x"
   },
   {
-    "Model": "data/MODEL/COLLEAGUESMOKE/smoke.x"
+    "Model": "data/MODEL/COLLEAGUESMOKE001/00_ColleagueSmoke001_body.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/01_ColleagueSmoke001_head.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/02_ColleagueSmoke001_armR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/03_ColleagueSmoke001_handR.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/04_ColleagueSmoke001_armL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/05_ColleagueSmoke001_handL.x"
+  },
+  {
+    "Model": "data/MODEL/COLLEAGUESMOKE001/smoke.x"
   },
   {
     "Model": "data/MODEL/BOSS/00_Boss_body.x"
@@ -187,5 +205,95 @@
   },
   {
     "Model": "data/MODEL/MOBCAST000/09_Mobcast000_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/00_Mobcast001_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/01_Mobcast001_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/02_Mobcast001_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/03_Mobcast001_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/04_Mobcast001_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/05_Mobcast001_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/06_Mobcast001_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/07_Mobcast001_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/08_Mobcast001_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST001/09_Mobcast001_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/00_Mobcast002_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/01_Mobcast002_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/02_Mobcast002_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/03_Mobcast002_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/04_Mobcast002_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/05_Mobcast002_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/06_Mobcast002_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/07_Mobcast002_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/08_Mobcast002_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST002/09_Mobcast002_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/00_Mobcast003_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/01_Mobcast003_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/02_Mobcast003_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/03_Mobcast003_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/04_Mobcast003_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/05_Mobcast003_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/06_Mobcast003_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/07_Mobcast003_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/08_Mobcast003_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST003/09_Mobcast003_footL.x"
   }
 ]

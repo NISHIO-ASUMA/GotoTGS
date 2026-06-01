@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="src\cpp\afk.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
+    <ClCompile Include="src\cpp\afkui.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
@@ -265,6 +266,7 @@
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
     <ClCompile Include="src\cpp\smokefriend.cpp" />
+    <ClCompile Include="src\cpp\smokeui.cpp" />
     <ClCompile Include="src\cpp\sound.cpp" />
     <ClCompile Include="src\cpp\spherecollider.cpp" />
     <ClCompile Include="src\cpp\statemachine.cpp" />
@@ -285,6 +287,7 @@
   <ItemGroup>
     <ClInclude Include="src\include\afk.h" />
     <ClInclude Include="src\include\afksmoke.h" />
+    <ClInclude Include="src\include\afkui.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\billboard.h" />
@@ -388,6 +391,7 @@
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
     <ClInclude Include="src\include\smokefriend.h" />
+    <ClInclude Include="src\include\smokeui.h" />
     <ClInclude Include="src\include\sound.h" />
     <ClInclude Include="src\include\spherecollider.h" />
     <ClInclude Include="src\include\statebase.h" />

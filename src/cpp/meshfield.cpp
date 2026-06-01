@@ -38,7 +38,15 @@ CMeshField::~CMeshField()
 //=========================================================
 // 生成処理
 //=========================================================
-CMeshField* CMeshField::Create(D3DXVECTOR3 pos, float fRadiusX, float fRadiusZ, int nNumX, int nNumZ)
+CMeshField* CMeshField::Create
+(
+	D3DXVECTOR3 pos, 
+	float fRadiusX, 
+	float fRadiusZ, 
+	int nNumX, 
+	int nNumZ, 
+	const char* pTexName
+)
 {
 	// インスタンス生成
 	CMeshField* pMeshField = new CMeshField;
@@ -52,7 +60,7 @@ CMeshField* CMeshField::Create(D3DXVECTOR3 pos, float fRadiusX, float fRadiusZ, 
 	pMeshField->m_MeshFiled.nNumZ = nNumZ;
 
 	// テクスチャ設定
-	pMeshField->SetTexture();
+	pMeshField->SetTexture(pTexName);
 
 	// 初期化失敗時
 	if (FAILED(pMeshField->Init())) return nullptr;
@@ -319,11 +327,11 @@ void CMeshField::Draw(void)
 //=========================================================
 // テクスチャ設定
 //=========================================================
-void CMeshField::SetTexture(void)
+void CMeshField::SetTexture(const char * pTexName)
 {
 	// テクスチャポインタ取得
 	CTexture* pTexture = CManager::GetInstance()->GetInstance()->GetTexture();
 
 	// 割り当て
-	m_MeshFiled.nTexIdx = pTexture->Register("data/TEXTURE/field00.jpg");
+	m_MeshFiled.nTexIdx = pTexture->Register(pTexName);
 }

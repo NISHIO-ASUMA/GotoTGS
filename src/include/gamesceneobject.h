@@ -25,6 +25,7 @@ class CScore;
 class CWorldWallManager;
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
+class CAfksmoke;			// 近田追加
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
