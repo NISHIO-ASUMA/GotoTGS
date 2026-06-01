@@ -30,6 +30,11 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// クールタイム中の処理
+	inline bool CoolTime(const auto& pClear);
+	// タスク中の処理
+	inline void Task(const auto& pClear);
+
 	// 設定処理
 	void SetAlphaUI(void);
 
