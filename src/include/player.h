@@ -79,4 +79,5 @@ private:
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	bool m_bMove;										// 移動したかどうかの判定変数
+	bool m_bAfkSmoke;									// たばこ休憩の判定変数
 };

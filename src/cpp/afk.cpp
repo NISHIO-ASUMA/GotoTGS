@@ -40,8 +40,12 @@ CAfk::~CAfk()
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfk::Init(void)
+HRESULT CAfk::Init(const D3DXVECTOR3& pos,const float& fRadius)
 {
+	// 座標と半径の設定
+	SetPos(pos);
+	SetRadius(fRadius);
+
 	// 球形コライダーを生成
 	m_pCollider = CSphereCollider::Create(m_pos, m_fRadius);
 
@@ -54,7 +58,6 @@ void CAfk::Uninit(void)
 {
 	// スフィアコライダーの破棄
 	m_pCollider.reset();
-
 }
 //=========================================================
 // 更新処理
