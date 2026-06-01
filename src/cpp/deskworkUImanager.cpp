@@ -14,15 +14,20 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "ui.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CDeskworkUIManager::CDeskworkUIManager() :
 m_pos(VECTOR3_NULL),
-m_bUse(false)
+m_bUse(false),
+m_bClear(false)
 {
-
+	if (m_pClearUI != nullptr)
+	{
+		return;
+	}
 }
 
 //=========================================================
@@ -38,14 +43,22 @@ CDeskworkUIManager::~CDeskworkUIManager()
 //=========================================================
 HRESULT CDeskworkUIManager::Init(void)
 {
-	// 乱数の種
-	srand((unsigned int)time(0));
+	m_pClearUI = CUi::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 200.0f, 0.0f),
+		60,
+		190.0f,
+		70.0f,
+		"CLEAR000.png",
+		false,
+		false,
+		5,
+		false,
+		false);
 
 	return S_OK;
 }
 
 //=========================================================
-// 初期化処理
+// 更新処理
 //=========================================================
 void CDeskworkUIManager::Update(void)
 {

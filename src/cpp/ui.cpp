@@ -26,7 +26,8 @@ m_isFlash(false),
 m_isAlphaTest(false),
 m_nAlphaCnt(NULL), 
 m_nAlphaFrame(NULL),
-m_nFlashFrame(NULL)
+m_nFlashFrame(NULL),
+m_bUse(true)
 {
 
 }
@@ -50,7 +51,8 @@ CUi* CUi::Create
 	bool isUseFlash,
 	bool isAlphaEnable,
 	int nAlphaFrame,
-	bool isAlphaTest
+	bool isAlphaTest,
+	bool bUse
 )
 {
 	// インスタンス生成
@@ -71,6 +73,7 @@ CUi* CUi::Create
 	pUi->m_isAlphaEnable = isAlphaEnable;
 	pUi->m_nAlphaFrame = nAlphaFrame;
 	pUi->m_isAlphaTest = isAlphaTest;
+	pUi->m_bUse = bUse;
 
 	// 生成されたポインタを返す
 	return pUi;
@@ -131,8 +134,11 @@ void CUi::Draw(void)
 		Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	}
 	
-	// 親クラスのの描画
-	CObject2D::Draw();
+	if (m_bUse != false)
+	{// 表示するかどうか Misaki
+		// 親クラスのの描画
+		CObject2D::Draw();
+	}
 
 	// αテスト有効時
 	if (m_isAlphaTest)
