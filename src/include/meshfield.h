@@ -45,7 +45,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
-	void SetTexture(void);
+	void SetTexture(const char* pTexName);
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRaiusZ(float fRadius) { m_MeshFiled.fRadiusZ = fRadius; }
 	void SetRaiusX(float fRadius) { m_MeshFiled.fRadius = fRadius; }
@@ -54,7 +54,17 @@ public:
 	float GetRadiusX(void) { return m_MeshFiled.fRadius; }
 	float GetRadiusZ(void) { return m_MeshFiled.fRadiusZ; }
 
-	static CMeshField* Create(D3DXVECTOR3 pos, float fRadiusX, float fRadiusZ, int nNumX, int nNumZ);
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	/// <param name="fRadiusX">Xの半径</param>
+	/// <param name="fRadiusZ">Zの半径</param>
+	/// <param name="nNumX">Xの分割数</param>
+	/// <param name="nNumZ">Zの分割数</param>
+	/// <param name="pTexName">テクスチャ名</param>
+	/// <returns></returns>
+	static CMeshField* Create(D3DXVECTOR3 pos, float fRadiusX, float fRadiusZ, int nNumX, int nNumZ,const char * pTexName);
 
 private:
 
