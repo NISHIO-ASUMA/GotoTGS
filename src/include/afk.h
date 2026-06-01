@@ -44,5 +44,6 @@ private:
 	std::unique_ptr<CSphereCollider> m_pCollider;	// 球形のコライダー
 	D3DXVECTOR3 m_pos;								// 位置
 	float m_fRadius;								// UI表示範囲の半径用変数
+	bool m_bAfk;									// さぼり判定用変数
 };
 

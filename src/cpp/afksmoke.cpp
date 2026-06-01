@@ -15,8 +15,6 @@
 //*********************************************************
 #include "spherecollider.h"
 #include "collisionsphere.h"
-#include "player.h"
-#include "gamesceneobject.h"
 
 //*********************************************************
 // 名前空間
@@ -66,6 +64,8 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
 //=========================================================
 HRESULT CAfksmoke::Init(void)
 {
+	// 親クラスの初期化処理
+	CAfk::Init();
 	return S_OK;
 }
 //=========================================================
@@ -73,30 +73,17 @@ HRESULT CAfksmoke::Init(void)
 //=========================================================
 void CAfksmoke::Uninit(void)
 {
-
+	// 親クラスの終了処理
+	CAfk::Uninit();
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CAfksmoke::Update(void)
 {
-	////// プレイヤーの情報を取得し判定を生成
-	////const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
+	// 親クラスの更新処理
+	CAfk::Update();
 
-	////// コライダー取得とnullチェック
-	////CSphereCollider* Collider = Player->GetSphereCollider();
-	////if (Collider == nullptr) return;
+	
 
-	////// 当たり判定の実行
-	////if (Collision(Collider))m_bLook = true;
-	////else m_bLook = false;
-
-	////// 現在の時間を取得
-	////int nNowTime = CGameSceneObject::GetInstance()->GetTime()->GetAllTime();
-
-	////// タイムが以下だったら
-	////if (nNowTime <= UI::nDeleteTime)m_bTime = false;
-
-	////// 親クラスの更新処理
-	////CBillboard::Update();
 }
