@@ -48,17 +48,27 @@ public:
 	// 設定処理
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetUse(const bool& bUse) { m_bUse = bUse; }
+	inline void AddPCTask(void) { m_nPCTaskNum++; }
+	inline void AddCOPYTask(void) { m_nCOPYTaskNum++; }
+	inline void MinusPCTask(void) { m_nPCTaskNum--; }
+	inline void MinusCOPYTask(void) { m_nCOPYTaskNum--; }
 
 	// 情報取得処理
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	bool GetUse(void) const { return m_bUse; }
 	CUi* GetClearUI(void) { return m_pClearUI; }
+	static int GetPCTaskNum(void) { return m_nPCTaskNum; }
+	static int GetCOPYTaskNum(void) { return m_nCOPYTaskNum; }
 
 private:
 
 	// メンバ変数
 	D3DXVECTOR3 m_pos;		// 座標
 	bool m_bUse;			// 使用しているかどうか	
-	bool m_bClear;			// クリアしているかどうか	
 	CUi* m_pClearUI;		// クリアUIのポインタ
+
+	// 静的メンバ変数
+	static int m_nPCTaskNum;		// こなしたPCタスクの数
+	static int m_nCOPYTaskNum;		// こなしたコピー機タスクの数
+
 };

@@ -8,7 +8,7 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "tutorialui.h"
+#include "afkui.h"
 
 //*********************************************************
 // インクルードファイル
@@ -24,7 +24,7 @@
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace TutorialUI
+namespace AfkUI
 {
 #ifdef _DEBUG
 	int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
@@ -36,7 +36,7 @@ namespace TutorialUI
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialUI::CTutorialUI(int nPriority) : CBillboard(nPriority),
+CAfkUI::CAfkUI(int nPriority) : CBillboard(nPriority),
 m_pCollider(nullptr),
 m_bLook(false),
 m_fRadius(NULL),
@@ -48,7 +48,7 @@ m_bTime(true)
 //=========================================================
 // デストラクタ
 //=========================================================
-CTutorialUI::~CTutorialUI()
+CAfkUI::~CAfkUI()
 {
 
 }
@@ -56,30 +56,30 @@ CTutorialUI::~CTutorialUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CTutorialUI* CTutorialUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
+CAfkUI* CAfkUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const float& fWidth, const float& fHeight, const float& fRadius, const char* pTexName)
 {
 	// インスタンス生成
-	CTutorialUI* pTutorialUI = new CTutorialUI;
-	if (pTutorialUI == nullptr) return nullptr;
+	CAfkUI* pAfkUI = new CAfkUI;
+	if (pAfkUI == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pTutorialUI->SetPos(pos);
-	pTutorialUI->SetSize(fWidth, fHeight);
-	pTutorialUI->SetRot(rot);
-	pTutorialUI->SetRadius(fRadius);
-	pTutorialUI->SetTexture(pTexName);
-	pTutorialUI->SetEnableZtest(true);
+	pAfkUI->SetPos(pos);
+	pAfkUI->SetSize(fWidth, fHeight);
+	pAfkUI->SetRot(rot);
+	pAfkUI->SetRadius(fRadius);
+	pAfkUI->SetTexture(pTexName);
+	pAfkUI->SetEnableZtest(true);
 
 	// 初期化失敗時
-	if (FAILED(pTutorialUI->Init())) return nullptr;
+	if (FAILED(pAfkUI->Init())) return nullptr;
 
 	// チュートリアルUIのポインタを返す
-	return pTutorialUI;
+	return pAfkUI;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CTutorialUI::Init(void)
+HRESULT CAfkUI::Init(void)
 {
 	// 親クラスの初期化処理
 	CBillboard::Init();
@@ -92,7 +92,7 @@ HRESULT CTutorialUI::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CTutorialUI::Uninit(void)
+void CAfkUI::Uninit(void)
 {
 	// 親クラスの終了処理
 	CBillboard::Uninit();
@@ -104,7 +104,7 @@ void CTutorialUI::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CTutorialUI::Update(void)
+void CAfkUI::Update(void)
 {
 	// プレイヤーの情報を取得し判定を生成
 	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
@@ -116,32 +116,32 @@ void CTutorialUI::Update(void)
 	// 当たり判定の実行
 	if (Collision(Collider))m_bLook = true;
 	else m_bLook = false;
-	
+
 	// 現在の時間を取得
 	int nNowTime = CGameSceneObject::GetInstance()->GetTime()->GetAllTime();
 
 	// タイムが以下だったら
-	if (nNowTime <= TutorialUI::nDeleteTime)m_bTime = false;
-	
+	if (nNowTime <= AfkUI::nDeleteTime)m_bTime = false;
+
 	// 親クラスの更新処理
 	CBillboard::Update();
 }
 //=========================================================
 // 描画処理
 //=========================================================
-void CTutorialUI::Draw(void)
+void CAfkUI::Draw(void)
 {
 	// 親クラスの描画処理
-	if(m_bLook || m_bTime)	CBillboard::Draw();
+	if (m_bLook || m_bTime)	CBillboard::Draw();
 }
 //=========================================================
 // 球形当たり判定処理
 //=========================================================
-bool CTutorialUI::Collision(CSphereCollider* pOther)
+bool CAfkUI::Collision(CSphereCollider* pOther)
 {
 	// nullなら
 	if (!m_pCollider) return false;
 
 	//球形当たり判定を返す
-	return CCollisionSphere::Collision(m_pCollider.get(),pOther);
+	return CCollisionSphere::Collision(m_pCollider.get(), pOther);
 }

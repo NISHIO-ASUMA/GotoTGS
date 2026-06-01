@@ -117,12 +117,10 @@ void CCOPYDeskwork::Update(void)
 	// 親の更新処理
 	CDeskworkUIManager::Update();
 
-	// キーボードのポインタ
-	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 	// クリアUIのポインタ
-	CUi* pCrear = CDeskworkUIManager::GetClearUI();
+	auto* pClear = CDeskworkUIManager::GetClearUI();
 
-	if (pKeyboard == nullptr)
+	if (pClear == nullptr)
 	{// ヌルチェック
 		return;
 	}
@@ -130,36 +128,119 @@ void CCOPYDeskwork::Update(void)
 	if (m_bTime != false)
 	{// クールタイムが始まっているなら
 
-		if (m_nCountTime <= Config::TIME_COOL)
-		{// クールタイムを数える
-
-			m_nCountTime++;
-
+		// クールタイム中の処理
+		if (CoolTime(pClear) != true)
+		{
+			// クールタイム中なら
 			return;
 		}
+	}
 
-		// タスクをランダムに設定
-		m_pDeskUI[TEXTURE_KEY]->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
-
-		// 色を元に戻す(通常色)
-		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
-
-		// クールタイムを初期化
-		m_nCountTime = 0;
-
-		// 横幅を初期化
-		m_pDeskUI[TEXTURE_GAGE]->SetWidth(0.0f);
-
-		// クールタイムが始まっていない状態にする
-		m_bTime = false;
-
-		// 点滅を止める
-		pCrear->SetUse(false);
-		pCrear->SetUseFlash(false);
-
+	if (GetPCTaskNum() <= 0)
+	{// こなしたPCタスクが1つもないとき
+		return;
 	}
 
 	// クールタイムが始まっていないなら
+	// タスク中の処理
+	Task(pClear);
+}
+
+//=========================================================
+// 描画処理
+//=========================================================
+void CCOPYDeskwork::Draw(void)
+{
+	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+	{
+		// タスクUIの描画処理
+		m_pDeskUI[nCount]->Draw();
+	}
+}
+
+//=========================================================
+// 透明度の処理
+//=========================================================
+void CCOPYDeskwork::SetAlphaUI(void)
+{
+	// クリアUIのポインタ
+	auto* pCrear = CDeskworkUIManager::GetClearUI();
+
+	// 使っていいるかどうかを設定する
+	SetUse(GetUse() ? false : true);
+
+	if (GetUse() != true)
+	{// 使っていない状態の場合
+
+		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+		{
+			// 色を透明にする
+			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+		}
+
+		// UIを非表示にする
+		pCrear->SetUse(false);
+
+		return;
+	}
+
+	// 色を不透明にする(通常色)
+	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+
+	// ゲージの色を赤にする
+	m_pDeskUI[TEXTURE_GAGE]->ChangeCol(COLOR_RED);
+}
+
+//=========================================================
+// クールタイム中の処理
+//=========================================================
+bool CCOPYDeskwork::CoolTime(const auto& pClear)
+{
+	if (m_nCountTime <= Config::TIME_COOL)
+	{// クールタイムを数える
+		m_nCountTime++;
+
+		return false;
+	}
+
+	// タスクをランダムに設定
+	m_pDeskUI[TEXTURE_KEY]->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+
+	// 色を元に戻す(通常色)
+	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+
+	// クールタイムを初期化
+	m_nCountTime = 0;
+
+	// 横幅を初期化
+	m_pDeskUI[TEXTURE_GAGE]->SetWidth(0.0f);
+
+	// クールタイムが始まっていない状態にする
+	m_bTime = false;
+
+	// 点滅を止める
+	pClear->SetUse(false);
+	pClear->SetUseFlash(false);
+
+	return true;
+}
+
+//=========================================================
+// タスク中の処理
+//=========================================================
+void CCOPYDeskwork::Task(const auto& pClear)
+{
+	// キーボードのポインタ
+	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	// スコアのポインタ
+	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+	// 進捗ゲージのポインタ
+	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+
+	if (pKeyboard == nullptr || pScore == nullptr || pProgressgauge == nullptr)
+	{// ヌルチェック
+		return;
+	}
 
 	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
 		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
@@ -203,10 +284,6 @@ void CCOPYDeskwork::Update(void)
 	// クールタイムを始める
 	m_bTime = true;
 
-	// スコアと進捗ゲージの情報を取得
-	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
-
 	// スコア加算
 	pScore->AddScore(100);
 
@@ -214,52 +291,13 @@ void CCOPYDeskwork::Update(void)
 	pProgressgauge->AddAFK();
 
 	// 点滅を始める
-	pCrear->SetUse(true);
-	pCrear->SetUseFlash(true);
+	pClear->SetUse(true);
+	pClear->SetUseFlash(true);
 
-}
+	// こなしたコピー機タスクの数を一つ増やす
+	AddCOPYTask();
 
-//=========================================================
-// 描画処理
-//=========================================================
-void CCOPYDeskwork::Draw(void)
-{
-	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
-	{
-		// タスクUIの描画処理
-		m_pDeskUI[nCount]->Draw();
-	}
-}
+	// こなしたPCタスクの数を1つ減らす
+	MinusPCTask();
 
-//=========================================================
-// 透明度の処理
-//=========================================================
-void CCOPYDeskwork::SetAlphaUI(void)
-{
-	// クリアUIのポインタ
-	CUi* pCrear = CDeskworkUIManager::GetClearUI();
-
-	// 使っていいるかどうかを設定する
-	SetUse(GetUse() ? false : true);
-
-	if (GetUse() != true)
-	{// 使っていない状態の場合
-
-		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
-		{
-			// 色を透明にする
-			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
-		}
-
-		// UIを非表示にする
-		pCrear->SetUse(false);
-
-		return;
-	}
-
-	// 色を不透明にする(通常色)
-	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
-
-	// ゲージの色を赤にする
-	m_pDeskUI[TEXTURE_GAGE]->ChangeCol(COLOR_RED);
 }

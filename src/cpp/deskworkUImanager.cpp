@@ -16,14 +16,20 @@
 #include "manager.h"
 #include "ui.h"
 
+// 静的メンバ変数宣言
+int CDeskworkUIManager::m_nPCTaskNum = NULL;
+int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
+
 //=========================================================
 // コンストラクタ
 //=========================================================
 CDeskworkUIManager::CDeskworkUIManager() :
 m_pos(VECTOR3_NULL),
-m_bUse(false),
-m_bClear(false)
+m_bUse(false)
 {
+	m_nPCTaskNum = NULL;
+	m_nCOPYTaskNum = NULL;
+
 	if (m_pClearUI != nullptr)
 	{
 		return;

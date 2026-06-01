@@ -268,8 +268,8 @@ void CPlayer::Update(void)
 
 				case CWorldUICollision::TYPE_COPY: // コピー機作業 [add Misaki]
 
-					// 両方がnullじゃない状態
-					if (pDesk && pDesk->GetCOPYDeskUI())
+					// 両方がnullじゃない状態かつPCタスクをこなしている場合
+					if (pDesk && pDesk->GetCOPYDeskUI() && (pDesk->GetCOPYDeskUI()->GetPCTaskNum() > 0))
 					{
 						pDesk->GetCOPYDeskUI()->SetAlphaUI();
 					}
