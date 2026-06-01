@@ -28,8 +28,8 @@
 #include "progressgauge.h"	// Misaki
 #include "enemy.h"
 #include "friend.h"
-#include "pcui.h"
-#include "copyui.h"
+#include "pcui.h"			  // 近田追加
+#include "copyui.h"			  // 近田追加
 #include "worldUIcollision.h" // 西尾追加
 #include "camera.h"			  // 西尾追加
 
@@ -47,6 +47,7 @@ namespace GAMEOBJECT
 	const D3DXVECTOR3 PcUIPos		= { -45.0f, 75.0f, 170.0f };	// PCUIの座標
 	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 75.0f, 355.0f };	// コピー機UIの座標
 	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };		// プレイヤーの座標
+	constexpr const char* UI_NAME = "Fbutton.png";					// チュートリアルuiのテクスチャ名
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";	// 読み込みjsonファイル名
 	constexpr const char* WallName	= "data/JSON/GameWall.json";	// 読み込みjsonファイル名
 };
@@ -94,10 +95,10 @@ HRESULT CGameSceneObject::Init(void)
 	CWorldUICollision::GetInstance()->Init();
 
 	// パソコン用チュートリアルUIの生成
-	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL, "Fbutton.png");
+	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL,GAMEOBJECT::UI_NAME);
 	
 	// コピー機用チュートリアルUIの生成
-	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL, "Fbutton.png");
+	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL,GAMEOBJECT::UI_NAME);
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -128,9 +129,7 @@ HRESULT CGameSceneObject::Init(void)
 //=========================================================
 void CGameSceneObject::Uninit(void)
 {
-	//*************************************
-	// ADD : 西尾
-	// タスクの判定を取る球形コライダー管理クラスを破棄
+	// ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
 
 	// ブロック管理クラスの破棄
@@ -151,15 +150,13 @@ void CGameSceneObject::Uninit(void)
 //=========================================================
 void CGameSceneObject::Update(void)
 {
-	// カメラのターゲット設定
+	// カメラの追従ターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
-	//****************************************
-	// ADD : 西尾
-	// タスクの判定を取る球形コライダー管理クラスを更新
+	//  ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
 
-	// ブロック管理クラスの更新処理 : 問題の処理
+	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
 
 #ifdef _DEBUG
