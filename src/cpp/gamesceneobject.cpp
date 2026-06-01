@@ -44,13 +44,13 @@ CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;		// シングルトン変数
 //*********************************************************
 namespace GAMEOBJECT
 {
-	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };		// タイマーの座標
-	const D3DXVECTOR3 PcUIPos		= { -45.0f, 75.0f, 170.0f };	// PCUIの座標
-	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 75.0f, 355.0f };	// コピー機UIの座標
-	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };		// プレイヤーの座標
-	constexpr const char* UI_NAME = "Fbutton.png";					// チュートリアルuiのテクスチャ名
-	constexpr const char* LoadName	= "data/JSON/Gameobject.json";	// 読み込みjsonファイル名
-	constexpr const char* WallName	= "data/JSON/GameWall.json";	// 読み込みjsonファイル名
+	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };			// タイマーの座標
+	const D3DXVECTOR3 PcUIPos		= { -45.0f, 75.0f, 170.0f };		// PCUIの座標
+	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 75.0f, 355.0f };		// コピー機UIの座標
+	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };			// プレイヤーの座標
+	constexpr const char* UI_NAME	= "Fbutton.png";					// チュートリアルuiのテクスチャ名
+	constexpr const char* LoadName	= "data/JSON/Gameobject.json";		// ゲーム内オブジェクトjsonファイル名
+	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
 };
 
 //=========================================================
@@ -91,6 +91,7 @@ HRESULT CGameSceneObject::Init(void)
 	// ゲームで使うオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(GAMEOBJECT::LoadName);
+	jsonmanager->Load(GAMEOBJECT::CharactorLoadName);
 
 	// タスクの判定を取る球形コライダー管理クラスを生成
 	CWorldUICollision::GetInstance()->Init();
