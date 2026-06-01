@@ -22,16 +22,17 @@
 #include "worldwallmanager.h"
 #include "ui.h"
 #include "meshfield.h"
-#include "player.h"
+#include "player.h"			// 近田追加
 #include "gametime.h"		// Misaki
 #include "deskwork.h"		// Misaki
 #include "progressgauge.h"	// Misaki
-#include "enemy.h"
-#include "friend.h"
-#include "pcui.h"			  // 近田追加
-#include "copyui.h"			  // 近田追加
-#include "worldUIcollision.h" // 西尾追加
-#include "camera.h"			  // 西尾追加
+#include "enemy.h"				// 西尾追加
+#include "friend.h"				// 近田追加
+#include "pcui.h"				// 近田追加
+#include "copyui.h"				// 近田追加
+#include "worldUIcollision.h"	// 西尾追加
+#include "camera.h"				// 西尾追加
+#include "afksmoke.h"			// 近田追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -100,6 +101,9 @@ HRESULT CGameSceneObject::Init(void)
 	// コピー機用チュートリアルUIの生成
 	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL,GAMEOBJECT::UI_NAME);
 
+	// たばこさぼりの初期化処理
+	CAfksmoke::Instance()->Init();
+
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
@@ -132,6 +136,9 @@ void CGameSceneObject::Uninit(void)
 	// ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
 
+	// たばこさぼりの破棄処理
+	CAfksmoke::Instance()->Uninit();
+
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
 
@@ -155,6 +162,9 @@ void CGameSceneObject::Update(void)
 
 	//  ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
+
+	// たばこさぼりの更新処理
+	CAfksmoke::Instance()->Update();
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();

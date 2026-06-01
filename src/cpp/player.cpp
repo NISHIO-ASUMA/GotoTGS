@@ -32,6 +32,7 @@
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 #include "camera.h"
+#include "afksmoke.h"
 
 //*********************************************************
 // インクルードファイル
@@ -56,7 +57,8 @@ CPlayer::CPlayer(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pMachine(nullptr),
-m_bMove(false)
+m_bMove(false),
+m_bAfkSmoke(false)
 {
 
 }
@@ -226,7 +228,7 @@ void CPlayer::Update(void)
 		m_pBoxCollider->SetPos(UpdatePos);
 		m_pBoxCollider->SetPosOld(GetOldPos());
 	}
-
+	
 //*************************************************
 // ADD : 西尾追加 タスクを起こせる球との当たり判定をとり、その時のキー入力でタスク発生(指定したもの)
 
@@ -388,6 +390,12 @@ void CPlayer::MoveBasedOnCamera(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
+	// さぼっているかの判定
+	auto bAfk = CAfksmoke::Instance()->GetAfk();
+	if (bAfk && pKeyboard->GetTrigger(DIK_F))
+	{
+		m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	}
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
 	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
@@ -443,10 +451,14 @@ void CPlayer::MoveBasedOnCamera(float speed)
 		m_bMove = true;
 	}
 
-	if (!pKeyboard->GetPress(DIK_W) &&
-		!pKeyboard->GetPress(DIK_S) &&
-		!pKeyboard->GetPress(DIK_D) &&
-		!pKeyboard->GetPress(DIK_A))
+	if (m_bAfkSmoke)
+	{
+		GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+	}
+	else if (!pKeyboard->GetPress(DIK_W) &&
+			 !pKeyboard->GetPress(DIK_S) &&
+			 !pKeyboard->GetPress(DIK_D) &&
+			 !pKeyboard->GetPress(DIK_A))
 	{
 		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL);
 	}

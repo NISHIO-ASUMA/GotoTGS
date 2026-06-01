@@ -38,7 +38,7 @@ public:
 	/// <summary>
 	/// ¶¬ˆ—
 	/// </summary>
-	/// <param name="pos">¶¬ˆ—</param>
+	/// <param name="pos">À•W</param>
 	/// <param name="rot">Šp“x</param>
 	/// <param name="fWidth">‰¡•</param>
 	/// <param name="fHeight">‚‚³</param>
