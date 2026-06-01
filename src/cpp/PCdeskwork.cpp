@@ -18,6 +18,7 @@
 #include "gamesceneobject.h"
 #include "score.h"
 #include "progressgauge.h"
+#include "ui.h"
 
 //=========================================================
 // コンストラクタ
@@ -88,6 +89,9 @@ HRESULT CPCDeskwork::Init(void)
 		ui.pos.x += Config::VALUE_WIDTH;
 	}
 
+	// 親の初期化処理
+	CDeskworkUIManager::Init();
+
 	return S_OK;
 }
 
@@ -104,8 +108,13 @@ void CPCDeskwork::Uninit(void)
 //=========================================================
 void CPCDeskwork::Update(void)
 {
+	// 親の更新処理
+	CDeskworkUIManager::Update();
+
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	// クリアUIのポインタ
+	CUi* pCrear = CDeskworkUIManager::GetClearUI();
 
 	if (pKeyboard == nullptr)
 	{// ヌルチェック
@@ -135,10 +144,15 @@ void CPCDeskwork::Update(void)
 		m_nNowIdx = 0;
 
 		// クールタイムを初期化
+
 		m_nCountTime = 0;
 
 		// クールタイムが始まっていない状態にする
 		m_bTime = false;
+
+		// 点滅を止める
+		pCrear->SetUse(false);
+		pCrear->SetUseFlash(false);
 
 	}
 
@@ -192,6 +206,10 @@ void CPCDeskwork::Update(void)
 	// スコア加算
 	pScore->AddScore(100);
 
+	// 点滅を始める
+	pCrear->SetUse(true);
+	pCrear->SetUseFlash(true);
+
 }
 
 //=========================================================
@@ -210,6 +228,9 @@ void CPCDeskwork::Draw(void)
 //=========================================================
 void CPCDeskwork::SetAlphaUI(void)
 {
+	// クリアUIのポインタ
+	CUi* pCrear = CDeskworkUIManager::GetClearUI();
+
 	// 使っていいるかどうかを設定する
 	SetUse(GetUse() ? false : true);
 
@@ -221,6 +242,9 @@ void CPCDeskwork::SetAlphaUI(void)
 			// 色を透明にする
 			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
 		}
+
+		// UIを非表示にする
+		pCrear->SetUse(false);
 
 		return;
 	}
