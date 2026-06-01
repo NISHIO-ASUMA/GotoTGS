@@ -18,11 +18,13 @@
 #include "gamesceneobject.h"
 #include "score.h"
 #include "progressgauge.h"
+#include "ui.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CCOPYDeskwork::CCOPYDeskwork() :CDeskworkUIManager(),
+m_pDeskUI{},
 m_nCountTime(0),
 m_bTime(false)
 {
@@ -59,6 +61,9 @@ CCOPYDeskwork* CCOPYDeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CCOPYDeskwork::Init(void)
 {
+	// 乱数の種
+	srand((unsigned int)time(0));
+
 	// メンバ変数の初期化
 	m_nCountTime = 0;	// 現在のカウント
 	m_bTime = false;	// クールタイム
@@ -90,6 +95,9 @@ HRESULT CCOPYDeskwork::Init(void)
 	// ゲージUIの生成処理
 	m_pDeskUI[TEXTURE_GAGE] = CDeskworkUI::Create(ui);
 
+	// 親の初期化処理
+	CDeskworkUIManager::Init();
+
 	return S_OK;
 }
 
@@ -106,8 +114,13 @@ void CCOPYDeskwork::Uninit(void)
 //=========================================================
 void CCOPYDeskwork::Update(void)
 {
+	// 親の更新処理
+	CDeskworkUIManager::Update();
+
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	// クリアUIのポインタ
+	CUi* pCrear = CDeskworkUIManager::GetClearUI();
 
 	if (pKeyboard == nullptr)
 	{// ヌルチェック
@@ -119,6 +132,7 @@ void CCOPYDeskwork::Update(void)
 
 		if (m_nCountTime <= Config::TIME_COOL)
 		{// クールタイムを数える
+
 			m_nCountTime++;
 
 			return;
@@ -138,6 +152,11 @@ void CCOPYDeskwork::Update(void)
 
 		// クールタイムが始まっていない状態にする
 		m_bTime = false;
+
+		// 点滅を止める
+		pCrear->SetUse(false);
+		pCrear->SetUseFlash(false);
+
 	}
 
 	// クールタイムが始まっていないなら
@@ -193,6 +212,11 @@ void CCOPYDeskwork::Update(void)
 
 	// こなしたさぼりの数を増やす（仮）
 	pProgressgauge->AddAFK();
+
+	// 点滅を始める
+	pCrear->SetUse(true);
+	pCrear->SetUseFlash(true);
+
 }
 
 //=========================================================
@@ -212,6 +236,9 @@ void CCOPYDeskwork::Draw(void)
 //=========================================================
 void CCOPYDeskwork::SetAlphaUI(void)
 {
+	// クリアUIのポインタ
+	CUi* pCrear = CDeskworkUIManager::GetClearUI();
+
 	// 使っていいるかどうかを設定する
 	SetUse(GetUse() ? false : true);
 
@@ -224,6 +251,9 @@ void CCOPYDeskwork::SetAlphaUI(void)
 			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
 		}
 
+		// UIを非表示にする
+		pCrear->SetUse(false);
+
 		return;
 	}
 
@@ -232,5 +262,4 @@ void CCOPYDeskwork::SetAlphaUI(void)
 
 	// ゲージの色を赤にする
 	m_pDeskUI[TEXTURE_GAGE]->ChangeCol(COLOR_RED);
-
 }

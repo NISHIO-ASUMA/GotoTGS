@@ -30,6 +30,10 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// 設定処理
+	void SetUseFlash(const bool& bUse) { m_isFlash = bUse; }	// Misaki
+	void SetUse(const bool& bUse) { m_bUse = bUse; }			// Misaki
+
 	/// <summary>
 	/// ポインタ生成関数
 	/// </summary>
@@ -53,7 +57,8 @@ public:
 		bool isUseFlash = false,
 		bool isAlphaEnable = false,
 		int nAlphaFrame = 0,
-		bool isAlphaTest = false
+		bool isAlphaTest = false,
+		bool bUse = true
 	);
 
 private:
@@ -67,4 +72,5 @@ private:
 	bool m_isFlash;					// 点滅するかどうか
 	bool m_isAlphaEnable;			// 描画開始から透明度を触るかどうか
 	bool m_isAlphaTest;				// αテストするかどうか
+	bool m_bUse;					// 表示するかどうか Misaki
 };
