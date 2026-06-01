@@ -49,18 +49,14 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
 {
 	// インスタンス生成
 	CAfksmoke* pAfkSmoke = new CAfksmoke;
-	//if (pAfkSmoke == nullptr) return nullptr;
+	if (pAfkSmoke == nullptr) return nullptr;
 
-	//// オブジェクトセット
-	//pAfkSmoke->SetPos(pos);
-	//pAfkSmoke->SetSize(fWidth, fHeight);
-	//pAfkSmoke->SetRot(rot);
-	//pAfkSmoke->SetRadius(fRadius);
-	//pAfkSmoke->SetTexture(pTexName);
-	//pAfkSmoke->SetEnableZtest(true);
+	// オブジェクトセット
+	pAfkSmoke->SetPos(pos);
+	pAfkSmoke->SetRadius(fRadius);
 
-	//// 初期化失敗時
-	//if (FAILED(pTutorialUI->Init())) return nullptr;
+	// 初期化失敗時
+	if (FAILED(pAfkSmoke->Init())) return nullptr;
 
 	// チュートリアルUIのポインタを返す
 	return pAfkSmoke;
@@ -70,13 +66,7 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos, const float& fRadius)
 //=========================================================
 HRESULT CAfksmoke::Init(void)
 {
-	//// 親クラスの初期化処理
-	//CBillboard::Init();
-
-	//// 球形コライダーを生成
-	//m_pCollider = CSphereCollider::Create(GetPos(), m_fRadius);
-
-	//return S_OK;
+	return S_OK;
 }
 //=========================================================
 // 終了処理
