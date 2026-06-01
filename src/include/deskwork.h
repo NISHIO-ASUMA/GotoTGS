@@ -58,7 +58,7 @@ private:
 		static constexpr float PC_VALUE_Y = 50.0f;								// Y軸の位置の増加量
 		static constexpr float PC_WIDTH = 700.0f;								// 横幅
 		static constexpr float PC_HEIGHT = 300.0f;								// 縦幅
-		static constexpr const char* PC_TEXNAME = "deskwork_background2.jpg";	// PCタスクのテクスチャ名
+		static constexpr const char* PC_TEXNAME = "deskwork_background2.png";	// PCタスクのテクスチャ名
 
 		// コピー機タスク用
 		static constexpr float COPY_VALUE_Y = 50.0f;					// Y軸の位置の増加量
