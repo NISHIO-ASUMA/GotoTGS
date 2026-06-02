@@ -147,10 +147,6 @@ void CDeskwork::Update(void)
 		// PCタスクUIの更新処理
 		m_pPCDeskUI->Update();
 
-		// テクスチャをPC用に設定
-		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
-		SetTexture(Config::PC_TEXNAME);
-
 		return;
 	}
 
@@ -159,13 +155,8 @@ void CDeskwork::Update(void)
 
 		// コピー機タスクUIの更新処理
 		m_pCOPYDeskUI->Update();
-	
-		// テクスチャをコピー機用に設定
-		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
-		SetTexture(Config::COPY_TEXNAME);
-
-		return;
 	}
+
 }
 
 //=========================================================
@@ -184,18 +175,36 @@ void CDeskwork::Draw(void)
 }
 
 //=========================================================
-// 背景の色の処理
+// 背景のテクスチャ処理
 //=========================================================
-void CDeskwork::SetAlpha(const bool &bUse)
+void CDeskwork::SetTexBG(const CWorldUICollision::TYPE& TaskType)
 {
-	if (bUse != false)
+	switch (TaskType)
 	{
-		// 不透明にする
-		SetCol(COLOR_WHITE);
+	case CWorldUICollision::TYPE_PC:
 
-		return;
+		// テクスチャをPC用に設定
+		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
+		SetTexture(Config::PC_TEXNAME);
+
+		break;
+
+	case CWorldUICollision::TYPE_COPY:
+
+		// テクスチャをコピー機用に設定
+		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
+
+		if (m_pCOPYDeskUI->GetPCTaskNum() <= NULL)
+		{// PCのタスクをこなしていなかったら
+			// 使用できないとき用のテクスチャに設定
+			SetTexture(Config::CANCEL_TEXNAME);
+
+			return;
+		}
+
+		// コピー機用のテクスチャに設定
+		SetTexture(Config::COPY_TEXNAME);
+
+		break;
 	}
-
-	// 透明にする
-	SetCol(COLOR_NULL);
 }

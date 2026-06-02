@@ -25,12 +25,12 @@
 //=================================================
 namespace AFK2DUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 400.0f, 0.0f };	// 2D画像の座標
+	const D3DXVECTOR3 Pos = { 640.0f, 500.0f, 0.0f };	// 2D画像の座標
 	constexpr float fWidth = 50.0f;						// 横幅
 	constexpr float fHeight = 50.0f;					// 縦幅
-	constexpr const char* Button_NAME = "Fbutton.png";	// チュートリアルuiのテクスチャ名
+	constexpr const char* Button_NAME = "AfkButton.png";	// チュートリアルuiのテクスチャ名
 	constexpr const char* NowAFK_NAME = "smoking.png";	// たばこUIのテクスチャ名
-}
+};
 
 //=================================================
 // 静的メンバ変数
@@ -84,6 +84,10 @@ HRESULT CAfk2DUI::Init(void)
 {
 	// 親クラスの初期化処理
 	CObject2D::Init();
+
+	// イージングの設定値
+	m_fCountFrame = 0.0f;
+	m_fMaxFrame = 60.0f;
 	
 	return S_OK;
 }
@@ -107,60 +111,59 @@ void CAfk2DUI::Update(void)
 	auto pos = GetPos();
 
 	// 初期の大きさ
-	D3DXVECTOR2 Apper = { 0.075f * pos.x, 0.075f * pos.y };
+	D3DXVECTOR2 Apper = { 0.35f * pos.x, 0.15f * pos.y };
 	// 目標の大きさ
-	D3DXVECTOR2 Dest = { 0.05f * pos.x,0.05f * pos.y };
+	D3DXVECTOR2 Dest = { 0.55f * pos.x,0.25f * pos.y };
 
+	// イージング判定が無効なら
+	if (m_bEasing == false)
+	{
+		// アニメーションカウンターを進める
+		m_fCountFrame++;
 
-	//// イージング判定が無効なら
-	//if (m_bEasing == false)
-	//{
-	//	// アニメーションカウンターを進める
-	//	m_fCountFrame++;
+		// 設定する大きさの変数
+		D3DXVECTOR2 Size = {};
+		// 今のアニメーションの進行割合を計算
+		float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
+		// 最終的な大きさから初期の大きさからの差分
+		D3DXVECTOR2 Diff = { Dest.x - Apper.x,Dest.y - Apper.y };
+		// 今の大きさを計算
+		Size = Apper + Diff * Ratio;
 
-	//	// 設定する大きさの変数
-	//	D3DXVECTOR2 Size = {};
-	//	// 今のアニメーションの進行割合を計算
-	//	float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
-	//	// 最終的な大きさから初期の大きさからの差分
-	//	D3DXVECTOR2 Diff = { Dest.x - Apper.x,Dest.y - Apper.y };
-	//	// 今の大きさを計算
-	//	Size = Apper + Diff * Ratio;
+		// サイズの設定
+		CObject2D::SetSize(Size.x, Size.y);
 
-	//	// サイズの設定
-	//	CObject2D::SetSize(Size.x, Size.y);
+	}
+	// イージング判定が有効なら
+	else if (m_bEasing == true)
+	{
+		// アニメーションカウンターを進める
+		m_fCountFrame--;
 
-	//}
-	//// イージング判定が有効なら
-	//else if (m_bEasing == true)
-	//{
-	//	// アニメーションカウンターを進める
-	//	m_fCountFrame--;
+		// 設定する大きさの変数
+		D3DXVECTOR2 Size = {};
+		// 今のアニメーションの進行割合を計算
+		float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
+		// 最終的な大きさから初期の大きさからの差分
+		D3DXVECTOR2 Diff = { Dest.x + Apper.x,Dest.y + Apper.y };
+		// 今の大きさを計算
+		Size = Apper - Diff * Ratio;
 
-	//	// 設定する大きさの変数
-	//	D3DXVECTOR2 Size = {};
-	//	// 今のアニメーションの進行割合を計算
-	//	float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
-	//	// 最終的な大きさから初期の大きさからの差分
-	//	D3DXVECTOR2 Diff = { Dest.x + Apper.x,Dest.y + Apper.y };
-	//	// 今の大きさを計算
-	//	Size = Apper - Diff * Ratio;
-
-	//	// サイズの設定
-	//	CObject2D::SetSize(Size.x, Size.y);
-	//}
-	//// フレームカウントがマックスフレームと一緒になったら
-	//else if (m_fCountFrame == m_fMaxFrame)
-	//{
-	//	// イージング判定を有効にする
-	//	m_bEasing = true;
-	//}
-	//// フレームカウントが0.0fなら
-	//else if (m_fCountFrame == 0.0f)
-	//{
-	//	// イージング判定を無効にする
-	//	m_bEasing = false;
-	//}
+		// サイズの設定
+		CObject2D::SetSize(Size.x, Size.y);
+	}
+	// フレームカウントがマックスフレームと一緒になったら
+	else if (m_fCountFrame == m_fMaxFrame)
+	{
+		// イージング判定を有効にする
+		m_bEasing = true;
+	}
+	// フレームカウントが0.0fなら
+	else if (m_fCountFrame == 0.0f)
+	{
+		// イージング判定を無効にする
+		m_bEasing = false;
+	}
 
 }
 //=========================================================

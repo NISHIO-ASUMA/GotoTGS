@@ -261,6 +261,7 @@ void CPlayer::Update(void)
 					// 両方がnullじゃない状態
 					if (pDesk && pDesk->GetPCDeskUI())
 					{
+						pDesk->SetTexBG(CWorldUICollision::TYPE_PC);
 						pDesk->GetPCDeskUI()->SetAlphaUI();
 					}
 				}
@@ -268,9 +269,10 @@ void CPlayer::Update(void)
 
 				case CWorldUICollision::TYPE_COPY: // コピー機作業 [add Misaki]
 
-					// 両方がnullじゃない状態かつPCタスクをこなしている場合
-					if (pDesk && pDesk->GetCOPYDeskUI() && (pDesk->GetCOPYDeskUI()->GetPCTaskNum() > 0))
+					// 両方がnullじゃない状態
+					if (pDesk && pDesk->GetCOPYDeskUI())
 					{
+						pDesk->SetTexBG(CWorldUICollision::TYPE_COPY);
 						pDesk->GetCOPYDeskUI()->SetAlphaUI();
 					}
 
@@ -403,10 +405,9 @@ void CPlayer::MoveBasedOnCamera(float speed)
 
 	// さぼっているかの判定
 	auto bAfk = CAfksmoke::Instance()->GetAfk();
-	if (bAfk && pKeyboard->GetTrigger(DIK_F))
-	{
-		m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	}
+	
+	if (bAfk && !m_bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = true;
+	else if (bAfk && m_bAfkSmoke && pKeyboard->GetTrigger(DIK_TAB))	m_bAfkSmoke = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
