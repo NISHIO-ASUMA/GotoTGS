@@ -33,8 +33,8 @@ public:
 	enum MENU
 	{
 		MENU_BACK,		// ”wŒi
-		MENU_RETRY,		// ‚â‚è’¼‚µ
 		MENU_CONTINUE,  // Œp‘±
+		MENU_RETRY,		// ‚â‚è’¼‚µ
 		MENU_QUIT,		// ƒ^ƒCƒgƒ‹‘JˆÚ
 		MENU_MAX
 	};
