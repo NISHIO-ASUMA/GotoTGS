@@ -39,9 +39,9 @@ public:
 	void Update(void);
 	void Draw(void);
 	
-	bool GetAfkButton(void) { return m_bAfkButton; }
-
 	static CAfk2DUI* Create(void);
+
+	bool GetAfkButton(void) { return m_bAfkButton; }
 
 	// インスタンス生成用関数
 	static CAfk2DUI* Instance(void);

@@ -160,6 +160,7 @@
     <ClCompile Include="src\cpp\afk2dui.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
     <ClCompile Include="src\cpp\afkui.cpp" />
+    <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="src\include\afk2dui.h" />
     <ClInclude Include="src\include\afksmoke.h" />
     <ClInclude Include="src\include\afkui.h" />
+    <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\billboard.h" />

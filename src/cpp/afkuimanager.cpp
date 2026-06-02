@@ -1,6 +1,6 @@
 //=========================================================
 //
-// TutorialUIManager処理 [ tutorialuimanager.cpp ]
+// AfkUIManager処理 [ afkuimanager.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,33 +8,31 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "tutorialuimanager.h"
+#include "afkuimanager.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "pcui.h"
-#include "copyui.h"
+#include "smokeui.h"
 
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace TutorialUIManager
+namespace AfkUIManager
 {
-	const D3DXVECTOR3 PcUIPos = { -45.0f, 75.0f, 170.0f };		// PCUIの座標
-	const D3DXVECTOR3 CopyUIPos = { 170.0f, 75.0f, 355.0f };	// コピー機UIの座標
-	constexpr const char* TutorialUI_NAME = "Fbutton.png";		// チュートリアルuiのテクスチャ名
+	const D3DXVECTOR3 SmokeUIPos = { 295.0f, 75.0f, 325.0f };			// たばこ用UIの座標
+	constexpr const char* SmokeUI_NAME = "smoking.png";					// たばこUIのテクスチャ名
 };
 
 //=================================================
 // 静的メンバ変数
 //=================================================
-CTutorialUIManager* CTutorialUIManager::m_pInstance = nullptr; // インスタンス変数
+CAfkUIManager* CAfkUIManager::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialUIManager::CTutorialUIManager()
+CAfkUIManager::CAfkUIManager()
 {
 
 }
@@ -42,28 +40,24 @@ CTutorialUIManager::CTutorialUIManager()
 //=========================================================
 // デストラクタ
 //=========================================================
-CTutorialUIManager::~CTutorialUIManager()
+CAfkUIManager::~CAfkUIManager()
 {
 
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CTutorialUIManager::Init(void)
+HRESULT CAfkUIManager::Init(void)
 {
-	// パソコン用チュートリアルUIの生成
-	CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
-
-	// コピー機用チュートリアルUIの生成
-	CCopyUI::Create(TutorialUIManager::CopyUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
-
+	// たばこ用UIの生成
+	CSmokeUI::Create(AfkUIManager::SmokeUIPos, VECTOR3_NULL, AfkUIManager::SmokeUI_NAME);
 
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CTutorialUIManager::Uninit(void)
+void CAfkUIManager::Uninit(void)
 {
 	// シングルトンの破棄
 	if (m_pInstance)
@@ -75,17 +69,17 @@ void CTutorialUIManager::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CTutorialUIManager::Update(void)
+void CAfkUIManager::Update(void)
 {
-	
+
 }
 //=========================================================
 // インスタンス取得処理
 //=========================================================
-CTutorialUIManager* CTutorialUIManager::Instance(void)
+CAfkUIManager* CAfkUIManager::Instance(void)
 {
 	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CTutorialUIManager;
+	if (m_pInstance == nullptr)m_pInstance = new CAfkUIManager;
 
 	// 生成されたインスタンスを返す
 	return m_pInstance;
