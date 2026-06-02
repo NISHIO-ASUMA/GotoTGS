@@ -232,7 +232,11 @@ void CPauseManager::SetEnablePause(void)
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_PAUSESTART);
 
-		// フラグ変更
+		// ポーズの有効無効フラグ変更
 		m_isPause = m_isPause ? false : true;
+
+		// カメラを固定化するかフラグ判別する
+		CManager::GetInstance()->GetCamera()->SetCameraMove(m_isPause);
+
 	}
 }

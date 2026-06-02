@@ -153,7 +153,6 @@ void CPlayer::Update(void)
 	//        今はPCの作業のみだけどこれから複数のタスクの判定も組んであげる形に変更になる
 	//		　髙橋追記 2026/05/19
 	//		　コピー機用の処理を追加しました
-	//		  
 	//        西尾追記 : カメラの固定化する処理を追加したよ
 
 	// タスクの情報を取得
@@ -408,6 +407,7 @@ void CPlayer::MoveBasedOnCamera(float speed)
 	{
 		m_bAfkSmoke = m_bAfkSmoke ? false : true;
 	}
+
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
 	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
@@ -465,6 +465,7 @@ void CPlayer::MoveBasedOnCamera(float speed)
 
 	if (m_bAfkSmoke)
 	{
+		// 煙草モーションに変更する
 		GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 	}
 	else if (!pKeyboard->GetPress(DIK_W) &&
@@ -472,7 +473,7 @@ void CPlayer::MoveBasedOnCamera(float speed)
 			 !pKeyboard->GetPress(DIK_D) &&
 			 !pKeyboard->GetPress(DIK_A))
 	{
-		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL);
+		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL,true,5);
 	}
 	// 移動入力がある場合
 	else if (m_bMove)
