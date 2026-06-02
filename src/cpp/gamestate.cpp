@@ -59,6 +59,7 @@ void CGameState::OnUpdate()
 {
 	// ポインタが無かったら
 	if (m_pGame == nullptr) return;
+	if (m_Progress == CGameState::PROGRESS_NONE) return;
 
 	// フェード取得
 	auto pFade = CManager::GetInstance()->GetFade();
@@ -67,13 +68,13 @@ void CGameState::OnUpdate()
 	// シーンオブジェクト取得
 	switch (m_Progress)
 	{
-	case CGameState::PROGRESS_NONE: // 何もない
+	case CGameState::PROGRESS_NONE:		// 何もない
 		break;
 
-	case CGameState::PROGRESS_NORMAL: // 進行を続ける
+	case CGameState::PROGRESS_NORMAL:	// 進行を続ける
 		break;
 
-	case CGameState::PROGRESS_END: // 終了し,画面遷移
+	case CGameState::PROGRESS_END:		// 終了し,画面遷移
 
 		// カウントを加算
 		m_nCount++;

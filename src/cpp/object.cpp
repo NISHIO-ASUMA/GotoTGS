@@ -137,11 +137,11 @@ void CObject::UpdateAll(void)
 			}
 
 			// ポーズオブジェクトのみを更新
-			if (CPauseManager::GetPause())
+			if (CPauseManager::GetInstance()->GetPause())
 			{
 				if (pObject->GetObjType() == TYPE_PAUSE)
 				{
-					// 対象更新
+					// ポーズ対象のみ更新
 					pObject->Update();
 				}
 			}

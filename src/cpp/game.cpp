@@ -58,12 +58,8 @@ HRESULT CGame::Init(void)
 	const auto& pCamera = CManager::GetInstance()->GetCamera();
 	pCamera->Init();
 
-	// ポーズマネージャー生成
-	m_pPausemanager = new CPauseManager;
-	if (m_pPausemanager == nullptr) return E_FAIL;
-
-	// ポーズマネージャー初期化処理
-	m_pPausemanager->Init();
+	// ポーズマネージャー初期化
+	CPauseManager::GetInstance()->Init();
 
 	// ゲームマネージャー初期化
 	CGameManager::GetInstance()->Init();
@@ -93,14 +89,8 @@ void CGame::Uninit(void)
 	// ゲームオブジェクトの破棄
 	CGameSceneObject::GetInstance()->Uninit();
 
-	// nullチェック
-	if (m_pPausemanager != nullptr)
-	{
-		// 終了処理
-		m_pPausemanager->Uninit();
-		delete m_pPausemanager;
-		m_pPausemanager = nullptr;
-	}
+	// ポーズマネージャー終了処理
+	CPauseManager::GetInstance()->Uninit();
 
 	// nullチェック
 	if (m_pState)
@@ -123,14 +113,18 @@ void CGame::Update(void)
 	auto State = m_pState->GetProgress();
 	if (State == m_pState->PROGRESS_END) return;
 
-	// ポーズのキー入力判定
-	m_pPausemanager->SetEnablePause();
+	// 通常の時のみキー入力受け付け
+	if (State == m_pState->PROGRESS_NORMAL)
+	{
+		// ポーズのキー入力判定
+		CPauseManager::GetInstance()->SetEnablePause();
 	
-	// ポーズ管理クラスの更新処理
-	m_pPausemanager->Update();
+		// ポーズ管理クラスの更新処理
+		CPauseManager::GetInstance()->Update();
+	}
 	
 	// falseの時に更新
-	if (!m_pPausemanager->GetPause() && State == m_pState->PROGRESS_NORMAL)
+	if (!CPauseManager::GetInstance()->GetPause() && State == m_pState->PROGRESS_NORMAL)
 	{
 		// ゲームマネージャー更新
 		CGameManager::GetInstance()->Update();

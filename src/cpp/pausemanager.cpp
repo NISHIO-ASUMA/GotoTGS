@@ -36,16 +36,12 @@ namespace PAUSEMANAGEINFO
 	constexpr float SPACEHEIGHT = 160.0f;		// ポリゴン同士の間隔
 };
 
-//*********************************************************
-// 静的メンバ変数宣言
-//*********************************************************
-bool CPauseManager::m_isPause = false; // ポーズフラグ
-
 //=========================================================
 // コンストラクタ
 //=========================================================
 CPauseManager::CPauseManager(): m_pPause{},
-m_nSelectIdx(NULL)
+m_nSelectIdx(NULL),
+m_isPause(false)
 {
 
 }
