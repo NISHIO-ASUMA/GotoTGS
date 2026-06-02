@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.h ]
+// AFK2DUI処理 [ afk2dui.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -18,7 +18,7 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "afk.h"
+#include "object2D.h"
 
 //*********************************************************
 // 前方宣言
@@ -28,31 +28,31 @@ class CSphereCollider;
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfksmoke : public CAfk
+class CAfk2DUI:public CObject2D
 {
 public:
-	~CAfksmoke();
+	CAfk2DUI();
+	~CAfk2DUI();
 
-	HRESULT Init(void);
+	HRESULT Init();
 	void Uninit(void);
 	void Update(void);
+	void Draw(void);
+	
+	bool GetAfkButton(void) { return m_bAfkButton; }
 
-	/// <summary>
-	/// 生成処理
-	/// </summary>
-	/// <param name="pos">生成処理</param>
-	/// <returns></returns>
-	static CAfksmoke* Create
-	(
-		const D3DXVECTOR3& pos
-	);
+	static CAfk2DUI* Create(void);
 
 	// インスタンス生成用関数
-	static CAfksmoke* Instance(void);
+	static CAfk2DUI* Instance(void);
 
 private:
-	CAfksmoke();					// コンストラクタ格納
-	static CAfksmoke* m_pInstance;	// シングルトン変数
+	static CAfk2DUI* m_pInstance;	// シングルトン変数
 
+	D3DXVECTOR3 m_pos;		// 位置
+	float m_fCountFrame;	// イージング用フレームカウント用変数
+	float m_fMaxFrame;		// 最大フレーム変数
+	bool m_bAfkButton;		// ボタン識別判定用変数
+	bool m_bEasing;			// イージング用変数
 };
 
