@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.cpp ]
+// AfkUIManager処理 [ afkuimanager.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,32 +8,31 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "afksmoke.h"
+#include "afkuimanager.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "spherecollider.h"
-#include "collisionsphere.h"
-
-//=================================================
-// 静的メンバ変数
-//=================================================
-CAfksmoke* CAfksmoke::m_pInstance = nullptr; // インスタンス変数
+#include "smokeui.h"
 
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace AFKSMOKE
+namespace AfkUIManager
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
-	constexpr float fRadius = 25.0f;					// 範囲の半径
+	const D3DXVECTOR3 SmokeUIPos = { 295.0f, 75.0f, 325.0f };			// たばこ用UIの座標
+	constexpr const char* SmokeUI_NAME = "smoking.png";					// たばこUIのテクスチャ名
 };
+
+//=================================================
+// 静的メンバ変数
+//=================================================
+CAfkUIManager* CAfkUIManager::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfksmoke::CAfksmoke()
+CAfkUIManager::CAfkUIManager()
 {
 
 }
@@ -41,47 +40,25 @@ CAfksmoke::CAfksmoke()
 //=========================================================
 // デストラクタ
 //=========================================================
-CAfksmoke::~CAfksmoke()
+CAfkUIManager::~CAfkUIManager()
 {
 
-}
-
-//=========================================================
-// 生成処理
-//=========================================================
-CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
-{
-	// インスタンス生成
-	CAfksmoke* pAfkSmoke = new CAfksmoke;
-	if (pAfkSmoke == nullptr) return nullptr;
-
-	// オブジェクトセット
-	pAfkSmoke->SetPos(AFKSMOKE::Pos);
-	pAfkSmoke->SetRadius(AFKSMOKE::fRadius);
-
-	// 初期化失敗時
-	if (FAILED(pAfkSmoke->Init())) return nullptr;
-
-	// チュートリアルUIのポインタを返す
-	return pAfkSmoke;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfksmoke::Init(void)
+HRESULT CAfkUIManager::Init(void)
 {
-	// 親クラスの初期化処理
-	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
+	// たばこ用UIの生成
+	CSmokeUI::Create(AfkUIManager::SmokeUIPos, VECTOR3_NULL, AfkUIManager::SmokeUI_NAME);
+
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CAfksmoke::Uninit(void)
+void CAfkUIManager::Uninit(void)
 {
-	// 親クラスの終了処理
-	CAfk::Uninit();
-
 	// シングルトンの破棄
 	if (m_pInstance)
 	{
@@ -92,18 +69,17 @@ void CAfksmoke::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CAfksmoke::Update(void)
+void CAfkUIManager::Update(void)
 {
-	// 親クラスの更新処理
-	CAfk::Update();
+
 }
 //=========================================================
 // インスタンス取得処理
 //=========================================================
-CAfksmoke* CAfksmoke::Instance(void)
+CAfkUIManager* CAfkUIManager::Instance(void)
 {
 	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CAfksmoke;
+	if (m_pInstance == nullptr)m_pInstance = new CAfkUIManager;
 
 	// 生成されたインスタンスを返す
 	return m_pInstance;

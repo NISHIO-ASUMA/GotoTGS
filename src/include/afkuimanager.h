@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.h ]
+// AfkUIManager処理 [ afkuimanager.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -16,43 +16,24 @@
 #include <memory>
 
 //*********************************************************
-// インクルードファイル
-//*********************************************************
-#include "afk.h"
-
-//*********************************************************
-// 前方宣言
-//*********************************************************
-class CSphereCollider;
-
-//*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfksmoke : public CAfk
+class CAfkUIManager
 {
 public:
-	~CAfksmoke();
+
+	CAfkUIManager();
+	~CAfkUIManager();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 
-	/// <summary>
-	/// 生成処理
-	/// </summary>
-	/// <param name="pos">生成処理</param>
-	/// <returns></returns>
-	static CAfksmoke* Create
-	(
-		const D3DXVECTOR3& pos
-	);
-
 	// インスタンス生成用関数
-	static CAfksmoke* Instance(void);
+	static CAfkUIManager* Instance(void);
 
 private:
-	CAfksmoke();					// コンストラクタ格納
-	static CAfksmoke* m_pInstance;	// シングルトン変数
+	static CAfkUIManager* m_pInstance;	// シングルトン変数
 
 };
 

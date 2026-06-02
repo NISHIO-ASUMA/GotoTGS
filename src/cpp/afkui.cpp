@@ -27,9 +27,9 @@
 namespace AfkUI
 {
 #ifdef _DEBUG
-	int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
+	constexpr int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
 #else
-	int nDeleteTime = 140;		// チュートリアル用UIの表示の仕方を切り替えるための時間
+	constexpr int nDeleteTime = 140;		// チュートリアル用UIの表示の仕方を切り替えるための時間
 #endif
 };
 
@@ -38,8 +38,8 @@ namespace AfkUI
 //=========================================================
 CAfkUI::CAfkUI(int nPriority) : CBillboard(nPriority),
 m_pCollider(nullptr),
-m_bLook(false),
 m_fRadius(NULL),
+m_bLook(false),
 m_bTime(true)
 {
 
@@ -132,7 +132,11 @@ void CAfkUI::Update(void)
 void CAfkUI::Draw(void)
 {
 	// 親クラスの描画処理
-	if (m_bLook || m_bTime)	CBillboard::Draw();
+	if (m_bLook || m_bTime)
+	{
+		// 親クラスの描画
+		CBillboard::Draw();
+	}
 }
 //=========================================================
 // 球形当たり判定処理

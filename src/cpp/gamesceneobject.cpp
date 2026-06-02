@@ -34,6 +34,9 @@
 #include "camera.h"				// 西尾追加
 #include "afksmoke.h"			// 近田追加
 #include "smokeui.h"			// 近田追加
+#include "afk2dui.h"			// 近田追加
+#include "tutorialuimanager.h"	// 近田追加
+#include "afkuimanager.h"		// 近田追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -46,12 +49,7 @@ CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;		// シングルトン変数
 namespace GAMEOBJECT
 {
 	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };			// タイマーの座標
-	const D3DXVECTOR3 PcUIPos		= { -45.0f, 75.0f, 170.0f };		// PCUIの座標
-	const D3DXVECTOR3 CopyUIPos		= { 170.0f, 75.0f, 355.0f };		// コピー機UIの座標
 	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };			// プレイヤーの座標
-	const D3DXVECTOR3 SmokeUIPos	= { 295.0f, 75.0f, 325.0f };			// たばこ用UIの座標
-	constexpr const char* TutorialUI_NAME	= "Fbutton.png";			// チュートリアルuiのテクスチャ名
-	constexpr const char* SmokeUI_NAME = "smoking.png";					// たばこUIのテクスチャ名
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";		// ゲーム内オブジェクトjsonファイル名
 	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
 };
@@ -99,17 +97,17 @@ HRESULT CGameSceneObject::Init(void)
 	// タスクの判定を取る球形コライダー管理クラスを生成
 	CWorldUICollision::GetInstance()->Init();
 
-	// パソコン用チュートリアルUIの生成
-	CPcUI::Create(GAMEOBJECT::PcUIPos, VECTOR3_NULL,GAMEOBJECT::TutorialUI_NAME);
-	
-	// コピー機用チュートリアルUIの生成
-	CCopyUI::Create(GAMEOBJECT::CopyUIPos, VECTOR3_NULL,GAMEOBJECT::TutorialUI_NAME);
+	// チュートリアルUIマネージャーの初期化処理
+	CTutorialUIManager::Instance()->Init();
 
-	// たばこ用UIの生成
-	CSmokeUI::Create(GAMEOBJECT::SmokeUIPos, VECTOR3_NULL, GAMEOBJECT::SmokeUI_NAME);
+	// AfkUIマネージャーの初期化処理
+	CAfkUIManager::Instance()->Init();
 
 	// たばこさぼりの初期化処理
 	CAfksmoke::Instance()->Init();
+
+	// さぼっているときのUIの生成
+	CAfk2DUI::Create();
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -142,6 +140,12 @@ void CGameSceneObject::Uninit(void)
 {
 	// ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
+
+	// チュートリアルUIマネージャーの終了処理
+	CTutorialUIManager::Instance()->Uninit();
+
+	// AfkUIマネージャーの初期化処理
+	CAfkUIManager::Instance()->Uninit();
 
 	// たばこさぼりの破棄処理
 	CAfksmoke::Instance()->Uninit();

@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.cpp ]
+// TutorialUIManager処理 [ tutorialuimanager.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,32 +8,33 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "afksmoke.h"
+#include "tutorialuimanager.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "spherecollider.h"
-#include "collisionsphere.h"
-
-//=================================================
-// 静的メンバ変数
-//=================================================
-CAfksmoke* CAfksmoke::m_pInstance = nullptr; // インスタンス変数
+#include "pcui.h"
+#include "copyui.h"
 
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace AFKSMOKE
+namespace TutorialUIManager
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
-	constexpr float fRadius = 25.0f;					// 範囲の半径
+	const D3DXVECTOR3 PcUIPos = { -45.0f, 75.0f, 170.0f };		// PCUIの座標
+	const D3DXVECTOR3 CopyUIPos = { 170.0f, 75.0f, 355.0f };	// コピー機UIの座標
+	constexpr const char* TutorialUI_NAME = "Fbutton.png";		// チュートリアルuiのテクスチャ名
 };
+
+//=================================================
+// 静的メンバ変数
+//=================================================
+CTutorialUIManager* CTutorialUIManager::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfksmoke::CAfksmoke()
+CTutorialUIManager::CTutorialUIManager()
 {
 
 }
@@ -41,47 +42,29 @@ CAfksmoke::CAfksmoke()
 //=========================================================
 // デストラクタ
 //=========================================================
-CAfksmoke::~CAfksmoke()
+CTutorialUIManager::~CTutorialUIManager()
 {
 
-}
-
-//=========================================================
-// 生成処理
-//=========================================================
-CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
-{
-	// インスタンス生成
-	CAfksmoke* pAfkSmoke = new CAfksmoke;
-	if (pAfkSmoke == nullptr) return nullptr;
-
-	// オブジェクトセット
-	pAfkSmoke->SetPos(AFKSMOKE::Pos);
-	pAfkSmoke->SetRadius(AFKSMOKE::fRadius);
-
-	// 初期化失敗時
-	if (FAILED(pAfkSmoke->Init())) return nullptr;
-
-	// チュートリアルUIのポインタを返す
-	return pAfkSmoke;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfksmoke::Init(void)
+HRESULT CTutorialUIManager::Init(void)
 {
-	// 親クラスの初期化処理
-	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
+	// パソコン用チュートリアルUIの生成
+	CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
+
+	// コピー機用チュートリアルUIの生成
+	CCopyUI::Create(TutorialUIManager::CopyUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
+
+
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CAfksmoke::Uninit(void)
+void CTutorialUIManager::Uninit(void)
 {
-	// 親クラスの終了処理
-	CAfk::Uninit();
-
 	// シングルトンの破棄
 	if (m_pInstance)
 	{
@@ -92,18 +75,17 @@ void CAfksmoke::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CAfksmoke::Update(void)
+void CTutorialUIManager::Update(void)
 {
-	// 親クラスの更新処理
-	CAfk::Update();
+	
 }
 //=========================================================
 // インスタンス取得処理
 //=========================================================
-CAfksmoke* CAfksmoke::Instance(void)
+CTutorialUIManager* CTutorialUIManager::Instance(void)
 {
 	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CAfksmoke;
+	if (m_pInstance == nullptr)m_pInstance = new CTutorialUIManager;
 
 	// 生成されたインスタンスを返す
 	return m_pInstance;
