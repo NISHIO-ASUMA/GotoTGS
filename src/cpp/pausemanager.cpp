@@ -65,7 +65,7 @@ HRESULT CPauseManager::Init(void)
 	m_isPause = false;
 
 	// 初期セレクト番号設定
-	m_nSelectIdx = CPause::MENU_RETRY;
+	m_nSelectIdx = CPause::MENU_CONTINUE;
 
 	// 基準座標を設定
 	D3DXVECTOR3 Bacepos = PAUSEMANAGEINFO::BACEPOS;
@@ -193,20 +193,20 @@ void CPauseManager::Update(void)
 			break;
 
 		/// <summary>
+		/// コンテニュー時はそのまま継続
+		/// </summary>
+		/// <param name=""></param>
+		case CPause::MENU_CONTINUE:
+			SetEnablePause(false);	
+			break;
+
+		/// <summary>
 		/// リトライ時はゲームを最初から
 		/// </summary>
 		/// <param name=""></param>
 		case CPause::MENU_RETRY:
 			if (pFade != nullptr) pFade->SetFade(std::make_unique<CGame>());
 			SetEnablePause(false);
-			break;
-
-		/// <summary>
-		/// コンテニュー時はそのまま継続
-		/// </summary>
-		/// <param name=""></param>
-		case CPause::MENU_CONTINUE:
-			SetEnablePause(false);	
 			break;
 
 		/// <summary>
