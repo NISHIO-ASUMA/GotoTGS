@@ -28,7 +28,7 @@ namespace AFK2DUI
 	const D3DXVECTOR3 Pos = { 640.0f, 500.0f, 0.0f };	// 2D画像の座標
 	constexpr float fWidth = 50.0f;						// 横幅
 	constexpr float fHeight = 50.0f;					// 縦幅
-	constexpr const char* Button_NAME = "Fbutton.png";	// チュートリアルuiのテクスチャ名
+	constexpr const char* Button_NAME = "AfkButton.png";	// チュートリアルuiのテクスチャ名
 	constexpr const char* NowAFK_NAME = "smoking.png";	// たばこUIのテクスチャ名
 };
 
@@ -111,9 +111,9 @@ void CAfk2DUI::Update(void)
 	auto pos = GetPos();
 
 	// 初期の大きさ
-	D3DXVECTOR2 Apper = { 0.15f * pos.x, 0.15f * pos.y };
+	D3DXVECTOR2 Apper = { 0.35f * pos.x, 0.15f * pos.y };
 	// 目標の大きさ
-	D3DXVECTOR2 Dest = { 0.25f * pos.x,0.25f * pos.y };
+	D3DXVECTOR2 Dest = { 0.55f * pos.x,0.25f * pos.y };
 
 	// イージング判定が無効なら
 	if (m_bEasing == false)
