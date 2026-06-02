@@ -19,6 +19,7 @@
 #include "gamesceneobject.h"
 #include "easing.h"
 #include "afksmoke.h"
+#include "player.h"
 
 //=================================================
 // 名前空間
@@ -107,6 +108,46 @@ void CAfk2DUI::Update(void)
 	// 親クラスの更新処理
 	CObject2D::Update();
 
+
+	// プレイヤーがたばこ吸っているかの判定変数
+	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
+
+	if (!bAfkSmoke)
+	{
+		SetTexture(AFK2DUI::Button_NAME);
+		Easing();
+	}
+	else
+	{
+		SetTexture(AFK2DUI::NowAFK_NAME);
+	}
+}
+//=========================================================
+// 描画処理
+//=========================================================
+void CAfk2DUI::Draw(void)
+{
+	auto bAfk = CAfksmoke::Instance()->GetAfk();
+	
+	// 親クラスの描画処理
+	if(bAfk)CObject2D::Draw();
+}
+//=========================================================
+// インスタンス取得処理
+//=========================================================
+CAfk2DUI* CAfk2DUI::Instance(void)
+{
+	// nullチェック
+	if (m_pInstance == nullptr)m_pInstance = new CAfk2DUI;
+
+	// 生成されたインスタンスを返す
+	return m_pInstance;
+}
+//=========================================================
+// イージング使用関数
+//=========================================================
+void CAfk2DUI::Easing(void)
+{
 	// 位置の取得
 	auto pos = GetPos();
 
@@ -164,26 +205,4 @@ void CAfk2DUI::Update(void)
 		// イージング判定を無効にする
 		m_bEasing = false;
 	}
-
-}
-//=========================================================
-// 描画処理
-//=========================================================
-void CAfk2DUI::Draw(void)
-{
-	auto bAfk = CAfksmoke::Instance()->GetAfk();
-	
-	// 親クラスの描画処理
-	if(bAfk)CObject2D::Draw();
-}
-//=========================================================
-// インスタンス取得処理
-//=========================================================
-CAfk2DUI* CAfk2DUI::Instance(void)
-{
-	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CAfk2DUI;
-
-	// 生成されたインスタンスを返す
-	return m_pInstance;
 }
