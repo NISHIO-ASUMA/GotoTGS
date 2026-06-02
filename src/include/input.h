@@ -119,6 +119,10 @@ public:
 	/// <param name="durationMs">振動フレーム時間</param>
 	void SetVibration(int leftMotor, int rightMotor, int durationMs);
 
+public:
+
+	bool GetConnectGamePad(void); // コントローラーが接続されているかどうかを判別する
+
 private:
 
 	XINPUT_STATE m_joyKeyState;			// ジョイパッドのプレス情報
@@ -130,6 +134,7 @@ private:
 	int m_rightMotor;					// 右モーターの強さ
 	DWORD m_VibrationEndTime;			// 振動終了時刻
 	bool m_isVibration;					// 振動中かどうか
+	bool m_isConnect;					// 接続されているかどうか
 };
 
 //*********************************************************
