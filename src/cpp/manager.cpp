@@ -35,6 +35,7 @@
 #include "instancemodelmanager.h"
 #include "instancemotionmanager.h"
 #include "jsonmanager.h"
+#include "pausemanager.h"
 
 //*********************************************************
 // 定数名前空間宣言
@@ -313,6 +314,9 @@ void CManager::SetScene(std::unique_ptr<CScene> pNewScene)
 			pNewScene.reset();
 			return;
 		}
+
+		// ポーズを強制的にoffにする
+		CPauseManager::GetInstance()->SetEnablePause(false);
 
 		// 所有権をマネージャに移動
 		m_pScene = std::move(pNewScene);

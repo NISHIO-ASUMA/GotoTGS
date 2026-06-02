@@ -29,6 +29,7 @@
 #include "debugproc.h"
 #include "PCdeskwork.h"			// Misaki
 #include "COPYdeskwork.h"		// Misaki
+#include "DOCUMENTdeskwork.h"	// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 #include "camera.h"
@@ -273,6 +274,17 @@ void CPlayer::Update(void)
 					{
 						pDesk->GetCOPYDeskUI()->SetAlphaUI();
 					}
+
+					break;
+
+				case CWorldUICollision::TYPE_DOCUMENT: // ‘—Þƒ^ƒXƒN[add Misaki]
+				{
+					// —¼•û‚ªnull‚¶‚á‚È‚¢ó‘Ô
+					if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
+					{
+						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
+					}
+				}
 
 					break;
 
