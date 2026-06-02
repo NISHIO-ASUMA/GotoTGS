@@ -41,7 +41,7 @@ public:
 	virtual ~CDeskworkUIManager();
 
 	virtual HRESULT Init(void);
-	virtual void Uninit(void) = 0;
+	virtual void Uninit(void);
 	virtual void Update(void);
 	virtual void Draw(void) = 0;
 

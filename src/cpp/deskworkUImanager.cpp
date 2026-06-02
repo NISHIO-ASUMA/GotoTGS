@@ -66,6 +66,16 @@ HRESULT CDeskworkUIManager::Init(void)
 }
 
 //=========================================================
+// èIóπèàóù
+//=========================================================
+void CDeskworkUIManager::Uninit(void)
+{
+	m_nPCTaskNum = NULL;
+	m_nCOPYTaskNum = NULL;
+	m_nDOCUMENTTaskNum = NULL;
+}
+
+//=========================================================
 // çXêVèàóù
 //=========================================================
 void CDeskworkUIManager::Update(void)
