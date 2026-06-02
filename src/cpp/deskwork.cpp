@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "PCdeskwork.h"
 #include "COPYdeskwork.h"
+#include "DOCUMENTdeskwork.h"
 #include "input.h"
 
 //=========================================================
@@ -23,7 +24,8 @@
 //=========================================================
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
 m_pPCDeskUI(nullptr),
-m_pCOPYDeskUI(nullptr)
+m_pCOPYDeskUI(nullptr),
+m_pDOCUMENTDesk(nullptr)
 {
 
 }
@@ -67,11 +69,12 @@ HRESULT CDeskwork::Init(void)
 	// 親の初期化処理
 	CObject2D::Init();
 
-	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr)
+	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr || m_pDOCUMENTDesk != nullptr)
 	{// どれかのポインタに中身が入っているなら
 		// ポインタを初期化
 		m_pPCDeskUI = nullptr;
 		m_pCOPYDeskUI = nullptr;
+		m_pDOCUMENTDesk = nullptr;
 	}
 
 	// PCタスクUIの生成
@@ -79,6 +82,9 @@ HRESULT CDeskwork::Init(void)
 
 	// コピー機タスクUIの生成
 	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + Config::COPY_VALUE_Y, 0.0f));
+
+	// 書類タスクの生成
+	m_pDOCUMENTDesk = CDOCUMENTDeskwork::Create();
 
 	// フラグを初期化
 	m_pPCDeskUI->SetUse(false);
@@ -108,6 +114,13 @@ void CDeskwork::Uninit(void)
 		m_pCOPYDeskUI->Uninit();
 		m_pCOPYDeskUI = nullptr;
 	}
+
+	// 書類タスクを破棄
+	if (m_pDOCUMENTDesk)
+	{
+		m_pDOCUMENTDesk->Uninit();
+		m_pDOCUMENTDesk = nullptr;
+	}
 }
 
 //=========================================================
@@ -118,6 +131,7 @@ void CDeskwork::Update(void)
 	// ポインタがヌルではなく有効状態ではないなら
 	if ((m_pPCDeskUI != nullptr && 
 		m_pCOPYDeskUI != nullptr) &&
+		m_pDOCUMENTDesk != nullptr &&
 		(m_pPCDeskUI->GetUse() != true && 
 		m_pCOPYDeskUI->GetUse() != true))
 	{
@@ -136,6 +150,8 @@ void CDeskwork::Update(void)
 		// テクスチャをPC用に設定
 		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
 		SetTexture(Config::PC_TEXNAME);
+
+		return;
 	}
 
 	if (m_pPCDeskUI->GetUse() != true)
@@ -147,8 +163,9 @@ void CDeskwork::Update(void)
 		// テクスチャをコピー機用に設定
 		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
 		SetTexture(Config::COPY_TEXNAME);
-	}
 
+		return;
+	}
 }
 
 //=========================================================
