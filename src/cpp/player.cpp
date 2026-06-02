@@ -403,10 +403,9 @@ void CPlayer::MoveBasedOnCamera(float speed)
 
 	// さぼっているかの判定
 	auto bAfk = CAfksmoke::Instance()->GetAfk();
-	if (bAfk && pKeyboard->GetTrigger(DIK_F))
-	{
-		m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	}
+	
+	if (bAfk && !m_bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = true;
+	else if (bAfk && m_bAfkSmoke && pKeyboard->GetTrigger(DIK_TAB))	m_bAfkSmoke = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
