@@ -681,6 +681,12 @@
     <ClCompile Include="src\cpp\tutorialuimanager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\titleui.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\titleuimanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1060,6 +1066,12 @@
     </ClInclude>
     <ClInclude Include="src\include\afk2dui.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titleui.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titleuimanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

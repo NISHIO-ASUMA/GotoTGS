@@ -46,6 +46,7 @@ public:
 	/// <param name="isAlphaEnable">透明度処理を有効化するか</param>
 	/// <param name="nAlphaFrame">透明化のフレーム</param>
 	/// <param name="isAlphaTest">αテストするか</param>
+	/// <param name="bUse">使っているかどうか</param>
 	/// <returns></returns>
 	static CUi* Create
 	(

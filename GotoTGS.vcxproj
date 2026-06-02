@@ -275,6 +275,8 @@
     <ClCompile Include="src\cpp\title.cpp" />
     <ClCompile Include="src\cpp\titlemanager.cpp" />
     <ClCompile Include="src\cpp\titleobject.cpp" />
+    <ClCompile Include="src\cpp\titleui.cpp" />
+    <ClCompile Include="src\cpp\titleuimanager.cpp" />
     <ClCompile Include="src\cpp\tutorial.cpp" />
     <ClCompile Include="src\cpp\tutorialmanager.cpp" />
     <ClCompile Include="src\cpp\tutorialobject.cpp" />
@@ -404,6 +406,8 @@
     <ClInclude Include="src\include\title.h" />
     <ClInclude Include="src\include\titlemanager.h" />
     <ClInclude Include="src\include\titleobject.h" />
+    <ClInclude Include="src\include\titleui.h" />
+    <ClInclude Include="src\include\titleuimanager.h" />
     <ClInclude Include="src\include\tutorial.h" />
     <ClInclude Include="src\include\tutorialmanager.h" />
     <ClInclude Include="src\include\tutorialobject.h" />

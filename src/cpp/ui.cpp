@@ -136,7 +136,7 @@ void CUi::Draw(void)
 	
 	if (m_bUse != false)
 	{// 表示するかどうか Misaki
-		// 親クラスのの描画
+		// 親クラスの描画
 		CObject2D::Draw();
 	}
 
