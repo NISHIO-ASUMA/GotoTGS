@@ -14,6 +14,7 @@
 // インクルード
 //*********************************************************
 #include "object2D.h"
+#include "worldUIcollision.h"
 
 //*********************************************************
 // 前方宣言
@@ -38,7 +39,7 @@ public:
 	void Draw(void) override;
 
 	// 設定処理
-	inline void SetAlpha(const bool &bUse);
+	void SetTexBG(const CWorldUICollision::TYPE& TaskType);
 
 	// 情報取得処理
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
@@ -62,10 +63,11 @@ private:
 		static constexpr const char* PC_TEXNAME = "deskwork_background2.png";	// PCタスクのテクスチャ名
 
 		// コピー機タスク用
-		static constexpr float COPY_VALUE_Y = 50.0f;					// Y軸の位置の増加量
-		static constexpr float COPY_WIDTH = 600.0f;						// 横幅
-		static constexpr float COPY_HEIGHT = 300.0f;					// 縦幅
-		static constexpr const char* COPY_TEXNAME = "copymachine.png";	// コピー機タスクのテクスチャ名
+		static constexpr float COPY_VALUE_Y = 50.0f;						// Y軸の位置の増加量
+		static constexpr float COPY_WIDTH = 600.0f;							// 横幅
+		static constexpr float COPY_HEIGHT = 300.0f;						// 縦幅
+		static constexpr const char* COPY_TEXNAME = "copymachine.png";		// コピー機タスクのテクスチャ名
+		static constexpr const char* CANCEL_TEXNAME = "taskcancel000.png";	// コピー機を使用できない時用のテクスチャ名
 
 	};
 
