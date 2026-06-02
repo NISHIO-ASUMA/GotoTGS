@@ -408,6 +408,7 @@
     <ClInclude Include="src\include\tutorialmanager.h" />
     <ClInclude Include="src\include\tutorialobject.h" />
     <ClInclude Include="src\include\tutorialui.h" />
+    <ClInclude Include="src\include\tutorialuimanager.h" />
     <ClInclude Include="src\include\ui.h" />
     <ClInclude Include="src\include\walkingfriend.h" />
     <ClInclude Include="src\include\worldUIcollision.h" />
