@@ -1,5 +1,5 @@
 {
-   "AllObject": 200,
+   "AllObject": 213,
    "SetObjects": [
       {
          "idx": 0,
@@ -3758,7 +3758,7 @@
             1.0,
             0.800000011920929
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
@@ -3778,7 +3778,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
@@ -3798,7 +3798,7 @@
             0.5,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
@@ -3818,7 +3818,7 @@
             1.0,
             0.5
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
@@ -3838,7 +3838,7 @@
             0.800000011920929,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
@@ -3858,7 +3858,7 @@
             0.699999988079071,
             0.6000000238418579
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
@@ -3878,15 +3878,15 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
          "idx": 194,
          "pos": [
-            425.010009765625,
+            423.989990234375,
             338.0,
-            1364.800048828125
+            1347.6800537109375
          ],
          "rot": [
             0.0,
@@ -3898,7 +3898,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
@@ -3918,7 +3918,7 @@
             1.0,
             1.2000000476837158
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
@@ -3938,7 +3938,7 @@
             0.800000011920929,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
@@ -3978,7 +3978,7 @@
             0.5,
             0.75
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
@@ -3998,8 +3998,268 @@
             0.6000000238418579,
             0.75
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
+      },
+      {
+         "idx": 200,
+         "pos": [
+            102.0199966430664,
+            662.0,
+            -398.8599853515625
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/bill03.x"
+      },
+      {
+         "idx": 201,
+         "pos": [
+            -364.92999267578125,
+            490.0,
+            747.280029296875
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/bill04.x"
+      },
+      {
+         "idx": 202,
+         "pos": [
+            -623.2999877929688,
+            422.0,
+            213.0399932861328
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            0.699999988079071,
+            1.0,
+            0.6000000238418579
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/bill02.x"
+      },
+      {
+         "idx": 203,
+         "pos": [
+            -431.4200134277344,
+            392.0,
+            -385.0899963378906
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.600000023841858,
+            1.0,
+            0.6000000238418579
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/bill01.x"
+      },
+      {
+         "idx": 204,
+         "pos": [
+            -592.27001953125,
+            392.0,
+            -219.4199981689453
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            0.800000011920929,
+            1.0,
+            0.699999988079071
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/bill01.x"
+      },
+      {
+         "idx": 205,
+         "pos": [
+            1115.4100341796875,
+            154.0,
+            676.260009765625
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/convenience_store00.x"
+      },
+      {
+         "idx": 206,
+         "pos": [
+            2267.0,
+            154.0,
+            -867.6400146484375
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/convenience_store01.x"
+      },
+      {
+         "idx": 207,
+         "pos": [
+            2220.139892578125,
+            146.0,
+            1124.06005859375
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/house00.x"
+      },
+      {
+         "idx": 208,
+         "pos": [
+            2314.919921875,
+            46.0,
+            -627.1099853515625
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Truck.x"
+      },
+      {
+         "idx": 209,
+         "pos": [
+            2308.969970703125,
+            46.0,
+            -541.0
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Truck.x"
+      },
+      {
+         "idx": 210,
+         "pos": [
+            1815.8900146484375,
+            46.0,
+            -177.60000610351563
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Bus.x"
+      },
+      {
+         "idx": 211,
+         "pos": [
+            839.6900024414063,
+            46.0,
+            -450.07000732421875
+         ],
+         "rot": [
+            0.0,
+            -3.130000114440918,
+            0.0
+         ],
+         "scale": [
+            1.5,
+            1.5,
+            1.5
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/car000.x"
+      },
+      {
+         "idx": 212,
+         "pos": [
+            1076.8199462890625,
+            44.0,
+            1203.77001953125
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Bus.x"
       }
    ]
 }
