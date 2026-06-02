@@ -43,6 +43,7 @@ public:
 	// 情報取得処理
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
 	CCOPYDeskwork* GetCOPYDeskUI(void) const { return m_pCOPYDeskUI; }
+	CDOCUMENTDeskwork* GetDOCUMENTDesk(void)const { return m_pDOCUMENTDesk; }
 
 	// 生成処理
 	static CDeskwork* Create(const D3DXVECTOR3& pos);
@@ -69,6 +70,7 @@ private:
 	};
 
 	// メンバ変数
-	CPCDeskwork* m_pPCDeskUI;		// PCタスクUIのポインタ
-	CCOPYDeskwork* m_pCOPYDeskUI;	// コピー機タスクUIのポインタ
+	CPCDeskwork* m_pPCDeskUI;				// PCタスクUIのポインタ
+	CCOPYDeskwork* m_pCOPYDeskUI;			// コピー機タスクUIのポインタ
+	CDOCUMENTDeskwork* m_pDOCUMENTDesk;		// 書類タスクのポインタ
 };

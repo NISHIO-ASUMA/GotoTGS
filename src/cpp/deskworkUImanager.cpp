@@ -19,6 +19,7 @@
 // 静的メンバ変数宣言
 int CDeskworkUIManager::m_nPCTaskNum = NULL;
 int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
+int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
 
 //=========================================================
 // コンストラクタ
@@ -29,6 +30,7 @@ m_bUse(false)
 {
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;
+	m_nDOCUMENTTaskNum = NULL;
 
 	if (m_pClearUI != nullptr)
 	{
@@ -71,4 +73,16 @@ void CDeskworkUIManager::Update(void)
 	// 乱数の種
 	srand((unsigned int)time(0));
 
+}
+
+//=========================================================
+// 書類の数の加算処理
+//=========================================================
+void CDeskworkUIManager::AddDOCUMENTTask(void)
+{
+	// こなしたコピー機タスクの数を加算
+	m_nDOCUMENTTaskNum += m_nCOPYTaskNum;
+
+	//  コピー機タスクの数を初期化
+	m_nCOPYTaskNum = NULL;
 }
