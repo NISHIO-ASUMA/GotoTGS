@@ -27,7 +27,7 @@ CAfksmoke* CAfksmoke::m_pInstance = nullptr; // インスタンス変数
 namespace AFKSMOKE
 {
 	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
-	float fRadius = 25.0f;								// 範囲の半径
+	constexpr float fRadius = 25.0f;					// 範囲の半径
 };
 
 //=========================================================
