@@ -34,6 +34,7 @@
 #include "camera.h"				// 西尾追加
 #include "afksmoke.h"			// 近田追加
 #include "smokeui.h"			// 近田追加
+#include "afk2dui.h"			// 近田追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -110,6 +111,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	// たばこさぼりの初期化処理
 	CAfksmoke::Instance()->Init();
+
+	// さぼっているときのUIの生成
+	CAfk2DUI::Create();
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
