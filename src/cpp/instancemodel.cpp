@@ -220,7 +220,7 @@ void CInstanceModel::Update(const D3DXMATRIX& mtx)
 void CInstanceModel::Draw(const D3DXMATRIX& mtx)
 {
 	// ポーズ中以外ならここで処理を返す
-	if (!CPauseManager::GetPause()) return;
+	if (!CPauseManager::GetInstance()->GetPause()) return;
 
 	// デバイスポインタを取得
 	const auto& Rendere = CManager::GetInstance()->GetRenderer();

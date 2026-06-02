@@ -22,9 +22,9 @@
 //*********************************************************
 namespace PAUSEBASE
 {
-	constexpr const char* BACKTEXTURE = "data/TEXTURE/PauseBack.png";			// 背景の半透明ポリゴン
+	constexpr const char* BACKTEXTURE = "data/TEXTURE/PauseBack.png";		// 背景の半透明ポリゴン
 	constexpr const char* QUITMENU = "data/TEXTURE/pause_quit.png";			// タイトル選択ポリゴン
-	constexpr const char* RETRYMENU = "data/TEXTURE/pause_retry.png";			// リトライ選択ポリゴン
+	constexpr const char* RETRYMENU = "data/TEXTURE/pause_retry.png";		// リトライ選択ポリゴン
 	constexpr const char* CONTINUEMENU = "data/TEXTURE/pause_continue.png";	// ゲーム継続選択ポリゴン
 };
 
@@ -93,7 +93,7 @@ void CPause::Uninit(void)
 void CPause::Update(void)
 {
 	// ポーズが有効なら
-	if (!CPauseManager::GetPause()) return;
+	if (!CPauseManager::GetInstance()->GetPause()) return;
 
 	// オブジェクトの更新処理
 	CObject2D::Update();
@@ -104,7 +104,7 @@ void CPause::Update(void)
 void CPause::Draw(void)
 {
 	// ポーズが有効なら
-	if (!CPauseManager::GetPause()) return;
+	if (!CPauseManager::GetInstance()->GetPause()) return;
 
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();

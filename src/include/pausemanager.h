@@ -16,13 +16,12 @@
 class CPause;
 
 //*********************************************************
-// ポーズメニュー管理クラスを定義
+// ポーズメニュー管理クラスを定義 ( シングルトン )
 //*********************************************************
 class CPauseManager
 {
 public:
 
-	CPauseManager();
 	~CPauseManager();
 
 	HRESULT Init(void);
@@ -33,7 +32,7 @@ public:
 	/// ポーズの有効状態を切り替える
 	/// </summary>
 	/// <param name="isFlags">引数で設定する値</param>
-	static void SetEnablePause(bool isFlags) { m_isPause = isFlags; }
+	void SetEnablePause(const bool& isFlags) { m_isPause = isFlags; }
 
 	/// <summary>
 	/// ポーズの状態を判別する
@@ -46,7 +45,22 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	static bool GetPause(void) { return m_isPause; }
+	bool GetPause(void) { return m_isPause; }
+
+	/// <summary>
+	/// シングルトン取得処理
+	/// </summary>
+	/// <param name="">生成される1つのインスタンス</param>
+	/// <returns></returns>
+	static CPauseManager* GetInstance(void)
+	{
+		static CPauseManager Instance;
+		return &Instance;
+	};
+
+private:
+
+	CPauseManager(); // 格納コンストラクタ
 
 private:
 
@@ -56,7 +70,7 @@ private:
 
 private:
 
-	static bool m_isPause;			// ポーズかどうか
+	bool m_isPause;					// ポーズかどうか
 	int m_nSelectIdx;				// セレクト番号
 	CPause* m_pPause[SELECT_MAX];	// ポーズクラスのポインタ配列
 };
