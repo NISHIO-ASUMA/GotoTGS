@@ -35,20 +35,25 @@ CAlert::~CAlert()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CAlert* CAlert::Create(void)
+CAlert* CAlert::Create(const Alert& alert)
 {
 	// インスタンス生成
 	CAlert* pAlert = new CAlert;
 
-	if (pAlert == nullptr)
-	{// ヌルチェック
-		return nullptr;
-	}
+	// ヌルチェック
+	if (pAlert == nullptr) return nullptr;
 
-	if (FAILED(pAlert->Init()))
-	{// 初期化が失敗した場合
-		return nullptr;
-	}
+	// 各設定処理
+	pAlert->SetPos(alert.pos);
+	pAlert->SetCol(alert.col);
+	pAlert->SetSize(alert.fWidth, alert.fHeight);
+	pAlert->SetUV(alert.tex.x, alert.tex.y);
+	pAlert->SetAnimFlag(alert.isLoop);
+	pAlert->SetUse(alert.bUse);
+	pAlert->SetTexture(Config::TEXNAME);
+
+	// 初期化が失敗したとき
+	if (FAILED(pAlert->Init())) return nullptr;
 
 	return pAlert;
 }
@@ -57,6 +62,9 @@ CAlert* CAlert::Create(void)
 //=========================================================
 HRESULT CAlert::Init(void)
 {
+	// 親の初期化処理
+	CAnimationObject2D::Init();
+
 	return S_OK;
 }
 
@@ -65,7 +73,8 @@ HRESULT CAlert::Init(void)
 //=========================================================
 void CAlert::Uninit(void)
 {
-
+	// 親の終了処理
+	CAnimationObject2D::Uninit();
 }
 
 //=========================================================
@@ -73,7 +82,17 @@ void CAlert::Uninit(void)
 //=========================================================
 void CAlert::Update(void)
 {
+	// 使用していないなら
+	if (GetUse() != true)
+	{
+		return;
+	}
+	
+	// 親の更新処理
+	CAnimationObject2D::Update();
 
+	// テクスチャの横移動処理
+	SetTexMoveU(Config::MAXFREAM);
 }
 
 //=========================================================
@@ -81,5 +100,13 @@ void CAlert::Update(void)
 //=========================================================
 void CAlert::Draw(void)
 {
+	// 使用していないなら
+	if (GetUse() != true)
+	{
+		return;
+	}
+
+	// 親の描画処理
+	CAnimationObject2D::Draw();
 
 }
