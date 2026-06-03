@@ -14,6 +14,7 @@
 // 前方宣言
 //*********************************************************
 class CTitleUi;
+class CUi;
 
 //*********************************************************
 // タイトルui管理処理
@@ -39,18 +40,37 @@ public:
 		return &Instance;
 	};
 
+	/// <summary>
+	/// タイトルで選択されたインデックス番号を返す
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	inline int GetSelectIdx(void) const { return m_nSelectIdx; }
+
 private:
 
 	CTitleuiManager(); // 格納コンストラクタ
 
+	void SlideStartUi(void); // 初期uiのスライド処理関数
+	void SlideSelectUi(void); // 選択肢のスライド処理関数
+
 private:
 
-	static constexpr int SELECT_BEGIN = 0;	// メニュー開始番号
-	static constexpr int PAD_NUMBER = 1;	// パッドのインデックス
-	static constexpr int SELECT_MAX = 2;	// 最大生成数
+	static constexpr int SELECT_BEGIN = 1;	// 開始番号
+	static constexpr int PAD_NUMBER = 2;	// パッドのインデックス
+	static constexpr int SELECT_MAX = 3;	// 最大生成数
+
+private:
+	static constexpr int START_UI_NUM = 2;  // 最初に置いてあるuiの生成数
 
 private:
 
 	int m_nSelectIdx;				// セレクト番号
 	CTitleUi* m_pUi[SELECT_MAX];	// タイトルuiクラスのポインタ配列
+
+private:
+
+	bool m_isFinishSlideUi;				// スライド終了判定
+	float m_fSlideRatio;				// スライドの進行度
+	CUi* m_pStartUiList[START_UI_NUM];	// 初期でおいてあるui群
 };

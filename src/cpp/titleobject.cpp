@@ -15,7 +15,7 @@
 //*********************************************************
 #include "manager.h"
 #include "jsonmanager.h"
-#include "worldwallmanager.h"
+#include "titleuimanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -28,13 +28,12 @@ CTitleObject* CTitleObject::m_pInstance = nullptr;					// シングルトン変数
 namespace TITLEOBJECT
 {
 	constexpr const char* LoadName = "data/JSON/Titleobject.json";		// 読み込むjsonファイル
-	constexpr const char* WallName = "data/JSON/TitleWorldWall.json";	// 壁のjsonファイル
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTitleObject::CTitleObject() : m_pWallManager(nullptr)
+CTitleObject::CTitleObject()
 {
 	
 }
@@ -54,10 +53,8 @@ HRESULT CTitleObject::Init(void)
 	auto JsonManager = CManager::GetInstance()->GetJsonManager();
 	JsonManager->Load(TITLEOBJECT::LoadName);
 
-	//// 見えない壁生成
-	//m_pWallManager = std::make_unique<CWorldWallManager>();
-	//JsonManager->SetWorldWallManager(m_pWallManager.get());
-	//m_pWallManager->Init(TITLEOBJECT::WallName);
+	// タイトルの選択肢設定クラスの初期化
+	CTitleuiManager::GetInstance()->Init();
 
 	return S_OK;
 }
@@ -67,8 +64,8 @@ HRESULT CTitleObject::Init(void)
 //=========================================================
 void CTitleObject::Uninit(void)
 {
-	// タイトルの壁の破棄
-	m_pWallManager.reset();
+	// タイトルの選択肢設定クラスの終了処理
+	CTitleuiManager::GetInstance()->Uninit();
 
 	// インスタンスの破棄
 	if (m_pInstance)
@@ -83,7 +80,8 @@ void CTitleObject::Uninit(void)
 //=========================================================
 void CTitleObject::Update(void)
 {
-
+	// タイトルの選択肢設定クラスの更新処理
+	CTitleuiManager::GetInstance()->Update();
 }
 
 //=========================================================
