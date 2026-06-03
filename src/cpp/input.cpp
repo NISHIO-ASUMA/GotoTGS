@@ -459,7 +459,7 @@ bool CJoyPad::GetLeftStick(void)
 	{
 		isLstick = true;
 	}
-
+	
 	// Œ‹‰Ê‚ð•Ô‚·
 	return isLstick;
 }
