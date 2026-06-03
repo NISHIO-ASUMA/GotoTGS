@@ -82,7 +82,7 @@
 #define COLOR_YERROW (D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f))		// 黄色
 #define COLOR_BLUE	 (D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f))		// 青
 #define COLOR_PURPLE (D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f))		// 紫
-#define COLOR_GLAY	 (D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f))		// グレー
+#define COLOR_GLAY	 (D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.4f))		// グレー
 
 #define V_COLOR_WHITE (D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 1.0f))	// モデルのカラー白
 #define V_COLOR_RED (D3DCOLORVALUE(1.0f, 0.0f, 0.0f, 1.0f))		// モデルのカラー赤

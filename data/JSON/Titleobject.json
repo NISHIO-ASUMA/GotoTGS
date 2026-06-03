@@ -7,17 +7,5 @@
     "SegmentX": 1,
     "SegmentZ": 1,
     "Texture": "data/TEXTURE/field.jpg"
-  },
-  {
-    "ObjectTag": "Ui",
-    "Pos": [ 640.0, 180.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 300.0,
-    "Height": 160.0,
-    "Texture": "TitleLogo.png",
-    "AlphaTest": false,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
   }
 ]

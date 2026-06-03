@@ -27,7 +27,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTitleManager::CTitleManager()
+CTitleManager::CTitleManager() : isKeyinputSet(false)
 {
 	
 }
@@ -59,6 +59,8 @@ HRESULT CTitleManager::Init(void)
 	// サウンド再生
 	pSound->Play(CSound::SOUND_LABEL_TITLE_BGM);
 
+	isKeyinputSet = false;
+
 	// 初期化結果を返す
 	return S_OK;
 }
@@ -67,13 +69,16 @@ HRESULT CTitleManager::Init(void)
 //=========================================================
 void CTitleManager::Uninit(void)
 {
-	
+
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CTitleManager::Update(void)
 {
+	// フラグが有効なら下の処理をスキップ
+	if (isKeyinputSet) return;
+
 	// 入力デバイス取得
 	CInputKeyboard* pKey = CManager::GetInstance()->GetInputKeyboard();
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
@@ -82,19 +87,15 @@ void CTitleManager::Update(void)
 	if (pKey == nullptr) return;
 	if (pJoyPad == nullptr) return;
 
-	// フェード取得
-	CFade* pFade = CManager::GetInstance()->GetFade();
-	if (pFade == nullptr) return;
-
-	// キー入力時の遷移
+	// キー入力時の判定
 	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START)))
 	{
 		// サウンド取得
 		CSound* pSound = CManager::GetInstance()->GetSound();
 		if (pSound == nullptr) return;
 
-		// ゲームシーンに遷移
-		pFade->SetFade(std::make_unique<CGame>());	
+		// 入力判定を有効化
+		isKeyinputSet = true;
 
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);

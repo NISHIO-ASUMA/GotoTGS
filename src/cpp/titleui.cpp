@@ -56,7 +56,7 @@ CTitleUi* CTitleUi::Create
 	pUi->SetAnchor();
 	pUi->m_isUseFlag = isUseSet;
 
-	return nullptr;
+	return pUi;
 }
 //========================================================
 // 初期化処理
@@ -81,20 +81,6 @@ void CTitleUi::Uninit(void)
 //========================================================
 void CTitleUi::Update(void)
 {
-#if 0
-	if (!m_isUseFlag)
-	{
-		// カラーを半透明にして、選択をさせない
-		SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.2f));
-		return;
-	}
-	else
-	{
-		// 通常カラー
-		SetCol(COLOR_WHITE);
-	}
-#endif
-
 	// 親クラスの更新処理
 	CObject2D::Update();
 }
