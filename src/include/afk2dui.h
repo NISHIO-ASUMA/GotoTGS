@@ -43,7 +43,7 @@ public:
 
 	bool GetAfkButton(void) { return m_bAfkButton; }
 
-	void Easing(void);
+	void EasingSine(void);
 
 	// インスタンス生成用関数
 	static CAfk2DUI* Instance(void);
