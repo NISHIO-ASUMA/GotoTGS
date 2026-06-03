@@ -199,6 +199,7 @@ void CPlayer::Update(void)
 
 	// カメラ基準の移動処理
 	MoveKeyboard(player::fSpeed);
+	//MoveJoypad(player::fSpeed);
 
 	// ステートマシンの更新処理
 	m_pMachine->Update();
@@ -500,6 +501,7 @@ void CPlayer::MoveJoypad(float speed)
 {
 	//// ジョイパッドのポインタ
 	//CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+	//XINPUT_STATE* pState = CManager::GetInstance()->GetJoyPad()->GetStickAngle();
 
 	//// カメラのポインタ
 	//CCamera* pCamera = CManager::GetInstance()->GetCamera();
@@ -537,7 +539,8 @@ void CPlayer::MoveJoypad(float speed)
 	//// 目的の向き
 	//D3DXVECTOR3 RotDest = GetRotDest();
 
-	//if (pJoyPad->GetPress(DIK_W))
+
+	//if (pState->Gamepad.sThumbLY > 2000)
 	//{
 	//	moveDir += camForward;
 	//	RotDest.y = rot.y + D3DX_PI;
@@ -545,40 +548,37 @@ void CPlayer::MoveJoypad(float speed)
 	//	// 移動判定をtrueに
 	//	m_bMove = true;
 	//}
-	//if (pKeyboard->GetPress(DIK_S))
-	//{
-	//	moveDir -= camForward;
-	//	RotDest.y = rot.y;
+	////if (pState->Gamepad.sThumbLY < -2000)
+	////{
+	////	moveDir -= camForward;
+	////	RotDest.y = rot.y;
 
-	//	// 移動判定をtrueに
-	//	m_bMove = true;
-	//}
-	//if (pKeyboard->GetPress(DIK_D))
-	//{
-	//	moveDir += camRight;
-	//	RotDest.y = rot.y - D3DX_PI * HALF;
+	////	// 移動判定をtrueに
+	////	m_bMove = true;
+	////}
+	////if (pState->Gamepad.sThumbLX > -2000)
+	////{
+	////	moveDir += camRight;
+	////	RotDest.y = rot.y - D3DX_PI * HALF;
 
-	//	// 移動判定をtrueに
-	//	m_bMove = true;
-	//}
-	//if (pKeyboard->GetPress(DIK_A))
-	//{
-	//	moveDir -= camRight;
-	//	RotDest.y = rot.y + D3DX_PI * HALF;
+	////	// 移動判定をtrueに
+	////	m_bMove = true;
+	////}
+	////if (pState->Gamepad.sThumbLX < 2000)
+	////{
+	////	moveDir -= camRight;
+	////	RotDest.y = rot.y + D3DX_PI * HALF;
 
-	//	// 移動判定をtrueに
-	//	m_bMove = true;
-	//}
+	////	// 移動判定をtrueに
+	////	m_bMove = true;
+	////}
 
 	//if (m_bAfkSmoke)
 	//{
 	//	// 煙草モーションに変更する
 	//	GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 	//}
-	//else if (!pKeyboard->GetPress(DIK_W) &&
-	//	!pKeyboard->GetPress(DIK_S) &&
-	//	!pKeyboard->GetPress(DIK_D) &&
-	//	!pKeyboard->GetPress(DIK_A))
+	//else if (pJoyPad->GetLeftStick())
 	//{
 	//	GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
 	//}
