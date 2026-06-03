@@ -20,17 +20,19 @@
 #include "easing.h"
 #include "afksmoke.h"
 #include "player.h"
+#include "afk.h"
 
 //=================================================
 // 名前空間
 //=================================================
 namespace AFK2DUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 500.0f, 0.0f };	// 2D画像の座標
-	constexpr float fWidth = 50.0f;						// 横幅
-	constexpr float fHeight = 50.0f;					// 縦幅
+	const D3DXVECTOR3 Pos = { 640.0f, 550.0f, 0.0f };		// 2D画像の座標
+	constexpr float fWidth = 250.0f;							// 横幅
+	constexpr float fHeight = 75.0f;						// 縦幅
+	constexpr float fMaxFrame = 60.0f;						// マックスフレーム
 	constexpr const char* Button_NAME = "AfkButton.png";	// チュートリアルuiのテクスチャ名
-	constexpr const char* NowAFK_NAME = "smoking.png";	// たばこUIのテクスチャ名
+	constexpr const char* NowAFK_NAME = "Afk.png";		// たばこUIのテクスチャ名
 };
 
 //=================================================
@@ -87,8 +89,8 @@ HRESULT CAfk2DUI::Init(void)
 	CObject2D::Init();
 
 	// イージングの設定値
-	m_fCountFrame = 0.0f;
-	m_fMaxFrame = 60.0f;
+	m_fCountFrame = NULL;
+	m_fMaxFrame = AFK2DUI::fMaxFrame;
 	
 	return S_OK;
 }
@@ -113,13 +115,15 @@ void CAfk2DUI::Update(void)
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
 
 	if (!bAfkSmoke)
-	{
+	{// たばこを吸っていなかったら
 		SetTexture(AFK2DUI::Button_NAME);
-		Easing();
+		EasingSine();
 	}
 	else
-	{
+	{// たばこを吸っていたら
 		SetTexture(AFK2DUI::NowAFK_NAME);
+		EasingSine();
+
 	}
 }
 //=========================================================
@@ -144,17 +148,17 @@ CAfk2DUI* CAfk2DUI::Instance(void)
 	return m_pInstance;
 }
 //=========================================================
-// イージング使用関数
+// イージングサイン使用関数
 //=========================================================
-void CAfk2DUI::Easing(void)
+void CAfk2DUI::EasingSine(void)
 {
 	// 位置の取得
 	auto pos = GetPos();
 
 	// 初期の大きさ
-	D3DXVECTOR2 Apper = { 0.35f * pos.x, 0.15f * pos.y };
+	D3DXVECTOR2 Apper = { 0.25f * pos.x, 0.15f * pos.y };
 	// 目標の大きさ
-	D3DXVECTOR2 Dest = { 0.55f * pos.x,0.25f * pos.y };
+	D3DXVECTOR2 Dest = { 0.35f * pos.x,0.2f * pos.y };
 
 	// イージング判定が無効なら
 	if (m_bEasing == false)
