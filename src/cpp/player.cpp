@@ -198,7 +198,7 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 oldpos = GetOldPos();
 
 	// カメラ基準の移動処理
-	MoveBasedOnCamera(player::fSpeed);
+	MoveKeyboard(player::fSpeed);
 
 	// ステートマシンの更新処理
 	m_pMachine->Update();
@@ -384,15 +384,12 @@ void CPlayer::ChangeState(CPlayerStateBase* pState, int nID)
 	m_pMachine->ChangeState(pState);
 }
 //=================================================
-// プレイヤー移動処理
+// プレイヤー移動処理(キーボード編)
 //=================================================
-void CPlayer::MoveBasedOnCamera(float speed)
+void CPlayer::MoveKeyboard(float speed)
 {
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
-
-	// ジョイパッドのポインタ
-	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 
 	// カメラのポインタ
 	CCamera* pCamera = CManager::GetInstance()->GetCamera();
@@ -408,6 +405,7 @@ void CPlayer::MoveBasedOnCamera(float speed)
 	
 	if (bAfk && !m_bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = true;
 	else if (bAfk && m_bAfkSmoke && pKeyboard->GetTrigger(DIK_TAB))	m_bAfkSmoke = false;
+	else if (!bAfk) m_bAfkSmoke = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -494,4 +492,112 @@ void CPlayer::MoveBasedOnCamera(float speed)
 		// 移動モーション設定
 		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
 	}
+}
+//=================================================
+// プレイヤー移動処理(ジョイパッド編)
+//=================================================
+void CPlayer::MoveJoypad(float speed)
+{
+	//// ジョイパッドのポインタ
+	//CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+
+	//// カメラのポインタ
+	//CCamera* pCamera = CManager::GetInstance()->GetCamera();
+
+	//// 向きの取得
+	//D3DXVECTOR3 rot = pCamera->GetRot();
+
+	//// ビューマトリックスの取得
+	//auto ViewMatrix = pCamera->GetView();
+
+	//// さぼっているかの判定
+	//auto bAfk = CAfksmoke::Instance()->GetAfk();
+
+	//if (bAfk && !m_bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+
+	//// ビュー行列の逆行列を計算
+	//D3DXMATRIX invViewMat;
+	//D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
+
+	//// 逆行列からカメラの方向ベクトルを抽出
+	//D3DXVECTOR3 camForward = D3DXVECTOR3(invViewMat._31, invViewMat._32, invViewMat._33);
+	//D3DXVECTOR3 camRight = D3DXVECTOR3(invViewMat._11, invViewMat._12, invViewMat._13);
+
+	//// XZ平面の移動にするため、Y成分を0にする
+	//camForward.y = NULL;
+	//camRight.y = NULL;
+
+	//// 方向ベクトルの正規化
+	//D3DXVec3Normalize(&camForward, &camForward);
+	//D3DXVec3Normalize(&camRight, &camRight);
+
+	//// 移動方向の計算
+	//D3DXVECTOR3 moveDir = VECTOR3_NULL;
+
+	//// 目的の向き
+	//D3DXVECTOR3 RotDest = GetRotDest();
+
+	//if (pJoyPad->GetPress(DIK_W))
+	//{
+	//	moveDir += camForward;
+	//	RotDest.y = rot.y + D3DX_PI;
+
+	//	// 移動判定をtrueに
+	//	m_bMove = true;
+	//}
+	//if (pKeyboard->GetPress(DIK_S))
+	//{
+	//	moveDir -= camForward;
+	//	RotDest.y = rot.y;
+
+	//	// 移動判定をtrueに
+	//	m_bMove = true;
+	//}
+	//if (pKeyboard->GetPress(DIK_D))
+	//{
+	//	moveDir += camRight;
+	//	RotDest.y = rot.y - D3DX_PI * HALF;
+
+	//	// 移動判定をtrueに
+	//	m_bMove = true;
+	//}
+	//if (pKeyboard->GetPress(DIK_A))
+	//{
+	//	moveDir -= camRight;
+	//	RotDest.y = rot.y + D3DX_PI * HALF;
+
+	//	// 移動判定をtrueに
+	//	m_bMove = true;
+	//}
+
+	//if (m_bAfkSmoke)
+	//{
+	//	// 煙草モーションに変更する
+	//	GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+	//}
+	//else if (!pKeyboard->GetPress(DIK_W) &&
+	//	!pKeyboard->GetPress(DIK_S) &&
+	//	!pKeyboard->GetPress(DIK_D) &&
+	//	!pKeyboard->GetPress(DIK_A))
+	//{
+	//	GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+	//}
+	//// 移動入力がある場合
+	//else if (m_bMove)
+	//{
+	//	// 移動の正規化
+	//	D3DXVec3Normalize(&moveDir, &moveDir);
+
+	//	// 位置の更新
+	//	SetMove(moveDir * speed);
+
+	//	// 移動方向から向きを計算
+	//	RotDest.y = atan2f(-moveDir.x, -moveDir.z);
+
+	//	// 目的の向きを設定
+	//	SetRotDest(RotDest);
+
+	//	// 移動モーション設定
+	//	GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
+	//}
 }

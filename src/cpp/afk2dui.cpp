@@ -20,6 +20,7 @@
 #include "easing.h"
 #include "afksmoke.h"
 #include "player.h"
+#include "afk.h"
 
 //=================================================
 // –¼‘O‹óŠÔ
