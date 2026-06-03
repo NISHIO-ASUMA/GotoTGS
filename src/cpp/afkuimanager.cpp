@@ -1,98 +1,86 @@
 //=========================================================
 //
-// タスクUIマネージャー処理 [ deskworkUImanager.cpp ]
-// Author: Takahashi Misaki
+// AfkUIManager処理 [ afkuimanager.cpp ]
+// Author: Shouya Chikada
 //
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "deskworkUImanager.h"
+#include "afkuimanager.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "manager.h"
-#include "ui.h"
+#include "smokeui.h"
 
-// 静的メンバ変数宣言
-int CDeskworkUIManager::m_nPCTaskNum = NULL;
-int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
-int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
+//*********************************************************
+// 名前空間
+//*********************************************************
+namespace AfkUIManager
+{
+	const D3DXVECTOR3 SmokeUIPos = { 295.0f, 75.0f, 325.0f };			// たばこ用UIの座標
+	constexpr const char* SmokeUI_NAME = "smoking.png";					// たばこUIのテクスチャ名
+};
+
+//=================================================
+// 静的メンバ変数
+//=================================================
+CAfkUIManager* CAfkUIManager::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskworkUIManager::CDeskworkUIManager() :
-m_pos(VECTOR3_NULL),
-m_bUse(false)
+CAfkUIManager::CAfkUIManager()
 {
-	m_nPCTaskNum = NULL;
-	m_nCOPYTaskNum = NULL;
-	m_nDOCUMENTTaskNum = NULL;
 
-	if (m_pClearUI != nullptr)
-	{
-		return;
-	}
 }
 
 //=========================================================
 // デストラクタ
 //=========================================================
-CDeskworkUIManager::~CDeskworkUIManager()
+CAfkUIManager::~CAfkUIManager()
 {
 
 }
-
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CDeskworkUIManager::Init(void)
+HRESULT CAfkUIManager::Init(void)
 {
-	m_pClearUI = CUi::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 200.0f, 0.0f),
-		60,
-		190.0f,
-		70.0f,
-		"CLEAR000.png",
-		false,
-		false,
-		5,
-		false,
-		false);
+	// たばこ用UIの生成
+	CSmokeUI::Create(AfkUIManager::SmokeUIPos, VECTOR3_NULL, AfkUIManager::SmokeUI_NAME);
 
 	return S_OK;
 }
-
 //=========================================================
 // 終了処理
 //=========================================================
-void CDeskworkUIManager::Uninit(void)
+void CAfkUIManager::Uninit(void)
 {
-	m_nPCTaskNum = NULL;
-	m_nCOPYTaskNum = NULL;
-	m_nDOCUMENTTaskNum = NULL;
+	// シングルトンの破棄
+	if (m_pInstance)
+	{
+		delete m_pInstance;
+		m_pInstance = nullptr;
+	}
 }
-
 //=========================================================
 // 更新処理
 //=========================================================
-void CDeskworkUIManager::Update(void)
+void CAfkUIManager::Update(void)
 {
-	// 乱数の種
-	srand((unsigned int)time(0));
 
 }
-
 //=========================================================
-// 書類の数の加算処理
+// インスタンス取得処理
 //=========================================================
-void CDeskworkUIManager::AddDOCUMENTTask(void)
+CAfkUIManager* CAfkUIManager::Instance(void)
 {
-	// こなしたコピー機タスクの数を加算
-	m_nDOCUMENTTaskNum += m_nCOPYTaskNum;
+	// nullチェック
+	if (m_pInstance == nullptr)m_pInstance = new CAfkUIManager;
 
-	//  コピー機タスクの数を初期化
-	m_nCOPYTaskNum = NULL;
+	// 生成されたインスタンスを返す
+	return m_pInstance;
 }

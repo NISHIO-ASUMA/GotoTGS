@@ -1,6 +1,6 @@
 //=========================================================
 //
-// TutorialUIManager処理 [ tutorialuimanager.h ]
+// AfkUIManager処理 [ afkuimanager.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -18,22 +18,22 @@
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CTutorialUIManager
+class CAfkUIManager
 {
 public:
 
-	CTutorialUIManager();
-	~CTutorialUIManager();
+	CAfkUIManager();
+	~CAfkUIManager();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 
 	// インスタンス生成用関数
-	static CTutorialUIManager* Instance(void);
+	static CAfkUIManager* Instance(void);
 
 private:
-	static CTutorialUIManager* m_pInstance;	// シングルトン変数
+	static CAfkUIManager* m_pInstance;	// シングルトン変数
 
 };
 

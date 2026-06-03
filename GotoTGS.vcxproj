@@ -160,6 +160,7 @@
     <ClCompile Include="src\cpp\afk2dui.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
     <ClCompile Include="src\cpp\afkui.cpp" />
+    <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
@@ -275,6 +276,8 @@
     <ClCompile Include="src\cpp\title.cpp" />
     <ClCompile Include="src\cpp\titlemanager.cpp" />
     <ClCompile Include="src\cpp\titleobject.cpp" />
+    <ClCompile Include="src\cpp\titleui.cpp" />
+    <ClCompile Include="src\cpp\titleuimanager.cpp" />
     <ClCompile Include="src\cpp\tutorial.cpp" />
     <ClCompile Include="src\cpp\tutorialmanager.cpp" />
     <ClCompile Include="src\cpp\tutorialobject.cpp" />
@@ -291,6 +294,7 @@
     <ClInclude Include="src\include\afk2dui.h" />
     <ClInclude Include="src\include\afksmoke.h" />
     <ClInclude Include="src\include\afkui.h" />
+    <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\billboard.h" />
@@ -404,6 +408,8 @@
     <ClInclude Include="src\include\title.h" />
     <ClInclude Include="src\include\titlemanager.h" />
     <ClInclude Include="src\include\titleobject.h" />
+    <ClInclude Include="src\include\titleui.h" />
+    <ClInclude Include="src\include\titleuimanager.h" />
     <ClInclude Include="src\include\tutorial.h" />
     <ClInclude Include="src\include\tutorialmanager.h" />
     <ClInclude Include="src\include\tutorialobject.h" />

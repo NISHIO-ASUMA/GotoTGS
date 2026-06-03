@@ -254,6 +254,7 @@ CJoyPad::CJoyPad()
 	m_leftMotor = NULL;
 	m_rightMotor = NULL;
 	m_VibrationEndTime = NULL;
+	m_isConnect = false;
 }
 //=========================================================
 // ゲームパッドのデストラクタ
@@ -302,6 +303,8 @@ void CJoyPad::Update(void)
 	// ジョイパッドの状態を取得
 	if (XInputGetState(0, &joykeyState) == ERROR_SUCCESS)
 	{
+		m_isConnect = true;
+
 		WORD Button = joykeyState.Gamepad.wButtons;				// 押したときの入力情報
 		WORD OldButton = m_joyKeyState.Gamepad.wButtons;		// 1F前の入力情報
 
@@ -311,6 +314,8 @@ void CJoyPad::Update(void)
 	}
 	else
 	{
+		m_isConnect = false;
+
 		// 状態リセット
 		ZeroMemory(&m_joyKeyState, sizeof(XINPUT_STATE));
 		ZeroMemory(&m_joyKeyStateTrigger, sizeof(XINPUT_STATE));
@@ -331,6 +336,13 @@ void CJoyPad::SetVibration(int leftMotor, int rightMotor, int durationMs)
 	vibration.wLeftMotorSpeed = leftMotor;
 	vibration.wRightMotorSpeed = rightMotor;
 	XInputSetState(0, &vibration); // コントローラーに適応
+}
+//=========================================================
+// コントローラーが接続されているかどうかを判別する
+//=========================================================
+bool CJoyPad::GetConnectGamePad(void)
+{
+	return m_isConnect;
 }
 //=========================================================
 // ゲームパッド振動更新処理

@@ -55,7 +55,7 @@ public:
 	);
 	
 	bool GetMoveCheck(void) { return m_bMove; }
-
+	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 

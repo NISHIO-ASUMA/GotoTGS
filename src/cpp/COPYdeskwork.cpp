@@ -106,7 +106,8 @@ HRESULT CCOPYDeskwork::Init(void)
 //=========================================================
 void CCOPYDeskwork::Uninit(void)
 {
-
+	// 親の終了処理
+	CDeskworkUIManager::Uninit();
 }
 
 //=========================================================
@@ -168,6 +169,18 @@ void CCOPYDeskwork::SetAlphaUI(void)
 
 	// 使っていいるかどうかを設定する
 	SetUse(GetUse() ? false : true);
+
+	if (GetPCTaskNum() <= NULL)
+	{// PCのタスクを1つもこなしていない場合
+
+		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
+		{
+			// 色を透明にする
+			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+		}
+
+		return;
+	}
 
 	if (GetUse() != true)
 	{// 使っていない状態の場合

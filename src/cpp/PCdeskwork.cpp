@@ -100,7 +100,8 @@ HRESULT CPCDeskwork::Init(void)
 //=========================================================
 void CPCDeskwork::Uninit(void)
 {
-
+	// êeÇÃèIóπèàóù
+	CDeskworkUIManager::Uninit();
 }
 
 //=========================================================
