@@ -503,6 +503,9 @@ void CPlayer::MoveJoypad(float speed)
 	//CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 	//XINPUT_STATE* pState = CManager::GetInstance()->GetJoyPad()->GetStickAngle();
 
+	//// コントローラーが接続されていなかったら
+	////if (!pJoyPad->GetConnectGamePad()) return;
+
 	//// カメラのポインタ
 	//CCamera* pCamera = CManager::GetInstance()->GetCamera();
 
@@ -539,39 +542,41 @@ void CPlayer::MoveJoypad(float speed)
 	//// 目的の向き
 	//D3DXVECTOR3 RotDest = GetRotDest();
 
-
-	//if (pState->Gamepad.sThumbLY > 2000)
+	//if (pJoyPad->GetLeftStick())
 	//{
-	//	moveDir += camForward;
-	//	RotDest.y = rot.y + D3DX_PI;
+	//	if (pState->Gamepad.sThumbLY > 2000)
+	//	{
+	//		moveDir += camForward;
+	//		RotDest.y = rot.y + D3DX_PI;
 
-	//	// 移動判定をtrueに
-	//	m_bMove = true;
+	//		// 移動判定をtrueに
+	//		m_bMove = true;
+	//	}
+	//	//if (pState->Gamepad.sThumbLY < -2000)
+	//	//{
+	//	//	moveDir -= camForward;
+	//	//	RotDest.y = rot.y;
+
+	//	//	// 移動判定をtrueに
+	//	//	m_bMove = true;
+	//	//}
+	//	//if (pState->Gamepad.sThumbLX > -2000)
+	//	//{
+	//	//	moveDir += camRight;
+	//	//	RotDest.y = rot.y - D3DX_PI * HALF;
+
+	//	//	// 移動判定をtrueに
+	//	//	m_bMove = true;
+	//	//}
+	//	//if (pState->Gamepad.sThumbLX < 2000)
+	//	//{
+	//	//	moveDir -= camRight;
+	//	//	RotDest.y = rot.y + D3DX_PI * HALF;
+
+	//	//	// 移動判定をtrueに
+	//	//	m_bMove = true;
+	//	//}
 	//}
-	////if (pState->Gamepad.sThumbLY < -2000)
-	////{
-	////	moveDir -= camForward;
-	////	RotDest.y = rot.y;
-
-	////	// 移動判定をtrueに
-	////	m_bMove = true;
-	////}
-	////if (pState->Gamepad.sThumbLX > -2000)
-	////{
-	////	moveDir += camRight;
-	////	RotDest.y = rot.y - D3DX_PI * HALF;
-
-	////	// 移動判定をtrueに
-	////	m_bMove = true;
-	////}
-	////if (pState->Gamepad.sThumbLX < 2000)
-	////{
-	////	moveDir -= camRight;
-	////	RotDest.y = rot.y + D3DX_PI * HALF;
-
-	////	// 移動判定をtrueに
-	////	m_bMove = true;
-	////}
 
 	//if (m_bAfkSmoke)
 	//{

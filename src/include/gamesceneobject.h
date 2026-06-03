@@ -25,6 +25,7 @@ class CScore;
 class CWorldWallManager;
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
+class CAlert;				// Misaki
 class CAfksmoke;			// 近田追加
 
 //*********************************************************
@@ -43,9 +44,10 @@ public:
 
 	CGametime* GetTime(void) const { return m_pTimer; }
 	CScore* GetScore(void) const { return m_pScore; }
-	CPlayer* GetPlayer(void) const { return m_pPlayer; } // [ Asuma add ]
-	CDeskwork* GetDesk(void) const { return m_pDeskwork; }	// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; } // Misaki
+	CPlayer* GetPlayer(void) const { return m_pPlayer; }						// [ Asuma add ]
+	CDeskwork* GetDesk(void) const { return m_pDeskwork; }						// Misaki
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }	// Misaki
+	CAlert* GetAlert(void) const { return m_pAlert; }							// Misaki
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
 
 	/// <summary>
@@ -68,6 +70,7 @@ private:
 	CGametime* m_pTimer;				// タイマークラスのポインタ
 	CDeskwork* m_pDeskwork;				// タスクのポインタ Misaki
 	CProgressgauge* m_pProgressgauge;	// 進捗ゲージのポインタ Misaki
+	CAlert* m_pAlert;					// 警告表示のポインタ Misaki
 	CPlayer* m_pPlayer;					// プレイヤーのクラスポインタ [ Asuma add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
