@@ -139,7 +139,6 @@ HRESULT CTitleuiManager::Init(void)
 												);
 	}
 
-#if 1
 	// 選択肢UI生成
 	for (int nCnt = 0; nCnt < SELECT_MAX; nCnt++)
 	{
@@ -150,9 +149,13 @@ HRESULT CTitleuiManager::Init(void)
 								TITLEUIINFO::FILE_NAME[nCnt], 
 								false);
 	};
-#endif
+
 	// 初期インデックスを設定 ( キーマウ入力用選択 )
 	m_nSelectIdx = SELECT_BEGIN;
+
+	// 再起動用の変数を初期化する
+	m_isFinishSlideUi = false;
+	m_fSlideRatio = NULL;
 
 	return S_OK;
 }
@@ -175,7 +178,6 @@ void CTitleuiManager::Update(void)
 		return;
 	}
 
-#if 1
 	// キー入力を取得
 	const auto& key = CManager::GetInstance()->GetInputKeyboard();
 	const auto& pad = CManager::GetInstance()->GetJoyPad();
@@ -268,8 +270,6 @@ void CTitleuiManager::Update(void)
 		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CGame>());
 		return;
 	}
-
-#endif
 }
 //=========================================================
 // スライドする処理
