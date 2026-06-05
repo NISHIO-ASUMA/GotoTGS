@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.h ]
+// AFKTV処理 [ afktv.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -28,11 +28,11 @@ class CSphereCollider;
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfksmoke : public CAfk
+class CAfkTV : public CAfk
 {
 public:
-	CAfksmoke();
-	~CAfksmoke();
+	CAfkTV();
+	~CAfkTV();
 
 	HRESULT Init(void);
 	void Uninit(void);
@@ -43,12 +43,11 @@ public:
 	/// </summary>
 	/// <param name="pos">生成処理</param>
 	/// <returns></returns>
-	static CAfksmoke* Create
+	static CAfkTV* Create
 	(
 		const D3DXVECTOR3& pos
 	);
 
 private:
-
 };
 

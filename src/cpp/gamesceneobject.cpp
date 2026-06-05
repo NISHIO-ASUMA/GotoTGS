@@ -30,11 +30,11 @@
 #include "friend.h"				// 近田追加
 #include "pcui.h"				// 近田追加
 #include "copyui.h"				// 近田追加
-#include "afksmoke.h"			// 近田追加
 #include "smokeui.h"			// 近田追加
 #include "afk2dui.h"			// 近田追加
 #include "tutorialuimanager.h"	// 近田追加
 #include "afkuimanager.h"		// 近田追加
+#include "afkmanager.h"			// 近田追加
 #include "enemy.h"				// 西尾追加
 #include "worldUIcollision.h"	// 西尾追加
 #include "camera.h"				// 西尾追加
@@ -106,8 +106,8 @@ HRESULT CGameSceneObject::Init(void)
 	// AfkUIマネージャーの初期化処理
 	CAfkUIManager::Instance()->Init();
 
-	// たばこさぼりの初期化処理
-	CAfksmoke::Instance()->Init();
+	// さぼりをまとめたマネージャーの初期化処理
+	CAfkManager::Instance()->Init();
 
 	// さぼっているときのUIの生成
 	CAfk2DUI::Create();
@@ -154,8 +154,8 @@ void CGameSceneObject::Uninit(void)
 	// AfkUIマネージャーの初期化処理
 	CAfkUIManager::Instance()->Uninit();
 
-	// たばこさぼりの破棄処理
-	CAfksmoke::Instance()->Uninit();
+	// さぼりをまとめたマネージャーの終了処理
+	CAfkManager::Instance()->Uninit();
 
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
@@ -181,8 +181,8 @@ void CGameSceneObject::Update(void)
 	//  ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
 
-	// たばこさぼりの更新処理
-	CAfksmoke::Instance()->Update();
+	// さぼりをまとめたマネージャーの更新処理
+	CAfkManager::Instance()->Update();
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();

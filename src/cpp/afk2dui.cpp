@@ -18,9 +18,11 @@
 #include "collisionsphere.h"
 #include "gamesceneobject.h"
 #include "easing.h"
-#include "afksmoke.h"
+#include "afkmanager.h"
 #include "player.h"
 #include "afk.h"
+#include "afksmoke.h"
+#include "afktv.h"
 
 //=================================================
 // 名前空間
@@ -113,8 +115,9 @@ void CAfk2DUI::Update(void)
 
 	// プレイヤーがたばこ吸っているかの判定変数
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
+	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
 
-	if (!bAfkSmoke)
+	if (!bAfkSmoke && !bAfkTV)
 	{// たばこを吸っていなかったら
 		SetTexture(AFK2DUI::Button_NAME);
 		EasingSine();
@@ -131,10 +134,11 @@ void CAfk2DUI::Update(void)
 //=========================================================
 void CAfk2DUI::Draw(void)
 {
-	auto bAfk = CAfksmoke::Instance()->GetAfk();
-	
+	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+
 	// 親クラスの描画処理
-	if(bAfk)CObject2D::Draw();
+	if(bAfkSmoke || bAfkTV)CObject2D::Draw();
 }
 //=========================================================
 // インスタンス取得処理
