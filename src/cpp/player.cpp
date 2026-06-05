@@ -32,9 +32,16 @@
 #include "DOCUMENTdeskwork.h"	// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
+<<<<<<< HEAD
 #include "afksmoke.h"
 #include "automaticdoormanager.h" // 西尾追加
 #include "automatic_door.h"  // 西尾追加
+=======
+#include "camera.h"
+#include "afkmanager.h"
+#include "afksmoke.h"
+#include "afktv.h"
+>>>>>>> 9e74c58f1ca7aca843e7ed4b5b00913e76debdf8
 
 //*********************************************************
 // 名前空間
@@ -60,7 +67,8 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pMachine(nullptr),
 m_bMove(false),
-m_bAfkSmoke(false)
+m_bAfkSmoke(false),
+m_bAfkTV(false)
 {
 
 }
@@ -420,10 +428,14 @@ void CPlayer::MoveKeyboard(float speed)
 	auto ViewMatrix = pCamera->GetView();
 
 	// さぼっているかの判定
-	auto bAfk = CAfksmoke::Instance()->GetAfk();
-	
-	if (bAfk && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfk) m_bAfkSmoke = false;
+	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+
+	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	else if (!bAfkSmoke) m_bAfkSmoke = false;
+
+	if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
+	else if (!bAfkTV) m_bAfkTV = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -480,11 +492,12 @@ void CPlayer::MoveKeyboard(float speed)
 		m_bMove = true;
 	}
 
-	if (m_bAfkSmoke)
-	{
-		// 煙草モーションに変更する
-		GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
-	}
+	// 煙草モーションに変更する
+	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+	
+	// テレビを見るモーションに切り替え
+	else if(m_bAfkTV) GetMotion()->SetMotion(CPlayer::MOTION::TV);
+
 	else if (!pKeyboard->GetPress(DIK_W) &&
 			 !pKeyboard->GetPress(DIK_S) &&
 			 !pKeyboard->GetPress(DIK_D) &&
@@ -536,10 +549,14 @@ void CPlayer::MoveJoypad(float speed)
 	auto ViewMatrix = pCamera->GetView();
 
 	// さぼっているかの判定
-	auto bAfk = CAfksmoke::Instance()->GetAfk();
+	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
 
-	if (bAfk && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A))m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfk) m_bAfkSmoke = false;
+	if (bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A))m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	else if (!bAfkSmoke) m_bAfkSmoke = false;
+
+	if (bAfkTV && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkTV = m_bAfkTV ? false : true;
+	else if (!bAfkTV) m_bAfkTV = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -599,11 +616,12 @@ void CPlayer::MoveJoypad(float speed)
 		}
 	}
 
-	if (m_bAfkSmoke)
-	{
-		// 煙草モーションに変更する
-		GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
-	}
+	// 煙草モーションに変更する
+	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+
+	// テレビを見るモーションに切り替え
+	else if (m_bAfkTV) GetMotion()->SetMotion(CPlayer::MOTION::TV);
+
 	else if (!pJoyPad->GetLeftStick())
 	{
 		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);

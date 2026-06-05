@@ -33,7 +33,7 @@ CPlayerStateDitch::~CPlayerStateDitch()
 //=========================================================
 void CPlayerStateDitch::OnStart()
 {
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::DITCH);
+	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 }
 
 //=========================================================

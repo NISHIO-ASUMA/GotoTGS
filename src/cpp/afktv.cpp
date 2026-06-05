@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.cpp ]
+// AFKTV処理 [ afktv.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,7 +8,7 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "afksmoke.h"
+#include "afktv.h"
 
 //*********************************************************
 // インクルードファイル
@@ -19,16 +19,16 @@
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace AFKSMOKE
+namespace AFKTV
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
-	constexpr float fRadius = 25.0f;					// 範囲の半径
+	const D3DXVECTOR3 Pos = { -253.0f, 0.0f, 313.0f };	// TVさぼりの範囲
+	constexpr float fRadius = 0.025f;						// 範囲の半径
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfksmoke::CAfksmoke()
+CAfkTV::CAfkTV()
 {
 
 }
@@ -36,7 +36,7 @@ CAfksmoke::CAfksmoke()
 //=========================================================
 // デストラクタ
 //=========================================================
-CAfksmoke::~CAfksmoke()
+CAfkTV::~CAfkTV()
 {
 
 }
@@ -44,35 +44,35 @@ CAfksmoke::~CAfksmoke()
 //=========================================================
 // 生成処理
 //=========================================================
-CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
+CAfkTV* CAfkTV::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
-	CAfksmoke* pAfkSmoke = new CAfksmoke;
-	if (pAfkSmoke == nullptr) return nullptr;
+	CAfkTV* pAfkTV = new CAfkTV;
+	if (pAfkTV == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pAfkSmoke->SetPos(AFKSMOKE::Pos);
-	pAfkSmoke->SetRadius(AFKSMOKE::fRadius);
+	pAfkTV->SetPos(AFKTV::Pos);
+	pAfkTV->SetRadius(AFKTV::fRadius);
 
 	// 初期化失敗時
-	if (FAILED(pAfkSmoke->Init())) return nullptr;
+	if (FAILED(pAfkTV->Init())) return nullptr;
 
 	// チュートリアルUIのポインタを返す
-	return pAfkSmoke;
+	return pAfkTV;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfksmoke::Init(void)
+HRESULT CAfkTV::Init(void)
 {
 	// 親クラスの初期化処理
-	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
+	CAfk::Init(AFKTV::Pos, AFKTV::fRadius);
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CAfksmoke::Uninit(void)
+void CAfkTV::Uninit(void)
 {
 	// 親クラスの終了処理
 	CAfk::Uninit();
@@ -80,7 +80,7 @@ void CAfksmoke::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CAfksmoke::Update(void)
+void CAfkTV::Update(void)
 {
 	// 親クラスの更新処理
 	CAfk::Update();
