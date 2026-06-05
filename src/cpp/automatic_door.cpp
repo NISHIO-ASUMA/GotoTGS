@@ -1,74 +1,73 @@
 //=========================================================
 //
-// ブロック処理 [ block.cpp ]
+// 自動ドアの処理 [ automatic_door.cpp ]
 // Author: Asuma Nishio
-// NOTE : マップ内に配置しているものは基本このクラス
-// 
+//
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "block.h"
+#include "automatic_door.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "manager.h"
-#include "xfilemanager.h"
 #include "boxcollider.h"
 #include "collisionbox.h"
-#include "camera.h"
+#include "manager.h"
+#include "xfilemanager.h"
+#include "renderer.h"
+#include "player.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CBlock::CBlock(int nPriority) : CObjectX(nPriority),
-m_pCollider(nullptr),
-m_Size(VECTOR3_NULL),
-m_isZTestEneble(false)
+CAutoMaticDoor::CAutoMaticDoor(int nPriority) : CObjectX(nPriority),
+m_isZTestEneble(false),
+m_pCollider(nullptr)
 {
-	
+
 }
 //=========================================================
 // デストラクタ
 //=========================================================
-CBlock::~CBlock()
+CAutoMaticDoor::~CAutoMaticDoor()
 {
-	
+
 }
 //=========================================================
 // 生成処理
 //=========================================================
-CBlock* CBlock::Create
+CAutoMaticDoor* CAutoMaticDoor::Create
 (
 	const D3DXVECTOR3& pos, 
-	const D3DXVECTOR3& rot, 
+	const D3DXVECTOR3& rot,
 	const D3DXVECTOR3& scale, 
 	const char* pModelName
 )
 {
 	// インスタンス生成
-	CBlock* pBlock = new CBlock;
-	if (pBlock == nullptr) return nullptr;
+	CAutoMaticDoor* pAutoDoor = new CAutoMaticDoor;
+	if (pAutoDoor == nullptr) return nullptr;
 
 	// オブジェクト設定
-	pBlock->SetFilePass(pModelName);
-	pBlock->SetPos(pos);
-	pBlock->SetRot(rot);
-	pBlock->SetScale(scale);
+	pAutoDoor->SetPos(pos);
+	pAutoDoor->SetRot(rot);
+	pAutoDoor->SetScale(scale);
+	pAutoDoor->SetFilePass(pModelName);
 
 	// 初期化失敗時
-	if (FAILED(pBlock->Init())) return nullptr;
+	if (FAILED(pAutoDoor->Init())) return nullptr;
 
-	return pBlock;
+	return pAutoDoor;
 }
 //=========================================================
-// ブロックの初期化処理
+// 初期化処理
 //=========================================================
-HRESULT CBlock::Init(void)
+HRESULT CAutoMaticDoor::Init(void)
 {
-	// 親クラスの初期化処理
+	// 親クラスの初期化
 	CObjectX::Init();
 
 	// Xファイルオブジェクト取得
@@ -82,80 +81,48 @@ HRESULT CBlock::Init(void)
 	D3DXVECTOR3 Scale = GetScale();
 	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
 
-	// 反映計算メソッド
-	{
-		Size.x = Size.x * Scale.x;
-		Size.y = Size.y * Scale.y; 
-		Size.z = Size.z * Scale.z;
-	}
-
-	// モデルのパス取得
-	std::string str = pXManager->GetInfo(nModelIdx).FilePath;
-
-	// 変更用の入れ物
-	D3DXVECTOR3 ChangeSize = Size;
-
-	// 特定のモデルのサイズ調整
-	if (str == "data/MODEL/STAGEOBJ/desk00.x")
-	{
-		// デスクの当たり判定を少し小さくする
-		ChangeSize.x *= Config::VALUESIZE;
-		ChangeSize.y *= Config::VALUESIZE;
-		ChangeSize.z *= Config::VALUESIZE;
-
-		// 大きさを実際に変更
-		Size = ChangeSize;
-	}
-
-	// サイズをセット
-	m_Size = Size;
-
 	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
-	D3DXVECTOR3 rot = GetRot(); 
+	D3DXVECTOR3 rot = GetRot();
 
 	// 回転を合成して回転行列を作成
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
-	// 特定のオブジェクトの当たり判定を消す
-	if (str == "data/MODEL/STAGEOBJ/pc00.x")
-	{
-		m_pCollider = nullptr;
-	}
-	else
-	{
-		// 矩形コライダー生成処理
-		m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size, matRot);
-	}
-	
+	// 矩形コライダー生成処理
+	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size, matRot);
+
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CBlock::Uninit(void)
+void CAutoMaticDoor::Uninit(void)
 {
-	// 矩形コライダーの破棄
-	m_pCollider.reset();
-
 	// 親クラスの終了処理
 	CObjectX::Uninit();
 }
 //=========================================================
 // 更新処理
 //=========================================================
-void CBlock::Update(void)
+void CAutoMaticDoor::Update(void)
 {
-	// 現在の座標取得
-	D3DXVECTOR3 pos = GetPos();
+	// 座標取得
+	auto pos = GetPos();
 
 	// コライダー座標の更新
-	if (m_pCollider) m_pCollider->SetPos(pos);
+	if (m_pCollider)
+	{
+		m_pCollider->SetPosOld(pos);
+		m_pCollider->SetPos(pos);
+	}
+
+	// 親クラスの更新処理
+	CObjectX::Update();
 }
 //=========================================================
 // 描画処理
 //=========================================================
-void CBlock::Draw(void)
+void CAutoMaticDoor::Draw(void)
 {
 	// デバイス取得
 	const auto& pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -178,13 +145,13 @@ void CBlock::Draw(void)
 	}
 }
 //=========================================================
-// 当たり判定
+// 当たり判定処理
 //=========================================================
-bool CBlock::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
+bool CAutoMaticDoor::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 {
-	// nullチェック
+	// コライダーがnullなら
 	if (m_pCollider == nullptr) return false;
 
-	// 矩形同士の当たり判定を返す
-	return CCollisionBox::Collision(m_pCollider.get(), pOther, OutPos);
+	// 矩形の当たり判定を返す
+	return CCollisionBox::Collision(m_pCollider.get(),pOther,OutPos);
 }

@@ -163,6 +163,8 @@
     <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
+    <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
+    <ClCompile Include="src\cpp\automatic_door.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
     <ClCompile Include="src\cpp\block.cpp" />
     <ClCompile Include="src\cpp\blockmanager.cpp" />
@@ -297,6 +299,8 @@
     <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
+    <ClInclude Include="src\include\automaticdoormanager.h" />
+    <ClInclude Include="src\include\automatic_door.h" />
     <ClInclude Include="src\include\billboard.h" />
     <ClInclude Include="src\include\block.h" />
     <ClInclude Include="src\include\blockmanager.h" />

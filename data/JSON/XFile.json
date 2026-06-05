@@ -72,5 +72,6 @@
   { "XFile": "data/MODEL/STAGEOBJ/Wall01.x" },
   { "XFile": "data/MODEL/STAGEOBJ/WallWindow.x" },
   { "XFile": "data/MODEL/STAGEOBJ/Water_Server.x" },
-  { "XFile": "data/MODEL/STAGEOBJ/Whiteboard.x" }
+  { "XFile": "data/MODEL/STAGEOBJ/Whiteboard.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/automaticdoor.x" }
 ]

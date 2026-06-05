@@ -38,6 +38,7 @@
 #include "enemy.h"				// 西尾追加
 #include "worldUIcollision.h"	// 西尾追加
 #include "camera.h"				// 西尾追加
+#include "automatic_door.h"		// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -131,6 +132,10 @@ HRESULT CGameSceneObject::Init(void)
 
 	// スコア初期化
 	m_pScore->DeleteScore();
+
+	// ADD : 西尾 [ 検証でオブジェクト追加 ]
+	CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 132.0f), D3DXVECTOR3(0.0f,1.57f,0.0f), INITSCALE, "STAGEOBJ/automaticdoor.x");
+	CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 90.5f), D3DXVECTOR3(0.0f, 1.57f, 0.0f), INITSCALE, "STAGEOBJ/automaticdoor.x");
 
 #endif
 	return S_OK;
