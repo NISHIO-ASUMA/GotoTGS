@@ -19,7 +19,14 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDeskworkUI::CDeskworkUI(int nPriority) : CObject(nPriority)
+CDeskworkUI::CDeskworkUI(int nPriority) : CObject(nPriority),
+m_pVtxBuff(nullptr),
+m_UI{},
+m_TexU(NULL),
+m_TexU1(NULL),
+m_TexV(NULL),
+m_nIdxTexture(NULL),
+n_nColorCount(NULL)
 {
 
 }
@@ -51,10 +58,11 @@ CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 	pDeskworkUI->SetHeight(ui.fHeight);		// 縦幅
 	pDeskworkUI->SetDigit(ui.fDigit);		// 分割数
 	pDeskworkUI->SetKeyType(ui.nKeytype);	// キーの種類
+	pDeskworkUI->SetKey(ui.nKey);			// 現在のキー
 	pDeskworkUI->SetIdx(ui.nIdx);			// 番号
 	pDeskworkUI->SetVTXtype(ui.VTXtype);	// 頂点ポイント
 
-	if (ui.nKeytype != DRAWTYPE_NONE)
+	if (pDeskworkUI->m_UI.nKey != KEYBOARD_NONE)
 	{// キータイプを指定しているなら
 		// テクスチャの設定
 		pDeskworkUI->SetTexture(Config::TEXNAME_KEYTYPE);
@@ -94,7 +102,7 @@ HRESULT CDeskworkUI::Init(void)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点ポイントの設定処理
-	SetVTXtype(m_UI.VTXtype);
+	SetVTX(pVtx);
 
 	// rhwの設定(1.0fで固定)
 	pVtx[0].rhw =
@@ -109,7 +117,7 @@ HRESULT CDeskworkUI::Init(void)
 	pVtx[3].col = m_UI.col;
 
 	// UV設定
-	SetDigit(m_UI.nKeytype, m_UI.fDigit);
+	SetDigit(pVtx);
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
@@ -138,15 +146,23 @@ void CDeskworkUI::Uninit(void)
 //=========================================================
 void CDeskworkUI::Update(void)
 {
+	// 頂点情報のポインタ
+	VERTEX_2D* pVtx = nullptr;
+
+	// 頂点バッファをロックし,頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
 	// 位置設定
 	SetPos(m_UI.pos);
 
 	// サイズ設定
-	SetSize(m_UI.fWidth, m_UI.fHeight);
+	SetSize(m_UI.fWidth, m_UI.fHeight, pVtx);
 
 	// UV設定
-	SetDigit(m_UI.nKeytype, m_UI.fDigit);
+	SetDigit(pVtx);
 
+	//頂点バッファをアンロック
+	m_pVtxBuff->Unlock();
 }
 
 //=========================================================
@@ -191,17 +207,11 @@ void CDeskworkUI::SetTexture(const char* pTexName)
 //==========================================================
 // サイズ処理
 //==========================================================
-void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
+void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* pVtx)
 {
 	// メンバに格納
 	m_UI.fWidth = fWidth;
 	m_UI.fHeight = fHeight;
-
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファをロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	switch (m_UI.VTXtype)
 	{
@@ -236,9 +246,6 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight)
 		break;
 
 	}
-
-	// 頂点バッファのアンロック
-	m_pVtxBuff->Unlock();
 }
 
 //===========================================================
@@ -266,86 +273,26 @@ void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 }
 
 //==========================================================
-// 点滅処理
-//==========================================================
-void CDeskworkUI::SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col)
-{
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファをロックする
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	// カラーカウントを加算
-	n_nColorCount++;
-
-	// 点滅する周期を計算する
-	int nCycle = nEndFrame - nStartFrame;
-	if (nCycle <= 0) nCycle = 1;
-
-	// 進行度を設定
-	float fProgress = static_cast<float>((n_nColorCount - nStartFrame) % nCycle) / static_cast<float>(nCycle);
-
-	// 透明度を格納する
-	float alpha = NULL;
-
-	if (fProgress < HALF)
-	{
-		// 線形補間
-		alpha = Lerp(HALF, Config::END_FLOAT, fProgress * Config::RATIO);
-	}
-	else
-	{
-		// 線形補間
-		alpha = Lerp(Config::END_FLOAT, HALF, (fProgress - HALF) * Config::RATIO);
-	}
-
-	// カラー設定
-	D3DXCOLOR ChangeCol(col.r, col.g, col.b, alpha);
-
-	// 現在カラーに適用
-	SetCol(ChangeCol);
-
-	// 頂点バッファをアンロック
-	m_pVtxBuff->Unlock();
-}
-
-//==========================================================
 // UV設定処理
 //==========================================================
-void CDeskworkUI::SetDigit(const int& nType, const float& nDigit)
+void CDeskworkUI::SetDigit(VERTEX_2D* pVtx)
 {
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファのロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
 	// テクスチャ座標の計算
-	float fTexU = (float)(nType) * nDigit;
+	float fTexU = (float)(m_UI.nKey) * m_UI.fDigit;
 
 	// テクスチャ座標の設定
-	pVtx[0].tex = D3DXVECTOR2(fTexU, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(fTexU + nDigit, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(fTexU, Config::END_FLOAT);
-	pVtx[3].tex = D3DXVECTOR2(fTexU + nDigit, Config::END_FLOAT);
-
-	// 頂点バッファのアンロック
-	m_pVtxBuff->Unlock();
+	pVtx[0].tex = D3DXVECTOR2(fTexU, 0.0f + (Config::TEX_V_VALUE * m_UI.nKeytype));
+	pVtx[1].tex = D3DXVECTOR2(fTexU + m_UI.fDigit, 0.0f + (Config::TEX_V_VALUE * m_UI.nKeytype));
+	pVtx[2].tex = D3DXVECTOR2(fTexU, Config::TEX_V_VALUE + (Config::TEX_V_VALUE * m_UI.nKeytype));
+	pVtx[3].tex = D3DXVECTOR2(fTexU + m_UI.fDigit, Config::TEX_V_VALUE + (Config::TEX_V_VALUE * m_UI.nKeytype));
 }
 
 //==========================================================
 // 頂点ポイント処理
 //==========================================================
-void CDeskworkUI::SetVTX(const VTXTYPE& VTXtype)
+void CDeskworkUI::SetVTX(VERTEX_2D* pVtx)
 {
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファのロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	switch (VTXtype)
+	switch (m_UI.VTXtype)
 	{
 	case VTXTYPE_CENTER:
 
@@ -378,8 +325,5 @@ void CDeskworkUI::SetVTX(const VTXTYPE& VTXtype)
 		break;
 
 	}
-
-	// 頂点バッファのアンロック
-	m_pVtxBuff->Unlock();
 
 }

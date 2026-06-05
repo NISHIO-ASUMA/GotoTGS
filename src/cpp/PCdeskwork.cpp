@@ -76,11 +76,12 @@ HRESULT CPCDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
+	ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
 
 	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
 		// タスクをランダムに設定
-		ui.nKeytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+		ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
 
 		// UIの生成処理
 		m_pDeskUI[ui.nIdx] = CDeskworkUI::Create(ui);
@@ -206,7 +207,7 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
 		// タスクをランダムに設定
-		m_pDeskUI[nCount]->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+		m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
 		// 色を元に戻す(通常色)
 		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
@@ -245,10 +246,10 @@ void CPCDeskwork::Task(const auto& pClear)
 		return;
 	}
 
-	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
-		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
-		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() == CDeskworkUI::DRAWTYPE_S) ||
-		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() == CDeskworkUI::DRAWTYPE_D))
+	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
+		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
+		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
+		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_D))
 	{// 正解を押した時
 
 		// 色を半透明にする
@@ -257,10 +258,10 @@ void CPCDeskwork::Task(const auto& pClear)
 		// 次のタスクに移る
 		m_nNowIdx++;
 	}
-	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_W) ||
-			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_A) ||
-			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_S) ||
-			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKeyType() != CDeskworkUI::DRAWTYPE_D))
+	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_W) ||
+			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_A) ||
+			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_S) ||
+			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_D))
 	{// 不正解を押した時
 
 		// 色を赤にする

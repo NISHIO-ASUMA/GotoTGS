@@ -76,7 +76,8 @@ HRESULT CCOPYDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
-	ui.nKeytype = (CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX);
+	ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
+	ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
 	ui.nIdx = TEXTURE_KEY;
 
 	// UIの生成処理
@@ -89,7 +90,8 @@ HRESULT CCOPYDeskwork::Init(void)
 	ui.fWidth = 0.0f;
 	ui.fHeight = Config::GAGE_HEIGHT;
 	ui.fDigit = 1.0f;
-	ui.nKeytype = CDeskworkUI::DRAWTYPE_NONE;
+	ui.nKeytype = CDeskworkUI::KEYTYPE_MAX;
+	ui.nKey = CDeskworkUI::KEYBOARD_NONE;
 	ui.nIdx = TEXTURE_GAGE;
 
 	// ゲージUIの生成処理
@@ -217,7 +219,7 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	}
 
 	// タスクをランダムに設定
-	m_pDeskUI[TEXTURE_KEY]->SetKeyType((CDeskworkUI::KEYTYPE)(rand() % CDeskworkUI::DRAWTYPE_MAX));
+	m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
 	// 色を元に戻す(通常色)
 	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
@@ -255,10 +257,10 @@ void CCOPYDeskwork::Task(const auto& pClear)
 		return;
 	}
 
-	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_W) ||
-		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_A) ||
-		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_S) ||
-		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::DRAWTYPE_D))
+	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
+		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
+		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
+		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_D))
 	{// 正解を押した時
 		// 色をグレーにする
 		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);

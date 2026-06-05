@@ -27,13 +27,36 @@ public:
 	// キータイプ
 	//****************************
 	enum KEYTYPE
+	{
+		KEYTYPE_BOARD = 0,
+		KEYTYPE_PAD,
+		KEYTYPE_MAX,
+	};
+
+	//****************************
+	// キーボードのキータイプ
+	//****************************
+	enum KEYBOARD
 	{		
-		DRAWTYPE_NONE = -1,
-		DRAWTYPE_A,
-		DRAWTYPE_S,
-		DRAWTYPE_W,
-		DRAWTYPE_D,
-		DRAWTYPE_MAX,
+		KEYBOARD_NONE = -1,
+		KEYBOARD_A,
+		KEYBOARD_S,
+		KEYBOARD_W,
+		KEYBOARD_D,
+		KEYBOARD_MAX,
+	};
+
+	//****************************
+	// コントローラーのキータイプ
+	//****************************
+	enum KYAPAD
+	{
+		KEYPAD_NONE = -1,
+		KEYPAD_A,
+		KEYPAD_B,
+		KEYPAD_X,
+		KEYPAD_Y,
+		KYAPAD_MAX,
 	};
 
 	//****************************
@@ -70,6 +93,7 @@ public:
 		float fHeight;			// 縦幅
 		float fDigit;			// テクスチャの分割数
 		int nKeytype;			// キータイプ
+		int nKey;				// 現在のキー
 		int nIdx;				// 番号
 	};
 
@@ -82,12 +106,11 @@ public:
 	void Draw(void);
 
 	// 設定処理
-	void ChangeCol(const D3DXCOLOR& col);												// カラー設定
-	void SetVTX(const VTXTYPE& VTXtype);												// 頂点ポイント設定
-	void SetSize(const float& fWidth, const float& fHeight);							// サイズ設定
-	void SetDigit(const int& nType, const float& nDigit);								// UV設定
-	void SetTexture(const char* pTexName);												// テクスチャ設定
-	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
+	void ChangeCol(const D3DXCOLOR& col);										// カラー設定
+	void SetVTX(VERTEX_2D* pVtx);												// 頂点ポイント設定
+	void SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* pVtx);	// サイズ設定
+	void SetDigit(VERTEX_2D* pVtx);												// UV設定
+	void SetTexture(const char* pTexName);										// テクスチャ設定
 
 	inline void SetPos(const D3DXVECTOR3& pos) { m_UI.pos = pos; }
 	inline void SetCol(const D3DXCOLOR& col) { m_UI.col = col; }
@@ -96,6 +119,7 @@ public:
 	inline void SetHeight(const float& fHeight) { m_UI.fHeight = fHeight; }
 	inline void SetDigit(const float& fDigit) { m_UI.fDigit = fDigit; }
 	inline void SetKeyType(const int& keytype) { m_UI.nKeytype = keytype; }
+	inline void SetKey(const int& key) { m_UI.nKey = key; }
 	inline void SetIdx(const int& nIdx) { m_UI.nIdx = nIdx; }
 
 	// 情報取得処理
@@ -105,6 +129,7 @@ public:
 	inline float GetHeight(void) const { return m_UI.fHeight; }
 	inline float GetDigit(void) const { return m_UI.fDigit; }
 	inline int GetKeyType(void) const { return m_UI.nKeytype; }
+	inline int GetKey(void) const { return m_UI.nKey; }
 	inline int GetIdx(void) const { return m_UI.nIdx; }
 
 	// 生成処理
@@ -119,7 +144,7 @@ private:
 	{
 		static constexpr const char* TEXNAME_KEYTYPE = "deskwork_UI.png";	// キーのテクスチャ名
 		static constexpr const char* TEXNAME_GAGE = "gage000.jpg";			// ゲージのテクスチャ名
-		static constexpr float END_FLOAT = 1.0f;							// 補完割合値
+		static constexpr float TEX_V_VALUE = 0.5f;							// テクスチャの縦の補完値
 		static constexpr float RATIO = 2.0f;								// 補完率
 	};
 
@@ -129,4 +154,5 @@ private:
 	float m_TexU, m_TexU1, m_TexV;			// テクスチャ座標
 	int m_nIdxTexture;						// テクスチャの番号
 	int n_nColorCount;						// 色変更カウント
+
 };
