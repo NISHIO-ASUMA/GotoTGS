@@ -29,12 +29,14 @@
 //=================================================
 namespace AFK2DUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 550.0f, 0.0f };		// 2D画像の座標
-	constexpr float fWidth = 250.0f;							// 横幅
+	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };		// 2D画像の座標
+	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };				// 初期のサイズ
+	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };				// 目標のサイズ
+	constexpr float fWidth = 250.0f;						// 横幅
 	constexpr float fHeight = 75.0f;						// 縦幅
 	constexpr float fMaxFrame = 60.0f;						// マックスフレーム
 	constexpr const char* Button_NAME = "AfkButton.png";	// チュートリアルuiのテクスチャ名
-	constexpr const char* NowAFK_NAME = "Afk.png";		// たばこUIのテクスチャ名
+	constexpr const char* NowAFK_NAME = "Afk.png";			// たばこUIのテクスチャ名
 };
 
 //=================================================
@@ -159,9 +161,9 @@ void CAfk2DUI::EasingSine(void)
 	auto pos = GetPos();
 
 	// 初期の大きさ
-	D3DXVECTOR2 Apper = { 0.25f * pos.x, 0.15f * pos.y };
+	D3DXVECTOR2 Apper = { AFK2DUI::Apper.x * pos.x, AFK2DUI::Apper.y * pos.y };
 	// 目標の大きさ
-	D3DXVECTOR2 Dest = { 0.35f * pos.x,0.2f * pos.y };
+	D3DXVECTOR2 Dest = { AFK2DUI::Dest.x * pos.x,AFK2DUI::Dest.y * pos.y };
 
 	// イージング判定が無効なら
 	if (m_bEasing == false)
