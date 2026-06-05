@@ -22,21 +22,22 @@
 #include "worldwallmanager.h"
 #include "ui.h"
 #include "meshfield.h"
-#include "player.h"			// 近田追加
-#include "gametime.h"		// Misaki
-#include "deskwork.h"		// Misaki
-#include "progressgauge.h"	// Misaki
-#include "enemy.h"				// 西尾追加
+#include "gametime.h"			// 髙橋追加
+#include "deskwork.h"			// 髙橋追加
+#include "progressgauge.h"		// 髙橋追加
+#include "alert.h"				// 髙橋追加
+#include "player.h"				// 近田追加
 #include "friend.h"				// 近田追加
 #include "pcui.h"				// 近田追加
 #include "copyui.h"				// 近田追加
-#include "worldUIcollision.h"	// 西尾追加
-#include "camera.h"				// 西尾追加
 #include "afksmoke.h"			// 近田追加
 #include "smokeui.h"			// 近田追加
 #include "afk2dui.h"			// 近田追加
 #include "tutorialuimanager.h"	// 近田追加
 #include "afkuimanager.h"		// 近田追加
+#include "enemy.h"				// 西尾追加
+#include "worldUIcollision.h"	// 西尾追加
+#include "camera.h"				// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -61,6 +62,7 @@ CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
+m_pAlert(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -221,4 +223,17 @@ void CGameSceneObject::CreatePointer(void)
 
 	// 進捗ゲージの生成 Misaki
 	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);
+
+	// 警告表示の構造体
+	CAlert::Alert alert;
+	alert.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f);
+	alert.col = COLOR_YERROW;
+	alert.tex = D3DXVECTOR2(2.0f, 1.0f);
+	alert.fWidth = SCREEN_WIDTH;
+	alert.fHeight = 50.0f;
+	alert.isLoop = true;
+	alert.bUse = false;
+
+	// 帰国表示の生成
+	m_pAlert = CAlert::Create(alert);
 }

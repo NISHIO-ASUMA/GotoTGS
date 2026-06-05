@@ -45,7 +45,7 @@
 #define SCREEN_WIDTH (1280)				// ウインドウの幅
 #define SCREEN_HEIGHT (720)				// ウインドウの高さ
 #define CLASS_NAME "WindowClass"		// ウインドウクラスの名前
-#define WINDOW_NAME "GotoTGS"			// ウインドウの名前
+#define WINDOW_NAME "LazyMan～サボリーマン～"			// ウインドウの名前
 
 //*********************************************************
 // FVFマクロ定義
