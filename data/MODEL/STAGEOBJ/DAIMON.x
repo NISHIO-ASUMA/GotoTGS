@@ -281,7 +281,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "data\\TEXTURE\\CupofCoffee.jpg";
+    "data\\TEXTURE\\Cup of Coffee.jpg";
    }
   }
  }
