@@ -71,6 +71,18 @@ public:
 		return &Instance;
 	}
 
+	/// <summary>
+	/// ŠJ•ÂŠJnˆ—
+	/// </summary>
+	/// <param name=""></param>
+	void StartOpen(void)
+	{
+		for (auto Door : m_pAutoDoors)
+		{
+			Door->OpenDoorFlag();
+		}
+	}
+
 private:
 
 	CAutoMaticDoorManager();

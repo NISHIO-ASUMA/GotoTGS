@@ -32,8 +32,9 @@
 #include "DOCUMENTdeskwork.h"	// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
-#include "camera.h"
 #include "afksmoke.h"
+#include "automaticdoormanager.h" // 西尾追加
+#include "automatic_door.h"  // 西尾追加
 
 //*********************************************************
 // 名前空間
@@ -154,6 +155,7 @@ void CPlayer::Update(void)
 	//		　髙橋追記 2026/05/19
 	//		　コピー機用の処理を追加しました
 	//        西尾追記 : カメラの固定化する処理を追加したよ
+	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加中
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
@@ -328,6 +330,20 @@ void CPlayer::Update(void)
 			m_pBoxCollider->SetPos(UpdatePos);
 			m_pBoxCollider->SetPosOld(UpdatePos);
 		}
+	}
+
+//*************************************************
+// ADD : 西尾 自動開閉ドア関係
+	auto MoveDoor = CAutoMaticDoorManager::GetInstance();
+
+	// 当たり判定処理
+	if (MoveDoor->CollisionSphere(m_pSphereCollider.get()))
+	{
+		// 自身の球座標を更新する
+		m_pSphereCollider->SetPos(UpdatePos);
+
+		// 開閉通知を起動する
+		MoveDoor->StartOpen();
 	}
 
 	// 親クラスの更新処理

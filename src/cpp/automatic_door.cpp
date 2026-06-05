@@ -113,6 +113,10 @@ HRESULT CAutoMaticDoor::Init(void)
 	// 初期座標を設定
 	m_vBasePos = GetPos();
 
+	// 変数初期化
+	m_nOpenTimer = NULL;
+	m_fMoveSpeed = NULL;
+
 	return S_OK;
 }
 //=========================================================
@@ -132,10 +136,10 @@ void CAutoMaticDoor::Update(void)
 	auto pos = GetPos();
 
 	// 移動方設定
-	float dir = (m_nMoveType == MOVETYPE_LEFT) ? -1.0f : 1.0f;
+	float dir = (m_nMoveType == MOVETYPE_LEFT) ? 1.0f : -1.0f;
 
 	// ドアがどれくらい開くか
-	float maxOpenDistance = 30.0f;
+	float maxOpenDistance = 50.0f;
 
 	switch (m_nState)
 	{
@@ -145,13 +149,16 @@ void CAutoMaticDoor::Update(void)
 
 	case STATE_OPENING:
 		// ドアを開ける方向に移動
-		pos.z += dir * m_fMoveSpeed;
+		pos.z += dir * MOVE_INFO::SPEED;
+		SetPos(pos);
 
 		// 目標の開き具合まで達したかチェック
 		if (fabsf(pos.z - m_vBasePos.z) >= maxOpenDistance)
 		{
 			// ピッタリの位置に補正して状態遷移
 			pos.z = m_vBasePos.z + (dir * maxOpenDistance);
+			SetPos(pos);
+
 			m_nState = STATE_OPEN_WAIT;
 			m_nOpenTimer = 0; 
 		}
@@ -169,15 +176,18 @@ void CAutoMaticDoor::Update(void)
 
 	case STATE_CLOSING:
 		// ドアを閉める方向に移動
-		pos.z -= dir * m_fMoveSpeed;
+		pos.z -= dir * MOVE_INFO::SPEED;
+		SetPos(pos);
 
 		// 左ドアならベースより小さくなったら、右ドアなら大きくなったら終了
-		if ((m_nMoveType == MOVETYPE_LEFT && pos.z >= m_vBasePos.z) ||
-			(m_nMoveType == MOVETYPE_RIGHT && pos.z <= m_vBasePos.z))
+		if ((dir == -1.0f && pos.z >= m_vBasePos.z) ||
+			(dir == 1.0f && pos.z <= m_vBasePos.z))
 		{
 			pos.z = m_vBasePos.z;
+			SetPos(pos);
 			m_nState = STATE_CLOSE_WAIT;
 		}
+
 		break;
 	}
 
