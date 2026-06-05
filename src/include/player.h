@@ -57,6 +57,7 @@ public:
 	
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
+	bool GetAfkTV(void) { return m_bAfkTV; }
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
@@ -70,7 +71,7 @@ public:
 		NEUTRAL,
 		MOVE,
 		SMOKE,
-		DITCH,
+		TV,
 		ACTION3,
 		MAX
 	};
@@ -80,5 +81,6 @@ private:
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	bool m_bMove;										// 移動したかどうかの判定変数
-	bool m_bAfkSmoke;									// たばこ休憩の判定変数
+	bool m_bAfkSmoke;									// たばこさぼりの判定変数
+	bool m_bAfkTV;										// TVさぼりの判定変数
 };

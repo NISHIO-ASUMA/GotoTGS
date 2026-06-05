@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.h ]
+// AfkManager処理 [ afkmanager.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -16,39 +16,36 @@
 #include <memory>
 
 //*********************************************************
-// インクルードファイル
-//*********************************************************
-#include "afk.h"
-
-//*********************************************************
 // 前方宣言
 //*********************************************************
-class CSphereCollider;
+class CAfksmoke;
+class CAfkTV;
 
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfksmoke : public CAfk
+class CAfkManager
 {
 public:
-	CAfksmoke();
-	~CAfksmoke();
+
+	CAfkManager();
+	~CAfkManager();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 
-	/// <summary>
-	/// 生成処理
-	/// </summary>
-	/// <param name="pos">生成処理</param>
-	/// <returns></returns>
-	static CAfksmoke* Create
-	(
-		const D3DXVECTOR3& pos
-	);
+	// ゲッター
+	CAfksmoke* GetAfkSmoke(void) { return m_pAfkSmoke; }
+	CAfkTV* GetAfkTV(void) { return m_pAfkTV; }
+
+	// インスタンス生成用関数
+	static CAfkManager* Instance(void);
 
 private:
+	static CAfkManager* m_pInstance;	// シングルトン変数
 
+	CAfksmoke* m_pAfkSmoke;				// たばこさぼりのポインタ
+	CAfkTV* m_pAfkTV;					// テレビさぼりのポインタ
 };
 
