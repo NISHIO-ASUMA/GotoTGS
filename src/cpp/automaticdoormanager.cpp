@@ -75,7 +75,8 @@ void CAutoMaticDoorManager::Uninit(void)
 void CAutoMaticDoorManager::Update(void)
 {
 	// プレイヤー取得
-	auto Player = CGameSceneObject::GetInstance()->GetPlayer();
+	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
+	if (Player == nullptr) return;
 
 	// カメラ取得
 	const auto& Camera = CManager::GetInstance()->GetCamera();
@@ -97,8 +98,6 @@ void CAutoMaticDoorManager::Update(void)
 			Door->SetZEneble(false);
 		}
 	}
-
-
 }
 //=========================================================
 // 球の当たり判定

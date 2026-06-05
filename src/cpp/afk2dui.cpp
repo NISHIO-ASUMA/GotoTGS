@@ -112,7 +112,6 @@ void CAfk2DUI::Update(void)
 	// 親クラスの更新処理
 	CObject2D::Update();
 
-
 	// プレイヤーがたばこ吸っているかの判定変数
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
 	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();

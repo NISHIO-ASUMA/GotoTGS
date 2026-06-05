@@ -38,7 +38,7 @@
 #include "enemy.h"				// 西尾追加
 #include "worldUIcollision.h"	// 西尾追加
 #include "camera.h"				// 西尾追加
-#include "automatic_door.h"		// 西尾追加
+#include "automaticdoormanager.h" // 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -133,9 +133,8 @@ HRESULT CGameSceneObject::Init(void)
 	// スコア初期化
 	m_pScore->DeleteScore();
 
-	// ADD : 西尾 [ 検証でオブジェクト追加 ]
-	CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 132.0f), D3DXVECTOR3(0.0f,1.57f,0.0f), INITSCALE, "STAGEOBJ/automaticdoor.x");
-	CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 90.5f), D3DXVECTOR3(0.0f, 1.57f, 0.0f), INITSCALE, "STAGEOBJ/automaticdoor.x");
+	// 自動ドア管理クラス
+	CAutoMaticDoorManager::GetInstance()->Init();
 
 #endif
 	return S_OK;
@@ -147,6 +146,9 @@ void CGameSceneObject::Uninit(void)
 {
 	// ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
+
+	// 自動ドア管理クラス
+	CAutoMaticDoorManager::GetInstance()->Uninit();
 
 	// チュートリアルUIマネージャーの終了処理
 	CTutorialUIManager::Instance()->Uninit();
@@ -183,6 +185,9 @@ void CGameSceneObject::Update(void)
 
 	// さぼりをまとめたマネージャーの更新処理
 	CAfkManager::Instance()->Update();
+
+	// 自動ドア管理クラス
+	CAutoMaticDoorManager::GetInstance()->Update();
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
