@@ -32,16 +32,11 @@
 #include "DOCUMENTdeskwork.h"	// Misaki
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
-<<<<<<< HEAD
+#include "afkmanager.h"
+#include "afktv.h"
 #include "afksmoke.h"
 #include "automaticdoormanager.h" // 西尾追加
-#include "automatic_door.h"  // 西尾追加
-=======
-#include "camera.h"
-#include "afkmanager.h"
-#include "afksmoke.h"
-#include "afktv.h"
->>>>>>> 9e74c58f1ca7aca843e7ed4b5b00913e76debdf8
+#include "automatic_door.h"		 // 西尾追加
 
 //*********************************************************
 // 名前空間
@@ -163,7 +158,7 @@ void CPlayer::Update(void)
 	//		　髙橋追記 2026/05/19
 	//		　コピー機用の処理を追加しました
 	//        西尾追記 : カメラの固定化する処理を追加したよ
-	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加中
+	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
