@@ -20,12 +20,26 @@
 #include "renderer.h"
 #include "player.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace MOVE_INFO
+{
+	constexpr float SPEED = 2.0f; // 移動速度
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
 CAutoMaticDoor::CAutoMaticDoor(int nPriority) : CObjectX(nPriority),
 m_isZTestEneble(false),
-m_pCollider(nullptr)
+m_pCollider(nullptr),
+m_nMoveType(MOVETYPE::MOVETYPE_LEFT),
+m_fMoveSpeed(NULL),
+m_nState(STATE::STATE_CLOSE_WAIT),
+m_nOpenTimer(NULL),
+m_vBasePos(VECTOR3_NULL),
+m_Size(VECTOR3_NULL)
 {
 
 }
@@ -44,7 +58,8 @@ CAutoMaticDoor* CAutoMaticDoor::Create
 	const D3DXVECTOR3& pos, 
 	const D3DXVECTOR3& rot,
 	const D3DXVECTOR3& scale, 
-	const char* pModelName
+	const char* pModelName,
+	const MOVETYPE& nType
 )
 {
 	// インスタンス生成
@@ -56,6 +71,7 @@ CAutoMaticDoor* CAutoMaticDoor::Create
 	pAutoDoor->SetRot(rot);
 	pAutoDoor->SetScale(scale);
 	pAutoDoor->SetFilePass(pModelName);
+	pAutoDoor->SetType(nType);
 
 	// 初期化失敗時
 	if (FAILED(pAutoDoor->Init())) return nullptr;
@@ -81,6 +97,9 @@ HRESULT CAutoMaticDoor::Init(void)
 	D3DXVECTOR3 Scale = GetScale();
 	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
 
+	// サイズセット
+	m_Size = Size;
+
 	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot();
@@ -90,6 +109,9 @@ HRESULT CAutoMaticDoor::Init(void)
 
 	// 矩形コライダー生成処理
 	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), Size, matRot);
+
+	// 初期座標を設定
+	m_vBasePos = GetPos();
 
 	return S_OK;
 }
@@ -108,6 +130,59 @@ void CAutoMaticDoor::Update(void)
 {
 	// 座標取得
 	auto pos = GetPos();
+
+	// 移動方設定
+	float dir = (m_nMoveType == MOVETYPE_LEFT) ? -1.0f : 1.0f;
+
+	// ドアがどれくらい開くか
+	float maxOpenDistance = 30.0f;
+
+	switch (m_nState)
+	{
+	case STATE_CLOSE_WAIT:
+		// プレイヤーが近づくのを待つ
+		break;
+
+	case STATE_OPENING:
+		// ドアを開ける方向に移動
+		pos.z += dir * m_fMoveSpeed;
+
+		// 目標の開き具合まで達したかチェック
+		if (fabsf(pos.z - m_vBasePos.z) >= maxOpenDistance)
+		{
+			// ピッタリの位置に補正して状態遷移
+			pos.z = m_vBasePos.z + (dir * maxOpenDistance);
+			m_nState = STATE_OPEN_WAIT;
+			m_nOpenTimer = 0; 
+		}
+		break;
+
+	case STATE_OPEN_WAIT:
+		// 一定時間開いたまま
+		m_nOpenTimer++;
+		if (m_nOpenTimer >= 120)
+		{
+			// 閉じる
+			m_nState = STATE_CLOSING;
+		}
+		break;
+
+	case STATE_CLOSING:
+		// ドアを閉める方向に移動
+		pos.z -= dir * m_fMoveSpeed;
+
+		// 左ドアならベースより小さくなったら、右ドアなら大きくなったら終了
+		if ((m_nMoveType == MOVETYPE_LEFT && pos.z >= m_vBasePos.z) ||
+			(m_nMoveType == MOVETYPE_RIGHT && pos.z <= m_vBasePos.z))
+		{
+			pos.z = m_vBasePos.z;
+			m_nState = STATE_CLOSE_WAIT;
+		}
+		break;
+	}
+
+	// 座標の設定
+	SetPos(pos);
 
 	// コライダー座標の更新
 	if (m_pCollider)
@@ -154,4 +229,15 @@ bool CAutoMaticDoor::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 
 	// 矩形の当たり判定を返す
 	return CCollisionBox::Collision(m_pCollider.get(),pOther,OutPos);
+}
+//=========================================================
+// ドアの開閉判別処理
+//=========================================================
+void CAutoMaticDoor::OpenDoorFlag(void)
+{
+	// 閉じている、または閉じ中の時だけ開く
+	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_CLOSING)
+	{
+		m_nState = STATE_OPENING;
+	}
 }

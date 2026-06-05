@@ -19,6 +19,7 @@
 #include "template.h"
 #include "player.h"
 #include "block.h"
+#include "automatic_door.h"
 
 //*********************************************************
 // 定数宣言
@@ -374,6 +375,63 @@ bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
 	// 判定ブロック情報
 	const auto& BlockPos = pBlock->GetPos();
 	const auto& BlockSize = pBlock->GetSize();
+
+	// ベクトル線分情報
+	D3DXVECTOR3 VecDir = PlayerPos - m_pCamera.posV;
+
+	// 長さを取得
+	float fLength = D3DXVec3Length(&VecDir);
+	if (fLength < 1e-6f) return false;
+
+	// ベクトルの正規化
+	D3DXVec3Normalize(&VecDir, &VecDir);
+
+	// モデルのサイズ判定
+	float radius = max(BlockSize.x, max(BlockSize.y, BlockSize.z)) * 0.5f;
+
+	// 線分と球の最短距離を判定する
+	D3DXVECTOR3 MathLength = BlockPos - m_pCamera.posV;
+	float MathDot = D3DXVec3Dot(&MathLength, &VecDir);
+	MathDot = max(0.0f, min(fLength, MathDot));
+
+	// ベクトル分の計算
+	D3DXVECTOR3 close = m_pCamera.posV + VecDir * MathDot;
+
+	// 差分を計算
+	D3DXVECTOR3 Diff = close - BlockPos;
+
+	// 長さの2剰計算
+	float distSq = D3DXVec3LengthSq(&Diff);
+
+	// 長さが以下だったら
+	if (distSq <= (radius * radius))
+	{
+		isCollision = true;
+	}
+	else
+	{
+		isCollision = false;
+	}
+
+	return isCollision;
+}
+//==============================================================
+// 別クラス判別バージョン
+//==============================================================
+bool CCamera::CollisionTorayDoor(CPlayer* pPlayer, CAutoMaticDoor* pDoor)
+{
+	// null値チェック
+	if (!pPlayer || !pDoor) return false;
+
+	// 判定用変数
+	bool isCollision = false;
+
+	// プレイヤー情報取得
+	const auto& PlayerPos = pPlayer->GetPos();
+
+	// 判定ブロック情報
+	const auto& BlockPos = pDoor->GetPos();
+	const auto& BlockSize = pDoor->GetSize();
 
 	// ベクトル線分情報
 	D3DXVECTOR3 VecDir = PlayerPos - m_pCamera.posV;
