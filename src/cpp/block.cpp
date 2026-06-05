@@ -176,7 +176,6 @@ void CBlock::Draw(void)
 		// Ý’è‚ð–ß‚·
 		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 	}
-
 }
 //=========================================================
 // “–‚½‚è”»’è

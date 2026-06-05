@@ -36,12 +36,13 @@
 #include "afksmoke.h"
 
 //*********************************************************
-// インクルードファイル
+// 名前空間
 //*********************************************************
 namespace player
 {
-	constexpr float fSpeed = 5.0f;		// プレイヤーの移動スピード
-	constexpr float fInput = 0.0001f;	// 移動処理に使うキーが入力されてるか比較する用の変数
+	constexpr float fSpeed = 5.0f;			// プレイヤーの移動スピード
+	constexpr float fInput = 0.0001f;		// 移動処理に使うキーが入力されてるか比較する用の変数
+	constexpr float fJoyInput = 2000.0f;	// ジョイパッドのスティック入力の値
 
 	/// <summary>
 	/// 以下、西尾追加
@@ -49,7 +50,6 @@ namespace player
 	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
 	constexpr float SphereSize = 60.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
-
 };
 //=========================================================
 // コンストラクタ
@@ -197,8 +197,10 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 oldpos = GetOldPos();
 
-	// カメラ基準の移動処理
+	// キーボード操作
 	MoveKeyboard(player::fSpeed);
+
+	// ジョイパッド操作
 	//MoveJoypad(player::fSpeed);
 
 	// ステートマシンの更新処理
@@ -404,8 +406,7 @@ void CPlayer::MoveKeyboard(float speed)
 	// さぼっているかの判定
 	auto bAfk = CAfksmoke::Instance()->GetAfk();
 	
-	if (bAfk && !m_bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = true;
-	else if (bAfk && m_bAfkSmoke && pKeyboard->GetTrigger(DIK_TAB))	m_bAfkSmoke = false;
+	if (bAfk && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
 	else if (!bAfk) m_bAfkSmoke = false;
 
 	// ビュー行列の逆行列を計算
@@ -499,110 +500,114 @@ void CPlayer::MoveKeyboard(float speed)
 //=================================================
 void CPlayer::MoveJoypad(float speed)
 {
-	//// ジョイパッドのポインタ
-	//CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
-	//XINPUT_STATE* pState = CManager::GetInstance()->GetJoyPad()->GetStickAngle();
+	// ジョイパッドのポインタ
+	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 
-	//// コントローラーが接続されていなかったら
-	////if (!pJoyPad->GetConnectGamePad()) return;
+	if (!pJoyPad) return;
 
-	//// カメラのポインタ
-	//CCamera* pCamera = CManager::GetInstance()->GetCamera();
+	XINPUT_STATE* pState = pJoyPad->GetStickAngle();
 
-	//// 向きの取得
-	//D3DXVECTOR3 rot = pCamera->GetRot();
+	// コントローラーが接続されていなかったら
+	//if (!pJoyPad->GetConnectGamePad()) return;
 
-	//// ビューマトリックスの取得
-	//auto ViewMatrix = pCamera->GetView();
+	// カメラのポインタ
+	CCamera* pCamera = CManager::GetInstance()->GetCamera();
 
-	//// さぼっているかの判定
-	//auto bAfk = CAfksmoke::Instance()->GetAfk();
+	// 向きの取得
+	D3DXVECTOR3 rot = pCamera->GetRot();
 
-	//if (bAfk && !m_bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	// ビューマトリックスの取得
+	auto ViewMatrix = pCamera->GetView();
 
-	//// ビュー行列の逆行列を計算
-	//D3DXMATRIX invViewMat;
-	//D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
+	// さぼっているかの判定
+	auto bAfk = CAfksmoke::Instance()->GetAfk();
 
-	//// 逆行列からカメラの方向ベクトルを抽出
-	//D3DXVECTOR3 camForward = D3DXVECTOR3(invViewMat._31, invViewMat._32, invViewMat._33);
-	//D3DXVECTOR3 camRight = D3DXVECTOR3(invViewMat._11, invViewMat._12, invViewMat._13);
+	if (bAfk && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A))m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	else if (!bAfk) m_bAfkSmoke = false;
 
-	//// XZ平面の移動にするため、Y成分を0にする
-	//camForward.y = NULL;
-	//camRight.y = NULL;
+	// ビュー行列の逆行列を計算
+	D3DXMATRIX invViewMat;
+	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
 
-	//// 方向ベクトルの正規化
-	//D3DXVec3Normalize(&camForward, &camForward);
-	//D3DXVec3Normalize(&camRight, &camRight);
+	// 逆行列からカメラの方向ベクトルを抽出
+	D3DXVECTOR3 camForward = D3DXVECTOR3(invViewMat._31, invViewMat._32, invViewMat._33);
+	D3DXVECTOR3 camRight = D3DXVECTOR3(invViewMat._11, invViewMat._12, invViewMat._13);
 
-	//// 移動方向の計算
-	//D3DXVECTOR3 moveDir = VECTOR3_NULL;
+	// XZ平面の移動にするため、Y成分を0にする
+	camForward.y = NULL;
+	camRight.y = NULL;
 
-	//// 目的の向き
-	//D3DXVECTOR3 RotDest = GetRotDest();
+	// 方向ベクトルの正規化
+	D3DXVec3Normalize(&camForward, &camForward);
+	D3DXVec3Normalize(&camRight, &camRight);
 
-	//if (pJoyPad->GetLeftStick())
-	//{
-	//	if (pState->Gamepad.sThumbLY > 2000)
-	//	{
-	//		moveDir += camForward;
-	//		RotDest.y = rot.y + D3DX_PI;
+	// 移動方向の計算
+	D3DXVECTOR3 moveDir = VECTOR3_NULL;
 
-	//		// 移動判定をtrueに
-	//		m_bMove = true;
-	//	}
-	//	//if (pState->Gamepad.sThumbLY < -2000)
-	//	//{
-	//	//	moveDir -= camForward;
-	//	//	RotDest.y = rot.y;
+	// 目的の向き
+	D3DXVECTOR3 RotDest = GetRotDest();
 
-	//	//	// 移動判定をtrueに
-	//	//	m_bMove = true;
-	//	//}
-	//	//if (pState->Gamepad.sThumbLX > -2000)
-	//	//{
-	//	//	moveDir += camRight;
-	//	//	RotDest.y = rot.y - D3DX_PI * HALF;
+	if (pJoyPad->GetLeftStick())
+	{
+		if (pState->Gamepad.sThumbLY > player::fJoyInput)
+		{
+			moveDir += camForward;
+			RotDest.y = rot.y + D3DX_PI;
 
-	//	//	// 移動判定をtrueに
-	//	//	m_bMove = true;
-	//	//}
-	//	//if (pState->Gamepad.sThumbLX < 2000)
-	//	//{
-	//	//	moveDir -= camRight;
-	//	//	RotDest.y = rot.y + D3DX_PI * HALF;
+			// 移動判定をtrueに
+			m_bMove = true;
+		}
+		if (pState->Gamepad.sThumbLY < -player::fJoyInput)
+		{
+			moveDir -= camForward;
+			RotDest.y = rot.y;
 
-	//	//	// 移動判定をtrueに
-	//	//	m_bMove = true;
-	//	//}
-	//}
+			// 移動判定をtrueに
+			m_bMove = true;
+		}
+		if (pState->Gamepad.sThumbLX > player::fJoyInput)
+		{
+			moveDir += camRight;
+			RotDest.y = rot.y - D3DX_PI * HALF;
 
-	//if (m_bAfkSmoke)
-	//{
-	//	// 煙草モーションに変更する
-	//	GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
-	//}
-	//else if (pJoyPad->GetLeftStick())
-	//{
-	//	GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
-	//}
-	//// 移動入力がある場合
-	//else if (m_bMove)
-	//{
-	//	// 移動の正規化
-	//	D3DXVec3Normalize(&moveDir, &moveDir);
+			// 移動判定をtrueに
+			m_bMove = true;
+		}
+		if (pState->Gamepad.sThumbLX < -player::fJoyInput)
+		{
+			moveDir -= camRight;
+			RotDest.y = rot.y + D3DX_PI * HALF;
 
-	//	// 位置の更新
-	//	SetMove(moveDir * speed);
+			// 移動判定をtrueに
+			m_bMove = true;
+		}
+	}
 
-	//	// 移動方向から向きを計算
-	//	RotDest.y = atan2f(-moveDir.x, -moveDir.z);
+	if (m_bAfkSmoke)
+	{
+		// 煙草モーションに変更する
+		GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+	}
+	else if (!pJoyPad->GetLeftStick())
+	{
+		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+	}
+	// 移動入力がある場合
+	else if (m_bMove)
+	{
+		// 移動の正規化
+		D3DXVec3Normalize(&moveDir, &moveDir);
 
-	//	// 目的の向きを設定
-	//	SetRotDest(RotDest);
+		// 位置の更新
+		SetMove(moveDir * speed);
 
-	//	// 移動モーション設定
-	//	GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
-	//}
+		// 移動方向から向きを計算
+		RotDest.y = atan2f(-moveDir.x, -moveDir.z);
+
+		// 目的の向きを設定
+		SetRotDest(RotDest);
+
+		// 移動モーション設定
+		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
+	}
 }
