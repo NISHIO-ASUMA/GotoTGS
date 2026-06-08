@@ -60,7 +60,7 @@ CAfkTV* CAfkTV::Create(const D3DXVECTOR3& pos)
 HRESULT CAfkTV::Init(void)
 {
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
-	CAfk::Init(AFKTV::Pos, AFKTV::fRadius, CAfk::COLLISION::SPHERE);
+	CAfk::Init(AFKTV::Pos, AFKTV::fRadius);
 	return S_OK;
 }
 //=========================================================
