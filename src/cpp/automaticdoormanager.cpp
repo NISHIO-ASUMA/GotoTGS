@@ -67,16 +67,24 @@ HRESULT CAutoMaticDoorManager::Init(void)
 								CAutoMaticDoor::MOVETYPE_RIGHT)
 								);
 	
-#if 0
 	// 自動ドアの生成 ( ゲームセンター側 )
 	m_pAutoDoors.push_back(
-		CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 132.0f),
+		CAutoMaticDoor::Create(D3DXVECTOR3(1493.0f, 34.0f, 131.0f),
 			AUTO_DOOR::ROT,
 			INITSCALE,
 			AUTO_DOOR::MODEL_NAME,
 			CAutoMaticDoor::MOVETYPE_LEFT)
+
 	);
-#endif
+
+	m_pAutoDoors.push_back(
+		CAutoMaticDoor::Create(D3DXVECTOR3(1493.0f, 34.0f, 89.5f),
+			AUTO_DOOR::ROT,
+			INITSCALE,
+			AUTO_DOOR::MODEL_NAME,
+			CAutoMaticDoor::MOVETYPE_RIGHT)
+
+	);
 
 	return S_OK;
 }
