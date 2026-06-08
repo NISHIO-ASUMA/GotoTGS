@@ -55,6 +55,7 @@ HRESULT CAfk::Init(const D3DXVECTOR3& pos,const float& fRadius, const COLLISION&
 	// 座標と半径の設定
 	SetPos(pos);
 	SetRadius(fRadius);
+	SetCollision(collison);
 	D3DXMATRIX matRot;
 
 	// ボックスコライダーの生成
@@ -85,23 +86,27 @@ void CAfk::Update(void)
 	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
 	if (Player == nullptr) return;
 
-	// スフィアコライダー取得とnullチェック
-	CSphereCollider* SphereCollider = Player->GetSphereCollider();
-	if (SphereCollider == nullptr) return;
+	if (m_Collison == COLLISION::SPHERE)
+	{
+		// スフィアコライダー取得とnullチェック
+		CSphereCollider* SphereCollider = Player->GetSphereCollider();
+		if (SphereCollider == nullptr) return;
 
-	// 当たり判定の実行
-	if (CollisionSphere(SphereCollider))m_bAfk = true;
-	else m_bAfk = false;
+		// 当たり判定の実行
+		if (CollisionSphere(SphereCollider))m_bAfk = true;
+		else m_bAfk = false;
+	}
 
-	// ボックスコライダー取得とnullチェック
-	CBoxCollider* BoxCollider = Player->GetBoxCollider();
-	if (BoxCollider == nullptr) return;
+	if (m_Collison == COLLISION::BOX)
+	{
+		// ボックスコライダー取得とnullチェック
+		CBoxCollider* BoxCollider = Player->GetBoxCollider();
+		if (BoxCollider == nullptr) return;
 
-	// 当たり判定の実行
-	if (CollisionBox(BoxCollider, &m_pos))m_bAfk = true;
-	else m_bAfk = false;
-	
-
+		// 当たり判定の実行
+		if (CollisionBox(BoxCollider, &m_pos))m_bAfk = true;
+		else m_bAfk = false;
+	}
 }
 //=========================================================
 // 球形当たり判定処理
