@@ -21,6 +21,14 @@
 #include "ui.h"
 #include "easing.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace PC_DESKWORK
+{
+	constexpr float SHAKE_POW = 40.0f;		// 振動力
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -28,7 +36,9 @@ CPCDeskwork::CPCDeskwork() :CDeskworkUIManager(),
 m_nNowIdx(NULL),
 m_nCountTime(NULL),
 m_bTime(false),
-m_bFalse(false)
+m_bFalse(false),
+m_BasePos(VECTOR3_NULL),
+m_Offsetpos(VECTOR3_NULL)
 {
 
 }
@@ -83,7 +93,7 @@ HRESULT CPCDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
-	ui.nKeytype = CDeskworkUI::KEYTYPE_PAD;
+	ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
 
 	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
@@ -210,16 +220,18 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 
 		if (m_bFalse != false)
 		{// 失敗している場合
-			// 1フレーム毎の移動量
+			// 1フレーム毎の割合
 			float t = CEasing::SetEase(m_nCountTime, Config::TIME_COOL);
 			float EasingValue = CEasing::EaseOutElastic(t);
 
-			D3DXVECTOR3 pos = GetPos();
-			pos.x = pos.x + m_Offsetpos.x * (1.0f - EasingValue);
+			// 失敗したものだけ動かす
+			D3DXVECTOR3 targetPos = m_pDeskUI[m_nNowIdx]->GetPos();
 
-			// 位置の設定
-			SetPos(pos);
+			// イージングを適用
+			targetPos.x += PC_DESKWORK::SHAKE_POW * (1.0f - EasingValue);
 
+			// 対象UIに座標を設定
+			m_pDeskUI[m_nNowIdx]->SetPos(targetPos);
 		}
 
 		return false;
@@ -227,6 +239,11 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
+		// 元の基準の位置に戻す
+		D3DXVECTOR3 normalPos = GetPos();
+		normalPos.x = (GetPos().x - Config::VALUE_WIDTH) + (Config::VALUE_WIDTH * nCount);
+		m_pDeskUI[nCount]->SetPos(normalPos);
+
 		// タスクをランダムに設定
 		m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
