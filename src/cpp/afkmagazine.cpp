@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKたばこ処理 [ afksmoke.cpp ]
+// AFKMagazine処理 [ afkmagazine.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,21 +8,21 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "afksmoke.h"
+#include "afkmagazine.h"
 
 //*********************************************************
 // 名前空間
 //*********************************************************
-namespace AFKSMOKE
+namespace AFKMAGAZINE
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
+	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// さぼりの範囲
 	constexpr float fRadius = 25.0f;					// 範囲の半径
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfksmoke::CAfksmoke()
+CAfkMagazine::CAfkMagazine()
 {
 
 }
@@ -30,7 +30,7 @@ CAfksmoke::CAfksmoke()
 //=========================================================
 // デストラクタ
 //=========================================================
-CAfksmoke::~CAfksmoke()
+CAfkMagazine::~CAfkMagazine()
 {
 
 }
@@ -38,15 +38,15 @@ CAfksmoke::~CAfksmoke()
 //=========================================================
 // 生成処理
 //=========================================================
-CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
+CAfkMagazine* CAfkMagazine::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
-	CAfksmoke* pAfkSmoke = new CAfksmoke;
+	CAfkMagazine* pAfkSmoke = new CAfkMagazine;
 	if (pAfkSmoke == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pAfkSmoke->SetPos(AFKSMOKE::Pos);
-	pAfkSmoke->SetRadius(AFKSMOKE::fRadius);
+	pAfkSmoke->SetPos(AFKMAGAZINE::Pos);
+	pAfkSmoke->SetRadius(AFKMAGAZINE::fRadius);
 
 	// 初期化失敗時
 	if (FAILED(pAfkSmoke->Init())) return nullptr;
@@ -57,16 +57,16 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfksmoke::Init(void)
+HRESULT CAfkMagazine::Init(void)
 {
 	// 親クラスの初期化処理
-	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
+	CAfk::Init(AFKMAGAZINE::Pos, AFKMAGAZINE::fRadius);
 	return S_OK;
 }
 //=========================================================
 // 終了処理
 //=========================================================
-void CAfksmoke::Uninit(void)
+void CAfkMagazine::Uninit(void)
 {
 	// 親クラスの終了処理
 	CAfk::Uninit();
@@ -74,7 +74,7 @@ void CAfksmoke::Uninit(void)
 //=========================================================
 // 更新処理
 //=========================================================
-void CAfksmoke::Update(void)
+void CAfkMagazine::Update(void)
 {
 	// 親クラスの更新処理
 	CAfk::Update();

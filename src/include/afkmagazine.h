@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFKTV処理 [ afktv.h ]
+// AFKMagazine処理 [ afkmagazine.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -23,11 +23,11 @@
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfkTV : public CAfk
+class CAfkMagazine : public CAfk
 {
 public:
-	CAfkTV();
-	~CAfkTV();
+	CAfkMagazine();
+	~CAfkMagazine();
 
 	HRESULT Init(void);
 	void Uninit(void);
@@ -38,7 +38,7 @@ public:
 	/// </summary>
 	/// <param name="pos">生成処理</param>
 	/// <returns></returns>
-	static CAfkTV* Create
+	static CAfkMagazine* Create
 	(
 		const D3DXVECTOR3& pos
 	);
