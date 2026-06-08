@@ -31,8 +31,7 @@ namespace AUTO_DOOR
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAutoMaticDoorManager::CAutoMaticDoorManager() : m_pSphereCollider(nullptr),
-m_pAutoDoors{}
+CAutoMaticDoorManager::CAutoMaticDoorManager() : m_pAutoDoors{}
 {
 
 }
@@ -118,15 +117,4 @@ void CAutoMaticDoorManager::Update(void)
 			Door->SetZEneble(false);
 		}
 	}
-}
-//=========================================================
-// 球の当たり判定
-//=========================================================
-bool CAutoMaticDoorManager::CollisionSphere(CSphereCollider* pOther)
-{
-	// ポインタがnull
-	if (!m_pSphereCollider) return false;
-
-	// 球同士の当たり判定を返す
-	return CCollisionSphere::Collision(m_pSphereCollider.get(),pOther);
 }

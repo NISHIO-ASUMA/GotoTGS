@@ -51,13 +51,6 @@ public:
 	/// <returns></returns>
 	inline CAutoMaticDoor* GetAutoDoor(const int nIdx) { return m_pAutoDoors[nIdx]; }
 
-	/// <summary>
-	/// 球の当たり判定を返す
-	/// </summary>
-	/// <param name="pOther">判定先のコライダー</param>
-	/// <returns></returns>
-	bool CollisionSphere(CSphereCollider* pOther);
-
 public:
 
 	/// <summary>
