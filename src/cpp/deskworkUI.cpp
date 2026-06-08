@@ -53,7 +53,6 @@ CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 
 	// 各種値の設定
 	pDeskworkUI->SetPos(ui.pos);			// 位置
-	pDeskworkUI->SetCol(ui.col);			// 色
 	pDeskworkUI->SetWidth(ui.fWidth);		// 横幅
 	pDeskworkUI->SetHeight(ui.fHeight);		// 縦幅
 	pDeskworkUI->SetDigit(ui.fDigit);		// 分割数
@@ -71,6 +70,53 @@ CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 	{
 		// テクスチャの設定
 		pDeskworkUI->SetTexture(Config::TEXNAME_GAGE);
+	}
+
+	if (pDeskworkUI->m_UI.nKeytype != KEYTYPE_PAD)
+	{// キーの種類がパッド以外なら
+		// 引数の値で設定
+		pDeskworkUI->SetCol(ui.col);
+	}
+	else
+	{
+		switch (pDeskworkUI->m_UI.nKey)
+		{// キーに合わせて色を付ける
+		case KEYPAD_A:
+
+			// 緑に設定
+			pDeskworkUI->SetCol(COLOR_GREEN);
+
+			break;
+		
+		case KEYPAD_B:
+
+			// 赤に設定
+			pDeskworkUI->SetCol(COLOR_RED);
+
+			break;
+		
+		case KEYPAD_X:
+
+			// オレンジに設定
+			pDeskworkUI->SetCol(D3DXCOLOR(1.0f, 0.5f, 0.0f, 1.0f));
+
+			break;
+		
+		case KEYPAD_Y:
+
+			// 青に設定
+			pDeskworkUI->SetCol(COLOR_BLUE);
+
+			break;
+
+		default:
+			
+			// 白に設定
+			pDeskworkUI->SetCol(COLOR_WHITE);
+
+			break;
+
+		}
 	}
 
 	// 初期化が失敗した場合
@@ -253,8 +299,52 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* 
 //===========================================================
 void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
 {
-	// メンバに格納
-	m_UI.col = col;
+	if (m_UI.nKeytype != KEYTYPE_PAD)
+	{// キーの種類がパッド以外なら
+		// 引数の値で設定
+		SetCol(col);
+	}
+	else
+	{
+		switch (m_UI.nKey)
+		{// キーに合わせて色を付ける
+		case KEYPAD_A:
+
+			// 緑に設定
+			SetCol(COLOR_GREEN);
+
+			break;
+
+		case KEYPAD_B:
+
+			// 赤に設定
+			SetCol(COLOR_RED);
+
+			break;
+
+		case KEYPAD_X:
+
+			// オレンジに設定
+			SetCol(D3DXCOLOR(1.0f, 0.5f, 0.0f, 1.0f));
+
+			break;
+
+		case KEYPAD_Y:
+
+			// 青に設定
+			SetCol(COLOR_BLUE);
+
+			break;
+
+		default:
+
+			// 白に設定
+			SetCol(COLOR_WHITE);
+
+			break;
+
+		}
+	}
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -327,3 +417,28 @@ void CDeskworkUI::SetVTX(VERTEX_2D* pVtx)
 	}
 
 }
+
+//==========================================================
+// 透明度設定処理
+//==========================================================
+void CDeskworkUI::SetAlpha(const float& fAlpha)
+{
+	// 透明度を設定
+	m_UI.col.a = fAlpha;
+
+	// 頂点情報のポインタ
+	VERTEX_2D* pVtx = nullptr;
+
+	// 頂点バッファをロック
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	// カラーを設定
+	pVtx[0].col =
+	pVtx[1].col =
+	pVtx[2].col =
+	pVtx[3].col = m_UI.col;
+
+	// 頂点バッファのアンロック
+	m_pVtxBuff->Unlock();
+}
+

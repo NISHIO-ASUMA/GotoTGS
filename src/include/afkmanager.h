@@ -20,6 +20,7 @@
 //*********************************************************
 class CAfksmoke;
 class CAfkTV;
+class CAfkMagazine;
 
 //*********************************************************
 // ブロックオブジェクトクラスを定義
@@ -47,5 +48,7 @@ private:
 
 	CAfksmoke* m_pAfkSmoke;				// たばこさぼりのポインタ
 	CAfkTV* m_pAfkTV;					// テレビさぼりのポインタ
+	CAfkMagazine* m_pAfkMagazine;		// 漫画さぼりのポインタ
+
 };
 

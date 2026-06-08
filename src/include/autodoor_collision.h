@@ -1,0 +1,85 @@
+//=========================================================
+//
+// 自動ドア当たり判定管理処理 [ autodoor_collision.h ]
+// Author: Asuma Nishio
+//
+//=========================================================
+
+//*********************************************************
+// インクルードガード
+//*********************************************************
+#pragma once
+
+//*********************************************************
+// システムインクルードファイル
+//*********************************************************
+#include <vector>
+
+//*********************************************************
+// インクルードファイル
+//*********************************************************
+#include "spherecollider.h"
+
+//*********************************************************
+// 自動ドア当たり判定管理クラスを定義
+//*********************************************************
+class CAutoMaticDoorCollision
+{
+public:
+
+	//*************************
+	// 判定処理構造体
+	//*************************
+	struct CollisionData
+	{
+		D3DXVECTOR3 pos; // 座標
+		float fRadius;   // 半径
+		int nIdx;		 // インデックス
+		std::unique_ptr<CSphereCollider> pCollider; // 球形のコライダー
+	};
+
+public:
+
+	~CAutoMaticDoorCollision();
+
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+
+public:
+
+	/// <summary>
+	/// シングルトン取得処理
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	static CAutoMaticDoorCollision* GetInstance(void)
+	{
+		static CAutoMaticDoorCollision Instance;
+		return &Instance;
+	}
+
+	/// <summary>
+	/// コライダー追加関数
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	/// <param name="fRadius">判定半径</param>
+	void AddCollider(const D3DXVECTOR3& pos, const float& fRadius,const int& nIdx);
+
+	/// <summary>
+	/// 判定コライダーの取得関数
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	const std::vector<std::unique_ptr<CollisionData>>& GetColliders(void) const { return m_AutoDoorCollider; }
+
+private:
+
+	CAutoMaticDoorCollision();
+
+	void LoadJson(void);
+
+private:
+
+	std::vector<std::unique_ptr<CollisionData>> m_AutoDoorCollider; // 判定コライダーの配列
+};

@@ -32,8 +32,8 @@ public:
 
 	void SetFlash(const int& nFirstcount, const int& nEndcount, const D3DXCOLOR& col);
 	void SetTexture(const char* pRegisterName);
-	void SetTexMoveU(const int& nMaxFream);		// Misaki
-	void SetTexMoveV(const int& nMaxFream);		// Misaki
+	void SetTexMoveU(const int& nMaxFream, const float& fLeftU, const float& fRightU);		// Misaki
+	void SetTexMoveV(const int& nMaxFream, const float& fTopV, const float& fBottomV);		// Misaki
 
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }
@@ -45,12 +45,14 @@ public:
 	inline void SetAnimFlag(const bool& isLoop) { m_isLoop = isLoop; }
 	inline void SetUse(const bool& bUse) { m_bUse = bUse; }		// Misaki
 
-	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }		// 座標を取得
-	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }		// 角度を取得
-	inline D3DXCOLOR GetCol(void) const { return m_col; }		// 色を取得
-	inline float GetWidth(void) const { return m_fWidth; }		// 横幅を取得
-	inline float GetHeight(void) const { return m_fHeight; }	// 高さを取得
-	inline bool GetUse(void) const { return m_bUse; }			// 表示するかどうかを取得 MIsaki
+	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }				// 座標を取得
+	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }				// 角度を取得
+	inline D3DXCOLOR GetCol(void) const { return m_col; }				// 色を取得
+	inline float GetWidth(void) const { return m_fWidth; }				// 横幅を取得
+	inline float GetHeight(void) const { return m_fHeight; }			// 高さを取得
+	inline bool GetUse(void) const { return m_bUse; }					// 表示するかどうかを取得 MIsaki
+	inline int GetFreamCount(void) const { return m_nFreamCount; }		// 現在のフレーム数を取得 Misaki
+	inline D3DXVECTOR2 GetTex(void) const { return D3DXVECTOR2(m_fTexU, m_fTexV); }
 
 	/// <summary>
 	/// 生成処理
@@ -93,8 +95,8 @@ private:
 	int m_nFreamCount;	// フレームカウント Misaki
 	float m_fWidth;		// 横幅
 	float m_fHeight;	// 高さ
-	float m_fTexV;		// テクスチャV
 	float m_fTexU;		// テクスチャU
+	float m_fTexV;		// テクスチャV
 	bool m_isLoop;		// ループアニメーションフラグ
 	bool m_bUse;		// 表示するかどうか Misaki
 };

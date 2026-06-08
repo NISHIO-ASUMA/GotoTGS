@@ -193,7 +193,8 @@ void CPauseManager::Update(void)
 		/// </summary>
 		/// <param name=""></param>
 		case CPause::MENU_CONTINUE:
-			SetEnablePause(false);	
+			SetEnablePause(false);
+			CManager::GetInstance()->GetCamera()->SetCameraMove(false); // カメラ固定解除
 			break;
 
 		/// <summary>
@@ -237,6 +238,5 @@ void CPauseManager::SetEnablePause(void)
 
 		// カメラを固定化するかフラグ判別する
 		CManager::GetInstance()->GetCamera()->SetCameraMove(m_isPause);
-
 	}
 }

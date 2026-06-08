@@ -21,11 +21,13 @@
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
 #include "ui.h"
+
 #include "meshfield.h"
 #include "gametime.h"			// 髙橋追加
 #include "deskwork.h"			// 髙橋追加
 #include "progressgauge.h"		// 髙橋追加
 #include "alert.h"				// 髙橋追加
+
 #include "player.h"				// 近田追加
 #include "friend.h"				// 近田追加
 #include "pcui.h"				// 近田追加
@@ -35,10 +37,12 @@
 #include "tutorialuimanager.h"	// 近田追加
 #include "afkuimanager.h"		// 近田追加
 #include "afkmanager.h"			// 近田追加
+
 #include "enemy.h"				// 西尾追加
 #include "worldUIcollision.h"	// 西尾追加
 #include "camera.h"				// 西尾追加
 #include "automaticdoormanager.h" // 西尾追加
+#include "autodoor_collision.h" // 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -136,6 +140,9 @@ HRESULT CGameSceneObject::Init(void)
 	// 自動ドア管理クラス
 	CAutoMaticDoorManager::GetInstance()->Init();
 
+	// 自動ドアコライダー管理クラスの生成
+	CAutoMaticDoorCollision::GetInstance()->Init();
+
 #endif
 	return S_OK;
 }
@@ -144,11 +151,14 @@ HRESULT CGameSceneObject::Init(void)
 //=========================================================
 void CGameSceneObject::Uninit(void)
 {
-	// ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを破棄
+	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
 
 	// 自動ドア管理クラス
 	CAutoMaticDoorManager::GetInstance()->Uninit();
+
+	// 自動ドアコライダー管理クラスの終了
+	CAutoMaticDoorCollision::GetInstance()->Uninit();
 
 	// チュートリアルUIマネージャーの終了処理
 	CTutorialUIManager::Instance()->Uninit();
@@ -189,6 +199,9 @@ void CGameSceneObject::Update(void)
 	// 自動ドア管理クラス
 	CAutoMaticDoorManager::GetInstance()->Update();
 
+	// 自動ドアコライダー管理クラスの更新
+	CAutoMaticDoorCollision::GetInstance()->Update();
+
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
 
@@ -214,7 +227,7 @@ void CGameSceneObject::Draw(void)
 //=========================================================
 void CGameSceneObject::CreatePointer(void)
 {
-	// ブロックマネージャー生成 追加 : 西尾
+	// ブロックマネージャー生成
 	m_pBlocks = std::make_unique<CBlockManager>();
 	const auto& jsonManager = CManager::GetInstance()->GetJsonManager();
 	jsonManager->SetBlockManager(m_pBlocks.get());
@@ -238,10 +251,10 @@ void CGameSceneObject::CreatePointer(void)
 	CAlert::Alert alert;
 	alert.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f);
 	alert.col = COLOR_YERROW;
-	alert.tex = D3DXVECTOR2(2.0f, 1.0f);
+	alert.tex = D3DXVECTOR2(1.0f, 1.0f);
 	alert.fWidth = SCREEN_WIDTH;
-	alert.fHeight = 50.0f;
-	alert.isLoop = true;
+	alert.fHeight = 200.0f;
+	alert.isLoop = false;
 	alert.bUse = false;
 
 	// 帰国表示の生成

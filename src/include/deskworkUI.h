@@ -107,6 +107,7 @@ public:
 
 	// 設定処理
 	void ChangeCol(const D3DXCOLOR& col);										// カラー設定
+	void SetAlpha(const float& fAlpha);											// 透明度設定
 	void SetVTX(VERTEX_2D* pVtx);												// 頂点ポイント設定
 	void SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* pVtx);	// サイズ設定
 	void SetDigit(VERTEX_2D* pVtx);												// UV設定
