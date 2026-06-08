@@ -2,6 +2,9 @@
 //
 // 自動ドア管理処理 [ automaticdoormanager.cpp ]
 // Author: Asuma Nishio
+// 
+// TODO : 当たり判定の処理をメンバ変数のクラスに持たせるように変更する 
+// or 世界のコライダー判別クラスに入れる
 //
 //=========================================================
 
@@ -15,6 +18,15 @@
 #include "gamesceneobject.h"
 #include "spherecollider.h"
 #include "collisionsphere.h"
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace AUTO_DOOR
+{
+	constexpr const char* MODEL_NAME = "STAGEOBJ/automaticdoor.x"; // ファイル名
+	const D3DXVECTOR3 ROT = { 0.0f,1.57f,0.0f };				   // 配置角度
+};
 
 //=========================================================
 // コンストラクタ
@@ -39,23 +51,34 @@ HRESULT CAutoMaticDoorManager::Init(void)
 	// 配列のクリア
 	m_pAutoDoors.clear();
 
-	// 自動ドアの生成
+	// 自動ドアの生成 ( オフィス側 )
 	m_pAutoDoors.push_back(
 		CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 132.0f),
-							   D3DXVECTOR3(0.0f, 1.57f, 0.0f), 
+							   AUTO_DOOR::ROT,
 							   INITSCALE, 
-							   "STAGEOBJ/automaticdoor.x", 
+							   AUTO_DOOR::MODEL_NAME,
 								CAutoMaticDoor::MOVETYPE_LEFT)
 						  );
 
 	m_pAutoDoors.push_back(
 		CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 90.5f),
-								D3DXVECTOR3(0.0f, 1.57f, 0.0f),
+								AUTO_DOOR::ROT,
 								INITSCALE,
-								"STAGEOBJ/automaticdoor.x",
+								AUTO_DOOR::MODEL_NAME,
 								CAutoMaticDoor::MOVETYPE_RIGHT)
 								);
 	
+#if 0
+	// 自動ドアの生成 ( ゲームセンター側 )
+	m_pAutoDoors.push_back(
+		CAutoMaticDoor::Create(D3DXVECTOR3(645.0f, 34.0f, 132.0f),
+			AUTO_DOOR::ROT,
+			INITSCALE,
+			AUTO_DOOR::MODEL_NAME,
+			CAutoMaticDoor::MOVETYPE_LEFT)
+	);
+#endif
+
 	// 球コライダー生成
 	m_pSphereCollider = CSphereCollider::Create(D3DXVECTOR3(645.0f, 40.0f, 105.0f), 30.0f);
 

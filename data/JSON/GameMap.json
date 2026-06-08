@@ -4262,7 +4262,7 @@
   {
     "ObjectTag": "Block",
     "pos": [
-      1586.699951171875,
+      1465.699951171875,
       154.0,
       112.83000183105469
     ],
@@ -4276,8 +4276,7 @@
       1.0,
       1.0
     ],
-
-    "filepath": "STAGEOBJ/arcade00.x"
+    "filepath": "STAGEOBJ/arcadeGate00.x"
   },
   {
     "ObjectTag": "Block",

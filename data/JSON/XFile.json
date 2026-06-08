@@ -2,6 +2,8 @@
   { "XFile": "data/MODEL/STAGEOBJ/Ashtray.x" },
   { "XFile": "data/MODEL/STAGEOBJ/arcade00.x" },
   { "XFile": "data/MODEL/STAGEOBJ/automaticdoor.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/arcadeGate00.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/arcadeBack00.x" },
   { "XFile": "data/MODEL/STAGEOBJ/basket.x" },
   { "XFile": "data/MODEL/STAGEOBJ/bill00.x" },
   { "XFile": "data/MODEL/STAGEOBJ/bill01.x" },
