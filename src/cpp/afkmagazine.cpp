@@ -15,8 +15,8 @@
 //*********************************************************
 namespace AFKMAGAZINE
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// さぼりの範囲
-	constexpr float fRadius = 25.0f;					// 範囲の半径
+	const D3DXVECTOR3 Pos = { 250, 0.0f, 100.0f };		// さぼりの範囲
+	const D3DXVECTOR3 Size = { 200.0f, 50.0f, 200.0f };	// 範囲の半径
 };
 
 //=========================================================
@@ -46,7 +46,7 @@ CAfkMagazine* CAfkMagazine::Create(const D3DXVECTOR3& pos)
 
 	// オブジェクトセット
 	pAfkSmoke->SetPos(AFKMAGAZINE::Pos);
-	pAfkSmoke->SetRadius(AFKMAGAZINE::fRadius);
+	pAfkSmoke->SetSize(AFKMAGAZINE::Size);
 
 	// 初期化失敗時
 	if (FAILED(pAfkSmoke->Init())) return nullptr;
@@ -59,8 +59,10 @@ CAfkMagazine* CAfkMagazine::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CAfkMagazine::Init(void)
 {
+	SetSize(AFKMAGAZINE::Size);
+
 	// 親クラスの初期化処理
-	CAfk::Init(AFKMAGAZINE::Pos, AFKMAGAZINE::fRadius, CAfk::COLLISION::BOX);
+	CAfk::Init(AFKMAGAZINE::Pos, NULL, CAfk::COLLISION::BOX);
 	return S_OK;
 }
 //=========================================================

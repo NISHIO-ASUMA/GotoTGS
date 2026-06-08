@@ -58,6 +58,7 @@ public:
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
+	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
@@ -72,7 +73,7 @@ public:
 		MOVE,
 		SMOKE,
 		TV,
-		ACTION3,
+		MAGAZINE,
 		MAX
 	};
 
@@ -83,4 +84,5 @@ private:
 	bool m_bMove;										// ˆÚ“®‚µ‚½‚©‚Ç‚¤‚©‚Ì”»’è•Ï”
 	bool m_bAfkSmoke;									// ‚½‚Î‚±‚³‚Ú‚è‚Ì”»’è•Ï”
 	bool m_bAfkTV;										// TV‚³‚Ú‚è‚Ì”»’è•Ï”
+	bool m_bAfkMagazine;								// –Ÿ‰æ‚³‚Ú‚è‚Ì”»’è•Ï”
 };
