@@ -26,6 +26,7 @@
 namespace MOVE_INFO
 {
 	constexpr float SPEED = 2.0f; // ˆÚ“®‘¬“x
+	constexpr int MAX_OPNETIME = 120;
 };
 
 //=========================================================
@@ -167,7 +168,7 @@ void CAutoMaticDoor::Update(void)
 	case STATE_OPEN_WAIT:
 		// ˆê’èŽžŠÔŠJ‚¢‚½‚Ü‚Ü
 		m_nOpenTimer++;
-		if (m_nOpenTimer >= 120)
+		if (m_nOpenTimer >= MOVE_INFO::MAX_OPNETIME)
 		{
 			// •Â‚¶‚é
 			m_nState = STATE_CLOSING;

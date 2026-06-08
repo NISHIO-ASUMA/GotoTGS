@@ -307,7 +307,6 @@ void CPlayer::Update(void)
 		}
 	}
 
-
 //*************************************************
 	// jsonmanager‚©‚çƒuƒƒbƒN‚ðŽæ“¾
 	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();

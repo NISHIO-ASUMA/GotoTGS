@@ -45,7 +45,7 @@ public:
 	inline int GetAll(void) { return static_cast<int>(m_pAutoDoors.size()); }
 
 	/// <summary>
-	/// 配列の中のブロックを取得する
+	/// 配列の中のドアを取得する
 	/// </summary>
 	/// <param name="nIdx">取得する配列番号</param>
 	/// <returns></returns>
