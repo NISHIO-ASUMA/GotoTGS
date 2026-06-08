@@ -37,6 +37,8 @@
 #include "afksmoke.h"
 #include "automaticdoormanager.h" // 西尾追加
 #include "automatic_door.h"		 // 西尾追加
+#include "autodoor_collision.h"		 // 西尾追加
+
 
 //*********************************************************
 // 名前空間
@@ -159,6 +161,7 @@ void CPlayer::Update(void)
 	//		　コピー機用の処理を追加しました
 	//        西尾追記 : カメラの固定化する処理を追加したよ
 	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加
+	//        西尾追記 : 2026/06/08 自動ドアの判別設定と判定の修正
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
@@ -336,16 +339,34 @@ void CPlayer::Update(void)
 
 //*************************************************
 // ADD : 西尾 自動開閉ドア関係
-	auto MoveDoor = CAutoMaticDoorManager::GetInstance();
+//*************************************************
+	auto* pDoorCollision = CAutoMaticDoorCollision::GetInstance(); // コライダークラス
+	auto* pDoorManager = CAutoMaticDoorManager::GetInstance();     // ドア管理クラス
 
-	// 当たり判定処理
-	if (MoveDoor->CollisionSphere(m_pSphereCollider.get()))
+	if (pDoorCollision && pDoorManager)
 	{
-		// 自身の球座標を更新する
-		m_pSphereCollider->SetPos(UpdatePos);
+		//自動ドア判定用コライダーを取得
+		const auto& DoorColliders = pDoorCollision->GetColliders();
 
-		// 開閉通知を起動する
-		MoveDoor->StartOpen();
+		for (const auto& ColliderData : DoorColliders)
+		{
+			// nullチェック
+			if (ColliderData == nullptr || ColliderData->pCollider == nullptr) continue;
+
+			// プレイヤーの球と、自動ドアのセンサー球との当たり判定
+			if (CollisionSphere(ColliderData->pCollider.get()))
+			{
+				// 球コライダー座標を更新
+				if (m_pSphereCollider)
+				{
+					m_pSphereCollider->SetPos(UpdatePos);
+				}
+
+				// 当たったコライダーのインデックスを渡して、特定のペアを開ける
+				pDoorManager->StartOpen(ColliderData->nIdx);
+				break;
+			}
+		}
 	}
 
 	// 親クラスの更新処理

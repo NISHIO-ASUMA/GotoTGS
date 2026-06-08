@@ -15,6 +15,7 @@
 //*********************************************************
 #include "afksmoke.h"
 #include "afktv.h"
+#include "afkmagazine.h"
 
 //=================================================
 // 静的メンバ変数
@@ -25,7 +26,8 @@ CAfkManager* CAfkManager::m_pInstance = nullptr; // インスタンス変数
 // コンストラクタ
 //=========================================================
 CAfkManager::CAfkManager() : m_pAfkSmoke(nullptr),
-m_pAfkTV(nullptr)
+m_pAfkTV(nullptr),
+m_pAfkMagazine(nullptr)
 {
 
 }
@@ -50,6 +52,10 @@ HRESULT CAfkManager::Init(void)
 	m_pAfkTV = new CAfkTV;
 	m_pAfkTV->Init();
 
+	// 漫画さぼりの初期化処理
+	m_pAfkMagazine = new CAfkMagazine;
+	m_pAfkMagazine->Init();
+
 	return S_OK;
 }
 //=========================================================
@@ -73,6 +79,14 @@ void CAfkManager::Uninit(void)
 		m_pAfkTV = nullptr;
 	}
 
+	// 漫画さぼりの破棄処理
+	if (m_pAfkMagazine)
+	{
+		m_pAfkMagazine->Uninit();
+		delete m_pAfkMagazine;
+		m_pAfkMagazine = nullptr;
+	}
+
 	// シングルトンの破棄
 	if (m_pInstance)
 	{
@@ -90,6 +104,9 @@ void CAfkManager::Update(void)
 
 	// テレビさぼりの更新処理
 	m_pAfkTV->Update();
+
+	// 漫画さぼりの更新処理
+	m_pAfkMagazine->Update();
 
 }
 //=========================================================

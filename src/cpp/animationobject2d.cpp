@@ -226,30 +226,11 @@ void CAnimationObject2D::Draw(void)
 //===================================================================
 // テクスチャの横移動処理
 //===================================================================
-void CAnimationObject2D::SetTexMoveU(const int& nMaxFream)
+void CAnimationObject2D::SetTexMoveU(const int& nMaxFream, const float& fLeftU, const float& fRightU)
 {
-	// 左右のテクスチャ座標
-	static float fLeftU = 0.0f;
-	static float fRightU = 0.0f;
 
 	// カウントを一つ増やす
 	m_nFreamCount++;
-
-	// 1フレームのテクスチャ移動量
-	float fFreamU = 1.0f / float(nMaxFream);
-	fLeftU += fFreamU;
-	fRightU += fFreamU + m_fTexU;
-
-	if (fLeftU >= m_fTexU)
-	{
-		fLeftU -= m_fTexU;
-	}
-
-	if (fRightU >= m_fTexU * 2.0f)
-	{
-		fRightU -= m_fTexU;
-	}
-
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -266,30 +247,32 @@ void CAnimationObject2D::SetTexMoveU(const int& nMaxFream)
 	// アンロック
 	m_pVtxBuff->Unlock();
 
-	if (m_isLoop != false && nMaxFream <= m_nFreamCount)
-	{// ループする状態かつカウントが最大フレームになった場合
+	if (m_nFreamCount < nMaxFream)
+	{// 最大フレームに達していない場合
+		return;
+	}
+
+	if (m_isLoop != false)
+	{// ループする状態の場合
 		// カウントを初期化
 		m_nFreamCount = 0;
+
+		return;
 	}
+
+	// 最大フレームに設定
+	m_nFreamCount = nMaxFream;
+
 }
 
 //===================================================================
 // テクスチャの縦移動処理
 //===================================================================
-void CAnimationObject2D::SetTexMoveV(const int& nMaxFream)
+void CAnimationObject2D::SetTexMoveV(const int& nMaxFream, const float& fTopV, const float& fBottomV)
 {
+
 	// カウントを一つ増やす
 	m_nFreamCount++;
-
-	// 1フレームのテクスチャ移動量
-	float fFreamV = 1.0f / float(nMaxFream);
-
-	// 現在のフレーム分のテクスチャ移動量
-	float fNowFreamV = fFreamV * float(m_nFreamCount);
-
-	// 左右のテクスチャ座標
-	float fTopV = fNowFreamV;
-	float fBottomV = fNowFreamV + m_fTexV;
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx = nullptr;
@@ -306,11 +289,21 @@ void CAnimationObject2D::SetTexMoveV(const int& nMaxFream)
 	// アンロック
 	m_pVtxBuff->Unlock();
 
-	if (m_isLoop != false && nMaxFream <= m_nFreamCount)
-	{// ループする状態かつカウントが最大フレームになった場合
+	if (m_nFreamCount < nMaxFream)
+	{// 最大フレームに達していない場合
+		return;
+	}
+
+	if (m_isLoop != false)
+	{// ループする状態の場合
 		// カウントを初期化
 		m_nFreamCount = 0;
+
+		return;
 	}
+
+	// 最大フレームに設定
+	m_nFreamCount = nMaxFream;
 
 }
 
