@@ -178,7 +178,7 @@ void CCOPYDeskwork::SetAlphaUI(void)
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 		{
 			// F‚ð“§–¾‚É‚·‚é
-			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+			m_pDeskUI[nCount]->SetAlpha(NULL);
 		}
 
 		return;
@@ -190,7 +190,7 @@ void CCOPYDeskwork::SetAlphaUI(void)
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 		{
 			// F‚ð“§–¾‚É‚·‚é
-			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+			m_pDeskUI[nCount]->SetAlpha(NULL);
 		}
 
 		// UI‚ð”ñ•\Ž¦‚É‚·‚é

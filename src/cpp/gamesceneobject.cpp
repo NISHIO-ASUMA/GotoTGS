@@ -238,10 +238,10 @@ void CGameSceneObject::CreatePointer(void)
 	CAlert::Alert alert;
 	alert.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f);
 	alert.col = COLOR_YERROW;
-	alert.tex = D3DXVECTOR2(2.0f, 1.0f);
+	alert.tex = D3DXVECTOR2(1.0f, 1.0f);
 	alert.fWidth = SCREEN_WIDTH;
-	alert.fHeight = 50.0f;
-	alert.isLoop = true;
+	alert.fHeight = 200.0f;
+	alert.isLoop = false;
 	alert.bUse = false;
 
 	// ãAçëï\é¶ÇÃê∂ê¨

@@ -34,7 +34,7 @@ public:
 		bool bUse;
 	};
 
-	CAlert();
+	CAlert(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CAlert();
 
 	HRESULT Init(void) override;

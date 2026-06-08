@@ -14,11 +14,12 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "easing.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAlert::CAlert()
+CAlert::CAlert(int nPriority):CAnimationObject2D(nPriority)
 {
 
 }
@@ -91,8 +92,14 @@ void CAlert::Update(void)
 	// 親の更新処理
 	CAnimationObject2D::Update();
 
+	// 1フレーム毎のテクスチャ移動量
+	float fTexU = CEasing::SetEase(GetFreamCount(), Config::MAXFREAM);
+
+	float fLeftU = CEasing::EaseOutQuad(fTexU);
+	float fRightU = CEasing::EaseOutQuad(fTexU) + GetTex().x;
+
 	// テクスチャの横移動処理
-	SetTexMoveU(Config::MAXFREAM);
+	SetTexMoveU(Config::MAXFREAM, fLeftU, fRightU);
 }
 
 //=========================================================
