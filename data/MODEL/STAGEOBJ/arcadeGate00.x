@@ -567,11 +567,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-<<<<<<< HEAD
     "data/TEXTURE/game.png";
-=======
-    "data\\TEXTURE\\game.png";
->>>>>>> 5e87628315aaadd4ba7ec16941a0055a9af92793
    }
   }
   Material {
