@@ -75,11 +75,25 @@ public:
 	/// 開閉開始処理
 	/// </summary>
 	/// <param name=""></param>
-	void StartOpen(void)
+	void StartOpen(const int& nIdx)
 	{
-		for (auto Door : m_pAutoDoors)
+		// 1つのグループにつき2枚のドアが登録
+		int nTargetIdx1 = nIdx * 2;
+		int nTargetIdx2 = nIdx * 2 + 1;
+
+		// 配列の最大サイズを取得
+		int nTotalDoors = GetAll();
+
+		// 1枚目のドアの開閉処理
+		if (nTargetIdx1 < nTotalDoors && m_pAutoDoors[nTargetIdx1] != nullptr)
 		{
-			Door->OpenDoorFlag();
+			m_pAutoDoors[nTargetIdx1]->OpenDoorFlag();
+		}
+
+		// 2枚目のドアの開閉処理
+		if (nTargetIdx2 < nTotalDoors && m_pAutoDoors[nTargetIdx2] != nullptr)
+		{
+			m_pAutoDoors[nTargetIdx2]->OpenDoorFlag();
 		}
 	}
 
@@ -90,5 +104,4 @@ private:
 private:
 
 	std::vector<CAutoMaticDoor*>m_pAutoDoors;			 // 配置する動的配列
-	std::unique_ptr<CSphereCollider>m_pSphereCollider;	 // 判定用の球コライダー
 };

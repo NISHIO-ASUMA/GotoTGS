@@ -79,9 +79,6 @@ HRESULT CAutoMaticDoorManager::Init(void)
 	);
 #endif
 
-	// 球コライダー生成
-	m_pSphereCollider = CSphereCollider::Create(D3DXVECTOR3(645.0f, 40.0f, 105.0f), 30.0f);
-
 	return S_OK;
 }
 //=========================================================
