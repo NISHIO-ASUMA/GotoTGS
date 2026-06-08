@@ -60,7 +60,7 @@ CAfksmoke* CAfksmoke::Create(const D3DXVECTOR3& pos)
 HRESULT CAfksmoke::Init(void)
 {
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
-	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
+	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius, CAfk::COLLISION::SPHERE);
 	return S_OK;
 }
 //=========================================================

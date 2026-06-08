@@ -60,7 +60,7 @@ CAfkMagazine* CAfkMagazine::Create(const D3DXVECTOR3& pos)
 HRESULT CAfkMagazine::Init(void)
 {
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
-	CAfk::Init(AFKMAGAZINE::Pos, AFKMAGAZINE::fRadius);
+	CAfk::Init(AFKMAGAZINE::Pos, AFKMAGAZINE::fRadius, CAfk::COLLISION::BOX);
 	return S_OK;
 }
 //=========================================================
