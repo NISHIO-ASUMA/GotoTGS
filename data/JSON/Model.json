@@ -295,5 +295,65 @@
   },
   {
     "Model": "data/MODEL/MOBCAST003/09_Mobcast003_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/00_Mobcast004_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/01_Mobcast004_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/02_Mobcast004_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/03_Mobcast004_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/04_Mobcast004_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/05_Mobcast004_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/06_Mobcast004_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/07_Mobcast004_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/08_Mobcast004_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST004/09_Mobcast004_footL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/00_Mobcast004_body.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/01_Mobcast005_head.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/02_Mobcast005_armR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/03_Mobcast005_handR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/04_Mobcast005_armL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/05_Mobcast005_handL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/06_Mobcast005_legR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/07_Mobcast005_footR.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/08_Mobcast005_legL.x"
+  },
+  {
+    "Model": "data/MODEL/MOBCAST005/09_Mobcast005_footL.x"
   }
 ]
