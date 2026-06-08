@@ -118,9 +118,9 @@ void CAfk2DUI::Update(void)
 	// プレイヤーがさぼっているか判定用の変数
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
 	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
-	//bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer();
+	bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkMagazine();
 
-	if (!bAfkSmoke && !bAfkTV /*&& !bAfkMagazine*/)
+	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine)
 	{// さぼっていなかったら
 		SetTexture(AFK2DUI::Button_NAME);
 		EasingSine();
@@ -139,9 +139,10 @@ void CAfk2DUI::Draw(void)
 {
 	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
 	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 
 	// 親クラスの描画処理
-	if(bAfkSmoke || bAfkTV)CObject2D::Draw();
+	if(bAfkSmoke || bAfkTV || bAfkMagazine)CObject2D::Draw();
 }
 //=========================================================
 // インスタンス取得処理

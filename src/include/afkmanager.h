@@ -39,6 +39,7 @@ public:
 	// ゲッター
 	CAfksmoke* GetAfkSmoke(void) { return m_pAfkSmoke; }
 	CAfkTV* GetAfkTV(void) { return m_pAfkTV; }
+	CAfkMagazine* GetAfkMagazine(void) { return m_pAfkMagazine; }
 
 	// インスタンス生成用関数
 	static CAfkManager* Instance(void);

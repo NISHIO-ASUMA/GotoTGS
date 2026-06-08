@@ -21,11 +21,6 @@
 #include "gamesceneobject.h"
 #include "player.h"
 
-namespace AFK
-{
-	
-}
-
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -58,12 +53,16 @@ HRESULT CAfk::Init(const D3DXVECTOR3& pos,const float& fRadius, const COLLISION&
 	SetCollision(collison);
 	D3DXMATRIX matRot;
 
-	// ボックスコライダーの生成
-	m_pBoxCollider = CBoxCollider::Create(m_pos, m_posOld, m_Size, matRot);
-
-	// 球形コライダーを生成
-	m_pSphereCollider = CSphereCollider::Create(m_pos, m_fRadius);
-
+	if (m_Collison == COLLISION::BOX)
+	{
+		// ボックスコライダーの生成
+		m_pBoxCollider = CBoxCollider::Create(m_pos, m_posOld, m_Size, matRot);
+	}
+	if (m_Collison == COLLISION::SPHERE)
+	{
+		// 球形コライダーを生成
+		m_pSphereCollider = CSphereCollider::Create(m_pos, m_fRadius);
+	}
 	return S_OK;
 }
 //=========================================================
@@ -71,11 +70,16 @@ HRESULT CAfk::Init(const D3DXVECTOR3& pos,const float& fRadius, const COLLISION&
 //=========================================================
 void CAfk::Uninit(void)
 {
-	// ボックスコライダーの破棄
-	m_pBoxCollider.reset();
-
-	// スフィアコライダーの破棄
-	m_pSphereCollider.reset();
+	if (m_Collison == COLLISION::BOX)
+	{
+		// ボックスコライダーの破棄
+		m_pBoxCollider.reset();
+	}
+	if (m_Collison == COLLISION::SPHERE)
+	{
+		// スフィアコライダーの破棄
+		m_pSphereCollider.reset();
+	}
 }
 //=========================================================
 // 更新処理
@@ -104,7 +108,10 @@ void CAfk::Update(void)
 		if (BoxCollider == nullptr) return;
 
 		// 当たり判定の実行
-		if (CollisionBox(BoxCollider, &m_pos))m_bAfk = true;
+		if (CollisionBox(BoxCollider, &m_pos))
+		{
+			m_bAfk = true;
+		}
 		else m_bAfk = false;
 	}
 }
