@@ -50,7 +50,7 @@ CAfkMagazine* CAfkMagazine::Create(const D3DXVECTOR3& pos)
 	// 初期化失敗時
 	if (FAILED(pAfkSmoke->Init())) return nullptr;
 
-	// チュートリアルUIのポインタを返す
+	// ポインタを返す
 	return pAfkSmoke;
 }
 //=========================================================

@@ -56,7 +56,7 @@ public:
 	inline void SetIsInstansing(const bool IsInstance) { m_Isinstancing = IsInstance; }
 
 	inline D3DXMATRIX GetMtxWorld(void) { return m_mtxworld; }
-	inline PARTTYPE GetPartType(void) const { return m_parttype; }
+	inline PARTTYPE GetPartType(void) const { return m_parttype; } // ƒp[ƒc‚Ìí—Ş‚ğæ“¾
 	inline int GetModelIdx(void) const { return m_nModelIdx; }
 	inline bool GetIsInstansing(void) const { return m_Isinstancing; }
 

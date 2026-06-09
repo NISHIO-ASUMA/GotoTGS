@@ -345,6 +345,48 @@ void CMotionManager::SetParts(std::ifstream& file, std::vector<CModel*>& pModel)
 				m_FileData.back().offrot.push_back(rot);
 			}
 		}
+		// "PARTTYPE"を読み取った
+		else if (cmd == "PARTTYPE")
+		{
+			std::string eq;
+			std::string typeStr;
+			partss >> eq >> typeStr;
+
+			if (nIdx >= 0 && pModel[nIdx])
+			{
+				// パーツの種類設定
+				CModel::PARTTYPE partType = CModel::PARTTYPE_NONE;
+
+				// スクリプトの文字列を列挙型に変換
+				if (typeStr == "NONE") {
+					partType = CModel::PARTTYPE_NONE;
+				}
+				else if (typeStr == "HEAD") {
+					partType = CModel::PARTTYPE_HEAD;
+				}
+				else if (typeStr == "CHEST") {
+					partType = CModel::PARTTYPE_CHEST;
+				}
+				else if (typeStr == "LEFTHAND" || typeStr == "LEFT_HAND") {
+					partType = CModel::PARTTYPE_LEFT_HAND;
+				}
+				else if (typeStr == "RIGHTHAND" || typeStr == "RIGHT_HAND") {
+					partType = CModel::PARTTYPE_RIGHT_HAND;
+				}
+				else if (typeStr == "LEFTLEG" || typeStr == "LEFT_LEG") {
+					partType = CModel::PARTTYPE_LEFT_LEG;
+				}
+				else if (typeStr == "RIGHTLEG" || typeStr == "RIGHT_LEG") {
+					partType = CModel::PARTTYPE_RIGHT_LEG;
+				}
+				else if (typeStr == "WEAPON") {
+					partType = CModel::PARTTYPE_WEAPON;
+				}
+
+				// モデルにパーツタイプを設定
+				pModel[nIdx]->SetPartType(partType);
+			}
+		}
 		// "END_PARTSSET"を読み取った
 		else if (cmd == "END_PARTSSET")
 		{
