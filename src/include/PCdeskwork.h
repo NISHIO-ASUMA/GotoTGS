@@ -36,7 +36,7 @@ public:
 	inline void Task(const auto& pClear);
 
 	// İ’èˆ—
-	void SetAlphaUI(void);
+	void SetAlphaUI(const bool& bUse = false);
 
 	// î•ñæ“¾ˆ—
 	CDeskworkUI* GetDeskUI(const int nIdx) const { return m_pDeskUI[nIdx]; }
