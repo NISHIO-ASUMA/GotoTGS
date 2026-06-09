@@ -67,7 +67,7 @@ private:
 		static constexpr float COPY_WIDTH = 600.0f;							// 横幅
 		static constexpr float COPY_HEIGHT = 300.0f;						// 縦幅
 		static constexpr const char* COPY_TEXNAME = "copymachine.png";		// コピー機タスクのテクスチャ名
-		static constexpr const char* CANCEL_TEXNAME = "taskcancel000.png";	// コピー機を使用できない時用のテクスチャ名
+		static constexpr const char* CANCEL_TEXNAME = "nocopymachine.png";	// コピー機を使用できない時用のテクスチャ名
 
 	};
 
