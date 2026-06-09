@@ -32,6 +32,7 @@ m_scale(INITSCALE),
 m_parttype(PARTTYPE_NONE),
 m_isShadow(false),
 m_Isinstancing(false),
+m_isOutLine(false),
 m_mtxworld{}
 {
 	

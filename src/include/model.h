@@ -42,7 +42,7 @@ public:
 	void Draw(void);
 
 	void DrawMtxShadow(void);
-	void DrawOutLine(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f,0.0f,0.0f,1.0f),const float fOutLinewidth = 0.78f); 
+	void DrawOutLine(const D3DXVECTOR4& color = D3DXVECTOR4(1.0f,1.0f,0.0f,1.0f),const float fOutLinewidth = 0.78f); 
 	void SetModelPass(const char* pModelName);
 	void SetParent(CModel* pModel);
 
@@ -54,6 +54,7 @@ public:
 	inline void SetPartType(PARTTYPE nDestPartType) { m_parttype = nDestPartType; }
 	inline void SetMtxShadow(bool isShadow) { m_isShadow = isShadow; }
 	inline void SetIsInstansing(const bool IsInstance) { m_Isinstancing = IsInstance; }
+	inline void SetUseOutLine(const bool& use) { m_isOutLine = use; }
 
 	inline D3DXMATRIX GetMtxWorld(void) { return m_mtxworld; }
 	inline PARTTYPE GetPartType(void) const { return m_parttype; } // パーツの種類を取得
@@ -86,5 +87,6 @@ private:
 	int* m_pTexture;		// テクスチャポインタ
 	bool m_isShadow;		// 影を設定するかどうか
 	bool m_Isinstancing;	// インスタンシングするかどうか
+	bool m_isOutLine;		// アウトライン
 	int m_nModelIdx;		// モデルインデックス
 };
