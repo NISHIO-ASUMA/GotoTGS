@@ -176,12 +176,6 @@ void CAnimationObject2D::Update(void)
 	pVtx[2].col =
 	pVtx[3].col = m_col;
 
-	////テクスチャ座標の設定
-	//pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	//pVtx[1].tex = D3DXVECTOR2(m_fTexU, 0.0f);
-	//pVtx[2].tex = D3DXVECTOR2(0.0f, m_fTexV);
-	//pVtx[3].tex = D3DXVECTOR2(m_fTexU, m_fTexV);
-
 	// アンロック
 	m_pVtxBuff->Unlock();
 }
