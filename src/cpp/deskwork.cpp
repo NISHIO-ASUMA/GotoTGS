@@ -155,8 +155,17 @@ void CDeskwork::Update(void)
 
 		// コピー機タスクUIの更新処理
 		m_pCOPYDeskUI->Update();
-	}
+	
+		if (m_pPCDeskUI->GetCOPYTaskNum() > NULL)
+		{// コピー機タスクが残っている場合
+			return;
+		}
 
+		// タスクが出来ない状態にする
+		SetTexBG(CWorldUICollision::TYPE_COPY);
+		m_pPCDeskUI->SetAlphaUI();
+	}
+	
 }
 
 //=========================================================

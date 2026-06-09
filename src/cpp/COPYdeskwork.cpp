@@ -163,13 +163,13 @@ void CCOPYDeskwork::Draw(void)
 //=========================================================
 // 透明度の処理
 //=========================================================
-void CCOPYDeskwork::SetAlphaUI(void)
+void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 {
 	// クリアUIのポインタ
 	auto* pCrear = CDeskworkUIManager::GetClearUI();
 
 	// 使っていいるかどうかを設定する
-	SetUse(GetUse() ? false : true);
+	SetUse(bUse);
 
 	if (GetPCTaskNum() <= NULL)
 	{// PCのタスクを1つもこなしていない場合
@@ -183,7 +183,7 @@ void CCOPYDeskwork::SetAlphaUI(void)
 		return;
 	}
 
-	if (GetUse() != true)
+	if (bUse != true)
 	{// 使っていない状態の場合
 
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)

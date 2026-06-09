@@ -166,7 +166,7 @@ void CPCDeskwork::Draw(void)
 //=========================================================
 // 透明度の処理
 //=========================================================
-void CPCDeskwork::SetAlphaUI(void)
+void CPCDeskwork::SetAlphaUI(const bool& bUse)
 {
 	// クリアUIのポインタ
 	auto* pCrear = CDeskworkUIManager::GetClearUI();
@@ -177,9 +177,9 @@ void CPCDeskwork::SetAlphaUI(void)
 	}
 
 	// 使っていいるかどうかを設定する
-	SetUse(GetUse() ? false : true);
+	SetUse(bUse);
 
-	if (GetUse() != true)
+	if (bUse != true)
 	{// 使っていない状態の場合
 
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
@@ -194,6 +194,7 @@ void CPCDeskwork::SetAlphaUI(void)
 		return;
 	}
 
+	// 使っている場合
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
 		if (nCount < m_nNowIdx)

@@ -15,6 +15,8 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
+#include "gamesceneobject.h"
+#include "score.h"
 
 //=========================================================
 // コンストラクタ
@@ -89,6 +91,12 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	{// 1つもコピー機タスクをこなしていない場合
 		return;
 	}
+
+	// スコアのポインタ
+	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+
+	// スコア加算
+	pScore->AddScore(1000);
 
 	// 書類タスクの数の加算処理
 	AddDOCUMENTTask();
