@@ -39,7 +39,7 @@
 #include "automaticdoormanager.h" // 西尾追加
 #include "automatic_door.h"		 // 西尾追加
 #include "autodoor_collision.h"		 // 西尾追加
-
+#include "outline.h"
 
 //*********************************************************
 // 名前空間
@@ -387,7 +387,33 @@ void CPlayer::Draw(void)
 	CMoveCharactor::Draw();
 
 	// 特定モデルの描画
-	if (m_pSubItemModels) m_pSubItemModels->Draw();
+	if (m_pSubItemModels)
+	{
+		m_pSubItemModels->Draw();
+
+		// マトリックス取得
+		auto mtxworld = GetMtx();
+
+		// ワールドマトリックスの設定
+		CManager::GetInstance()->GetRenderer()->GetDevice()->SetTransform(D3DTS_WORLD, &mtxworld);
+
+		// カリングを切る
+		CManager::GetInstance()->GetRenderer()->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+
+		// シェーダー開始
+		COutLine::GetInstance()->Begin();
+		COutLine::GetInstance()->BeginPass();
+
+		// アウトラインセット
+		m_pSubItemModels->DrawOutLine();
+
+		// シェーダー終了
+		COutLine::GetInstance()->EndPass();
+		COutLine::GetInstance()->End();
+
+		// カリングを戻す
+		CManager::GetInstance()->GetRenderer()->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	}
 
 	// プレイヤー座標のデバッグ表示
 	CDebugproc::Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
@@ -534,7 +560,7 @@ void CPlayer::MoveKeyboard(float speed)
 	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 
 //***********************************************
-// 	 TODO :  特定のモーションの時に特定のモデルを持たせる
+// TODO :  特定のモーションの時に特定のモデルを持たせる
 //***********************************************
 
 	// テレビを見るモーションに切り替え
@@ -552,7 +578,13 @@ void CPlayer::MoveKeyboard(float speed)
 	else if (m_bAfkMagazine)
 	{		
 		// プレイヤーの手に雑誌を持たせる
-		AddItemSet("data/MODEL/STAGEOBJ/magaziner_001.x", CModel::PARTTYPE_LEFT_HAND,D3DXVECTOR3(1.57f,0.0f, 0.0f));
+		AddItemSet
+		(
+			"data/MODEL/STAGEOBJ/magaziner_002.x", // 対象モデルファイル
+			CModel::PARTTYPE_LEFT_HAND,			   // 持たせる場所
+			D3DXVECTOR3(-1.57f,0.0f,0.0f),
+			D3DXVECTOR3(5.0f,0.0f,-7.0f)
+		);
 
 		// 雑誌を見るモーションに変更
 		GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);

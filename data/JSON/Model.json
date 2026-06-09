@@ -355,5 +355,8 @@
   },
   {
     "Model": "data/MODEL/MOBCAST005/09_Mobcast005_footL.x"
+  },
+  {
+    "Model": "data/MODEL/STAGEOBJ/magaziner_002.x"
   }
 ]

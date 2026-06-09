@@ -106,6 +106,9 @@ public:
 		// オフセットを設定する
 		m_pSubItemModels->OffSetPos(offpos);
 		m_pSubItemModels->OffSetRot(rot);
+
+		// アウトラインせってい
+		m_pSubItemModels->SetUseOutLine(true);
 	}
 
 	/// <summary>
