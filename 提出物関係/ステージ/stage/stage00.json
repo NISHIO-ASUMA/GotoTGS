@@ -1,5 +1,5 @@
 {
-   "AllObject": 290,
+   "AllObject": 304,
    "SetObjects": [
       {
          "idx": 0,
@@ -3644,66 +3644,6 @@
       {
          "idx": 182,
          "pos": [
-            496.6099853515625,
-            0.0,
-            324.0799865722656
-         ],
-         "rot": [
-            0.0,
-            -1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            1.5,
-            2.0,
-            1.5
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/vending_machine01.x"
-      },
-      {
-         "idx": 183,
-         "pos": [
-            494.0,
-            0.0,
-            240.67999267578125
-         ],
-         "rot": [
-            0.0,
-            -1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            2.0,
-            2.0,
-            2.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/vending_machine00.x"
-      },
-      {
-         "idx": 184,
-         "pos": [
-            494.0,
-            0.0,
-            285.1199951171875
-         ],
-         "rot": [
-            0.0,
-            -1.5700000524520874,
-            0.0
-         ],
-         "scale": [
-            2.0,
-            2.0,
-            2.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/vending_machine02.x"
-      },
-      {
-         "idx": 185,
-         "pos": [
             473.3999938964844,
             400.0,
             -442.1300048828125
@@ -3722,7 +3662,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 186,
+         "idx": 183,
          "pos": [
             287.3999938964844,
             416.0,
@@ -3742,7 +3682,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 187,
+         "idx": 184,
          "pos": [
             491.260009765625,
             416.0,
@@ -3762,7 +3702,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 188,
+         "idx": 185,
          "pos": [
             860.02001953125,
             668.0,
@@ -3782,7 +3722,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 189,
+         "idx": 186,
          "pos": [
             2583.75,
             330.0,
@@ -3802,7 +3742,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 190,
+         "idx": 187,
          "pos": [
             2164.3798828125,
             416.0,
@@ -3822,7 +3762,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 191,
+         "idx": 188,
          "pos": [
             1780.72998046875,
             318.0,
@@ -3842,7 +3782,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 192,
+         "idx": 189,
          "pos": [
             1258.6700439453125,
             292.0,
@@ -3862,7 +3802,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 193,
+         "idx": 190,
          "pos": [
             2639.7099609375,
             338.0,
@@ -3882,7 +3822,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 194,
+         "idx": 191,
          "pos": [
             423.989990234375,
             338.0,
@@ -3902,7 +3842,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 195,
+         "idx": 192,
          "pos": [
             2784.139892578125,
             338.0,
@@ -3922,7 +3862,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 196,
+         "idx": 193,
          "pos": [
             2245.169921875,
             530.0,
@@ -3942,7 +3882,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 197,
+         "idx": 194,
          "pos": [
             2672.239990234375,
             338.0,
@@ -3962,7 +3902,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 198,
+         "idx": 195,
          "pos": [
             869.2899780273438,
             338.0,
@@ -3982,7 +3922,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 199,
+         "idx": 196,
          "pos": [
             1496.1400146484375,
             224.0,
@@ -4002,7 +3942,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 200,
+         "idx": 197,
          "pos": [
             102.0199966430664,
             662.0,
@@ -4022,7 +3962,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill03.x"
       },
       {
-         "idx": 201,
+         "idx": 198,
          "pos": [
             -371.05999755859375,
             490.0,
@@ -4042,7 +3982,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill04.x"
       },
       {
-         "idx": 202,
+         "idx": 199,
          "pos": [
             -623.2999877929688,
             422.0,
@@ -4062,7 +4002,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       },
       {
-         "idx": 203,
+         "idx": 200,
          "pos": [
             -383.4200134277344,
             392.0,
@@ -4082,7 +4022,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 204,
+         "idx": 201,
          "pos": [
             -542.27001953125,
             392.0,
@@ -4102,7 +4042,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill01.x"
       },
       {
-         "idx": 205,
+         "idx": 202,
          "pos": [
             1213.4100341796875,
             154.0,
@@ -4122,7 +4062,7 @@
          "filepath": "data/MODEL/STAGEOBJ/convenience_store00.x"
       },
       {
-         "idx": 206,
+         "idx": 203,
          "pos": [
             2267.0,
             154.0,
@@ -4142,7 +4082,7 @@
          "filepath": "data/MODEL/STAGEOBJ/convenience_store01.x"
       },
       {
-         "idx": 207,
+         "idx": 204,
          "pos": [
             2277.9599609375,
             146.0,
@@ -4162,7 +4102,7 @@
          "filepath": "data/MODEL/STAGEOBJ/house00.x"
       },
       {
-         "idx": 208,
+         "idx": 205,
          "pos": [
             2314.919921875,
             46.0,
@@ -4182,7 +4122,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Truck.x"
       },
       {
-         "idx": 209,
+         "idx": 206,
          "pos": [
             2308.969970703125,
             46.0,
@@ -4202,7 +4142,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Truck.x"
       },
       {
-         "idx": 210,
+         "idx": 207,
          "pos": [
             2049.840087890625,
             46.0,
@@ -4222,7 +4162,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Bus.x"
       },
       {
-         "idx": 211,
+         "idx": 208,
          "pos": [
             1279.030029296875,
             20.0,
@@ -4242,7 +4182,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car000.x"
       },
       {
-         "idx": 212,
+         "idx": 209,
          "pos": [
             1221.469970703125,
             44.0,
@@ -4262,7 +4202,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Bus.x"
       },
       {
-         "idx": 213,
+         "idx": 210,
          "pos": [
             1299.31005859375,
             22.0,
@@ -4282,7 +4222,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car000.x"
       },
       {
-         "idx": 214,
+         "idx": 211,
          "pos": [
             275.70001220703125,
             20.0,
@@ -4302,7 +4242,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 215,
+         "idx": 212,
          "pos": [
             287.70001220703125,
             20.0,
@@ -4322,7 +4262,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 216,
+         "idx": 213,
          "pos": [
             299.70001220703125,
             20.0,
@@ -4342,7 +4282,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 217,
+         "idx": 214,
          "pos": [
             303.70001220703125,
             32.0,
@@ -4362,7 +4302,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_003.x"
       },
       {
-         "idx": 218,
+         "idx": 215,
          "pos": [
             291.70001220703125,
             30.0,
@@ -4382,7 +4322,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_004.x"
       },
       {
-         "idx": 219,
+         "idx": 216,
          "pos": [
             276.739990234375,
             30.0,
@@ -4402,7 +4342,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 220,
+         "idx": 217,
          "pos": [
             302.739990234375,
             42.0,
@@ -4422,7 +4362,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 221,
+         "idx": 218,
          "pos": [
             276.739990234375,
             42.0,
@@ -4442,7 +4382,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 222,
+         "idx": 219,
          "pos": [
             290.739990234375,
             42.0,
@@ -4462,7 +4402,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 223,
+         "idx": 220,
          "pos": [
             1362.1400146484375,
             30.0,
@@ -4482,7 +4422,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car001.x"
       },
       {
-         "idx": 224,
+         "idx": 221,
          "pos": [
             1379.7900390625,
             24.0,
@@ -4502,7 +4442,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car002.x"
       },
       {
-         "idx": 225,
+         "idx": 222,
          "pos": [
             2079.81005859375,
             28.0,
@@ -4522,7 +4462,7 @@
          "filepath": "data/MODEL/STAGEOBJ/taxi.x"
       },
       {
-         "idx": 226,
+         "idx": 223,
          "pos": [
             1661.8299560546875,
             68.0,
@@ -4542,7 +4482,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Izakaya.x"
       },
       {
-         "idx": 227,
+         "idx": 224,
          "pos": [
             916.469970703125,
             192.0,
@@ -4562,7 +4502,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pachinko.x"
       },
       {
-         "idx": 228,
+         "idx": 225,
          "pos": [
             1198.4300537109375,
             24.0,
@@ -4582,7 +4522,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car003.x"
       },
       {
-         "idx": 229,
+         "idx": 226,
          "pos": [
             1390.8399658203125,
             28.0,
@@ -4602,7 +4542,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car001.x"
       },
       {
-         "idx": 230,
+         "idx": 227,
          "pos": [
             993.8800048828125,
             0.0,
@@ -4622,7 +4562,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
       },
       {
-         "idx": 231,
+         "idx": 228,
          "pos": [
             1108.6700439453125,
             0.0,
@@ -4642,7 +4582,7 @@
          "filepath": "data/MODEL/STAGEOBJ/GuardrailBreak.x"
       },
       {
-         "idx": 232,
+         "idx": 229,
          "pos": [
             1327.43994140625,
             0.0,
@@ -4662,7 +4602,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
       },
       {
-         "idx": 233,
+         "idx": 230,
          "pos": [
             1472.3299560546875,
             144.0,
@@ -4682,7 +4622,7 @@
          "filepath": "data/MODEL/STAGEOBJ/arcadeGate00.x"
       },
       {
-         "idx": 234,
+         "idx": 231,
          "pos": [
             1603.8599853515625,
             110.0,
@@ -4702,7 +4642,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 235,
+         "idx": 232,
          "pos": [
             1492.0,
             110.0,
@@ -4722,7 +4662,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 236,
+         "idx": 233,
          "pos": [
             1492.0,
             110.0,
@@ -4742,7 +4682,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 237,
+         "idx": 234,
          "pos": [
             1603.780029296875,
             110.0,
@@ -4762,7 +4702,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 238,
+         "idx": 235,
          "pos": [
             1768.050048828125,
             110.0,
@@ -4782,7 +4722,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 239,
+         "idx": 236,
          "pos": [
             1768.0,
             110.0,
@@ -4802,7 +4742,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 240,
+         "idx": 237,
          "pos": [
             1820.0,
             110.0,
@@ -4822,7 +4762,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 241,
+         "idx": 238,
          "pos": [
             1820.0,
             110.0,
@@ -4842,7 +4782,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 242,
+         "idx": 239,
          "pos": [
             1492.0,
             110.0,
@@ -4862,7 +4802,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 243,
+         "idx": 240,
          "pos": [
             1492.0,
             110.0,
@@ -4882,7 +4822,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 244,
+         "idx": 241,
          "pos": [
             302.55999755859375,
             46.0,
@@ -4902,7 +4842,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 245,
+         "idx": 242,
          "pos": [
             290.55999755859375,
             46.0,
@@ -4922,7 +4862,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 246,
+         "idx": 243,
          "pos": [
             276.55999755859375,
             46.0,
@@ -4942,7 +4882,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 247,
+         "idx": 244,
          "pos": [
             276.55999755859375,
             30.0,
@@ -4962,7 +4902,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_003.x"
       },
       {
-         "idx": 248,
+         "idx": 245,
          "pos": [
             288.55999755859375,
             30.0,
@@ -4982,7 +4922,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_004.x"
       },
       {
-         "idx": 249,
+         "idx": 246,
          "pos": [
             302.55999755859375,
             30.0,
@@ -5002,7 +4942,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 250,
+         "idx": 247,
          "pos": [
             304.55999755859375,
             18.0,
@@ -5022,7 +4962,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 251,
+         "idx": 248,
          "pos": [
             292.55999755859375,
             18.0,
@@ -5042,7 +4982,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 252,
+         "idx": 249,
          "pos": [
             280.55999755859375,
             18.0,
@@ -5062,7 +5002,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_004.x"
       },
       {
-         "idx": 253,
+         "idx": 250,
          "pos": [
             222.55999755859375,
             18.0,
@@ -5082,7 +5022,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_004.x"
       },
       {
-         "idx": 254,
+         "idx": 251,
          "pos": [
             210.55999755859375,
             18.0,
@@ -5102,7 +5042,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_003.x"
       },
       {
-         "idx": 255,
+         "idx": 252,
          "pos": [
             196.55999755859375,
             18.0,
@@ -5122,7 +5062,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 256,
+         "idx": 253,
          "pos": [
             220.55999755859375,
             32.0,
@@ -5142,7 +5082,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 257,
+         "idx": 254,
          "pos": [
             206.55999755859375,
             32.0,
@@ -5162,7 +5102,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 258,
+         "idx": 255,
          "pos": [
             194.55999755859375,
             32.0,
@@ -5182,7 +5122,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_004.x"
       },
       {
-         "idx": 259,
+         "idx": 256,
          "pos": [
             222.55999755859375,
             44.0,
@@ -5202,7 +5142,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_001.x"
       },
       {
-         "idx": 260,
+         "idx": 257,
          "pos": [
             196.55999755859375,
             44.0,
@@ -5222,7 +5162,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_000.x"
       },
       {
-         "idx": 261,
+         "idx": 258,
          "pos": [
             210.55999755859375,
             44.0,
@@ -5242,7 +5182,7 @@
          "filepath": "data/MODEL/STAGEOBJ/magaziner_002.x"
       },
       {
-         "idx": 262,
+         "idx": 259,
          "pos": [
             980.9299926757813,
             140.0,
@@ -5262,7 +5202,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 263,
+         "idx": 260,
          "pos": [
             1025.2900390625,
             140.0,
@@ -5282,7 +5222,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 264,
+         "idx": 261,
          "pos": [
             978.9299926757813,
             140.0,
@@ -5302,7 +5242,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 265,
+         "idx": 262,
          "pos": [
             1996.9300537109375,
             140.0,
@@ -5322,7 +5262,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 266,
+         "idx": 263,
          "pos": [
             986.25,
             140.0,
@@ -5342,7 +5282,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 267,
+         "idx": 264,
          "pos": [
             1469.8399658203125,
             140.0,
@@ -5362,7 +5302,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 268,
+         "idx": 265,
          "pos": [
             1872.9599609375,
             140.0,
@@ -5382,7 +5322,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 269,
+         "idx": 266,
          "pos": [
             1813.8399658203125,
             140.0,
@@ -5402,7 +5342,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 270,
+         "idx": 267,
          "pos": [
             1209.5699462890625,
             140.0,
@@ -5422,7 +5362,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 271,
+         "idx": 268,
          "pos": [
             2383.300048828125,
             140.0,
@@ -5442,7 +5382,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 272,
+         "idx": 269,
          "pos": [
             2389.260009765625,
             140.0,
@@ -5462,7 +5402,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 273,
+         "idx": 270,
          "pos": [
             2383.580078125,
             140.0,
@@ -5482,7 +5422,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 274,
+         "idx": 271,
          "pos": [
             985.9199829101563,
             96.0,
@@ -5502,7 +5442,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 275,
+         "idx": 272,
          "pos": [
             679.2100219726563,
             96.0,
@@ -5522,7 +5462,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 276,
+         "idx": 273,
          "pos": [
             681.9000244140625,
             96.0,
@@ -5542,7 +5482,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 277,
+         "idx": 274,
          "pos": [
             1462.3699951171875,
             96.0,
@@ -5562,7 +5502,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 278,
+         "idx": 275,
          "pos": [
             1810.449951171875,
             96.0,
@@ -5582,7 +5522,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 279,
+         "idx": 276,
          "pos": [
             1531.3199462890625,
             96.0,
@@ -5602,7 +5542,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 280,
+         "idx": 277,
          "pos": [
             2182.909912109375,
             96.0,
@@ -5622,7 +5562,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 281,
+         "idx": 278,
          "pos": [
             2397.659912109375,
             96.0,
@@ -5642,7 +5582,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 282,
+         "idx": 279,
          "pos": [
             2397.7099609375,
             96.0,
@@ -5662,7 +5602,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 283,
+         "idx": 280,
          "pos": [
             1848.4100341796875,
             96.0,
@@ -5682,7 +5622,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 284,
+         "idx": 281,
          "pos": [
             1646.699951171875,
             154.0,
@@ -5702,7 +5642,7 @@
          "filepath": "data/MODEL/STAGEOBJ/convenience_store01.x"
       },
       {
-         "idx": 285,
+         "idx": 282,
          "pos": [
             2237.139892578125,
             24.0,
@@ -5722,7 +5662,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car002.x"
       },
       {
-         "idx": 286,
+         "idx": 283,
          "pos": [
             1497.5899658203125,
             96.0,
@@ -5742,7 +5682,7 @@
          "filepath": "data/MODEL/STAGEOBJ/StreetLight.x"
       },
       {
-         "idx": 287,
+         "idx": 284,
          "pos": [
             1148.3299560546875,
             0.0,
@@ -5762,7 +5702,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
       },
       {
-         "idx": 288,
+         "idx": 285,
          "pos": [
             1377.6600341796875,
             0.0,
@@ -5782,7 +5722,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
       },
       {
-         "idx": 289,
+         "idx": 286,
          "pos": [
             1826.1700439453125,
             0.0,
@@ -5800,6 +5740,346 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
+      },
+      {
+         "idx": 287,
+         "pos": [
+            520.3499755859375,
+            20.0,
+            357.45001220703125
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/toilet.x"
+      },
+      {
+         "idx": 288,
+         "pos": [
+            611.3300170898438,
+            20.0,
+            360.739990234375
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/toilet.x"
+      },
+      {
+         "idx": 289,
+         "pos": [
+            606.7100219726563,
+            20.0,
+            -190.32000732421875
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/toilet.x"
+      },
+      {
+         "idx": 290,
+         "pos": [
+            517.3300170898438,
+            20.0,
+            -193.75999450683594
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/toilet.x"
+      },
+      {
+         "idx": 291,
+         "pos": [
+            566.1199951171875,
+            85.0,
+            -170.0
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.7999999523162842,
+            1.5,
+            4.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 292,
+         "pos": [
+            519.0,
+            49.0,
+            -122.5999984741211
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            3.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Woman_toilet_door.x"
+      },
+      {
+         "idx": 293,
+         "pos": [
+            609.0,
+            49.0,
+            -122.0
+         ],
+         "rot": [
+            0.0,
+            3.140000104904175,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            3.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Woman_toilet_door.x"
+      },
+      {
+         "idx": 294,
+         "pos": [
+            609.0,
+            49.0,
+            280.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            3.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Man_toilet_door.x"
+      },
+      {
+         "idx": 295,
+         "pos": [
+            519.0,
+            49.0,
+            280.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            3.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Man_toilet_door.x"
+      },
+      {
+         "idx": 296,
+         "pos": [
+            565.0,
+            85.0,
+            330.739990234375
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.899999976158142,
+            1.5,
+            4.199999809265137
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 297,
+         "pos": [
+            543.0,
+            23.0,
+            342.3699951171875
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/paper_holder.x"
+      },
+      {
+         "idx": 298,
+         "pos": [
+            587.0,
+            23.0,
+            346.3699951171875
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/paper_holder.x"
+      },
+      {
+         "idx": 299,
+         "pos": [
+            587.0,
+            23.0,
+            -170.6300048828125
+         ],
+         "rot": [
+            0.0,
+            -1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/paper_holder.x"
+      },
+      {
+         "idx": 300,
+         "pos": [
+            545.0,
+            23.0,
+            -180.6300048828125
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ],
+         "Flags": true,
+         "filepath": "data/MODEL/STAGEOBJ/paper_holder.x"
+      },
+      {
+         "idx": 301,
+         "pos": [
+            564.6599731445313,
+            133.0,
+            -124.2699966430664
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            0.6000000238418579,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 302,
+         "pos": [
+            564.6599731445313,
+            133.0,
+            281.7300109863281
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            3.0,
+            0.6000000238418579,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
+      },
+      {
+         "idx": 303,
+         "pos": [
+            645.0,
+            124.0,
+            111.0
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.5,
+            0.800000011920929,
+            1.0
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/Wall01.x"
       }
    ]
 }
