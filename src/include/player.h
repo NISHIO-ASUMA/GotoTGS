@@ -77,7 +77,55 @@ public:
 		MAX
 	};
 
+//***********************************
+// 西尾追加
+public:
+
+	/// <summary>
+	/// 特定動作時にアイテムを追加する関数
+	/// </summary>
+	/// <param name="pModelName"></param>
+	/// <param name="parttype"></param>
+	void AddItemSet(const char* pModelName, CModel::PARTTYPE parttype,const D3DXVECTOR3& rot = VECTOR3_NULL,const D3DXVECTOR3& offpos = VECTOR3_NULL)
+	{
+		// nullじゃなかったら破棄する
+		if (m_pSubItemModels) DeleteItem();
+
+		// 親モデルを取得する
+		CModel* pParent = GetPartModel(parttype);
+		if (!pParent) return;
+
+		// アイテムモデル生成
+		m_pSubItemModels.reset(CModel::Create(VECTOR3_NULL, VECTOR3_NULL, pModelName, false));
+		if (m_pSubItemModels)
+		{
+			// 親にくっつける
+			m_pSubItemModels->SetParent(pParent);
+		}
+
+		// オフセットを設定する
+		m_pSubItemModels->OffSetPos(offpos);
+		m_pSubItemModels->OffSetRot(rot);
+	}
+
+	/// <summary>
+	/// 手に持っている物を破棄する
+	/// </summary>
+	/// <param name=""></param>
+	void DeleteItem(void)
+	{
+		if (m_pSubItemModels)
+		{
+			// 終了処理
+			m_pSubItemModels->Uninit();
+
+			// ポインタのクリア
+			m_pSubItemModels.reset();
+		}
+	}
+
 private:
+
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
@@ -85,4 +133,10 @@ private:
 	bool m_bAfkSmoke;									// たばこさぼりの判定変数
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
+
+//***********************************
+// 西尾追加
+private:
+	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
+
 };

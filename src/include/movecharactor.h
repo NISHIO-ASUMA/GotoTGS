@@ -45,6 +45,17 @@ public:
 	void MotionLoad(const char* pScriptName, int nDestMotions,const bool isShadow);
 	void UpdatePosition(void);
 
+public:
+
+	/// <summary>
+	/// “Á’è‚Ìƒ‚ƒfƒ‹‚ðŽæ“¾‚·‚é
+	/// </summary>
+	/// <param name="type"></param>
+	/// <returns></returns>
+	CModel* GetPartModel(CModel::PARTTYPE& type);
+
+public:
+
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetOldPos(const D3DXVECTOR3& posOld) { m_posOld = posOld; }
 	inline void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }
