@@ -19,11 +19,26 @@
 #include "score.h"
 #include "progressgauge.h"
 #include "ui.h"
+#include "easing.h"
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace PC_DESKWORK
+{
+	constexpr float SHAKE_POW = 40.0f;		// 振動力
+};
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPCDeskwork::CPCDeskwork() :CDeskworkUIManager()
+CPCDeskwork::CPCDeskwork() :CDeskworkUIManager(),
+m_nNowIdx(NULL),
+m_nCountTime(NULL),
+m_bTime(false),
+m_bFalse(false),
+m_BasePos(VECTOR3_NULL),
+m_Offsetpos(VECTOR3_NULL)
 {
 
 }
@@ -61,17 +76,19 @@ HRESULT CPCDeskwork::Init(void)
 	// クールタイムが始まっていない状態にする
 	m_bTime = false;
 
+	// 失敗していない状態にする
+	m_bFalse = false;
+
 	// 現在選択されているUIの番号の初期化
 	m_nNowIdx = 0;
 
 	// 位置
-	D3DXVECTOR3 pos = GetPos();
-	pos.x = GetPos().x - Config::VALUE_WIDTH;
+	m_Offsetpos = GetPos();
+	m_Offsetpos.x = GetPos().x - Config::VALUE_WIDTH;
 
 	// UIの情報
 	CDeskworkUI::UI ui;
-	ui.pos = pos;
-	ui.col = D3DXCOLOR(COLOR_NULL);
+	ui.pos = m_Offsetpos;
 	ui.VTXtype = CDeskworkUI::VTXTYPE_CENTER;
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
@@ -116,8 +133,8 @@ void CPCDeskwork::Update(void)
 	// クリアUIのポインタ
 	auto* pClear = CDeskworkUIManager::GetClearUI();
 
-	if (m_bTime != false)
-	{// クールタイムが始まったなら
+	if (m_bTime != false || m_bFalse != false)
+	{// 失敗したかクールタイムが始まったなら
 
 		// クールタイム中の処理
 		if (CoolTime(pClear) != true)
@@ -168,7 +185,7 @@ void CPCDeskwork::SetAlphaUI(void)
 		for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 		{
 			// 色を透明にする
-			m_pDeskUI[nCount]->ChangeCol(COLOR_NULL);
+			m_pDeskUI[nCount]->SetAlpha(NULL);
 		}
 
 		// UIを非表示にする
@@ -182,13 +199,13 @@ void CPCDeskwork::SetAlphaUI(void)
 		if (nCount < m_nNowIdx)
 		{
 			// 色を半透明にする
-			m_pDeskUI[nCount]->ChangeCol(COLOR_HALFVALUE);
+			m_pDeskUI[nCount]->SetAlpha(0.5f);
 
 			continue;
 		}
 
 		// 色を不透明にする(通常色)
-		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
+		m_pDeskUI[nCount]->SetAlpha(1.0f);
 	}
 }
 
@@ -201,11 +218,32 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	{// クールタイムを数える
 		m_nCountTime++;
 
+		if (m_bFalse != false)
+		{// 失敗している場合
+			// 1フレーム毎の割合
+			float t = CEasing::SetEase(m_nCountTime, Config::TIME_COOL);
+			float EasingValue = CEasing::EaseOutElastic(t);
+
+			// 失敗したものだけ動かす
+			D3DXVECTOR3 targetPos = m_pDeskUI[m_nNowIdx]->GetPos();
+
+			// イージングを適用
+			targetPos.x += PC_DESKWORK::SHAKE_POW * (1.0f - EasingValue);
+
+			// 対象UIに座標を設定
+			m_pDeskUI[m_nNowIdx]->SetPos(targetPos);
+		}
+
 		return false;
 	}
 
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
+		// 元の基準の位置に戻す
+		D3DXVECTOR3 normalPos = GetPos();
+		normalPos.x = (GetPos().x - Config::VALUE_WIDTH) + (Config::VALUE_WIDTH * nCount);
+		m_pDeskUI[nCount]->SetPos(normalPos);
+
 		// タスクをランダムに設定
 		m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
@@ -221,6 +259,9 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 
 	// クールタイムが始まっていない状態にする
 	m_bTime = false;
+
+	// 失敗していない状態にする
+	m_bFalse = false;
 
 	// 点滅を止める
 	pClear->SetUse(false);
@@ -253,7 +294,7 @@ void CPCDeskwork::Task(const auto& pClear)
 	{// 正解を押した時
 
 		// 色を半透明にする
-		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_HALFVALUE);
+		m_pDeskUI[m_nNowIdx]->SetAlpha(0.5f);
 
 		// 次のタスクに移る
 		m_nNowIdx++;
@@ -265,10 +306,13 @@ void CPCDeskwork::Task(const auto& pClear)
 	{// 不正解を押した時
 
 		// 色を赤にする
-		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED);
+		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED, true);
 
 		// クールタイムを始める
 		m_bTime = true;
+
+		// 失敗した状態にする
+		m_bFalse = true;
 
 		return;
 	}

@@ -86,15 +86,15 @@ public:
 	//****************************
 	struct UI
 	{
-		D3DXVECTOR3 pos;		// 位置
-		D3DXCOLOR col;			// 色情報
-		VTXTYPE VTXtype;		// 頂点座標のタイプ
-		float fWidth;			// 横幅
-		float fHeight;			// 縦幅
-		float fDigit;			// テクスチャの分割数
-		int nKeytype;			// キータイプ
-		int nKey;				// 現在のキー
-		int nIdx;				// 番号
+		D3DXVECTOR3 pos;				// 位置
+		D3DXCOLOR col = COLOR_WHITE;	// 色情報
+		VTXTYPE VTXtype;				// 頂点座標のタイプ
+		float fWidth;					// 横幅
+		float fHeight;					// 縦幅
+		float fDigit;					// テクスチャの分割数
+		int nKeytype;					// キータイプ
+		int nKey;						// 現在のキー
+		int nIdx;						// 番号
 	};
 
 	CDeskworkUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
@@ -106,7 +106,7 @@ public:
 	void Draw(void);
 
 	// 設定処理
-	void ChangeCol(const D3DXCOLOR& col);										// カラー設定
+	void ChangeCol(const D3DXCOLOR& col, const bool& bUse = false);				// カラー設定
 	void SetAlpha(const float& fAlpha);											// 透明度設定
 	void SetVTX(VERTEX_2D* pVtx);												// 頂点ポイント設定
 	void SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* pVtx);	// サイズ設定
@@ -154,6 +154,5 @@ private:
 	UI m_UI;								// UIの情報
 	float m_TexU, m_TexU1, m_TexV;			// テクスチャ座標
 	int m_nIdxTexture;						// テクスチャの番号
-	int n_nColorCount;						// 色変更カウント
-
+	int m_nColorCount;						// 色変更カウント
 };

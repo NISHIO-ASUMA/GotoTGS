@@ -26,7 +26,7 @@ m_TexU(NULL),
 m_TexU1(NULL),
 m_TexV(NULL),
 m_nIdxTexture(NULL),
-n_nColorCount(NULL)
+m_nColorCount(NULL)
 {
 
 }
@@ -53,6 +53,7 @@ CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 
 	// 各種値の設定
 	pDeskworkUI->SetPos(ui.pos);			// 位置
+	pDeskworkUI->SetCol(ui.col);			// 色
 	pDeskworkUI->SetWidth(ui.fWidth);		// 横幅
 	pDeskworkUI->SetHeight(ui.fHeight);		// 縦幅
 	pDeskworkUI->SetDigit(ui.fDigit);		// 分割数
@@ -70,53 +71,6 @@ CDeskworkUI* CDeskworkUI::Create(const UI& ui)
 	{
 		// テクスチャの設定
 		pDeskworkUI->SetTexture(Config::TEXNAME_GAGE);
-	}
-
-	if (pDeskworkUI->m_UI.nKeytype != KEYTYPE_PAD)
-	{// キーの種類がパッド以外なら
-		// 引数の値で設定
-		pDeskworkUI->SetCol(ui.col);
-	}
-	else
-	{
-		switch (pDeskworkUI->m_UI.nKey)
-		{// キーに合わせて色を付ける
-		case KEYPAD_A:
-
-			// 緑に設定
-			pDeskworkUI->SetCol(COLOR_GREEN);
-
-			break;
-		
-		case KEYPAD_B:
-
-			// 赤に設定
-			pDeskworkUI->SetCol(COLOR_RED);
-
-			break;
-		
-		case KEYPAD_X:
-
-			// オレンジに設定
-			pDeskworkUI->SetCol(D3DXCOLOR(1.0f, 0.5f, 0.0f, 1.0f));
-
-			break;
-		
-		case KEYPAD_Y:
-
-			// 青に設定
-			pDeskworkUI->SetCol(COLOR_BLUE);
-
-			break;
-
-		default:
-			
-			// 白に設定
-			pDeskworkUI->SetCol(COLOR_WHITE);
-
-			break;
-
-		}
 	}
 
 	// 初期化が失敗した場合
@@ -157,10 +111,10 @@ HRESULT CDeskworkUI::Init(void)
 	pVtx[3].rhw = 1.0f;
 
 	// 頂点カラーの設定
-	pVtx[0].col =
-	pVtx[1].col =
-	pVtx[2].col =
-	pVtx[3].col = m_UI.col;
+	ChangeCol(m_UI.col);
+	
+	// 透明度の設定
+	SetAlpha(NULL);
 
 	// UV設定
 	SetDigit(pVtx);
@@ -197,9 +151,6 @@ void CDeskworkUI::Update(void)
 
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	// 位置設定
-	SetPos(m_UI.pos);
 
 	// サイズ設定
 	SetSize(m_UI.fWidth, m_UI.fHeight, pVtx);
@@ -297,9 +248,9 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* 
 //===========================================================
 // カラー設定
 //===========================================================
-void CDeskworkUI::ChangeCol(const D3DXCOLOR& col)
+void CDeskworkUI::ChangeCol(const D3DXCOLOR& col, const bool& bUse)
 {
-	if (m_UI.nKeytype != KEYTYPE_PAD)
+	if (m_UI.nKeytype != KEYTYPE_PAD || bUse != false)
 	{// キーの種類がパッド以外なら
 		// 引数の値で設定
 		SetCol(col);

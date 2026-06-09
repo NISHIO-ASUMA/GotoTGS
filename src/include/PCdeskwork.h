@@ -63,7 +63,10 @@ private:
 
 	// メンバ変数
 	CDeskworkUI* m_pDeskUI[Config::UI_NUM];		// UIのポインタ
+	D3DXVECTOR3 m_Offsetpos;					// 元の位置
+	D3DXVECTOR3 m_BasePos;						// イージングで移動する基準の座標の入れ物
 	int m_nNowIdx;								// 現在選択している番号
 	int m_nCountTime;							// タイマーカウント
 	bool m_bTime;								// クールタイムが始まっているかどうか
+	bool m_bFalse;								// 失敗したかどうか
 };

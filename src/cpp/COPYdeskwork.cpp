@@ -71,7 +71,6 @@ HRESULT CCOPYDeskwork::Init(void)
 	// UIの情報
 	CDeskworkUI::UI ui;
 	ui.pos = GetPos();
-	ui.col = D3DXCOLOR(COLOR_NULL);
 	ui.VTXtype = CDeskworkUI::VTXTYPE_CENTER;
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
@@ -200,7 +199,7 @@ void CCOPYDeskwork::SetAlphaUI(void)
 	}
 
 	// 色を不透明にする(通常色)
-	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+	m_pDeskUI[TEXTURE_KEY]->SetAlpha(1.0f);
 
 	// ゲージの色を赤にする
 	m_pDeskUI[TEXTURE_GAGE]->ChangeCol(COLOR_RED);
@@ -222,7 +221,7 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
 	// 色を元に戻す(通常色)
-	m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+	m_pDeskUI[TEXTURE_KEY]->SetAlpha(1.0f);
 
 	// クールタイムを初期化
 	m_nCountTime = 0;
