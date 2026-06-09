@@ -195,6 +195,23 @@ void CMoveCharactor::UpdatePosition(void)
 	m_pos += m_move;
 }
 //=========================================================
+// 特定モデルの取得
+//=========================================================
+CModel* CMoveCharactor::GetPartModel(CModel::PARTTYPE& type)
+{
+	// 特定モデルの配列から
+	for (auto* pModel : m_pModel)
+	{
+		// 一致していたらモデルのポインタを返す
+		if (pModel && pModel->GetPartType() == type)
+		{
+			return pModel;
+		}
+	}
+
+	return nullptr;
+}
+//=========================================================
 // モーションロード処理
 //=========================================================
 void CMoveCharactor::MotionLoad(const char* pScriptName, int nDestMotions, const bool isShadow)

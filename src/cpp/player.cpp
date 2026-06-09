@@ -63,6 +63,7 @@ namespace player
 CPlayer::CPlayer(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
+m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
 m_bMove(false),
 m_bAfkSmoke(false),
@@ -147,6 +148,9 @@ void CPlayer::Uninit(void)
 
 	// スフィアコライダーの破棄
 	m_pSphereCollider.reset();
+
+	// サブモデルの破棄
+	m_pSubItemModels.reset();
 
 	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
@@ -275,7 +279,7 @@ void CPlayer::Update(void)
 					if (pDesk && pDesk->GetPCDeskUI())
 					{
 						pDesk->SetTexBG(CWorldUICollision::TYPE_PC);
-						pDesk->GetPCDeskUI()->SetAlphaUI();
+						pDesk->GetPCDeskUI()->SetAlphaUI(true);
 					}
 				}
 					break;
@@ -286,7 +290,7 @@ void CPlayer::Update(void)
 					if (pDesk && pDesk->GetCOPYDeskUI())
 					{
 						pDesk->SetTexBG(CWorldUICollision::TYPE_COPY);
-						pDesk->GetCOPYDeskUI()->SetAlphaUI();
+						pDesk->GetCOPYDeskUI()->SetAlphaUI(true);
 					}
 
 					break;
@@ -382,6 +386,9 @@ void CPlayer::Draw(void)
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
 
+	// 特定モデルの描画
+	if (m_pSubItemModels) m_pSubItemModels->Draw();
+
 	// プレイヤー座標のデバッグ表示
 	CDebugproc::Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
 	CDebugproc::Draw(0, 180);
@@ -450,13 +457,23 @@ void CPlayer::MoveKeyboard(float speed)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 
 	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
-
+	else if (!bAfkSmoke)
+	{
+		DeleteItem();
+		m_bAfkSmoke = false;
+	}
 	if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
-
+	else if (!bAfkTV)
+	{
+		DeleteItem();
+		m_bAfkTV = false;
+	}
 	if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
+	else if (!bAfkMagazine)
+	{
+		DeleteItem();
+		m_bAfkMagazine = false;
+	}
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -516,12 +533,30 @@ void CPlayer::MoveKeyboard(float speed)
 	// 煙草モーションに変更する
 	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 
+//***********************************************
+// 	 TODO :  特定のモーションの時に特定のモデルを持たせる
+//***********************************************
+
 	// テレビを見るモーションに切り替え
-	else if (m_bAfkTV) GetMotion()->SetMotion(CPlayer::MOTION::TV);
+	else if (m_bAfkTV)
+	{
+		// プレイヤー座標を椅子の上にセットする
+		
+		// 角度を変更し、テレビに向ける
+		// SetRot();
 
+		// tvモーションに変更する
+		GetMotion()->SetMotion(CPlayer::MOTION::TV);
+	}
 	// 雑誌を見るモーションに変更
-	else if (m_bAfkMagazine) GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+	else if (m_bAfkMagazine)
+	{		
+		// プレイヤーの手に雑誌を持たせる
+		AddItemSet("data/MODEL/STAGEOBJ/magaziner_001.x", CModel::PARTTYPE_LEFT_HAND,D3DXVECTOR3(1.57f,0.0f, 0.0f));
 
+		// 雑誌を見るモーションに変更
+		GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+	}
 	// キーが押されていなかったら
 	else if (!pKeyboard->GetPress(DIK_W) &&
 			 !pKeyboard->GetPress(DIK_S) &&

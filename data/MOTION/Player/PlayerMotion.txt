@@ -71,6 +71,7 @@ CHARACTERSET
 		PARENT = 4					# (親)左腕
 		POS = 15.0 0.0 0.0
 		ROT = 0.0 0.0 0.0
+		PARTTYPE = LEFTHAND		# パーツの種類
 	END_PARTSSET
 
 	PARTSSET
