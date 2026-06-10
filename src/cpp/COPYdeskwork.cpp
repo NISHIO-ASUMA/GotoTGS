@@ -166,6 +166,9 @@ void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 			m_pDeskUI[nCount]->SetAlpha(NULL);
 		}
 
+		// UI‚ğ”ñ•\¦‚É‚·‚é
+		pCrear->SetUse(false);
+
 		return;
 	}
 
