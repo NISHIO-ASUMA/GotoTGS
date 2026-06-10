@@ -20,10 +20,10 @@ public:
 	CEvent();
 	~CEvent();
 
-	HRESULT Init(void) override;
-	void Uninit(void) override;
-	void Update(void) override;
-	void Draw(void) override;
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
 
 	static CEvent* Create(const D3DXVECTOR3& pos);
 

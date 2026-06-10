@@ -39,8 +39,6 @@ CEvent* CEvent::Create(const D3DXVECTOR3& pos)
 	CEvent* pEvent = new CEvent;
 	if (pEvent == nullptr) return nullptr;
 
-	// À•WÝ’è
-	pEvent->SetPos(pos);
 
 	// ‰Šú‰»Ž¸”sŽž
 	if (FAILED(pEvent->Init())) return nullptr;
