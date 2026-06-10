@@ -268,9 +268,6 @@ void CPlayer::Update(void)
 				// カメラ固定フラグ有効化
 				CManager::GetInstance()->GetCamera()->SetCameraMove(true);
 				
-				// タスク取得
-				auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
-
 				switch (Colliders->nType)
 				{
 				case CWorldUICollision::TYPE_PC: // パソコンタスク

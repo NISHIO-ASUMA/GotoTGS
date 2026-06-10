@@ -156,14 +156,13 @@ void CDeskwork::Update(void)
 		// コピー機タスクUIの更新処理
 		m_pCOPYDeskUI->Update();
 	
-		if (m_pCOPYDeskUI->GetPCTaskNum() > NULL)
+		if (m_pCOPYDeskUI->GetPCTaskNum() > NULL || m_pCOPYDeskUI->GetTime() != false)
 		{// PCタスクが残っている場合
 			return;
 		}
 
 		// タスクが出来ない状態にする
 		SetTexBG(CWorldUICollision::TYPE_COPY);
-		m_pCOPYDeskUI->SetAlphaUI();
 	}
 	
 }
@@ -207,6 +206,7 @@ void CDeskwork::SetTexBG(const CWorldUICollision::TYPE& TaskType)
 		{// PCのタスクをこなしていなかったら
 			// 使用できないとき用のテクスチャに設定
 			SetTexture(Config::CANCEL_TEXNAME);
+			m_pCOPYDeskUI->SetAlphaUI(true);
 
 			return;
 		}

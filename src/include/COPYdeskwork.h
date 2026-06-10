@@ -41,9 +41,9 @@ public:
 	void Draw(void) override;
 
 	// クールタイム中の処理
-	inline bool CoolTime(const auto& pClear);
+	inline bool CoolTime(void);
 	// タスク中の処理
-	inline void Task(const auto& pClear);
+	inline void Task(void);
 
 	// 設定処理
 	void SetAlphaUI(const bool& bUse = false);
@@ -75,6 +75,4 @@ private:
 
 	// メンバ変数
 	CDeskworkUI* m_pDeskUI[Config::UI_NUM];		// UIのポインタ
-	int m_nCountTime;							// タイマーカウント
-	bool m_bTime;								// クールタイムが始まっているかどうか
 };
