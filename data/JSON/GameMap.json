@@ -16,7 +16,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk02.x"
   },
   {
@@ -36,7 +35,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk01.x"
   },
   {
@@ -56,7 +54,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -76,7 +73,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -96,7 +92,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -116,7 +111,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -136,7 +130,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -156,7 +149,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -176,7 +168,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -196,7 +187,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -216,7 +206,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -236,7 +225,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -256,7 +244,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -276,7 +263,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -296,7 +282,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -316,7 +301,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/desk00.x"
   },
   {
@@ -336,7 +320,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -356,7 +339,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -376,7 +358,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -396,7 +377,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -416,7 +396,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -436,7 +415,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -456,7 +434,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -476,7 +453,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -496,7 +472,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -516,7 +491,6 @@
       0.800000011920929,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair01.x"
   },
   {
@@ -524,7 +498,7 @@
     "pos": [
       -35.220001220703125,
       31.0,
-      178.10000610351563
+      178.10000610351562
     ],
     "rot": [
       0.0,
@@ -536,7 +510,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -556,7 +529,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -576,7 +548,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -596,7 +567,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -616,7 +586,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/TVbase.x"
   },
   {
@@ -636,7 +605,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/TV.x"
   },
   {
@@ -656,7 +624,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
@@ -676,7 +643,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/DeskLight.x"
   },
   {
@@ -696,7 +662,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -716,7 +681,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
@@ -736,7 +700,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/snack_bowl.x"
   },
   {
@@ -756,7 +719,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/DeskLight.x"
   },
   {
@@ -776,7 +738,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -796,7 +757,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -816,7 +776,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -836,7 +795,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -856,7 +814,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -876,7 +833,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -896,7 +852,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -916,7 +871,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magazine_rack.x"
   },
   {
@@ -936,7 +890,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Conferencedesk.x"
   },
   {
@@ -956,7 +909,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Whiteboard.x"
   },
   {
@@ -976,7 +928,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/coat_rack001.x"
   },
   {
@@ -996,7 +947,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/coat_rack000.x"
   },
   {
@@ -1016,7 +966,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/coat_rack002.x"
   },
   {
@@ -1036,7 +985,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1056,7 +1004,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1076,7 +1023,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Ashtray.x"
   },
   {
@@ -1096,7 +1042,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1116,7 +1061,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1136,7 +1080,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1156,7 +1099,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1176,7 +1118,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1196,7 +1137,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/projector.x"
   },
   {
@@ -1216,7 +1156,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/WallWindow.x"
   },
   {
@@ -1236,7 +1175,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/WallWindow.x"
   },
   {
@@ -1256,7 +1194,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1276,7 +1213,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1296,7 +1232,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1316,7 +1251,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1336,7 +1270,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1356,7 +1289,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1376,7 +1308,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1396,7 +1327,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/WallWindow.x"
   },
   {
@@ -1416,7 +1346,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/WallWindow.x"
   },
   {
@@ -1436,7 +1365,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/WallWindow.x"
   },
   {
@@ -1456,7 +1384,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -1476,13 +1403,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      254.60000610351563,
+      254.60000610351562,
       13.0,
       -181.8800048828125
     ],
@@ -1496,7 +1422,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1516,7 +1441,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1536,7 +1460,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1556,7 +1479,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1576,7 +1498,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1596,7 +1517,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1616,7 +1536,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1636,7 +1555,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1656,7 +1574,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/ConferenceChair.x"
   },
   {
@@ -1676,7 +1593,6 @@
       2.0,
       1.5
     ],
-
     "filepath": "STAGEOBJ/Cupboard.x"
   },
   {
@@ -1696,7 +1612,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/trash_can.x"
   },
   {
@@ -1716,7 +1631,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Water_Server.x"
   },
   {
@@ -1736,7 +1650,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/CoffeeMaker.x"
   },
   {
@@ -1756,7 +1669,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/snack_bowl.x"
   },
   {
@@ -1776,7 +1688,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/microwave00.x"
   },
   {
@@ -1796,7 +1707,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
@@ -1816,7 +1726,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/shredder.x"
   },
   {
@@ -1836,7 +1745,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -1856,7 +1764,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -1876,7 +1783,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -1896,7 +1802,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -1916,7 +1821,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster002.x"
   },
   {
@@ -1936,7 +1840,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster001.x"
   },
   {
@@ -1956,7 +1859,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster000.x"
   },
   {
@@ -1976,7 +1878,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster000.x"
   },
   {
@@ -1996,7 +1897,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster001.x"
   },
   {
@@ -2016,7 +1916,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/extinguisher00.x"
   },
   {
@@ -2036,7 +1935,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/extinguisher00.x"
   },
   {
@@ -2056,7 +1954,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant001.x"
   },
   {
@@ -2076,7 +1973,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant001.x"
   },
   {
@@ -2096,7 +1992,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant001.x"
   },
   {
@@ -2116,7 +2011,6 @@
       0.5199999809265137,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -2136,13 +2030,12 @@
       0.41999998688697815,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      168.97000122070313,
+      168.97000122070312,
       140.0,
       -4.0
     ],
@@ -2156,7 +2049,6 @@
       0.5199999809265137,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -2176,7 +2068,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/emergency_exit.x"
   },
   {
@@ -2196,7 +2087,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack000.x"
   },
   {
@@ -2216,7 +2106,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2236,7 +2125,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2256,7 +2144,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/PrivateWorkBooth.x"
   },
   {
@@ -2276,7 +2163,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/PrivateWorkBooth.x"
   },
   {
@@ -2296,7 +2182,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/PrivateWorkBooth.x"
   },
   {
@@ -2304,7 +2189,7 @@
     "pos": [
       -301.1099853515625,
       42.0,
-      120.72000122070313
+      120.72000122070312
     ],
     "rot": [
       0.0,
@@ -2316,7 +2201,6 @@
       0.800000011920929,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
@@ -2336,13 +2220,12 @@
       0.800000011920929,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/pc00.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      -153.33999633789063,
+      -153.33999633789062,
       31.0,
       -20.020000457763672
     ],
@@ -2356,7 +2239,6 @@
       0.800000011920929,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -2376,7 +2258,6 @@
       0.800000011920929,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/Keyboard.x"
   },
   {
@@ -2396,7 +2277,6 @@
       1.5,
       1.5
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
@@ -2416,7 +2296,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -2436,7 +2315,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -2456,7 +2334,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/chair00.x"
   },
   {
@@ -2476,7 +2353,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/DAIMON.x"
   },
   {
@@ -2496,7 +2372,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2516,7 +2391,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack000.x"
   },
   {
@@ -2536,7 +2410,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack000.x"
   },
   {
@@ -2556,7 +2429,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2576,7 +2448,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2596,7 +2467,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack002.x"
   },
   {
@@ -2616,7 +2486,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Partition.x"
   },
   {
@@ -2636,7 +2505,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Partition.x"
   },
   {
@@ -2656,7 +2524,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Partition.x"
   },
   {
@@ -2676,7 +2543,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Partition.x"
   },
   {
@@ -2696,7 +2562,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack001.x"
   },
   {
@@ -2716,7 +2581,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/calendar.x"
   },
   {
@@ -2736,7 +2600,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/calendar.x"
   },
   {
@@ -2756,7 +2619,6 @@
       1.25,
       1.25
     ],
-
     "filepath": "STAGEOBJ/clock00.x"
   },
   {
@@ -2776,7 +2638,6 @@
       0.8999999761581421,
       1.0
     ],
-
     "filepath": "STAGEOBJ/kettle00.x"
   },
   {
@@ -2796,7 +2657,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/File_rack001.x"
   },
   {
@@ -2816,7 +2676,6 @@
       0.8999999761581421,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
@@ -2836,13 +2695,12 @@
       0.8999999761581421,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      -137.35000610351563,
+      -137.35000610351562,
       37.0,
       -1.9199999570846558
     ],
@@ -2856,7 +2714,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/DeskLight.x"
   },
   {
@@ -2876,13 +2733,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/NotePC.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      -176.83999633789063,
+      -176.83999633789062,
       25.0,
       335.9100036621094
     ],
@@ -2896,7 +2752,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/coat_rack000.x"
   },
   {
@@ -2916,7 +2771,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster002.x"
   },
   {
@@ -2936,7 +2790,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant001.x"
   },
   {
@@ -2956,7 +2809,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Whiteboard.x"
   },
   {
@@ -2976,14 +2828,13 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant001.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
       461.45001220703125,
-      33.0,
+      27.0,
       15.880000114440918
     ],
     "rot": [
@@ -2996,13 +2847,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/houseplant.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      196.83999633789063,
+      196.83999633789062,
       17.0,
       69.27999877929688
     ],
@@ -3016,13 +2866,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      208.83999633789063,
+      208.83999633789062,
       17.0,
       69.27999877929688
     ],
@@ -3036,13 +2885,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      222.83999633789063,
+      222.83999633789062,
       19.0,
       69.27999877929688
     ],
@@ -3056,7 +2904,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
@@ -3076,7 +2923,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -3096,7 +2942,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_003.x"
   },
   {
@@ -3116,7 +2961,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -3136,7 +2980,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -3156,7 +2999,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_003.x"
   },
   {
@@ -3176,7 +3018,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -3196,7 +3037,6 @@
       0.8999999761581421,
       0.8999999761581421
     ],
-
     "filepath": "STAGEOBJ/sofa.x"
   },
   {
@@ -3216,7 +3056,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/sofa.x"
   },
   {
@@ -3236,7 +3075,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/vending_machine02.x"
   },
   {
@@ -3256,7 +3094,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/vending_machine00.x"
   },
   {
@@ -3276,7 +3113,6 @@
       1.0,
       1.5
     ],
-
     "filepath": "STAGEOBJ/copy_machine.x"
   },
   {
@@ -3296,7 +3132,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/surveillance_camera.x"
   },
   {
@@ -3316,7 +3151,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/surveillance_camera.x"
   },
   {
@@ -3336,7 +3170,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/surveillance_camera.x"
   },
   {
@@ -3356,7 +3189,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/surveillance_camera.x"
   },
   {
@@ -3376,7 +3208,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -3396,7 +3227,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -3416,7 +3246,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -3436,7 +3265,6 @@
       1.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -3456,7 +3284,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/phone.x"
   },
   {
@@ -3476,15 +3303,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Penholder.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      -228.08999633789063,
+      -228.08999633789062,
       14.0,
-      126.72000122070313
+      126.72000122070312
     ],
     "rot": [
       0.0,
@@ -3496,7 +3322,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/safe.x"
   },
   {
@@ -3516,7 +3341,6 @@
       2.0,
       1.5
     ],
-
     "filepath": "STAGEOBJ/safe.x"
   },
   {
@@ -3536,7 +3360,6 @@
       1.75,
       1.5
     ],
-
     "filepath": "STAGEOBJ/snack_bowl01.x"
   },
   {
@@ -3556,7 +3379,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster100.x"
   },
   {
@@ -3564,7 +3386,7 @@
     "pos": [
       360.82000732421875,
       72.0,
-      227.22000122070313
+      227.22000122070312
     ],
     "rot": [
       0.0,
@@ -3576,7 +3398,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/poster101.x"
   },
   {
@@ -3584,7 +3405,7 @@
     "pos": [
       -310.3599853515625,
       38.0,
-      87.83999633789063
+      87.83999633789062
     ],
     "rot": [
       0.0,
@@ -3596,7 +3417,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/phone01.x"
   },
   {
@@ -3616,7 +3436,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/phone01.x"
   },
   {
@@ -3636,7 +3455,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/phone01.x"
   },
   {
@@ -3656,7 +3474,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -3676,7 +3493,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -3696,7 +3512,6 @@
       1.0,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -3716,7 +3531,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3736,7 +3550,6 @@
       0.5,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3756,7 +3569,6 @@
       1.0,
       0.5
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -3776,7 +3588,6 @@
       0.800000011920929,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -3796,7 +3607,6 @@
       0.699999988079071,
       0.6000000238418579
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -3816,7 +3626,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -3836,7 +3645,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -3856,7 +3664,6 @@
       1.0,
       1.2000000476837158
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -3876,7 +3683,6 @@
       0.800000011920929,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3896,7 +3702,6 @@
       1.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3916,7 +3721,6 @@
       0.5,
       0.75
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3936,7 +3740,6 @@
       0.6000000238418579,
       0.75
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -3956,7 +3759,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill03.x"
   },
   {
@@ -3964,7 +3766,7 @@
     "pos": [
       -371.05999755859375,
       490.0,
-      722.4099731445313
+      722.4099731445312
     ],
     "rot": [
       0.0,
@@ -3976,7 +3778,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/bill04.x"
   },
   {
@@ -3996,7 +3797,6 @@
       1.0,
       0.6000000238418579
     ],
-
     "filepath": "STAGEOBJ/bill02.x"
   },
   {
@@ -4016,7 +3816,6 @@
       1.0,
       0.6000000238418579
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -4036,7 +3835,6 @@
       1.0,
       0.699999988079071
     ],
-
     "filepath": "STAGEOBJ/bill01.x"
   },
   {
@@ -4056,7 +3854,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/convenience_store00.x"
   },
   {
@@ -4076,7 +3873,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/convenience_store01.x"
   },
   {
@@ -4096,7 +3892,6 @@
       0.800000011920929,
       0.800000011920929
     ],
-
     "filepath": "STAGEOBJ/house00.x"
   },
   {
@@ -4116,7 +3911,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Truck.x"
   },
   {
@@ -4136,7 +3930,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Truck.x"
   },
   {
@@ -4156,7 +3949,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Bus.x"
   },
   {
@@ -4176,7 +3968,6 @@
       1.5,
       1.5
     ],
-
     "filepath": "STAGEOBJ/car000.x"
   },
   {
@@ -4196,7 +3987,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Bus.x"
   },
   {
@@ -4216,7 +4006,6 @@
       1.5,
       1.5
     ],
-
     "filepath": "STAGEOBJ/car000.x"
   },
   {
@@ -4236,7 +4025,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -4256,7 +4044,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -4276,7 +4063,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
@@ -4296,7 +4082,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_003.x"
   },
   {
@@ -4316,7 +4101,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -4336,7 +4120,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -4356,7 +4139,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -4376,7 +4158,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -4396,15 +4177,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1362.1400146484375,
+      1355.52001953125,
       30.0,
-      -10.390000343322754
+      -0.3799999952316284
     ],
     "rot": [
       0.0,
@@ -4416,7 +4196,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/car001.x"
   },
   {
@@ -4436,7 +4215,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/car002.x"
   },
   {
@@ -4456,7 +4234,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/taxi.x"
   },
   {
@@ -4464,7 +4241,7 @@
     "pos": [
       1661.8299560546875,
       68.0,
-      -966.6599731445313
+      -966.6599731445312
     ],
     "rot": [
       0.0,
@@ -4476,7 +4253,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Izakaya.x"
   },
   {
@@ -4496,7 +4272,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pachinko.x"
   },
   {
@@ -4516,7 +4291,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/car003.x"
   },
   {
@@ -4536,7 +4310,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/car001.x"
   },
   {
@@ -4556,15 +4329,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Guardrail.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1108.6700439453125,
+      1108.1400146484375,
       0.0,
-      -165.3300018310547
+      -204.6199951171875
     ],
     "rot": [
       0.0,
@@ -4576,15 +4348,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/GuardrailBreak.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1327.43994140625,
+      1330.7900390625,
       0.0,
-      -166.52999877929688
+      -204.85000610351562
     ],
     "rot": [
       0.0,
@@ -4596,7 +4367,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Guardrail.x"
   },
   {
@@ -4616,7 +4386,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/arcadeGate00.x"
   },
   {
@@ -4636,7 +4405,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4656,7 +4424,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4676,7 +4443,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4696,7 +4462,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4716,7 +4481,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4736,7 +4500,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4756,7 +4519,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4776,7 +4538,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4796,7 +4557,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4816,7 +4576,6 @@
       2.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall02.x"
   },
   {
@@ -4836,7 +4595,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -4856,7 +4614,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -4876,7 +4633,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
@@ -4896,7 +4652,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_003.x"
   },
   {
@@ -4916,7 +4671,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -4936,7 +4690,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
@@ -4956,7 +4709,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -4976,7 +4728,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -4996,7 +4747,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -5016,7 +4766,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -5036,7 +4785,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_003.x"
   },
   {
@@ -5056,7 +4804,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -5076,7 +4823,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
@@ -5096,7 +4842,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -5116,7 +4861,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_004.x"
   },
   {
@@ -5136,7 +4880,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_001.x"
   },
   {
@@ -5156,7 +4899,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_000.x"
   },
   {
@@ -5176,15 +4918,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/magaziner_002.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      980.9299926757813,
+      987.0900268554688,
       140.0,
-      568.2100219726563
+      576.0900268554688
     ],
     "rot": [
       0.0,
@@ -5196,15 +4937,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1025.2900390625,
+      1023.77001953125,
       140.0,
-      860.9099731445313
+      859.6099853515625
     ],
     "rot": [
       0.0,
@@ -5216,13 +4956,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      978.9299926757813,
+      978.9299926757812,
       140.0,
       1310.2099609375
     ],
@@ -5236,7 +4975,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5256,7 +4994,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5276,7 +5013,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5296,7 +5032,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5316,7 +5051,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5336,7 +5070,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5344,7 +5077,7 @@
     "pos": [
       1209.5699462890625,
       140.0,
-      -1006.6900024414063
+      -1006.6900024414062
     ],
     "rot": [
       0.0,
@@ -5356,7 +5089,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5376,7 +5108,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5396,7 +5127,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
@@ -5416,15 +5146,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Pole.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      985.9199829101563,
+      997.9099731445312,
       96.0,
-      822.3200073242188
+      836.3300170898438
     ],
     "rot": [
       0.0,
@@ -5436,13 +5165,12 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      679.2100219726563,
+      679.2100219726562,
       96.0,
       394.3299865722656
     ],
@@ -5456,7 +5184,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5476,7 +5203,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5496,7 +5222,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5516,7 +5241,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5536,7 +5260,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5544,7 +5267,7 @@
     "pos": [
       2182.909912109375,
       96.0,
-      -680.7000122070313
+      -680.7000122070312
     ],
     "rot": [
       0.0,
@@ -5556,7 +5279,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5576,7 +5298,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5596,7 +5317,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5616,7 +5336,6 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
@@ -5636,7 +5355,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/convenience_store01.x"
   },
   {
@@ -5656,7 +5374,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/car002.x"
   },
   {
@@ -5676,15 +5393,14 @@
       2.0,
       2.0
     ],
-
     "filepath": "STAGEOBJ/StreetLight.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1148.3299560546875,
+      1094.9100341796875,
       0.0,
-      894.3800048828125
+      885.2999877929688
     ],
     "rot": [
       0.0,
@@ -5696,15 +5412,14 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Guardrail.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      1377.6600341796875,
+      1316.719970703125,
       0.0,
-      895.6300048828125
+      888.1699829101562
     ],
     "rot": [
       0.0,
@@ -5716,7 +5431,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Guardrail.x"
   },
   {
@@ -5724,7 +5438,7 @@
     "pos": [
       1826.1700439453125,
       0.0,
-      621.7000122070313
+      621.7000122070312
     ],
     "rot": [
       0.0,
@@ -5736,7 +5450,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Guardrail.x"
   },
   {
@@ -5756,7 +5469,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/toilet.x"
   },
   {
@@ -5776,13 +5488,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/toilet.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      606.7100219726563,
+      606.7100219726562,
       20.0,
       -190.32000732421875
     ],
@@ -5796,7 +5507,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/toilet.x"
   },
   {
@@ -5816,7 +5526,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/toilet.x"
   },
   {
@@ -5836,7 +5545,6 @@
       1.5,
       4.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -5856,7 +5564,6 @@
       3.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Woman_toilet_door.x"
   },
   {
@@ -5876,7 +5583,6 @@
       3.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Woman_toilet_door.x"
   },
   {
@@ -5896,7 +5602,6 @@
       3.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Man_toilet_door.x"
   },
   {
@@ -5916,7 +5621,6 @@
       3.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Man_toilet_door.x"
   },
   {
@@ -5936,7 +5640,6 @@
       1.5,
       4.199999809265137
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
@@ -5956,7 +5659,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/paper_holder.x"
   },
   {
@@ -5976,7 +5678,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/paper_holder.x"
   },
   {
@@ -5996,7 +5697,6 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/paper_holder.x"
   },
   {
@@ -6016,13 +5716,12 @@
       1.0,
       1.0
     ],
-
     "filepath": "STAGEOBJ/paper_holder.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      564.6599731445313,
+      564.6599731445312,
       133.0,
       -124.2699966430664
     ],
@@ -6036,13 +5735,12 @@
       0.6000000238418579,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
-      564.6599731445313,
+      564.6599731445312,
       133.0,
       281.7300109863281
     ],
@@ -6056,14 +5754,13 @@
       0.6000000238418579,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
   },
   {
     "ObjectTag": "Block",
     "pos": [
       645.0,
-      124.0,
+      122.0,
       111.0
     ],
     "rot": [
@@ -6073,10 +5770,883 @@
     ],
     "scale": [
       1.5,
-      0.800000011920929,
+      0.8500000238418579,
       1.0
     ],
-
     "filepath": "STAGEOBJ/Wall01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1543.989990234375,
+      35.0,
+      465.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.600000023841858,
+      1.600000023841858,
+      1.600000023841858
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1617.989990234375,
+      35.0,
+      465.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.600000023841858,
+      1.600000023841858,
+      1.600000023841858
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1692.02001953125,
+      35.0,
+      465.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.600000023841858,
+      1.600000023841858,
+      1.600000023841858
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1765.989990234375,
+      35.0,
+      465.0
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.600000023841858,
+      1.600000023841858,
+      1.600000023841858
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1604.72998046875,
+      20.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1650.72998046875,
+      20.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1696.72998046875,
+      20.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1742.72998046875,
+      20.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1742.72998046875,
+      60.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1696.72998046875,
+      60.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1650.72998046875,
+      60.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1604.72998046875,
+      60.0,
+      278.4599914550781
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1604.72998046875,
+      60.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1650.72998046875,
+      60.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1694.72998046875,
+      60.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1740.72998046875,
+      60.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1740.72998046875,
+      20.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1694.72998046875,
+      20.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1648.72998046875,
+      20.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1604.72998046875,
+      20.0,
+      302.4599914550781
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1586.8399658203125,
+      19.0,
+      194.88999938964844
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_1.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1576.6300048828125,
+      19.0,
+      19.219999313354492
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_1.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1741.97998046875,
+      19.0,
+      199.27999877929688
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_1.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1735.5400390625,
+      19.0,
+      22.229999542236328
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_1.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1812.550048828125,
+      19.0,
+      420.19000244140625
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/extinguisher00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1663.3599853515625,
+      29.0,
+      101.58000183105469
+    ],
+    "rot": [
+      0.0,
+      2.2899999618530273,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/crane_game_1.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1474.949951171875,
+      0.0,
+      -80.69999694824219
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/vending_machine00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1474.949951171875,
+      0.0,
+      -114.69999694824219
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/vending_machine02.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1114.43994140625,
+      0.0,
+      -748.8699951171875
+    ],
+    "rot": [
+      0.0,
+      3.140000104904175,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/vending_machine01.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      634.2999877929688,
+      0.0,
+      24.65999984741211
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/vending_machine00.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      634.2999877929688,
+      0.0,
+      -9.34000015258789
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "filepath": "STAGEOBJ/vending_machine02.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1492.0,
+      155.0,
+      111.0
+    ],
+    "rot": [
+      0.0,
+      -1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.5700000524520874,
+      1.2000000476837158,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Wall02.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1788.9000244140625,
+      42.0,
+      -187.64999389648438
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1788.9000244140625,
+      42.0,
+      -93.6500015258789
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1675.0,
+      42.0,
+      -192.74000549316406
+    ],
+    "rot": [
+      0.0,
+      -1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1675.0,
+      42.0,
+      -100.0
+    ],
+    "rot": [
+      0.0,
+      -1.559999942779541,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1626.9000244140625,
+      42.0,
+      -100.0
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1626.9000244140625,
+      42.0,
+      -193.64999389648438
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1512.9000244140625,
+      42.0,
+      -193.64999389648438
+    ],
+    "rot": [
+      0.0,
+      -1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      1512.9000244140625,
+      42.0,
+      -101.6500015258789
+    ],
+    "rot": [
+      0.0,
+      -1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "filepath": "STAGEOBJ/crane_game_0.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      987.1699829101562,
+      0.0,
+      450.57000732421875
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/Guardrail.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      475.0899963378906,
+      0.0,
+      1880.72998046875
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "filepath": "STAGEOBJ/tower.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      4.409999847412109,
+      508.0,
+      -884.4500122070312
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/bill04.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      2722.780029296875,
+      256.0,
+      1693.8699951171875
+    ],
+    "rot": [
+      0.0,
+      1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      0.5,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/bill04.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      564.219970703125,
+      52.0,
+      278.32000732421875
+    ],
+    "rot": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/poster000.x"
+  },
+  {
+    "ObjectTag": "Block",
+    "pos": [
+      488.42999267578125,
+      78.0,
+      -11.479999542236328
+    ],
+    "rot": [
+      0.0,
+      -1.5700000524520874,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "filepath": "STAGEOBJ/poster100.x"
   }
 ]
