@@ -89,24 +89,26 @@ HRESULT CProgressgauge::Init(void)
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// 左右のゲージの長さ
-	float fLeftWidth = m_Offsetpos.x - m_fWidth;
-	float fRightWidth = m_Offsetpos.x + m_fWidth;
+	// ゲージの初期位置を左に設定する
+	m_Offsetpos.x -= m_fWidth * 0.5f;
+
+	// 境界線の位置をゲージの7割の位置にする
+	m_pos.x = m_Offsetpos.x + m_fWidth * 0.7f;
 
 	// 頂点座標の設定
 	// 左端の頂点座標
-	pVtx[0].pos = D3DXVECTOR3(fLeftWidth, m_Offsetpos.y - m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(fLeftWidth, m_Offsetpos.y + m_fHeight, 0.0f);
+	pVtx[0].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y + m_fHeight * 0.5f, 0.0f);
 
 	// 境界線の頂点座標
-	pVtx[1].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y - m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y + m_fHeight, 0.0f);
-	pVtx[4].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y - m_fHeight, 0.0f);
-	pVtx[6].pos = D3DXVECTOR3(m_Offsetpos.x, m_Offsetpos.y + m_fHeight, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(m_pos.x, m_Offsetpos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(m_pos.x, m_Offsetpos.y + m_fHeight * 0.5f, 0.0f);
+	pVtx[4].pos = D3DXVECTOR3(m_pos.x, m_Offsetpos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[6].pos = D3DXVECTOR3(m_pos.x, m_Offsetpos.y + m_fHeight * 0.5f, 0.0f);
 
 	// 右端の頂点座標
-	pVtx[5].pos = D3DXVECTOR3(fRightWidth, m_Offsetpos.y - m_fHeight, 0.0f);
-	pVtx[7].pos = D3DXVECTOR3(fRightWidth, m_Offsetpos.y + m_fHeight, 0.0f);
+	pVtx[5].pos = D3DXVECTOR3(m_Offsetpos.x + m_fWidth, m_Offsetpos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[7].pos = D3DXVECTOR3(m_Offsetpos.x + m_fWidth, m_Offsetpos.y + m_fHeight * 0.5f, 0.0f);
 
 	// rhwの設定(1.0fで固定)
 	pVtx[0].rhw =
@@ -176,10 +178,10 @@ void CProgressgauge::Update(void)
 
 	// 頂点座標の設定
 	// 境界線の頂点座標
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x, m_pos.y - m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x, m_pos.y + m_fHeight, 0.0f);
-	pVtx[4].pos = D3DXVECTOR3(m_pos.x, m_pos.y - m_fHeight, 0.0f);
-	pVtx[6].pos = D3DXVECTOR3(m_pos.x, m_pos.y + m_fHeight, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(m_pos.x, m_pos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(m_pos.x, m_pos.y + m_fHeight * 0.5f, 0.0f);
+	pVtx[4].pos = D3DXVECTOR3(m_pos.x, m_pos.y - m_fHeight * 0.5f, 0.0f);
+	pVtx[6].pos = D3DXVECTOR3(m_pos.x, m_pos.y + m_fHeight * 0.5f, 0.0f);
 
 	// 頂点カラーの設定
 	// 左ゲージの色
@@ -258,12 +260,12 @@ void CProgressgauge::AddTask(void)
 	float fDiffWidth = m_fWidth * 0.03f;
 
 	// 境界線の位置をずらす
-	m_pos.x += fDiffWidth;
+	m_pos.x -= fDiffWidth;
 
-	if (m_pos.x >= m_Offsetpos.x + m_fWidth)
+	if (m_pos.x <= m_Offsetpos.x)
 	{// 境界線がゲージの端を超える時
 
-		m_pos.x = m_Offsetpos.x + m_fWidth;
+		m_pos.x = m_Offsetpos.x;
 	}
 
 }
@@ -277,14 +279,14 @@ void CProgressgauge::AddAFK(void)
 	m_nAFK++;
 
 	// 境界線の位置の計算
-	float fDiffWidth = m_fWidth * 0.03f;
+	float fDiffWidth = m_fWidth * 0.005f;
 
 	// 境界線の位置をずらす
-	m_pos.x -= fDiffWidth;
+	m_pos.x += fDiffWidth;
 
-	if (m_pos.x <= m_Offsetpos.x - m_fWidth)
+	if (m_pos.x >= m_Offsetpos.x + m_fWidth)
 	{// 境界線がゲージの端を超える時
 
-		m_pos.x = m_Offsetpos.x - m_fWidth;
+		m_pos.x = m_Offsetpos.x + m_fWidth;
 	}
 }

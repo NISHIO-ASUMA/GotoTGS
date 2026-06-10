@@ -24,9 +24,7 @@
 // コンストラクタ
 //=========================================================
 CCOPYDeskwork::CCOPYDeskwork() :CDeskworkUIManager(),
-m_pDeskUI{},
-m_nCountTime(0),
-m_bTime(false)
+m_pDeskUI{}
 {
 
 }
@@ -63,10 +61,6 @@ HRESULT CCOPYDeskwork::Init(void)
 {
 	// 乱数の種
 	srand((unsigned int)time(0));
-
-	// メンバ変数の初期化
-	m_nCountTime = 0;	// 現在のカウント
-	m_bTime = false;	// クールタイム
 
 	// UIの情報
 	CDeskworkUI::UI ui;
@@ -119,21 +113,13 @@ void CCOPYDeskwork::Update(void)
 	// 親の更新処理
 	CDeskworkUIManager::Update();
 
-	// クリアUIのポインタ
-	auto* pClear = CDeskworkUIManager::GetClearUI();
-
-	if (pClear == nullptr)
-	{// ヌルチェック
-		return;
-	}
-
-	if (m_bTime != false)
+	if (GetTime() != false)
 	{// クールタイムが始まっているなら
 
 		// クールタイム中の処理
-		if (CoolTime(pClear) != true)
+		if (CoolTime() != true)
 		{
-			// クールタイム中なら
+			// クールタイムが終わったなら
 			return;
 		}
 	}
@@ -145,7 +131,7 @@ void CCOPYDeskwork::Update(void)
 
 	// クールタイムが始まっていないなら
 	// タスク中の処理
-	Task(pClear);
+	Task();
 }
 
 //=========================================================
@@ -208,11 +194,22 @@ void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 // クールタイム中の処理
 //=========================================================
-bool CCOPYDeskwork::CoolTime(const auto& pClear)
+bool CCOPYDeskwork::CoolTime(void)
 {
-	if (m_nCountTime <= Config::TIME_COOL)
+	// クリアUIのポインタ
+	auto* pClear = CDeskworkUIManager::GetClearUI();
+
+	if (pClear == nullptr)
+	{// ヌルチェック
+		return false;
+	}
+
+	// 現在のカウント
+	int nCountTime = GetCountTime();
+
+	if (nCountTime <= Config::TIME_COOL)
 	{// クールタイムを数える
-		m_nCountTime++;
+		SetCountTime(++nCountTime);
 
 		return false;
 	}
@@ -223,14 +220,14 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	// 色を元に戻す(通常色)
 	m_pDeskUI[TEXTURE_KEY]->SetAlpha(1.0f);
 
-	// クールタイムを初期化
-	m_nCountTime = 0;
-
 	// 横幅を初期化
 	m_pDeskUI[TEXTURE_GAGE]->SetWidth(0.0f);
 
 	// クールタイムが始まっていない状態にする
-	m_bTime = false;
+	SetTime(false);
+
+	// クールタイムを初期化
+	SetCountTime(NULL);
 
 	// 点滅を止める
 	pClear->SetUse(false);
@@ -242,7 +239,7 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 //=========================================================
 // タスク中の処理
 //=========================================================
-void CCOPYDeskwork::Task(const auto& pClear)
+void CCOPYDeskwork::Task(void)
 {
 	// キーボードのポインタ
 	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
@@ -250,8 +247,13 @@ void CCOPYDeskwork::Task(const auto& pClear)
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
 	// 進捗ゲージのポインタ
 	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+	// クリアUIのポインタ
+	auto* pClear = CDeskworkUIManager::GetClearUI();
 
-	if (pKeyboard == nullptr || pScore == nullptr || pProgressgauge == nullptr)
+	// 現在のカウント
+	int nCountTime = GetCountTime();
+
+	if (pKeyboard == nullptr || pScore == nullptr || pProgressgauge == nullptr || pClear == nullptr)
 	{// ヌルチェック
 		return;
 	}
@@ -265,11 +267,12 @@ void CCOPYDeskwork::Task(const auto& pClear)
 		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);
 
 		// カウントを一つ進める
-		m_nCountTime++;
+		nCountTime++;
+		SetCountTime(nCountTime);
 
 		// 進行度に応じて横幅を計算
 		float fWidth = 0.0f;
-		fWidth = Config::GAGE_WIDTH * ((float)m_nCountTime / (float)Config::TIME_PUSH);
+		fWidth = Config::GAGE_WIDTH * ((float)nCountTime / (float)Config::TIME_PUSH);
 
 		// 横幅を設定
 		m_pDeskUI[TEXTURE_GAGE]->SetWidth(fWidth);
@@ -287,16 +290,16 @@ void CCOPYDeskwork::Task(const auto& pClear)
 		m_pDeskUI[nCount]->Update();
 	}
 
-	if (m_nCountTime <= Config::TIME_PUSH)
+	if (nCountTime <= Config::TIME_PUSH)
 	{
 		return;
 	}
 
 	// カウントを初期化
-	m_nCountTime = 0;
+	SetCountTime(NULL);
 
 	// クールタイムを始める
-	m_bTime = true;
+	SetTime(true);
 
 	// スコア加算
 	pScore->AddScore(100);

@@ -26,7 +26,9 @@ int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
 //=========================================================
 CDeskworkUIManager::CDeskworkUIManager() :
 m_pos(VECTOR3_NULL),
-m_bUse(false)
+m_bUse(false),
+m_bTime(false),
+m_nCountTime(NULL)
 {
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;

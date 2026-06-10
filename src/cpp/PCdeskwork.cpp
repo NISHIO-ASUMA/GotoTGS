@@ -34,8 +34,6 @@ namespace PC_DESKWORK
 //=========================================================
 CPCDeskwork::CPCDeskwork() :CDeskworkUIManager(),
 m_nNowIdx(NULL),
-m_nCountTime(NULL),
-m_bTime(false),
 m_bFalse(false),
 m_BasePos(VECTOR3_NULL),
 m_Offsetpos(VECTOR3_NULL)
@@ -73,9 +71,6 @@ CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CPCDeskwork::Init(void)
 {
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
-
 	// 失敗していない状態にする
 	m_bFalse = false;
 
@@ -133,7 +128,7 @@ void CPCDeskwork::Update(void)
 	// クリアUIのポインタ
 	auto* pClear = CDeskworkUIManager::GetClearUI();
 
-	if (m_bTime != false || m_bFalse != false)
+	if (GetTime() != false || m_bFalse != false)
 	{// 失敗したかクールタイムが始まったなら
 
 		// クールタイム中の処理
@@ -215,14 +210,18 @@ void CPCDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 bool CPCDeskwork::CoolTime(const auto& pClear)
 {
-	if (m_nCountTime <= Config::TIME_COOL)
+	// 現在のカウント
+	int nCountTime = GetCountTime();
+
+	if (nCountTime <= Config::TIME_COOL)
 	{// クールタイムを数える
-		m_nCountTime++;
+		nCountTime++;
+		SetCountTime(nCountTime);
 
 		if (m_bFalse != false)
 		{// 失敗している場合
 			// 1フレーム毎の割合
-			float t = CEasing::SetEase(m_nCountTime, Config::TIME_COOL);
+			float t = CEasing::SetEase(nCountTime, Config::TIME_COOL);
 			float EasingValue = CEasing::EaseOutElastic(t);
 
 			// 失敗したものだけ動かす
@@ -255,14 +254,14 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	// 現在選択している番号を初期化
 	m_nNowIdx = 0;
 
-	// クールタイムを初期化
-	m_nCountTime = 0;
-
-	// クールタイムが始まっていない状態にする
-	m_bTime = false;
-
 	// 失敗していない状態にする
 	m_bFalse = false;
+
+	// クールタイムが始まっていない状態にする
+	SetTime(false);
+
+	// クールタイムを初期化
+	SetCountTime(NULL);
 
 	// 点滅を止める
 	pClear->SetUse(false);
@@ -309,11 +308,11 @@ void CPCDeskwork::Task(const auto& pClear)
 		// 色を赤にする
 		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED, true);
 
-		// クールタイムを始める
-		m_bTime = true;
-
 		// 失敗した状態にする
 		m_bFalse = true;
+
+		// クールタイムを始める
+		SetTime(true);
 
 		return;
 	}
@@ -325,7 +324,7 @@ void CPCDeskwork::Task(const auto& pClear)
 	}
 
 	// クールタイムを始める
-	m_bTime = true;
+	SetTime(true);
 
 	// こなしたタスクの数を増やす
 	pProgressgauge->AddTask();
