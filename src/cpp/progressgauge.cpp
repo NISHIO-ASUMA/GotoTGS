@@ -93,7 +93,7 @@ HRESULT CProgressgauge::Init(void)
 	m_Offsetpos.x -= m_fWidth * 0.5f;
 
 	// 境界線の位置をゲージの7割の位置にする
-	m_pos.x = m_Offsetpos.x + m_fWidth * 0.7f;
+	m_pos.x = m_Offsetpos.x + m_fWidth * Config::LIFE_RATIO;
 
 	// 頂点座標の設定
 	// 左端の頂点座標
@@ -240,13 +240,13 @@ void CProgressgauge::SetTexture(const char* pTexName)
 	m_nIdxTexture = pTexture->Register(TexPath.c_str());
 }
 
-//==========================================================
-// 点滅処理
-//==========================================================
-void CProgressgauge::SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col)
-{
-
-}
+////==========================================================
+//// 点滅処理
+////==========================================================
+//void CProgressgauge::SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col)
+//{
+//
+//}
 
 //==========================================================
 // タスクの数加算処理
@@ -257,7 +257,7 @@ void CProgressgauge::AddTask(void)
 	m_nTask++;
 
 	// 境界線の位置の計算
-	float fDiffWidth = m_fWidth * 0.03f;
+	float fDiffWidth = m_fWidth * Config::GAUGE_RATIO;
 
 	// 境界線の位置をずらす
 	m_pos.x -= fDiffWidth;
@@ -279,7 +279,7 @@ void CProgressgauge::AddAFK(void)
 	m_nAFK++;
 
 	// 境界線の位置の計算
-	float fDiffWidth = m_fWidth * 0.005f;
+	float fDiffWidth = m_fWidth * Config::GAUGE_RATIO;
 
 	// 境界線の位置をずらす
 	m_pos.x += fDiffWidth;

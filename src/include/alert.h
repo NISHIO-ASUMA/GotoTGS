@@ -52,7 +52,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr int MAXFREAM = 180;					// 最大フレーム数
+		static constexpr int MAX_FREAM = 180;					// 最大フレーム数
 		static constexpr const char* TEXNAME = "alert000.png";	// テクスチャ名
 	};
 };

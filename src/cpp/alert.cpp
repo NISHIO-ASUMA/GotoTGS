@@ -84,22 +84,19 @@ void CAlert::Uninit(void)
 void CAlert::Update(void)
 {
 	// 使用していないなら
-	if (GetUse() != true)
-	{
-		return;
-	}
+	if (GetUse() != true) return;
 	
-	// 親の更新処理
-	CAnimationObject2D::Update();
-
 	// 1フレーム毎のテクスチャ移動量
-	float fTexU = CEasing::SetEase(GetFreamCount(), Config::MAXFREAM);
+	float fTexU = CEasing::SetEase(GetFreamCount(), Config::MAX_FREAM);
 
 	float fLeftU = CEasing::EaseOutQuad(fTexU);
 	float fRightU = CEasing::EaseOutQuad(fTexU) + GetTex().x;
 
 	// テクスチャの横移動処理
-	SetTexMoveU(Config::MAXFREAM, fLeftU, fRightU);
+	SetTexMoveU(Config::MAX_FREAM, fLeftU, fRightU);
+
+	// 親の更新処理
+	CAnimationObject2D::Update();
 }
 
 //=========================================================
@@ -108,12 +105,8 @@ void CAlert::Update(void)
 void CAlert::Draw(void)
 {
 	// 使用していないなら
-	if (GetUse() != true)
-	{
-		return;
-	}
+	if (GetUse() != true) return;
 
 	// 親の描画処理
 	CAnimationObject2D::Draw();
-
 }

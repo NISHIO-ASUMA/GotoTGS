@@ -222,7 +222,6 @@ void CAnimationObject2D::Draw(void)
 //===================================================================
 void CAnimationObject2D::SetTexMoveU(const int& nMaxFream, const float& fLeftU, const float& fRightU)
 {
-
 	// カウントを一つ増やす
 	m_nFreamCount++;
 
@@ -264,7 +263,6 @@ void CAnimationObject2D::SetTexMoveU(const int& nMaxFream, const float& fLeftU, 
 //===================================================================
 void CAnimationObject2D::SetTexMoveV(const int& nMaxFream, const float& fTopV, const float& fBottomV)
 {
-
 	// カウントを一つ増やす
 	m_nFreamCount++;
 

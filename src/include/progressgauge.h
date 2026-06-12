@@ -57,6 +57,15 @@ public:
 
 private:
 
+	//*******************************
+	// 定数構造体宣言
+	//*******************************
+	struct Config
+	{
+		static constexpr float LIFE_RATIO = 0.7f;		// 体力の初期割合
+		static constexpr float GAUGE_RATIO = 0.005f;	// ゲージの増減割合
+	};
+
 	// メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファのポインタ
 	D3DXVECTOR3 m_pos;						// 位置
