@@ -559,6 +559,7 @@ void CPlayer::MoveKeyboard(float speed)
 		GetMotion()->SetMotion(CPlayer::MOTION::TV);
 	}
 
+	// モーションチェンジ
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine) return;
 
 	// キーが押されていなかったら
@@ -684,15 +685,10 @@ void CPlayer::MoveJoypad(float speed)
 		}
 	}
 
-	// 煙草モーションに変更する
-	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
-
 	// テレビを見るモーションに切り替え
 	else if (m_bAfkTV) GetMotion()->SetMotion(CPlayer::MOTION::TV);
 
-	// 雑誌を見るモーションに変更
-	else if (m_bAfkMagazine) GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
-
+	// モーションチェンジ
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine) return;
 
 	// 移動していなかったら
