@@ -14,11 +14,14 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "easing.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEventcutin::CEventcutin()
+CEventcutin::CEventcutin(int nPriority):CAnimationObject2D(nPriority),
+m_Offsetpos(VECTOR3_NULL),
+m_nStopCount(NULL)
 {
 
 }
@@ -29,13 +32,12 @@ CEventcutin::CEventcutin()
 CEventcutin::~CEventcutin()
 {
 
-
 }
 
 //=========================================================
 // 生成処理処理
 //=========================================================
-CEventcutin* CEventcutin::Create(void)
+CEventcutin* CEventcutin::Create(const EventCutin& eventcutin)
 {
 	// インスタンス生成
 	CEventcutin* pEventcutin = new CEventcutin;
@@ -44,6 +46,19 @@ CEventcutin* CEventcutin::Create(void)
 	{// ヌルチェック
 		return nullptr;
 	}
+
+	// 初期位置を設定
+	pEventcutin->m_Offsetpos = eventcutin.pos;
+	pEventcutin->m_Offsetpos.x -= SCREEN_WIDTH;
+
+	// 各設定処理
+	pEventcutin->SetPos(pEventcutin->m_Offsetpos);
+	pEventcutin->SetCol(eventcutin.col);
+	pEventcutin->SetSize(eventcutin.fWidth, eventcutin.fHeight);
+	pEventcutin->SetUV(eventcutin.tex.x, eventcutin.tex.y);
+	pEventcutin->SetAnimFlag(eventcutin.isLoop);
+	pEventcutin->SetUse(eventcutin.bUse);
+	pEventcutin->SetTexture(Config::TEXNAME);
 
 	if (FAILED(pEventcutin->Init()))
 	{// 初期化が失敗した場合
@@ -57,6 +72,12 @@ CEventcutin* CEventcutin::Create(void)
 //=========================================================
 HRESULT CEventcutin::Init(void)
 {
+	// 表示し続けるフレームのカウントを初期化
+	m_nStopCount = NULL;
+
+	// 親の初期化処理
+	CAnimationObject2D::Init();
+
 	return S_OK;
 }
 
@@ -65,7 +86,8 @@ HRESULT CEventcutin::Init(void)
 //=========================================================
 void CEventcutin::Uninit(void)
 {
-
+	// 親の終了処理
+	CAnimationObject2D::Uninit();
 }
 
 //=========================================================
@@ -73,6 +95,57 @@ void CEventcutin::Uninit(void)
 //=========================================================
 void CEventcutin::Update(void)
 {
+	// 使用していない時
+	if (GetUse() != true) return;
+
+	// 位置
+	D3DXVECTOR3 pos = GetPos();
+
+	// 現在のカウント
+	int nCount = GetFreamCount();
+
+	if (m_nStopCount >= NULL)
+	{// 表示するカウントが残っているなら
+		// 表示するカウントを1つ減らす
+		m_nStopCount--;
+
+		return;
+	}
+
+	// 現在のカウントを1つ進める
+	nCount++;
+
+	// 1フレーム毎のX軸の移動量
+	float fMoveX = CEasing::SetEase(nCount, Config::MOVE_FREAM);
+	fMoveX = CEasing::EaseOutCubic(fMoveX);
+
+	// 移動量を加算
+	pos.x += SCREEN_WIDTH * fMoveX;
+
+	if (nCount >= Config::MOVE_FREAM)
+	{// 現在のカウントが移動時のフレーム数を超えたなら
+
+		// 現在のカウントを初期化
+		SetFreamCount(NULL);
+
+		if (pos.x >= SCREEN_WIDTH + HALFWIDTH)
+		{// 右端の画面外に完全に移動したなら
+			// 初期位置に戻す
+			pos = m_Offsetpos;
+		}
+		else
+		{
+
+			// 表示するフレーム数を代入する
+			m_nStopCount = Config::STOP_FREAM;
+		}
+	}
+
+	// 位置を設定
+	SetPos(pos);
+
+	// 親クラスの更新処理
+	CAnimationObject2D::Update();
 
 }
 
@@ -81,5 +154,10 @@ void CEventcutin::Update(void)
 //=========================================================
 void CEventcutin::Draw(void)
 {
+	// 使用していないなら
+	if (GetUse() != true) return;
+
+	// 親の描画処理
+	CAnimationObject2D::Draw();
 
 }

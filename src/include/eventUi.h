@@ -11,30 +11,23 @@
 #pragma once
 
 //*********************************************************
-// インクルードファイル
-//*********************************************************
-#include "object2D.h"
-
-//*********************************************************
 // イベントUIに対するクラスを定義
 //*********************************************************
-class CEventUI :public CObject2D
+class CEventUI
 {
 public:
 
-	CEventUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	CEventUI();
 	~CEventUI();
 
-	HRESULT Init(void) override;
-	void Uninit(void) override;
-	void Update(void) override;
-	void Draw(void) override;
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
 
 	// 生成処理
 	static CEventUI* Create(void);
 
 private:
-
-	// メンバ変数
 
 };

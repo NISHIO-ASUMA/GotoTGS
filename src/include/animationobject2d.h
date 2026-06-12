@@ -43,15 +43,16 @@ public:
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_fWidth = fHeight; }
 	inline void SetAnimFlag(const bool& isLoop) { m_isLoop = isLoop; }
-	inline void SetUse(const bool& bUse) { m_bUse = bUse; }		// Misaki
+	inline void SetUse(const bool& bUse) { m_bUse = bUse; }									// Misaki
+	inline void SetFreamCount(const int& nFreamCount) { m_nFreamCount = nFreamCount; }		// Misaki
 
-	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }				// 座標を取得
-	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }				// 角度を取得
-	inline D3DXCOLOR GetCol(void) const { return m_col; }				// 色を取得
-	inline float GetWidth(void) const { return m_fWidth; }				// 横幅を取得
-	inline float GetHeight(void) const { return m_fHeight; }			// 高さを取得
-	inline bool GetUse(void) const { return m_bUse; }					// 表示するかどうかを取得 MIsaki
-	inline int GetFreamCount(void) const { return m_nFreamCount; }		// 現在のフレーム数を取得 Misaki
+	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }								// 座標を取得
+	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }								// 角度を取得
+	inline D3DXCOLOR GetCol(void) const { return m_col; }								// 色を取得
+	inline float GetWidth(void) const { return m_fWidth; }								// 横幅を取得
+	inline float GetHeight(void) const { return m_fHeight; }							// 高さを取得
+	inline bool GetUse(void) const { return m_bUse; }									// 表示するかどうかを取得 MIsaki
+	inline int GetFreamCount(void) const { return m_nFreamCount; }						// 現在のフレーム数を取得 Misaki
 	inline D3DXVECTOR2 GetTex(void) const { return D3DXVECTOR2(m_fTexU, m_fTexV); }
 
 	/// <summary>
@@ -93,10 +94,12 @@ private:
 	int m_nAnimCount;	// アニメーションカウント
 	int m_nAnimPattren; // アニメーションパターン
 	int m_nFreamCount;	// フレームカウント Misaki
+
 	float m_fWidth;		// 横幅
 	float m_fHeight;	// 高さ
 	float m_fTexU;		// テクスチャU
 	float m_fTexV;		// テクスチャV
+
 	bool m_isLoop;		// ループアニメーションフラグ
 	bool m_bUse;		// 表示するかどうか Misaki
 };

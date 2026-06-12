@@ -22,7 +22,19 @@ class CEventcutin :public CAnimationObject2D
 {
 public:
 
-	CEventcutin();
+	// イベントカットイン表示の構造体
+	struct EventCutin
+	{
+		D3DXVECTOR3 pos;
+		D3DXCOLOR col;
+		D3DXVECTOR2 tex;
+		float fWidth;
+		float fHeight;
+		bool isLoop;
+		bool bUse;
+	};
+
+	CEventcutin(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CEventcutin();
 
 	HRESULT Init(void);
@@ -31,9 +43,21 @@ public:
 	void Draw(void);
 
 	// 生成処理
-	static CEventcutin* Create(void);
+	static CEventcutin* Create(const EventCutin& eventcutin);
 
 private:
 
+	//*******************************
+	// 定数構造体宣言
+	//*******************************
+	struct Config
+	{
+		static constexpr int MOVE_FREAM = 30;					// 移動時のフレーム数
+		static constexpr int STOP_FREAM = 60;					// 表示するフレーム数
+		static constexpr const char* TEXNAME = "cutin000.png";	// テクスチャ名
+	};
+
 	// メンバ変数
+	D3DXVECTOR3 m_Offsetpos;	// 初期位置
+	int m_nStopCount;			// 表示するフレームのカウント
 };

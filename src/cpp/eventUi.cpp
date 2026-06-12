@@ -18,7 +18,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEventUI::CEventUI(int nPriority) : CObject2D(nPriority)
+CEventUI::CEventUI()
 {
 
 }
@@ -40,15 +40,11 @@ CEventUI* CEventUI::Create(void)
 	// インスタンス生成
 	CEventUI* pEventUI = new CEventUI;
 
-	if (pEventUI == nullptr)
-	{// ヌルチェック
-		return nullptr;
-	}
+	// ヌルチェック
+	if (pEventUI == nullptr) return nullptr;
 
-	if (FAILED(pEventUI->Init()))
-	{// 初期化が失敗した場合
-		return nullptr;
-	}
+	// 初期化が失敗した時
+	if (FAILED(pEventUI->Init())) return nullptr;
 
 	return pEventUI;
 }
@@ -57,8 +53,6 @@ CEventUI* CEventUI::Create(void)
 //=========================================================
 HRESULT CEventUI::Init(void)
 {
-	// 親クラスの初期化処理
-	CObject2D::Init();
 
 	return S_OK;
 }
@@ -68,8 +62,6 @@ HRESULT CEventUI::Init(void)
 //=========================================================
 void CEventUI::Uninit(void)
 {
-	// 親クラスの終了処理
-	CObject2D::Uninit();
 
 }
 
@@ -78,8 +70,6 @@ void CEventUI::Uninit(void)
 //=========================================================
 void CEventUI::Update(void)
 {
-	// 親クラスの更新処理
-	CObject2D::Update();
 
 }
 
@@ -88,6 +78,5 @@ void CEventUI::Update(void)
 //=========================================================
 void CEventUI::Draw(void)
 {
-	// 親クラスの描画処理
-	CObject2D::Draw();
+
 }
