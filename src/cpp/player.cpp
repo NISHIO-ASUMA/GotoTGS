@@ -480,23 +480,13 @@ void CPlayer::MoveKeyboard(float speed)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 
 	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke)
-	{
-		DeleteItem();
-		m_bAfkSmoke = false;
-	}
+	else if (!bAfkSmoke) m_bAfkSmoke = false;
+	
 	if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV)
-	{
-		DeleteItem();
-		m_bAfkTV = false;
-	}
+	else if (!bAfkTV) m_bAfkTV = false;
+	
 	if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine)
-	{
-		DeleteItem();
-		m_bAfkMagazine = false;
-	}
+	else if (!bAfkMagazine) m_bAfkMagazine = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -553,15 +543,12 @@ void CPlayer::MoveKeyboard(float speed)
 		m_bMove = true;
 	}
 
-	// 煙草モーションに変更する
-	if (m_bAfkSmoke) GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
-
 //***********************************************
 // TODO :  特定のモーションの時に特定のモデルを持たせる
 //***********************************************
 
 	// テレビを見るモーションに切り替え
-	else if (m_bAfkTV)
+	if (m_bAfkTV)
 	{
 		// プレイヤー座標を椅子の上にセットする
 		
@@ -571,21 +558,9 @@ void CPlayer::MoveKeyboard(float speed)
 		// tvモーションに変更する
 		GetMotion()->SetMotion(CPlayer::MOTION::TV);
 	}
-	// 雑誌を見るモーションに変更
-	else if (m_bAfkMagazine)
-	{		
-		// プレイヤーの手に雑誌を持たせる
-		AddItemSet
-		(
-			"data/MODEL/STAGEOBJ/magaziner_002.x", // 対象モデルファイル
-			CModel::PARTTYPE_LEFT_HAND,			   // 持たせる場所
-			D3DXVECTOR3(-1.57f,0.0f,0.0f),
-			D3DXVECTOR3(5.0f,0.0f,-7.0f)
-		);
 
-		// 雑誌を見るモーションに変更
-		GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
-	}
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine) return;
+
 	// キーが押されていなかったら
 	else if (!pKeyboard->GetPress(DIK_W) &&
 			 !pKeyboard->GetPress(DIK_S) &&
@@ -717,6 +692,8 @@ void CPlayer::MoveJoypad(float speed)
 
 	// 雑誌を見るモーションに変更
 	else if (m_bAfkMagazine) GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine) return;
 
 	// 移動していなかったら
 	else if (!pJoyPad->GetLeftStick())GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);

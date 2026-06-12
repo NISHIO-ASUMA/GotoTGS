@@ -15,8 +15,8 @@
 //*********************************************************
 namespace AFKMAGAZINE
 {
-	const D3DXVECTOR3 Pos = { 250, 0.0f, 95.0f };	// ˆÊ’u
-	constexpr float fRadius = 25.0f;				// ”ÍˆÍ‚Ì”¼Œa
+	const D3DXVECTOR3 Pos = { 250.0f, 0.0f, 95.0f };	// ˆÊ’u
+	constexpr float fRadius = 25.0f;					// ”ÍˆÍ‚Ì”¼Œa
 };
 
 //=========================================================

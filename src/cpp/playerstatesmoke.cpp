@@ -8,22 +8,22 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "playerstateditch.h"
+#include "playerstatesmoke.h"
 #include "playerstateneutral.h"
 #include "player.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPlayerStateDitch::CPlayerStateDitch()
+CPlayerStateSmoke::CPlayerStateSmoke()
 {
-	SetID(ID_MOVE);
+	SetID(ID_SMOKE);
 }
 
 //=========================================================
 // デストラクタ
 //=========================================================
-CPlayerStateDitch::~CPlayerStateDitch()
+CPlayerStateSmoke::~CPlayerStateSmoke()
 {
 
 }
@@ -31,7 +31,7 @@ CPlayerStateDitch::~CPlayerStateDitch()
 //=========================================================
 // 状態開始
 //=========================================================
-void CPlayerStateDitch::OnStart()
+void CPlayerStateSmoke::OnStart()
 {
 	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 }
@@ -39,9 +39,9 @@ void CPlayerStateDitch::OnStart()
 //=========================================================
 // 状態更新
 //=========================================================
-void CPlayerStateDitch::OnUpdate()
+void CPlayerStateSmoke::OnUpdate()
 {
-	if (!m_pPlayer->GetMoveCheck())
+	if (!m_pPlayer->GetAfkSmoke())
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
@@ -51,7 +51,7 @@ void CPlayerStateDitch::OnUpdate()
 //=========================================================
 // 状態終了
 //=========================================================
-void CPlayerStateDitch::OnExit()
+void CPlayerStateSmoke::OnExit()
 {
-
+	m_pPlayer->DeleteItem();
 }

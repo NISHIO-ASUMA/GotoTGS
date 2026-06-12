@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤーステートディッチクラス処理 [ playerstateditch.h ]
+// プレイヤーステートスモーククラス処理 [ playerstatesmoke.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -18,16 +18,14 @@
 //*********************************************************
 // プレイヤーステートアクションクラスを定義
 //*********************************************************
-class CPlayerStateDitch : public CPlayerStateBase
+class CPlayerStateSmoke : public CPlayerStateBase
 {
 public:
-	CPlayerStateDitch();
-	~CPlayerStateDitch();
+	CPlayerStateSmoke();
+	~CPlayerStateSmoke();
 
 	void OnStart(void) override;
 	void OnUpdate(void) override;
 	void OnExit(void) override;
-
-private:
 
 };

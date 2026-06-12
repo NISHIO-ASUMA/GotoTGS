@@ -46,7 +46,9 @@ public:
 	{
 		ID_NEUTRAL,
 		ID_MOVE,
-		ID_ACTION,
+		ID_SMOKE,
+		ID_TV,
+		ID_MAGAZINE,
 		ID_MAX
 	};
 

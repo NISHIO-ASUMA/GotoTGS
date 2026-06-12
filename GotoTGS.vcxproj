@@ -253,9 +253,9 @@
     </ClCompile>
     <ClCompile Include="src\cpp\pcui.cpp" />
     <ClCompile Include="src\cpp\player.cpp" />
-    <ClCompile Include="src\cpp\playerstateaction.cpp" />
+    <ClCompile Include="src\cpp\playerstatemagazine.cpp" />
     <ClCompile Include="src\cpp\playerstatebase.cpp" />
-    <ClCompile Include="src\cpp\playerstateditch.cpp" />
+    <ClCompile Include="src\cpp\playerstatesmoke.cpp" />
     <ClCompile Include="src\cpp\playerstatemove.cpp" />
     <ClCompile Include="src\cpp\playerstateneutral.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
@@ -389,9 +389,9 @@
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\pcui.h" />
     <ClInclude Include="src\include\player.h" />
-    <ClInclude Include="src\include\playerstateaction.h" />
+    <ClInclude Include="src\include\playerstatemagazine.h" />
     <ClInclude Include="src\include\playerstatebase.h" />
-    <ClInclude Include="src\include\playerstateditch.h" />
+    <ClInclude Include="src\include\playerstatesmoke.h" />
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\progressgauge.h" />

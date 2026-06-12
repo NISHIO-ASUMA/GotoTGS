@@ -10,6 +10,8 @@
 //*********************************************************
 #include "playerstateneutral.h"
 #include "playerstatemove.h"
+#include "playerstatesmoke.h"
+#include "playerstatemagazine.h"
 #include "player.h"
 #include "manager.h"
 #include "input.h"
@@ -43,11 +45,15 @@ void CPlayerStateNeutral::OnStart()
 //=========================================================
 void CPlayerStateNeutral::OnUpdate()
 {
-	// 移動判定がtrueだったら
-	if (m_pPlayer->GetMoveCheck())
+	if (m_pPlayer->GetAfkSmoke())
 	{
 		// ステートを移動にチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateMove(), ID_MOVE);
+		m_pPlayer->ChangeState(new CPlayerStateSmoke(), ID_SMOKE);
+	}
+	else if (m_pPlayer->GetAfkMagazine())
+	{
+		// ステートを移動にチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateMagazine(), ID_MAGAZINE);
 	}
 }
 
@@ -56,5 +62,5 @@ void CPlayerStateNeutral::OnUpdate()
 //=========================================================
 void CPlayerStateNeutral::OnExit()
 {
-
+	m_pPlayer->DeleteItem();
 }

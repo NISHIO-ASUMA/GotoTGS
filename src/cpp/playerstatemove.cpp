@@ -53,5 +53,5 @@ void CPlayerStateMove::OnUpdate()
 //=========================================================
 void CPlayerStateMove::OnExit()
 {
-
+	m_pPlayer->DeleteItem();
 }

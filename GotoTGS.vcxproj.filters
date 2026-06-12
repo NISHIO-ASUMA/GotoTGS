@@ -579,7 +579,7 @@
     <ClCompile Include="src\cpp\player.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\playerstateaction.cpp">
+    <ClCompile Include="src\cpp\playerstatemagazine.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\playerstateneutral.cpp">
@@ -660,7 +660,7 @@
     <ClCompile Include="src\cpp\createjsonmove.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\playerstateditch.cpp">
+    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\afk.cpp">
@@ -989,7 +989,7 @@
     <ClInclude Include="src\include\player.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\playerstateaction.h">
+    <ClInclude Include="src\include\playerstatemagazine.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
     </ClInclude>
     <ClInclude Include="src\include\playerstatebase.h">
@@ -1070,7 +1070,7 @@
     <ClInclude Include="src\include\createjsonmove.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\playerstateditch.h">
+    <ClInclude Include="src\include\playerstatesmoke.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\afk.h">

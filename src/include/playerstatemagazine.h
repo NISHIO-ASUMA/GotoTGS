@@ -18,11 +18,11 @@
 //*********************************************************
 // プレイヤーステートアクションクラスを定義
 //*********************************************************
-class CPlayerStateAction : public CPlayerStateBase
+class CPlayerStateMagazine : public CPlayerStateBase
 {
 public:
-	CPlayerStateAction();
-	~CPlayerStateAction();
+	CPlayerStateMagazine();
+	~CPlayerStateMagazine();
 
 	void OnStart(void) override;
 	void OnUpdate(void) override;
