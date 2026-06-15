@@ -307,6 +307,12 @@
     <Filter Include="ソース ファイル\AddFile\Takahashi\Deskwork\Task">
       <UniqueIdentifier>{6851dc28-3ec6-469a-8433-6fe4e8edea60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\afk">
+      <UniqueIdentifier>{090444a8-5223-4ad4-aac1-69fa2ddf0d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\afk">
+      <UniqueIdentifier>{b6c025b2-8f4e-4336-b322-92ce360d43ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -663,19 +669,7 @@
     <ClCompile Include="src\cpp\playerstatesmoke.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\afk.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\afksmoke.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\afkui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\smokeui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\afk2dui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\tutorialuimanager.cpp">
@@ -687,25 +681,40 @@
     <ClCompile Include="src\cpp\titleuimanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\afkuimanager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\cpp\autodoor_collision.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\automatic_door.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\automaticdoormanager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\afktv.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\cpp\afk.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\afkmanager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\cpp\afk2dui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\afkmagazine.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\autodoor_collision.cpp">
+    <ClCompile Include="src\cpp\afkmanager.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afksmoke.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afktv.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afkui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afkuimanager.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemymanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1073,19 +1082,7 @@
     <ClInclude Include="src\include\playerstatesmoke.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\afk.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afksmoke.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afkui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\smokeui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afk2dui.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\titleui.h">
@@ -1097,25 +1094,40 @@
     <ClInclude Include="src\include\tutorialuimanager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\afkuimanager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\include\autodoor_collision.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\automatic_door.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\include\enemymanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\automaticdoormanager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\include\afk.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\afktv.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afkmanager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\include\afk2dui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
     </ClInclude>
     <ClInclude Include="src\include\afkmagazine.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\autodoor_collision.h">
+    <ClInclude Include="src\include\afkmanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afksmoke.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afktv.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkuimanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\automatic_door.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\automaticdoormanager.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
