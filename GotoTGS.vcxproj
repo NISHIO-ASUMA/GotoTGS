@@ -198,6 +198,7 @@
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
     <ClCompile Include="src\cpp\enemy.cpp" />
+    <ClCompile Include="src\cpp\enemymanager.cpp" />
     <ClCompile Include="src\cpp\enemystatebase.cpp" />
     <ClCompile Include="src\cpp\enemystateneutral.cpp" />
     <ClCompile Include="src\cpp\event.cpp" />
@@ -338,6 +339,7 @@
     <ClInclude Include="src\include\DOCUMENTdeskwork.h" />
     <ClInclude Include="src\include\easing.h" />
     <ClInclude Include="src\include\enemy.h" />
+    <ClInclude Include="src\include\enemymanager.h" />
     <ClInclude Include="src\include\enemystatebase.h" />
     <ClInclude Include="src\include\enemystateneutral.h" />
     <ClInclude Include="src\include\event.h" />
