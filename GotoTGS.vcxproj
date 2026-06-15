@@ -203,7 +203,7 @@
     <ClCompile Include="src\cpp\enemystateneutral.cpp" />
     <ClCompile Include="src\cpp\event.cpp" />
     <ClCompile Include="src\cpp\eventcutin.cpp" />
-    <ClCompile Include="src\cpp\eventUi.cpp" />
+    <ClCompile Include="src\cpp\eventUI.cpp" />
     <ClCompile Include="src\cpp\fade.cpp" />
     <ClCompile Include="src\cpp\friend.cpp" />
     <ClCompile Include="src\cpp\game.cpp" />
@@ -344,7 +344,7 @@
     <ClInclude Include="src\include\enemystateneutral.h" />
     <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\eventcutin.h" />
-    <ClInclude Include="src\include\eventUi.h" />
+    <ClInclude Include="src\include\eventUI.h" />
     <ClInclude Include="src\include\fade.h" />
     <ClInclude Include="src\include\friend.h" />
     <ClInclude Include="src\include\game.h" />

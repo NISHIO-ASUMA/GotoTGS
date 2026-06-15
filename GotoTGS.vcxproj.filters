@@ -603,7 +603,7 @@
     <ClCompile Include="src\cpp\gametime.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\eventUi.cpp">
+    <ClCompile Include="src\cpp\eventUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\eventcutin.cpp">
@@ -1016,7 +1016,7 @@
     <ClInclude Include="src\include\eventcutin.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\eventUi.h">
+    <ClInclude Include="src\include\eventUI.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
     </ClInclude>
     <ClInclude Include="src\include\gametime.h">

@@ -26,7 +26,7 @@
 #include "gametime.h"			// 髙橋追加
 #include "deskwork.h"			// 髙橋追加
 #include "progressgauge.h"		// 髙橋追加
-#include "alert.h"				// 髙橋追加
+#include "eventUI.h"			// 髙橋追加
 
 #include "player.h"				// 近田追加
 #include "friend.h"				// 近田追加
@@ -67,7 +67,7 @@ CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
-m_pAlert(nullptr),
+m_pEventUI(nullptr),
 m_pWorldWallManager(nullptr)
 {
 
@@ -247,16 +247,6 @@ void CGameSceneObject::CreatePointer(void)
 	// 進捗ゲージの生成 Misaki
 	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);
 
-	// 警告表示の構造体
-	CAlert::Alert alert;
-	alert.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f);
-	alert.col = COLOR_YERROW;
-	alert.tex = D3DXVECTOR2(1.0f, 1.0f);
-	alert.fWidth = SCREEN_WIDTH;
-	alert.fHeight = 200.0f;
-	alert.isLoop = false;
-	alert.bUse = false;
-
-	// 帰国表示の生成
-	m_pAlert = CAlert::Create(alert);
+	// イベントUIの生成
+	m_pEventUI = CEventUI::Create();
 }

@@ -52,12 +52,13 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr int MOVE_FREAM = 30;					// 移動時のフレーム数
-		static constexpr int STOP_FREAM = 60;					// 表示するフレーム数
+		static constexpr int MOVE_FREAM = 120;					// 移動時のフレーム数
+		static constexpr int STOP_FREAM = 180;					// 表示するフレーム数
 		static constexpr const char* TEXNAME = "cutin000.png";	// テクスチャ名
 	};
 
 	// メンバ変数
 	D3DXVECTOR3 m_Offsetpos;	// 初期位置
 	int m_nStopCount;			// 表示するフレームのカウント
+	bool m_bTurn;				// 折り返したかどうか
 };

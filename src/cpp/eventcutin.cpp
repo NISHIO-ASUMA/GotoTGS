@@ -21,7 +21,8 @@
 //=========================================================
 CEventcutin::CEventcutin(int nPriority):CAnimationObject2D(nPriority),
 m_Offsetpos(VECTOR3_NULL),
-m_nStopCount(NULL)
+m_nStopCount(NULL),
+m_bTurn(false)
 {
 
 }
@@ -76,6 +77,9 @@ HRESULT CEventcutin::Init(void)
 	// 表示し続けるフレームのカウントを初期化
 	m_nStopCount = NULL;
 
+	// 折り返していない状態にする
+	m_bTurn = false;
+
 	// 親の初期化処理
 	CAnimationObject2D::Init();
 
@@ -105,7 +109,7 @@ void CEventcutin::Update(void)
 	// 現在のカウント
 	int nCount = GetFreamCount();
 
-	if (m_nStopCount >= NULL)
+	if (m_nStopCount > NULL)
 	{// 表示するカウントが残っているなら
 		// 表示するカウントを1つ減らす
 		m_nStopCount--;
@@ -116,29 +120,47 @@ void CEventcutin::Update(void)
 	// 現在のカウントを1つ進める
 	nCount++;
 
+	// 現在のカウントを設定
+	SetFreamCount(nCount);
+
 	// 1フレーム毎のX軸の移動量
 	float fMoveX = CEasing::SetEase(nCount, Config::MOVE_FREAM);
 	fMoveX = CEasing::EaseOutCubic(fMoveX);
 
 	// 移動量を加算
-	pos.x += SCREEN_WIDTH * fMoveX;
+	pos.x = m_Offsetpos.x + (SCREEN_WIDTH * fMoveX);
 
 	if (nCount >= Config::MOVE_FREAM)
-	{// 現在のカウントが移動時のフレーム数を超えたなら
-
+	{
 		// 現在のカウントを初期化
 		SetFreamCount(NULL);
 
-		if (pos.x >= SCREEN_WIDTH + HALFWIDTH)
-		{// 右端の画面外に完全に移動したなら
+		if (m_bTurn != false)
+		{
 			// 初期位置に戻す
+			m_Offsetpos.x -= SCREEN_WIDTH;
 			pos = m_Offsetpos;
+
+			// 表示しない状態にする
+			SetUse(false);
+
+			// 折り返ししていない状態にする
+			m_bTurn = false;
+
 		}
 		else
 		{
+			// 初期位置を中心に設定
+			m_Offsetpos.x += SCREEN_WIDTH;
+
 			// 表示するフレーム数を代入する
 			m_nStopCount = Config::STOP_FREAM;
+
+			// 折り返した状態にする
+			m_bTurn = true;
+
 		}
+
 	}
 
 	// 位置を設定
@@ -146,7 +168,6 @@ void CEventcutin::Update(void)
 
 	// 親クラスの更新処理
 	CAnimationObject2D::Update();
-
 }
 
 //=========================================================
