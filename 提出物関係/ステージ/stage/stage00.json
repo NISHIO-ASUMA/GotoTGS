@@ -1,5 +1,5 @@
 {
-   "AllObject": 371,
+   "AllObject": 370,
    "SetObjects": [
       {
          "idx": 0,
@@ -6484,13 +6484,13 @@
       {
          "idx": 324,
          "pos": [
-            1576.5799560546875,
+            1597.6400146484375,
             19.0,
-            184.9199981689453
+            168.22000122070313
          ],
          "rot": [
             0.0,
-            3.140000104904175,
+            -2.5999999046325684,
             0.0
          ],
          "scale": [
@@ -6504,13 +6504,13 @@
       {
          "idx": 325,
          "pos": [
-            1578.550048828125,
+            1594.5799560546875,
             19.0,
-            19.780000686645508
+            50.79999923706055
          ],
          "rot": [
             0.0,
-            3.140000104904175,
+            3.049999952316284,
             0.0
          ],
          "scale": [
@@ -6524,13 +6524,13 @@
       {
          "idx": 326,
          "pos": [
-            1726.7099609375,
+            1696.6300048828125,
             19.0,
-            183.1699981689453
+            160.5
          ],
          "rot": [
             0.0,
-            3.140000104904175,
+            2.7799999713897705,
             0.0
          ],
          "scale": [
@@ -6544,13 +6544,13 @@
       {
          "idx": 327,
          "pos": [
-            1709.989990234375,
+            1697.3299560546875,
             19.0,
-            18.540000915527344
+            47.81999969482422
          ],
          "rot": [
             0.0,
-            3.140000104904175,
+            -2.630000114440918,
             0.0
          ],
          "scale": [
@@ -6584,26 +6584,6 @@
       {
          "idx": 329,
          "pos": [
-            1648.300048828125,
-            25.0,
-            110.23999786376953
-         ],
-         "rot": [
-            0.0,
-            2.2899999618530273,
-            0.0
-         ],
-         "scale": [
-            1.2999999523162842,
-            1.2999999523162842,
-            1.2999999523162842
-         ],
-         "Flags": false,
-         "filepath": "data/MODEL/STAGEOBJ/crane_game_1.x"
-      },
-      {
-         "idx": 330,
-         "pos": [
             1474.949951171875,
             0.0,
             -80.69999694824219
@@ -6622,7 +6602,7 @@
          "filepath": "data/MODEL/STAGEOBJ/vending_machine00.x"
       },
       {
-         "idx": 331,
+         "idx": 330,
          "pos": [
             1474.949951171875,
             0.0,
@@ -6642,7 +6622,7 @@
          "filepath": "data/MODEL/STAGEOBJ/vending_machine02.x"
       },
       {
-         "idx": 332,
+         "idx": 331,
          "pos": [
             1114.43994140625,
             0.0,
@@ -6662,7 +6642,7 @@
          "filepath": "data/MODEL/STAGEOBJ/vending_machine01.x"
       },
       {
-         "idx": 333,
+         "idx": 332,
          "pos": [
             634.2999877929688,
             0.0,
@@ -6682,7 +6662,7 @@
          "filepath": "data/MODEL/STAGEOBJ/vending_machine00.x"
       },
       {
-         "idx": 334,
+         "idx": 333,
          "pos": [
             634.2999877929688,
             0.0,
@@ -6702,7 +6682,7 @@
          "filepath": "data/MODEL/STAGEOBJ/vending_machine02.x"
       },
       {
-         "idx": 335,
+         "idx": 334,
          "pos": [
             1492.0,
             146.5,
@@ -6722,7 +6702,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Wall02.x"
       },
       {
-         "idx": 336,
+         "idx": 335,
          "pos": [
             1788.9000244140625,
             42.0,
@@ -6742,7 +6722,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 337,
+         "idx": 336,
          "pos": [
             1788.9000244140625,
             42.0,
@@ -6762,7 +6742,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 338,
+         "idx": 337,
          "pos": [
             1675.0,
             42.0,
@@ -6782,7 +6762,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 339,
+         "idx": 338,
          "pos": [
             1675.0,
             42.0,
@@ -6802,7 +6782,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 340,
+         "idx": 339,
          "pos": [
             1626.9000244140625,
             42.0,
@@ -6822,7 +6802,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 341,
+         "idx": 340,
          "pos": [
             1626.9000244140625,
             42.0,
@@ -6842,7 +6822,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 342,
+         "idx": 341,
          "pos": [
             1512.9000244140625,
             42.0,
@@ -6862,7 +6842,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 343,
+         "idx": 342,
          "pos": [
             1512.9000244140625,
             42.0,
@@ -6882,7 +6862,7 @@
          "filepath": "data/MODEL/STAGEOBJ/crane_game_0.x"
       },
       {
-         "idx": 344,
+         "idx": 343,
          "pos": [
             987.1699829101563,
             0.0,
@@ -6902,7 +6882,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Guardrail.x"
       },
       {
-         "idx": 345,
+         "idx": 344,
          "pos": [
             475.0899963378906,
             0.0,
@@ -6922,7 +6902,7 @@
          "filepath": "data/MODEL/STAGEOBJ/tower.x"
       },
       {
-         "idx": 346,
+         "idx": 345,
          "pos": [
             -141.16000366210938,
             508.0,
@@ -6942,7 +6922,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill04.x"
       },
       {
-         "idx": 347,
+         "idx": 346,
          "pos": [
             2722.780029296875,
             256.0,
@@ -6962,7 +6942,7 @@
          "filepath": "data/MODEL/STAGEOBJ/bill04.x"
       },
       {
-         "idx": 348,
+         "idx": 347,
          "pos": [
             564.219970703125,
             52.0,
@@ -6982,7 +6962,7 @@
          "filepath": "data/MODEL/STAGEOBJ/poster000.x"
       },
       {
-         "idx": 349,
+         "idx": 348,
          "pos": [
             488.42999267578125,
             78.0,
@@ -7002,7 +6982,7 @@
          "filepath": "data/MODEL/STAGEOBJ/poster100.x"
       },
       {
-         "idx": 350,
+         "idx": 349,
          "pos": [
             828.8099975585938,
             0.0,
@@ -7022,7 +7002,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 351,
+         "idx": 350,
          "pos": [
             852.1099853515625,
             0.0,
@@ -7042,7 +7022,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 352,
+         "idx": 351,
          "pos": [
             1677.7099609375,
             0.0,
@@ -7062,7 +7042,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 353,
+         "idx": 352,
          "pos": [
             2158.080078125,
             0.0,
@@ -7082,7 +7062,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 354,
+         "idx": 353,
          "pos": [
             2182.300048828125,
             0.0,
@@ -7102,7 +7082,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 355,
+         "idx": 354,
          "pos": [
             1791.1700439453125,
             0.0,
@@ -7122,7 +7102,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 356,
+         "idx": 355,
          "pos": [
             817.9299926757813,
             0.0,
@@ -7142,7 +7122,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 357,
+         "idx": 356,
          "pos": [
             1323.800048828125,
             0.0,
@@ -7162,7 +7142,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Manhole.x"
       },
       {
-         "idx": 358,
+         "idx": 357,
          "pos": [
             1802.02001953125,
             136.0,
@@ -7182,7 +7162,7 @@
          "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
       },
       {
-         "idx": 359,
+         "idx": 358,
          "pos": [
             1508.9100341796875,
             158.0,
@@ -7202,7 +7182,7 @@
          "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
       },
       {
-         "idx": 360,
+         "idx": 359,
          "pos": [
             1804.9100341796875,
             158.0,
@@ -7222,7 +7202,7 @@
          "filepath": "data/MODEL/STAGEOBJ/surveillance_camera.x"
       },
       {
-         "idx": 361,
+         "idx": 360,
          "pos": [
             1676.0999755859375,
             22.0,
@@ -7242,7 +7222,7 @@
          "filepath": "data/MODEL/STAGEOBJ/car000.x"
       },
       {
-         "idx": 362,
+         "idx": 361,
          "pos": [
             1529.3699951171875,
             18.0,
@@ -7262,7 +7242,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
       },
       {
-         "idx": 363,
+         "idx": 362,
          "pos": [
             1586.27001953125,
             22.0,
@@ -7282,7 +7262,7 @@
          "filepath": "data/MODEL/STAGEOBJ/trash_can.x"
       },
       {
-         "idx": 364,
+         "idx": 363,
          "pos": [
             1847.9599609375,
             140.0,
@@ -7302,7 +7282,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Pole.x"
       },
       {
-         "idx": 365,
+         "idx": 364,
          "pos": [
             1805.0,
             24.0,
@@ -7322,7 +7302,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Gacha.x"
       },
       {
-         "idx": 366,
+         "idx": 365,
          "pos": [
             1805.0,
             24.0,
@@ -7342,7 +7322,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Gacha.x"
       },
       {
-         "idx": 367,
+         "idx": 366,
          "pos": [
             1805.0,
             24.0,
@@ -7362,7 +7342,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Gacha.x"
       },
       {
-         "idx": 368,
+         "idx": 367,
          "pos": [
             1805.0,
             24.0,
@@ -7382,7 +7362,7 @@
          "filepath": "data/MODEL/STAGEOBJ/Gacha.x"
       },
       {
-         "idx": 369,
+         "idx": 368,
          "pos": [
             1799.8199462890625,
             27.0,
@@ -7402,7 +7382,7 @@
          "filepath": "data/MODEL/STAGEOBJ/money_changer.x"
       },
       {
-         "idx": 370,
+         "idx": 369,
          "pos": [
             734.8800048828125,
             67.0,
