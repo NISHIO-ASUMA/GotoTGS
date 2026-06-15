@@ -22,7 +22,7 @@ class CEventcutin :public CAnimationObject2D
 {
 public:
 
-	// イベントカットイン表示の構造体
+	// カットイン表示の構造体
 	struct EventCutin
 	{
 		D3DXVECTOR3 pos;

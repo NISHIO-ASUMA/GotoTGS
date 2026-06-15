@@ -67,6 +67,7 @@ CEventcutin* CEventcutin::Create(const EventCutin& eventcutin)
 
 	return pEventcutin;
 }
+
 //=========================================================
 // ‰Šú‰»ˆ—
 //=========================================================
@@ -135,7 +136,6 @@ void CEventcutin::Update(void)
 		}
 		else
 		{
-
 			// •\¦‚·‚éƒtƒŒ[ƒ€”‚ğ‘ã“ü‚·‚é
 			m_nStopCount = Config::STOP_FREAM;
 		}
