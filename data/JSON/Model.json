@@ -358,5 +358,38 @@
   },
   {
     "Model": "data/MODEL/STAGEOBJ/magaziner_002.x"
+  },
+  {
+    "Model": "data/MODEL/STAGEOBJ/smoke.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/00_Police_body.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/01_Police_head.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/02_Police_armR.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/03_Police_handR.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/04_Police_armL.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/05_Police_handL.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/06_Police_legR.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/07_Police_footR.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/08_Police_legL.x"
+  },
+  {
+    "Model": "data/MODEL/POLICE/09_Police_footL.x"
   }
 ]

@@ -82,6 +82,7 @@
   { "XFile": "data/MODEL/STAGEOBJ/sofa.x" },
   { "XFile": "data/MODEL/STAGEOBJ/StreetLight.x" },
   { "XFile": "data/MODEL/STAGEOBJ/surveillance_camera.x" },
+  { "XFile": "data/MODEL/STAGEOBJ/smoke.x" },
   { "XFile": "data/MODEL/STAGEOBJ/taxi.x" },
   { "XFile": "data/MODEL/STAGEOBJ/toilet.x" },
   { "XFile": "data/MODEL/STAGEOBJ/tower.x" },
