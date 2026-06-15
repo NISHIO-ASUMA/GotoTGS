@@ -42,7 +42,7 @@ public:
 	~CBoxCollider();
 
 	void SetPosOld(const D3DXVECTOR3& posold) { m_BoxInfo.posOld = posold; }
-	BoxColliderInfo GetInfo(void) const { return m_BoxInfo; }
+	const BoxColliderInfo& GetInfo(void) const { return m_BoxInfo; }
 
 	/// <summary>
 	/// ê∂ê¨èàóù
