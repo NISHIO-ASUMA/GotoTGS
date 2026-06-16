@@ -717,6 +717,9 @@
     <ClCompile Include="src\cpp\enemymanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\playerstatetv.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1129,6 +1132,9 @@
     </ClInclude>
     <ClInclude Include="src\include\automaticdoormanager.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatetv.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

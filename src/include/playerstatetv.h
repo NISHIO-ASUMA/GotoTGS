@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤーステートニュートラルクラス処理 [ playerstateneutral.h ]
+// TV見ているサボりの状態クラス処理 [ playerstatetv.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -16,14 +16,14 @@
 #include "playerstatebase.h"
 
 //*********************************************************
-// プレイヤーステートニュートラルクラスを定義
+// TV見ているサボり状態クラスを定義
 //*********************************************************
-class CPlayerStateNeutral : public CPlayerStateBase
+class CPlayerStateTV : public CPlayerStateBase
 {
 public:
 
-	CPlayerStateNeutral();
-	~CPlayerStateNeutral();
+	CPlayerStateTV();
+	~CPlayerStateTV();
 
 	void OnStart(void) override;
 	void OnUpdate(void) override;

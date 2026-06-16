@@ -259,6 +259,7 @@
     <ClCompile Include="src\cpp\playerstatesmoke.cpp" />
     <ClCompile Include="src\cpp\playerstatemove.cpp" />
     <ClCompile Include="src\cpp\playerstateneutral.cpp" />
+    <ClCompile Include="src\cpp\playerstatetv.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
     <ClCompile Include="src\cpp\rankingmanager.cpp" />
@@ -396,6 +397,7 @@
     <ClInclude Include="src\include\playerstatesmoke.h" />
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
+    <ClInclude Include="src\include\playerstatetv.h" />
     <ClInclude Include="src\include\progressgauge.h" />
     <ClInclude Include="src\include\ranking.h" />
     <ClInclude Include="src\include\rankingmanager.h" />

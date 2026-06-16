@@ -57,6 +57,16 @@ namespace player
 	constexpr float SphereSize = 60.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 };
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace Player_Info
+{
+	const D3DXVECTOR3 TV_CHARACTORPOS = { -235.0f, 13.0f, 280.0f };
+	const D3DXVECTOR3 TV_DESTPOS = { -350.0f, 13.0f, 350.0f };
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -68,7 +78,8 @@ m_pMachine(nullptr),
 m_bMove(false),
 m_bAfkSmoke(false),
 m_bAfkTV(false),
-m_bAfkMagazine(false)
+m_bAfkMagazine(false),
+m_TvPrevPos(VECTOR3_NULL)
 {
 
 }
@@ -168,6 +179,7 @@ void CPlayer::Update(void)
 	//        西尾追記 : カメラの固定化する処理を追加したよ
 	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加
 	//        西尾追記 : 2026/06/08 自動ドアの判別設定と判定の修正
+	//		  西尾追記 : 2026/06/16 モデルが出ないバグを修正 ステート追加
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
@@ -313,64 +325,11 @@ void CPlayer::Update(void)
 		}
 	}
 
-//*************************************************
-	// jsonmanagerからブロックを取得
-	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
-	if (BlockManager == nullptr) return;
+	// ブロックとの判定
+	UpdateBlockCollision(UpdatePos);
 
-	// 最大ブロックを取得する
-	for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
-	{
-		// 各ブロックを取得し判定を生成
-		auto IdxBlock = BlockManager->GetBlock(nCnt);
-
-		// コライダー取得とnullチェック
-		CBoxCollider* Collider = IdxBlock->GetCollider();
-		if (Collider == nullptr) continue;
-
-		// 当たり判定の実行
-		if (Collision(Collider, &UpdatePos))
-		{
-			// 当たった点の座標セット
-			SetPos(UpdatePos);
-
-			// コライダーと現在座標の更新をする
-			m_pBoxCollider->SetPos(UpdatePos);
-			m_pBoxCollider->SetPosOld(UpdatePos);
-		}
-	}
-
-//*************************************************
-// ADD : 西尾 自動開閉ドア関係
-//*************************************************
-	auto* pDoorCollision = CAutoMaticDoorCollision::GetInstance(); // コライダークラス
-	auto* pDoorManager = CAutoMaticDoorManager::GetInstance();	   // ドア管理クラス
-
-	if (pDoorCollision && pDoorManager)
-	{
-		//自動ドア判定用コライダーを取得
-		const auto& DoorColliders = pDoorCollision->GetColliders();
-
-		for (const auto& ColliderData : DoorColliders)
-		{
-			// nullチェック
-			if (ColliderData == nullptr || ColliderData->pCollider == nullptr) continue;
-
-			// プレイヤーの球と、自動ドアのセンサー球との当たり判定
-			if (CollisionSphere(ColliderData->pCollider.get()))
-			{
-				// 球コライダー座標を更新
-				if (m_pSphereCollider)
-				{
-					m_pSphereCollider->SetPos(UpdatePos);
-				}
-
-				// 当たったコライダーのインデックスを渡して、特定のペアを開ける
-				pDoorManager->StartOpen(ColliderData->nIdx);
-				break;
-			}
-		}
-	}
+	// 自動ドアとの判定
+	UpdateAutoDoorCollision(UpdatePos);
 
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
@@ -543,24 +502,8 @@ void CPlayer::MoveKeyboard(float speed)
 		// 移動判定をtrueに
 		m_bMove = true;
 	}
-
-//***********************************************
-// TODO :  特定のモーションの時に特定のモデルを持たせる
-//***********************************************
-
-	// テレビを見るモーションに切り替え
-	if (m_bAfkTV)
-	{
-		// プレイヤー座標を椅子の上にセットする
-		
-		// 角度を変更し、テレビに向ける
-		// SetRot();
-
-		// tvモーションに変更する
-		GetMotion()->SetMotion(CPlayer::MOTION::TV);
-	}
-
-	// モーションチェンジ
+	
+	// サボり判定が有効な物があったら
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine) return;
 
 	// キーが押されていなかったら
@@ -713,4 +656,86 @@ void CPlayer::MoveJoypad(float speed)
 		// 移動モーション設定
 		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
 	}
+}
+//=================================================
+// ブロックとのコリジョン判定関数わけ
+//=================================================
+void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
+{
+	// スキップする
+	if (m_bAfkTV) return; 
+
+	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (!BlockManager) return;
+
+	for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
+	{
+		auto IdxBlock = BlockManager->GetBlock(nCnt);
+		if (!IdxBlock) continue;
+
+		// コライダー取得
+		CBoxCollider* Collider = IdxBlock->GetCollider();
+		if (!Collider) continue;
+
+		if (Collision(Collider, &pos))
+		{
+			// 現在座標をセット
+			SetPos(pos);
+
+			// コライダー更新
+			m_pBoxCollider->SetPos(pos);
+			m_pBoxCollider->SetPosOld(pos);
+		}
+	}
+}
+//=================================================
+// 自動ドアとのコリジョン関数分け
+//=================================================
+void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
+{
+	auto* pDoorCollision = CAutoMaticDoorCollision::GetInstance(); // コライダークラス
+	auto* pDoorManager = CAutoMaticDoorManager::GetInstance();	   // ドア管理クラス
+	if (!pDoorCollision || !pDoorManager) return;
+
+	//自動ドア判定用コライダーを取得
+	const auto& DoorColliders = pDoorCollision->GetColliders();
+
+	for (const auto& ColliderData : DoorColliders)
+	{
+		// nullチェック
+		if (ColliderData == nullptr || ColliderData->pCollider == nullptr) continue;
+
+		// プレイヤーの球と、自動ドアのセンサー球との当たり判定
+		if (CollisionSphere(ColliderData->pCollider.get()))
+		{
+			// 球コライダー座標を更新
+			if (m_pSphereCollider)
+			{
+				m_pSphereCollider->SetPos(pos);
+			}
+
+			// 当たったコライダーのインデックスを渡して、特定のペアを開ける
+			pDoorManager->StartOpen(ColliderData->nIdx);
+			break;
+		}
+	}
+}
+//=================================================
+// テレビを向くための計算関数
+//=================================================
+void CPlayer::MathTVRotation(void)
+{
+#if 0
+	// 座標をセットする
+	SetPos(Player_Info::TV_CHARACTORPOS);
+
+	// 対象ベクトルを作成
+	auto VecToTV = Player_Info::TV_DESTPOS - GetPos();
+
+	// 回転角を生成
+	float fRotY = atan2f(VecToTV.x, VecToTV.z);
+
+	// 角度を設定
+	SetRot(D3DXVECTOR3(0.0f, fRotY, 0.0f));
+#endif
 }
