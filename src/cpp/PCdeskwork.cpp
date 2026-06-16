@@ -92,6 +92,9 @@ HRESULT CPCDeskwork::Init(void)
 
 	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
+		// ポインタの初期化
+		m_pDeskUI[ui.nIdx] = nullptr;
+
 		// タスクをランダムに設定
 		ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
 

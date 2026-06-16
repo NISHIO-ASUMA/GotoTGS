@@ -62,6 +62,12 @@ HRESULT CCOPYDeskwork::Init(void)
 	// —”‚Ìí
 	srand((unsigned int)time(0));
 
+	for (int nCount = 0; nCount < TEXTURE_MAX; nCount++)
+	{
+		// ƒ|ƒCƒ“ƒ^‚Ì‰Šú‰»
+		m_pDeskUI[nCount] = nullptr;
+	}
+
 	// UI‚Ìî•ñ
 	CDeskworkUI::UI ui;
 	ui.pos = GetPos();
