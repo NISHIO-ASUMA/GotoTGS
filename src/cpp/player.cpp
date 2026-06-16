@@ -344,7 +344,7 @@ void CPlayer::Update(void)
 // ADD : 西尾 自動開閉ドア関係
 //*************************************************
 	auto* pDoorCollision = CAutoMaticDoorCollision::GetInstance(); // コライダークラス
-	auto* pDoorManager = CAutoMaticDoorManager::GetInstance();     // ドア管理クラス
+	auto* pDoorManager = CAutoMaticDoorManager::GetInstance();	   // ドア管理クラス
 
 	if (pDoorCollision && pDoorManager)
 	{
@@ -383,9 +383,10 @@ void CPlayer::Draw(void)
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
 
-	// 特定モデルの描画
+	// 特定モデルがあるなら
 	if (m_pSubItemModels)
 	{
+		// モデル描画
 		m_pSubItemModels->Draw();
 
 		// マトリックス取得

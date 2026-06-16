@@ -141,5 +141,4 @@ private:
 // ¼”ö’Ç‰Á
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // “Á’è“®ì‚É‚½‚¹‚éƒ‚ƒfƒ‹
-
 };

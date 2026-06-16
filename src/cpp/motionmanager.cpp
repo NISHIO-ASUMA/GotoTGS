@@ -22,7 +22,6 @@
 // インクルードファイル
 //*********************************************************
 #include "motion.h"
-#include "model.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -103,6 +102,13 @@ int CMotionManager::Register(const char* pFileName, std::vector<CModel*>& pModel
 				// オフセット設定
 				pNewModel->OffSetPos(m_FileData[nCnt].offpos[nModel]);
 				pNewModel->OffSetRot(m_FileData[nCnt].offrot[nModel]);
+
+				// もしモデルの種類を読み取って値があったら
+				if (m_FileData[nCnt].PartType[nModel])
+				{
+					// 保存してあるモデルの種類を設定する
+					pNewModel->SetPartType(m_FileData[nCnt].PartType[nModel]);
+				}
 			}
 
 			// ファイルインデックス番号を返す
@@ -266,12 +272,20 @@ void CMotionManager::SetParts(std::ifstream& file, std::vector<CModel*>& pModel)
 		std::string cmd;
 		partss >> cmd;
 
-		// "INDEX"を読み取った
 		if (cmd == "INDEX")
 		{
 			// インデックスの変数に値を代入
 			std::string eq;
 			partss >> eq >> nIdx;
+
+			if (nIdx >= 0 && pModel[nIdx])
+			{
+				// モデル側に初期値をセット
+				pModel[nIdx]->SetPartType(CModel::PARTTYPE_NONE);
+
+				// この時点でデータを保持する配列に仮の初期値を追加
+				m_FileData.back().PartType.push_back(CModel::PARTTYPE_NONE);
+			}
 		}
 		// "PARENT"を読み取った
 		else if (cmd == "PARENT")
@@ -354,37 +368,24 @@ void CMotionManager::SetParts(std::ifstream& file, std::vector<CModel*>& pModel)
 
 			if (nIdx >= 0 && pModel[nIdx])
 			{
-				// パーツの種類設定
+				// 代入用のローカル変数
 				CModel::PARTTYPE partType = CModel::PARTTYPE_NONE;
 
-				// スクリプトの文字列を列挙型に変換
-				if (typeStr == "NONE") {
-					partType = CModel::PARTTYPE_NONE;
-				}
-				else if (typeStr == "HEAD") {
-					partType = CModel::PARTTYPE_HEAD;
-				}
-				else if (typeStr == "CHEST") {
-					partType = CModel::PARTTYPE_CHEST;
-				}
-				else if (typeStr == "LEFTHAND" || typeStr == "LEFT_HAND") {
-					partType = CModel::PARTTYPE_LEFT_HAND;
-				}
-				else if (typeStr == "RIGHTHAND" || typeStr == "RIGHT_HAND") {
-					partType = CModel::PARTTYPE_RIGHT_HAND;
-				}
-				else if (typeStr == "LEFTLEG" || typeStr == "LEFT_LEG") {
-					partType = CModel::PARTTYPE_LEFT_LEG;
-				}
-				else if (typeStr == "RIGHTLEG" || typeStr == "RIGHT_LEG") {
-					partType = CModel::PARTTYPE_RIGHT_LEG;
-				}
-				else if (typeStr == "WEAPON") {
-					partType = CModel::PARTTYPE_WEAPON;
-				}
+				// 文字列を判定
+				if (typeStr == "NONE")							partType = CModel::PARTTYPE_NONE; // 無し
+				else if (typeStr == "HEAD")						partType = CModel::PARTTYPE_HEAD; // 頭
+				else if (typeStr == "CHEST")					partType = CModel::PARTTYPE_CHEST;// 腰
+				else if (typeStr == "LEFTHAND" || typeStr == "LEFT_HAND")  partType = CModel::PARTTYPE_LEFT_HAND; // 左手
+				else if (typeStr == "RIGHTHAND" || typeStr == "RIGHT_HAND") partType = CModel::PARTTYPE_RIGHT_HAND; // 右手
+				else if (typeStr == "LEFTLEG" || typeStr == "LEFT_LEG")   partType = CModel::PARTTYPE_LEFT_LEG;   // 左足
+				else if (typeStr == "RIGHTLEG" || typeStr == "RIGHT_LEG")  partType = CModel::PARTTYPE_RIGHT_LEG; // 右足
+				else if (typeStr == "WEAPON")					partType = CModel::PARTTYPE_WEAPON;// 武器
 
-				// モデルにパーツタイプを設定
+				// モデルの値を上書き
 				pModel[nIdx]->SetPartType(partType);
+
+				// INDEXで追加した要素を、上書きして配列内のデータを設定する
+				m_FileData.back().PartType.back() = partType;
 			}
 		}
 		// "END_PARTSSET"を読み取った
