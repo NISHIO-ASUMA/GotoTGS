@@ -57,7 +57,7 @@ public:
 	inline void SetUseOutLine(const bool& use) { m_isOutLine = use; }
 
 	inline D3DXMATRIX GetMtxWorld(void) { return m_mtxworld; }
-	inline PARTTYPE GetPartType(void) const { return m_parttype; } // ƒp[ƒc‚Ìí—Ş‚ğæ“¾
+	inline PARTTYPE GetPartType(void) const { return m_parttype; }
 	inline int GetModelIdx(void) const { return m_nModelIdx; }
 	inline bool GetIsInstansing(void) const { return m_Isinstancing; }
 

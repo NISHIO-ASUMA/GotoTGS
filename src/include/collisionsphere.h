@@ -38,7 +38,7 @@ public:
 	/// <returns></returns>
 	static bool Collision
 	(
-		CSphereCollider * thisCollider, 
+		CSphereCollider * thisCollider,
 		CSphereCollider * otherCollider
 	);
 
