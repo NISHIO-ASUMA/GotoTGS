@@ -66,7 +66,7 @@ HRESULT CEventUI::Init(void)
 	eventcutin.fWidth = SCREEN_WIDTH;
 	eventcutin.fHeight = 300.0f;
 	eventcutin.isLoop = false;
-	eventcutin.bUse = true;
+	eventcutin.bUse = false;
 
 	// カットインの生成
 	m_pEventcutin = CEventcutin::Create(eventcutin);

@@ -1,6 +1,6 @@
 #==============================================================================
 #
-# 『モーションビューワ』スクリプトファイル [ PlayerMotion.txt ]
+# 『モーションビューワ』スクリプトファイル [motion_hammer.txt]
 # Author : AKIRA TANAKA
 #
 #==============================================================================
@@ -14,22 +14,26 @@ NUM_MODEL = 10
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/PLAYER/00_Player_body.x		# [0]体
-MODEL_FILENAME = data/MODEL/PLAYER/01_Player_head.x		# [1]頭
-MODEL_FILENAME = data/MODEL/PLAYER/02_Player_armR.x		# [2]右腕
-MODEL_FILENAME = data/MODEL/PLAYER/03_Player_handR.x	# [3]右手
-MODEL_FILENAME = data/MODEL/PLAYER/04_Player_armL.x		# [4]左腕
-MODEL_FILENAME = data/MODEL/PLAYER/05_Player_handL.x	# [5]左手
-MODEL_FILENAME = data/MODEL/PLAYER/06_Player_legR.x		# [6]右腿
-MODEL_FILENAME = data/MODEL/PLAYER/07_Player_footR.x	# [7]右足
-MODEL_FILENAME = data/MODEL/PLAYER/08_Player_legL.x		# [8]左腿
-MODEL_FILENAME = data/MODEL/PLAYER/09_Player_footL.x	# [9]左足
+MODEL_FILENAME = data/MODEL/Player/00_Player_body.x		# [0]体
+MODEL_FILENAME = data/MODEL/Player/01_Player_head.x		# [1]頭
+MODEL_FILENAME = data/MODEL/Player/02_Player_armR.x		# [2]右腕
+MODEL_FILENAME = data/MODEL/Player/03_Player_handR.x		# [3]右手
+MODEL_FILENAME = data/MODEL/Player/04_Player_armL.x		# [4]左腕
+MODEL_FILENAME = data/MODEL/Player/05_Player_handL.x		# [5]左手
+MODEL_FILENAME = data/MODEL/Player/06_Player_legR.x		# [6]右腿
+MODEL_FILENAME = data/MODEL/Player/07_Player_footR.x		# [7]右足
+MODEL_FILENAME = data/MODEL/Player/08_Player_legL.x		# [8]左腿
+MODEL_FILENAME = data/MODEL/Player/09_Player_footL.x		# [9]左足
 
 #------------------------------------------------------------------------------
 # キャラクター情報
 #------------------------------------------------------------------------------
 CHARACTERSET
 	NUM_PARTS = 10					# パーツ数
+	MOVE = 3.0						# 移動量
+	JUMP = 10.25					# ジャンプ量
+	RADIUS = 20.0					# 半径
+	HEIGHT = 40.0					# 高さ
 
 	PARTSSET
 		INDEX = 0					# 体
@@ -71,7 +75,6 @@ CHARACTERSET
 		PARENT = 4					# (親)左腕
 		POS = 15.0 0.0 0.0
 		ROT = 0.0 0.0 0.0
-		PARTTYPE = LEFTHAND		# パーツの種類
 	END_PARTSSET
 
 	PARTSSET
