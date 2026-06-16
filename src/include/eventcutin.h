@@ -52,8 +52,8 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr int MOVE_FREAM = 120;					// 移動時のフレーム数
-		static constexpr int STOP_FREAM = 180;					// 表示するフレーム数
+		static constexpr int MOVE_FREAM = 60;					// 移動時のフレーム数
+		static constexpr int STOP_FREAM = 120;					// 表示するフレーム数
 		static constexpr const char* TEXNAME = "cutin000.png";	// テクスチャ名
 	};
 
