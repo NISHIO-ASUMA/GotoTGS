@@ -1,6 +1,6 @@
 //=========================================================
 //
-// 雑誌読みサボり状態クラス処理 [ playerstatemagazine.cpp ]
+// TV見ているサボりの状態クラス処理 [ playerstatetv.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,60 +8,57 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "playerstatemagazine.h"
+#include "playerstatetv.h"
 #include "playerstateneutral.h"
 #include "player.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPlayerStateMagazine::CPlayerStateMagazine()
+CPlayerStateTV::CPlayerStateTV()
 {
-	SetID(ID_MAGAZINE);
+	SetID(ID_TV);
 }
-
 //=========================================================
 // デストラクタ
 //=========================================================
-CPlayerStateMagazine::~CPlayerStateMagazine()
+CPlayerStateTV::~CPlayerStateTV()
 {
 
 }
-
 //=========================================================
-// 状態開始
+// 開始関数
 //=========================================================
-void CPlayerStateMagazine::OnStart()
+void CPlayerStateTV::OnStart(void)
 {
-	// プレイヤーの手に雑誌を持たせる
-	m_pPlayer->AddItemSet
-	(
-		"data/MODEL/STAGEOBJ/magaziner_002.x", // 対象モデルファイル
-		CModel::PARTTYPE_LEFT_HAND,			   // 持たせる場所
-		D3DXVECTOR3(-1.57f, 0.0f, 0.0f),
-		D3DXVECTOR3(5.0f, 0.0f, -7.0f)
-	);
+	// 情報取得
+	auto Pos = m_pPlayer->GetPos();
+
+	// 座標を保存しておく
+	m_pPlayer->SetPrevPos(Pos);
+
+	// プレイヤーの現在座標を椅子の上にセットする
+	m_pPlayer->MathTVRotation();
 
 	// モーション変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::TV, true, 5);
 }
-
 //=========================================================
-// 状態更新
+// 更新関数
 //=========================================================
-void CPlayerStateMagazine::OnUpdate()
+void CPlayerStateTV::OnUpdate(void)
 {
-	if (!m_pPlayer->GetAfkMagazine())
+	if (!m_pPlayer->GetAfkTV())
 	{
-		// ステートを移動にチェンジ
+		// 状態遷移
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
 	}
 }
-
 //=========================================================
-// 状態終了
+// 終了関数
 //=========================================================
-void CPlayerStateMagazine::OnExit()
+void CPlayerStateTV::OnExit(void)
 {
-	m_pPlayer->DeleteItem();
+	// 保存していた座標にもどる
+	m_pPlayer->SetPos(m_pPlayer->GetPrevPos());
 }

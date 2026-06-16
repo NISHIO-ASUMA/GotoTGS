@@ -47,8 +47,8 @@ public:
 		ID_NEUTRAL,
 		ID_MOVE,
 		ID_SMOKE,
-		ID_TV,
 		ID_MAGAZINE,
+		ID_TV,
 		ID_MAX
 	};
 

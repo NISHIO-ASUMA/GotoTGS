@@ -12,9 +12,8 @@
 #include "playerstatemove.h"
 #include "playerstatesmoke.h"
 #include "playerstatemagazine.h"
+#include "playerstatetv.h"
 #include "player.h"
-#include "manager.h"
-#include "input.h"
 
 //=========================================================
 // コンストラクタ
@@ -47,12 +46,17 @@ void CPlayerStateNeutral::OnUpdate()
 {
 	if (m_pPlayer->GetAfkSmoke())
 	{
-		// ステートを移動にチェンジ
+		// ステートを煙草サボりにチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateSmoke(), ID_SMOKE);
+	}
+	else if (m_pPlayer->GetAfkTV())
+	{
+		// ステートをテレビに変更
+		//m_pPlayer->ChangeState(new CPlayerStateTV(), ID_TV);
 	}
 	else if (m_pPlayer->GetAfkMagazine())
 	{
-		// ステートを移動にチェンジ
+		// ステートを雑誌サボりにチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateMagazine(), ID_MAGAZINE);
 	}
 }

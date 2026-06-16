@@ -59,8 +59,12 @@ public:
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
+
+	inline D3DXVECTOR3 GetPrevPos(void) const { return m_TvPrevPos; }
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
+
+	void SetPrevPos(const D3DXVECTOR3& pos) { m_TvPrevPos = pos; }
 
 public:
 
@@ -127,6 +131,11 @@ public:
 		}
 	}
 
+	void UpdateBlockCollision(D3DXVECTOR3 pos);
+	void UpdateAutoDoorCollision(D3DXVECTOR3 pos);
+
+	void MathTVRotation(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -141,4 +150,5 @@ private:
 // 西尾追加
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
+	D3DXVECTOR3 m_TvPrevPos;				  // テレビサボりの座標
 };
