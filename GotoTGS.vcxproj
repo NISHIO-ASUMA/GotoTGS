@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="src\cpp\afk.cpp" />
     <ClCompile Include="src\cpp\afk2dui.cpp" />
+    <ClCompile Include="src\cpp\afkgamecenter.cpp" />
     <ClCompile Include="src\cpp\afkmagazine.cpp" />
     <ClCompile Include="src\cpp\afkmanager.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
@@ -300,6 +301,7 @@
   <ItemGroup>
     <ClInclude Include="src\include\afk.h" />
     <ClInclude Include="src\include\afk2dui.h" />
+    <ClInclude Include="src\include\afkgamecenter.h" />
     <ClInclude Include="src\include\afkmagazine.h" />
     <ClInclude Include="src\include\afkmanager.h" />
     <ClInclude Include="src\include\afksmoke.h" />

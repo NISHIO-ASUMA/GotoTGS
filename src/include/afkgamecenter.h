@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AfkManager処理 [ afkmanager.h ]
+// AFKGameCenter処理 [ afkgamecenter.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -16,43 +16,33 @@
 #include <memory>
 
 //*********************************************************
-// 前方宣言
+// インクルードファイル
 //*********************************************************
-class CAfksmoke;
-class CAfkTV;
-class CAfkMagazine;
-class CAfkGameCenter;
+#include "afk.h"
 
 //*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
-class CAfkManager
+class CAfkGameCenter : public CAfk
 {
 public:
-
-	CAfkManager();
-	~CAfkManager();
+	CAfkGameCenter();
+	~CAfkGameCenter();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 
-	// ゲッター
-	CAfksmoke* GetAfkSmoke(void) { return m_pAfkSmoke; }
-	CAfkTV* GetAfkTV(void) { return m_pAfkTV; }
-	CAfkMagazine* GetAfkMagazine(void) { return m_pAfkMagazine; }
-	CAfkGameCenter* GetAfkGameCenter(void) { return m_pAfkGameCenter; }
-
-	// インスタンス生成用関数
-	static CAfkManager* Instance(void);
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="pos">生成処理</param>
+	/// <returns></returns>
+	static CAfkGameCenter* Create
+	(
+		const D3DXVECTOR3& pos
+	);
 
 private:
-	static CAfkManager* m_pInstance;	// シングルトン変数
-
-	CAfksmoke* m_pAfkSmoke;				// たばこさぼりのポインタ
-	CAfkTV* m_pAfkTV;					// テレビさぼりのポインタ
-	CAfkMagazine* m_pAfkMagazine;		// 漫画さぼりのポインタ
-	CAfkGameCenter* m_pAfkGameCenter;	// ゲームセンターさぼりのポインタ
-
 };
 
