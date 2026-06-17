@@ -1024,7 +1024,7 @@
       {
          "idx": 51,
          "pos": [
-            375.0,
+            383.0,
             18.0,
             320.0
          ],
@@ -1038,13 +1038,13 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
       },
       {
          "idx": 52,
          "pos": [
-            295.0,
+            321.0,
             18.0,
             320.0
          ],
@@ -1058,7 +1058,7 @@
             1.0,
             1.0
          ],
-         "Flags": true,
+         "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/Ashtray.x"
       },
       {
