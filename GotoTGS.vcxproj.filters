@@ -666,9 +666,6 @@
     <ClCompile Include="src\cpp\createjsonmove.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\smokeui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -718,6 +715,9 @@
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\playerstatetv.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
   </ItemGroup>

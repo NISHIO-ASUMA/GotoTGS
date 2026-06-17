@@ -193,6 +193,12 @@ void CMoveCharactor::UpdatePosition(void)
 {
 	m_posOld = m_pos;
 	m_pos += m_move;
+
+	// ‚à‚µ’n–Ê‚È‚ç
+	if (m_pos.y <= NULL)
+	{
+		m_pos.y = 0.0f;
+	}
 }
 //=========================================================
 // “Á’èƒ‚ƒfƒ‹‚ÌŽæ“¾
