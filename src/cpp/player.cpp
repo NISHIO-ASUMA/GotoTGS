@@ -59,12 +59,12 @@ namespace player
 };
 
 //*********************************************************
-// 定数名前空間
+// 定数名前空間 ( テレビ関連の状態時 )
 //*********************************************************
 namespace Player_Info
 {
-	const D3DXVECTOR3 TV_CHARACTORPOS = { -235.0f, 13.0f, 280.0f };
-	const D3DXVECTOR3 TV_DESTPOS = { -350.0f, 13.0f, 350.0f };
+	const D3DXVECTOR3 TV_CHARACTORPOS = { -244.0f, 10.5f,277.0f };
+	const D3DXVECTOR3 TV_DESTPOS = { -248.0f, 12.0f, 362.0f };
 };
 
 //=========================================================
@@ -725,7 +725,6 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 //=================================================
 void CPlayer::MathTVRotation(void)
 {
-#if 0
 	// 座標をセットする
 	SetPos(Player_Info::TV_CHARACTORPOS);
 
@@ -733,9 +732,9 @@ void CPlayer::MathTVRotation(void)
 	auto VecToTV = Player_Info::TV_DESTPOS - GetPos();
 
 	// 回転角を生成
-	float fRotY = atan2f(VecToTV.x, VecToTV.z);
+	float fRotY = atan2f(-VecToTV.x, -VecToTV.z);
 
 	// 角度を設定
+	SetRotDest(D3DXVECTOR3(0.0f, fRotY, 0.0f));
 	SetRot(D3DXVECTOR3(0.0f, fRotY, 0.0f));
-#endif
 }
