@@ -24,6 +24,7 @@
 #include "afksmoke.h"
 #include "afktv.h"
 #include "afkmagazine.h"
+#include "afkgamecenter.h"
 
 //=================================================
 // 名前空間
@@ -119,8 +120,9 @@ void CAfk2DUI::Update(void)
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
 	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
 	bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkMagazine();
+	bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
 
-	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine)
+	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter)
 	{// さぼっていなかったら
 		SetTexture(AFK2DUI::Button_NAME);
 		EasingSine();
@@ -140,9 +142,10 @@ void CAfk2DUI::Draw(void)
 	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
 	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
+	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 
 	// 親クラスの描画処理
-	if(bAfkSmoke || bAfkTV || bAfkMagazine)CObject2D::Draw();
+	if(bAfkSmoke || bAfkTV || bAfkMagazine || bAfkGameCenter)CObject2D::Draw();
 }
 //=========================================================
 // インスタンス取得処理

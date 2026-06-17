@@ -666,9 +666,6 @@
     <ClCompile Include="src\cpp\createjsonmove.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\smokeui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -719,6 +716,18 @@
     </ClCompile>
     <ClCompile Include="src\cpp\playerstatetv.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afkgamecenter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\police.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstategamecenter.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1135,6 +1144,15 @@
     </ClInclude>
     <ClInclude Include="src\include\playerstatetv.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkgamecenter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\police.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstategamecenter.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

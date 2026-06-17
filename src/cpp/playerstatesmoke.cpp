@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤーステートディッチクラス処理 [ playerstateditch.cpp ]
+// 煙草のサボり状態管理クラス処理 [ playerstatesmoke.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -33,6 +33,16 @@ CPlayerStateSmoke::~CPlayerStateSmoke()
 //=========================================================
 void CPlayerStateSmoke::OnStart()
 {
+	// プレイヤーの手に煙草を持たせる
+	m_pPlayer->AddItemSet
+	(
+		"data/MODEL/STAGEOBJ/smoke.x",	// 対象モデルファイル
+		CModel::PARTTYPE_RIGHT_HAND,	// 持たせる場所
+		D3DXVECTOR3(0.0f,0.0f,1.57f),
+		D3DXVECTOR3(-3.0f, 0.0f,3.0f)
+	);
+
+	// モーション変更
 	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 }
 

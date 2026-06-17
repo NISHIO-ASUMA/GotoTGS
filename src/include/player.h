@@ -59,6 +59,7 @@ public:
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
+	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 
 	inline D3DXVECTOR3 GetPrevPos(void) const { return m_TvPrevPos; }
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
@@ -145,6 +146,7 @@ private:
 	bool m_bAfkSmoke;									// たばこさぼりの判定変数
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
+	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 
 //***********************************
 // 西尾追加

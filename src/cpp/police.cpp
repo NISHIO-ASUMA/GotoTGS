@@ -1,27 +1,27 @@
 //========================================================
 //
-// 社長処理 [ boss.cpp ]
+// 警察キャラクターの処理 [ police.cpp ]
 // Author: Asuma Nishio
-// NOTE : 社長キャラクターのクラス処理
+//
+// NOTE : stateマシンとかでの制御も視野に入れる
 // 
 //========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "boss.h"
+#include "police.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "boxcollider.h"
 #include "spherecollider.h"
+#include "collisionsphere.h"
 
 //========================================================
 // コンストラクタ
 //========================================================
-CBoss::CBoss(int nPriority) : CMoveCharactor(nPriority),
-m_pBoxColiider(nullptr),
+CPolice::CPolice(int nPriority) : CMoveCharactor(nPriority),
 m_pSphereColiider(nullptr)
 {
 
@@ -29,62 +29,79 @@ m_pSphereColiider(nullptr)
 //========================================================
 // デストラクタ
 //========================================================
-CBoss::~CBoss()
+CPolice::~CPolice()
 {
 
 }
 //========================================================
 // 生成処理
 //========================================================
-CBoss* CBoss::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CPolice* CPolice::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 {
 	// インスタンス生成
-	CBoss* pBoss = new CBoss;
-	if (pBoss == nullptr) return nullptr;
+	CPolice* pPolice = new CPolice;
+	if (pPolice == nullptr) return nullptr;
 
 	// オブジェクト設定
-	pBoss->SetPos(pos);
-	pBoss->SetRot(rot);
+	pPolice->SetPos(pos);
+	pPolice->SetRot(rot);
+	pPolice->SetUseOutLine(true);
 
-	// 初期化設定時
-	if (FAILED(pBoss->Init())) return nullptr;
+	// 初期化失敗時
+	if (FAILED(pPolice->Init())) return nullptr;
 
-	return pBoss;
+	return pPolice;
 }
 //========================================================
 // 初期化処理
 //========================================================
-HRESULT CBoss::Init(void)
+HRESULT CPolice::Init(void)
 {
-	// キャラクター初期化
+	// 親クラスの初期化
 	CMoveCharactor::Init();
+
+	// モーション読み込み
+	MotionLoad("data/MOTION/police/PoliceMotion.txt", MOTION::MAX, false);
+
+	// コライダー生成 ( 球 )
+	m_pSphereColiider = CSphereCollider::Create(GetPos(), Config::SPHERE_RANGE);
 
 	return S_OK;
 }
 //========================================================
 // 終了処理
 //========================================================
-void CBoss::Uninit(void)
+void CPolice::Uninit(void)
 {
-	// キャラクター終了
+	// コライダーのリセット
+	m_pSphereColiider.reset();
+
+	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
+
 }
 //========================================================
 // 更新処理
 //========================================================
-void CBoss::Update(void)
+void CPolice::Update(void)
 {
-	// キャラクター座標更新
-	CMoveCharactor::UpdatePosition();
-
-	// キャラクター更新
+	// 親クラスの更新処理
 	CMoveCharactor::Update();
 }
 //========================================================
 // 描画処理
 //========================================================
-void CBoss::Draw(void)
+void CPolice::Draw(void)
 {
-	// キャラクター描画
+	// 親クラスの描画
 	CMoveCharactor::Draw();
+}
+//========================================================
+// 当たり判定処理 ( 球形 )
+//========================================================
+bool CPolice::Collision(CSphereCollider* pOther)
+{
+	if (m_pSphereColiider == nullptr) return false;
+
+	return CCollisionSphere::Collision(m_pSphereColiider.get(), pOther);
 }
