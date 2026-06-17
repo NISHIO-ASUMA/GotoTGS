@@ -1,6 +1,6 @@
 //=========================================================
 //
-// イベントUI処理 [ eventUI.h ]
+// チュートリアルのセリフ処理 [ tutoriallines.h ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -16,20 +16,14 @@
 #include "object.h"
 
 //*********************************************************
-// 前方宣言
+// チュートリアルのセリフに対するクラスを定義
 //*********************************************************
-class CEventcutin;
-class CAlert;
-
-//*********************************************************
-// イベントUIに対するクラスを定義
-//*********************************************************
-class CEventUI:public CObject
+class CTutorialLines :public CObject
 {
 public:
 
-	CEventUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
-	~CEventUI();
+	CTutorialLines(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	~CTutorialLines();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
@@ -37,15 +31,12 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CEventUI* Create(void);
+	static CTutorialLines* Create(void);
 
 	// 情報取得処理
-	static CEventcutin* GetEventcutin(void) { return m_pEventcutin; }
-	static CAlert* GetAlert(void) { return m_pAlert; }
 
 private:
 
 	// メンバ変数
-	static CEventcutin* m_pEventcutin;
-	static CAlert* m_pAlert;
+
 };

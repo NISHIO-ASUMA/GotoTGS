@@ -313,6 +313,12 @@
     <Filter Include="ヘッダー ファイル\AddFile\Chikada\afk">
       <UniqueIdentifier>{b6c025b2-8f4e-4336-b322-92ce360d43ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\TutorialLines">
+      <UniqueIdentifier>{8c8b8cc0-c674-4850-a2a4-6da50ddfaff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\TutorialLines">
+      <UniqueIdentifier>{a8967194-0e57-487a-a65a-bee3e42cacba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -728,6 +734,12 @@
     </ClCompile>
     <ClCompile Include="src\cpp\playerstategamecenter.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutoriallines.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutoriallinesBG.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1153,6 +1165,12 @@
     </ClInclude>
     <ClInclude Include="src\include\playerstategamecenter.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutoriallines.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutoriallinesBG.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

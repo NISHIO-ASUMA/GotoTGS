@@ -1,6 +1,6 @@
 //=========================================================
 //
-// イベントUI処理 [ eventUI.cpp ]
+// チュートリアルのセリフ処理 [ tutoriallines.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,25 +8,17 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "eventUi.h"
+#include "tutoriallines.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "eventcutin.h"
-#include "alert.h"
-
-//*********************************************************
-// 静的メンバ変数宣言
-//*********************************************************
-CEventcutin* CEventUI::m_pEventcutin = nullptr;
-CAlert* CEventUI::m_pAlert = nullptr;
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEventUI::CEventUI(int nPriority):CObject(nPriority)
+CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority)
 {
 
 }
@@ -34,19 +26,18 @@ CEventUI::CEventUI(int nPriority):CObject(nPriority)
 //=========================================================
 // デストラクタ
 //=========================================================
-CEventUI::~CEventUI()
+CTutorialLines::~CTutorialLines()
 {
-
 
 }
 
 //=========================================================
 // 生成処理
 //=========================================================
-CEventUI* CEventUI::Create(void)
+CTutorialLines* CTutorialLines::Create(void)
 {
-	// インスタンス生成
-	CEventUI* pEventUI = new CEventUI;
+	// 生成
+	CTutorialLines* pEventUI = new CTutorialLines;
 
 	// ヌルチェック
 	if (pEventUI == nullptr) return nullptr;
@@ -60,33 +51,8 @@ CEventUI* CEventUI::Create(void)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CEventUI::Init(void)
+HRESULT CTutorialLines::Init(void)
 {
-	// カットインの構造体
-	CEventcutin::EventCutin eventcutin;
-	eventcutin.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT, 0.0f);
-	eventcutin.col = COLOR_WHITE;
-	eventcutin.tex = D3DXVECTOR2(1.0f, 1.0f);
-	eventcutin.fWidth = SCREEN_WIDTH;
-	eventcutin.fHeight = 300.0f;
-	eventcutin.isLoop = false;
-	eventcutin.bUse = false;
-
-	// カットインの生成
-	m_pEventcutin = CEventcutin::Create(eventcutin);
-
-	// 警告表示の構造体
-	CAlert::Alert alert;
-	alert.pos = D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f);
-	alert.col = COLOR_YERROW;
-	alert.tex = D3DXVECTOR2(1.0f, 1.0f);
-	alert.fWidth = SCREEN_WIDTH;
-	alert.fHeight = 200.0f;
-	alert.isLoop = false;
-	alert.bUse = false;
-
-	// 警告表示の生成
-	m_pAlert = CAlert::Create(alert);
 
 	return S_OK;
 }
@@ -94,30 +60,23 @@ HRESULT CEventUI::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CEventUI::Uninit(void)
+void CTutorialLines::Uninit(void)
 {
-	// 各UIの終了処理
-	m_pEventcutin->Uninit();	// カットイン
-	m_pAlert->Uninit();			// 警告表示
+
 }
 
 //=========================================================
 // 更新処理
 //=========================================================
-void CEventUI::Update(void)
+void CTutorialLines::Update(void)
 {
-	// 各UIの更新処理
-	m_pEventcutin->Update();	// カットイン
-	m_pAlert->Update();			// 警告表示
+
 }
 
 //=========================================================
 // 描画処理
 //=========================================================
-void CEventUI::Draw(void)
+void CTutorialLines::Draw(void)
 {
-	// 各UIの描画処理
-	m_pEventcutin->Draw();		// カットイン
-	m_pAlert->Draw();			// 警告表示
 
 }

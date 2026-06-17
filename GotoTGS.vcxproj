@@ -290,6 +290,8 @@
     <ClCompile Include="src\cpp\titleui.cpp" />
     <ClCompile Include="src\cpp\titleuimanager.cpp" />
     <ClCompile Include="src\cpp\tutorial.cpp" />
+    <ClCompile Include="src\cpp\tutoriallines.cpp" />
+    <ClCompile Include="src\cpp\tutoriallinesBG.cpp" />
     <ClCompile Include="src\cpp\tutorialmanager.cpp" />
     <ClCompile Include="src\cpp\tutorialobject.cpp" />
     <ClCompile Include="src\cpp\tutorialui.cpp" />
@@ -433,6 +435,8 @@
     <ClInclude Include="src\include\titleui.h" />
     <ClInclude Include="src\include\titleuimanager.h" />
     <ClInclude Include="src\include\tutorial.h" />
+    <ClInclude Include="src\include\tutoriallines.h" />
+    <ClInclude Include="src\include\tutoriallinesBG.h" />
     <ClInclude Include="src\include\tutorialmanager.h" />
     <ClInclude Include="src\include\tutorialobject.h" />
     <ClInclude Include="src\include\tutorialui.h" />
