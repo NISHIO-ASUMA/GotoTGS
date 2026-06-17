@@ -36,7 +36,6 @@ m_pShadowS{},
 m_fMoveValue(NULL),
 m_isStencilUse(false),
 m_isOutLine(false),
-m_isInstancing(false),
 m_mtxworld{}
 {
 
