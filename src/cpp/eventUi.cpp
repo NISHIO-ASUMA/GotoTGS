@@ -17,12 +17,16 @@
 #include "eventcutin.h"
 #include "alert.h"
 
+//*********************************************************
+// 静的メンバ変数宣言
+//*********************************************************
+CEventcutin* CEventUI::m_pEventcutin = nullptr;
+CAlert* CEventUI::m_pAlert = nullptr;
+
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEventUI::CEventUI(int nPriority):CObject(nPriority),
-m_pEventcutin(nullptr),
-m_pAlert(nullptr)
+CEventUI::CEventUI(int nPriority):CObject(nPriority)
 {
 
 }

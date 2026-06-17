@@ -40,12 +40,12 @@ public:
 	static CEventUI* Create(void);
 
 	// î•ñæ“¾ˆ—
-	CEventcutin* GetEventcutin(void) { return m_pEventcutin; }
-	CAlert* GetAlert(void) { return m_pAlert; }
+	static CEventcutin* GetEventcutin(void) { return m_pEventcutin; }
+	static CAlert* GetAlert(void) { return m_pAlert; }
 
 private:
 
 	// ƒƒ“ƒo•Ï”
-	CEventcutin* m_pEventcutin;
-	CAlert* m_pAlert;
+	static CEventcutin* m_pEventcutin;
+	static CAlert* m_pAlert;
 };

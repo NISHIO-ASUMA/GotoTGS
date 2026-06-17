@@ -43,7 +43,7 @@ public:
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_fWidth = fHeight; }
 	inline void SetAnimFlag(const bool& isLoop) { m_isLoop = isLoop; }
-	inline void SetUse(const bool& bUse) { m_bUse = bUse; }									// Misaki
+	inline void SetUse(const bool& bUse = false) { m_bUse = bUse; }							// Misaki
 	inline void SetFreamCount(const int& nFreamCount) { m_nFreamCount = nFreamCount; }		// Misaki
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }								// À•W‚ğæ“¾
