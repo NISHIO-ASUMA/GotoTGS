@@ -51,8 +51,8 @@ void CPlayerStateNeutral::OnUpdate()
 	}
 	else if (m_pPlayer->GetAfkTV())
 	{
-		// ステートをテレビに変更
-		//m_pPlayer->ChangeState(new CPlayerStateTV(), ID_TV);
+		// ステートをテレビにチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateTV(), ID_TV);
 	}
 	else if (m_pPlayer->GetAfkMagazine())
 	{
