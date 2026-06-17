@@ -15,8 +15,8 @@
 //*********************************************************
 namespace AFKGAMECENTER
 {
-	const D3DXVECTOR3 Pos = { 500.0f, 0.0f, 95.0f };	// ˆÊ’u
-	constexpr float fRadius = 25.0f;					// ”ÍˆÍ‚Ì”¼Œa
+	const D3DXVECTOR3 Pos = { 1695.0f, 0.0f, 47.5f };	// ˆÊ’u
+	constexpr float fRadius = 3.0f;					// ”ÍˆÍ‚Ì”¼Œa
 };
 
 //=========================================================
