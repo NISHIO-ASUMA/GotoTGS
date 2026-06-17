@@ -22,7 +22,7 @@
 namespace TutorialUIManager
 {
 	const D3DXVECTOR3 PcUIPos = { -45.0f, 75.0f, 170.0f };		// PCUIの座標
-	const D3DXVECTOR3 CopyUIPos = { 170.0f, 75.0f, 355.0f };	// コピー機UIの座標
+	const D3DXVECTOR3 CopyUIPos = { 150.0f, 75.0f, 355.0f };	// コピー機UIの座標
 	constexpr const char* TutorialUI_NAME = "Fbutton.png";		// チュートリアルuiのテクスチャ名
 };
 
