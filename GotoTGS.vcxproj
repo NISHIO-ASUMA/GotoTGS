@@ -255,6 +255,7 @@
     </ClCompile>
     <ClCompile Include="src\cpp\pcui.cpp" />
     <ClCompile Include="src\cpp\player.cpp" />
+    <ClCompile Include="src\cpp\playerstategamecenter.cpp" />
     <ClCompile Include="src\cpp\playerstatemagazine.cpp" />
     <ClCompile Include="src\cpp\playerstatebase.cpp" />
     <ClCompile Include="src\cpp\playerstatesmoke.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\pcui.h" />
     <ClInclude Include="src\include\player.h" />
+    <ClInclude Include="src\include\playerstategamecenter.h" />
     <ClInclude Include="src\include\playerstatemagazine.h" />
     <ClInclude Include="src\include\playerstatebase.h" />
     <ClInclude Include="src\include\playerstatesmoke.h" />

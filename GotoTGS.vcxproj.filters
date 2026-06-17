@@ -726,6 +726,9 @@
     <ClCompile Include="src\cpp\police.cpp">
       <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\playerstategamecenter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1147,6 +1150,9 @@
     </ClInclude>
     <ClInclude Include="src\include\police.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstategamecenter.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

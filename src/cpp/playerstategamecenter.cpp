@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤーステートニュートラルクラス処理 [ playerstateneutral.cpp ]
+// ゲームセンターサボり状態クラス処理 [ playerstategamecenter.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -8,26 +8,22 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "playerstateneutral.h"
-#include "playerstatemove.h"
-#include "playerstatesmoke.h"
-#include "playerstatemagazine.h"
-#include "playerstatetv.h"
 #include "playerstategamecenter.h"
+#include "playerstateneutral.h"
 #include "player.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPlayerStateNeutral::CPlayerStateNeutral()
+CPlayerStateGameCenter::CPlayerStateGameCenter()
 {
-	SetID(ID_NEUTRAL);
+	SetID(ID_MAGAZINE);
 }
 
 //=========================================================
 // デストラクタ
 //=========================================================
-CPlayerStateNeutral::~CPlayerStateNeutral()
+CPlayerStateGameCenter::~CPlayerStateGameCenter()
 {
 
 }
@@ -35,43 +31,28 @@ CPlayerStateNeutral::~CPlayerStateNeutral()
 //=========================================================
 // 状態開始
 //=========================================================
-void CPlayerStateNeutral::OnStart()
+void CPlayerStateGameCenter::OnStart()
 {
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL,true,5);
+	// モーション変更
+	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
 }
 
 //=========================================================
 // 状態更新
 //=========================================================
-void CPlayerStateNeutral::OnUpdate()
+void CPlayerStateGameCenter::OnUpdate()
 {
-	if (m_pPlayer->GetAfkSmoke())
+	if (!m_pPlayer->GetAfkMagazine())
 	{
-		// ステートを煙草サボりにチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateSmoke(), ID_SMOKE);
-	}
-	else if (m_pPlayer->GetAfkTV())
-	{
-		// ステートをテレビにチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateTV(), ID_TV);
-	}
-	else if (m_pPlayer->GetAfkMagazine())
-	{
-		// ステートを雑誌サボりにチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateMagazine(), ID_MAGAZINE);
-	}
-	else if (m_pPlayer->GetAfkGameCenter())
-	{
-		// ステートをテレビにチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateGameCenter(), ID_MAGAZINE);
-
+		// ステートを移動にチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
 	}
 }
 
 //=========================================================
 // 状態終了
 //=========================================================
-void CPlayerStateNeutral::OnExit()
+void CPlayerStateGameCenter::OnExit()
 {
 	m_pPlayer->DeleteItem();
 }

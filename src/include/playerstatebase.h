@@ -49,6 +49,7 @@ public:
 		ID_SMOKE,
 		ID_MAGAZINE,
 		ID_TV,
+		ID_GAMECENTER,
 		ID_MAX
 	};
 
