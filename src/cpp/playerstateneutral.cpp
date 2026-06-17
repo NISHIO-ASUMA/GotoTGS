@@ -63,7 +63,7 @@ void CPlayerStateNeutral::OnUpdate()
 	else if (m_pPlayer->GetAfkGameCenter())
 	{
 		// ステートをテレビにチェンジ
-		m_pPlayer->ChangeState(new CPlayerStateGameCenter(), ID_MAGAZINE);
+		m_pPlayer->ChangeState(new CPlayerStateGameCenter(), ID_GAMECENTER);
 
 	}
 }

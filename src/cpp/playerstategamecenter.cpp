@@ -13,11 +13,19 @@
 #include "player.h"
 
 //=========================================================
+// 名前空間
+//=========================================================
+namespace AFKGAMECENTER
+{
+	const D3DXVECTOR3 PosDest = { 1705.0f, 0.0f, 166.0f };	// ゲーム機の位置
+}
+
+//=========================================================
 // コンストラクタ
 //=========================================================
 CPlayerStateGameCenter::CPlayerStateGameCenter()
 {
-	SetID(ID_MAGAZINE);
+	SetID(ID_GAMECENTER);
 }
 
 //=========================================================
@@ -33,6 +41,15 @@ CPlayerStateGameCenter::~CPlayerStateGameCenter()
 //=========================================================
 void CPlayerStateGameCenter::OnStart()
 {
+	// ゲーム機とプレイヤーの距離の差
+	D3DXVECTOR3 diff = m_pPlayer->GetPos() - AFKGAMECENTER::PosDest;
+
+	// 角度
+	float fAngle = atan2f(diff.x, diff.z);
+
+	// 角度の設定
+	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL,fAngle,NULL));
+	
 	// モーション変更
 	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
 }
@@ -42,7 +59,7 @@ void CPlayerStateGameCenter::OnStart()
 //=========================================================
 void CPlayerStateGameCenter::OnUpdate()
 {
-	if (!m_pPlayer->GetAfkMagazine())
+	if (!m_pPlayer->GetAfkGameCenter())
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
