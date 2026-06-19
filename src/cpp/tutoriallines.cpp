@@ -14,11 +14,13 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "tutoriallinesBG.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority)
+CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority),
+m_pBG(nullptr)
 {
 
 }
@@ -53,6 +55,9 @@ CTutorialLines* CTutorialLines::Create(void)
 //=========================================================
 HRESULT CTutorialLines::Init(void)
 {
+	// 背景の生成処理
+	m_pBG = CTutorialLinesBG::Create(D3DXVECTOR3(790.0f, SCREEN_HEIGHT * 0.87f, 0.0f));
+
 
 	return S_OK;
 }
@@ -62,6 +67,8 @@ HRESULT CTutorialLines::Init(void)
 //=========================================================
 void CTutorialLines::Uninit(void)
 {
+	// 各ポインタの終了処理
+	m_pBG->Uninit();
 
 }
 
@@ -70,6 +77,8 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
+	// 各ポインタの更新処理
+	m_pBG->Update();
 
 }
 
@@ -78,5 +87,7 @@ void CTutorialLines::Update(void)
 //=========================================================
 void CTutorialLines::Draw(void)
 {
+	// 各ポインタの描画処理
+	m_pBG->Draw();
 
 }

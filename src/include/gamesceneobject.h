@@ -26,6 +26,7 @@ class CWorldWallManager;
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
+class CTutorialLines;		// Misaki
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
@@ -48,6 +49,7 @@ public:
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }			// Misaki
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }								// Misaki
 	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
+	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }			// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -71,6 +73,7 @@ private:
 	CProgressgauge* m_pProgressgauge;	// 進捗ゲージのポインタ Misaki
 	CEventUI* m_pEventUI;				// イベントUIのポインタ Misaki
 	CPlayer* m_pPlayer;					// プレイヤーのクラスポインタ [ Asuma add ]
+	CTutorialLines* m_pTutoriallines;	// チュートリアルのセリフのポインタ Misaki
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ

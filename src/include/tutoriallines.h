@@ -16,6 +16,11 @@
 #include "object.h"
 
 //*********************************************************
+// 前方宣言
+//*********************************************************
+class CTutorialLinesBG;
+
+//*********************************************************
 // チュートリアルのセリフに対するクラスを定義
 //*********************************************************
 class CTutorialLines :public CObject
@@ -34,9 +39,10 @@ public:
 	static CTutorialLines* Create(void);
 
 	// 情報取得処理
+	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景
 
 private:
 
 	// メンバ変数
-
+	CTutorialLinesBG* m_pBG;
 };

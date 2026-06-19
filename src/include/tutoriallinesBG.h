@@ -42,10 +42,8 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr float POS_X = HALFWIDTH;						// X軸の位置
-		static constexpr float POS_Y = SCREEN_HEIGHT * 0.8f;			// Y軸の位置
-		static constexpr float WIDTH = SCREEN_WIDTH;					// 横幅
-		static constexpr float HEIGHT = 200.0f;							// 縦幅
+		static constexpr float WIDTH = 500.0f;							// 横幅
+		static constexpr float HEIGHT = 100.0f;							// 縦幅
 		static constexpr const char* TEXNAME = "Tutoriallines000.png";	// 背景のテクスチャ名
 
 	};

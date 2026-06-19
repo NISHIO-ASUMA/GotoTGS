@@ -44,9 +44,9 @@ CTutorialLinesBG* CTutorialLinesBG::Create(const D3DXVECTOR3& pos)
 
 	// 各種値の設定
 	pEventUI->SetPos(pos);
-	pEventUI->SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);		// サイズ設定
-	pEventUI->SetCol(COLOR_WHITE);								// カラー設定
-	pEventUI->SetTexture(Config::PC_TEXNAME);					// テクスチャ設定
+	pEventUI->SetSize(Config::WIDTH, Config::HEIGHT);		// サイズ設定
+	pEventUI->SetCol(COLOR_WHITE);							// カラー設定
+	pEventUI->SetTexture(Config::TEXNAME);					// テクスチャ設定
 
 	// 初期化が失敗した時
 	if (FAILED(pEventUI->Init())) return nullptr;
@@ -59,6 +59,8 @@ CTutorialLinesBG* CTutorialLinesBG::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CTutorialLinesBG::Init(void)
 {
+	// 親の初期化処理
+	CObject2D::Init();
 
 	return S_OK;
 }
@@ -68,6 +70,8 @@ HRESULT CTutorialLinesBG::Init(void)
 //=========================================================
 void CTutorialLinesBG::Uninit(void)
 {
+	// 親の終了処理
+	CObject2D::Uninit();
 
 }
 
@@ -76,6 +80,8 @@ void CTutorialLinesBG::Uninit(void)
 //=========================================================
 void CTutorialLinesBG::Update(void)
 {
+	// 親の更新処理
+	CObject2D::Update();
 
 }
 
@@ -84,5 +90,7 @@ void CTutorialLinesBG::Update(void)
 //=========================================================
 void CTutorialLinesBG::Draw(void)
 {
+	// 親の描画処理
+	CObject2D::Draw();
 
 }
