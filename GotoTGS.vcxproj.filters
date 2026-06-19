@@ -741,6 +741,9 @@
     <ClCompile Include="src\cpp\tutoriallinesBG.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\lines.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1170,6 +1173,9 @@
       <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClInclude>
     <ClInclude Include="src\include\tutoriallinesBG.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\lines.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClInclude>
   </ItemGroup>

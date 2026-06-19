@@ -1,6 +1,6 @@
 //=========================================================
 //
-// チュートリアルのセリフ背景処理 [ tutoriallinesBG.h ]
+// セリフ処理 [ lines.h ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -16,14 +16,14 @@
 #include "object2D.h"
 
 //*********************************************************
-// チュートリアルのセリフ背景に対するクラスを定義
+// セリフに対するクラスを定義
 //*********************************************************
-class CTutorialLinesBG :public CObject2D
+class CLines :public CObject2D
 {
 public:
 
-	CTutorialLinesBG(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
-	~CTutorialLinesBG();
+	CLines(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	~CLines();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
@@ -31,7 +31,7 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CTutorialLinesBG* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size);
+	static CLines* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size);
 
 	// 設定処理
 	void SetUse(const bool& bUse) { m_bUse = bUse; }
@@ -43,10 +43,10 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME = "Tutoriallines000.png";	// 背景のテクスチャ名
+		static constexpr const char* SERIHU_001 = "Tutoriallines001.png";	// セリフ1
 
 	};
 
 	// メンバ変数
-	bool m_bUse;
+	bool m_bUse;					// 使用しているかどうか
 };
