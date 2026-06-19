@@ -41,6 +41,7 @@ public:
 
 	// 情報取得処理
 	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景
+	CLines* GetLines(void) { return m_pLines; }			// セリフ
 
 private:
 
@@ -53,9 +54,6 @@ private:
 		static constexpr const float POS_Y = SCREEN_HEIGHT * 0.87f;
 		static constexpr const float WIDTH = 500.0f;						// 横幅
 		static constexpr const float HEIGHT = 100.0f;						// 縦幅
-		static constexpr const char* SERIHU_001 = "Tutoriallines001.png";	// セリフ1
-		//static constexpr const char* SERIHU_002 = "Tutoriallines000.png";	// セリフ2
-		//static constexpr const char* SERIHU_003 = "Tutoriallines000.png";	// セリフ3
 
 	};
 

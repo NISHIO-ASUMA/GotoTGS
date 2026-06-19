@@ -252,5 +252,5 @@ void CGameSceneObject::CreatePointer(void)
 	m_pEventUI = CEventUI::Create();
 
 	// チュートリアルのセリフの生成 Misaki
-	m_pTutoriallines = CTutorialLines::Create(true);
+	m_pTutoriallines = CTutorialLines::Create();
 }
