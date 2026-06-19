@@ -187,8 +187,8 @@ void CPlayer::Update(void)
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 
 	// 各タスクの使用中かどうか
-	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;			// PCタスク
-	bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;		// コピー機タスク [add Misaki]
+	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;				// PCタスク
+	bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;			// コピー機タスク [add Misaki]
 
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
@@ -313,6 +313,12 @@ void CPlayer::Update(void)
 					{
 						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
 					}
+
+					// カメラ固定フラグ無効化
+					CManager::GetInstance()->GetCamera()->SetCameraMove(false);
+
+					// NOTE : エフェクトとかパーティクル(成功演出っぽい物)の追加
+					// 担当 : 近田君
 				}
 
 					break;

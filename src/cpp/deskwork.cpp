@@ -89,6 +89,7 @@ HRESULT CDeskwork::Init(void)
 	// フラグを初期化
 	m_pPCDeskUI->SetUse(false);
 	m_pCOPYDeskUI->SetUse(false);
+	m_pDOCUMENTDesk->SetUse(false);
 
 	return S_OK;
 }
@@ -133,7 +134,8 @@ void CDeskwork::Update(void)
 		m_pCOPYDeskUI != nullptr) &&
 		m_pDOCUMENTDesk != nullptr &&
 		(m_pPCDeskUI->GetUse() != true && 
-		m_pCOPYDeskUI->GetUse() != true))
+		m_pCOPYDeskUI->GetUse() != true && 
+		m_pDOCUMENTDesk->GetUse() != true))
 	{
 		return;
 	}
@@ -165,6 +167,12 @@ void CDeskwork::Update(void)
 		SetTexBG(CWorldUICollision::TYPE_COPY);
 	}
 	
+	if (m_pDOCUMENTDesk->GetUse() != true)
+	{
+		// ドキュメント更新
+		m_pDOCUMENTDesk->Update();
+		return;
+	}
 }
 
 //=========================================================
