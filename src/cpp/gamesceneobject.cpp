@@ -23,26 +23,27 @@
 #include "ui.h"
 
 #include "meshfield.h"
-#include "gametime.h"			// 髙橋追加
-#include "deskwork.h"			// 髙橋追加
-#include "progressgauge.h"		// 髙橋追加
-#include "eventUI.h"			// 髙橋追加
+#include "gametime.h"				// 髙橋追加
+#include "deskwork.h"				// 髙橋追加
+#include "progressgauge.h"			// 髙橋追加
+#include "eventUI.h"				// 髙橋追加
+#include "tutoriallines.h"			// 髙橋追加
 
-#include "player.h"				// 近田追加
-#include "friend.h"				// 近田追加
-#include "pcui.h"				// 近田追加
-#include "copyui.h"				// 近田追加
-#include "smokeui.h"			// 近田追加
-#include "afk2dui.h"			// 近田追加
-#include "tutorialuimanager.h"	// 近田追加
-#include "afkuimanager.h"		// 近田追加
-#include "afkmanager.h"			// 近田追加
+#include "player.h"					// 近田追加
+#include "friend.h"					// 近田追加
+#include "pcui.h"					// 近田追加
+#include "copyui.h"					// 近田追加
+#include "smokeui.h"				// 近田追加
+#include "afk2dui.h"				// 近田追加
+#include "tutorialuimanager.h"		// 近田追加
+#include "afkuimanager.h"			// 近田追加
+#include "afkmanager.h"				// 近田追加
 
-#include "enemy.h"				// 西尾追加
-#include "worldUIcollision.h"	// 西尾追加
-#include "camera.h"				// 西尾追加
-#include "automaticdoormanager.h" // 西尾追加
-#include "autodoor_collision.h" // 西尾追加
+#include "enemy.h"					// 西尾追加
+#include "worldUIcollision.h"		// 西尾追加
+#include "camera.h"					// 西尾追加
+#include "automaticdoormanager.h"	// 西尾追加
+#include "autodoor_collision.h"		// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -54,9 +55,9 @@ CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;		// シングルトン変数
 //*********************************************************
 namespace GAMEOBJECT
 {
-	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };			// タイマーの座標
-	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };			// プレイヤーの座標
-	constexpr const char* LoadName	= "data/JSON/Gameobject.json";		// ゲーム内オブジェクトjsonファイル名
+	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };						// タイマーの座標
+	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };						// プレイヤーの座標
+	constexpr const char* LoadName	= "data/JSON/Gameobject.json";					// ゲーム内オブジェクトjsonファイル名
 	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
 };
 
@@ -247,6 +248,9 @@ void CGameSceneObject::CreatePointer(void)
 	// 進捗ゲージの生成 Misaki
 	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);
 
-	// イベントUIの生成
+	// イベントUIの生成 Misaki
 	m_pEventUI = CEventUI::Create();
+
+	// チュートリアルのセリフの生成 Misaki
+	m_pTutoriallines = CTutorialLines::Create();
 }

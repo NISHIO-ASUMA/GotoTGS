@@ -14,11 +14,14 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "tutoriallinesBG.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority)
+CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority),
+m_bUse(false),
+m_pBG(nullptr)
 {
 
 }
@@ -34,18 +37,21 @@ CTutorialLines::~CTutorialLines()
 //=========================================================
 // 生成処理
 //=========================================================
-CTutorialLines* CTutorialLines::Create(void)
+CTutorialLines* CTutorialLines::Create(const bool& bUse)
 {
 	// 生成
-	CTutorialLines* pEventUI = new CTutorialLines;
+	CTutorialLines* pTutoriallines = new CTutorialLines;
 
 	// ヌルチェック
-	if (pEventUI == nullptr) return nullptr;
+	if (pTutoriallines == nullptr) return nullptr;
+
+	// 引数の値を代入
+	pTutoriallines->m_bUse = bUse;
 
 	// 初期化が失敗した時
-	if (FAILED(pEventUI->Init())) return nullptr;
+	if (FAILED(pTutoriallines->Init())) return nullptr;
 
-	return pEventUI;
+	return pTutoriallines;
 }
 
 //=========================================================
@@ -53,6 +59,9 @@ CTutorialLines* CTutorialLines::Create(void)
 //=========================================================
 HRESULT CTutorialLines::Init(void)
 {
+	// 背景の生成処理
+	m_pBG = CTutorialLinesBG::Create(D3DXVECTOR3(790.0f, SCREEN_HEIGHT * 0.87f, 0.0f));
+
 
 	return S_OK;
 }
@@ -62,6 +71,8 @@ HRESULT CTutorialLines::Init(void)
 //=========================================================
 void CTutorialLines::Uninit(void)
 {
+	// 各ポインタの終了処理
+	m_pBG->Uninit();
 
 }
 
@@ -70,6 +81,11 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
+	// 各ポインタの更新処理
+	m_pBG->Update();
 
 }
 
@@ -78,5 +94,10 @@ void CTutorialLines::Update(void)
 //=========================================================
 void CTutorialLines::Draw(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
+	// 各ポインタの描画処理
+	m_pBG->Draw();
 
 }
