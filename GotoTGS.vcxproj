@@ -223,6 +223,7 @@
     <ClCompile Include="src\cpp\jsonconverter.cpp" />
     <ClCompile Include="src\cpp\jsonmanager.cpp" />
     <ClCompile Include="src\cpp\light.cpp" />
+    <ClCompile Include="src\cpp\lines.cpp" />
     <ClCompile Include="src\cpp\load.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\manager.cpp" />
@@ -371,6 +372,7 @@
     <ClInclude Include="src\include\jsoncreator.h" />
     <ClInclude Include="src\include\jsonmanager.h" />
     <ClInclude Include="src\include\light.h" />
+    <ClInclude Include="src\include\lines.h" />
     <ClInclude Include="src\include\load.h" />
     <ClInclude Include="src\include\main.h" />
     <ClInclude Include="src\include\manager.h" />

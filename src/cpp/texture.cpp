@@ -114,6 +114,7 @@ int CTexture::Register(const char* pFileName)
 //=========================================================
 LPDIRECT3DTEXTURE9 CTexture::GetAddress(int nIdx)
 {
+
 	// —áŠOˆ—
 	if (nIdx < NULL || nIdx >= static_cast<int>(m_pTextures.size())) return nullptr;
 
