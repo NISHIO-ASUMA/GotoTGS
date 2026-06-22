@@ -129,6 +129,7 @@ public:
 	inline float GetWidth(void) const { return m_UI.fWidth; }
 	inline float GetHeight(void) const { return m_UI.fHeight; }
 	inline float GetDigit(void) const { return m_UI.fDigit; }
+	inline float GetAlpha(void) const { return m_UI.col.a; }
 	inline int GetKeyType(void) const { return m_UI.nKeytype; }
 	inline int GetKey(void) const { return m_UI.nKey; }
 	inline int GetIdx(void) const { return m_UI.nIdx; }
