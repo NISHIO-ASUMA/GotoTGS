@@ -35,7 +35,7 @@ CLines::~CLines()
 //=========================================================
 // 生成処理
 //=========================================================
-CLines* CLines::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size)
+CLines* CLines::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size, const char* TEXNAME)
 {
 	// 生成
 	CLines* pLines = new CLines;
@@ -44,10 +44,10 @@ CLines* CLines::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size)
 	if (pLines == nullptr) return nullptr;
 
 	// 各種値の設定
-	pLines->SetPos(pos);
-	pLines->SetSize(size.x, size.y);			// サイズ設定
-	pLines->SetCol(COLOR_WHITE);				// カラー設定
-	pLines->SetTexture(Config::SERIHU_001);		// テクスチャ設定
+	pLines->SetPos(pos);				// 位置
+	pLines->SetSize(size.x, size.y);	// サイズ
+	pLines->SetCol(COLOR_WHITE);		// カラー
+	pLines->SetTexture(TEXNAME);		// テクスチャ
 
 	// 初期化が失敗した時
 	if (FAILED(pLines->Init())) return nullptr;
