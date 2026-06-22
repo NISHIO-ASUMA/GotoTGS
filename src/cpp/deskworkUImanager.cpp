@@ -49,6 +49,7 @@ CDeskworkUIManager::~CDeskworkUIManager()
 //=========================================================
 HRESULT CDeskworkUIManager::Init(void)
 {
+	// クリアUIの生成
 	m_pClearUI = CUi::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 200.0f, 0.0f),
 		60,
 		190.0f,
@@ -59,6 +60,12 @@ HRESULT CDeskworkUIManager::Init(void)
 		5,
 		false,
 		false);
+
+	// クールタイムではない状態にする
+	m_bTime = false;
+
+	// カウントを初期化
+	m_nCountTime = NULL;
 
 	return S_OK;
 }

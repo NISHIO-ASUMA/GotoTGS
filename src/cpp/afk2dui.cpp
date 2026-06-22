@@ -31,14 +31,15 @@
 //=================================================
 namespace AFK2DUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };		// 2D画像の座標
-	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };				// 初期のサイズ
-	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };				// 目標のサイズ
-	constexpr float fWidth = 250.0f;						// 横幅
-	constexpr float fHeight = 75.0f;						// 縦幅
-	constexpr float fMaxFrame = 60.0f;						// マックスフレーム
-	constexpr const char* Button_NAME = "AfkButton.png";	// チュートリアルuiのテクスチャ名
-	constexpr const char* NowAFK_NAME = "Afk.png";			// たばこUIのテクスチャ名
+	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };			// 2D画像の座標
+	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };					// 初期のサイズ
+	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };					// 目標のサイズ
+	constexpr float fWidth = 250.0f;							// 横幅
+	constexpr float fHeight = 75.0f;							// 縦幅
+	constexpr float fMaxFrame = 60.0f;							// マックスフレーム
+	constexpr const char* Button_NAME = "AfkButton.png";		// チュートリアルuiのテクスチャ名
+	constexpr const char* GameCenter_NAME = "gamecenter.png";	// ゲームセンターuiのテクスチャ名
+	constexpr const char* Smoke_NAME = "smoke.png";				// たばこUIのテクスチャ名
 };
 
 //=================================================
@@ -116,6 +117,9 @@ void CAfk2DUI::Update(void)
 	// 親クラスの更新処理
 	CObject2D::Update();
 
+	// イージング
+	EasingSine();
+
 	// プレイヤーがさぼっているか判定用の変数
 	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
 	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
@@ -125,14 +129,14 @@ void CAfk2DUI::Update(void)
 	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter)
 	{// さぼっていなかったら
 		SetTexture(AFK2DUI::Button_NAME);
-		EasingSine();
 	}
-	else
-	{// さぼっていたら
-		SetTexture(AFK2DUI::NowAFK_NAME);
-		EasingSine();
-
-	}
+	
+	// ゲームセンターでさぼっていたら
+	else if(bAfkGameCenter) SetTexture(AFK2DUI::GameCenter_NAME);
+	
+	// たばこでさぼっていたら
+	else if (bAfkSmoke)SetTexture(AFK2DUI::Smoke_NAME);
+	
 }
 //=========================================================
 // 描画処理
