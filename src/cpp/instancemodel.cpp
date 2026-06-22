@@ -209,9 +209,6 @@ void CInstanceModel::Update(const D3DXMATRIX& mtx)
 
 	// ワールドマトリックスを設定する
 	D3DXMatrixMultiply(&m_mtxworld, &m_mtxworld, &mtxParent);
-
-	// インスタンシング描画のオブジェクトに設定
-	Rendere->AddInstanceObject(m_nModelIdx, this);
 #endif
 }
 //=========================================================
@@ -219,16 +216,13 @@ void CInstanceModel::Update(const D3DXMATRIX& mtx)
 //=========================================================
 void CInstanceModel::Draw(const D3DXMATRIX& mtx)
 {
+#if 0
 	// ポーズ中以外ならここで処理を返す
 	if (!CPauseManager::GetInstance()->GetPause()) return;
 
 	// デバイスポインタを取得
 	const auto& Rendere = CManager::GetInstance()->GetRenderer();
 	LPDIRECT3DDEVICE9 pDevice = Rendere->GetDevice();
-
-	// ファイルマネージャー取得
-	CInstanceModelManager* pIMgr = CManager::GetInstance()->GetInstanceModelManager();
-	if (!pIMgr) return;
 
 	// 配列情報
 	const auto& fileData = pIMgr->GetList();
@@ -306,18 +300,21 @@ void CInstanceModel::Draw(const D3DXMATRIX& mtx)
 
 	// マテリアルを戻す
 	pDevice->SetMaterial(&matDef);
+#endif
 }
 //=========================================================
 // モデルパス設定
 //=========================================================
 void CInstanceModel::SetModelPass(const char* pModelName)
 {
+#if 0
 	// マネージャーから取得
 	const auto& InstModelManager = CManager::GetInstance()->GetInstanceModelManager();
 	if (InstModelManager == nullptr) return;
 
 	// インデックスセット
 	m_nModelIdx = InstModelManager->Register(pModelName);
+#endif
 }
 //=========================================================
 // ターゲットの座標に設定
