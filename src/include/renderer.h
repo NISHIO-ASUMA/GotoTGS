@@ -34,14 +34,6 @@ class CRenderer
 {
 public:
 
-	//****************************
-	// インスタンシング構造体
-	//****************************
-	struct InstanceData
-	{
-		D3DXMATRIX mtxworld; // ワールドマトリックス
-	};
-
 	CRenderer();
 	~CRenderer();
 
@@ -58,25 +50,6 @@ public:
 	UINT GetWidth(void) { return m_Width; }
 	UINT GetHeight(void) { return m_Height; }
 	static CDebugproc* GetDebug(void) { return m_pDebug; }
-
-	/// <summary>
-	/// インスタンシング登録関数
-	/// </summary>
-	/// <param name="nIdxModel">モデルインデックス</param>
-	/// <param name="pModel">モデルポインタ</param>
-	void AddInstanceObject(const int nIdxModel, CInstanceModel* pModel);
-
-	/// <summary>
-	/// 全インスタンシングオブジェクト描画関数
-	/// </summary>
-	/// <param name=""></param>
-	void DrawInstancingAll(void);
-
-	/// <summary>
-	/// インスタンス配列内オブジェクトクリア関数
-	/// </summary>
-	/// <param name=""></param>
-	void ClearDrawInstance(void) { m_RegisterInstObject.clear(); };
 
 private:
 
