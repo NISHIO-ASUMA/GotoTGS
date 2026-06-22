@@ -1,5 +1,5 @@
 {
-   "AllObject": 375,
+   "AllObject": 376,
    "SetObjects": [
       {
          "idx": 0,
@@ -7500,6 +7500,26 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/bench.x"
+      },
+      {
+         "idx": 375,
+         "pos": [
+            2351.6298828125,
+            67.0,
+            302.6300048828125
+         ],
+         "rot": [
+            0.0,
+            1.5700000524520874,
+            0.0
+         ],
+         "scale": [
+            1.5,
+            1.5,
+            1.5
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/subway_exit.x"
       }
    ]
 }
