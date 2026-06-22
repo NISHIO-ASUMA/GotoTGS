@@ -79,6 +79,7 @@ public:
 		SMOKE,
 		TV,
 		MAGAZINE,
+		GAME,
 		MAX
 	};
 
