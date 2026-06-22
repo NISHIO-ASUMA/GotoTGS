@@ -51,11 +51,11 @@ CTutorialUIManager::~CTutorialUIManager()
 //=========================================================
 HRESULT CTutorialUIManager::Init(void)
 {
-	// パソコン用チュートリアルUIの生成
-	CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
-
 	// コピー機用チュートリアルUIの生成
 	CCopyUI::Create(TutorialUIManager::CopyUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
+
+	// パソコン用チュートリアルUIの生成
+	CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
 
 
 	return S_OK;
