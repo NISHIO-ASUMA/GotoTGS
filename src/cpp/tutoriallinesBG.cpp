@@ -18,7 +18,8 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialLinesBG::CTutorialLinesBG(int nPriority) :CObject2D(nPriority)
+CTutorialLinesBG::CTutorialLinesBG(int nPriority) :CObject2D(nPriority),
+m_bUse(false)
 {
 
 }
@@ -34,24 +35,24 @@ CTutorialLinesBG::~CTutorialLinesBG()
 //=========================================================
 // 生成処理
 //=========================================================
-CTutorialLinesBG* CTutorialLinesBG::Create(const D3DXVECTOR3& pos)
+CTutorialLinesBG* CTutorialLinesBG::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size)
 {
 	// 生成
-	CTutorialLinesBG* pEventUI = new CTutorialLinesBG;
+	CTutorialLinesBG* pTutorialLinesBG = new CTutorialLinesBG;
 
 	// ヌルチェック
-	if (pEventUI == nullptr) return nullptr;
+	if (pTutorialLinesBG == nullptr) return nullptr;
 
 	// 各種値の設定
-	pEventUI->SetPos(pos);
-	pEventUI->SetSize(Config::WIDTH, Config::HEIGHT);		// サイズ設定
-	pEventUI->SetCol(COLOR_WHITE);							// カラー設定
-	pEventUI->SetTexture(Config::TEXNAME);					// テクスチャ設定
+	pTutorialLinesBG->SetPos(pos);
+	pTutorialLinesBG->SetSize(size.x, size.y);		// サイズ設定
+	pTutorialLinesBG->SetCol(COLOR_WHITE);			// カラー設定
+	pTutorialLinesBG->SetTexture(Config::TEXNAME);	// テクスチャ設定
 
 	// 初期化が失敗した時
-	if (FAILED(pEventUI->Init())) return nullptr;
+	if (FAILED(pTutorialLinesBG->Init())) return nullptr;
 
-	return pEventUI;
+	return pTutorialLinesBG;
 }
 
 //=========================================================
@@ -80,6 +81,9 @@ void CTutorialLinesBG::Uninit(void)
 //=========================================================
 void CTutorialLinesBG::Update(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
 	// 親の更新処理
 	CObject2D::Update();
 
@@ -90,6 +94,9 @@ void CTutorialLinesBG::Update(void)
 //=========================================================
 void CTutorialLinesBG::Draw(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
 	// 親の描画処理
 	CObject2D::Draw();
 

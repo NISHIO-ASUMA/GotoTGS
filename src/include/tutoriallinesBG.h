@@ -31,9 +31,10 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CTutorialLinesBG* Create(const D3DXVECTOR3& pos);
+	static CTutorialLinesBG* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size);
 
-	// 情報取得処理
+	// 設定処理
+	void SetUse(const bool& bUse) { m_bUse = bUse; }
 
 private:
 
@@ -42,12 +43,10 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr float WIDTH = 500.0f;							// 横幅
-		static constexpr float HEIGHT = 100.0f;							// 縦幅
 		static constexpr const char* TEXNAME = "Tutoriallines000.png";	// 背景のテクスチャ名
 
 	};
 
 	// メンバ変数
-
+	bool m_bUse;
 };

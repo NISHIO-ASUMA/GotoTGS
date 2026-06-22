@@ -613,7 +613,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\GotoTGS\\data\\TEXTURE\\Arcade_game_001.JPG";
+    "data\\TEXTURE\\Arcade_game_001.JPG";
    }
   }
   Material {

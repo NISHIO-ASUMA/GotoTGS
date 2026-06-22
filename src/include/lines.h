@@ -1,6 +1,6 @@
 //=========================================================
 //
-// チュートリアルのセリフ処理 [ tutoriallines.h ]
+// セリフ処理 [ lines.h ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -16,20 +16,14 @@
 #include "object2D.h"
 
 //*********************************************************
-// 前方宣言
+// セリフに対するクラスを定義
 //*********************************************************
-class CTutorialLinesBG;
-class CLines;
-
-//*********************************************************
-// チュートリアルのセリフに対するクラスを定義
-//*********************************************************
-class CTutorialLines :public CObject
+class CLines :public CObject2D
 {
 public:
 
-	CTutorialLines(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
-	~CTutorialLines();
+	CLines(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	~CLines();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
@@ -37,11 +31,10 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CTutorialLines* Create(const bool& bUse = false);
+	static CLines* Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size);
 
-	// 情報取得処理
-	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景
-	CLines* GetLines(void) { return m_pLines; }			// セリフ
+	// 設定処理
+	void SetUse(const bool& bUse) { m_bUse = bUse; }
 
 private:
 
@@ -50,16 +43,10 @@ private:
 	//************************************
 	struct Config
 	{
-		static constexpr const float POS_X = 790.0f;
-		static constexpr const float POS_Y = SCREEN_HEIGHT * 0.87f;
-		static constexpr const float WIDTH = 500.0f;						// 横幅
-		static constexpr const float HEIGHT = 100.0f;						// 縦幅
+		static constexpr const char* SERIHU_001 = "Tutoriallines001.png";	// セリフ1
 
 	};
 
 	// メンバ変数
 	bool m_bUse;					// 使用しているかどうか
-	CTutorialLinesBG* m_pBG;		// 背景のポインタ
-	CLines* m_pLines;				// セリフのポインタ
-
 };

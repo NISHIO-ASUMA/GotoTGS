@@ -1,6 +1,6 @@
 //=========================================================
 //
-// チュートリアルのセリフ処理 [ tutoriallines.cpp ]
+// セリフ処理 [ lines.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,22 +8,18 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "tutoriallines.h"
+#include "lines.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "lines.h"
-#include "tutoriallinesBG.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority),
-m_bUse(false),
-m_pLines(nullptr),
-m_pBG(nullptr)
+CLines::CLines(int nPriority) :CObject2D(nPriority),
+m_bUse(false)
 {
 
 }
@@ -31,7 +27,7 @@ m_pBG(nullptr)
 //=========================================================
 // デストラクタ
 //=========================================================
-CTutorialLines::~CTutorialLines()
+CLines::~CLines()
 {
 
 }
@@ -39,39 +35,33 @@ CTutorialLines::~CTutorialLines()
 //=========================================================
 // 生成処理
 //=========================================================
-CTutorialLines* CTutorialLines::Create(const bool& bUse)
+CLines* CLines::Create(const D3DXVECTOR3& pos, const D3DXVECTOR2& size)
 {
 	// 生成
-	CTutorialLines* pTutoriallines = new CTutorialLines;
+	CLines* pLines = new CLines;
 
 	// ヌルチェック
-	if (pTutoriallines == nullptr) return nullptr;
+	if (pLines == nullptr) return nullptr;
 
-	// 引数の値を代入
-	pTutoriallines->m_bUse = bUse;
+	// 各種値の設定
+	pLines->SetPos(pos);
+	pLines->SetSize(size.x, size.y);			// サイズ設定
+	pLines->SetCol(COLOR_WHITE);				// カラー設定
+	pLines->SetTexture(Config::SERIHU_001);		// テクスチャ設定
 
 	// 初期化が失敗した時
-	if (FAILED(pTutoriallines->Init())) return nullptr;
+	if (FAILED(pLines->Init())) return nullptr;
 
-	return pTutoriallines;
+	return pLines;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CTutorialLines::Init(void)
+HRESULT CLines::Init(void)
 {
-	// 背景の生成処理
-	m_pBG = CTutorialLinesBG::Create(D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f),
-		D3DXVECTOR2(Config::WIDTH, Config::HEIGHT));
-
-	// セリフの生成処理
-	m_pLines = CLines::Create(D3DXVECTOR3(Config::POS_X, Config::POS_Y, 0.0f),
-		D3DXVECTOR2(Config::WIDTH, Config::HEIGHT));
-
-	// 現在の状態を代入する
-	m_pBG->SetUse(m_bUse);
-	m_pLines->SetUse(m_bUse);
+	// 親の初期化処理
+	CObject2D::Init();
 
 	return S_OK;
 }
@@ -79,25 +69,35 @@ HRESULT CTutorialLines::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CTutorialLines::Uninit(void)
+void CLines::Uninit(void)
 {
-	// 各ポインタをヌルにする
-	m_pBG = nullptr;
-	m_pLines = nullptr;
+	// 親の終了処理
+	CObject2D::Uninit();
+
 }
 
 //=========================================================
 // 更新処理
 //=========================================================
-void CTutorialLines::Update(void)
+void CLines::Update(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
+	// 親の更新処理
+	CObject2D::Update();
 
 }
 
 //=========================================================
 // 描画処理
 //=========================================================
-void CTutorialLines::Draw(void)
+void CLines::Draw(void)
 {
+	// 描画していない状態なら
+	if (m_bUse != true) return;
+
+	// 親の描画処理
+	CObject2D::Draw();
 
 }
