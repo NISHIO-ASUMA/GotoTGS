@@ -41,9 +41,6 @@ void CPlayerStateSmoke::OnStart()
 		D3DXVECTOR3(0.0f,0.0f,1.57f),
 		D3DXVECTOR3(-3.0f, 0.0f,3.0f)
 	);
-
-	// モーション変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
 }
 
 //=========================================================
@@ -51,6 +48,13 @@ void CPlayerStateSmoke::OnStart()
 //=========================================================
 void CPlayerStateSmoke::OnUpdate()
 {
+	// モーションが違ったら
+	if (m_pPlayer->SMOKE != m_pPlayer->GetMotion()->GetMotionType())
+	{
+		// モーション変更
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::SMOKE);
+	}
+
 	if (!m_pPlayer->GetAfkSmoke())
 	{
 		// ステートを移動にチェンジ

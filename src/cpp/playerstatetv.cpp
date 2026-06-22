@@ -39,15 +39,19 @@ void CPlayerStateTV::OnStart(void)
 
 	// プレイヤーの現在座標を椅子の上にセットする
 	m_pPlayer->MathTVRotation();
-
-	// モーション変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::TV, true, 5);
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CPlayerStateTV::OnUpdate(void)
 {
+	// モーションが違ったら
+	if (m_pPlayer->TV != m_pPlayer->GetMotion()->GetMotionType())
+	{
+		// モーション変更
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::TV, true, 5);
+	}
+
 	if (!m_pPlayer->GetAfkTV())
 	{
 		// 状態遷移

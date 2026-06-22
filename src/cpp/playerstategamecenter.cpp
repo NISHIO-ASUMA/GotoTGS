@@ -50,8 +50,6 @@ void CPlayerStateGameCenter::OnStart()
 	// 角度の設定
 	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL,fAngle,NULL));
 	
-	// モーション変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::GAME);
 }
 
 //=========================================================
@@ -59,6 +57,13 @@ void CPlayerStateGameCenter::OnStart()
 //=========================================================
 void CPlayerStateGameCenter::OnUpdate()
 {
+	// モーションが違ったら
+	if (m_pPlayer->GAME != m_pPlayer->GetMotion()->GetMotionType())
+	{
+		// モーション変更
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::GAME);
+	}
+
 	if (!m_pPlayer->GetAfkGameCenter())
 	{
 		// ステートを移動にチェンジ

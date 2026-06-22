@@ -76,7 +76,7 @@ private:
 	CUi* m_pClearUI;		// クリアUIのポインタ
 	bool m_bUse;			// 使用しているかどうか	
 	bool m_bTime;			// クールタイム中かどうか
-	int m_nCountTime;		// クールタイムのカウント
+	int m_nCountTime;		// 時間をカウントする変数
 
 	// 静的メンバ変数
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
