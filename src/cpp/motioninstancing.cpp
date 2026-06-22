@@ -70,12 +70,12 @@ std::unique_ptr<CMotionInstancing> CMotionInstancing::Load
 //=========================================================
 void CMotionInstancing::RegisterPath(const char* pMotionName, std::vector<CInstanceModel*>& pModel, int nDestMotions, const bool isShadow)
 {
-	// モーションマネージャーを取得する
-	auto MotionManager = CManager::GetInstance()->GetInstMotionManager();
-	if (MotionManager == nullptr) return;
+	//// モーションマネージャーを取得する
+	//auto MotionManager = CManager::GetInstance()->GetInstMotionManager();
+	//if (MotionManager == nullptr) return;
 
-	// インデックスに登録し,その情報を取得する
-	m_nMotionIdx = MotionManager->Register(pMotionName, pModel, nDestMotions, isShadow);
+	//// インデックスに登録し,その情報を取得する
+	//m_nMotionIdx = MotionManager->Register(pMotionName, pModel, nDestMotions, isShadow);
 }
 //============================================================
 // モーションセット
@@ -134,15 +134,15 @@ void CMotionInstancing::SetMotion(int nMotionType, bool isBlend, int nBlendFrame
 //=========================================================
 void CMotionInstancing::Update(std::vector<CInstanceModel*> pModel)
 {
-	// モーションマネージャークラスからモーションデータ取得
-	const auto& manager = CManager::GetInstance()->GetInstMotionManager();
-	const auto& info = manager->GetFileDataIdx(m_nMotionIdx);
+	//// モーションマネージャークラスからモーションデータ取得
+	//const auto& manager = CManager::GetInstance()->GetInstMotionManager();
+	//const auto& info = manager->GetFileDataIdx(m_nMotionIdx);
 
-	// モーションフレーム計算処理
-	MathMotionFrame(info);
+	//// モーションフレーム計算処理
+	//MathMotionFrame(info);
 
-	// モデルに適用する
-	ApplyCache(pModel,info);
+	//// モデルに適用する
+	//ApplyCache(pModel,info);
 }
 //=================================================================
 // フレーム計算

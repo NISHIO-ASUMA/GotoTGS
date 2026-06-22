@@ -18,11 +18,8 @@
 #include "input.h"
 #include "camera.h"
 #include "fade.h"
-#include "instancing.h"
 #include "modelmanager.h"
 #include "model.h"
-#include "instancemodel.h"
-#include "instancemodelmanager.h"
 #include "texture.h"
 
 //*********************************************************
@@ -139,21 +136,6 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_pDebug = new CDebugproc;
 	m_pDebug->Init();
 
-	// インスタンシング用頂点バッファ生成
-	HRESULT hr = m_pD3DDevice->CreateVertexBuffer
-	(
-		sizeof(InstanceData) * RENDERINFO::MAX_INSTANCE,
-		D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY,
-		0,
-		D3DPOOL_DEFAULT,
-		&m_instanceVB,
-		nullptr
-	);
-
-	// 生成失敗時
-	if (FAILED(hr))
-		return hr;
-
 	return S_OK;
 }
 //=========================================================
@@ -241,11 +223,6 @@ void CRenderer::Draw(void)
 		// 全オブジェクト描画
 		CObject::DrawAll();
 
-		//*****************************
-		// インスタンシングのDrawCall
-		//*****************************
-		//DrawInstancingAll();
-
 		// シーン取得
 		CScene* pScene = CManager::GetInstance()->GetSceneRaw();
 
@@ -267,125 +244,6 @@ void CRenderer::Draw(void)
 
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(nullptr, nullptr, nullptr, nullptr);
-}
-//=========================================================
-// インスタンシングオブジェクト登録関数
-//=========================================================
-void CRenderer::AddInstanceObject(const int nIdxModel,CInstanceModel* pModel)
-{
-	// 対象オブジェクトをインスタンシング配列に追加
-	m_RegisterInstObject[nIdxModel].push_back(pModel);
-}
-//=========================================================
-// インスタンシング描画関数
-//=========================================================
-void CRenderer::DrawInstancingAll(void)
-{
-	// モデルマネージャー取得
-	auto* modelMgr = CManager::GetInstance()->GetInstanceModelManager();
-	auto& models = modelMgr->GetList();
-
-	for (auto& pair : m_RegisterInstObject)
-	{
-		// 配列の最初と次を取得
-		int nModelIdx = pair.first;
-		auto& instances = pair.second;
-
-		// 情報が無かったら
-		if (instances.empty())
-			continue;
-
-		// 対象オブジェクトの情報を格納
-		auto& modelInfo = models[nModelIdx];
-		auto& modelData = modelInfo.InstanceData;
-
-		//===================================
-		// インスタンシング頂点バッファ更新
-		//===================================
-		InstanceData* pInst = nullptr;
-
-		// 頂点バッファをロック
-		m_instanceVB->Lock(0, 0, (void**)&pInst, D3DLOCK_DISCARD);
-
-		for (int nCnt = 0; nCnt < static_cast<int>(instances.size()); nCnt++)
-		{
-			// ワールドマトリックス設定
-			pInst[nCnt].mtxworld = instances[nCnt]->GetMtxWorld();
-		}
-
-		// 頂点バッファをアンロック
-		m_instanceVB->Unlock();
-
-		//=============================
-		// マテリアル単位ループ
-		//=============================
-		for (DWORD matID = 0; matID < modelInfo.dwNumMat; matID++)
-		{
-			//=========================
-			// マテリアルカラー取得
-			//=========================
-			D3DXVECTOR4 matColor = VECTOR4_NULL;
-
-			if (modelInfo.pBuffMat)
-			{
-				// モデルのマテリアルを取得する
-				auto& mat = modelInfo.Materials[matID];
-
-				// D3DXVECTOR4に変換する
-				matColor = D3DXVECTOR4
-				(
-					mat.Diffuse.r,
-					mat.Diffuse.g,
-					mat.Diffuse.b,
-					mat.Diffuse.a
-				);
-			}
-
-			//=========================
-			// インスタンシング描画
-			//=========================
-			CInstancing::GetInstance()->Begin();
-			CInstancing::GetInstance()->BeginPass();
-
-			// インスタンシング開始関数
-			CInstancing::GetInstance()->BeginInstancing
-			(
-				instances.size(),
-				modelData.VtxBuffer,
-				sizeof(MODEL_3D),
-				modelData.IndexBuffer,
-				m_instanceVB,
-				sizeof(InstanceData)
-			);
-
-			// シェーダーパラメーターセット
-			CInstancing::GetInstance()->SetInstancingParam(nullptr, matColor);
-
-			// ポリゴン描画
-			m_pD3DDevice->DrawIndexedPrimitive
-			(
-				D3DPT_TRIANGLELIST,
-				0,
-				0,
-				modelData.vtxCount,
-				0,
-				modelData.PrimCount
-			);
-
-			// インスタンシングパラメーターリセット
-			CInstancing::GetInstance()->EndInstancing();
-
-			// インスタンシング終了
-			CInstancing::GetInstance()->EndPass();
-			CInstancing::GetInstance()->End();
-		}
-	}
-
-	// セカンドの配列クリア
-	for (auto& pair : m_RegisterInstObject)
-	{
-		pair.second.clear();
-	}
 }
 //=========================================================
 // ワイヤーフレーム起動
