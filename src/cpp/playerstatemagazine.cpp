@@ -41,9 +41,6 @@ void CPlayerStateMagazine::OnStart()
 		D3DXVECTOR3(-1.57f, 0.0f, 0.0f),
 		D3DXVECTOR3(5.0f, 0.0f, -7.0f)
 	);
-
-	// モーション変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
 }
 
 //=========================================================
@@ -51,6 +48,13 @@ void CPlayerStateMagazine::OnStart()
 //=========================================================
 void CPlayerStateMagazine::OnUpdate()
 {
+	// モーションが違ったら
+	if (m_pPlayer->MAGAZINE != m_pPlayer->GetMotion()->GetMotionType())
+	{
+		// モーション変更
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+	}
+
 	if (!m_pPlayer->GetAfkMagazine())
 	{
 		// ステートを移動にチェンジ

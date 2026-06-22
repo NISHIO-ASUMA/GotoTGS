@@ -66,7 +66,6 @@ public:
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
 	void SetPrevPos(const D3DXVECTOR3& pos) { m_TvPrevPos = pos; }
-
 public:
 
 	//************************
