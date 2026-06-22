@@ -319,6 +319,24 @@
     <Filter Include="ヘッダー ファイル\AddFile\Takahashi\TutorialLines">
       <UniqueIdentifier>{a8967194-0e57-487a-a65a-bee3e42cacba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\AutoDoor">
+      <UniqueIdentifier>{fee17e7f-1b6a-470b-8277-f2dd0fa38ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\SideOpenDoor">
+      <UniqueIdentifier>{b301a7bf-4abd-4850-bab1-c4a3963d7fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor">
+      <UniqueIdentifier>{baa4af78-d3ac-49df-bfb9-8632f7c3484b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\enemy">
+      <UniqueIdentifier>{f6dbccc8-77b5-4316-aec1-4dd63b4bdbe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Ui">
+      <UniqueIdentifier>{2f3362ea-f642-436a-be14-d9c0dd47b461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\freind">
+      <UniqueIdentifier>{deca85e8-c440-49d3-b541-bee0f9df0efa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -621,12 +639,6 @@
     <ClCompile Include="src\cpp\alert.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\smokefriend.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemy.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\tutorialui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
@@ -651,23 +663,14 @@
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\enemystatebase.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\progressgauge.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemystateneutral.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\copyui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\pcui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\walkingfriend.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\createjsonmove.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
@@ -677,21 +680,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\tutorialuimanager.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\titleui.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\titleuimanager.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\autodoor_collision.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\automatic_door.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\automaticdoormanager.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\afk.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
@@ -717,9 +705,6 @@
     <ClCompile Include="src\cpp\afkuimanager.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\enemymanager.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\playerstatetv.cpp">
       <Filter>ソース ファイル\AddFile\Chikada</Filter>
     </ClCompile>
@@ -728,9 +713,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\afkgamecenter.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\police.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\playerstategamecenter.cpp">
       <Filter>ソース ファイル</Filter>
@@ -743,6 +725,51 @@
     </ClCompile>
     <ClCompile Include="src\cpp\lines.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\automatic_door.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\AutoDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\sideopendoor.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemy.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemymanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\automaticdoormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\AutoDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\autodoor_collision.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\AutoDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\police.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\smokefriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\walkingfriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\titleui.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\titleuimanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\slideopendoormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\sideopendoorcollision.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1177,6 +1204,15 @@
     </ClInclude>
     <ClInclude Include="src\include\lines.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\sideopendoor.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\slideopendoormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\sideopendoorcollision.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

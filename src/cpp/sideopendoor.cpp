@@ -1,0 +1,277 @@
+//=========================================================
+//
+// キー入力で開く両開きドアの処理 [ sideopendoor.cpp ]
+// Author: Asuma Nishio
+//
+// NOTE : イメージは会議室によくある取っ手付きのドア
+// 
+//=========================================================
+
+//*********************************************************
+// クラス定義ヘッダーファイル
+//*********************************************************
+#include "sideopendoor.h"
+
+//*********************************************************
+// インクルードファイル
+//*********************************************************
+#include "manager.h"
+#include "renderer.h"
+#include "boxcollider.h"
+#include "collisionbox.h"
+#include "xfilemanager.h"
+#include "texture.h"
+#include "input.h"
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace SIDEDOOR_INFO
+{
+	constexpr float MAX_ROTATION = 90.0f; // 最大角度
+};
+
+//=========================================================
+// コンストラクタ
+//=========================================================
+CSideOpenDoor::CSideOpenDoor(int nPriority) : CObjectX(nPriority),
+m_isZTestEneble(false),
+m_nOpenType(OPENTYPE_LEFT),
+m_nState(STATE_CLOSE_WAIT),
+m_pCollider(nullptr),
+m_Size(INITSCALE),
+m_fAngle(NULL),
+m_fOffsetX(1.0f),
+m_nCloseTime(NULL)
+{
+}
+//=========================================================
+// デストラクタ
+//=========================================================
+CSideOpenDoor::~CSideOpenDoor()
+{
+
+}
+//=========================================================
+// 生成処理
+//=========================================================
+CSideOpenDoor* CSideOpenDoor::Create
+(
+	const D3DXVECTOR3& pos,
+	const D3DXVECTOR3& rot,
+	const D3DXVECTOR3& scale,
+	const char* pModelName,
+	const OPENTYPE& nType
+)
+{
+	// インスタンス生成
+	CSideOpenDoor* pSide = new CSideOpenDoor;
+	if (pSide == nullptr) return nullptr;
+
+	// オブジェクト設定
+	pSide->SetPos(pos);
+	pSide->SetRot(rot);
+	pSide->SetScale(scale);
+	pSide->SetFilePass(pModelName);
+	pSide->SetType(nType);
+
+	// 初期化失敗時
+	if (FAILED(pSide->Init())) return nullptr;
+
+	return pSide;
+}
+//=========================================================
+// 初期化処理
+//=========================================================
+HRESULT CSideOpenDoor::Init(void)
+{
+	// 親クラスの初期化
+	CObjectX::Init();
+
+	// Xファイルオブジェクト取得
+	CXfileManager* pXManager = CManager::GetInstance()->GetXManager();
+	if (pXManager == nullptr) return E_FAIL;
+
+	// インデックス番号のモデルを取得
+	int nModelIdx = GetModelIdx();
+
+	// モデルの拡大率と既存の拡大率を合わせる
+	D3DXVECTOR3 Scale = GetScale();
+	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
+
+	// サイズセット
+	m_Size = Size;
+
+	// オブジェクトの回転角度を取得
+	D3DXMATRIX matRot;
+	D3DXVECTOR3 rot = GetRot();
+
+	// 回転を合成して回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
+	// 矩形コライダー生成処理
+	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), m_Size, matRot);
+
+	// オフセットを作成
+	m_fOffsetX = (m_Size.x / 2.0f) * Scale.x;
+
+	return S_OK;
+}
+//=========================================================
+// 終了処理
+//=========================================================
+void CSideOpenDoor::Uninit(void)
+{
+	// 親クラスの終了処理
+	CObjectX::Uninit();
+}
+//=========================================================
+// 更新処理
+//=========================================================
+void CSideOpenDoor::Update(void)
+{
+	// 状態を切り替える ( 外部の関数にしてもつ )
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_6))
+	{
+		if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
+		{
+			m_nState = STATE_OPENING; // 開き始める
+		}
+		else
+		{
+			m_nState = STATE_RETURN;  // 閉じ始める
+		}
+	}
+
+	switch (m_nState)
+	{
+	case STATE_OPENING:
+
+		m_fAngle += 0.03f; // 開くスピード
+
+		if (m_fAngle >= D3DXToRadian(SIDEDOOR_INFO::MAX_ROTATION))
+		{
+			// 最大角度を設定
+			m_fAngle = D3DXToRadian(SIDEDOOR_INFO::MAX_ROTATION);
+		}
+		break;
+
+	case STATE_RETURN:
+		m_fAngle -= 0.03f; // 閉じるスピード
+
+		if (m_fAngle <= 0.0f)
+		{
+			m_fAngle = 0.0f;
+			m_nState = STATE_CLOSE_WAIT;
+		}
+		break;
+	}
+
+	D3DXMATRIX mtxScale, mtxRot, mtxTrans;
+	D3DXMatrixScaling(&mtxScale, GetScale().x, GetScale().y, GetScale().z);
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, GetRot().y, GetRot().x, GetRot().z);
+	D3DXMatrixTranslation(&mtxTrans, GetPos().x, GetPos().y, GetPos().z);
+
+	D3DXMATRIX mtxDoorRot;
+	float finalAngle = (m_nOpenType == OPENTYPE_LEFT) ? m_fAngle : -m_fAngle;
+	D3DXMatrixRotationY(&mtxDoorRot, finalAngle);
+
+	D3DXMATRIX mtxPivotIn, mtxPivotOut;
+	float offset = (m_nOpenType == OPENTYPE_LEFT) ? m_fOffsetX : -m_fOffsetX;
+
+	D3DXMatrixTranslation(&mtxPivotIn, -offset, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&mtxPivotOut, offset, 0.0f, 0.0f);
+
+	D3DXMATRIX mtxFinalWorld = mtxScale * mtxPivotIn * mtxDoorRot * mtxPivotOut * mtxRot * mtxTrans;
+
+	SetMtxWorld(mtxFinalWorld);
+
+	// 親クラスの更新処理
+	CObjectX::Update();	
+}
+//=========================================================
+// 描画処理
+//=========================================================
+void CSideOpenDoor::Draw(void)
+{
+	CXfileManager* pXMgr = CManager::GetInstance()->GetXManager();
+	if (!pXMgr) return;
+
+	auto& fileData = pXMgr->GetList();
+	if (GetModelIdx() >= static_cast<int>(fileData.size())) return;
+
+	auto& model = fileData[GetModelIdx()];
+	if (!model.pMesh) return;
+
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+	D3DMATERIAL9 matDef;
+
+	// Zテストの制御
+	if (m_isZTestEneble) 
+	{
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	}
+
+	D3DXMATRIX mtxWorld = GetMtxWorld();
+	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
+
+	pDevice->GetMaterial(&matDef);
+
+	if (model.pBuffMat)
+	{
+
+		D3DXMATERIAL* pMat = (D3DXMATERIAL*)model.pBuffMat->GetBufferPointer();
+		CTexture* pTex = CManager::GetInstance()->GetTexture();
+
+		for (int nCnt = 0; nCnt < static_cast<int>(model.dwNumMat); nCnt++)
+		{
+			D3DXMATERIAL Col = pMat[nCnt];
+
+			Col.MatD3D.Diffuse.a *= GetCol().a;
+			Col.MatD3D.Diffuse.r *= GetCol().r;
+			Col.MatD3D.Diffuse.g *= GetCol().g;
+			Col.MatD3D.Diffuse.b *= GetCol().b;
+
+			pDevice->SetMaterial(&Col.MatD3D);
+			int texIdx = model.pTexture[nCnt];
+			pDevice->SetTexture(0, (texIdx >= NULL) ? pTex->GetAddress(texIdx) : nullptr);
+
+			// メッシュの描画
+			model.pMesh->DrawSubset(nCnt);
+		}
+	}
+
+	// マテリアルを変更
+	pDevice->SetMaterial(&matDef);
+
+	// Zテスト設定を戻す
+	if (m_isZTestEneble) 
+	{
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	}
+}
+//=========================================================
+// 当たり判定処理
+//=========================================================
+bool CSideOpenDoor::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
+{
+	// nullなら
+	if (m_pCollider == nullptr) return false;
+
+	// 判定式を使う
+	return CCollisionBox::CollisionEx(m_pCollider.get(),pOther,OutPos);
+}
+//=========================================================
+// 回転するドアのフラグ起動
+//=========================================================
+void CSideOpenDoor::RotationDoorFlag(void)
+{
+	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
+	{
+		m_nState = STATE_OPENING;	// 開き始める
+	}
+	else
+	{
+		m_nState = STATE_RETURN;	// 自動的に閉じ始める
+	}
+}

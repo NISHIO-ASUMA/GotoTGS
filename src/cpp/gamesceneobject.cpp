@@ -44,6 +44,7 @@
 #include "camera.h"					// ¼”ö’Ç‰Á
 #include "automaticdoormanager.h"	// ¼”ö’Ç‰Á
 #include "autodoor_collision.h"		// ¼”ö’Ç‰Á
+#include "sideopendoor.h"
 
 //*********************************************************
 // Ã“Iƒƒ“ƒo•Ï”
