@@ -279,6 +279,9 @@
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
+    <ClCompile Include="src\cpp\sideopendoor.cpp" />
+    <ClCompile Include="src\cpp\sideopendoorcollision.cpp" />
+    <ClCompile Include="src\cpp\slideopendoormanager.cpp" />
     <ClCompile Include="src\cpp\smokefriend.cpp" />
     <ClCompile Include="src\cpp\smokeui.cpp" />
     <ClCompile Include="src\cpp\sound.cpp" />
@@ -423,6 +426,9 @@
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
+    <ClInclude Include="src\include\sideopendoor.h" />
+    <ClInclude Include="src\include\sideopendoorcollision.h" />
+    <ClInclude Include="src\include\slideopendoormanager.h" />
     <ClInclude Include="src\include\smokefriend.h" />
     <ClInclude Include="src\include\smokeui.h" />
     <ClInclude Include="src\include\sound.h" />

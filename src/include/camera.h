@@ -17,6 +17,7 @@ class CInputMouse;
 class CPlayer;
 class CBlock;
 class CAutoMaticDoor;
+class CSideOpenDoor;
 
 //*********************************************************
 // カメラクラスを定義
@@ -97,6 +98,14 @@ public:
 	/// <param name="pBlock">判定するクラスの外部ポインタ</param>
 	/// <returns></returns>
 	bool CollisionTorayDoor(CPlayer* pPlayer = nullptr, CAutoMaticDoor* pDoor = nullptr);
+
+	/// <summary>
+	/// 西尾追加 : カメラから見たプレイヤーとの透過判定
+	/// </summary>
+	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
+	/// <param name="pDoor">判定するクラスのポインタ</param>
+	/// <returns></returns>
+	bool CollisionToraySide(CPlayer* pPlayer = nullptr, CSideOpenDoor* pDoor = nullptr);
 
 public:
 

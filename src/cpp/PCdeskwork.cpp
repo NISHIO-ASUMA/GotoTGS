@@ -146,8 +146,11 @@ void CPCDeskwork::Update(void)
 	// 現在のタスクUIの更新処理
 	m_pDeskUI[m_nNowIdx]->Update();
 
-	// タスク中の処理
-	Task(pClear);
+	if (GetUse() != false)
+	{
+		// タスク中の処理
+		Task(pClear);
+	}
 }
 
 //=========================================================
@@ -250,8 +253,23 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 		// タスクをランダムに設定
 		m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
 
-		// 色を元に戻す(通常色)
-		m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
+		if (GetUse() != true)
+		{
+			// 現在の透明度を取得
+			float fAlpha = m_pDeskUI[nCount]->GetAlpha();
+
+			// 色を元に戻す(通常色)
+			m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
+
+			// 透明度だけ引き継ぐ
+			m_pDeskUI[nCount]->SetAlpha(fAlpha);
+
+		}
+		else
+		{
+			// 色を元に戻す(通常色)
+			m_pDeskUI[nCount]->ChangeCol(COLOR_WHITE);
+		}
 	}
 
 	// 現在選択している番号を初期化
