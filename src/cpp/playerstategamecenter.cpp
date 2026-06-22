@@ -51,7 +51,7 @@ void CPlayerStateGameCenter::OnStart()
 	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL,fAngle,NULL));
 	
 	// ƒ‚[ƒVƒ‡ƒ“•ÏX
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::MAGAZINE);
+	m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::GAME);
 }
 
 //=========================================================
