@@ -171,61 +171,65 @@ void CCamera::SetCamera(void)
 //==============================================================
 void CCamera::MouseView(CInputMouse * pMouse)
 {
-	// 左クリック
-	if (pMouse->GetPress(CInputMouse::MOUSE_LEFT))
+	// 左のALT押しているときのみ
+	if (CManager::GetInstance()->GetInputKeyboard()->GetPress(DIK_LALT))
 	{
-		// マウスの移動量取得
-		D3DXVECTOR2 Move = pMouse->GetMouseVelocity();
-		D3DXVECTOR2 MoveOld = pMouse->GetMouseOldVelocity();
-
-		// 現在の角度を計算
-		D3DXVECTOR2 fAngle = Move - MoveOld;
-
-		// 回転量を更新
-		m_pCamera.rot.y += fAngle.x * 0.01f;
-		m_pCamera.rot.x += fAngle.y * 0.01f;
-
-		// 回転量を制限
-		if (m_pCamera.rot.x > CAMERAINFO::MAX_VIEWUP)
+		// 左クリック
+		if (pMouse->GetPress(CInputMouse::MOUSE_LEFT))
 		{
-			m_pCamera.rot.x -= fAngle.y * 0.01f;
+			// マウスの移動量取得
+			D3DXVECTOR2 Move = pMouse->GetMouseVelocity();
+			D3DXVECTOR2 MoveOld = pMouse->GetMouseOldVelocity();
+
+			// 現在の角度を計算
+			D3DXVECTOR2 fAngle = Move - MoveOld;
+
+			// 回転量を更新
+			m_pCamera.rot.y += fAngle.x * 0.01f;
+			m_pCamera.rot.x += fAngle.y * 0.01f;
+
+			// 回転量を制限
+			if (m_pCamera.rot.x > CAMERAINFO::MAX_VIEWUP)
+			{
+				m_pCamera.rot.x -= fAngle.y * 0.01f;
+			}
+			else if (m_pCamera.rot.x < CAMERAINFO::MAX_VIEWDOWN)
+			{
+				m_pCamera.rot.x -= fAngle.y * 0.01f;
+			}
+
+			// カメラの視点の情報
+			m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+			m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+			m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 		}
-		else if (m_pCamera.rot.x < CAMERAINFO::MAX_VIEWDOWN)
+		// 右クリック
+		else if (pMouse->GetPress(CInputMouse::MOUSE_RIGHT))
 		{
-			m_pCamera.rot.x -= fAngle.y * 0.01f;
+			D3DXVECTOR2 Move = pMouse->GetMouseVelocity();
+			D3DXVECTOR2 MoveOld = pMouse->GetMouseOldVelocity();
+
+			D3DXVECTOR2 fAngle = Move - MoveOld;
+
+			// 回転量を更新
+			m_pCamera.rot.y += fAngle.x * 0.01f;
+			m_pCamera.rot.x += fAngle.y * 0.01f;
+
+			// 回転量を制限
+			if (m_pCamera.rot.x > CAMERAINFO::MAX_VIEWUP)
+			{
+				m_pCamera.rot.x -= fAngle.y * 0.01f;
+			}
+			else if (m_pCamera.rot.x < CAMERAINFO::MAX_VIEWDOWN)
+			{
+				m_pCamera.rot.x -= fAngle.y * 0.01f;
+			}
+
+			// カメラ座標を更新
+			m_pCamera.posR.x = m_pCamera.posV.x + sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+			m_pCamera.posR.y = m_pCamera.posV.y + cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+			m_pCamera.posR.z = m_pCamera.posV.z + sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 		}
-
-		// カメラの視点の情報
-		m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
-		m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
-		m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
-	}
-	// 右クリック
-	else if (pMouse->GetPress(CInputMouse::MOUSE_RIGHT))
-	{
-		D3DXVECTOR2 Move = pMouse->GetMouseVelocity();
-		D3DXVECTOR2 MoveOld = pMouse->GetMouseOldVelocity();
-
-		D3DXVECTOR2 fAngle = Move - MoveOld;
-
-		// 回転量を更新
-		m_pCamera.rot.y += fAngle.x * 0.01f;
-		m_pCamera.rot.x += fAngle.y * 0.01f;
-
-		// 回転量を制限
-		if (m_pCamera.rot.x > CAMERAINFO::MAX_VIEWUP)
-		{
-			m_pCamera.rot.x -= fAngle.y * 0.01f;
-		}
-		else if (m_pCamera.rot.x < CAMERAINFO::MAX_VIEWDOWN)
-		{
-			m_pCamera.rot.x -= fAngle.y * 0.01f;
-		}
-
-		// カメラ座標を更新
-		m_pCamera.posR.x = m_pCamera.posV.x + sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
-		m_pCamera.posR.y = m_pCamera.posV.y + cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
-		m_pCamera.posR.z = m_pCamera.posV.z + sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	}
 
 	// 正規化
