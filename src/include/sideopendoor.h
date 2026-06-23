@@ -2,8 +2,6 @@
 //
 // キー入力で開く両開きドアの処理 [ sideopendoor.h ]
 // Author: Asuma Nishio
-//
-// NOTE : イメージは204教室のドア
 // 
 //=========================================================
 
@@ -65,6 +63,13 @@ public:
 	void Draw(void) override;
 
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+
+	/// <summary>
+	/// 状態を返す
+	/// </summary>
+	/// <param name="">現在のドアの状態</param>
+	/// <returns></returns>
+	STATE GetState(void) const { return m_nState; }
 
 	/// <summary>
 	/// 矩形コライダー取得処理

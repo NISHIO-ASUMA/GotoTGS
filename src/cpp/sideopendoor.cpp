@@ -85,8 +85,7 @@ CSideOpenDoor* CSideOpenDoor::Create
 // 初期化処理
 //=========================================================
 HRESULT CSideOpenDoor::Init(void)
-{// 開く種類(LEFT,RIGHTによって)変えないといけない
-
+{
 	// 親クラスの初期化
 	CObjectX::Init();
 
@@ -143,7 +142,7 @@ void CSideOpenDoor::Update(void)
 			// 最大角度を設定
 			m_fAngle = D3DXToRadian(SIDEDOOR_INFO::MAX_ROTATION);
 
-			//タイマーをリセットして待機ステートへ
+			// タイマーをリセットして待機ステートへ
 			m_nCloseTime = 0;
 			m_nState = STATE_OPENWAIT;
 		}
@@ -175,19 +174,28 @@ void CSideOpenDoor::Update(void)
 		break;
 	}
 
+	// ローカルマトリックス宣言
 	D3DXMATRIX mtxScale, mtxRot, mtxTrans;
+
+	// マトリックスの要素を設定する
 	D3DXMatrixScaling(&mtxScale, GetScale().x, GetScale().y, GetScale().z);
 	D3DXMatrixRotationYawPitchRoll(&mtxRot, GetRot().y, GetRot().x, GetRot().z);
 	D3DXMatrixTranslation(&mtxTrans, GetPos().x, GetPos().y, GetPos().z);
 
+	// ドアの開く角度を設定する
 	float finalAngle = (m_nOpenType == OPENTYPE_LEFT) ? -m_fAngle : m_fAngle;
+
+	// Y軸回転の値をマトリックスに設定する
 	D3DXMATRIX mtxDoorRot;
 	D3DXMatrixRotationY(&mtxDoorRot, finalAngle);
 
+	// 基準となる回転の位置を設定する
 	float pivotX = (m_nOpenType == OPENTYPE_LEFT) ? m_fOffsetX : -m_fOffsetX;
 
+	// ピボット用の変数宣言
 	D3DXMATRIX mtxPivotIn, mtxPivotOut;
 
+	// 種類によって回転の基準の位置を変更
 	if (m_nOpenType == OPENTYPE_LEFT)
 	{
 		D3DXMatrixTranslation(&mtxPivotIn, -pivotX, 0.0f, 0.0f);
@@ -199,8 +207,10 @@ void CSideOpenDoor::Update(void)
 		D3DXMatrixTranslation(&mtxPivotOut, -pivotX, 0.0f, 0.0f);
 	}
 
+	// ワールド座標に設定する
 	D3DXMATRIX mtxFinalWorld = mtxScale * mtxPivotIn * mtxDoorRot * mtxPivotOut * mtxRot * mtxTrans;
 
+	// オブジェクトのマトリックスに設定
 	SetMtxWorld(mtxFinalWorld);
 
 	// 親クラスの更新処理
@@ -211,15 +221,19 @@ void CSideOpenDoor::Update(void)
 //=========================================================
 void CSideOpenDoor::Draw(void)
 {
+	// ファイルマネージャーから取得
 	CXfileManager* pXMgr = CManager::GetInstance()->GetXManager();
 	if (!pXMgr) return;
 
+	// モデルのリストを取得
 	auto& fileData = pXMgr->GetList();
 	if (GetModelIdx() >= static_cast<int>(fileData.size())) return;
 
+	// モデルのインデックスチェック
 	auto& model = fileData[GetModelIdx()];
 	if (!model.pMesh) return;
 
+	// デバイスとカラーマトリックスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 	D3DMATERIAL9 matDef;
 
@@ -229,19 +243,25 @@ void CSideOpenDoor::Draw(void)
 		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	}
 
+	// ワールド座標を取得
 	D3DXMATRIX mtxWorld = GetMtxWorld();
 	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
 
+	// デバイスのマテリアルの設定
 	pDevice->GetMaterial(&matDef);
 
 	if (model.pBuffMat)
 	{
-
+		// マテリアルのポインタを取得する
 		D3DXMATERIAL* pMat = (D3DXMATERIAL*)model.pBuffMat->GetBufferPointer();
+
+		// テクスチャ取得
 		CTexture* pTex = CManager::GetInstance()->GetTexture();
 
+		// マテリアルループ
 		for (int nCnt = 0; nCnt < static_cast<int>(model.dwNumMat); nCnt++)
 		{
+			// カラーの乗算設定
 			D3DXMATERIAL Col = pMat[nCnt];
 
 			Col.MatD3D.Diffuse.a *= GetCol().a;
@@ -249,9 +269,14 @@ void CSideOpenDoor::Draw(void)
 			Col.MatD3D.Diffuse.g *= GetCol().g;
 			Col.MatD3D.Diffuse.b *= GetCol().b;
 
+			// マテリアルをセット
 			pDevice->SetMaterial(&Col.MatD3D);
-			int texIdx = model.pTexture[nCnt];
-			pDevice->SetTexture(0, (texIdx >= NULL) ? pTex->GetAddress(texIdx) : nullptr);
+
+			// テクスチャインデックスを取得
+			int nTexIdx = model.pTexture[nCnt];
+
+			// デバイスにテクスチャを設定
+			pDevice->SetTexture(0, (nTexIdx >= NULL) ? pTex->GetAddress(nTexIdx) : nullptr);
 
 			// メッシュの描画
 			model.pMesh->DrawSubset(nCnt);
@@ -285,6 +310,7 @@ void CSideOpenDoor::RotationDoorFlag(void)
 {
 	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
 	{
-		m_nState = STATE_OPENING;	// 開き始めるフラグにする
+		// 開き始めるフラグにする
+		m_nState = STATE_OPENING;
 	}
 }

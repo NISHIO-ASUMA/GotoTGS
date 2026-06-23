@@ -140,17 +140,17 @@ HRESULT CGameSceneObject::Init(void)
 	// スコア初期化
 	m_pScore->DeleteScore();
 
-	// 自動ドア管理クラス
-	CAutoMaticDoorManager::GetInstance()->Init();
-
-	// 自動ドアコライダー管理クラスの生成
-	CAutoMaticDoorCollision::GetInstance()->Init();
-
 	// サイドに開くドアの管理クラスを生成
 	CSideOpenDoorManager::GetInstance()->Init();
 
 	// サイドに開くドアのコライダークラスを生成
 	CSideOpenDoorCollision::GetInstance()->Init();
+
+	// 自動ドア管理クラス
+	CAutoMaticDoorManager::GetInstance()->Init();
+
+	// 自動ドアコライダー管理クラスの生成
+	CAutoMaticDoorCollision::GetInstance()->Init();
 
 #endif
 	return S_OK;
@@ -211,17 +211,17 @@ void CGameSceneObject::Update(void)
 	// さぼりをまとめたマネージャーの更新処理
 	CAfkManager::Instance()->Update();
 
-	// 自動ドア管理クラス
-	CAutoMaticDoorManager::GetInstance()->Update();
-
-	// 自動ドアコライダー管理クラスの更新
-	CAutoMaticDoorCollision::GetInstance()->Update();
-
 	// サイドに開くドアの管理クラスの更新
 	CSideOpenDoorManager::GetInstance()->Update();
 
 	// サイドに開くドアのコライダークラスの更新処理
 	CSideOpenDoorCollision::GetInstance()->Update();
+
+	// 自動ドア管理クラス
+	CAutoMaticDoorManager::GetInstance()->Update();
+
+	// 自動ドアコライダー管理クラスの更新
+	CAutoMaticDoorCollision::GetInstance()->Update();
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();

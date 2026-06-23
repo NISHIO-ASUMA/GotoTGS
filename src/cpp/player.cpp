@@ -707,6 +707,36 @@ void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
 			m_pBoxCollider->SetPosOld(pos);
 		}
 	}
+
+	// サイドに開くドアの当たり判定
+	const auto& SideDoorManager = CSideOpenDoorManager::GetInstance();
+	if (!SideDoorManager) return;
+
+	for (int nCnt = 0; nCnt < SideDoorManager->GetAll(); nCnt++)
+	{
+		// インデックスごとの取得
+		auto IdxSide = SideDoorManager->GetSideOpenDoor(nCnt);
+		if (!IdxSide) continue;
+
+		// もし状態が"開き"ならスキップ
+		auto State = IdxSide->GetState();
+		if (State == CSideOpenDoor::STATE_OPENWAIT) continue;
+
+		// 矩形のコライダー取得
+		CBoxCollider* Collider = IdxSide->GetCollider();
+		if (!Collider) continue;
+
+		// ヒットしたら
+		if (Collision(Collider, &pos))
+		{
+			// 現在座標をセット
+			SetPos(pos);
+
+			// コライダー更新
+			m_pBoxCollider->SetPos(pos);
+			m_pBoxCollider->SetPosOld(pos);
+		}
+	}
 }
 //=================================================
 // 自動ドアとのコリジョン関数分け
