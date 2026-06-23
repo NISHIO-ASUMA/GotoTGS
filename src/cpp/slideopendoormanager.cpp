@@ -49,6 +49,19 @@ HRESULT CSideOpenDoorManager::Init(void)
 	m_pSideOpenDoors.clear();
 
 	// 開くドアを配列に追加する
+	m_pSideOpenDoors.push_back(CSideOpenDoor::Create
+								(D3DXVECTOR3(482.0f,34.0f,132.0f),
+								(D3DXVECTOR3(0.0f,-1.57f,0.0f)),
+								(D3DXVECTOR3(1.25f, 1.0f,1.8f)),
+								"STAGEOBJ/Door.x",
+								CSideOpenDoor::OPENTYPE_LEFT));
+
+	m_pSideOpenDoors.push_back(CSideOpenDoor::Create
+								(D3DXVECTOR3(482.0f, 34.0f, 88.0f),
+								(D3DXVECTOR3(0.0f,1.57f,0.0f)),
+								(D3DXVECTOR3(1.25f, 1.0f, 1.8f)),
+								"STAGEOBJ/Door.x",
+								CSideOpenDoor::OPENTYPE_RIGHT));
 
 	return S_OK;
 }
@@ -71,6 +84,7 @@ void CSideOpenDoorManager::Update(void)
 
 	// カメラ取得
 	const auto& Camera = CManager::GetInstance()->GetCamera();
+	if (Camera == nullptr) return;
 
 	// 判定式生成
 	for (auto Door : m_pSideOpenDoors)

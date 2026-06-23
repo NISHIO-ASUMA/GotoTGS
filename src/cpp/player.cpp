@@ -343,6 +343,9 @@ void CPlayer::Update(void)
 	// 自動ドアとの判定
 	UpdateAutoDoorCollision(UpdatePos);
 
+	// オフィス内のドアとの判定
+	UpdateSideDoorCollision(UpdatePos);
+
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
 }
@@ -742,9 +745,12 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 //=================================================
 void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
 {
-	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance(); // コライダークラス
-	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();	   // ドア管理クラス
+	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance();	// コライダークラス
+	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();		// ドア管理クラス
 	if (!pSideDoorCollision || !pSideDoorManager) return;
+
+	// キー入力がなかったら下の処理を行わない
+	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F)) return;
 
 	//自動ドア判定用コライダーを取得
 	const auto& DoorColliders = pSideDoorCollision->GetColliders();
@@ -754,7 +760,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
 		// nullチェック
 		if (ColliderData == nullptr || ColliderData->pCollider == nullptr) continue;
 
-		// プレイヤーの球と、自動ドアのセンサー球との当たり判定
+		// プレイヤーの球と、サイドドアのセンサー球との当たり判定
 		if (CollisionSphere(ColliderData->pCollider.get()))
 		{
 			// 球コライダー座標を更新

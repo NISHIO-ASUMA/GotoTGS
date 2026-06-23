@@ -44,7 +44,8 @@
 #include "camera.h"					// 西尾追加
 #include "automaticdoormanager.h"	// 西尾追加
 #include "autodoor_collision.h"		// 西尾追加
-#include "sideopendoor.h"
+#include "slideopendoormanager.h"	// 西尾追加
+#include "sideopendoorcollision.h"	// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -145,6 +146,12 @@ HRESULT CGameSceneObject::Init(void)
 	// 自動ドアコライダー管理クラスの生成
 	CAutoMaticDoorCollision::GetInstance()->Init();
 
+	// サイドに開くドアの管理クラスを生成
+	CSideOpenDoorManager::GetInstance()->Init();
+
+	// サイドに開くドアのコライダークラスを生成
+	CSideOpenDoorCollision::GetInstance()->Init();
+
 #endif
 	return S_OK;
 }
@@ -161,6 +168,12 @@ void CGameSceneObject::Uninit(void)
 
 	// 自動ドアコライダー管理クラスの終了
 	CAutoMaticDoorCollision::GetInstance()->Uninit();
+
+	// サイドに開くドアの管理クラスの終了
+	CSideOpenDoorManager::GetInstance()->Uninit();
+
+	// サイドに開くドアのコライダークラスの終了処理
+	CSideOpenDoorCollision::GetInstance()->Uninit();
 
 	// チュートリアルUIマネージャーの終了処理
 	CTutorialUIManager::Instance()->Uninit();
@@ -192,7 +205,7 @@ void CGameSceneObject::Update(void)
 	// カメラの追従ターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
-	//  ADD : 西尾 タスクの判定を取る球形コライダー管理クラスを更新
+	// 西尾 タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
 
 	// さぼりをまとめたマネージャーの更新処理
@@ -203,6 +216,12 @@ void CGameSceneObject::Update(void)
 
 	// 自動ドアコライダー管理クラスの更新
 	CAutoMaticDoorCollision::GetInstance()->Update();
+
+	// サイドに開くドアの管理クラスの更新
+	CSideOpenDoorManager::GetInstance()->Update();
+
+	// サイドに開くドアのコライダークラスの更新処理
+	CSideOpenDoorCollision::GetInstance()->Update();
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
@@ -215,7 +234,6 @@ void CGameSceneObject::Update(void)
 		m_pScore->SaveScore("data/SCORE/LazyScore.bin");
 	}
 #endif // _DEBUG
-
 }
 //=========================================================
 // 描画処理
