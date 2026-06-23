@@ -42,6 +42,10 @@
 #include "outline.h"
 #include "afkgamecenter.h"
 
+#include "slideopendoormanager.h"	// 西尾追加
+#include "sideopendoor.h"			// 西尾追加
+#include "sideopendoorcollision.h"	// 西尾追加
+
 //*********************************************************
 // 名前空間
 //*********************************************************
@@ -729,6 +733,38 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 
 			// 当たったコライダーのインデックスを渡して、特定のペアを開ける
 			pDoorManager->StartOpen(ColliderData->nIdx);
+			break;
+		}
+	}
+}
+//=================================================
+// サイドに開くドアとのコリジョン関数分け
+//=================================================
+void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
+{
+	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance(); // コライダークラス
+	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();	   // ドア管理クラス
+	if (!pSideDoorCollision || !pSideDoorManager) return;
+
+	//自動ドア判定用コライダーを取得
+	const auto& DoorColliders = pSideDoorCollision->GetColliders();
+
+	for (const auto& ColliderData : DoorColliders)
+	{
+		// nullチェック
+		if (ColliderData == nullptr || ColliderData->pCollider == nullptr) continue;
+
+		// プレイヤーの球と、自動ドアのセンサー球との当たり判定
+		if (CollisionSphere(ColliderData->pCollider.get()))
+		{
+			// 球コライダー座標を更新
+			if (m_pSphereCollider)
+			{
+				m_pSphereCollider->SetPos(pos);
+			}
+
+			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
+			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
 			break;
 		}
 	}

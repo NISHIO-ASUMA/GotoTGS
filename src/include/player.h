@@ -134,6 +134,7 @@ public:
 
 	void UpdateBlockCollision(D3DXVECTOR3 pos);
 	void UpdateAutoDoorCollision(D3DXVECTOR3 pos);
+	void UpdateSideDoorCollision(D3DXVECTOR3 pos);
 
 	void MathTVRotation(void);
 
