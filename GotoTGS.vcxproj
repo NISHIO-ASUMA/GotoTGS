@@ -303,6 +303,7 @@
     <ClCompile Include="src\cpp\tutorialui.cpp" />
     <ClCompile Include="src\cpp\tutorialuimanager.cpp" />
     <ClCompile Include="src\cpp\ui.cpp" />
+    <ClCompile Include="src\cpp\vigilancegauge.cpp" />
     <ClCompile Include="src\cpp\walkingfriend.cpp" />
     <ClCompile Include="src\cpp\worldUIcollision.cpp" />
     <ClCompile Include="src\cpp\worldwallmanager.cpp" />
@@ -454,6 +455,7 @@
     <ClInclude Include="src\include\tutorialui.h" />
     <ClInclude Include="src\include\tutorialuimanager.h" />
     <ClInclude Include="src\include\ui.h" />
+    <ClInclude Include="src\include\vigilancegauge.h" />
     <ClInclude Include="src\include\walkingfriend.h" />
     <ClInclude Include="src\include\worldUIcollision.h" />
     <ClInclude Include="src\include\worldwallmanager.h" />
