@@ -771,6 +771,12 @@
     <ClCompile Include="src\cpp\sideopendoorcollision.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\effect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\particle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1213,6 +1219,12 @@
     </ClInclude>
     <ClInclude Include="src\include\sideopendoorcollision.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\effect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\particle.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
