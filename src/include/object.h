@@ -23,11 +23,6 @@ public:
 	enum TYPE
 	{
 		TYPE_NONE,
-		TYPE_ARRAY,		// 仲間
-		TYPE_ENEMY,		// 敵
-		TYPE_QUEEN,		// 防衛対象
-		TYPE_WORKER,	// 司令塔
-		TYPE_TOP,		// トップキャラクター
 		TYPE_MESH,		// メッシュオブジェクト
 		TYPE_BLOCK,		// ブロック
 		TYPE_PAUSE,		// ポーズ
