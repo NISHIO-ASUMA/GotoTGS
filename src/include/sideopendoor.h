@@ -51,6 +51,7 @@ public:
 	{
 		STATE_CLOSE_WAIT,	// •Â‚¶ó‘Ô
 		STATE_OPENING,		// ŠJ‚«’†
+		STATE_OPENWAIT,		// ŠJ‚¢‚Ä‚¢‚éŠÔ‚Ìó‘Ô
 		STATE_RETURN,		// ‰Šú‚Ìó‘Ô‚É‚à‚Ç‚é
 		STATE_MAX
 	};
@@ -102,7 +103,7 @@ public:
 	inline void SetType(const OPENTYPE& nType) { m_nOpenType = nType; }
 	inline void SetZEneble(const bool& isenable) { m_isZTestEneble = isenable; }
 
-	void RotationDoorFlag(void); // ÀÛ‚É“à•”‚Åstate‚ğ•ÏX‚µ‚Ä‚¢‚é
+	void RotationDoorFlag(void);
 
 private:
 

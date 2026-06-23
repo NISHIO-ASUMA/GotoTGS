@@ -29,6 +29,7 @@
 namespace SIDEDOOR_INFO
 {
 	constexpr float MAX_ROTATION = 90.0f; // 最大角度
+	constexpr int MAX_DOOR_CLOSETIME = 240; // 閉まる最大時間
 };
 
 //=========================================================
@@ -84,7 +85,8 @@ CSideOpenDoor* CSideOpenDoor::Create
 // 初期化処理
 //=========================================================
 HRESULT CSideOpenDoor::Init(void)
-{
+{// 開く種類(LEFT,RIGHTによって)変えないといけない
+
 	// 親クラスの初期化
 	CObjectX::Init();
 
@@ -112,7 +114,7 @@ HRESULT CSideOpenDoor::Init(void)
 	// 矩形コライダー生成処理
 	m_pCollider = CBoxCollider::Create(GetPos(), GetPos(), m_Size, matRot);
 
-	// オフセットを作成
+	// 回転する際のオフセットを作成
 	m_fOffsetX = (m_Size.x / 2.0f) * Scale.x;
 
 	return S_OK;
@@ -130,29 +132,31 @@ void CSideOpenDoor::Uninit(void)
 //=========================================================
 void CSideOpenDoor::Update(void)
 {
-	// 状態を切り替える ( 外部の関数にしてもつ )
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_6))
-	{
-		if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
-		{
-			m_nState = STATE_OPENING; // 開き始める
-		}
-		else
-		{
-			m_nState = STATE_RETURN;  // 閉じ始める
-		}
-	}
-
+	// 状態ごとの切り替え
 	switch (m_nState)
 	{
 	case STATE_OPENING:
-
 		m_fAngle += 0.03f; // 開くスピード
 
 		if (m_fAngle >= D3DXToRadian(SIDEDOOR_INFO::MAX_ROTATION))
 		{
 			// 最大角度を設定
 			m_fAngle = D3DXToRadian(SIDEDOOR_INFO::MAX_ROTATION);
+
+			//タイマーをリセットして待機ステートへ
+			m_nCloseTime = 0;
+			m_nState = STATE_OPENWAIT;
+		}
+		break;
+
+	case STATE_OPENWAIT: // 開いた状態をキープ
+
+		m_nCloseTime++; // 毎フレームカウントアップ
+
+		// 最大時間経ったら閉じ始める
+		if (m_nCloseTime >= SIDEDOOR_INFO::MAX_DOOR_CLOSETIME)
+		{
+			m_nState = STATE_RETURN;
 		}
 		break;
 
@@ -165,6 +169,10 @@ void CSideOpenDoor::Update(void)
 			m_nState = STATE_CLOSE_WAIT;
 		}
 		break;
+
+	case STATE_CLOSE_WAIT:
+		// 閉じている時は何もしない
+		break;
 	}
 
 	D3DXMATRIX mtxScale, mtxRot, mtxTrans;
@@ -172,22 +180,31 @@ void CSideOpenDoor::Update(void)
 	D3DXMatrixRotationYawPitchRoll(&mtxRot, GetRot().y, GetRot().x, GetRot().z);
 	D3DXMatrixTranslation(&mtxTrans, GetPos().x, GetPos().y, GetPos().z);
 
+	float finalAngle = (m_nOpenType == OPENTYPE_LEFT) ? -m_fAngle : m_fAngle;
 	D3DXMATRIX mtxDoorRot;
-	float finalAngle = (m_nOpenType == OPENTYPE_LEFT) ? m_fAngle : -m_fAngle;
 	D3DXMatrixRotationY(&mtxDoorRot, finalAngle);
 
-	D3DXMATRIX mtxPivotIn, mtxPivotOut;
-	float offset = (m_nOpenType == OPENTYPE_LEFT) ? m_fOffsetX : -m_fOffsetX;
+	float pivotX = (m_nOpenType == OPENTYPE_LEFT) ? m_fOffsetX : -m_fOffsetX;
 
-	D3DXMatrixTranslation(&mtxPivotIn, -offset, 0.0f, 0.0f);
-	D3DXMatrixTranslation(&mtxPivotOut, offset, 0.0f, 0.0f);
+	D3DXMATRIX mtxPivotIn, mtxPivotOut;
+
+	if (m_nOpenType == OPENTYPE_LEFT)
+	{
+		D3DXMatrixTranslation(&mtxPivotIn, -pivotX, 0.0f, 0.0f);
+		D3DXMatrixTranslation(&mtxPivotOut, pivotX, 0.0f, 0.0f);
+	}
+	else if (m_nOpenType == OPENTYPE_RIGHT)
+	{
+		D3DXMatrixTranslation(&mtxPivotIn, pivotX, 0.0f, 0.0f);
+		D3DXMatrixTranslation(&mtxPivotOut, -pivotX, 0.0f, 0.0f);
+	}
 
 	D3DXMATRIX mtxFinalWorld = mtxScale * mtxPivotIn * mtxDoorRot * mtxPivotOut * mtxRot * mtxTrans;
 
 	SetMtxWorld(mtxFinalWorld);
 
 	// 親クラスの更新処理
-	CObjectX::Update();	
+	CObjectX::Update();
 }
 //=========================================================
 // 描画処理
@@ -268,10 +285,6 @@ void CSideOpenDoor::RotationDoorFlag(void)
 {
 	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
 	{
-		m_nState = STATE_OPENING;	// 開き始める
-	}
-	else
-	{
-		m_nState = STATE_RETURN;	// 自動的に閉じ始める
+		m_nState = STATE_OPENING;	// 開き始めるフラグにする
 	}
 }

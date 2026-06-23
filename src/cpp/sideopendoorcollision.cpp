@@ -25,7 +25,7 @@
 namespace CollisionSide
 {
 	using json = nlohmann::json;									// 名前空間
-	constexpr const char* LoadName = "data/JSON/SideCollider.json"; // 読み込むファイル
+	constexpr const char* LoadName = "data/JSON/SideCollision.json"; // 読み込むファイル
 };
 
 //=========================================================

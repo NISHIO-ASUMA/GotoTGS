@@ -181,6 +181,7 @@ void CTitleuiManager::Update(void)
 	// キー入力を取得
 	const auto& key = CManager::GetInstance()->GetInputKeyboard();
 	const auto& pad = CManager::GetInstance()->GetJoyPad();
+	const auto& mouse = CManager::GetInstance()->GetMouse();
 
 	// パッドの接続判定チェック
 	bool isConnect = pad->GetConnectGamePad();
@@ -257,7 +258,8 @@ void CTitleuiManager::Update(void)
 	}
 
 	// 選択したら,キー入力でシーン遷移
-	if (key->GetTrigger(DIK_RETURN) || pad->GetTrigger(CJoyPad::JOYKEY_A) || pad->GetTrigger(CJoyPad::JOYKEY_START))
+	if (key->GetTrigger(DIK_RETURN) || pad->GetTrigger(CJoyPad::JOYKEY_A) || pad->GetTrigger(CJoyPad::JOYKEY_START)
+		|| mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// サウンド取得
 		CSound* pSound = CManager::GetInstance()->GetSound();
@@ -299,7 +301,7 @@ void CTitleuiManager::SlideStartUi(void)
 		m_pStartUiList[nCntStart]->SetPos(currentPos);
 	}
 
-	// 選択肢UIを右側から中央へ入場させる
+	// 選択肢UIを右側から中央へ
 	float easeRatio = CEasing::EaseOutBack(m_fSlideRatio);
 
 	// 全選択肢の数
