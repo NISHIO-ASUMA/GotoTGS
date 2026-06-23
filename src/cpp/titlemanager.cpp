@@ -59,6 +59,7 @@ HRESULT CTitleManager::Init(void)
 	// サウンド再生
 	pSound->Play(CSound::SOUND_LABEL_TITLE_BGM);
 
+	// フラグ初期化
 	isKeyinputSet = false;
 
 	// 初期化結果を返す
@@ -80,15 +81,18 @@ void CTitleManager::Update(void)
 	if (isKeyinputSet) return;
 
 	// 入力デバイス取得
-	CInputKeyboard* pKey = CManager::GetInstance()->GetInputKeyboard();
-	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+	auto * pKey = CManager::GetInstance()->GetInputKeyboard();
+	auto * pJoyPad = CManager::GetInstance()->GetJoyPad();
+	auto* pMouse = CManager::GetInstance()->GetMouse();
 
 	// 取得失敗時
 	if (pKey == nullptr) return;
 	if (pJoyPad == nullptr) return;
+	if (pMouse == nullptr) return;
 
 	// キー入力時の判定
-	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START)))
+	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START)) ||
+		pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// サウンド取得
 		CSound* pSound = CManager::GetInstance()->GetSound();
