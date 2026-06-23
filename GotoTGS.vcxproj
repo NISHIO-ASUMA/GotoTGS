@@ -198,6 +198,7 @@
     <ClCompile Include="src\cpp\deskworkUImanager.cpp" />
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
+    <ClCompile Include="src\cpp\effect.cpp" />
     <ClCompile Include="src\cpp\enemy.cpp" />
     <ClCompile Include="src\cpp\enemymanager.cpp" />
     <ClCompile Include="src\cpp\enemystatebase.cpp" />
@@ -245,6 +246,7 @@
     <ClCompile Include="src\cpp\object3D.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
+    <ClCompile Include="src\cpp\particle.cpp" />
     <ClCompile Include="src\cpp\pause.cpp" />
     <ClCompile Include="src\cpp\pausemanager.cpp" />
     <ClCompile Include="src\cpp\PCdeskwork.cpp" />
@@ -349,6 +351,7 @@
     <ClInclude Include="src\include\deskworkUImanager.h" />
     <ClInclude Include="src\include\DOCUMENTdeskwork.h" />
     <ClInclude Include="src\include\easing.h" />
+    <ClInclude Include="src\include\effect.h" />
     <ClInclude Include="src\include\enemy.h" />
     <ClInclude Include="src\include\enemymanager.h" />
     <ClInclude Include="src\include\enemystatebase.h" />
@@ -397,6 +400,7 @@
     <ClInclude Include="src\include\object3D.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />
+    <ClInclude Include="src\include\particle.h" />
     <ClInclude Include="src\include\pause.h" />
     <ClInclude Include="src\include\pausemanager.h" />
     <ClInclude Include="src\include\PCdeskwork.h" />
