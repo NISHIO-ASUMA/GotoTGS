@@ -233,7 +233,7 @@ void CPlayer::Update(void)
 	MoveKeyboard(player::fSpeed);
 
 	// ジョイパッド操作
-	//MoveJoypad(player::fSpeed);
+	MoveJoypad(player::fSpeed);
 
 	// ステートマシンの更新処理
 	m_pMachine->Update();
