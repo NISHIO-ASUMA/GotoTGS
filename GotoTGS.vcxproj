@@ -197,6 +197,7 @@
     <ClCompile Include="src\cpp\deskworkUI.cpp" />
     <ClCompile Include="src\cpp\deskworkUImanager.cpp" />
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp" />
+    <ClCompile Include="src\cpp\doorui.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
     <ClCompile Include="src\cpp\effect.cpp" />
     <ClCompile Include="src\cpp\enemy.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="src\include\deskworkUI.h" />
     <ClInclude Include="src\include\deskworkUImanager.h" />
     <ClInclude Include="src\include\DOCUMENTdeskwork.h" />
+    <ClInclude Include="src\include\doorui.h" />
     <ClInclude Include="src\include\easing.h" />
     <ClInclude Include="src\include\effect.h" />
     <ClInclude Include="src\include\enemy.h" />

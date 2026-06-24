@@ -57,7 +57,6 @@ HRESULT CTutorialUIManager::Init(void)
 	// パソコン用チュートリアルUIの生成
 	CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::TutorialUI_NAME);
 
-
 	return S_OK;
 }
 //=========================================================

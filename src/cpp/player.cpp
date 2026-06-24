@@ -233,7 +233,7 @@ void CPlayer::Update(void)
 	MoveKeyboard(player::fSpeed);
 
 	// ジョイパッド操作
-	//MoveJoypad(player::fSpeed);
+	MoveJoypad(player::fSpeed);
 
 	// ステートマシンの更新処理
 	m_pMachine->Update();
@@ -656,7 +656,7 @@ void CPlayer::MoveJoypad(float speed)
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter) return;
 
 	// 移動していなかったら
-	else if (!pJoyPad->GetLeftStick())GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+	else if (!pJoyPad->GetLeftStick()) GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
 	
 	// 移動入力がある場合
 	else if (m_bMove)
