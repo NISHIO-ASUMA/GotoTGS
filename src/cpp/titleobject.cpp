@@ -16,25 +16,25 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "titleuimanager.h"
-#include "object2Dmulti.h"
+#include "blockmanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
 //*********************************************************
-CTitleObject* CTitleObject::m_pInstance = nullptr;					// シングルトン変数
+CTitleObject* CTitleObject::m_pInstance = nullptr;		// シングルトン変数
 
 //*********************************************************
 // 定数宣言空間
 //*********************************************************
 namespace TITLEOBJECT
 {
-	constexpr const char* LoadName = "data/JSON/Titleobject.json";		// 読み込むjsonファイル
+	constexpr const char* LoadName = "data/JSON/Titleobject.json";	// 読み込むjsonファイル
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTitleObject::CTitleObject()
+CTitleObject::CTitleObject() : m_pBlock(nullptr)
 {
 	
 }
@@ -57,8 +57,10 @@ HRESULT CTitleObject::Init(void)
 	// タイトルの選択肢設定クラスの初期化
 	CTitleuiManager::GetInstance()->Init();
 
-	// テストでマルチオブジェクト生成
-	//CObject2DMulti::Create(D3DXVECTOR3(400.0f, 250.0f, 0.0f), 60.0f, 60.0f, "circle002.png", "field000.jpg");
+	// マップ生成
+	m_pBlock = std::make_unique<CBlockManager>();
+	JsonManager->SetBlockManager(m_pBlock.get());
+	m_pBlock->Init();
 
 	return S_OK;
 }
@@ -70,6 +72,9 @@ void CTitleObject::Uninit(void)
 {
 	// タイトルの選択肢設定クラスの終了処理
 	CTitleuiManager::GetInstance()->Uninit();
+
+	// ポインタの破棄
+	m_pBlock.reset();
 
 	// インスタンスの破棄
 	if (m_pInstance)
