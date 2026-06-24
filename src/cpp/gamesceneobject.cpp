@@ -286,7 +286,6 @@ void CGameSceneObject::CreatePointer(void)
 	vigilancegauge.tex = D3DXVECTOR2(1.0f, 1.0f);
 	vigilancegauge.fWidth = 200.0f;
 	vigilancegauge.fHeight = 200.0f;
-	vigilancegauge.isLoop = false;
 	vigilancegauge.bUse = true;
 
 	// åxâ˙ÉQÅ[ÉWÇÃê∂ê¨ Misaki

@@ -19,7 +19,8 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CVigilancegauge::CVigilancegauge(int nPriority)
+CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority),
+m_bUse(false)
 {
 
 }
@@ -48,10 +49,9 @@ CVigilancegauge* CVigilancegauge::Create(const Vigilancegauge& vigilancegauge)
 	pVigilancegauge->SetPos(vigilancegauge.pos);
 	pVigilancegauge->SetCol(vigilancegauge.col);
 	pVigilancegauge->SetSize(vigilancegauge.fWidth, vigilancegauge.fHeight);
-	pVigilancegauge->SetUV(vigilancegauge.tex.x, vigilancegauge.tex.y);
-	pVigilancegauge->SetAnimFlag(vigilancegauge.isLoop);
-	pVigilancegauge->SetUse(vigilancegauge.bUse);
-	pVigilancegauge->SetTexture(Config::TEXNAME);
+	pVigilancegauge->SetTexture(Config::TEXNAME_BASE, 0);
+	pVigilancegauge->SetTexture(Config::TEXNAME_MULTI, 1);
+	pVigilancegauge->m_bUse = vigilancegauge.bUse;
 
 	// 初期化が失敗したとき
 	if (FAILED(pVigilancegauge->Init())) return nullptr;
@@ -65,7 +65,7 @@ CVigilancegauge* CVigilancegauge::Create(const Vigilancegauge& vigilancegauge)
 HRESULT CVigilancegauge::Init(void)
 {
 	// 親の初期化処理
-	CAnimationObject2D::Init();
+	CObject2DMulti::Init();
 
 	return S_OK;
 }
@@ -76,7 +76,7 @@ HRESULT CVigilancegauge::Init(void)
 void CVigilancegauge::Uninit(void)
 {
 	// 親の終了処理
-	CAnimationObject2D::Uninit();
+	CObject2DMulti::Uninit();
 }
 
 //=========================================================
@@ -85,10 +85,10 @@ void CVigilancegauge::Uninit(void)
 void CVigilancegauge::Update(void)
 {
 	// 使用していないなら
-	if (GetUse() != true) return;
+	if (m_bUse != true) return;
 
 	// 親の更新処理
-	CAnimationObject2D::Update();
+	CObject2DMulti::Update();
 }
 
 //=========================================================
@@ -97,8 +97,8 @@ void CVigilancegauge::Update(void)
 void CVigilancegauge::Draw(void)
 {
 	// 使用していないなら
-	if (GetUse() != true) return;
+	if (m_bUse != true) return;
 
 	// 親の描画処理
-	CAnimationObject2D::Draw();
+	CObject2DMulti::Draw();
 }
