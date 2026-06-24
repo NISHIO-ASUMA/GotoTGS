@@ -1,6 +1,6 @@
 //=========================================================
 //
-// PCUI処理 [ pcui.h ]
+// ドアUI処理 [ doorui.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -18,37 +18,46 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "tutorialui.h"
+#include "object2D.h"
 
 //*********************************************************
-// オブジェクトクラスを定義
+// 前方宣言
 //*********************************************************
-class CPcUI : public CTutorialUI
+class CSphereCollider;
+
+//*********************************************************
+// ブロックオブジェクトクラスを定義
+//*********************************************************
+class CDoorUI :public CObject2D
 {
 public:
+	CDoorUI();
+	~CDoorUI();
 
-	CPcUI(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
-	~CPcUI();
-
-	HRESULT Init(void);
+	HRESULT Init();
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	/// <summary>
-	/// 生成処理
-	/// </summary>
-	/// <param name="pos">生成処理</param>
-	/// <param name="rot">角度</param>
-	/// <param name="fWidth">横幅</param>
-	/// <param name="fHeight">高さ</param>
-	/// <param name="pTexName">テクスチャファイル名</param>
-	/// <returns></returns>
-	static CPcUI* Create
-	(
-		const D3DXVECTOR3& pos,
-		const D3DXVECTOR3& rot,
-		const char* pTexName
-	);
+	static CDoorUI* Create(void);
+
+	bool GetAfkButton(void) { return m_bAfkButton; }
+
+	void EasingSine(void);
+
+	// インスタンス生成用関数
+	static CDoorUI* Instance(void);
+
+private:
+	static CDoorUI* m_pInstance;	// シングルトン変数
+
+	D3DXVECTOR3 m_pos;		// 位置
+	float m_fCountFrame;	// イージング用フレームカウント用変数
+	float m_fMaxFrame;		// 最大フレーム変数
+	bool m_bAfkButton;		// ボタン識別判定用変数
+	bool m_bEasing;			// イージング用変数
+	bool m_bDisplay;		// 表示するかの判定変数
 };
+
+
 

@@ -656,7 +656,7 @@ void CPlayer::MoveJoypad(float speed)
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter) return;
 
 	// ˆÚ“®‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç
-	else if (!pJoyPad->GetLeftStick())GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+	else if (!pJoyPad->GetLeftStick()) GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
 	
 	// ˆÚ“®“ü—Í‚ª‚ ‚éê‡
 	else if (m_bMove)

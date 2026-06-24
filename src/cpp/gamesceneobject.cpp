@@ -39,6 +39,7 @@
 #include "tutorialuimanager.h"		// 近田追加
 #include "afkuimanager.h"			// 近田追加
 #include "afkmanager.h"				// 近田追加
+#include "doorui.h"					// 近田追加
 
 #include "enemy.h"					// 西尾追加
 #include "worldUIcollision.h"		// 西尾追加
@@ -120,6 +121,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	// さぼっているときのUIの生成
 	CAfk2DUI::Create();
+
+	// ドア用チュートリアルUIの生成
+	CDoorUI::Create();
 
 	// 各種ポインタクラスの生成
 	CreatePointer();

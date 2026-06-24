@@ -789,6 +789,9 @@
     <ClCompile Include="src\cpp\object2Dmulti.cpp">
       <Filter>ソース ファイル\ObjectClass\2D</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\doorui.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1243,6 +1246,9 @@
     </ClInclude>
     <ClInclude Include="src\include\object2Dmulti.h">
       <Filter>ヘッダー ファイル\ObjectClass\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\doorui.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
