@@ -41,7 +41,7 @@
 #include "autodoor_collision.h"	  // 西尾追加
 #include "outline.h"
 #include "afkgamecenter.h"
-
+#include "titleuimanager.h"
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
@@ -229,12 +229,17 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 oldpos = GetOldPos();
 
-	// キーボード操作
-	MoveKeyboard(player::fSpeed);
-
+	if (CTitleuiManager::GetInstance()->GetSelectIdx() == 1)
+	{
+		// キーボード操作
+		MoveKeyboard(player::fSpeed);
+	}
 	// ジョイパッド操作
-	MoveJoypad(player::fSpeed);
-
+	else if (CTitleuiManager::GetInstance()->GetSelectIdx() == 2)
+	{
+		MoveJoypad(player::fSpeed);
+	}
+	
 	// ステートマシンの更新処理
 	m_pMachine->Update();
 
@@ -780,7 +785,8 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
 	if (!pSideDoorCollision || !pSideDoorManager) return;
 
 	// キー入力がなかったら下の処理を行わない
-	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F)) return;
+	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F) ||
+		!CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A)) return;
 
 	//自動ドア判定用コライダーを取得
 	const auto& DoorColliders = pSideDoorCollision->GetColliders();
