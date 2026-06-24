@@ -1,6 +1,6 @@
 //=========================================================
 //
-// 警戒度のゲージ処理 [ vigilancegauge.h ]
+// 警戒ゲージ処理 [ vigilancegauge.h ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -16,9 +16,9 @@
 #include "animationobject2d.h"
 
 //*********************************************************
-//  警戒度のゲージに対するクラスを定義
+//  警戒ゲージに対するクラスを定義
 //*********************************************************
-class CVigilancegauge
+class CVigilancegauge:public CAnimationObject2D
 {
 public:
 
@@ -37,10 +37,10 @@ public:
 	CVigilancegauge(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CVigilancegauge();
 
-	HRESULT Init(void);
-	void Uninit(void);
-	void Update(void);
-	void Draw(void);
+	HRESULT Init(void) override;
+	void Uninit(void) override;
+	void Update(void) override;
+	void Draw(void) override;
 
 	// 生成処理
 	static CVigilancegauge* Create(const Vigilancegauge& vigilancegauge);
@@ -52,7 +52,6 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr int MAX_FREAM = 180;					// 最大フレーム数
-		static constexpr const char* TEXNAME = "alert000.png";	// テクスチャ名
+		static constexpr const char* TEXNAME = "vigilancegauge000.png";	// テクスチャ名
 	};
 };
