@@ -243,6 +243,7 @@
     <ClCompile Include="src\cpp\number.cpp" />
     <ClCompile Include="src\cpp\object.cpp" />
     <ClCompile Include="src\cpp\object2D.cpp" />
+    <ClCompile Include="src\cpp\object2Dmulti.cpp" />
     <ClCompile Include="src\cpp\object3D.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
@@ -398,6 +399,7 @@
     <ClInclude Include="src\include\number.h" />
     <ClInclude Include="src\include\object.h" />
     <ClInclude Include="src\include\object2D.h" />
+    <ClInclude Include="src\include\object2Dmulti.h" />
     <ClInclude Include="src\include\object3D.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />

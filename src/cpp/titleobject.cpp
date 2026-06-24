@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "titleuimanager.h"
+#include "object2Dmulti.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -55,6 +56,9 @@ HRESULT CTitleObject::Init(void)
 
 	// タイトルの選択肢設定クラスの初期化
 	CTitleuiManager::GetInstance()->Init();
+
+	// テストでマルチオブジェクト生成
+	//CObject2DMulti::Create(D3DXVECTOR3(400.0f, 250.0f, 0.0f), 60.0f, 60.0f, "circle002.png", "field000.jpg");
 
 	return S_OK;
 }
