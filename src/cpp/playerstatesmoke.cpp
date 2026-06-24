@@ -12,6 +12,14 @@
 #include "playerstateneutral.h"
 #include "player.h"
 
+//*********************************************************
+// 名前空間
+//*********************************************************
+namespace STATE_SMOKE
+{
+	const D3DXVECTOR3 PosDest = { 321.0f, 50.0f, 320.0f };	// たばこのごみ箱の位置
+}
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -41,6 +49,15 @@ void CPlayerStateSmoke::OnStart()
 		D3DXVECTOR3(0.0f,0.0f,1.57f),
 		D3DXVECTOR3(-3.0f, 0.0f,3.0f)
 	);
+
+	// たばこごみ箱とプレイヤーの距離の差
+	D3DXVECTOR3 diff = m_pPlayer->GetPos() - STATE_SMOKE::PosDest;
+
+	// 角度
+	float fAngle = atan2f(diff.x, diff.z);
+
+	// 角度の設定
+	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL, fAngle, NULL));
 }
 
 //=========================================================

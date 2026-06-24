@@ -24,8 +24,8 @@ D3DXVECTOR3 CParticle::m_TargetPos = {};
 
 namespace EFFECT
 {
-	constexpr int nMax = 200;		// ランダム最大値
-	constexpr int nMin = 100;		// ランダム最小値
+	constexpr int nMax = 30;		// ランダム最大値
+	constexpr int nMin = 10;		// ランダム最小値
 }
 
 //=========================================================
@@ -90,11 +90,7 @@ void CParticle::Uninit(void)
 //=========================================================
 void CParticle::Update(void)
 {
-	if (!m_bUse)
-	{
-		Uninit();
-		return;
-	}
+	if (!m_bUse)return;
 	
 	switch (m_type)
 	{
@@ -118,11 +114,6 @@ void CParticle::Update(void)
 		break;
 	}
 
-	m_nLife --;
-	if (m_nLife <= 0)
-	{
-		m_bUse = false;
-	}
 }
 //=========================================================
 // 描画処理
@@ -170,30 +161,32 @@ void CParticle::None(void)
 void CParticle::Smoke(void)
 {
 	// ローカル変数
-	D3DXVECTOR3 pos;
 	D3DXVECTOR3 move;
-	D3DXCOLOR col;
-	
-	// 今の位置を保存
-	pos = m_pos;
 
-	float xRand = ((float)(rand() % EFFECT::nMax) - (EFFECT::nMin + 75)) / 75.0f;
-	float zRand = ((float)(rand() % EFFECT::nMax) - (EFFECT::nMin + 75)) / 75.0f;
-	float ySpeed = ((float)(rand() % 50) / EFFECT::nMin) + 1.0f;
-
-	move = D3DXVECTOR3(xRand, ySpeed, zRand);
-
-	// 色・サイズ・寿命の設定
-	col = m_col;
+	// 位置・色・サイズの設定
+	D3DXVECTOR3 pos = m_pos;
+	D3DXCOLOR col = m_col;
 	float fRadius = m_fRadius;
-	int nLife = 40 + rand() % 20;
 
 	m_nCreateTime--;
 	if (m_nCreateTime < 0)
 	{
-		// エフェクトの生成
-		CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_NONE);
-		m_nCreateTime = 30;
+		for (int nCntAppear = 0; nCntAppear < 5; nCntAppear++)
+		{
+
+			float xRand = ((float)(rand() % EFFECT::nMax) - EFFECT::nMin) / 50.0f;
+			float zRand = ((float)(rand() % EFFECT::nMax) - EFFECT::nMin) / 50.0f;
+			float ySpeed = ((float)(rand() % 50) / 50) + 0.01f;
+
+			move = D3DXVECTOR3(xRand, ySpeed, zRand);
+
+			// 寿命の設定
+			int nLife = 40 + rand() % 20;
+
+			// エフェクトの生成
+			CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_NONE);
+			m_nCreateTime = 15;
+		}
 	}
 }
 //=========================================================

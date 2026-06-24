@@ -73,7 +73,7 @@ CAfkUI* CAfkUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const flo
 	// 初期化失敗時
 	if (FAILED(pAfkUI->Init())) return nullptr;
 
-	// チュートリアルUIのポインタを返す
+	// UIのポインタを返す
 	return pAfkUI;
 }
 //=========================================================

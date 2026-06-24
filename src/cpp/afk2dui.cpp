@@ -38,8 +38,6 @@ namespace AFK2DUI
 	constexpr float fHeight = 75.0f;							// 縦幅
 	constexpr float fMaxFrame = 60.0f;							// マックスフレーム
 	constexpr const char* Button_NAME = "AfkButton.png";		// チュートリアルuiのテクスチャ名
-	constexpr const char* GameCenter_NAME = "gamecenter.png";	// ゲームセンターuiのテクスチャ名
-	constexpr const char* Smoke_NAME = "smoke.png";				// たばこUIのテクスチャ名
 };
 
 //=================================================
@@ -54,7 +52,8 @@ CAfk2DUI::CAfk2DUI() : m_pos(VECTOR3_NULL),
 m_fMaxFrame(NULL),
 m_fCountFrame(NULL),
 m_bAfkButton(false),
-m_bEasing(false)
+m_bEasing(false),
+m_bDisplay(true)
 {
 
 }
@@ -126,28 +125,27 @@ void CAfk2DUI::Update(void)
 	bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkMagazine();
 	bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
 
+	// さぼっていなかったら
 	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter)
-	{// さぼっていなかったら
+	{
+		m_bDisplay = true;
 		SetTexture(AFK2DUI::Button_NAME);
 	}
-	
-	// ゲームセンターでさぼっていたら
-	else if(bAfkGameCenter) SetTexture(AFK2DUI::GameCenter_NAME);
-	
-	// たばこでさぼっていたら
-	else if (bAfkSmoke)SetTexture(AFK2DUI::Smoke_NAME);
-	
+	// さぼっていたら
+	else m_bDisplay = false;
 }
 //=========================================================
 // 描画処理
 //=========================================================
 void CAfk2DUI::Draw(void)
 {
+	if (!m_bDisplay) return;
+
 	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
 	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-
+	
 	// 親クラスの描画処理
 	if(bAfkSmoke || bAfkTV || bAfkMagazine || bAfkGameCenter)CObject2D::Draw();
 }
