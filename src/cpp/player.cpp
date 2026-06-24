@@ -85,6 +85,7 @@ m_bAfkSmoke(false),
 m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
+m_bDoor(false),
 m_TvPrevPos(VECTOR3_NULL)
 {
 
@@ -785,7 +786,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
 	if (!pSideDoorCollision || !pSideDoorManager) return;
 
 	// キー入力がなかったら下の処理を行わない
-	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F) ||
+	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F) &&
 		!CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A)) return;
 
 	//自動ドア判定用コライダーを取得
@@ -803,8 +804,9 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
 			if (m_pSphereCollider)
 			{
 				m_pSphereCollider->SetPos(pos);
+				
 			}
-
+			
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
 			break;
