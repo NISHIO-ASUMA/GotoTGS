@@ -1,5 +1,5 @@
 {
-   "AllObject": 379,
+   "AllObject": 380,
    "SetObjects": [
       {
          "idx": 0,
@@ -7580,6 +7580,26 @@
          ],
          "Flags": false,
          "filepath": "data/MODEL/STAGEOBJ/automaticdoor.x"
+      },
+      {
+         "idx": 379,
+         "pos": [
+            156.8300018310547,
+            594.0,
+            80.29000091552734
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.399999976158142,
+            1.0,
+            0.8700000047683716
+         ],
+         "Flags": false,
+         "filepath": "data/MODEL/STAGEOBJ/bill02.x"
       }
    ]
 }
