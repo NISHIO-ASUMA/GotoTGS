@@ -95,6 +95,12 @@ void CMoveCharactor::Uninit(void)
 //=========================================================
 void CMoveCharactor::Update(void)
 {
+	// ‚à‚µ’n–Ê‚È‚ç
+	if (m_pos.y <= NULL)
+	{
+		m_pos.y = 0.0f;
+	}
+
 	// ˆÚ“®—Ê‚ÌŒ¸Š
 	m_move.x += (0.0f - m_move.x) * 0.75f;
 	m_move.z += (0.0f - m_move.z) * 0.75f;

@@ -720,7 +720,7 @@ void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
 
 		// もし状態が"開き"ならスキップ
 		auto State = IdxSide->GetState();
-		if (State == CSideOpenDoor::STATE_OPENWAIT) continue;
+		if (State != CSideOpenDoor::STATE_CLOSE) continue;
 
 		// 矩形のコライダー取得
 		CBoxCollider* Collider = IdxSide->GetCollider();

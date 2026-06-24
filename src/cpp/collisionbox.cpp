@@ -252,7 +252,6 @@ bool CCollisionBox::CollisionEx(CBoxCollider* thisCollider, CBoxCollider* OtherC
 			fMinOverlap = fOverlap;
 			pushAxis = unitAxis;
 
-			// 押し出し方向を「自分から相手へ」ではなく「相手から自分へ」に向ける
 			// 内積を使って判別
 			if (D3DXVec3Dot(&VecCenter, &pushAxis) > 0.0f)
 			{

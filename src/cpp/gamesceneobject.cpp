@@ -21,13 +21,14 @@
 #include "jsonmanager.h"
 #include "worldwallmanager.h"
 #include "ui.h"
-
 #include "meshfield.h"
+
 #include "gametime.h"				// 髙橋追加
 #include "deskwork.h"				// 髙橋追加
 #include "progressgauge.h"			// 髙橋追加
 #include "eventUI.h"				// 髙橋追加
 #include "tutoriallines.h"			// 髙橋追加
+#include "vigilancegauge.h"			// 髙橋追加
 
 #include "player.h"					// 近田追加
 #include "friend.h"					// 近田追加
@@ -71,7 +72,8 @@ m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
-m_pWorldWallManager(nullptr)
+m_pWorldWallManager(nullptr),
+m_pVigilancegauge(nullptr)
 {
 
 }
@@ -272,4 +274,18 @@ void CGameSceneObject::CreatePointer(void)
 
 	// チュートリアルのセリフの生成 Misaki
 	m_pTutoriallines = CTutorialLines::Create();
+
+	// 警戒ゲージの構造体
+	CVigilancegauge::Vigilancegauge vigilancegauge;
+	vigilancegauge.pos = D3DXVECTOR3(100.0f, 600.0f, 0.0f);
+	vigilancegauge.col = COLOR_WHITE;
+	vigilancegauge.tex = D3DXVECTOR2(1.0f, 1.0f);
+	vigilancegauge.fWidth = 200.0f;
+	vigilancegauge.fHeight = 200.0f;
+	vigilancegauge.isLoop = false;
+	vigilancegauge.bUse = true;
+
+	// 警戒ゲージの生成 Misaki
+	m_pVigilancegauge = CVigilancegauge::Create(vigilancegauge);
+
 }
