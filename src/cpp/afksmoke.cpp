@@ -10,7 +10,9 @@
 //*********************************************************
 #include "afksmoke.h"
 
-// テスト
+//*********************************************************
+// インクルードファイル
+//*********************************************************
 #include "particle.h"
 #include "player.h"
 #include "gamesceneobject.h"
@@ -21,14 +23,14 @@
 namespace AFKSMOKE
 {
 	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };			// たばこさぼりの範囲
-	const D3DXVECTOR3 ParticlePos = { 321.0f, 50.0f, 320.0f };	// パーティクル位置
+	const D3DXVECTOR3 ParticlePos = { 321.0f, 25.0f, 320.0f };	// パーティクル位置
 	constexpr float fRadius = 25.0f;							// 範囲の半径
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfksmoke::CAfksmoke()
+CAfksmoke::CAfksmoke() : m_pParticle(nullptr)
 {
 
 }
@@ -68,7 +70,7 @@ HRESULT CAfksmoke::Init(void)
 	// 親クラスの初期化処理
 	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
 
-	CParticle::Create(AFKSMOKE::ParticlePos, VECTOR3_NULL, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f), 15000, 15.0f, CParticle::TYPE_SMOKE);
+	m_pParticle = CParticle::Create(AFKSMOKE::ParticlePos, VECTOR3_NULL, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f), 0, 10.0f, CParticle::TYPE_SMOKE);
 
 	return S_OK;
 }
@@ -87,4 +89,11 @@ void CAfksmoke::Update(void)
 {
 	// 親クラスの更新処理
 	CAfk::Update();
+
+	// プレイヤーがさぼっているか判定用の変数
+	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
+
+	if (bAfkSmoke) m_pParticle->SetUse(true);
+	else m_pParticle->SetUse(false);
+
 }

@@ -56,6 +56,7 @@ public:
 	void SetLife(int nLife) { m_nLife = nLife; }
 	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 	void SetType(TYPE type) { m_type = type; }
+	void SetUse(bool bUse) { m_bUse = bUse; }
 
 private:
 	void None(void);				// ’Êíó‘Ô

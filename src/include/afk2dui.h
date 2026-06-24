@@ -56,5 +56,6 @@ private:
 	float m_fMaxFrame;		// 最大フレーム変数
 	bool m_bAfkButton;		// ボタン識別判定用変数
 	bool m_bEasing;			// イージング用変数
+	bool m_bDisplay;		// 表示するかの判定変数
 };
 
