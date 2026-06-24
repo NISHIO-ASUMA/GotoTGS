@@ -99,10 +99,7 @@ void CSideOpenDoorCollision::LoadJson(void)
 	std::ifstream file(CollisionSide::LoadName);
 
 	// ファイルが正常に開けなかった場合
-	if (!file.is_open())
-	{
-		return;
-	}
+	if (!file.is_open()) return;
 
 	// JSONデータを格納するオブジェクト
 	CollisionSide::json sphereData;

@@ -51,6 +51,7 @@ public:
 		STATE_OPENING,		// 開き中
 		STATE_OPENWAIT,		// 開いている時間の状態
 		STATE_RETURN,		// 初期の状態にもどる
+		STATE_CLOSE,
 		STATE_MAX
 	};
 
@@ -123,4 +124,5 @@ private:
 	float m_fOffsetX;	// 回転軸のオフセット量（ドアの幅の半分）
 	bool m_isZTestEneble;	// 透明化判定を受けるかどうか
 	int m_nCloseTime;		// 開いていたら閉じるカウント用変数
+	int m_nReturnCount;
 };

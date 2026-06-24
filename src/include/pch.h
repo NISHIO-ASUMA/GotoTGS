@@ -52,7 +52,8 @@
 //*********************************************************
 #define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)					// [2D]頂点フォーマット
 #define FVF_VERTEX_3D (D3DFVF_XYZ | D3DFVF_NORMAL |  D3DFVF_DIFFUSE | D3DFVF_TEX1)		// [3D]頂点フォーマット
-#define FVF_VERTEX_3D_MULTI (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2) // [3Dマルチ]頂点フォーマット
+#define FVF_VERTEX_2D_MULTI (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 | D3DFVF_TEX2)		// [2Dマルチ]頂点フォーマット
+#define FVF_VERTEX_3D_MULTI (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2)			// [3Dマルチ]頂点フォーマット
 
 //*********************************************************
 // クリア変数マクロ定義
@@ -97,6 +98,18 @@ struct VERTEX_2D
 	float rhw;			// 座標変換用係数
 	D3DCOLOR col;		// 頂点カラー
 	D3DXVECTOR2 tex;	// テクスチャ座標
+};
+
+//*********************************************************
+// 頂点情報[2D_マルチ]の構造体
+//*********************************************************
+struct VERTEX_2D_MULTI
+{
+	D3DXVECTOR3 pos;				// 頂点座標
+	float rhw;						// 座標変換用係数
+	D3DCOLOR col;					// 頂点カラー
+	float tex_u,tex_v;				// テクスチャ座標 (1枚目)
+	float texMulti_u, texMulti_v;	// マルチテクスチャ (2枚目)
 };
 
 //*********************************************************

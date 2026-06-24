@@ -43,7 +43,8 @@ m_pCollider(nullptr),
 m_Size(INITSCALE),
 m_fAngle(NULL),
 m_fOffsetX(1.0f),
-m_nCloseTime(NULL)
+m_nCloseTime(NULL),
+m_nReturnCount(NULL)
 {
 }
 //=========================================================
@@ -170,7 +171,17 @@ void CSideOpenDoor::Update(void)
 		break;
 
 	case STATE_CLOSE_WAIT:
-		// 閉じている時は何もしない
+		
+		m_nReturnCount++;
+
+		if (m_nReturnCount >= 5)
+		{
+			m_nReturnCount = 0;
+			m_nState = STATE_CLOSE;
+		}
+		break;
+
+	case STATE_CLOSE:
 		break;
 	}
 
@@ -308,7 +319,7 @@ bool CSideOpenDoor::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 //=========================================================
 void CSideOpenDoor::RotationDoorFlag(void)
 {
-	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_RETURN)
+	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_CLOSE)
 	{
 		// 開き始めるフラグにする
 		m_nState = STATE_OPENING;
