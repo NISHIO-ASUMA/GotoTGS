@@ -34,7 +34,7 @@ public:
 	{
 		D3DXVECTOR3 pos;	// 座標
 		float fRadius;		// 半径
-		std::vector<int> targetDoorIndices; // 開けるドア数のインデックス
+		std::vector<int> targetDoorIndices;			// 開けるドア数のインデックス
 		std::unique_ptr<CSphereCollider> pCollider; // 球形のコライダー
 	};
 
@@ -78,7 +78,6 @@ private:
 	CSideOpenDoorCollision();
 
 	void LoadJson(void);
-
 
 private:
 
