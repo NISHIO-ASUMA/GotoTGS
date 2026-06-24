@@ -45,6 +45,9 @@ CVigilancegauge* CVigilancegauge::Create(const Vigilancegauge& vigilancegauge)
 	// ƒkƒ‹ƒ`ƒFƒbƒN
 	if (pVigilancegauge == nullptr) return nullptr;
 
+	// ‰Šú‰»‚ªŽ¸”s‚µ‚½‚Æ‚«
+	if (FAILED(pVigilancegauge->Init())) return nullptr;
+
 	// ŠeÝ’èˆ—
 	pVigilancegauge->SetPos(vigilancegauge.pos);
 	pVigilancegauge->SetCol(vigilancegauge.col);
@@ -52,9 +55,6 @@ CVigilancegauge* CVigilancegauge::Create(const Vigilancegauge& vigilancegauge)
 	pVigilancegauge->SetTexture(Config::TEXNAME_BASE, 0);
 	pVigilancegauge->SetTexture(Config::TEXNAME_MULTI, 1);
 	pVigilancegauge->m_bUse = vigilancegauge.bUse;
-
-	// ‰Šú‰»‚ªŽ¸”s‚µ‚½‚Æ‚«
-	if (FAILED(pVigilancegauge->Init())) return nullptr;
 
 	return pVigilancegauge;
 }

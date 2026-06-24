@@ -234,7 +234,7 @@ void CObject2DMulti::Draw(void)
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_MODULATE);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_CURRENT);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_TEXTURE);
-
+			
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_CURRENT);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_TEXTURE);
@@ -250,18 +250,27 @@ void CObject2DMulti::Draw(void)
 	// ポリゴン描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-	// テクスチャ破棄
-	for (int i = 0; i < static_cast<int>(m_apTexture.size()); ++i)
+	// テクスチャ解除
+	for (int i = 0; i < static_cast<int>(m_apTexture.size()); i++)
 	{
-		// テクスチャクラスにnull設定
-		pDevice->SetTexture(static_cast<DWORD>(i), nullptr);
+		// null初期化
+		pDevice->SetTexture(i, nullptr);
+	}
 
-		// テクスチャ設定を元に戻す
-		if (i > 0)
-		{
-			pDevice->SetTextureStageState(static_cast<DWORD>(i), D3DTSS_COLOROP, D3DTOP_DISABLE);
-			pDevice->SetTextureStageState(static_cast<DWORD>(i), D3DTSS_ALPHAOP, D3DTOP_DISABLE);
-		}
+	// 通常状態へ戻す
+	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+
+	// 2枚目のテクスチャステージチャートを戻す
+	for (int i = 1; i < static_cast<int>(m_apTexture.size()); i++)
+	{
+		pDevice->SetTextureStageState(i, D3DTSS_COLOROP, D3DTOP_DISABLE);
+		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 	}
 }
 //==========================================================

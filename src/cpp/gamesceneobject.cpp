@@ -284,8 +284,8 @@ void CGameSceneObject::CreatePointer(void)
 	vigilancegauge.pos = D3DXVECTOR3(100.0f, 600.0f, 0.0f);
 	vigilancegauge.col = COLOR_WHITE;
 	vigilancegauge.tex = D3DXVECTOR2(1.0f, 1.0f);
-	vigilancegauge.fWidth = 200.0f;
-	vigilancegauge.fHeight = 200.0f;
+	vigilancegauge.fWidth = 60.0f;
+	vigilancegauge.fHeight = 60.0f;
 	vigilancegauge.bUse = true;
 
 	// åxâ˙ÉQÅ[ÉWÇÃê∂ê¨ Misaki
