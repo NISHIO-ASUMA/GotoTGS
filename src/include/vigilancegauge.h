@@ -13,12 +13,12 @@
 //*********************************************************
 // インクルード
 //*********************************************************
-#include "animationobject2d.h"
+#include "object2Dmulti.h"
 
 //*********************************************************
 //  警戒ゲージに対するクラスを定義
 //*********************************************************
-class CVigilancegauge:public CAnimationObject2D
+class CVigilancegauge:public CObject2DMulti
 {
 public:
 
@@ -30,7 +30,6 @@ public:
 		D3DXVECTOR2 tex;
 		float fWidth;
 		float fHeight;
-		bool isLoop;
 		bool bUse;
 	};
 
@@ -52,6 +51,9 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME = "vigilancegauge000.png";	// テクスチャ名
+		static constexpr const char* TEXNAME_BASE = "vigilancegauge000.png";	// 基本のテクスチャ
+		static constexpr const char* TEXNAME_MULTI = "field000.jpg";	// マルチテクスチャ
 	};
+
+	bool m_bUse;	// 使用するかどうか
 };
