@@ -14,24 +14,16 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "spherecollider.h"
-#include "collisionsphere.h"
 #include "gamesceneobject.h"
 #include "easing.h"
-#include "afkmanager.h"
 #include "player.h"
-#include "afk.h"
-#include "afksmoke.h"
-#include "afktv.h"
-#include "afkmagazine.h"
-#include "afkgamecenter.h"
 
 //=================================================
 // 名前空間
 //=================================================
 namespace DoorUI
 {
-	const D3DXVECTOR3 Pos = { 482.0f,34.0f,112.0f };		// ドアUIの座標
+	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };		// ドアUIの座標
 	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };				// 初期のサイズ
 	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };				// 目標のサイズ
 	constexpr float fWidth = 250.0f;						// 横幅
@@ -51,7 +43,6 @@ CDoorUI* CDoorUI::m_pInstance = nullptr; // インスタンス変数
 CDoorUI::CDoorUI() : m_pos(VECTOR3_NULL),
 m_fMaxFrame(NULL),
 m_fCountFrame(NULL),
-m_bAfkButton(false),
 m_bEasing(false),
 m_bDisplay(true)
 {
@@ -124,7 +115,7 @@ void CDoorUI::Update(void)
 //=========================================================
 void CDoorUI::Draw(void)
 {
-	CObject2D::Draw();
+	//CObject2D::Draw();
 }
 //=========================================================
 // インスタンス取得処理

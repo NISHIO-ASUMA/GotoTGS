@@ -14,8 +14,6 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "spherecollider.h"
-#include "collisionsphere.h"
 #include "gamesceneobject.h"
 #include "easing.h"
 #include "afkmanager.h"

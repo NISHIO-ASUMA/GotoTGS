@@ -85,8 +85,13 @@ m_bAfkSmoke(false),
 m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
+<<<<<<< HEAD
 m_TvPrevPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE)
+=======
+m_bDoor(false),
+m_TvPrevPos(VECTOR3_NULL)
+>>>>>>> 5fba7c79e71679b7011668259e184b79c9c88a51
 {
 
 }
@@ -789,6 +794,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();		// ドア管理クラス
 	if (!pSideDoorCollision || !pSideDoorManager) return;
 
+<<<<<<< HEAD
 	// 判定チェック
 	if (m_nControlTypes == CONTROLTYPE_KEY)
 	{
@@ -798,6 +804,11 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	{
 		if (!pad->GetTrigger(CJoyPad::JOYKEY_A)) return;
 	}
+=======
+	// キー入力がなかったら下の処理を行わない
+	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F) &&
+		!CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A)) return;
+>>>>>>> 5fba7c79e71679b7011668259e184b79c9c88a51
 
 	//自動ドア判定用コライダーを取得
 	const auto& DoorColliders = pSideDoorCollision->GetColliders();
@@ -814,8 +825,9 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 			if (m_pSphereCollider)
 			{
 				m_pSphereCollider->SetPos(pos);
+				
 			}
-
+			
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
 			break;

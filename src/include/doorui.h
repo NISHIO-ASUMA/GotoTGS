@@ -21,11 +21,6 @@
 #include "object2D.h"
 
 //*********************************************************
-// 前方宣言
-//*********************************************************
-class CSphereCollider;
-
-//*********************************************************
 // ブロックオブジェクトクラスを定義
 //*********************************************************
 class CDoorUI :public CObject2D
@@ -41,8 +36,6 @@ public:
 
 	static CDoorUI* Create(void);
 
-	bool GetAfkButton(void) { return m_bAfkButton; }
-
 	void EasingSine(void);
 
 	// インスタンス生成用関数
@@ -54,7 +47,6 @@ private:
 	D3DXVECTOR3 m_pos;		// 位置
 	float m_fCountFrame;	// イージング用フレームカウント用変数
 	float m_fMaxFrame;		// 最大フレーム変数
-	bool m_bAfkButton;		// ボタン識別判定用変数
 	bool m_bEasing;			// イージング用変数
 	bool m_bDisplay;		// 表示するかの判定変数
 };
