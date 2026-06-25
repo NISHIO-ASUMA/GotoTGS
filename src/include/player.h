@@ -22,6 +22,8 @@ class CBoxCollider;
 class CSphereCollider;
 class CPlayerStateBase;
 class CStateMachine;
+class CInputKeyboard;
+class CJoyPad;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -82,6 +84,17 @@ public:
 		MAX
 	};
 
+	//*************************
+	// 操作メニュータイプ
+	//*************************
+	enum CONTROLTYPE
+	{
+		CONTROLTYPE_NONE,
+		CONTROLTYPE_KEY,
+		CONTROLTYPE_PAD,
+		CONTROLTYPE_MAX
+	};
+
 //***********************************
 // 西尾追加
 public:
@@ -134,7 +147,7 @@ public:
 
 	void UpdateBlockCollision(D3DXVECTOR3 pos);
 	void UpdateAutoDoorCollision(D3DXVECTOR3 pos);
-	void UpdateSideDoorCollision(D3DXVECTOR3 pos);
+	void UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad);
 
 	void MathTVRotation(void);
 
@@ -154,4 +167,5 @@ private:
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	D3DXVECTOR3 m_TvPrevPos;				  // テレビサボりの座標
+	int m_nControlTypes;					  // 操作種類
 };

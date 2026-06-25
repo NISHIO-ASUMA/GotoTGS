@@ -85,7 +85,8 @@ m_bAfkSmoke(false),
 m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
-m_TvPrevPos(VECTOR3_NULL)
+m_TvPrevPos(VECTOR3_NULL),
+m_nControlTypes(CONTROLTYPE_NONE)
 {
 
 }
@@ -145,6 +146,9 @@ HRESULT CPlayer::Init(void)
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), player::SphereSize);
 
+	// 操作の種類を設定する(パッドかキーマウかどうか)
+	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	return S_OK;
 }
 //=========================================================
@@ -196,6 +200,7 @@ void CPlayer::Update(void)
 
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
+	const auto& Pad = CManager::GetInstance()->GetJoyPad();
 
 	//*********************************************************
 	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
@@ -229,13 +234,13 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 oldpos = GetOldPos();
 
-	if (CTitleuiManager::GetInstance()->GetSelectIdx() == 1)
+	if (m_nControlTypes == CONTROLTYPE_KEY)
 	{
 		// キーボード操作
 		MoveKeyboard(player::fSpeed);
 	}
 	// ジョイパッド操作
-	else if (CTitleuiManager::GetInstance()->GetSelectIdx() == 2)
+	else if (m_nControlTypes == CONTROLTYPE_PAD)
 	{
 		MoveJoypad(player::fSpeed);
 	}
@@ -349,7 +354,7 @@ void CPlayer::Update(void)
 	UpdateAutoDoorCollision(UpdatePos);
 
 	// オフィス内のドアとの判定
-	UpdateSideDoorCollision(UpdatePos);
+	UpdateSideDoorCollision(UpdatePos,Key,Pad);
 
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
@@ -778,15 +783,21 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 //=================================================
 // サイドに開くドアとのコリジョン関数分け
 //=================================================
-void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos)
+void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad)
 {
 	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance();	// コライダークラス
 	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();		// ドア管理クラス
 	if (!pSideDoorCollision || !pSideDoorManager) return;
 
-	// キー入力がなかったら下の処理を行わない
-	if (!CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F) ||
-		!CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A)) return;
+	// 判定チェック
+	if (m_nControlTypes == CONTROLTYPE_KEY)
+	{
+		if (!key->GetTrigger(DIK_F)) return;
+	}
+	else if (m_nControlTypes == CONTROLTYPE_PAD)
+	{
+		if (!pad->GetTrigger(CJoyPad::JOYKEY_A)) return;
+	}
 
 	//自動ドア判定用コライダーを取得
 	const auto& DoorColliders = pSideDoorCollision->GetColliders();
