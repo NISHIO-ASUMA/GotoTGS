@@ -47,7 +47,6 @@ HRESULT CAfk::Init(const D3DXVECTOR3& pos,const float& fRadius)
 	// 座標と半径の設定
 	SetPos(pos);
 	SetRadius(fRadius);
-	D3DXMATRIX matRot;
 
 	// 球形コライダーを生成
 	m_pSphereCollider = CSphereCollider::Create(m_pos, m_fRadius);

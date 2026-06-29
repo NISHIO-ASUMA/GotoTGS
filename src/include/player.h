@@ -161,7 +161,6 @@ private:
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
-	bool m_bDoor;										// ドアフラグ
 
 //***********************************
 // 西尾追加

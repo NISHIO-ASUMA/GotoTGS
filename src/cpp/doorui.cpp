@@ -15,6 +15,8 @@
 //*********************************************************
 #include "manager.h"
 #include "gamesceneobject.h"
+#include "spherecollider.h"
+#include "collisionsphere.h"
 #include "easing.h"
 #include "player.h"
 
@@ -24,8 +26,10 @@
 namespace DoorUI
 {
 	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };		// ドアUIの座標
+	const D3DXVECTOR3 DoorPos = { 482.0f, 0.0f,132.0f };		// ドアの座標
 	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };				// 初期のサイズ
 	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };				// 目標のサイズ
+	constexpr float fRadius = 25.0f;						// 半径
 	constexpr float fWidth = 250.0f;						// 横幅
 	constexpr float fHeight = 75.0f;						// 縦幅
 	constexpr float fMaxFrame = 60.0f;						// マックスフレーム
@@ -40,11 +44,13 @@ CDoorUI* CDoorUI::m_pInstance = nullptr; // インスタンス変数
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDoorUI::CDoorUI() : m_pos(VECTOR3_NULL),
+CDoorUI::CDoorUI() : m_pSphereCollider(nullptr), 
+m_pos(VECTOR3_NULL),
 m_fMaxFrame(NULL),
 m_fCountFrame(NULL),
 m_bEasing(false),
-m_bDisplay(true)
+m_bDisplay(false),
+m_bUse(false)
 {
 
 }
@@ -89,6 +95,9 @@ HRESULT CDoorUI::Init(void)
 	m_fCountFrame = NULL;
 	m_fMaxFrame = DoorUI::fMaxFrame;
 
+	// 球形コライダーを生成
+	m_pSphereCollider = CSphereCollider::Create(DoorUI::DoorPos, DoorUI::fRadius);
+
 	return S_OK;
 }
 //=========================================================
@@ -98,14 +107,35 @@ void CDoorUI::Uninit(void)
 {
 	// 親クラスの終了処理
 	CObject2D::Uninit();
+
+	// スフィアコライダーの破棄
+	m_pSphereCollider.reset();
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CDoorUI::Update(void)
 {
+	if (m_bUse)
+	{
+		Uninit();
+		return;
+	}
+
 	// 親クラスの更新処理
 	CObject2D::Update();
+
+	// プレイヤーの情報を取得し判定を生成
+	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
+	if (Player == nullptr) return;
+
+	// スフィアコライダー取得とnullチェック
+	CSphereCollider* SphereCollider = Player->GetSphereCollider();
+	if (SphereCollider == nullptr) return;
+
+	// 当たり判定の実行
+	if (CollisionSphere(SphereCollider))m_bDisplay = true;
+	else m_bDisplay = false;
 
 	// イージング
 	EasingSine();
@@ -115,7 +145,7 @@ void CDoorUI::Update(void)
 //=========================================================
 void CDoorUI::Draw(void)
 {
-	//CObject2D::Draw();
+	if(m_bDisplay) CObject2D::Draw();
 }
 //=========================================================
 // インスタンス取得処理
@@ -127,6 +157,17 @@ CDoorUI* CDoorUI::Instance(void)
 
 	// 生成されたインスタンスを返す
 	return m_pInstance;
+}
+//=========================================================
+// 球形当たり判定処理
+//=========================================================
+bool CDoorUI::CollisionSphere(CSphereCollider* pOther)
+{
+	// nullなら
+	if (!m_pSphereCollider) return false;
+
+	//球形当たり判定を返す
+	return CCollisionSphere::Collision(m_pSphereCollider.get(), pOther);
 }
 //=========================================================
 // イージングサイン使用関数

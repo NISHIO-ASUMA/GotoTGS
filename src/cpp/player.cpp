@@ -42,6 +42,7 @@
 #include "outline.h"
 #include "afkgamecenter.h"
 #include "titleuimanager.h"
+#include "doorui.h"
 #include "slideopendoormanager.h"	// êºîˆí«â¡
 #include "sideopendoor.h"			// êºîˆí«â¡
 #include "sideopendoorcollision.h"	// êºîˆí«â¡
@@ -86,8 +87,7 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_TvPrevPos(VECTOR3_NULL),
-m_nControlTypes(CONTROLTYPE_NONE),
-m_bDoor(false)
+m_nControlTypes(CONTROLTYPE_NONE)
 {
 
 }
