@@ -63,7 +63,7 @@ private:
 	struct Config
 	{
 		static constexpr float LIFE_RATIO = 0.7f;		// 体力の初期割合
-		static constexpr float GAUGE_RATIO = 0.005f;	// ゲージの増減割合
+		static constexpr float GAUGE_RATIO = 0.02f;		// ゲージの増減割合
 	};
 
 	// メンバ変数

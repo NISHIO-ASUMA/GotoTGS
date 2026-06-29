@@ -313,8 +313,8 @@ void CCOPYDeskwork::Task(void)
 	// スコア加算
 	pScore->AddScore(100);
 
-	// こなしたさぼりの数を増やす（仮）
-	pProgressgauge->AddAFK();
+	// こなしたタスクの数を増やす
+	pProgressgauge->AddTask();
 
 	// 点滅を始める
 	pClear->SetUse(true);
