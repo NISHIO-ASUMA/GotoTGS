@@ -29,5 +29,4 @@ public:
 	void OnExit(void) override;
 
 private:
-
 };

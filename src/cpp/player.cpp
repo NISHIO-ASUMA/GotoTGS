@@ -42,7 +42,7 @@
 #include "outline.h"
 #include "afkgamecenter.h"
 #include "titleuimanager.h"
-#include "doorui.h"
+#include "progressgauge.h"
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
@@ -87,7 +87,8 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_TvPrevPos(VECTOR3_NULL),
-m_nControlTypes(CONTROLTYPE_NONE)
+m_nControlTypes(CONTROLTYPE_NONE),
+m_nCntAfk(NULL)
 {
 
 }
@@ -534,7 +535,15 @@ void CPlayer::MoveKeyboard(float speed)
 	}
 	
 	// サボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter) return;
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter)
+	{
+		m_nCntAfk++;
+		if (m_nCntAfk >= 120)
+		{
+			CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			m_nCntAfk = 0;
+		}
+	}
 
 	// キーが押されていなかったら
 	else if (!pKeyboard->GetPress(DIK_W) &&
@@ -664,7 +673,15 @@ void CPlayer::MoveJoypad(float speed)
 	}
 
 	// モーションチェンジ
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter) return;
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter)
+	{
+		m_nCntAfk++;
+		if (m_nCntAfk >= 120)
+		{
+			CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			m_nCntAfk = 0;
+		}
+	}
 
 	// 移動していなかったら
 	else if (!pJoyPad->GetLeftStick()) GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
