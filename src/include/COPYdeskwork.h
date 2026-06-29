@@ -40,11 +40,6 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
-	// クールタイム中の処理
-	inline bool CoolTime(void);
-	// タスク中の処理
-	inline void Task(void);
-
 	// 設定処理
 	void SetAlphaUI(const bool& bUse = false);
 
@@ -55,6 +50,10 @@ public:
 	static CCOPYDeskwork* Create(const D3DXVECTOR3& pos);
 
 private:
+	// メンバ関数
+	bool CoolTime(const auto& pClear);				// クールタイム中の処理
+	void Task(const auto& pClear);					// タスク中の処理
+	void ControlResult(int& nCount);		// コントローラーを押した結果の処理
 
 	//************************************
 	// 定数構造体宣言

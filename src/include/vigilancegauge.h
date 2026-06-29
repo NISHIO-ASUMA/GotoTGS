@@ -51,8 +51,8 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME_BASE = "vigilancegauge000.png";	// 基本のテクスチャ
-		static constexpr const char* TEXNAME_MULTI = nullptr;					// マルチテクスチャ
+		static constexpr const char* TEXNAME_BASE = "vigilance.png";	// 基本のテクスチャ
+		static constexpr const char* TEXNAME_MULTI = nullptr;			// マルチテクスチャ
 	};
 
 	bool m_bUse;	// 使用するかどうか

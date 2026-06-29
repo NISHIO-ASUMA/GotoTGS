@@ -82,5 +82,4 @@ private:
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
 	static int m_nCOPYTaskNum;		// こなしたコピー機タスクの数
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
-
 };
