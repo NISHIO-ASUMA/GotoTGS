@@ -23,7 +23,8 @@
 //*********************************************************
 namespace SIDEMANAGER
 {
-	constexpr const char* MODEL_NAME = "STAGEOBJ/automaticdoor.x"; // ファイル名
+	constexpr const char* SIDEMODELNAME = "STAGEOBJ/Door.x";				// 両開きドアのファイル名
+	constexpr const char* TOILEMODELNAME = "STAGEOBJ/Man_toilet_door.x";	// トイレのドアのファイル名
 };
 
 //=========================================================
@@ -53,14 +54,22 @@ HRESULT CSideOpenDoorManager::Init(void)
 								(D3DXVECTOR3(482.0f,34.0f,132.0f),
 								(D3DXVECTOR3(0.0f,-1.57f,0.0f)),
 								(D3DXVECTOR3(1.25f, 1.0f,1.8f)),
-								"STAGEOBJ/Door.x",
+								SIDEMANAGER::SIDEMODELNAME,
 								CSideOpenDoor::OPENTYPE_LEFT));
 
 	m_pSideOpenDoors.push_back(CSideOpenDoor::Create
 								(D3DXVECTOR3(482.0f, 34.0f, 88.0f),
 								(D3DXVECTOR3(0.0f,1.57f,0.0f)),
 								(D3DXVECTOR3(1.25f, 1.0f, 1.8f)),
-								"STAGEOBJ/Door.x",
+								SIDEMANAGER::SIDEMODELNAME,
+								CSideOpenDoor::OPENTYPE_RIGHT));
+
+	// トイレのドア
+	m_pSideOpenDoors.push_back(CSideOpenDoor::Create
+								(D3DXVECTOR3(609.0f, 49.0f, -122.0f),
+								(D3DXVECTOR3(0.0f, 3.14f, 0.0f)),
+								(D3DXVECTOR3(3.0f, 3.0f, 1.0f)),
+								SIDEMANAGER::TOILEMODELNAME,
 								CSideOpenDoor::OPENTYPE_RIGHT));
 
 	return S_OK;
