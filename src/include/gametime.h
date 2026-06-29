@@ -63,7 +63,7 @@ private:
 #ifdef _DEBUG
 		static constexpr int NUMTIME = 600;						// 最大タイマー
 #else
-		static constexpr int NUMTIME = 1200;					// 最大タイマー
+		static constexpr int NUMTIME = 180;						// 最大タイマー
 #endif // _DEBUG
 	};
 

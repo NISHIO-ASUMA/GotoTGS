@@ -271,7 +271,7 @@ void CGameSceneObject::CreatePointer(void)
 	m_pScore = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.f, 80.0f);
 
 	// 進捗ゲージの生成 Misaki
-	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(400.0f, 50.0f, 0.0f), 300.0f, 25.0f);
+	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(250.0f, 50.0f, 0.0f), 400.0f, 40.0f);
 
 	// イベントUIの生成 Misaki
 	m_pEventUI = CEventUI::Create();
@@ -284,8 +284,8 @@ void CGameSceneObject::CreatePointer(void)
 	vigilancegauge.pos = D3DXVECTOR3(100.0f, 600.0f, 0.0f);
 	vigilancegauge.col = COLOR_WHITE;
 	vigilancegauge.tex = D3DXVECTOR2(1.0f, 1.0f);
-	vigilancegauge.fWidth = 60.0f;
-	vigilancegauge.fHeight = 60.0f;
+	vigilancegauge.fWidth = 100.0f;
+	vigilancegauge.fHeight = 100.0f;
 	vigilancegauge.bUse = true;
 
 	// 警戒ゲージの生成 Misaki

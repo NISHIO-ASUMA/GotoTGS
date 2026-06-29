@@ -17,6 +17,7 @@
 #include "input.h"
 #include "gamesceneobject.h"
 #include "score.h"
+#include "progressgauge.h"
 
 //=========================================================
 // コンストラクタ
@@ -94,9 +95,14 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+	// 進捗ゲージのポインタ
+	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
 
 	// スコア加算
 	pScore->AddScore(1000);
+
+	// こなしたタスクの数を増やす
+	pProgressgauge->AddTask();
 
 	// 書類タスクの数の加算処理
 	AddDOCUMENTTask();
