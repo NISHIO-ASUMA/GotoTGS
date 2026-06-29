@@ -2,8 +2,6 @@
 //
 // キー入力で開く両開きドアの処理 [ sideopendoor.cpp ]
 // Author: Asuma Nishio
-//
-// NOTE : イメージは会議室によくある取っ手付きのドア
 // 
 //=========================================================
 
@@ -101,8 +99,10 @@ HRESULT CSideOpenDoor::Init(void)
 	D3DXVECTOR3 Scale = GetScale();
 	D3DXVECTOR3 Size = pXManager->GetInfo(nModelIdx).Size;
 
-	// サイズセット
-	m_Size = Size;
+	// 元のサイズにスケールを掛け合わせる
+	m_Size.x = Size.x * Scale.x;
+	m_Size.y = Size.y * Scale.y;
+	m_Size.z = Size.z * Scale.z;
 
 	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
@@ -223,6 +223,17 @@ void CSideOpenDoor::Update(void)
 
 	// オブジェクトのマトリックスに設定
 	SetMtxWorld(mtxFinalWorld);
+
+	// コライダー更新処理
+	if (m_pCollider != nullptr)
+	{
+		// 最終座標を変換する
+		auto FinalPos = D3DXVECTOR3(mtxFinalWorld._41, mtxFinalWorld._42, mtxFinalWorld._43);
+
+		// コライダーをマトリックスから計算する
+		m_pCollider->SetPosOld(m_pCollider->GetPos());
+		m_pCollider->SetPos(FinalPos);
+	}
 
 	// 親クラスの更新処理
 	CObjectX::Update();

@@ -3,5 +3,10 @@
     "Pos": [ 480.0, 40.0, 105.0 ],
     "Radius": 30.0,
     "SideDoorNumber": [ 0, 1 ]
+  },
+  {
+    "Pos": [ 590.0, 40.0, -120.0 ],
+    "Radius": 40.0,
+    "SideDoorNumber": [ 2 ]
   }
 ]

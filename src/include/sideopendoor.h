@@ -47,11 +47,11 @@ public:
 	//**************************
 	enum STATE
 	{
-		STATE_CLOSE_WAIT,	// •Â‚¶ó‘Ô
+		STATE_CLOSE_WAIT,	// •Â‚¶‘Ò‚¿ó‘Ô
 		STATE_OPENING,		// ŠJ‚«’†
 		STATE_OPENWAIT,		// ŠJ‚¢‚Ä‚¢‚éŽžŠÔ‚Ìó‘Ô
 		STATE_RETURN,		// ‰Šú‚Ìó‘Ô‚É‚à‚Ç‚é
-		STATE_CLOSE,
+		STATE_CLOSE,		// •Â‚¶‚Ä‚é
 		STATE_MAX
 	};
 
