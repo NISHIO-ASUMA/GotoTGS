@@ -108,6 +108,8 @@ public:
 	bool GetPressLT(void);
 	bool GetPressRT(void);
 	bool GetLeftStick(void);
+	float GetRightStickX(void);
+	float GetRightStickY(void);
 
 	inline XINPUT_STATE* GetStickAngle(void) { return &m_joyKeyState; }
 

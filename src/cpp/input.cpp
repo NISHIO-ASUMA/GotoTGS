@@ -463,6 +463,20 @@ bool CJoyPad::GetLeftStick(void)
 	// 結果を返す
 	return isLstick;
 }
+//===============================================
+//
+//===============================================
+float CJoyPad::GetRightStickX()
+{
+	return (m_joyKeyState.Gamepad.sThumbRX / 32768.0f);
+}
+//===============================================
+//
+//===============================================
+float CJoyPad::GetRightStickY()
+{
+	return (m_joyKeyState.Gamepad.sThumbRY / 32768.0f);
+}
 
 //=========================================================
 // マウスのコンストラクタ

@@ -38,6 +38,17 @@ public:
 	};
 
 	//*************************
+	// 操作メニュータイプ
+	//*************************
+	enum CONTROLTYPE
+	{
+		CONTROLTYPE_NONE,
+		CONTROLTYPE_KEY,
+		CONTROLTYPE_PAD,
+		CONTROLTYPE_MAX
+	};
+
+	//*************************
 	// カメラ構造体を定義
 	//*************************
 	struct Camera
@@ -61,6 +72,7 @@ public:
 	void SetCamera(void);
 	void MouseView(CInputMouse* pMouse);
 	void FollowMouse(void);
+	void FollowJoyPad(void);
 	void WheelMouse(int nDelta);
 
 	void ThirdPersonView(void);
@@ -128,5 +140,6 @@ private:
 private:
 	Camera m_pCamera;				// カメラ構造体変数
 	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
+	int m_nControlTypes;			// 操作種類
 	bool m_isMove;					// カメラ動かせるかどうかのフラグ
 };
