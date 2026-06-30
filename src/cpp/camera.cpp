@@ -580,7 +580,7 @@ void CCamera::FollowJoyPad(void)
 		}
 		if (fabsf(ry) > deadZone)	
 		{
-			m_pCamera.rot.x += ry * sensitivity;
+			m_pCamera.rot.x -= ry * sensitivity;
 		}
 
 		if (m_pCamera.rot.y < -D3DX_PI)
