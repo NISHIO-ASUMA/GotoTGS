@@ -19,6 +19,7 @@
 #include "score.h"
 #include "progressgauge.h"
 #include "ui.h"
+#include "titleuimanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -68,6 +69,9 @@ HRESULT CCOPYDeskwork::Init(void)
 		m_pDeskUI[nCount] = nullptr;
 	}
 
+	// 現在の操作方法を取得
+	int nControl = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	// UIの情報
 	CDeskworkUI::UI ui;
 	ui.pos = GetPos();
@@ -75,8 +79,19 @@ HRESULT CCOPYDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
-	ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
-	ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
+	if (nControl == 1)
+	{// キーボード操作の場合
+		ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
+		// タスクをランダムに設定
+		ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
+	}
+	else
+	{
+		ui.nKeytype = CDeskworkUI::KEYTYPE_PAD;
+		// タスクをランダムに設定
+		ui.nKey = (CDeskworkUI::KYAPAD)(rand() % CDeskworkUI::KYAPAD_MAX);
+	}
+
 	ui.nIdx = TEXTURE_KEY;
 
 	// UIの生成処理
@@ -119,11 +134,19 @@ void CCOPYDeskwork::Update(void)
 	// 親の更新処理
 	CDeskworkUIManager::Update();
 
+	// クリアUIのポインタ
+	auto* pClear = CDeskworkUIManager::GetClearUI();
+
+	if (pClear == nullptr)
+	{// ヌルチェック
+		return;
+	}
+
 	if (GetTime() != false)
 	{// クールタイムが始まっているなら
 
 		// クールタイム中の処理
-		if (CoolTime() != true)
+		if (CoolTime(pClear) != true)
 		{
 			// クールタイムが終わったなら
 			return;
@@ -137,7 +160,7 @@ void CCOPYDeskwork::Update(void)
 
 	// クールタイムが始まっていないなら
 	// タスク中の処理
-	Task();
+	Task(pClear);
 }
 
 //=========================================================
@@ -203,16 +226,8 @@ void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 // クールタイム中の処理
 //=========================================================
-bool CCOPYDeskwork::CoolTime(void)
+bool CCOPYDeskwork::CoolTime(const auto& pClear)
 {
-	// クリアUIのポインタ
-	auto* pClear = CDeskworkUIManager::GetClearUI();
-
-	if (pClear == nullptr)
-	{// ヌルチェック
-		return false;
-	}
-
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
@@ -223,8 +238,16 @@ bool CCOPYDeskwork::CoolTime(void)
 		return false;
 	}
 
-	// タスクをランダムに設定
-	m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
+	if (m_pDeskUI[TEXTURE_KEY]->GetKeyType() == 1)
+	{// キーボード操作の場合
+		// タスクをランダムに設定
+		m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
+	}
+	else
+	{
+		// タスクをランダムに設定
+		m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KYAPAD)(rand() % CDeskworkUI::KYAPAD_MAX));
+	}
 
 	// 色を元に戻す(通常色)
 	m_pDeskUI[TEXTURE_KEY]->SetAlpha(1.0f);
@@ -248,50 +271,23 @@ bool CCOPYDeskwork::CoolTime(void)
 //=========================================================
 // タスク中の処理
 //=========================================================
-void CCOPYDeskwork::Task(void)
+void CCOPYDeskwork::Task(const auto& pClear)
 {
-	// キーボードのポインタ
-	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
 	// 進捗ゲージのポインタ
 	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
-	// クリアUIのポインタ
-	auto* pClear = CDeskworkUIManager::GetClearUI();
 
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
-	if (pKeyboard == nullptr || pScore == nullptr || pProgressgauge == nullptr || pClear == nullptr)
+	if (pScore == nullptr || pProgressgauge == nullptr)
 	{// ヌルチェック
 		return;
 	}
 
-	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
-		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
-		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
-		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_D))
-	{// 正解を押した時
-		// 色をグレーにする
-		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);
-
-		// カウントを一つ進める
-		nCountTime++;
-		SetCountTime(nCountTime);
-
-		// 進行度に応じて横幅を計算
-		float fWidth = 0.0f;
-		fWidth = Config::GAGE_WIDTH * ((float)nCountTime / (float)Config::TIME_PUSH);
-
-		// 横幅を設定
-		m_pDeskUI[TEXTURE_GAGE]->SetWidth(fWidth);
-
-	}
-	else
-	{
-		// 色を元に戻す(通常色)
-		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
-	}
+	// コントローラーを押した結果の処理
+	ControlResult(nCountTime);
 
 	for (int nCount = 0; nCount < Config::UI_NUM; nCount++)
 	{
@@ -326,4 +322,50 @@ void CCOPYDeskwork::Task(void)
 	// こなしたPCタスクの数を1つ減らす
 	MinusPCTask();
 
+}
+
+//=========================================================
+// コントローラーを押した結果の処理
+//=========================================================
+void CCOPYDeskwork::ControlResult(int& nCount)
+{
+	// キーボードのポインタ
+	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	// パッドのポインタ
+	auto* pJoypad = CManager::GetInstance()->GetJoyPad();
+
+	if (pKeyboard == nullptr || pJoypad == nullptr)
+	{// ヌルチェック
+		return;
+	}
+
+	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
+		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
+		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
+		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_D) ||
+		(pJoypad->GetPress(CJoyPad::JOYKEY_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_A) ||
+		(pJoypad->GetPress(CJoyPad::JOYKEY_B) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_B) ||
+		(pJoypad->GetPress(CJoyPad::JOYKEY_X) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_X) ||
+		(pJoypad->GetPress(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_Y))
+	{// 正解を押した時
+		// 色をグレーにする
+		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);
+
+		// カウントを一つ進める
+		nCount++;
+		SetCountTime(nCount);
+
+		// 進行度に応じて横幅を計算
+		float fWidth = 0.0f;
+		fWidth = Config::GAGE_WIDTH * ((float)nCount / (float)Config::TIME_PUSH);
+
+		// 横幅を設定
+		m_pDeskUI[TEXTURE_GAGE]->SetWidth(fWidth);
+
+	}
+	else
+	{
+		// 色を元に戻す(通常色)
+		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_WHITE);
+	}
 }

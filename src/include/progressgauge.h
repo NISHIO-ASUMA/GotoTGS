@@ -32,7 +32,7 @@ public:
 
 	// 設定処理
 	void SetTexture(const char* pTexName);												// テクスチャ設定
-	void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
+	//void SetFlash(const int& nStartFrame, const int& nEndFrame, const D3DXCOLOR& col);	// 点滅処理
 	void AddTask(void);																	// タスクの数
 	void AddAFK(void);																	// さぼりの数
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }

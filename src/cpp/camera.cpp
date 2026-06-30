@@ -21,6 +21,7 @@
 #include "block.h"
 #include "automatic_door.h"
 #include "sideopendoor.h"
+#include "titleuimanager.h"
 
 //*********************************************************
 // 定数宣言
@@ -41,6 +42,7 @@ namespace CAMERAINFO
 //=========================================================
 CCamera::CCamera() : m_pCamera(ClearDefault()),
 m_pThirdPersonPos(VECTOR3_NULL),
+m_nControlTypes(CONTROLTYPE_NONE),
 m_isMove(false)
 {
 	
@@ -73,6 +75,9 @@ HRESULT CCamera::Init(void)
 	// 移動フラグ
 	m_isMove = false;
 
+	// 操作の種類を設定する(パッドかキーマウかどうか)
+	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	return S_OK;
 }
 //=========================================================
@@ -101,7 +106,8 @@ void CCamera::Update(void)
 			ThirdPersonView();
 
 			// 移動フラグがfalseならフリック対応
-			if (!m_isMove) FollowMouse();
+			if (m_nControlTypes == CONTROLTYPE_KEY && !m_isMove) FollowMouse();
+			if (m_nControlTypes == CONTROLTYPE_PAD && !m_isMove) FollowJoyPad();
 		}
 	}
 	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)
@@ -551,4 +557,57 @@ CCamera::Camera CCamera::ClearDefault(void)
 	m_pCamera.vecU = VECTOR3_NULL;
 
 	return m_pCamera;
+}
+//==============================================================
+// パッド操作関数
+//==============================================================
+void CCamera::FollowJoyPad(void)
+{
+	// ジョイパッドのポインタ
+	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+
+	if (pJoyPad != nullptr)
+	{
+		const float sensitivity = 0.1f;
+		const float rx = pJoyPad->GetRightStickX();
+		const float ry = pJoyPad->GetRightStickY();
+
+		// デッドゾーン処理
+		const float deadZone = 0.2f;
+		if (fabsf(rx) > deadZone)
+		{
+			m_pCamera.rot.y += rx * sensitivity;
+		}
+		if (fabsf(ry) > deadZone)
+		{
+			m_pCamera.rot.x += ry * sensitivity;
+		}
+
+		if (m_pCamera.rot.y < -D3DX_PI)
+		{
+			m_pCamera.rot.y += D3DX_PI * 2.0f;
+		}
+		else if (m_pCamera.rot.y > D3DX_PI)
+		{
+			m_pCamera.rot.y += -D3DX_PI * 2.0f;
+		}
+
+		if (m_pCamera.rot.x < -D3DX_PI)
+		{
+			m_pCamera.rot.x += D3DX_PI * 2.0f;
+		}
+		else if (m_pCamera.rot.x > D3DX_PI)
+		{
+			m_pCamera.rot.x += -D3DX_PI * 2.0f;
+		}
+
+		if (m_pCamera.rot.x > 3.00f)
+		{
+			m_pCamera.rot.x -= sensitivity;
+		}
+		else if (m_pCamera.rot.x < 0.1f)
+		{
+			m_pCamera.rot.x -= sensitivity;
+		}
+	}
 }

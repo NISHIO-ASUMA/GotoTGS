@@ -18,6 +18,7 @@
 #include "COPYdeskwork.h"
 #include "DOCUMENTdeskwork.h"
 #include "input.h"
+#include "titleuimanager.h"
 
 //=========================================================
 // コンストラクタ

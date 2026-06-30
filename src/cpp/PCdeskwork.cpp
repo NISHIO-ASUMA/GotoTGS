@@ -20,6 +20,7 @@
 #include "progressgauge.h"
 #include "ui.h"
 #include "easing.h"
+#include "titleuimanager.h"
 
 //*********************************************************
 // 定数名前空間
@@ -71,6 +72,9 @@ CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos)
 //=========================================================
 HRESULT CPCDeskwork::Init(void)
 {
+	// 現在の操作方法を取得
+	int nControl = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	// 失敗していない状態にする
 	m_bFalse = false;
 
@@ -88,15 +92,30 @@ HRESULT CPCDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
-	ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
+	if (nControl == 1)
+	{// キーボード操作の場合
+		ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
+	}
+	else
+	{
+		ui.nKeytype = CDeskworkUI::KEYTYPE_PAD;
+	}
 
 	for (ui.nIdx = 0; ui.nIdx < Config::UI_NUM; ui.nIdx++)
 	{
 		// ポインタの初期化
 		m_pDeskUI[ui.nIdx] = nullptr;
 
-		// タスクをランダムに設定
-		ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
+		if (nControl == 1)
+		{// キーボード操作の場合
+			// タスクをランダムに設定
+			ui.nKey = (CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX);
+		}
+		else
+		{
+			// タスクをランダムに設定
+			ui.nKey = (CDeskworkUI::KYAPAD)(rand() % CDeskworkUI::KYAPAD_MAX);
+		}
 
 		// UIの生成処理
 		m_pDeskUI[ui.nIdx] = CDeskworkUI::Create(ui);
@@ -250,8 +269,17 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 		normalPos.x = (GetPos().x - Config::VALUE_WIDTH) + (Config::VALUE_WIDTH * nCount);
 		m_pDeskUI[nCount]->SetPos(normalPos);
 
-		// タスクをランダムに設定
-		m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
+		if (m_pDeskUI[nCount]->GetKeyType() == 1)
+		{// キーボード操作の場合
+			// タスクをランダムに設定
+			m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
+		}
+		else
+		{
+			// タスクをランダムに設定
+			m_pDeskUI[nCount]->SetKey((CDeskworkUI::KYAPAD)(rand() % CDeskworkUI::KYAPAD_MAX));
+		}
+
 
 		if (GetUse() != true)
 		{
@@ -296,51 +324,23 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 //=========================================================
 void CPCDeskwork::Task(const auto& pClear)
 {
-	// キーボードのポインタ
-	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
 	// 進捗ゲージのポインタ
 	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
 
-	if (pKeyboard == nullptr || pScore == nullptr || pProgressgauge == nullptr)
+	if (pScore == nullptr || pProgressgauge == nullptr)
 	{// ヌルチェック
 		return;
 	}
 
-	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
-		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
-		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
-		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_D))
-	{// 正解を押した時
-
-		// 色を半透明にする
-		m_pDeskUI[m_nNowIdx]->SetAlpha(0.5f);
-
-		// 次のタスクに移る
-		m_nNowIdx++;
-	}
-	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_W) ||
-			(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_A) ||
-			(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_S) ||
-			(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_D))
-	{// 不正解を押した時
-
-		// 色を赤にする
-		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED, true);
-
-		// 失敗した状態にする
-		m_bFalse = true;
-
-		// クールタイムを始める
-		SetTime(true);
-
+	if (ControlResult() != true)
+	{// 間違ったボタンを押した場合
 		return;
 	}
 
-	// タスクが終わっていないなら
 	if (m_nNowIdx < Config::UI_NUM)
-	{
+	{// タスクが終わっていないなら
 		return;
 	}
 
@@ -360,4 +360,62 @@ void CPCDeskwork::Task(const auto& pClear)
 	// こなしたPCタスクの数を一つ増やす
 	AddPCTask();
 
+}
+
+//=========================================================
+// コントローラーを押した結果の処理
+//=========================================================
+bool CPCDeskwork::ControlResult(void)
+{
+	// キーボードのポインタ
+	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	// パッドのポインタ
+	auto* pJoypad = CManager::GetInstance()->GetJoyPad();
+
+	if (pKeyboard == nullptr || pJoypad == nullptr)
+	{// ヌルチェック
+		return false;
+	}
+
+	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
+		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
+		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
+		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_D) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_A) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_B) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_B) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_X) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_X) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_Y))
+	{// 正解を押した時
+
+		// 色を半透明にする
+		m_pDeskUI[m_nNowIdx]->SetAlpha(0.5f);
+
+		// 次のタスクに移る
+		m_nNowIdx++;
+
+		return true;
+	}
+	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_W) ||
+		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_A) ||
+		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_S) ||
+		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_D) || 
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_A) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_B) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_B) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_X) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_X) ||
+		(pJoypad->GetTrigger(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_Y))
+	{// 不正解を押した時
+
+		// 色を赤にする
+		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED, true);
+
+		// 失敗した状態にする
+		m_bFalse = true;
+
+		// クールタイムを始める
+		SetTime(true);
+
+		return false;
+	}
+
+	return false;
 }

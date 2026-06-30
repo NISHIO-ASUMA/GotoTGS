@@ -209,7 +209,7 @@ void CPlayer::Update(void)
 	//*********************************************************
 	if (isPcDeskWork || isCopyDeskWork)
 	{
-		if (!Key->GetTrigger(DIK_F))
+		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_A))
 		{// 終了キーを押していない場合
 			return;
 		}
@@ -293,7 +293,7 @@ void CPlayer::Update(void)
 		if (CollisionSphere(Colliders->pCollider.get()))
 		{
 			// 当たっている かつ Fキー入力
-			if (Key->GetTrigger(DIK_F))
+			if (Key->GetTrigger(DIK_F) || Pad->GetTrigger(CJoyPad::JOYKEY_A))
 			{
 				// カメラ固定フラグ有効化
 				CManager::GetInstance()->GetCamera()->SetCameraMove(true);
@@ -552,6 +552,7 @@ void CPlayer::MoveKeyboard(float speed)
 			 !pKeyboard->GetPress(DIK_A))
 	{
 		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL,true,5);
+		m_nCntAfk = 0;
 	}
 	// 移動入力がある場合
 	else if (m_bMove)
@@ -570,6 +571,8 @@ void CPlayer::MoveKeyboard(float speed)
 
 		// 移動モーション設定
 		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
+
+		m_nCntAfk = 0;
 	}
 }
 //=================================================
@@ -583,9 +586,6 @@ void CPlayer::MoveJoypad(float speed)
 	if (!pJoyPad) return;
 
 	XINPUT_STATE* pState = pJoyPad->GetStickAngle();
-
-	// コントローラーが接続されていなかったら
-	//if (!pJoyPad->GetConnectGamePad()) return;
 
 	// カメラのポインタ
 	CCamera* pCamera = CManager::GetInstance()->GetCamera();
@@ -684,8 +684,11 @@ void CPlayer::MoveJoypad(float speed)
 	}
 
 	// 移動していなかったら
-	else if (!pJoyPad->GetLeftStick()) GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
-	
+	else if (!pJoyPad->GetLeftStick())
+	{
+		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+		m_nCntAfk = 0;
+	}
 	// 移動入力がある場合
 	else if (m_bMove)
 	{
@@ -703,6 +706,8 @@ void CPlayer::MoveJoypad(float speed)
 
 		// 移動モーション設定
 		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
+
+		m_nCntAfk = 0;
 	}
 }
 //=================================================
