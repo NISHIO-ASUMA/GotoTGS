@@ -209,7 +209,7 @@ void CPlayer::Update(void)
 	//*********************************************************
 	if (isPcDeskWork || isCopyDeskWork)
 	{
-		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_A))
+		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
 		{// 終了キーを押していない場合
 			return;
 		}
@@ -293,7 +293,7 @@ void CPlayer::Update(void)
 		if (CollisionSphere(Colliders->pCollider.get()))
 		{
 			// 当たっている かつ Fキー入力
-			if (Key->GetTrigger(DIK_F) || Pad->GetTrigger(CJoyPad::JOYKEY_A))
+			if (Key->GetTrigger(DIK_F) || Pad->GetTrigger(CJoyPad::JOYKEY_START))
 			{
 				// カメラ固定フラグ有効化
 				CManager::GetInstance()->GetCamera()->SetCameraMove(true);
@@ -602,16 +602,16 @@ void CPlayer::MoveJoypad(float speed)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 
-	if (bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A))m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	if (bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START))m_bAfkSmoke = m_bAfkSmoke ? false : true;
 	else if (!bAfkSmoke) m_bAfkSmoke = false;
 
-	if (bAfkTV && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkTV = m_bAfkTV ? false : true;
+	if (bAfkTV && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
 	else if (!bAfkTV) m_bAfkTV = false;
 
-	if (bAfkMagazine && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
+	if (bAfkMagazine && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
 	else if (!bAfkMagazine) m_bAfkMagazine = false;
 
-	if (bAfkGameCenter && pJoyPad->GetTrigger(CJoyPad::JOYKEY_A)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
+	if (bAfkGameCenter && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
 	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
 
 	// ビュー行列の逆行列を計算
@@ -819,7 +819,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	}
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
 	{
-		if (!pad->GetTrigger(CJoyPad::JOYKEY_A)) return;
+		if (!pad->GetTrigger(CJoyPad::JOYKEY_START)) return;
 	}
 
 	//自動ドア判定用コライダーを取得

@@ -228,7 +228,7 @@ void CPauseManager::SetEnablePause(void)
 
 	// Pキー or Start が押された
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_P) ||
-		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START))
+		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_BACK))
 	{
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_PAUSESTART);
