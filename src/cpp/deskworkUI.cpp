@@ -275,15 +275,15 @@ void CDeskworkUI::ChangeCol(const D3DXCOLOR& col, const bool& bUse)
 
 		case KEYPAD_X:
 
-			// オレンジに設定
-			SetCol(D3DXCOLOR(1.0f, 0.5f, 0.0f, 1.0f));
+			// 青に設定
+			SetCol(COLOR_BLUE);
 
 			break;
 
 		case KEYPAD_Y:
 
-			// 青に設定
-			SetCol(COLOR_BLUE);
+			// オレンジに設定
+			SetCol(D3DXCOLOR(1.0f, 0.5f, 0.0f, 1.0f));
 
 			break;
 
