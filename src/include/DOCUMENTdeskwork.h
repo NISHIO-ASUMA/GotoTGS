@@ -40,7 +40,7 @@ public:
 	void SetDOCUMENTValue(void);
 
 	// ¶¬ˆ—
-	static CDOCUMENTDeskwork* Create(void);
+	static CDOCUMENTDeskwork* Create(const bool& bUse = false);
 
 private:
 	// ƒƒ“ƒo•Ï”

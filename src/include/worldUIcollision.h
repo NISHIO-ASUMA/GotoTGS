@@ -49,6 +49,7 @@ public:
 	//**********************************
 	enum TYPE
 	{
+		TYPE_NONE = -1,		// 作業をしていない状態 Misaki
 		TYPE_PC,			// デスク作業
 		TYPE_COPY,			// コピー機作業
 		TYPE_DOCUMENT,		// 書類作業

@@ -39,12 +39,13 @@ public:
 	void Draw(void) override;
 
 	// 設定処理
-	void SetTexBG(const CWorldUICollision::TYPE& TaskType);
+	void SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool& bUse = false);
 
 	// 情報取得処理
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
 	CCOPYDeskwork* GetCOPYDeskUI(void) const { return m_pCOPYDeskUI; }
 	CDOCUMENTDeskwork* GetDOCUMENTDesk(void)const { return m_pDOCUMENTDesk; }
+	static CWorldUICollision::TYPE GetTaskType(void) { return m_TaskType; }
 
 	// 生成処理
 	static CDeskwork* Create(const D3DXVECTOR3& pos);
@@ -75,4 +76,7 @@ private:
 	CPCDeskwork* m_pPCDeskUI;				// PCタスクUIのポインタ
 	CCOPYDeskwork* m_pCOPYDeskUI;			// コピー機タスクUIのポインタ
 	CDOCUMENTDeskwork* m_pDOCUMENTDesk;		// 書類タスクのポインタ
+
+	// 静的メンバ変数
+	static CWorldUICollision::TYPE m_TaskType;	// タスクの種類
 };

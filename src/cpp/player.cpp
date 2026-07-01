@@ -196,9 +196,9 @@ void CPlayer::Update(void)
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 
-	// 各タスクの使用中かどうか
-	bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;				// PCタスク
-	bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;			// コピー機タスク [add Misaki]
+	//// 各タスクの使用中かどうか
+	//bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;				// PCタスク
+	//bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;			// コピー機タスク [add Misaki]
 
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
@@ -207,7 +207,7 @@ void CPlayer::Update(void)
 	//*********************************************************
 	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
 	//*********************************************************
-	if (isPcDeskWork || isCopyDeskWork)
+	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)/*isPcDeskWork || isCopyDeskWork*/
 	{
 		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
 		{// 終了キーを押していない場合
@@ -215,18 +215,10 @@ void CPlayer::Update(void)
 		}
 
 		// 起動したタスクを非アクティブにする [add Misaki]
-		if (isPcDeskWork)
-		{// PCタスクの場合
-			pDesk->GetPCDeskUI()->SetAlphaUI();
-			// カメラ固定フラグ無効化
-			CManager::GetInstance()->GetCamera()->SetCameraMove(false);
-		}
-		else if (isCopyDeskWork)
-		{// コピー機タスクの場合
-			pDesk->GetCOPYDeskUI()->SetAlphaUI();
-			// カメラ固定フラグ無効化
-			CManager::GetInstance()->GetCamera()->SetCameraMove(false);
-		}
+		pDesk->SetTaskType(pDesk->GetTaskType());
+
+		// カメラ固定フラグ無効化
+		CManager::GetInstance()->GetCamera()->SetCameraMove(false);
 
 		// タスク中は移動や他の当たり判定をさせないためにリターン
 		return;
@@ -300,30 +292,14 @@ void CPlayer::Update(void)
 				
 				switch (Colliders->nType)
 				{
-				case CWorldUICollision::TYPE_PC: // パソコンタスク
-				{
-					// 両方がnullじゃない状態
-					if (pDesk && pDesk->GetPCDeskUI())
-					{
-						pDesk->SetTexBG(CWorldUICollision::TYPE_PC);
-						pDesk->GetPCDeskUI()->SetAlphaUI(true);
-					}
-				}
-					break;
+				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add Misaki]
 
-				case CWorldUICollision::TYPE_COPY: // コピー機作業 [add Misaki]
-
-					// 両方がnullじゃない状態
-					if (pDesk && pDesk->GetCOPYDeskUI())
-					{
-						pDesk->SetTexBG(CWorldUICollision::TYPE_COPY);
-						pDesk->GetCOPYDeskUI()->SetAlphaUI(true);
-					}
+					return;
 
 					break;
 
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add Misaki]
-				{
+				
 					// 両方がnullじゃない状態
 					if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
 					{
@@ -335,12 +311,21 @@ void CPlayer::Update(void)
 
 					// NOTE : エフェクトとかパーティクル(成功演出っぽい物)の追加
 					// 担当 : 近田君
-				}
+				
 
 					break;
 
 				default:
+
+					// nullじゃない状態
+					if (pDesk)
+					{
+						// タスクを起動する
+						pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
+					}
+
 					break;
+
 				}
 
 				// タスク起動したら抜ける

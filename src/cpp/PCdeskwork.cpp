@@ -53,13 +53,14 @@ CPCDeskwork::~CPCDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos)
+CPCDeskwork* CPCDeskwork::Create(const D3DXVECTOR3& pos, const bool& bUse)
 {
 	// PCタスクのポインタ
 	static CPCDeskwork pPCDeskwork;
 
 	// 設定処理
 	pPCDeskwork.SetPos(pos);
+	pPCDeskwork.SetUse(bUse);
 
 	// 初期化が失敗した場合
 	if (FAILED(pPCDeskwork.Init())) return nullptr;

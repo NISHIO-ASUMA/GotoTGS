@@ -47,7 +47,7 @@ public:
 	CDeskworkUI* GetDeskUI(const int nIdx) const { return m_pDeskUI[nIdx]; }
 
 	// ¶¬ˆ—
-	static CCOPYDeskwork* Create(const D3DXVECTOR3& pos);
+	static CCOPYDeskwork* Create(const D3DXVECTOR3& pos, const bool& bUse = false);
 
 private:
 	// ƒƒ“ƒoŠÖ”

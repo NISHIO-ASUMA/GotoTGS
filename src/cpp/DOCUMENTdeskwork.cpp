@@ -38,10 +38,13 @@ CDOCUMENTDeskwork::~CDOCUMENTDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDOCUMENTDeskwork* CDOCUMENTDeskwork::Create(void)
+CDOCUMENTDeskwork* CDOCUMENTDeskwork::Create(const bool& bUse)
 {
 	// 書類タスクのポインタ
 	static CDOCUMENTDeskwork pDOCUMENTDeskwork;
+
+	// 設定処理
+	pDOCUMENTDeskwork.SetUse(bUse);
 
 	// 初期化が失敗した場合
 	if (FAILED(pDOCUMENTDeskwork.Init())) return nullptr;
