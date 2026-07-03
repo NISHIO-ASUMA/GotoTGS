@@ -66,10 +66,6 @@ public:
 		return &Instance;
 	};
 
-private:
-
-	CEnemyManager();
-
 	/// <summary>
 	/// ŠÇ—ƒNƒ‰ƒX“à‚Å¶¬
 	/// </summary>
@@ -77,6 +73,10 @@ private:
 	/// <param name="rot">Šp“x</param>
 	/// <returns></returns>
 	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot);
+
+private:
+
+	CEnemyManager();
 
 	void LoadJson(void);
 

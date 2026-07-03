@@ -48,6 +48,7 @@
 #include "autodoor_collision.h"		// 西尾追加
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
+#include "enemymanager.h"
 
 //*********************************************************
 // 静的メンバ変数
@@ -128,8 +129,8 @@ HRESULT CGameSceneObject::Init(void)
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
-	// 敵生成
-	CEnemy::Create(D3DXVECTOR3(390.0f, 0.0f, 200.0f), VECTOR3_NULL);
+	// 敵管理クラス生成
+	CEnemyManager::GetInstance()->Init();
 	
 	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
@@ -189,6 +190,9 @@ void CGameSceneObject::Uninit(void)
 
 	// さぼりをまとめたマネージャーの終了処理
 	CAfkManager::Instance()->Uninit();
+
+	// 敵管理クラスの終了
+	CEnemyManager::GetInstance()->Uninit();
 
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();

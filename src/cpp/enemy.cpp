@@ -25,6 +25,9 @@
 #include "gamesceneobject.h"
 #include "player.h"
 #include "template.h"
+#include "statemachine.h"
+#include "enemystatebase.h"
+#include "enemystateneutral.h"
 
 //*********************************************************
 // 定数名前空間
@@ -53,10 +56,12 @@ namespace EnemyInfo
 CEnemy::CEnemy(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxColiider(nullptr),
 m_pSphereColiider(nullptr),
+m_pMachine(nullptr),
 m_isCheckPoint(false),
 m_isTargetChase(false),
 m_nStopTime(NULL),
-m_nTargetIdx(NULL)
+m_nTargetIdx(NULL),
+m_playerTargetPos(VECTOR3_NULL)
 {
 
 }
@@ -110,6 +115,16 @@ HRESULT CEnemy::Init(void)
 	// 球形コライダー生成
 	m_pSphereColiider = CSphereCollider::Create(GetPos(),Config::SPHERE_RANGE);
 
+	// ステートマシン生成
+	m_pMachine = new CStateMachine;
+
+	// nullじゃないなら
+	if (m_pMachine)
+	{
+		// 初期状態を生成
+		ChangeState(new CEnemyStateNeutral(), CEnemyStateBase::ID_NEUTRAL);
+	}
+
 	return S_OK;
 }
 //========================================================
@@ -121,6 +136,14 @@ void CEnemy::Uninit(void)
 	m_pBoxColiider.reset();
 	m_pSphereColiider.reset();
 
+	// ステートマシンの破棄
+	if (m_pMachine)
+	{
+		m_pMachine->OnExit();
+		delete m_pMachine;
+		m_pMachine = nullptr;
+	}
+
 	// キャラクタークラス終了処理
 	CMoveCharactor::Uninit();
 }
@@ -129,8 +152,8 @@ void CEnemy::Uninit(void)
 //========================================================
 void CEnemy::Update(void)
 {
-	// ビューポイント追従更新関数
-	UpdateMoveViewPoint();
+	// ステートの更新
+	m_pMachine->Update();
 
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
@@ -153,10 +176,7 @@ void CEnemy::Draw(void)
 // ビューポイント追従処理
 //========================================================
 void CEnemy::UpdateMoveViewPoint(void)
-{
-	// 追跡中なら
-	if (m_isTargetChase) return;
-
+{	
 	// 停止カウント中の処理
 	if (m_nStopTime > 0)
 	{
@@ -216,6 +236,20 @@ void CEnemy::UpdateMoveViewPoint(void)
 
 	// 目標角度をセット
 	SetRotDest(rotDest);
+}
+//========================================================
+// ステート変更処理
+//========================================================
+void CEnemy::ChangeState(CEnemyStateBase* pState, int nID)
+{
+	// 自分自身のポインタを設定
+	pState->SetOwner(this);
+
+	// IDの設定
+	pState->SetID(nID);
+
+	// ステート変更
+	m_pMachine->ChangeState(pState);
 }
 //========================================================
 // 視界の扇形の描画処理

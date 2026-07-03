@@ -66,7 +66,7 @@ void CEnemyManager::LoadJson(void)
 	const auto& json = CManager::GetInstance()->GetJsonManager();
 
 	// “G‚ðŽÀÛ‚É“Ç‚Ýž‚Þ
-	json->SetEnemyManager(this);
+	json->SetEnemyManager(GetInstance());
 	json->Load(ENEMY_MANAGER::FILE);
 }
 //=========================================================

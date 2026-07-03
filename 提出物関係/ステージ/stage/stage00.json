@@ -1005,7 +1005,7 @@
          "idx": 50,
          "pos": [
             360.0,
-            25.0,
+            28.0,
             95.0
          ],
          "rot": [
@@ -1018,7 +1018,7 @@
             1.0,
             1.0
          ],
-         "Flags": false,
+         "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/coat_rack002.x"
       },
       {

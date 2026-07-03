@@ -1,59 +1,53 @@
 //=========================================================
 //
-// 敵の通常状態クラス [ enemystateneutral.cpp ]
-// Author : Asuma Nishio
-// 
+// 敵がプレイヤーを探す状態のクラス[ enemystateserch.cpp ]
+// Author: Asuma Nishio
+//
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "enemystateneutral.h"
+#include "enemystateserch.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "enemy.h"
-#include "manager.h"
-#include "input.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEnemyStateNeutral::CEnemyStateNeutral()
+CEnemyStateSerch::CEnemyStateSerch()
 {
-	SetID(ID_NEUTRAL);
+	// idセット
+	SetID(ID_SERCH);
 }
 //=========================================================
 // デストラクタ
 //=========================================================
-CEnemyStateNeutral::~CEnemyStateNeutral()
+CEnemyStateSerch::~CEnemyStateSerch()
 {
 
 }
 //=========================================================
-// 状態開始
+// 開始関数
 //=========================================================
-void CEnemyStateNeutral::OnStart()
+void CEnemyStateSerch::OnStart(void)
 {
-	// モーションセット
-	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true, 5);
-}
-//=========================================================
-// 状態更新
-//=========================================================
-void CEnemyStateNeutral::OnUpdate()
-{
-	// nullなら
-	if (!m_pEnemy) return;
 
-	// 通常のポインタ移動をする
-	m_pEnemy->UpdateMoveViewPoint();
 }
 //=========================================================
-// 状態終了
+// 更新関数
 //=========================================================
-void CEnemyStateNeutral::OnExit()
+void CEnemyStateSerch::OnUpdate(void)
+{
+
+}
+//=========================================================
+// 終了関数
+//=========================================================
+void CEnemyStateSerch::OnExit(void)
 {
 
 }
