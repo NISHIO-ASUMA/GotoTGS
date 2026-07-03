@@ -2,9 +2,6 @@
 //
 // 敵の処理 [ enemy.h ]
 // Author: Asuma Nishio
-// 
-// NOTE : プレイヤーを疑っているモーションを追加して切り替えを作る
-//        プレイヤーにつかまった判定を作らなあかん
 //
 //========================================================
 
@@ -28,6 +25,8 @@
 //*********************************************************
 class CSphereCollider;
 class CBoxCollider;
+class CStateMachine;
+class CEnemyStateBase;
 
 //*********************************************************
 // 敵キャラクタークラスを定義
@@ -55,6 +54,13 @@ public:
 	/// <returns></returns>
 	static CEnemy* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot);
 
+	/// <summary>
+	/// ステート変更関数
+	/// </summary>
+	/// <param name="pState">起こしたい状態(クラス)</param>
+	/// <param name="nID">ステートのID</param>
+	void ChangeState(CEnemyStateBase* pState, int nID);
+
 public:
 
 	//***************************
@@ -63,7 +69,7 @@ public:
 	enum MOTION
 	{
 		NEUTRAL,	// ニュートラル
-		MOVE,		// 移動
+		MOVE,		// 移動 
 		SEARCH,		// 疑いモーション
 		MAX
 	};
@@ -90,9 +96,22 @@ public:
 
 	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag;}
 
-private:
-
 	void UpdateMoveViewPoint(void);
+
+/// <summary>
+/// 西尾追加 : 窓口の関数をまとめて格納しているpublic メソッド
+/// </summary>
+public:
+
+	void DecrementStopTime(void) { if (m_nStopTime > 0) m_nStopTime--; } // 減算関数
+
+	void OnSpottedPlayer(const D3DXVECTOR3& pos) { m_playerTargetPos = pos; }
+	void SetTargetIdx(int idx) { m_nTargetIdx = idx; }
+	void SetStopTime(int time) { m_nStopTime = time; }
+
+	int  GetStopTime(void) const { return m_nStopTime; }
+	int GetTargetIndex(void) const { return m_nTargetIdx; }
+	D3DXVECTOR3 GetPlayerTargetPos(void) const { return m_playerTargetPos; }
 
 private:
 
@@ -103,4 +122,7 @@ private:
 	int m_nStopTime;									// 停止しているカウント
 	int m_nTargetIdx;									// 向かう目的地のインデックス
 	bool m_isTargetChase;								// 追跡
+
+	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
+	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
 };

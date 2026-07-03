@@ -847,8 +847,8 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 		// 見つかる扇方の範囲内だったら
 		if (IdxEnemy->CheckEyesight(UpdatePos))
 		{
-			// 対象の敵の動きを変更する
-			IdxEnemy->SetTargetChaseFlag(true);
+			// 対象の敵の動きを変更する(プレイヤーを追従するかどうかのフラグを変更する )
+			//IdxEnemy->SetTargetChaseFlag(true);
 			break;
 		}
 	}

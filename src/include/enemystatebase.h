@@ -45,9 +45,9 @@ public:
 	//************************
 	enum STATEID
 	{
-		ID_NEUTRAL, // ‘Ò‹@ó‘Ô
-		ID_SERCH,   // ’Tõó‘Ô
-		ID_ACTION,  // Ž¶Óó‘Ô
+		ID_NEUTRAL, // ’Êíó‘Ô
+		ID_SERCH,	// ’Tõó‘Ô
+		ID_CHASE,	// ’ÇÕó‘Ô
 		ID_MAX
 	};
 

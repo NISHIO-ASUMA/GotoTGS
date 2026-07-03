@@ -798,6 +798,15 @@
     <ClCompile Include="src\cpp\vigilanceicon.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\createjsonenemy.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystatechase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystateserch.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1261,6 +1270,15 @@
     </ClInclude>
     <ClInclude Include="src\include\vigilanceicon.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonenemy.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatechase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystateserch.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
