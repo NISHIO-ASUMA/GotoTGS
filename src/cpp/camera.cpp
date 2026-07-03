@@ -587,51 +587,34 @@ CCamera::Camera CCamera::ClearDefault(void)
 //==============================================================
 void CCamera::FollowJoyPad(void)
 {
-	// ジョイパッドのポインタ
-	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+	// スティック
+	auto pad = CManager::GetInstance()->GetJoyPad();
+	XINPUT_STATE* pStick = pad->GetStickAngle();
 
-	if (pJoyPad != nullptr)
+	if (pad->GetRightStick())
 	{
-		const float sensitivity = 0.1f;
-		const float rx = pJoyPad->GetRightStickX();
-		const float ry = pJoyPad->GetRightStickY();
+		float RStickAngleY = pStick->Gamepad.sThumbRY;
+		float RStickAngleX = pStick->Gamepad.sThumbRX;
 
-		// デッドゾーン処理
-		const float deadZone = 0.2f;
-		if (fabsf(rx) > deadZone)
-		{
-			m_pCamera.rot.y += rx * sensitivity;
-		}
-		if (fabsf(ry) > deadZone)	
-		{
-			m_pCamera.rot.x -= ry * sensitivity;
-		}
+		float DeadZone = 10920.0f;
+		float fMag = sqrtf((RStickAngleX * RStickAngleX) + (RStickAngleY * RStickAngleY));
 
-		if (m_pCamera.rot.y < -D3DX_PI)
+		if (fMag >= DeadZone)
 		{
-			m_pCamera.rot.y += D3DX_PI * 2.0f;
-		}
-		else if (m_pCamera.rot.y > D3DX_PI)
-		{
-			m_pCamera.rot.y += -D3DX_PI * 2.0f;
-		}
+			float NormalizeX = RStickAngleX / fMag;
+			float NormalizeY = RStickAngleY / fMag;
 
-		if (m_pCamera.rot.x < -D3DX_PI)
-		{
-			m_pCamera.rot.x += D3DX_PI * 2.0f;
-		}
-		else if (m_pCamera.rot.x > D3DX_PI)
-		{
-			m_pCamera.rot.x += -D3DX_PI * 2.0f;
-		}
-
-		if (m_pCamera.rot.x > 3.00f)
-		{
-			m_pCamera.rot.x -= sensitivity;
-		}
-		else if (m_pCamera.rot.x < 0.1f)
-		{
-			m_pCamera.rot.x += sensitivity;
+			float fAngle = fMag * 0.000003f;
+			m_pCamera.rot.y += NormalizeX * 0.5f * fAngle;
+			m_pCamera.rot.x -= NormalizeY * 0.5f * fAngle;
 		}
 	}
+
+	// Y軸（水平回転）の正規化
+	if (m_pCamera.rot.y > D3DX_PI)  m_pCamera.rot.y -= D3DX_PI * 2.0f;
+	if (m_pCamera.rot.y < -D3DX_PI) m_pCamera.rot.y += D3DX_PI * 2.0f;
+
+	// X軸（上下回転）の制限
+	if (m_pCamera.rot.x <= 1.0f)  m_pCamera.rot.x = 1.0f;
+	if (m_pCamera.rot.x >= 2.6f)  m_pCamera.rot.x = 2.6f;
 }

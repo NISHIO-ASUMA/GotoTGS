@@ -111,6 +111,8 @@ public:
 	float GetRightStickX(void);
 	float GetRightStickY(void);
 
+	bool GetRightStick(void);
+
 	inline XINPUT_STATE* GetStickAngle(void) { return &m_joyKeyState; }
 
 	/// <summary>

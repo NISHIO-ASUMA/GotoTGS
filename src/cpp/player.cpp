@@ -569,7 +569,6 @@ void CPlayer::MoveJoypad(float speed)
 {
 	// ジョイパッドのポインタ
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
-
 	if (!pJoyPad) return;
 
 	XINPUT_STATE* pState = pJoyPad->GetStickAngle();
@@ -622,9 +621,35 @@ void CPlayer::MoveJoypad(float speed)
 
 	// 目的の向き
 	D3DXVECTOR3 RotDest = GetRotDest();
+	auto move = GetMove();
 
 	if (pJoyPad->GetLeftStick())
 	{
+		// 左スティックの角度
+		float LStickAngleY = pState->Gamepad.sThumbLY;
+		float LStickAngleX = pState->Gamepad.sThumbLX;
+
+		// デッドゾーンを設定
+		float DeadZone = 32767.0f * 0.25f;
+		float fMag = sqrtf((LStickAngleX * LStickAngleX) + (LStickAngleY * LStickAngleY));
+
+		if (fMag > DeadZone)
+		{
+			// 正規化
+			float normalizeX = (LStickAngleX / fMag);
+			float normalizeY = (LStickAngleY / fMag);
+
+			// 移動量を計算する
+			float MoveX = normalizeX * cosf(-pCamera->GetRot().y) - normalizeY * sinf(-pCamera->GetRot().y);
+			float MoveZ = normalizeX * sinf(-pCamera->GetRot().y) + normalizeY * cosf(-pCamera->GetRot().y);
+
+			// 移動量を設定
+			move.x += MoveX * speed;
+			move.z += MoveZ * speed;
+			RotDest.y = atan2f(-MoveX, -MoveZ);
+			m_bMove = true;
+		}
+#if 0
 		if (pState->Gamepad.sThumbLY > player::fJoyInput)
 		{
 			moveDir += camForward;
@@ -657,6 +682,7 @@ void CPlayer::MoveJoypad(float speed)
 			// 移動判定をtrueに
 			m_bMove = true;
 		}
+#endif
 	}
 
 	// モーションチェンジ
@@ -679,14 +705,8 @@ void CPlayer::MoveJoypad(float speed)
 	// 移動入力がある場合
 	else if (m_bMove)
 	{
-		// 移動の正規化
-		D3DXVec3Normalize(&moveDir, &moveDir);
-
 		// 位置の更新
-		SetMove(moveDir * speed);
-
-		// 移動方向から向きを計算
-		RotDest.y = atan2f(-moveDir.x, -moveDir.z);
+		SetMove(move);
 
 		// 目的の向きを設定
 		SetRotDest(RotDest);
