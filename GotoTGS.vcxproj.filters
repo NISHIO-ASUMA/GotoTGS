@@ -792,6 +792,12 @@
     <ClCompile Include="src\cpp\doorui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\vigilanceUImanager.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\vigilanceicon.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1249,6 +1255,12 @@
     </ClInclude>
     <ClInclude Include="src\include\doorui.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\vigilanceUImanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\vigilanceicon.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
