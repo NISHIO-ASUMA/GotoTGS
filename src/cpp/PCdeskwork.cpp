@@ -93,6 +93,7 @@ HRESULT CPCDeskwork::Init(void)
 	ui.fWidth = Config::UI_WIDTH;
 	ui.fHeight = Config::UI_HEIGHT;
 	ui.fDigit = Config::VALUE_TEXU;
+
 	if (nControl == 1)
 	{// キーボード操作の場合
 		ui.nKeytype = CDeskworkUI::KEYTYPE_BOARD;
@@ -270,7 +271,7 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 		normalPos.x = (GetPos().x - Config::VALUE_WIDTH) + (Config::VALUE_WIDTH * nCount);
 		m_pDeskUI[nCount]->SetPos(normalPos);
 
-		if (m_pDeskUI[nCount]->GetKeyType() == 1)
+		if (m_pDeskUI[nCount]->GetKeyType() == CDeskworkUI::KEYTYPE_BOARD)
 		{// キーボード操作の場合
 			// タスクをランダムに設定
 			m_pDeskUI[nCount]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));

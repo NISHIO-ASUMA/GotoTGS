@@ -239,7 +239,7 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 		return false;
 	}
 
-	if (m_pDeskUI[TEXTURE_KEY]->GetKeyType() == 1)
+	if (m_pDeskUI[TEXTURE_KEY]->GetKeyType() == CDeskworkUI::KEYTYPE_BOARD)
 	{// キーボード操作の場合
 		// タスクをランダムに設定
 		m_pDeskUI[TEXTURE_KEY]->SetKey((CDeskworkUI::KEYBOARD)(rand() % CDeskworkUI::KEYBOARD_MAX));
