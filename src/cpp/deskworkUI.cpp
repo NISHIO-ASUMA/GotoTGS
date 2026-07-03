@@ -161,6 +161,9 @@ void CDeskworkUI::Update(void)
 	pVtx[2].col =
 	pVtx[3].col = m_UI.col;
 
+	// UV設定
+	SetDigit(pVtx);
+
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 }
