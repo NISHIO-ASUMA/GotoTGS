@@ -19,8 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority),
-m_bUse(false)
+CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority)
 {
 
 }
@@ -37,26 +36,25 @@ CVigilancegauge::~CVigilancegauge()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CVigilancegauge* CVigilancegauge::Create(const Vigilancegauge& vigilancegauge)
+CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge)
 {
 	// インスタンス生成
-	CVigilancegauge* pVigilancegauge = new CVigilancegauge;
+	CVigilancegauge* pGauge = new CVigilancegauge;
 
 	// ヌルチェック
-	if (pVigilancegauge == nullptr) return nullptr;
+	if (pGauge == nullptr) return nullptr;
 
 	// 初期化が失敗したとき
-	if (FAILED(pVigilancegauge->Init())) return nullptr;
+	if (FAILED(pGauge->Init())) return nullptr;
 
 	// 各設定処理
-	pVigilancegauge->SetPos(vigilancegauge.pos);
-	pVigilancegauge->SetCol(vigilancegauge.col);
-	pVigilancegauge->SetSize(vigilancegauge.fWidth, vigilancegauge.fHeight);
-	pVigilancegauge->SetTexture(Config::TEXNAME_BASE, 0);
-	pVigilancegauge->SetTexture(Config::TEXNAME_MULTI, 1);
-	pVigilancegauge->m_bUse = vigilancegauge.bUse;
+	pGauge->SetPos(gauge.pos);
+	pGauge->SetCol(gauge.col);
+	pGauge->SetSize(gauge.fWidth, gauge.fHeight);
+	pGauge->SetTexture(Config::TEXNAME_BASE, 0);
+	pGauge->SetTexture(Config::TEXNAME_MULTI, 1);
 
-	return pVigilancegauge;
+	return pGauge;
 }
 
 //=========================================================
@@ -84,9 +82,6 @@ void CVigilancegauge::Uninit(void)
 //=========================================================
 void CVigilancegauge::Update(void)
 {
-	// 使用していないなら
-	if (m_bUse != true) return;
-
 	// 親の更新処理
 	CObject2DMulti::Update();
 }
@@ -96,9 +91,6 @@ void CVigilancegauge::Update(void)
 //=========================================================
 void CVigilancegauge::Draw(void)
 {
-	// 使用していないなら
-	if (m_bUse != true) return;
-
 	// 親の描画処理
 	CObject2DMulti::Draw();
 }

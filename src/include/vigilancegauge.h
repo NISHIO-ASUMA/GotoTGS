@@ -23,14 +23,13 @@ class CVigilancegauge:public CObject2DMulti
 public:
 
 	// 警戒度のゲージの構造体
-	struct Vigilancegauge
+	struct Gauge
 	{
 		D3DXVECTOR3 pos;
 		D3DXCOLOR col;
 		D3DXVECTOR2 tex;
 		float fWidth;
 		float fHeight;
-		bool bUse;
 	};
 
 	CVigilancegauge(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
@@ -42,7 +41,7 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CVigilancegauge* Create(const Vigilancegauge& vigilancegauge);
+	static CVigilancegauge* Create(const Gauge& gauge);
 
 private:
 
@@ -51,9 +50,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME_BASE = "vigilance.png";	// 基本のテクスチャ
-		static constexpr const char* TEXNAME_MULTI = nullptr;			// マルチテクスチャ
+		static constexpr const char* TEXNAME_BASE = "vigilancegauge001.png";	// 基本のテクスチャ
+		static constexpr const char* TEXNAME_MULTI = "vigilancegauge000.png";	// マルチテクスチャ
 	};
-
-	bool m_bUse;	// 使用するかどうか
 };

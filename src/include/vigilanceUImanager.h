@@ -13,16 +13,22 @@
 //*********************************************************
 // インクルード
 //*********************************************************
-#include "vigilancegauge.h"
+#include "object.h"
+
+//*********************************************************
+// 前方宣言
+//*********************************************************
+class CVigilanceicon;
+class CVigilancegauge;
 
 //*********************************************************
 //  警戒度UIマネージャーに対するクラスを定義
 //*********************************************************
-class CVigilanceUIManager
+class CVigilanceUIManager:public CObject
 {
 public:
 
-	CVigilanceUIManager();
+	CVigilanceUIManager(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CVigilanceUIManager();
 
 	HRESULT Init(void);
@@ -54,5 +60,8 @@ private:
 
 	};
 
-	bool m_bUse;	// 使用するかどうか
+	// メンバ変数
+	CVigilanceicon* pIcon;		// アイコンのポインタ
+	CVigilancegauge* pGauge;	// ゲージのポインタ
+	bool m_bUse;				// 使用するかどうか
 };
