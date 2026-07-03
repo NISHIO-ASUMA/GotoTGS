@@ -46,6 +46,8 @@
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
+#include "enemymanager.h"			// 西尾追加
+#include "enemy.h"					// 西尾追加
 
 //*********************************************************
 // 名前空間
@@ -293,9 +295,6 @@ void CPlayer::Update(void)
 				switch (Colliders->nType)
 				{
 				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add Misaki]
-
-					return;
-
 					break;
 
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add Misaki]
@@ -339,6 +338,9 @@ void CPlayer::Update(void)
 
 	// 自動ドアとの判定
 	UpdateAutoDoorCollision(UpdatePos);
+
+	// 敵の視界との当たり判定
+	CollisionEnemyEyesite(UpdatePos);
 
 	// オフィス内のドアとの判定
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
@@ -827,6 +829,26 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 			
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
+			break;
+		}
+	}
+}
+//=================================================
+// 敵の視界との当たり判定
+//=================================================
+void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
+{
+	// 敵管理クラスを取得する
+	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
+
+	// 敵の中での判定取得
+	for (auto& IdxEnemy : Enemy)
+	{
+		// 見つかる扇方の範囲内だったら
+		if (IdxEnemy->CheckEyesight(UpdatePos))
+		{
+			// 対象の敵の動きを変更する
+			IdxEnemy->SetTargetChaseFlag(true);
 			break;
 		}
 	}

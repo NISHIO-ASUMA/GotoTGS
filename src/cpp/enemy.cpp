@@ -54,6 +54,7 @@ CEnemy::CEnemy(int nPriority) : CMoveCharactor(nPriority),
 m_pBoxColiider(nullptr),
 m_pSphereColiider(nullptr),
 m_isCheckPoint(false),
+m_isTargetChase(false),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL)
 {
@@ -153,6 +154,9 @@ void CEnemy::Draw(void)
 //========================================================
 void CEnemy::UpdateMoveViewPoint(void)
 {
+	// 追跡中なら
+	if (m_isTargetChase) return;
+
 	// 停止カウント中の処理
 	if (m_nStopTime > 0)
 	{
@@ -358,7 +362,7 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
 	D3DXVec3Normalize(&enemyForward, &enemyForward);
 
-	// プレイヤーへの方向ベクトルを正規化
+	// 方向ベクトルを正規化
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
@@ -372,6 +376,8 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 	// 内積判定
 	if (dot >= cosHalfAngle)
 	{
+		// 状態変更
+		
 		return true; // 視界に入っている
 	}
 

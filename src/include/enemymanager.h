@@ -68,6 +68,8 @@ public:
 
 private:
 
+	CEnemyManager();
+
 	/// <summary>
 	/// ŠÇ—ƒNƒ‰ƒX“à‚Å¶¬
 	/// </summary>
@@ -76,7 +78,7 @@ private:
 	/// <returns></returns>
 	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot);
 
-	CEnemyManager();
+	void LoadJson(void);
 
 private:
 	std::vector<CEnemy*>m_pEnemys; // “G‚ÌŠÇ—”z—ñ

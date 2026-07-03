@@ -84,6 +84,12 @@ public:
 	void ResultCamera(void);
 
 	/// <summary>
+	/// 西尾追加 : タイトルのカメラ
+	/// </summary>
+	/// <param name=""></param>
+	void TitleCamera(void);
+
+	/// <summary>
 	/// 西尾追加 : 三人称カメラに関する設定処理
 	/// </summary>
 	/// <param name="target">追従対象の座標</param>

@@ -23,6 +23,7 @@
 class CJsonCreator;
 class CBlockManager;
 class CWorldWallManager;
+class CEnemyManager;
 
 //*********************************************************
 // jsonを一括管理するクラスを定義
@@ -40,9 +41,11 @@ public:
 
 	void SetBlockManager(CBlockManager* pManager) { m_pBlockManager = pManager; }
 	void SetWorldWallManager(CWorldWallManager* pManager) { m_pWorldWallManager = pManager; }
+	void SetEnemyManager(CEnemyManager* pManager) { m_pEnemyManager = pManager; }
 
 	CBlockManager* GetBlockManager(void){ return m_pBlockManager; }
 	CWorldWallManager* GetWorldWallManager(void) { return m_pWorldWallManager; }
+	CEnemyManager* GetEnemyManager(void) { return m_pEnemyManager; }
 
 private:
 
@@ -50,4 +53,5 @@ private:
 
 	CBlockManager* m_pBlockManager = nullptr;			// ブロックマネージャーのポインタ
 	CWorldWallManager* m_pWorldWallManager = nullptr;	// 世界の壁管理クラスのポインタ
+	CEnemyManager* m_pEnemyManager = nullptr;			// 敵の管理クラスのポインタ(いるか怪しいけど)
 };

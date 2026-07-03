@@ -14,6 +14,16 @@
 // インクルードファイル
 //*********************************************************
 #include "enemy.h"
+#include "jsonmanager.h"
+#include "manager.h"
+
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace ENEMY_MANAGER
+{
+	constexpr const char* FILE = "data/Json/GameEnemy.json"; // 外部ファイル
+};
 
 //=========================================================
 // コンストラクタ
@@ -48,12 +58,27 @@ CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& 
 	return pEnemy;
 }
 //=========================================================
+// 外部ファイル設定
+//=========================================================
+void CEnemyManager::LoadJson(void)
+{
+	// jsonmanagerを取得
+	const auto& json = CManager::GetInstance()->GetJsonManager();
+
+	// 敵を実際に読み込む
+	json->SetEnemyManager(this);
+	json->Load(ENEMY_MANAGER::FILE);
+}
+//=========================================================
 // 初期化処理
 //=========================================================
 HRESULT CEnemyManager::Init(void)
 {
 	// 配列の切り離し
 	m_pEnemys.clear();
+
+	// 外部ファイル読み込み
+	LoadJson();
 
 	return S_OK;
 }

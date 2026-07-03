@@ -37,6 +37,15 @@ namespace CAMERAINFO
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 }
 
+namespace TITLECAMERAINFO
+{
+	const D3DXVECTOR3 InitPos = { -178.0f, 166.0f, -63.0f };	// カメラ初期座標
+	const D3DXVECTOR3 InitPosR = { -2.3f, 0.0f, -230.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitRot = { 2.02f, 0.54f, 0.0f };			// カメラ初期角度
+	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
+	constexpr float Distance = 380.0f;							// 初期の距離
+}
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -109,6 +118,10 @@ void CCamera::Update(void)
 			if (m_nControlTypes == CONTROLTYPE_KEY && !m_isMove) FollowMouse();
 			if (m_nControlTypes == CONTROLTYPE_PAD && !m_isMove) FollowJoyPad();
 		}
+	}
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_TITLE)
+	{
+		TitleCamera();
 	}
 	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)
 	{
@@ -368,6 +381,17 @@ void CCamera::ResultCamera(void)
 
 	// 視点から注視点までの距離
 	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
+}
+//==============================================================
+// タイトルのカメラ処理
+//==============================================================
+void CCamera::TitleCamera(void)
+{
+	m_pCamera.posV = TITLECAMERAINFO::InitPos;			// カメラの位置
+	m_pCamera.posR = VECTOR3_NULL;						// カメラの見ている位置
+	m_pCamera.vecU = TITLECAMERAINFO::InitVecU;			// 上方向ベクトル
+	m_pCamera.rot = TITLECAMERAINFO::InitRot;			// 角度
+	m_pCamera.fDistance = TITLECAMERAINFO::Distance;	// 距離
 }
 //==============================================================
 // カメラから見て透過させる時の当たり判定関数

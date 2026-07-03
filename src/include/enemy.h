@@ -88,6 +88,8 @@ public:
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
+	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag;}
+
 private:
 
 	void UpdateMoveViewPoint(void);
@@ -100,4 +102,5 @@ private:
 	bool m_isCheckPoint;								// ポイントに到着したかどうか
 	int m_nStopTime;									// 停止しているカウント
 	int m_nTargetIdx;									// 向かう目的地のインデックス
+	bool m_isTargetChase;								// 追跡
 };
