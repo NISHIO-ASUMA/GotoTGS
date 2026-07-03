@@ -27,7 +27,7 @@ class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
 class CTutorialLines;		// Misaki
-class CVigilancegauge;		// Misaki
+class CVigilanceUIManager;	// Misaki
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
@@ -68,14 +68,14 @@ private:
 
 private:
 
-	CScore* m_pScore;						// スコアクラスのポインタ
-	CGametime* m_pTimer;					// タイマークラスのポインタ
-	CDeskwork* m_pDeskwork;					// タスクのポインタ Misaki
-	CProgressgauge* m_pProgressgauge;		// 進捗ゲージのポインタ Misaki
-	CEventUI* m_pEventUI;					// イベントUIのポインタ Misaki
-	CPlayer* m_pPlayer;						// プレイヤーのクラスポインタ [ Asuma add ]
-	CTutorialLines* m_pTutoriallines;		// チュートリアルのセリフのポインタ Misaki
-	CVigilancegauge* m_pVigilancegauge;		// 警戒ゲージのポインタ Misaki
+	CScore* m_pScore;								// スコアクラスのポインタ
+	CGametime* m_pTimer;							// タイマークラスのポインタ
+	CDeskwork* m_pDeskwork;							// タスクのポインタ Misaki
+	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ Misaki
+	CEventUI* m_pEventUI;							// イベントUIのポインタ Misaki
+	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ [ Asuma add ]
+	CTutorialLines* m_pTutoriallines;				// チュートリアルのセリフのポインタ Misaki
+	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ Misaki
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ

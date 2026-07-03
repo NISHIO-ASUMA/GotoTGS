@@ -28,7 +28,7 @@
 #include "progressgauge.h"			// 髙橋追加
 #include "eventUI.h"				// 髙橋追加
 #include "tutoriallines.h"			// 髙橋追加
-#include "vigilancegauge.h"			// 髙橋追加
+#include "vigilanceUImanager.h"		// 髙橋追加
 
 #include "player.h"					// 近田追加
 #include "friend.h"					// 近田追加
@@ -75,10 +75,11 @@ m_pScore(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pWorldWallManager(nullptr),
-m_pVigilancegauge(nullptr)
+m_pVigilanceUImanager(nullptr)
 {
 
 }
+
 //=========================================================
 // デストラクタ
 //=========================================================
@@ -86,6 +87,7 @@ CGameSceneObject::~CGameSceneObject()
 {
 
 }
+
 //=========================================================
 // インスタンス取得処理
 //=========================================================
@@ -97,6 +99,7 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 	// インスタンスを返す
 	return m_pInstance;
 }
+
 //=========================================================
 // 初期化処理
 //=========================================================
@@ -162,6 +165,7 @@ HRESULT CGameSceneObject::Init(void)
 #endif
 	return S_OK;
 }
+
 //=========================================================
 // 終了処理
 //=========================================================
@@ -207,6 +211,7 @@ void CGameSceneObject::Uninit(void)
 		m_pInstance = nullptr;
 	}
 }
+
 //=========================================================
 // 更新処理
 //=========================================================
@@ -245,6 +250,7 @@ void CGameSceneObject::Update(void)
 	}
 #endif // _DEBUG
 }
+
 //=========================================================
 // 描画処理
 //=========================================================
@@ -252,6 +258,7 @@ void CGameSceneObject::Draw(void)
 {
 
 }
+
 //=========================================================
 // ポインタの生成を行う関数
 //=========================================================
@@ -283,16 +290,7 @@ void CGameSceneObject::CreatePointer(void)
 	// チュートリアルのセリフの生成 Misaki
 	m_pTutoriallines = CTutorialLines::Create();
 
-	// 警戒ゲージの構造体
-	CVigilancegauge::Vigilancegauge vigilancegauge;
-	vigilancegauge.pos = D3DXVECTOR3(100.0f, 600.0f, 0.0f);
-	vigilancegauge.col = COLOR_WHITE;
-	vigilancegauge.tex = D3DXVECTOR2(1.0f, 1.0f);
-	vigilancegauge.fWidth = 100.0f;
-	vigilancegauge.fHeight = 100.0f;
-	vigilancegauge.bUse = true;
-
-	// 警戒ゲージの生成 Misaki
-	m_pVigilancegauge = CVigilancegauge::Create(vigilancegauge);
+	// 警戒度UIマネージャーの生成 Misaki
+	m_pVigilanceUImanager = CVigilanceUIManager::Create();
 
 }
