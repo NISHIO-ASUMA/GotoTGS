@@ -21,6 +21,11 @@
 #include "titleuimanager.h"
 
 //=========================================================
+// 静的メンバ変数宣言
+//=========================================================
+CWorldUICollision::TYPE CDeskwork::m_TaskType = CWorldUICollision::TYPE_NONE;
+
+//=========================================================
 // コンストラクタ
 //=========================================================
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
@@ -51,7 +56,7 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 	if (pDeskwork == nullptr) return nullptr;
 
 	// 各種値の設定
-	pDeskwork->SetPos(pos);
+	pDeskwork->SetPos(pos);										// 位置設定
 	pDeskwork->SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);	// サイズ設定
 	pDeskwork->SetCol(COLOR_WHITE);								// カラー設定
 	pDeskwork->SetTexture(Config::PC_TEXNAME);					// テクスチャ設定
@@ -72,7 +77,7 @@ HRESULT CDeskwork::Init(void)
 
 	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr || m_pDOCUMENTDesk != nullptr)
 	{// どれかのポインタに中身が入っているなら
-		// ポインタを初期化
+		// 全てのポインタを初期化
 		m_pPCDeskUI = nullptr;
 		m_pCOPYDeskUI = nullptr;
 		m_pDOCUMENTDesk = nullptr;
@@ -87,10 +92,8 @@ HRESULT CDeskwork::Init(void)
 	// 書類タスクの生成
 	m_pDOCUMENTDesk = CDOCUMENTDeskwork::Create();
 
-	// フラグを初期化
-	m_pPCDeskUI->SetUse(false);
-	m_pCOPYDeskUI->SetUse(false);
-	m_pDOCUMENTDesk->SetUse(false);
+	// タスクをしていない状態にする
+	m_TaskType = CWorldUICollision::TYPE_NONE;
 
 	return S_OK;
 }
@@ -123,6 +126,9 @@ void CDeskwork::Uninit(void)
 		m_pDOCUMENTDesk->Uninit();
 		m_pDOCUMENTDesk = nullptr;
 	}
+
+	// タスクをしていない状態にする
+	m_TaskType = CWorldUICollision::TYPE_NONE;
 }
 
 //=========================================================
@@ -141,35 +147,48 @@ void CDeskwork::Update(void)
 	// 親の更新処理
 	CObject2D::Update();
 
-	if (m_pCOPYDeskUI->GetUse() != true)
-	{// 他のタスクが起動していないなら
+	switch (m_TaskType)
+	{
+	// タスクをしていない状態の場合 
+	case CWorldUICollision::TYPE_NONE:
+
+		// 何も更新しない
+		break;
+
+	// PCタスクの場合
+	case CWorldUICollision::TYPE_PC:
 
 		// PCタスクUIの更新処理
 		m_pPCDeskUI->Update();
 
-		return;
-	}
+		break;
 
-	if (m_pPCDeskUI->GetUse() != true)
-	{// 他のタスクが起動していないなら
+	// コピー機タスクの場合
+	case CWorldUICollision::TYPE_COPY:
 
 		// コピー機タスクUIの更新処理
 		m_pCOPYDeskUI->Update();
-	
+
 		if (m_pCOPYDeskUI->GetPCTaskNum() > NULL || m_pCOPYDeskUI->GetTime() != false)
 		{// PCタスクが残っている場合
 			return;
 		}
 
-		// タスクが出来ない状態にする
-		SetTexBG(CWorldUICollision::TYPE_COPY);
-	}
-	
-	if (m_pDOCUMENTDesk->GetUse() != true)
-	{
-		// ドキュメント更新
+		// 使用できないとき用のテクスチャに設定
+		SetTexture(Config::CANCEL_TEXNAME);
+
+		// コピー機タスクUIの透明に設定
+		m_pCOPYDeskUI->SetAlphaUI(NULL);
+
+		break;
+
+	// 書類タスクの場合
+	case CWorldUICollision::TYPE_DOCUMENT:
+
+		// 書類タスクの更新処理
 		m_pDOCUMENTDesk->Update();
-		return;
+
+		break;
 	}
 }
 
@@ -178,8 +197,8 @@ void CDeskwork::Update(void)
 //=========================================================
 void CDeskwork::Draw(void)
 {
-	// 有効状態ではないなら
-	if (m_pPCDeskUI->GetUse() != true && m_pCOPYDeskUI->GetUse() != true)
+	// PCタスクとコピー機タスク以外なら
+	if (m_TaskType != CWorldUICollision::TYPE_PC && m_TaskType != CWorldUICollision::TYPE_COPY)
 	{
 		return;
 	}
@@ -189,13 +208,17 @@ void CDeskwork::Draw(void)
 }
 
 //=========================================================
-// 背景のテクスチャ処理
+// タスクの種類設定処理
 //=========================================================
-void CDeskwork::SetTexBG(const CWorldUICollision::TYPE& TaskType)
+void CDeskwork::SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool& bUse)
 {
 	switch (TaskType)
 	{
+	// PCタスクの場合
 	case CWorldUICollision::TYPE_PC:
+	
+		// PCタスクUIの透明度を設定
+		m_pPCDeskUI->SetAlphaUI(bUse);
 
 		// テクスチャをPC用に設定
 		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
@@ -203,23 +226,38 @@ void CDeskwork::SetTexBG(const CWorldUICollision::TYPE& TaskType)
 
 		break;
 
+	// コピー機タスクの場合
 	case CWorldUICollision::TYPE_COPY:
 
-		// テクスチャをコピー機用に設定
-		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
-
-		if (m_pCOPYDeskUI->GetPCTaskNum() <= NULL)
-		{// PCのタスクをこなしていなかったら
-			// 使用できないとき用のテクスチャに設定
-			SetTexture(Config::CANCEL_TEXNAME);
-			m_pCOPYDeskUI->SetAlphaUI(true);
-
-			return;
-		}
+		// コピー機タスクUIの透明度を設定
+		m_pCOPYDeskUI->SetAlphaUI(bUse);
 
 		// コピー機用のテクスチャに設定
+		SetSize(Config::COPY_WIDTH, Config::COPY_HEIGHT);
 		SetTexture(Config::COPY_TEXNAME);
+
+		if (m_pCOPYDeskUI->GetPCTaskNum() <= NULL)
+		{// PCタスクが残ってない場合
+			// 使用できないとき用のテクスチャに設定
+			SetTexture(Config::CANCEL_TEXNAME);
+
+			// コピー機タスクUIの透明に設定
+			m_pCOPYDeskUI->SetAlphaUI(NULL);
+
+		}
 
 		break;
 	}
+
+	if (bUse != true)
+	{// 使用しないなら
+
+		// タスクしていない状態に変更
+		m_TaskType = CWorldUICollision::TYPE_NONE;
+
+		return;
+	}
+
+	// タスクの種類を設定
+	m_TaskType = TaskType;
 }

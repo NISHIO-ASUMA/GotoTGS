@@ -39,7 +39,7 @@ public:
 	inline int GetNumUI(void) const { return Config::UI_NUM; }
 
 	// ê∂ê¨èàóù
-	static CPCDeskwork* Create(const D3DXVECTOR3& pos);
+	static CPCDeskwork* Create(const D3DXVECTOR3& pos, const bool& bUse = false);
 
 private:
 

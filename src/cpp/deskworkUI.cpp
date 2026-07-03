@@ -155,8 +155,11 @@ void CDeskworkUI::Update(void)
 	// サイズ設定
 	SetSize(m_UI.fWidth, m_UI.fHeight, pVtx);
 
-	// UV設定
-	SetDigit(pVtx);
+	// カラーを設定
+	pVtx[0].col =
+	pVtx[1].col =
+	pVtx[2].col =
+	pVtx[3].col = m_UI.col;
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
@@ -225,9 +228,9 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* 
 	case VTXTYPE_LEFT:
 
 		// 頂点座標の設定
-		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y - m_UI.fHeight, 0.0f);
 		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y + m_UI.fHeight, 0.0f);
 		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x + m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
@@ -236,9 +239,9 @@ void CDeskworkUI::SetSize(const float& fWidth, const float& fHeight, VERTEX_2D* 
 
 		// 頂点座標の設定
 		pVtx[0].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y - m_UI.fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y - m_UI.fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y - m_UI.fHeight, 0.0f);
 		pVtx[2].pos = D3DXVECTOR3(m_UI.pos.x - m_UI.fWidth, m_UI.pos.y + m_UI.fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x, m_UI.pos.y + m_UI.fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x			  , m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
 
@@ -296,21 +299,6 @@ void CDeskworkUI::ChangeCol(const D3DXCOLOR& col, const bool& bUse)
 
 		}
 	}
-
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファをロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	// カラーを設定
-	pVtx[0].col =
-	pVtx[1].col =
-	pVtx[2].col =
-	pVtx[3].col = m_UI.col;
-
-	// 頂点バッファのアンロック
-	m_pVtxBuff->Unlock();
 }
 
 //==========================================================
@@ -364,9 +352,7 @@ void CDeskworkUI::SetVTX(VERTEX_2D* pVtx)
 		pVtx[3].pos = D3DXVECTOR3(m_UI.pos.x			   , m_UI.pos.y + m_UI.fHeight, 0.0f);
 
 		break;
-
 	}
-
 }
 
 //==========================================================
@@ -376,20 +362,5 @@ void CDeskworkUI::SetAlpha(const float& fAlpha)
 {
 	// 透明度を設定
 	m_UI.col.a = fAlpha;
-
-	// 頂点情報のポインタ
-	VERTEX_2D* pVtx = nullptr;
-
-	// 頂点バッファをロック
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	// カラーを設定
-	pVtx[0].col =
-	pVtx[1].col =
-	pVtx[2].col =
-	pVtx[3].col = m_UI.col;
-
-	// 頂点バッファのアンロック
-	m_pVtxBuff->Unlock();
 }
 
