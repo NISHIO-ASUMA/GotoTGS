@@ -152,7 +152,11 @@ void CBlock::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 
 	// コライダー座標の更新
-	if (m_pCollider) m_pCollider->SetPos(pos);
+	if (m_pCollider)
+	{
+		m_pCollider->SetPos(pos);
+		m_pCollider->SetPosOld(pos);
+	}
 }
 //=========================================================
 // 描画処理

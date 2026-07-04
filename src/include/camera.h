@@ -75,6 +75,10 @@ public:
 	void FollowJoyPad(void);
 	void WheelMouse(int nDelta);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name=""></param>
 	void ThirdPersonView(void);
 
 	/// <summary>
