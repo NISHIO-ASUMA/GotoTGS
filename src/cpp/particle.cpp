@@ -34,7 +34,6 @@ namespace EFFECT
 CParticle::CParticle() : m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_col(V_COLOR_WHITE),
-m_nLife(NULL),
 m_nCreateTime(NULL),
 m_fRadius(NULL),
 m_bUse(false)
@@ -50,7 +49,7 @@ CParticle::~CParticle()
 //=========================================================
 // ¶¬ˆ—
 //=========================================================
-CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, int nLife, float fRadius, TYPE type)
+CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius, TYPE type)
 {
 	CParticle* pParticle = new CParticle;
 
@@ -60,7 +59,6 @@ CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, in
 	pParticle->SetPos(pos);
 	pParticle->SetRot(rot);
 	pParticle->SetColor(col);
-	pParticle->SetLife(nLife);
 	pParticle->SetRadius(fRadius);
 	pParticle->SetType(type);
 
@@ -140,7 +138,7 @@ void CParticle::None(void)
 
 		float theta = D3DXToRadian(rand() % 360);				// •ûˆÊŠp
 		float phi = D3DXToRadian(rand() % 180);					// ‹ÂŠp
-		float fLength = (float)(rand() % 20) / 10.0f + 1.5f;
+		float fLength = (float)(rand() % 3) / 2.0f + 0.5f;
 
 		move.x = sinf(phi) * cosf(theta) * fLength;
 		move.y = cosf(phi) * fLength;

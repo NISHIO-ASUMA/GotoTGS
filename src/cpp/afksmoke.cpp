@@ -18,13 +18,21 @@
 #include "gamesceneobject.h"
 
 //*********************************************************
-// 名前空間
+// 名前空間(たばこさぼり)
 //*********************************************************
 namespace AFKSMOKE
 {
-	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };			// たばこさぼりの範囲
-	const D3DXVECTOR3 ParticlePos = { 321.0f, 25.0f, 320.0f };	// パーティクル位置
-	constexpr float fRadius = 25.0f;							// 範囲の半径
+	const D3DXVECTOR3 Pos = { 295.0f, 0.0f, 325.0f };	// たばこさぼりの範囲
+	constexpr float fRadius = 25.0f;					// 範囲の半径
+};
+//*********************************************************
+// 名前空間(パーティクル)
+//*********************************************************
+namespace PARTICLE
+{
+	const D3DXVECTOR3 Pos = { 321.0f, 25.0f, 320.0f };	// 位置
+	const D3DXCOLOR col = { 0.5f, 0.5f, 0.5f, 0.5f };	// カラー
+	constexpr float fRadius = 10.0f;					// 範囲の半径
 };
 
 //=========================================================
@@ -70,7 +78,8 @@ HRESULT CAfksmoke::Init(void)
 	// 親クラスの初期化処理
 	CAfk::Init(AFKSMOKE::Pos,AFKSMOKE::fRadius);
 
-	m_pParticle = CParticle::Create(AFKSMOKE::ParticlePos, VECTOR3_NULL, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f), 0, 10.0f, CParticle::TYPE_SMOKE);
+	// パーティクル生成
+	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_SMOKE);
 
 	return S_OK;
 }
