@@ -22,7 +22,8 @@
 //=========================================================
 CVigilanceUIManager::CVigilanceUIManager(int nPriority) :CObject(nPriority),
 pIcon(nullptr),
-pGauge(nullptr)
+pGauge(nullptr),
+m_bUse(false)
 {
 
 }
@@ -39,13 +40,16 @@ CVigilanceUIManager::~CVigilanceUIManager()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CVigilanceUIManager* CVigilanceUIManager::Create(void)
+CVigilanceUIManager* CVigilanceUIManager::Create(const bool& bUse)
 {
 	// 生成
 	CVigilanceUIManager* pVigilanceUIManager = new CVigilanceUIManager;
 
 	// ヌルチェック
 	if (pVigilanceUIManager == nullptr) return nullptr;
+
+	// 表示するかどうかを設定
+	pVigilanceUIManager->SetUse(bUse);
 
 	// 初期化が失敗したとき
 	if (FAILED(pVigilanceUIManager->Init())) return nullptr;
@@ -58,20 +62,19 @@ CVigilanceUIManager* CVigilanceUIManager::Create(void)
 //=========================================================
 HRESULT CVigilanceUIManager::Init(void)
 {
-	// アイコンの構造体
-	CVigilanceicon::Icon icon;
-	icon.pos = D3DXVECTOR3(Config::ICON_POS_X, Config::ICON_POS_Y, 0.0f);
-	icon.fWidth = Config::ICON_WIDTH;
-	icon.fHeight = Config::ICON_HEIGHT;
+	//// アイコンの構造体
+	//CVigilanceicon::Icon icon;
+	//icon.pos = D3DXVECTOR3(Config::ICON_POS_X, Config::ICON_POS_Y, 0.0f);
+	//icon.fWidth = Config::ICON_WIDTH;
+	//icon.fHeight = Config::ICON_HEIGHT;
 
-	// アイコンの生成処理
-	pIcon = CVigilanceicon::Create(icon);
+	//// アイコンの生成処理
+	//pIcon = CVigilanceicon::Create(icon);
 
 	// ゲージの構造体
 	CVigilancegauge::Gauge gauge;
 	gauge.pos = D3DXVECTOR3(Config::GAUGE_POS_X, Config::GAUGE_POS_Y, 0.0f);
 	gauge.col = COLOR_WHITE;
-	gauge.tex = D3DXVECTOR2(1.0f, 1.0f);
 	gauge.fWidth = Config::GAUGE_WIDTH;
 	gauge.fHeight = Config::GAUGE_HEIGHT;
 
@@ -110,7 +113,6 @@ void CVigilanceUIManager::Update(void)
 	if (m_bUse != true) return;
 
 	// 各ポインタの更新処理
-	pIcon->Update();
 	pGauge->Update();
 }
 
@@ -123,7 +125,6 @@ void CVigilanceUIManager::Draw(void)
 	if (m_bUse != true) return;
 
 	// 各ポインタの描画処理
-	pIcon->Draw();
 	pGauge->Draw();
 
 }

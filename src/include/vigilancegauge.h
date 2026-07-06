@@ -27,7 +27,6 @@ public:
 	{
 		D3DXVECTOR3 pos;
 		D3DXCOLOR col;
-		D3DXVECTOR2 tex;
 		float fWidth;
 		float fHeight;
 	};

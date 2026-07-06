@@ -51,8 +51,8 @@ CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge)
 	pGauge->SetPos(gauge.pos);
 	pGauge->SetCol(gauge.col);
 	pGauge->SetSize(gauge.fWidth, gauge.fHeight);
-	pGauge->SetTexture(Config::TEXNAME_BASE, 0);
-	pGauge->SetTexture(Config::TEXNAME_MULTI, 1);
+	pGauge->SetTexture(Config::TEXNAME_MULTI, 0);
+	pGauge->SetTexture(Config::TEXNAME_BASE, 1);
 
 	return pGauge;
 }
