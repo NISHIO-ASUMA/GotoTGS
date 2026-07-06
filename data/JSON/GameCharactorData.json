@@ -106,6 +106,14 @@
   {
     "ObjectTag": "Charactor",
     "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion003.txt",
+    "Pos": [ -176.0, 17.2, -4.0 ],
+    "Rot": [ 0.0, -0.88, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
     "CharactorName": "SmokeFirend",
     "MotionName": "data/MOTION/Smoke/SmokeMotion.txt",
     "Pos": [ 450.0, 0.0, 355.0 ],
