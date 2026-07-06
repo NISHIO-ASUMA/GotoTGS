@@ -38,7 +38,7 @@ namespace PARTICLE
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfkGameCenter::CAfkGameCenter()
+CAfkGameCenter::CAfkGameCenter() : m_pParticle(nullptr)
 {
 
 }
@@ -57,17 +57,17 @@ CAfkGameCenter::~CAfkGameCenter()
 CAfkGameCenter* CAfkGameCenter::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
-	CAfkGameCenter* pAfkSmoke = new CAfkGameCenter;
-	if (pAfkSmoke == nullptr) return nullptr;
+	CAfkGameCenter* pAfkGameCenter = new CAfkGameCenter;
+	if (pAfkGameCenter == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pAfkSmoke->SetPos(AFKGAMECENTER::Pos);
+	pAfkGameCenter->SetPos(AFKGAMECENTER::Pos);
 
 	// 初期化失敗時
-	if (FAILED(pAfkSmoke->Init())) return nullptr;
+	if (FAILED(pAfkGameCenter->Init())) return nullptr;
 
 	// ポインタを返す
-	return pAfkSmoke;
+	return pAfkGameCenter;
 }
 //=========================================================
 // 初期化処理
