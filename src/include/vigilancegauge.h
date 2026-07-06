@@ -49,7 +49,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr const char* TEXNAME_BASE = "vigilancegauge001.png";	// 基本のテクスチャ
+		static constexpr const char* TEXNAME_BASE = "gage000.png";	// 基本のテクスチャ
 		static constexpr const char* TEXNAME_MULTI = "vigilancegauge000.png";	// マルチテクスチャ
 	};
 };
