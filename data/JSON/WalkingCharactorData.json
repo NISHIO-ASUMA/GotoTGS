@@ -1,0 +1,10 @@
+[
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "Move",
+    "CharactorName": "Walking",
+    "MotionName": "data/MOTION/Mob/MobMotion00.txt",
+    "Pos": [ 40.0, 17.2, 162.5 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  }
+]
