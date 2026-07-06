@@ -807,6 +807,9 @@
     <ClCompile Include="src\cpp\enemystateserch.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\meetingfriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1278,6 +1281,9 @@
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
     <ClInclude Include="src\include\enemystateserch.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meetingfriend.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
   </ItemGroup>

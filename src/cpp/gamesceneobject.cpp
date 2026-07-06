@@ -291,6 +291,6 @@ void CGameSceneObject::CreatePointer(void)
 	m_pTutoriallines = CTutorialLines::Create();
 
 	// 警戒度UIマネージャーの生成 Misaki
-	m_pVigilanceUImanager = CVigilanceUIManager::Create();
+	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
 
 }
