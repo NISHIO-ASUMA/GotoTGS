@@ -810,6 +810,9 @@
     <ClCompile Include="src\cpp\meetingfriend.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\afktvpolygon.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1285,6 +1288,9 @@
     </ClInclude>
     <ClInclude Include="src\include\meetingfriend.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afktvpolygon.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

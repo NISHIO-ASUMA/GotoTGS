@@ -41,6 +41,7 @@
 #include "afkmanager.h"				// ‹ß“c’Ç‰Á
 #include "doorui.h"					// ‹ß“c’Ç‰Á
 
+
 #include "enemy.h"					// ¼”ö’Ç‰Á
 #include "worldUIcollision.h"		// ¼”ö’Ç‰Á
 #include "camera.h"					// ¼”ö’Ç‰Á

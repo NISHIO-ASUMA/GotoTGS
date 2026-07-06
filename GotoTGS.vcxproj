@@ -163,6 +163,7 @@
     <ClCompile Include="src\cpp\afkmanager.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
     <ClCompile Include="src\cpp\afktv.cpp" />
+    <ClCompile Include="src\cpp\afktvpolygon.cpp" />
     <ClCompile Include="src\cpp\afkui.cpp" />
     <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
@@ -325,6 +326,7 @@
     <ClInclude Include="src\include\afkmanager.h" />
     <ClInclude Include="src\include\afksmoke.h" />
     <ClInclude Include="src\include\afktv.h" />
+    <ClInclude Include="src\include\afktvpolygon.h" />
     <ClInclude Include="src\include\afkui.h" />
     <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
