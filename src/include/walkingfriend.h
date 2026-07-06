@@ -21,6 +21,11 @@
 #include "movecharactor.h"
 
 //*********************************************************
+// 前方宣言
+//*********************************************************
+class CBoxCollider;
+
+//*********************************************************
 // 歩く同僚キャラクタークラスを定義
 //*********************************************************
 class CWalkFriend : public CMoveCharactor
@@ -34,6 +39,8 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+
+	bool Collision(CBoxCollider* pOther,D3DXVECTOR3* PushPos);
 
 	/// <summary>
 	/// 生成処理
@@ -53,6 +60,20 @@ public:
 	{
 		NEUTRAL,	// ニュートラル
 		ACTION,		// 歩く
+		PLAY,		// ゲーセン遊び
+		MAX
+	};
+
+	//***************************
+	// 移動タイプ列挙型
+	//***************************
+	enum MOVING
+	{
+		NONE,			// 移動しない
+		MOVE_LEFT,		// 左方向
+		MOVE_RIGHT,		// 右方向
+		MOVE_FRONT_Z,	// -Z(手前)
+		MOVE_BACK_Z,	// +Z(奥行き)
 		MAX
 	};
 
@@ -62,6 +83,13 @@ private:
 
 private:
 
+	std::unique_ptr<CBoxCollider> m_pBoxCollider;	// 矩形のコライダー
+
+private:
+
 	bool m_isSet;			 // セットポイントについたか
 	const char* m_pFileName; // ファイルパス
+
+private:
+	const D3DXVECTOR3 BoxSize = { 50.0f,50.0f,50.0f }; // 固定の矩形サイズ
 };

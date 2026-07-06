@@ -1,6 +1,6 @@
 //=========================================================
 //
-// エフェクト処理[effect.cpp]
+// エフェクト処理 [ effect.cpp ]
 // Author : Kaiti Aoto
 //
 //=========================================================
@@ -37,14 +37,15 @@ m_bUse(false)
 //=========================================================
 CEffect::~CEffect()
 {
+
 }
 //=========================================================
 // 生成処理
 //=========================================================
-CEffect* CEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 move, D3DXCOLOR col, int nLife, float fRadius, TYPE type)
+CEffect* CEffect::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3DXVECTOR3& move, const D3DXCOLOR& col, int nLife, float fRadius, TYPE type)
 {
+	// インスタンス生成
 	CEffect* pEffect = new CEffect;
-	
 	if (pEffect == nullptr) return nullptr;
 	
 	pEffect->SetPos(pos);
@@ -115,11 +116,11 @@ HRESULT CEffect::Init(void)
 	CTexture* pTex = CManager::GetInstance()->GetTexture();
 	if (m_Type == TYPE_NONE)
 	{
-		m_nIdxTex = pTex->Register("data\\TEXTURE\\effect000.jpg");
+		m_nIdxTex = pTex->Register("data/TEXTURE/effect000.jpg");
 	}
 	else if (m_Type == TYPE_THUNDER)
 	{
-		m_nIdxTex = pTex->Register("data\\TEXTURE\\effect001.png");
+		m_nIdxTex = pTex->Register("data/TEXTURE/effect001.png");
 	}
 	
 	return S_OK;
@@ -184,8 +185,10 @@ void CEffect::Update(void)
 //=========================================================
 void CEffect::Draw(void)
 {
+	// デバイス取得
 	CRenderer* pRenderer = CManager::GetInstance()->GetRenderer();
 	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
+
 	//テクスチャ取得
 	CTexture* pTex = CManager::GetInstance()->GetTexture();
 
@@ -268,7 +271,7 @@ void CEffect::Draw(void)
 	}
 }
 //=========================================================
-// 大きさ
+// 大きさを設定する関数
 //=========================================================
 void CEffect::SetSize(float fRadius)
 {
@@ -286,12 +289,13 @@ void CEffect::SetSize(float fRadius)
 	m_pVtxBuff->Unlock();
 }
 //=========================================================
-// 色
+// 色を設定する関数
 //=========================================================
-void CEffect::SetColor(D3DXCOLOR col)
+void CEffect::SetColor(const D3DXCOLOR& col)
 {
 	m_col = col;
 	VERTEX_3D* pVtx = NULL;
+
 	//頂点バッファをロックし、頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 

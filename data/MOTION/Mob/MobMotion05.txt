@@ -1,8 +1,8 @@
 #==============================================================================
 #
-# 『モーションビューワ』スクリプトファイル [ MobMotion03.txt ]
+# 『モーションビューワ』スクリプトファイル [ MobMotion05.txt ]
 # Author : AKIRA TANAKA
-# これはmobcast003
+#
 #==============================================================================
 SCRIPT			# この行は絶対消さないこと！
 
@@ -14,16 +14,16 @@ NUM_MODEL = 10
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/MOBCAST003/00_Mobcast003_body.x		# [0]体
-MODEL_FILENAME = data/MODEL/MOBCAST003/01_Mobcast003_head.x		# [1]頭
-MODEL_FILENAME = data/MODEL/MOBCAST003/02_Mobcast003_armR.x		# [2]右腕
-MODEL_FILENAME = data/MODEL/MOBCAST003/03_Mobcast003_handR.x	# [3]右手
-MODEL_FILENAME = data/MODEL/MOBCAST003/04_Mobcast003_armL.x		# [4]左腕
-MODEL_FILENAME = data/MODEL/MOBCAST003/05_Mobcast003_handL.x	# [5]左手
-MODEL_FILENAME = data/MODEL/MOBCAST003/06_Mobcast003_legR.x		# [6]右腿
-MODEL_FILENAME = data/MODEL/MOBCAST003/07_Mobcast003_footR.x	# [7]右足
-MODEL_FILENAME = data/MODEL/MOBCAST003/08_Mobcast003_legL.x		# [8]左腿
-MODEL_FILENAME = data/MODEL/MOBCAST003/09_Mobcast003_footL.x	# [9]左足
+MODEL_FILENAME = data/MODEL/MOBCAST005/00_Mobcast005_body.x		# [0]体
+MODEL_FILENAME = data/MODEL/MOBCAST005/01_Mobcast005_head.x		# [1]頭
+MODEL_FILENAME = data/MODEL/MOBCAST005/02_Mobcast005_armR.x		# [2]右腕
+MODEL_FILENAME = data/MODEL/MOBCAST005/03_Mobcast005_handR.x	# [3]右手
+MODEL_FILENAME = data/MODEL/MOBCAST005/04_Mobcast005_armL.x		# [4]左腕
+MODEL_FILENAME = data/MODEL/MOBCAST005/05_Mobcast005_handL.x	# [5]左手
+MODEL_FILENAME = data/MODEL/MOBCAST005/06_Mobcast005_legR.x		# [6]右腿
+MODEL_FILENAME = data/MODEL/MOBCAST005/07_Mobcast005_footR.x	# [7]右足
+MODEL_FILENAME = data/MODEL/MOBCAST005/08_Mobcast005_legL.x		# [8]左腿
+MODEL_FILENAME = data/MODEL/MOBCAST005/09_Mobcast005_footL.x	# [9]左足
 
 #------------------------------------------------------------------------------
 # キャラクター情報
@@ -101,10 +101,6 @@ CHARACTERSET
 		ROT = 0.0 0.0 0.0
 	END_PARTSSET
 END_CHARACTERSET
-
-#------------------------------------------------------------------------------
-# モーション情報
-#------------------------------------------------------------------------------
 #========================================
 # [0] ニュートラルモーション
 #========================================
@@ -604,4 +600,5 @@ MOTIONSET
 		END_KEY
 	END_KEYSET
 END_MOTIONSET
+
 END_SCRIPT		# この行は絶対消さないこと！

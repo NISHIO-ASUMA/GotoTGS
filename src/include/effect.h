@@ -1,6 +1,6 @@
 //=========================================================
 //
-// エフェクト処理[effect.h]
+// エフェクト処理 [ effect.h ]
 // Author : Kaiti Aoto
 //
 //=========================================================
@@ -16,11 +16,15 @@
 #include "object.h"
 
 //*********************************************************
-// エフェクトクラス
+// エフェクトクラスを定義
 //*********************************************************
 class CEffect:public CObject
 {
 public:
+
+	//***************************
+	// 種類列挙型
+	//***************************
 	typedef enum
 	{
 		TYPE_NONE = 0,
@@ -31,25 +35,31 @@ public:
 	//メンバ関数
 	CEffect(int nPriority = static_cast<int>(CObject::PRIORITY::EFFECT));
 	~CEffect();
+
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
 	// 静的メンバ関数
-	static CEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 move, D3DXCOLOR col, int nLife, float fRadius, TYPE type = TYPE_NONE);
+	static CEffect* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3DXVECTOR3& move, const D3DXCOLOR& col, int nLife, float fRadius, TYPE type = TYPE_NONE);
 
-	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
-	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
-	void SetMove(D3DXVECTOR3 move) { m_move = move; }
-	void SetCol(D3DXCOLOR col) { m_col = col; }
+public:
+
+	void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
+	void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }
+	void SetMove(const D3DXVECTOR3& move) { m_move = move; }
+	void SetCol(const D3DXCOLOR& col) { m_col = col; }
 	void SetLife(int nLife) { m_nLife = nLife; }
 	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 	void SetType(TYPE type) { m_Type = type; }
 
 private:
+
 	void SetSize(float fRadius);
-	void SetColor(D3DXCOLOR col);
+	void SetColor(const D3DXCOLOR& col);
+
+private:
 
 	//メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// バッファ
