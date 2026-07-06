@@ -36,8 +36,14 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	// 設定処理
+	void SetUse(const bool& bUse) { m_bUse = bUse; }
+
+	// 情報取得処理
+	bool GetUse(void) { return m_bUse; }
+
 	// 生成処理
-	static CVigilanceUIManager* Create(void);
+	static CVigilanceUIManager* Create(const bool& bUse);
 
 private:
 
@@ -53,10 +59,10 @@ private:
 		static constexpr float ICON_HEIGHT = 100.0f;	// 縦幅
 
 		// ゲージの定数
-		static constexpr float GAUGE_POS_X = ICON_POS_X + 50.0f;	// X軸の位置
+		static constexpr float GAUGE_POS_X = ICON_POS_X + 100.0f;	// X軸の位置
 		static constexpr float GAUGE_POS_Y = ICON_POS_Y;			// Y軸の位置
 		static constexpr float GAUGE_WIDTH = 150.0f;				// 横幅
-		static constexpr float GAUGE_HEIGHT = 600.0f;				// 縦幅
+		static constexpr float GAUGE_HEIGHT = 200.0f;				// 縦幅
 
 	};
 
