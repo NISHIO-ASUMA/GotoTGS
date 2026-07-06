@@ -232,6 +232,7 @@
     <ClCompile Include="src\cpp\load.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\manager.cpp" />
+    <ClCompile Include="src\cpp\meetingfriend.cpp" />
     <ClCompile Include="src\cpp\meshcylinder.cpp" />
     <ClCompile Include="src\cpp\meshdome.cpp" />
     <ClCompile Include="src\cpp\meshfield.cpp" />
@@ -394,6 +395,7 @@
     <ClInclude Include="src\include\load.h" />
     <ClInclude Include="src\include\main.h" />
     <ClInclude Include="src\include\manager.h" />
+    <ClInclude Include="src\include\meetingfriend.h" />
     <ClInclude Include="src\include\meshcylinder.h" />
     <ClInclude Include="src\include\meshdome.h" />
     <ClInclude Include="src\include\meshfield.h" />

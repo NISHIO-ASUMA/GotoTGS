@@ -21,6 +21,7 @@
 #include "jsonconverter.h"
 #include "friend.h"
 #include "smokefriend.h"
+#include "meetingfriend.h"
 
 //===================================================================
 // 生成処理
@@ -49,6 +50,6 @@ void CJsonCreateNoMove::Create(const JsonNoMove::json& Jsondata)
 	}
 	else if (type == "MeetingFriend")
 	{// 会議室キャラクター
-		// CMeetingFriend::Create(pos,rot);
+		CMeetingFriend::Create(pos,rot,str.c_str());
 	}
 }
