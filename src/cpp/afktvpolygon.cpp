@@ -34,7 +34,7 @@ namespace AFKTVPOLYGON
 	const D3DXVECTOR3 Pos = { 1000.0f, 45.0f, 300.0f };			// 3D画像の座標
 	constexpr float fWidth = 100.0f;							// 横幅
 	constexpr float fHeight = 50.0f;							// 縦幅
-	constexpr const char* Button_NAME = "AfkButton.png";		// チュートリアルuiのテクスチャ名
+	constexpr const char* Button_NAME = "AfkButton.jpg";		// チュートリアルuiのテクスチャ名
 };
 
 //=================================================
@@ -118,7 +118,7 @@ HRESULT CAfkTVPolygon::Init(void)
 	pVtx[0].nor =
 		pVtx[1].nor =
 		pVtx[2].nor =
-		pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		pVtx[3].nor = D3DXVECTOR3(0.0f, 0.0f, -1.0f);;
 
 	// 頂点カラーの設定
 	pVtx[0].col =
@@ -177,7 +177,7 @@ void CAfkTVPolygon::Update(void)
 	pVtx[0].nor =
 		pVtx[1].nor =
 		pVtx[2].nor =
-		pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		pVtx[3].nor = D3DXVECTOR3(0.0f, 0.0f, -1.0f);;
 
 	// 頂点カラーの設定
 	pVtx[0].col =
