@@ -343,6 +343,12 @@
     <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge">
       <UniqueIdentifier>{cd84f445-3ff4-4ffa-be0d-5451684776f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\Mob">
+      <UniqueIdentifier>{e750484a-a1bd-481f-b13f-c5df4e4ca99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\mob">
+      <UniqueIdentifier>{9ffbc454-c60f-4f88-b66e-4f651fcb0b36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -812,6 +818,9 @@
     </ClCompile>
     <ClCompile Include="src\cpp\afktvpolygon.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\mobcharactormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1291,6 +1300,9 @@
     </ClInclude>
     <ClInclude Include="src\include\afktvpolygon.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\mobcharactormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\mob</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
