@@ -40,7 +40,7 @@
 #include "afkuimanager.h"			// 近田追加
 #include "afkmanager.h"				// 近田追加
 #include "doorui.h"					// 近田追加
-
+#include "afktvpolygon.h"			// 近田追加
 
 #include "enemy.h"					// 西尾追加
 #include "worldUIcollision.h"		// 西尾追加
@@ -49,7 +49,7 @@
 #include "autodoor_collision.h"		// 西尾追加
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
-#include "enemymanager.h"
+#include "enemymanager.h"			// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -130,6 +130,9 @@ HRESULT CGameSceneObject::Init(void)
 	// ドア用チュートリアルUIの生成
 	CDoorUI::Create();
 
+	// テレビ用ポリゴンの生成
+	CAfkTVPolygon::Instance()->Init();
+
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
@@ -196,6 +199,9 @@ void CGameSceneObject::Uninit(void)
 	// さぼりをまとめたマネージャーの終了処理
 	CAfkManager::Instance()->Uninit();
 
+	// テレビ用ポリゴンの終了処理
+	CAfkTVPolygon::Instance()->Uninit();
+
 	// 敵管理クラスの終了
 	CEnemyManager::GetInstance()->Uninit();
 
@@ -226,6 +232,9 @@ void CGameSceneObject::Update(void)
 
 	// さぼりをまとめたマネージャーの更新処理
 	CAfkManager::Instance()->Update();
+
+	// テレビ用ポリゴンの更新処理
+	CAfkTVPolygon::Instance()->Update();
 
 	// サイドに開くドアの管理クラスの更新
 	CSideOpenDoorManager::GetInstance()->Update();
@@ -294,4 +303,6 @@ void CGameSceneObject::CreatePointer(void)
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
 
+	// テレビ用ポリゴンの描画処理
+	CAfkTVPolygon::Instance()->Draw();
 }
