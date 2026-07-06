@@ -206,6 +206,15 @@ void CMoveCharactor::UpdatePosition(void)
 	}
 }
 //=========================================================
+// モーションだけ更新する
+//=========================================================
+void CMoveCharactor::UpdateMotionOnly(void)
+{
+	// モーションとモデルの更新
+	if (m_pMotion)
+		m_pMotion->Update(m_pModel);
+}
+//=========================================================
 // 特定モデルの取得
 //=========================================================
 CModel* CMoveCharactor::GetPartModel(CModel::PARTTYPE& type)
