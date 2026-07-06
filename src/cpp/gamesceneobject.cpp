@@ -50,6 +50,7 @@
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
+#include "mobcharactormanager.h"	// 西尾追加
 
 //*********************************************************
 // 静的メンバ変数
@@ -166,6 +167,9 @@ HRESULT CGameSceneObject::Init(void)
 	// 自動ドアコライダー管理クラスの生成
 	CAutoMaticDoorCollision::GetInstance()->Init();
 
+	// モブキャラクター管理クラスを追加
+	CMobCharactorManager::GetInstance()->Init();
+
 #endif
 	return S_OK;
 }
@@ -204,6 +208,9 @@ void CGameSceneObject::Uninit(void)
 
 	// 敵管理クラスの終了
 	CEnemyManager::GetInstance()->Uninit();
+
+	// モブキャラクター管理クラスの終了
+	CMobCharactorManager::GetInstance()->Uninit();
 
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
