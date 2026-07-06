@@ -16,5 +16,14 @@
     "SegmentX": 1,
     "SegmentZ": 1,
     "Texture": "data/TEXTURE/field00.jpg"
+  },
+  {
+    "ObjectTag": "MeshField",
+    "Pos": [ 1656.0, 0.0, 122.0 ],
+    "RadiusX": 335.0,
+    "RadiusZ": 740.0,
+    "SegmentX": 1,
+    "SegmentZ": 1,
+    "Texture": "data/TEXTURE/Floor.jpg"
   }
 ]
