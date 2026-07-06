@@ -12,6 +12,14 @@
 #include "playerstateneutral.h"
 #include "player.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace PlayerTV
+{
+	const D3DXVECTOR3 ReturnPos = { -253.0f,0.0f,316.0f };  // もどる固定座標
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -31,12 +39,6 @@ CPlayerStateTV::~CPlayerStateTV()
 //=========================================================
 void CPlayerStateTV::OnStart(void)
 {
-	// 情報取得
-	auto Pos = m_pPlayer->GetPos();
-
-	// 座標を保存しておく
-	m_pPlayer->SetPrevPos(Pos);
-
 	// プレイヤーの現在座標を椅子の上にセットする
 	m_pPlayer->MathTVRotation();
 }
@@ -63,6 +65,6 @@ void CPlayerStateTV::OnUpdate(void)
 //=========================================================
 void CPlayerStateTV::OnExit(void)
 {
-	// 保存していた座標にもどる
-	m_pPlayer->SetPos(m_pPlayer->GetPrevPos());
+	// 固定の座標にもどる
+	m_pPlayer->SetPos(PlayerTV::ReturnPos);
 }

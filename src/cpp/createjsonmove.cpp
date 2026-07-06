@@ -19,7 +19,7 @@
 // インクルードファイル
 //*******************************************************************
 #include "jsonconverter.h"
-#include "walkingfriend.h"
+#include "mobcharactormanager.h"
 
 //===================================================================
 // 生成処理
@@ -40,6 +40,6 @@ void CJsonCreateMove::Create(const JsonMove::json& Jsondata)
 
 	if (type == "Walking")
 	{// 歩く同僚生成
-		CWalkFriend::Create(pos, rot, str.c_str());
+		CMobCharactorManager::GetInstance()->CreateManager(pos, rot, str.c_str());
 	}
 }

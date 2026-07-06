@@ -239,6 +239,7 @@
     <ClCompile Include="src\cpp\meshfield.cpp" />
     <ClCompile Include="src\cpp\meshimpact.cpp" />
     <ClCompile Include="src\cpp\meshpiler.cpp" />
+    <ClCompile Include="src\cpp\mobcharactormanager.cpp" />
     <ClCompile Include="src\cpp\model.cpp" />
     <ClCompile Include="src\cpp\modelmanager.cpp" />
     <ClCompile Include="src\cpp\motion.cpp" />
@@ -403,6 +404,7 @@
     <ClInclude Include="src\include\meshfield.h" />
     <ClInclude Include="src\include\meshimpact.h" />
     <ClInclude Include="src\include\meshpiler.h" />
+    <ClInclude Include="src\include\mobcharactormanager.h" />
     <ClInclude Include="src\include\model.h" />
     <ClInclude Include="src\include\modelmanager.h" />
     <ClInclude Include="src\include\motion.h" />
