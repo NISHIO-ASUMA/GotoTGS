@@ -67,12 +67,18 @@ namespace player
 };
 
 //*********************************************************
-// 定数名前空間 ( テレビ関連の状態時 )
+// 定数名前空間 ( タスク関連時 )
 //*********************************************************
 namespace Player_Info
 {
+	// テレビ関係
 	const D3DXVECTOR3 TV_CHARACTORPOS = { -244.0f, 10.5f,277.0f };
 	const D3DXVECTOR3 TV_DESTPOS = { -248.0f, 12.0f, 362.0f };
+
+	// デスクワーク関係
+	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
+	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
+
 };
 
 //=========================================================
@@ -88,6 +94,7 @@ m_bAfkSmoke(false),
 m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
+m_isPcWork(false),
 m_TvPrevPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_nCntAfk(NULL)
@@ -153,6 +160,9 @@ HRESULT CPlayer::Init(void)
 	// 操作の種類を設定する(パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
 
+	// フラグの再初期化
+	m_isPcWork = false;
+
 	return S_OK;
 }
 //=========================================================
@@ -198,10 +208,6 @@ void CPlayer::Update(void)
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 
-	//// 各タスクの使用中かどうか
-	//bool isPcDeskWork = (pDesk && pDesk->GetPCDeskUI()) ? pDesk->GetPCDeskUI()->GetUse() : false;				// PCタスク
-	//bool isCopyDeskWork = (pDesk && pDesk->GetCOPYDeskUI()) ? pDesk->GetCOPYDeskUI()->GetUse() : false;			// コピー機タスク [add Misaki]
-
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
 	const auto& Pad = CManager::GetInstance()->GetJoyPad();
@@ -213,7 +219,23 @@ void CPlayer::Update(void)
 	{
 		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
 		{// 終了キーを押していない場合
+
+			// モーション更新だけ挟んでreturn
+			CMoveCharactor::Update();
 			return;
+		}
+
+		// ADD : 西尾 さっき行っていた作業が"デスクワーク"なら
+		if (pDesk->GetTaskType() == CWorldUICollision::TYPE_PC)
+		{
+			// プレイヤーの座標を戻す
+			SetPos(Player_Info::DESK_RETURNPOS);
+
+			// 角度を変更
+			SetRot(VECTOR3_NULL);
+
+			// フラグをリセットする
+			m_isPcWork = false;
 		}
 
 		// 起動したタスクを非アクティブにする [add Misaki]
@@ -300,11 +322,6 @@ void CPlayer::Update(void)
 
 					// カメラ固定フラグ無効化
 					CManager::GetInstance()->GetCamera()->SetCameraMove(false);
-
-					// NOTE : エフェクトとかパーティクル(成功演出っぽい物)の追加
-					// 担当 : 近田君
-				
-
 					break;
 
 				default:
@@ -312,6 +329,13 @@ void CPlayer::Update(void)
 					// nullじゃない状態
 					if (pDesk)
 					{
+						// デスクワーク時
+						if (Colliders->nType == CWorldUICollision::TYPE_PC)
+						{
+							// PCタスクの時の動作関数
+							MathDeskRotation();
+						}
+
 						// タスクを起動する
 						pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
 					}
@@ -623,10 +647,14 @@ void CPlayer::MoveJoypad(float speed)
 		float LStickAngleX = pState->Gamepad.sThumbLX;
 
 		// デッドゾーンを設定
-		float DeadZone = 32767.0f * 0.25f;
+		float DeadZone = 32767.0f * 0.15f;
 		float fMag = sqrtf((LStickAngleX * LStickAngleX) + (LStickAngleY * LStickAngleY));
 
-		if (fMag > DeadZone)
+		if (fMag < DeadZone)
+		{
+			m_bMove = false;
+		}
+		else if (fMag > DeadZone)
 		{
 			// 正規化
 			float normalizeX = (LStickAngleX / fMag);
@@ -642,40 +670,6 @@ void CPlayer::MoveJoypad(float speed)
 			RotDest.y = atan2f(-MoveX, -MoveZ);
 			m_bMove = true;
 		}
-#if 0
-		if (pState->Gamepad.sThumbLY > player::fJoyInput)
-		{
-			moveDir += camForward;
-			RotDest.y = rot.y + D3DX_PI;
-
-			// 移動判定をtrueに
-			m_bMove = true;
-		}
-		if (pState->Gamepad.sThumbLY < -player::fJoyInput)
-		{
-			moveDir -= camForward;
-			RotDest.y = rot.y;
-
-			// 移動判定をtrueに
-			m_bMove = true;
-		}
-		if (pState->Gamepad.sThumbLX > player::fJoyInput)
-		{
-			moveDir += camRight;
-			RotDest.y = rot.y - D3DX_PI * HALF;
-
-			// 移動判定をtrueに
-			m_bMove = true;
-		}
-		if (pState->Gamepad.sThumbLX < -player::fJoyInput)
-		{
-			moveDir -= camRight;
-			RotDest.y = rot.y + D3DX_PI * HALF;
-
-			// 移動判定をtrueに
-			m_bMove = true;
-		}
-#endif
 	}
 
 	// モーションチェンジ
@@ -688,7 +682,6 @@ void CPlayer::MoveJoypad(float speed)
 			m_nCntAfk = 0;
 		}
 	}
-
 	// 移動していなかったら
 	else if (!pJoyPad->GetLeftStick())
 	{
@@ -717,6 +710,10 @@ void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
 {
 	// スキップする
 	if (m_bAfkTV) return; 
+	if (m_isPcWork)
+	{
+		return;
+	}
 
 	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
 	if (!BlockManager) return;
@@ -883,4 +880,25 @@ void CPlayer::MathTVRotation(void)
 	// 角度を設定
 	SetRotDest(D3DXVECTOR3(0.0f, fRotY, 0.0f));
 	SetRot(D3DXVECTOR3(0.0f, fRotY, 0.0f));
+}
+//=================================================
+// パソコンを向くための計算関数 
+//=================================================
+void CPlayer::MathDeskRotation(void)
+{
+	// フラグを有効化する
+	m_isPcWork = true;
+
+	// モーション情報を変更
+	GetMotion()->SetMotion(CPlayer::MOTION::TV, true, 3);
+
+	// プレイヤーの位置をデスク用の固定座標にセット
+	SetPos(Player_Info::DESK_DESTPOS);
+
+	// 向きたい角度
+	float fRotY = D3DX_PI * 0.5f;
+
+	// 目的の角度を設定
+	SetRotDest(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
+	SetRot(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 }

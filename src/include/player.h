@@ -151,7 +151,8 @@ public:
 	void CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos);
 
 	void MathTVRotation(void);
-
+	void MathDeskRotation(void);
+//****************************************************
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -170,4 +171,5 @@ private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	D3DXVECTOR3 m_TvPrevPos;				  // テレビサボりの座標
 	int m_nControlTypes;					  // 操作種類
+	bool m_isPcWork;						  // デスクワークか
 };

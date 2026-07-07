@@ -15,12 +15,17 @@
 //*********************************************************
 #include "manager.h"
 #include "motion.h"
+#include "boxcollider.h"
+#include "collisionbox.h"
 
 //========================================================
 // コンストラクタ
 //========================================================
 CWalkFriend::CWalkFriend(int nPriority) : CMoveCharactor(nPriority),
-m_isSet(false)
+m_isSet(false),
+m_pBoxCollider(nullptr),
+m_fMoveDistance(NULL),
+m_MoveType(NULL)
 {
 
 }
@@ -34,7 +39,14 @@ CWalkFriend::~CWalkFriend()
 //========================================================
 // 生成処理
 //========================================================
-CWalkFriend* CWalkFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* MotionName)
+CWalkFriend* CWalkFriend::Create
+(
+	const D3DXVECTOR3& pos, 
+	const D3DXVECTOR3& rot, 
+	const char* MotionName, 
+	const int& nMoveType, 
+	const float& fMoveValue
+)
 {
 	// インスタンス生成
 	CWalkFriend* pWalk = new CWalkFriend;
@@ -44,6 +56,8 @@ CWalkFriend* CWalkFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,
 	pWalk->SetPos(pos);
 	pWalk->SetRot(rot);
 	pWalk->SetFileName(MotionName);
+	pWalk->SetMoveType(nMoveType);
+	pWalk->SetMoveValue(fMoveValue);
 	pWalk->SetUseOutLine(true);
 	pWalk->SetOutlineColor(D3DXVECTOR4(1.0f, 0.0f, 1.0f, 1.0f));
 
@@ -63,6 +77,16 @@ HRESULT CWalkFriend::Init(void)
 	// モーションロード
 	MotionLoad(m_pFileName, MOTION::MAX, false);
 
+	// 回転角を生成
+	D3DXMATRIX mtxRot;
+	D3DXVECTOR3 rot = GetRot();
+
+	// 回転行列を作成
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, rot.y, rot.x, rot.z);
+
+	// コライダー生成
+	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), BoxSize, mtxRot);
+
 	return S_OK;
 }
 //========================================================
@@ -78,6 +102,22 @@ void CWalkFriend::Uninit(void)
 //========================================================
 void CWalkFriend::Update(void)
 {
+	// 各移動方向に応じた処理
+	UpdateMovingType(m_MoveType);
+
+	// 座標の更新
+	CMoveCharactor::UpdatePosition();
+
+	// 更新後の座標取得
+	D3DXVECTOR3 UpdatePos = GetPos();
+
+	// ボックスコライダー座標の更新
+	if (m_pBoxCollider)
+	{
+		m_pBoxCollider->SetPos(UpdatePos);
+		m_pBoxCollider->SetPosOld(GetOldPos());
+	}
+
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
 }
@@ -88,4 +128,45 @@ void CWalkFriend::Draw(void)
 {
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
+}
+//========================================================
+// 矩形の当たり判定
+//========================================================
+bool CWalkFriend::Collision(CBoxCollider* pOther, D3DXVECTOR3* PushPos)
+{
+	if (!m_pBoxCollider) return false;
+
+	// 矩形同士の関数
+	return CCollisionBox::CollisionEx(m_pBoxCollider.get(),pOther,PushPos);
+}
+//========================================================
+// 種類に応じた移動処理
+//========================================================
+void CWalkFriend::UpdateMovingType(const int& nMoveType)
+{
+	// 座標の取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 rot = GetRot();
+	D3DXVECTOR3 rtodest = GetRotDest();
+	D3DXVECTOR3 move = GetMove();
+
+	// 移動の種類に応じて方向を変更
+	switch (nMoveType)
+	{
+	case MOVING::MOVE_FRONT_Z: // 手前のZ方向(-Z)に進む
+
+
+
+		break;
+
+	default:
+		break;
+	}
+
+	// 移動している状態なら
+	// GetMotion()->SetMotion(MOTION::WALK,true,5);
+
+	// 移動を辞めたら or 移動していない状態ならニュートラルへ
+	// GetMotion()->SetMotion(MOTION::NEUTRAL,true,5);
+
 }

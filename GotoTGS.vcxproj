@@ -163,6 +163,7 @@
     <ClCompile Include="src\cpp\afkmanager.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
     <ClCompile Include="src\cpp\afktv.cpp" />
+    <ClCompile Include="src\cpp\afktvpolygon.cpp" />
     <ClCompile Include="src\cpp\afkui.cpp" />
     <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
@@ -232,11 +233,13 @@
     <ClCompile Include="src\cpp\load.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\manager.cpp" />
+    <ClCompile Include="src\cpp\meetingfriend.cpp" />
     <ClCompile Include="src\cpp\meshcylinder.cpp" />
     <ClCompile Include="src\cpp\meshdome.cpp" />
     <ClCompile Include="src\cpp\meshfield.cpp" />
     <ClCompile Include="src\cpp\meshimpact.cpp" />
     <ClCompile Include="src\cpp\meshpiler.cpp" />
+    <ClCompile Include="src\cpp\mobcharactormanager.cpp" />
     <ClCompile Include="src\cpp\model.cpp" />
     <ClCompile Include="src\cpp\modelmanager.cpp" />
     <ClCompile Include="src\cpp\motion.cpp" />
@@ -324,6 +327,7 @@
     <ClInclude Include="src\include\afkmanager.h" />
     <ClInclude Include="src\include\afksmoke.h" />
     <ClInclude Include="src\include\afktv.h" />
+    <ClInclude Include="src\include\afktvpolygon.h" />
     <ClInclude Include="src\include\afkui.h" />
     <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
@@ -394,11 +398,13 @@
     <ClInclude Include="src\include\load.h" />
     <ClInclude Include="src\include\main.h" />
     <ClInclude Include="src\include\manager.h" />
+    <ClInclude Include="src\include\meetingfriend.h" />
     <ClInclude Include="src\include\meshcylinder.h" />
     <ClInclude Include="src\include\meshdome.h" />
     <ClInclude Include="src\include\meshfield.h" />
     <ClInclude Include="src\include\meshimpact.h" />
     <ClInclude Include="src\include\meshpiler.h" />
+    <ClInclude Include="src\include\mobcharactormanager.h" />
     <ClInclude Include="src\include\model.h" />
     <ClInclude Include="src\include\modelmanager.h" />
     <ClInclude Include="src\include\motion.h" />

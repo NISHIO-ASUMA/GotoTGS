@@ -343,6 +343,84 @@
     <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge">
       <UniqueIdentifier>{cd84f445-3ff4-4ffa-be0d-5451684776f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\Mob">
+      <UniqueIdentifier>{e750484a-a1bd-481f-b13f-c5df4e4ca99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\mob">
+      <UniqueIdentifier>{9ffbc454-c60f-4f88-b66e-4f651fcb0b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Boss">
+      <UniqueIdentifier>{56281bdb-3887-4486-9702-695a2ad9bf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\ui">
+      <UniqueIdentifier>{54b5be3c-96b0-4047-94fa-84a5c6973f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Event">
+      <UniqueIdentifier>{1f38b9da-5556-48d9-8b65-1a466416328d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Collider">
+      <UniqueIdentifier>{2749fba4-3881-4de8-b2e0-87f285ad640c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Other%27s">
+      <UniqueIdentifier>{07b5877d-2e0d-49bf-9d0c-7a64c8760616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\effect">
+      <UniqueIdentifier>{73e314ba-b4d9-4ef6-8f1a-9c4099cceb97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\autodoor">
+      <UniqueIdentifier>{941f64b8-d167-4cd7-8050-1cf007c63d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Boss">
+      <UniqueIdentifier>{2fffb5e8-4c3d-4508-acdd-5e73f396a065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor">
+      <UniqueIdentifier>{12be4b2c-a2ba-4823-841f-320193a3201c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy">
+      <UniqueIdentifier>{9fa9284d-c8f2-465f-8cab-cc1ad308d792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Friend">
+      <UniqueIdentifier>{cf0872c2-f356-4312-bdd0-585b15771804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\sidedoor">
+      <UniqueIdentifier>{a9334db4-1a39-4df9-aede-083f8724c499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\ui">
+      <UniqueIdentifier>{d91a3757-094a-4047-a069-f21c1c692835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\player">
+      <UniqueIdentifier>{6db62063-f9ff-4dd9-a7a8-dfde6d03e406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\player">
+      <UniqueIdentifier>{c440394d-d83f-4856-8541-b1436f41709b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\player\Main">
+      <UniqueIdentifier>{d9f7cbfb-1c2b-453f-8d93-d311980c6ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Chikada\player\State">
+      <UniqueIdentifier>{124dcf6f-2c0c-4ec3-8663-3518cac03995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\player\State">
+      <UniqueIdentifier>{3609a8ae-1cb7-43b5-9d11-5ec2a7be9444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\player\Main">
+      <UniqueIdentifier>{967b8099-4e6e-47c4-9c06-dfe37405967a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\ui">
+      <UniqueIdentifier>{bf4d650a-7b8d-46ed-b2fe-ea932e53276d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Collider">
+      <UniqueIdentifier>{35050933-8579-43f2-aef3-a31ef06f40ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Event">
+      <UniqueIdentifier>{ebb7c107-3eee-4767-8db6-fb0171dda033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Other%27s">
+      <UniqueIdentifier>{36b86806-44d4-4620-b0cf-68fec552da3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Chikada\effect">
+      <UniqueIdentifier>{ccabb3db-2b22-48ec-b834-e944893c316a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -606,50 +684,8 @@
     <ClCompile Include="src\cpp\gauge.cpp">
       <Filter>ソース ファイル\Ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\boss.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\friend.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\player.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstatemagazine.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstateneutral.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstatemove.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstatebase.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\statemachine.cpp">
       <Filter>ソース ファイル\State\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\gametime.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\eventUI.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\eventcutin.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\event.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\alert.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\tutorialui.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\worldUIcollision.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\deskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork</Filter>
@@ -669,23 +705,8 @@
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\progressgauge.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\copyui.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\pcui.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\createjsonmove.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\smokeui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\tutorialuimanager.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\afk.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
@@ -710,18 +731,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\afkuimanager.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstatetv.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
-      <Filter>ソース ファイル\AddFile\Chikada</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\afkgamecenter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\playerstategamecenter.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\tutoriallines.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\TutorialLines</Filter>
@@ -777,20 +786,11 @@
     <ClCompile Include="src\cpp\sideopendoorcollision.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\effect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\particle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\vigilancegauge.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\object2Dmulti.cpp">
       <Filter>ソース ファイル\ObjectClass\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\doorui.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\vigilanceUImanager.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
@@ -806,6 +806,93 @@
     </ClCompile>
     <ClCompile Include="src\cpp\enemystateserch.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\meetingfriend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\mobcharactormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\boss.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\friend.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\player.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatemagazine.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatemove.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatesmoke.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstatetv.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\copyui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\event.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\eventcutin.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\eventUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\worldUIcollision.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\alert.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gametime.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\progressgauge.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\pcui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutorialui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afkgamecenter.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afktvpolygon.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\tutorialuimanager.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\smokeui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\doorui.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\playerstategamecenter.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\effect.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\particle.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1076,65 +1163,11 @@
     <ClInclude Include="src\include\gauge.h">
       <Filter>ヘッダー ファイル\Ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\alert.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\boss.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\friend.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\player.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatemagazine.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatebase.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatemove.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstateneutral.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\event.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\eventcutin.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\eventUI.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\gametime.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\statebase.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\smokefriend.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemy.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\tutorialui.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\worldUIcollision.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\statemachine.h">
       <Filter>ヘッダー ファイル\State\BaseState</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\pcui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\copyui.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\deskwork.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork</Filter>
@@ -1154,41 +1187,8 @@
     <ClInclude Include="src\include\DOCUMENTdeskwork.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\enemystatebase.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\progressgauge.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystateneutral.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\walkingfriend.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\createjsonmove.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatesmoke.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\smokeui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\titleui.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\titleuimanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\tutorialuimanager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\autodoor_collision.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemymanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
     </ClInclude>
     <ClInclude Include="src\include\afk.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
@@ -1214,24 +1214,6 @@
     <ClInclude Include="src\include\afkuimanager.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\automatic_door.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\automaticdoormanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatetv.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afkgamecenter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\police.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstategamecenter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\tutoriallines.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClInclude>
@@ -1241,29 +1223,11 @@
     <ClInclude Include="src\include\lines.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\TutorialLines</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\sideopendoor.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\slideopendoormanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\sideopendoorcollision.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\effect.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\particle.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\vigilancegauge.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClInclude>
     <ClInclude Include="src\include\object2Dmulti.h">
       <Filter>ヘッダー ファイル\ObjectClass\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\doorui.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\vigilanceUImanager.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
@@ -1274,11 +1238,143 @@
     <ClInclude Include="src\include\createjsonenemy.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\mobcharactormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\mob</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\autodoor_collision.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\automatic_door.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\automaticdoormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\boss.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemy.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemymanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="src\include\enemystatechase.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystateneutral.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\include\enemystateserch.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\meetingfriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\police.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\sideopendoor.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\sidedoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\sideopendoorcollision.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\sidedoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\slideopendoormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\sidedoor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\smokefriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\walkingfriend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titleui.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\titleuimanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\friend.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\player.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatemagazine.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatemove.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstateneutral.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatetv.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorialui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\worldUIcollision.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\event.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\eventcutin.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\eventUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\alert.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gametime.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\progressgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Other%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkgamecenter.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afktvpolygon.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\copyui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\doorui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\pcui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstategamecenter.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatesmoke.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\smokeui.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorialuimanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\effect.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\particle.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

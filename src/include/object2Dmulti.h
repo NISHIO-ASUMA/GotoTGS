@@ -36,6 +36,8 @@ public:
 		ANCHORTYPE_CENTER,
 		ANCHORTYPE_LEFTSIDE,
 		ANCHORTYPE_RIGHTSIDE,
+		ANCHORTYPE_TOPSIDE,
+		ANCHORTYPE_BOTTOMSIDE,
 		ANCHORTYPE_MAX
 	};
 
@@ -56,9 +58,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void SetCenter(void);
-	void SetLeft(void);
-	void SetRight(void);
+	void SetAnchorPoint(VERTEX_2D_MULTI* pVtx);
 	void SetTexture(const char* pRegisterName,const int& nIdx);
 	void SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col);
 
@@ -71,7 +71,7 @@ public:
 	inline void SetSize(float fWidth, float fHeight) { m_fWidth = fWidth, m_fHeight = fHeight; }
 	inline void SetWidth(float fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(float fHeight) { m_fHeight = fHeight; }
-	inline void SetAnchor(int Type = ANCHORTYPE_CENTER) { m_nAnchorType = Type; }
+	inline void SetAnchorType(int Type = ANCHORTYPE_CENTER) { m_nAnchorType = Type; }
 	inline void SetDrawType(int nType) { m_nDrawType = nType; }
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }

@@ -19,7 +19,7 @@
 // インクルードファイル
 //*******************************************************************
 #include "jsonconverter.h"
-#include "walkingfriend.h"
+#include "mobcharactormanager.h"
 
 //===================================================================
 // 生成処理
@@ -38,8 +38,14 @@ void CJsonCreateMove::Create(const JsonMove::json& Jsondata)
 	// パス情報の設定
 	std::string str = CJsonConverter::ConverterPath(Jsondata, "MotionName");
 
+	// 移動タイプの設定
+	int nType = CJsonConverter::ConverterInt(Jsondata, "MoveType");
+
+	// 移動距離の設定
+	float fMoveValue = CJsonConverter::ConverterFloat(Jsondata, "MoveDistance");
+
 	if (type == "Walking")
 	{// 歩く同僚生成
-		CWalkFriend::Create(pos, rot, str.c_str());
+		CMobCharactorManager::GetInstance()->CreateManager(pos, rot, str.c_str(), nType, fMoveValue);
 	}
 }

@@ -44,6 +44,7 @@ public:
 	virtual void Draw(void) override;
 	void MotionLoad(const char* pScriptName, int nDestMotions,const bool isShadow);
 	void UpdatePosition(void);
+	void UpdateMotionOnly(void);
 
 public:
 

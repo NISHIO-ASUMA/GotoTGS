@@ -43,17 +43,15 @@ public:
 	// 取得処理
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
-	int GetLife(void) { return m_nLife; }
 	bool GetUse(void) { return m_bUse; }
 
 	// 静的メンバ関数
-	static CParticle* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, int nLife, float fRadius, TYPE type);
+	static CParticle* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius, TYPE type);
 	static void SetTargetPos(D3DXVECTOR3 pos) { m_TargetPos = pos; }
 
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetColor(D3DXCOLOR col) { m_col = col; }
-	void SetLife(int nLife) { m_nLife = nLife; }
 	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 	void SetType(TYPE type) { m_type = type; }
 	void SetUse(bool bUse) { m_bUse = bUse; }
@@ -73,7 +71,6 @@ private:
 	D3DXVECTOR3 m_rot;				// 角度
 	D3DXCOLOR m_col;				// 色
 	TYPE m_type;					// 種類
-	int m_nLife;					// 寿命
 	int m_nCreateTime;				// 生成時間
 	float m_fRadius;				// 半径
 	bool m_bUse;					// 使用しているか

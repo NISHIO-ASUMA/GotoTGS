@@ -40,11 +40,8 @@ public:
 
 	void EasingSine(void);
 
-	// インスタンス生成用関数
-	static CAfk2DUI* Instance(void);
 
 private:
-	static CAfk2DUI* m_pInstance;	// シングルトン変数
 
 	D3DXVECTOR3 m_pos;		// 位置
 	float m_fCountFrame;	// イージング用フレームカウント用変数

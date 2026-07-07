@@ -58,6 +58,62 @@
   {
     "ObjectTag": "Charactor",
     "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion001.txt",
+    "Pos": [ 297.0, 17.2, -80.5 ],
+    "Rot": [ 0.0, 0.27, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion001.txt",
+    "Pos": [ 337.0, 17.2, -80.5 ],
+    "Rot": [ 0.0, -0.44, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion002.txt",
+    "Pos": [ 370.0, 17.2, -183.0 ],
+    "Rot": [ 0.0, 2.94, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion002.txt",
+    "Pos": [ 254.0, 17.2, -181.0 ],
+    "Rot": [ 0.0, 3.03, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion003.txt",
+    "Pos": [ -272.0, 17.2, -13.0 ],
+    "Rot": [ 0.0, 0.84, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion003.txt",
+    "Pos": [ -273.0, 17.2, 94.0 ],
+    "Rot": [ 0.0, 2.37, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
+    "CharactorName": "MeetingFriend",
+    "MotionName": "data/MOTION/Friend/FriendMotion003.txt",
+    "Pos": [ -176.0, 17.2, -4.0 ],
+    "Rot": [ 0.0, -0.88, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "NoMove",
     "CharactorName": "SmokeFirend",
     "MotionName": "data/MOTION/Smoke/SmokeMotion.txt",
     "Pos": [ 450.0, 0.0, 355.0 ],
