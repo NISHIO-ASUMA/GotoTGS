@@ -32,8 +32,21 @@ public:
 	// インスタンス生成用関数
 	static CTutorialUIManager* Instance(void);
 
+public:
+
+	//*************************
+	// 操作メニュータイプ
+	//*************************
+	enum CONTROLTYPE
+	{
+		CONTROLTYPE_NONE,
+		CONTROLTYPE_KEY,
+		CONTROLTYPE_PAD,
+		CONTROLTYPE_MAX
+	};
+
 private:
 	static CTutorialUIManager* m_pInstance;	// シングルトン変数
-
+	int m_nControlTypes;					// 操作種類
 };
 
