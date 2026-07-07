@@ -124,34 +124,26 @@ void CParticle::Draw(void)
 //=========================================================
 void CParticle::None(void)
 {
-	int nCntAppear;
-	D3DXVECTOR3 pos;
 	D3DXVECTOR3 move;
-	D3DXCOLOR col;
-	float fRadius;
-	int nLife;
 
-	for (nCntAppear = 0; nCntAppear < 5; nCntAppear++)
-	{
-		// 今の位置を設定
-		pos = m_pos;
+	// 今の位置を設定
+	D3DXVECTOR3 pos = m_pos;
 
-		float theta = D3DXToRadian(rand() % 360);				// 方位角
-		float phi = D3DXToRadian(rand() % 180);					// 仰角
-		float fLength = (float)(rand() % 3) / 2.0f + 0.5f;
+	float theta = D3DXToRadian(rand() % 360);				// 方位角
+	float phi = D3DXToRadian(rand() % 180);					// 仰角
+	float fLength = (float)(rand() % 3) / 2.0f + 0.5f;
 
-		move.x = sinf(phi) * cosf(theta) * fLength;
-		move.y = cosf(phi) * fLength;
-		move.z = sinf(phi) * sinf(theta) * fLength;
+	move.x = sinf(phi) * cosf(theta) * fLength;
+	move.y = cosf(phi) * fLength;
+	move.z = sinf(phi) * sinf(theta) * fLength;
 
-		// 色・サイズ・寿命の設定
-		col = m_col;
-		fRadius = m_fRadius;
-		nLife = 30;
+	// 色・サイズ・寿命の設定
+	D3DXCOLOR col = m_col;
+	float fRadius = m_fRadius;
+	int nLife = 30;
 
-		// エフェクトの生成
-		CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_NONE);
-	}
+	// エフェクトの生成
+	CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_NONE);
 }
 //=========================================================
 // 舞い上がる煙
