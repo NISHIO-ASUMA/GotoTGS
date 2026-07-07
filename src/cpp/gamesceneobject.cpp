@@ -132,7 +132,7 @@ HRESULT CGameSceneObject::Init(void)
 	CDoorUI::Create();
 
 	// テレビ用ポリゴンの生成
-	CAfkTVPolygon::Instance()->Init();
+	CAfkTVPolygon::Create();
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -203,9 +203,6 @@ void CGameSceneObject::Uninit(void)
 	// さぼりをまとめたマネージャーの終了処理
 	CAfkManager::Instance()->Uninit();
 
-	// テレビ用ポリゴンの終了処理
-	CAfkTVPolygon::Instance()->Uninit();
-
 	// 敵管理クラスの終了
 	CEnemyManager::GetInstance()->Uninit();
 
@@ -240,9 +237,6 @@ void CGameSceneObject::Update(void)
 	// さぼりをまとめたマネージャーの更新処理
 	CAfkManager::Instance()->Update();
 
-	// テレビ用ポリゴンの更新処理
-	CAfkTVPolygon::Instance()->Update();
-
 	// サイドに開くドアの管理クラスの更新
 	CSideOpenDoorManager::GetInstance()->Update();
 
@@ -273,7 +267,7 @@ void CGameSceneObject::Update(void)
 //=========================================================
 void CGameSceneObject::Draw(void)
 {
-
+	
 }
 
 //=========================================================
@@ -309,7 +303,4 @@ void CGameSceneObject::CreatePointer(void)
 
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
-
-	// テレビ用ポリゴンの描画処理
-	CAfkTVPolygon::Instance()->Draw();
 }
