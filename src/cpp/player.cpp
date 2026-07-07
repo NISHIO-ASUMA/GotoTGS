@@ -647,7 +647,7 @@ void CPlayer::MoveJoypad(float speed)
 		float LStickAngleX = pState->Gamepad.sThumbLX;
 
 		// デッドゾーンを設定
-		float DeadZone = 32767.0f * 0.15f;
+		float DeadZone = 0.5f;
 		float fMag = sqrtf((LStickAngleX * LStickAngleX) + (LStickAngleY * LStickAngleY));
 
 		if (fMag < DeadZone)
