@@ -35,7 +35,7 @@ CVigilanceicon::~CVigilanceicon()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CVigilanceicon* CVigilanceicon::Create(const Icon& icon)
+CVigilanceicon* CVigilanceicon::Create(const Icon& icon, const char* TEXNAME)
 {
 	// インスタンス生成
 	CVigilanceicon* pVigilancegauge = new CVigilanceicon;
@@ -49,7 +49,7 @@ CVigilanceicon* CVigilanceicon::Create(const Icon& icon)
 	// 各設定処理
 	pVigilancegauge->SetPos(icon.pos);
 	pVigilancegauge->SetSize(icon.fWidth, icon.fHeight);
-	pVigilancegauge->SetTexture(Config::TEXNAME);
+	pVigilancegauge->SetTexture(TEXNAME);
 
 	return pVigilancegauge;
 }

@@ -41,6 +41,7 @@ m_nAnchorType(ANCHORTYPE_NONE)
 {
 
 }
+
 //==========================================================
 // デストラクタ
 //==========================================================
@@ -48,6 +49,7 @@ CObject2DMulti::~CObject2DMulti()
 {
 	m_apTexture.clear();
 }
+
 //==========================================================
 // 生成処理
 //==========================================================
@@ -76,6 +78,7 @@ CObject2DMulti* CObject2DMulti::Create
 
 	return pMulti;
 }
+
 //==========================================================
 // 初期化処理
 //==========================================================
@@ -134,6 +137,7 @@ HRESULT CObject2DMulti::Init(void)
 
 	return S_OK;
 }
+
 //==========================================================
 // 終了処理
 //==========================================================
@@ -152,6 +156,7 @@ void CObject2DMulti::Uninit(void)
 	// 自身の破棄
 	CObject::Release();
 }
+
 //==========================================================
 // 更新処理
 //==========================================================
@@ -165,16 +170,7 @@ void CObject2DMulti::Update(void)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
-
-	// rhwの設定
-	pVtx[0].rhw =
-	pVtx[1].rhw =
-	pVtx[2].rhw =
-	pVtx[3].rhw = 1.0f;
+	SetAnchorPoint(pVtx);
 
 	// 頂点カラーの設定
 	pVtx[0].col =
@@ -196,6 +192,7 @@ void CObject2DMulti::Update(void)
 	// アンロック
 	m_pVtxBuff->Unlock();
 }
+
 //==========================================================
 // 描画処理
 //==========================================================
@@ -273,27 +270,68 @@ void CObject2DMulti::Draw(void)
 		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 	}
 }
+
 //==========================================================
-// 中心基準生成
+// アンカーポイントに合わせた座標設定
 //==========================================================
-void CObject2DMulti::SetCenter(void)
+void CObject2DMulti::SetAnchorPoint(VERTEX_2D_MULTI* pVtx)
 {
+	switch (m_nAnchorType)
+	{
+	// 中心
+	case ANCHORTYPE_CENTER:
+
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
+
+		break;
+
+	// 左寄り
+	case ANCHORTYPE_LEFTSIDE:
+
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x				, m_pos.y - m_fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2, m_pos.y - m_fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x				, m_pos.y + m_fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2, m_pos.y + m_fHeight, 0.0f);
+
+		break;
+
+	// 右寄り
+	case ANCHORTYPE_RIGHTSIDE:
+
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2, m_pos.y - m_fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x				, m_pos.y - m_fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2, m_pos.y + m_fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x				, m_pos.y + m_fHeight, 0.0f);
+
+		break;
+
+	// 上寄り
+	case ANCHORTYPE_TOPSIDE:
+
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y				 , 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y				 , 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight * 2, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight * 2, 0.0f);
+
+		break;
+
+	// 下寄り
+	case ANCHORTYPE_BOTTOMSIDE:
+
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight * 2, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight * 2, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y				 , 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y				 , 0.0f);
+
+		break;
+
+	}
 
 }
-//==========================================================
-// 左寄り
-//==========================================================
-void CObject2DMulti::SetLeft(void)
-{
 
-}
-//==========================================================
-// 右寄り
-//==========================================================
-void CObject2DMulti::SetRight(void)
-{
-
-}
 //==========================================================
 // テクスチャ設定
 //==========================================================

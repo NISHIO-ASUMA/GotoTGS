@@ -39,15 +39,8 @@ public:
 	void Draw(void) override;
 
 	// 生成処理
-	static CVigilanceicon* Create(const Icon& icon);
+	static CVigilanceicon* Create(const Icon& icon, const char* TEXNAME);
 
 private:
 
-	//*******************************
-	// 定数構造体宣言
-	//*******************************
-	struct Config
-	{
-		static constexpr const char* TEXNAME = "vigilanceicon.png";	// テクスチャの名前
-	};
 };
