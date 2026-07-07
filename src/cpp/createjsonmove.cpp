@@ -44,8 +44,19 @@ void CJsonCreateMove::Create(const JsonMove::json& Jsondata)
 	// ˆÚ“®‹——£‚ÌÝ’è
 	float fMoveValue = CJsonConverter::ConverterFloat(Jsondata, "MoveDistance");
 
+	// ˆÚ“®‘¬“x‚ÌÝ’è
+	float fMoveSpeed = CJsonConverter::ConverterFloat(Jsondata, "MoveSpeed");
+
 	if (type == "Walking")
 	{// •à‚­“¯—»¶¬
-		CMobCharactorManager::GetInstance()->CreateManager(pos, rot, str.c_str(), nType, fMoveValue);
+		CMobCharactorManager::GetInstance()->CreateManager
+		(
+			pos, 
+			rot, 
+			str.c_str(), 
+			nType, 
+			fMoveValue,
+			fMoveSpeed
+		);
 	}
 }

@@ -73,7 +73,7 @@ public:
 	/// <param name="rot">角度</param>
 	/// <param name= "pMotionName">モーションファイル</param>
 	/// <returns></returns>
-	CWalkFriend* CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const char* pMotionName,const int nMoveType,const float fMoveValue);
+	CWalkFriend* CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const char* pMotionName,const int nMoveType,const float fMoveValue, const float fMoveSpeed);
 
 private:
 

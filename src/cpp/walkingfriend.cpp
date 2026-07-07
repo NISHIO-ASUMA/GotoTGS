@@ -25,7 +25,13 @@ CWalkFriend::CWalkFriend(int nPriority) : CMoveCharactor(nPriority),
 m_isSet(false),
 m_pBoxCollider(nullptr),
 m_fMoveDistance(NULL),
-m_MoveType(NULL)
+m_MoveType(NULL),
+m_nStopCount(NULL),
+m_fSpeed(NULL),
+m_TargetPos(VECTOR3_NULL),
+m_SavePos(VECTOR3_NULL),
+m_nMoveTypeIndex(NULL),
+m_isReturning(false)
 {
 
 }
@@ -45,7 +51,8 @@ CWalkFriend* CWalkFriend::Create
 	const D3DXVECTOR3& rot, 
 	const char* MotionName, 
 	const int& nMoveType, 
-	const float& fMoveValue
+	const float& fMoveValue,
+	const float& fSpeed
 )
 {
 	// インスタンス生成
@@ -54,10 +61,14 @@ CWalkFriend* CWalkFriend::Create
 
 	// オブジェクト設定
 	pWalk->SetPos(pos);
+	pWalk->SetSavePos(pos);
 	pWalk->SetRot(rot);
 	pWalk->SetFileName(MotionName);
 	pWalk->SetMoveType(nMoveType);
 	pWalk->SetMoveValue(fMoveValue);
+	pWalk->SetMoveSpeed(fSpeed);
+	pWalk->SetMathTargetPos(pos);
+
 	pWalk->SetUseOutLine(true);
 	pWalk->SetOutlineColor(D3DXVECTOR4(1.0f, 0.0f, 1.0f, 1.0f));
 
@@ -87,6 +98,16 @@ HRESULT CWalkFriend::Init(void)
 	// コライダー生成
 	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), BoxSize, mtxRot);
 
+	// ファイル名がマイケルなら
+	if (m_pFileName == "data/MOTION/Mob/Mob_Mj.txt")
+	{
+		m_nMoveTypeIndex = 1;
+	}
+	else
+	{
+		m_nMoveTypeIndex = 0;
+	}
+
 	return S_OK;
 }
 //========================================================
@@ -103,7 +124,7 @@ void CWalkFriend::Uninit(void)
 void CWalkFriend::Update(void)
 {
 	// 各移動方向に応じた処理
-	UpdateMovingType(m_MoveType);
+	UpdateMovingType();
 
 	// 座標の更新
 	CMoveCharactor::UpdatePosition();
@@ -140,33 +161,215 @@ bool CWalkFriend::Collision(CBoxCollider* pOther, D3DXVECTOR3* PushPos)
 	return CCollisionBox::CollisionEx(m_pBoxCollider.get(),pOther,PushPos);
 }
 //========================================================
+// 目的地座標の計算関数
+//========================================================
+void CWalkFriend::SetMathTargetPos(const D3DXVECTOR3& startpos)
+{
+	// 初期化
+	m_TargetPos = VECTOR3_NULL;
+
+	// 代入
+	m_TargetPos = startpos;
+
+	// 種類によって変更する
+	switch (m_MoveType)
+	{
+	case MOVING::MOVE_FRONT_Z: m_TargetPos.z -= m_fMoveDistance; break; // 手前(-Z)
+	case MOVING::MOVE_BACK_Z:  m_TargetPos.z += m_fMoveDistance; break; // 奥行き(+Z)
+	case MOVING::MOVE_LEFT:    m_TargetPos.x -= m_fMoveDistance; break; // 左(-X)
+	case MOVING::MOVE_RIGHT:   m_TargetPos.x += m_fMoveDistance; break; // 右(+X)
+	default: break;
+	}
+}
+//========================================================
 // 種類に応じた移動処理
 //========================================================
-void CWalkFriend::UpdateMovingType(const int& nMoveType)
+void CWalkFriend::UpdateMovingType(void)
 {
-	// 座標の取得
-	D3DXVECTOR3 pos = GetPos();
-	D3DXVECTOR3 rot = GetRot();
-	D3DXVECTOR3 rtodest = GetRotDest();
-	D3DXVECTOR3 move = GetMove();
-
-	// 移動の種類に応じて方向を変更
-	switch (nMoveType)
+	// インデックスに応じて通す更新関数を選択する
+	switch (m_nMoveTypeIndex)
 	{
-	case MOVING::MOVE_FRONT_Z: // 手前のZ方向(-Z)に進む
+	case 0:
+		UpdateNormal(); // 通常移動
+		break;
 
-
-
+	case 1:
+		UpdateMj();		// マイケル移動
 		break;
 
 	default:
+		UpdateNormal();
 		break;
 	}
+}
+//========================================================
+// 通常モード
+//========================================================
+void CWalkFriend::UpdateNormal(void)
+{
+	// 待機中の処理
+	if (m_isSet)
+	{
+		m_nStopCount++;
 
-	// 移動している状態なら
-	// GetMotion()->SetMotion(MOTION::WALK,true,5);
+		if (m_nStopCount >= MaxStop)
+		{
+			m_isSet = false;
+			m_nStopCount = 0;
+			m_isReturning = !m_isReturning;
+		}
 
-	// 移動を辞めたら or 移動していない状態ならニュートラルへ
-	// GetMotion()->SetMotion(MOTION::NEUTRAL,true,5);
+		// ニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
 
+	// 座標を取得
+	D3DXVECTOR3 pos = GetPos();
+
+	// ゴールへの距離
+	float fDistanceToGoal = 0.0f;
+
+	// フラグがfalse
+	if (!m_isReturning)
+	{
+		// 目的地に近いか
+		D3DXVECTOR3 diff = pos - m_TargetPos;
+		fDistanceToGoal = D3DXVec3Length(&diff);
+	}
+	else
+	{
+		// 元居た座標にもどってくる
+		D3DXVECTOR3 diff = pos - m_SavePos;
+		fDistanceToGoal = D3DXVec3Length(&diff);
+	}
+
+	// 目標に近づいたら
+	if (fDistanceToGoal <= 2.0f)
+	{
+		m_isSet = true;
+		SetMove(VECTOR3_NULL);
+		return;
+	}
+
+	// 目的角の計算
+	float fTargetRot = 0.0f;
+	int MoveType = GetMoveType();
+
+	switch (MoveType)
+	{
+	case MOVING::MOVE_FRONT_Z: fTargetRot = -D3DX_PI;       break;	// 手前(-Z)
+	case MOVING::MOVE_BACK_Z:  fTargetRot = 0.0f;          break;	// 奥行き(+Z)
+	case MOVING::MOVE_LEFT:    fTargetRot = -D3DX_PI / 2.0f; break; // 左(-X)
+	case MOVING::MOVE_RIGHT:   fTargetRot = D3DX_PI / 2.0f;  break; // 右(+X)
+	default: break;
+	}
+
+	// 向きの反転
+	if (m_isReturning)
+	{
+		fTargetRot += D3DX_PI;
+	}
+
+	// 移動方向の計算
+	D3DXVECTOR3 forward;
+	forward.x = sinf(fTargetRot) * m_fSpeed;
+	forward.y = 0.0f;
+	forward.z = cosf(fTargetRot) * m_fSpeed;
+
+	// 移動方向から向きを計算
+	fTargetRot = atan2f(-forward.x, -forward.z);
+
+	// 目的角を設定
+	SetRotDest(D3DXVECTOR3(GetRotDest().x, -fTargetRot, GetRotDest().z));
+
+	// 移動量の設定
+	SetMove(forward);
+
+	// 移動モーション
+	GetMotion()->SetMotion(MOTION::WALK, true, 5);
+}
+//========================================================
+// マイケルモードの移動処理
+//========================================================
+void CWalkFriend::UpdateMj(void)
+{
+	// 待機中の処理
+	if (m_isSet)
+	{
+		m_nStopCount++;
+
+		if (m_nStopCount >= MaxStop)
+		{
+			m_isSet = false;
+			m_nStopCount = 0;
+			m_isReturning = !m_isReturning;
+		}
+
+		// ニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 座標を取得
+	D3DXVECTOR3 pos = GetPos();
+
+	// ゴールへの距離
+	float fDistanceToGoal = 0.0f;
+
+	// フラグがfalse
+	if (!m_isReturning)
+	{
+		// 目的地に近いか
+		D3DXVECTOR3 diff = pos - m_TargetPos;
+		fDistanceToGoal = D3DXVec3Length(&diff);
+	}
+	else
+	{
+		// 元居た座標にもどってくる
+		D3DXVECTOR3 diff = pos - m_SavePos;
+		fDistanceToGoal = D3DXVec3Length(&diff);
+	}
+
+	// 目標に近づいたら
+	if (fDistanceToGoal <= 2.0f)
+	{
+		m_isSet = true;
+		SetMove(VECTOR3_NULL);
+		return;
+	}
+
+	// 目的角の計算
+	float fTargetRot = 0.0f;
+	int MoveType = GetMoveType();
+
+	switch (MoveType)
+	{
+	case MOVING::MOVE_FRONT_Z: fTargetRot = -D3DX_PI;		break;	// 手前(-Z)
+	case MOVING::MOVE_BACK_Z:  fTargetRot = 0.0f;			break;	// 奥行き(+Z)
+	case MOVING::MOVE_LEFT:    fTargetRot = -D3DX_PI / 2.0f; break; // 左(-X)
+	case MOVING::MOVE_RIGHT:   fTargetRot = D3DX_PI / 2.0f;  break; // 右(+X)
+	default: break;
+	}
+
+	// 向きの反転
+	if (m_isReturning)
+	{
+		fTargetRot += D3DX_PI;
+	}
+
+	// 移動方向の計算
+	D3DXVECTOR3 forward;
+	forward.x = sinf(fTargetRot) * m_fSpeed;
+	forward.y = 0.0f;
+	forward.z = cosf(fTargetRot) * m_fSpeed;
+
+	// 目的角を設定
+	SetRotDest(D3DXVECTOR3(GetRotDest().x, -fTargetRot, GetRotDest().z));
+
+	// 移動量の設定
+	SetMove(forward);
+
+	// 移動モーション
+	GetMotion()->SetMotion(MOTION::WALK, true, 5);
 }

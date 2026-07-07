@@ -48,11 +48,12 @@ CWalkFriend* CMobCharactorManager::CreateManager
 	const D3DXVECTOR3& rot, 
 	const char* pMotionName, 
 	const int nMoveType, 
-	const float fMoveValue
+	const float fMoveValue,
+	const float fMoveSpeed
 )
 {
 	// インスタンス生成
-	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName,nMoveType,fMoveValue);
+	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName,nMoveType,fMoveValue, fMoveSpeed);
 
 	// 動的配列内に追加
 	if (pMob)
