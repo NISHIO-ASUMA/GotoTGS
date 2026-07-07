@@ -74,7 +74,7 @@ public:
 		MOVE_RIGHT,		// ‰E•ûŒü
 		MOVE_FRONT_Z,	// -Z(Žè‘O)
 		MOVE_BACK_Z,	// +Z(‰œs‚«)
-		MAX
+		MOVE_MAX
 	};
 
 private:
