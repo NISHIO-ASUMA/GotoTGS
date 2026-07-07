@@ -31,25 +31,22 @@
 //=================================================
 namespace AFKTVPOLYGON
 {
-	const D3DXVECTOR3 Pos = { 1000.0f, 45.0f, 300.0f };			// 3D画像の座標
-	constexpr float fWidth = 100.0f;							// 横幅
-	constexpr float fHeight = 50.0f;							// 縦幅
-	constexpr const char* Button_NAME = "AfkButton.jpg";		// チュートリアルuiのテクスチャ名
+	const D3DXVECTOR3 Pos = { -249.0f, 47.0f, 360.5f };		// 3D画像の座標
+	constexpr float fWidth = 28.0f;							// 横幅
+	constexpr float fHeight = 18.0f;						// 縦幅
+	constexpr const char* Button_NAME = "tv_anime.jpg";		// TVのテクスチャ名
 };
-
-//=================================================
-// 静的メンバ変数
-//=================================================
-CAfkTVPolygon* CAfkTVPolygon::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfkTVPolygon::CAfkTVPolygon() : m_pVtxBuff(nullptr),
+CAfkTVPolygon::CAfkTVPolygon(int nPriority) : CObject(nPriority), 
+m_pVtxBuff(nullptr),
 m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_col(COLOR_WHITE),
 m_nIdxTexture(-1),
+m_FlashCount(NULL),
 m_bDisplay(true),
 m_mtxWorld{}
 {
@@ -73,6 +70,7 @@ CAfkTVPolygon* CAfkTVPolygon::Create(void)
 
 	// オブジェクトセット
 	pAfkTVPolygon->SetPos(AFKTVPOLYGON::Pos);
+	pAfkTVPolygon->SetRot(VECTOR3_NULL);
 	pAfkTVPolygon->SetTexture(AFKTVPOLYGON::Button_NAME);
 
 	// 初期化失敗時
@@ -87,10 +85,6 @@ CAfkTVPolygon* CAfkTVPolygon::Create(void)
 //=========================================================
 HRESULT CAfkTVPolygon::Init(void)
 {
-	SetPos(AFKTVPOLYGON::Pos);
-	SetRot(VECTOR3_NULL);
-	SetTexture(AFKTVPOLYGON::Button_NAME);
-
 	// デバイスポインタを宣言
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
@@ -109,16 +103,16 @@ HRESULT CAfkTVPolygon::Init(void)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点座標の設定
-	pVtx[0].pos =
-		pVtx[1].pos =
-		pVtx[2].pos =
-		pVtx[3].pos = VECTOR3_NULL;
+	pVtx[0].pos = D3DXVECTOR3(-AFKTVPOLYGON::fWidth, AFKTVPOLYGON::fHeight, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(AFKTVPOLYGON::fWidth, AFKTVPOLYGON::fHeight, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(-AFKTVPOLYGON::fWidth, -AFKTVPOLYGON::fHeight, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(AFKTVPOLYGON::fWidth, -AFKTVPOLYGON::fHeight, 0.0f);
 
 	// 各頂点の法線(ベクトル)の設定
 	pVtx[0].nor =
 		pVtx[1].nor =
 		pVtx[2].nor =
-		pVtx[3].nor = D3DXVECTOR3(0.0f, 0.0f, -1.0f);;
+		pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
 	// 頂点カラーの設定
 	pVtx[0].col =
@@ -149,12 +143,8 @@ void CAfkTVPolygon::Uninit(void)
 		m_pVtxBuff = nullptr;
 	}
 
-	// シングルトンの破棄
-	if (m_pInstance)
-	{
-		delete m_pInstance;
-		m_pInstance = nullptr;
-	}
+	// 自身の破棄
+	CObject::Release();
 }
 //=========================================================
 // 更新処理
@@ -177,7 +167,7 @@ void CAfkTVPolygon::Update(void)
 	pVtx[0].nor =
 		pVtx[1].nor =
 		pVtx[2].nor =
-		pVtx[3].nor = D3DXVECTOR3(0.0f, 0.0f, -1.0f);;
+		pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
 	// 頂点カラーの設定
 	pVtx[0].col =
@@ -193,6 +183,8 @@ void CAfkTVPolygon::Update(void)
 
 	// アンロック
 	m_pVtxBuff->Unlock();
+
+	Flash(2, 1);
 
 	// 計算用のマトリックスを宣言
 	D3DXMATRIX mtxRot, mtxTrans;
@@ -211,7 +203,8 @@ void CAfkTVPolygon::Update(void)
 //=========================================================
 void CAfkTVPolygon::Draw(void)
 {
-	if (!m_bDisplay) return;
+	
+	if (!CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV()) return;
 
 	// デバイスポインタを宣言
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -232,12 +225,8 @@ void CAfkTVPolygon::Draw(void)
 	}
 	else
 	{
-		// テクスチャクラス取得
-		CTexture* pTexture = CManager::GetInstance()->GetTexture();
-		if (pTexture == nullptr) return;
-
-		// テクスチャセット
-		pDevice->SetTexture(0, pTexture->GetAddress(m_nIdxTexture));
+		// テクスチャを設定
+		pDevice->SetTexture(0, CManager::GetInstance()->GetTexture()->GetAddress(m_nIdxTexture));
 	}
 
 	// ポリゴンの描画
@@ -245,17 +234,6 @@ void CAfkTVPolygon::Draw(void)
 
 	// テクスチャを消す
 	pDevice->SetTexture(0, nullptr);
-}
-//=========================================================
-// インスタンス取得処理
-//=========================================================
-CAfkTVPolygon* CAfkTVPolygon::Instance(void)
-{
-	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CAfkTVPolygon;
-
-	// 生成されたインスタンスを返す
-	return m_pInstance;
 }
 //=========================================================
 // テクスチャ割り当て
@@ -272,4 +250,45 @@ void CAfkTVPolygon::SetTexture(const char* pTexName)
 
 	// 割り当て
 	m_nIdxTexture = pTexture->Register(TexPath.c_str());
+}
+//=========================================================
+// 点滅処理
+//=========================================================
+void CAfkTVPolygon::Flash(const int nMaxFlashTime, const int Digittime)
+{
+	// 頂点情報のポインタ
+	VERTEX_3D* pVtx = nullptr;
+
+	// 頂点バッファをロックし,頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	// 点滅カウントを加算
+	m_FlashCount++;
+
+	// カラー変数
+	D3DXCOLOR col = COLOR_WHITE;
+
+	// 点滅カウントと一致したとき
+	if (m_FlashCount == Digittime)
+	{
+		// 頂点カラーの設定
+		col = COLOR_GLAY;
+
+		// カラーセット
+		SetCol(col);
+	}
+	else if (m_FlashCount == nMaxFlashTime)
+	{
+		// 頂点カラーの設定
+		col = COLOR_WHITE;
+
+		// カラーセット
+		SetCol(col);
+
+		// 初期値に戻す
+		m_FlashCount = NULL;
+	}
+
+	//アンロック
+	m_pVtxBuff->Unlock();
 }
