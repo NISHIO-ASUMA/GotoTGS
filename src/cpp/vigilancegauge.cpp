@@ -36,7 +36,7 @@ CVigilancegauge::~CVigilancegauge()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge)
+CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge, const char* BTEXTURE, const char* MTEXTURE)
 {
 	// インスタンス生成
 	CVigilancegauge* pGauge = new CVigilancegauge;
@@ -51,8 +51,9 @@ CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge)
 	pGauge->SetPos(gauge.pos);
 	pGauge->SetCol(gauge.col);
 	pGauge->SetSize(gauge.fWidth, gauge.fHeight);
-	pGauge->SetTexture(Config::TEXNAME_BASE, 0);
-	pGauge->SetTexture(Config::TEXNAME_MULTI, 1);
+	pGauge->SetTexture(BTEXTURE, 0);
+	pGauge->SetTexture(MTEXTURE, 1);
+	pGauge->SetAnchorType(gauge.nAnchorType);
 
 	return pGauge;
 }
