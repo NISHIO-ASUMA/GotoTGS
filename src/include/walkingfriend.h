@@ -47,9 +47,22 @@ public:
 	/// </summary>
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
-	/// <param name= "MotionName">スクリプト名</param>
+	/// <param name="MotionName">ファイル名</param>
+	/// <param name="nMoveType">移動方向の種類</param>
+	/// <param name="fMoveValue">移動距離</param>
 	/// <returns></returns>
-	static CWalkFriend* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const char * MotionName);
+	static CWalkFriend* Create
+	(
+		const D3DXVECTOR3& pos, 
+		const D3DXVECTOR3& rot,
+		const char * MotionName,
+		const int& nMoveType,
+		const float& fMoveValue = 30.0f
+	);
+
+public:
+
+	int GetMoveType(void) const { return m_MoveType; }
 
 public:
 
@@ -59,7 +72,7 @@ public:
 	enum MOTION
 	{
 		NEUTRAL,	// ニュートラル
-		ACTION,		// 歩く
+		WALK,		// 歩く
 		PLAY,		// ゲーセン遊び
 		MAX
 	};
@@ -70,16 +83,20 @@ public:
 	enum MOVING
 	{
 		NONE,			// 移動しない
-		MOVE_LEFT,		// 左方向
-		MOVE_RIGHT,		// 右方向
 		MOVE_FRONT_Z,	// -Z(手前)
 		MOVE_BACK_Z,	// +Z(奥行き)
+		MOVE_LEFT,		// 左方向
+		MOVE_RIGHT,		// 右方向
 		MOVE_MAX
 	};
 
 private:
 
 	void SetFileName(const char* pFileName) { m_pFileName = pFileName; }
+	void SetMoveType(const int& nType) { m_MoveType = nType; }
+	void SetMoveValue(const float& fDistance) { m_fMoveDistance = fDistance; }
+
+	void UpdateMovingType(const int& nMoveType);
 
 private:
 
@@ -89,6 +106,8 @@ private:
 
 	bool m_isSet;			 // セットポイントについたか
 	const char* m_pFileName; // ファイルパス
+	int m_MoveType;			 // 移動方向の種類
+	float m_fMoveDistance;	 // 移動する距離
 
 private:
 	const D3DXVECTOR3 BoxSize = { 50.0f,50.0f,50.0f }; // 固定の矩形サイズ
