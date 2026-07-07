@@ -42,10 +42,17 @@ CMobCharactorManager::~CMobCharactorManager()
 //=========================================================
 // 実際の生成処理
 //=========================================================
-CWalkFriend* CMobCharactorManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* pMotionName)
+CWalkFriend* CMobCharactorManager::CreateManager
+(
+	const D3DXVECTOR3& pos, 
+	const D3DXVECTOR3& rot, 
+	const char* pMotionName, 
+	const int nMoveType, 
+	const float fMoveValue
+)
 {
 	// インスタンス生成
-	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName);
+	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName,nMoveType,fMoveValue);
 
 	// 動的配列内に追加
 	if (pMob)
