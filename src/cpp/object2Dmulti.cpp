@@ -119,9 +119,7 @@ HRESULT CObject2DMulti::Init(void)
 	pVtx[2].col =
 	pVtx[3].col = COLOR_WHITE;
 
-	//--------------------------------------------
-	// テクスチャ座標（UV）の設定 ( float型にしてます )
-	//--------------------------------------------
+	// uvの設定
 	pVtx[0].tex_u = 0.0f; pVtx[0].tex_v = 0.0f;
 	pVtx[1].tex_u = 1.0f; pVtx[1].tex_v = 0.0f;
 	pVtx[2].tex_u = 0.0f; pVtx[2].tex_v = 1.0f;
@@ -129,8 +127,8 @@ HRESULT CObject2DMulti::Init(void)
 
 	pVtx[0].texMulti_u = 0.0f; pVtx[0].texMulti_v = 0.0f;
 	pVtx[1].texMulti_u = 1.0f; pVtx[1].texMulti_v = 0.0f;
-	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 1.0f;
-	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 1.0f;
+	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 0.5f;
+	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 0.5f;
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
@@ -217,16 +215,15 @@ void CObject2DMulti::Draw(void)
 		else
 		{
 			// 2枚目の設定
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_MODULATE);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_CURRENT);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_TEXTURE);
-			
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_BLENDTEXTUREALPHA);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE); // 2枚目の赤
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT); // 1枚目の円
+
+			// 透明にする
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_CURRENT);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_TEXTURE);
-
 		}
-		
 	}
 
 	// 頂点バッファの設定
@@ -283,18 +280,18 @@ void CObject2DMulti::SetAnchorPoint(VERTEX_2D_MULTI* pVtx)
 	case ANCHORTYPE_LEFTSIDE:
 
 		pVtx[0].pos = D3DXVECTOR3(m_pos.x				, m_pos.y - m_fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2, m_pos.y - m_fHeight, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2.0f, m_pos.y - m_fHeight, 0.0f);
 		pVtx[2].pos = D3DXVECTOR3(m_pos.x				, m_pos.y + m_fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2, m_pos.y + m_fHeight, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth * 2.0f, m_pos.y + m_fHeight, 0.0f);
 
 		break;
 
 	// 右寄り
 	case ANCHORTYPE_RIGHTSIDE:
 
-		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2, m_pos.y - m_fHeight, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2.0f, m_pos.y - m_fHeight, 0.0f);
 		pVtx[1].pos = D3DXVECTOR3(m_pos.x				, m_pos.y - m_fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2, m_pos.y + m_fHeight, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth * 2.0f, m_pos.y + m_fHeight, 0.0f);
 		pVtx[3].pos = D3DXVECTOR3(m_pos.x				, m_pos.y + m_fHeight, 0.0f);
 
 		break;
@@ -304,21 +301,20 @@ void CObject2DMulti::SetAnchorPoint(VERTEX_2D_MULTI* pVtx)
 
 		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y				 , 0.0f);
 		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y				 , 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight * 2, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight * 2, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight * 2.0f, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight * 2.0f, 0.0f);
 
 		break;
 
 	// 下寄り
 	case ANCHORTYPE_BOTTOMSIDE:
 
-		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight * 2, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight * 2, 0.0f);
+		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight * 2.0f, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight * 2.0f, 0.0f);
 		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y				 , 0.0f);
 		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y				 , 0.0f);
 
 		break;
-
 	}
 
 }
@@ -368,20 +364,23 @@ void CObject2DMulti::SetUV(const float fRatio)
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// テクスチャ座標の設定
-	// １枚目は固定
+	// テクスチャ座標の設定 ( ベース )
 	pVtx[0].tex_u = 0.0f; pVtx[0].tex_v = 0.0f;
 	pVtx[1].tex_u = 1.0f; pVtx[1].tex_v = 0.0f;
 	pVtx[2].tex_u = 0.0f; pVtx[2].tex_v = 1.0f;
 	pVtx[3].tex_u = 1.0f; pVtx[3].tex_v = 1.0f;
 
-	// 現在のテクスチャのUVを計算
-	float vOffset = 1.0f - fRatio;
+	// uv座標のオフセット
+	float vOffset = fRatio * 0.5f;
 
+	// 2枚目の設定 ( マルチ側 )
+	// 上端の頂点
 	pVtx[0].texMulti_u = 0.0f; pVtx[0].texMulti_v = 0.0f + vOffset;
 	pVtx[1].texMulti_u = 1.0f; pVtx[1].texMulti_v = 0.0f + vOffset;
-	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 1.0f + vOffset;
-	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 1.0f + vOffset;
+
+	// 下端の頂点
+	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 0.5f + vOffset;
+	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 0.5f + vOffset;
 
 	// アンロック
 	m_pVtxBuff->Unlock();

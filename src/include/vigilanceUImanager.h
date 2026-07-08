@@ -69,7 +69,7 @@ private:
 		static constexpr float GAUGE_POS_Y = ICON_POS_Y - POS_Y_VALUE;					// Y軸の位置
 		static constexpr const char* GAUGE_FREAM_TEXNAME = "vigilancegauge000.png";		// フレームのテクスチャ
 		static constexpr const char* GAUGE_TEXNAME_BASE = "vigilancegauge001.png";		// 基本のテクスチャ
-		static constexpr const char* GAUGE_TEXNAME_MULTI = "field000.jpg";				// マルチテクスチャ
+		static constexpr const char* GAUGE_TEXNAME_MULTI = "gauge_pre.png";				// マルチテクスチャ
 
 	};
 

@@ -14,6 +14,7 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
+#include "input.h"
 
 //=========================================================
 // コンストラクタ
@@ -86,7 +87,16 @@ void CVigilancegauge::Update(void)
 	// 親の更新処理
 	CObject2DMulti::Update();
 
-	m_fRatio = 0.5f;
+	// 実験
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
+	{
+		m_fRatio += 0.1f;
+	}
+
+	if (m_fRatio >= 1.0f)
+	{
+		m_fRatio = 0.0f;
+	}
 
 	// テクスチャのUVを比率分動かす
 	CObject2DMulti::SetUV(m_fRatio);
