@@ -98,8 +98,8 @@ HRESULT CWalkFriend::Init(void)
 	// コライダー生成
 	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetPos(), BoxSize, mtxRot);
 
-	// ファイル名がマイケルなら
-	if (m_pFileName == "data/MOTION/Mob/Mob_Mj.txt")
+	// ファイル名が"マイケル"なら
+	if (m_pFileName == "data/MOTION/Mob/MobMotionMj.txt")
 	{
 		m_nMoveTypeIndex = 1;
 	}
