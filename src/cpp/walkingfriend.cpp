@@ -123,6 +123,20 @@ void CWalkFriend::Uninit(void)
 //========================================================
 void CWalkFriend::Update(void)
 {
+	// 動かないタイプなら処理を通さない
+	if (this->m_MoveType == MOVING::NONE)
+	{
+		// 目的角を設定
+		SetRotDest(GetRot());
+
+		// 移動しない
+		SetMove(VECTOR3_NULL);
+
+		// クラスだけ更新
+		CMoveCharactor::Update();
+		return;
+	}
+
 	// 各移動方向に応じた処理
 	UpdateMovingType();
 
@@ -198,7 +212,6 @@ void CWalkFriend::UpdateMovingType(void)
 		break;
 
 	default:
-		UpdateNormal();
 		break;
 	}
 }
@@ -219,72 +232,48 @@ void CWalkFriend::UpdateNormal(void)
 			m_isReturning = !m_isReturning;
 		}
 
-		// ニュートラルモーション
+		// 待機中はニュートラルモーション
 		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
 		return;
 	}
 
-	// 座標を取得
+	// 現在の座標を取得
 	D3DXVECTOR3 pos = GetPos();
 
-	// ゴールへの距離
-	float fDistanceToGoal = 0.0f;
+	// 現在の目的地となる座標を決定
+	D3DXVECTOR3 targetPos = (!m_isReturning) ? m_TargetPos : m_SavePos;
 
-	// フラグがfalse
-	if (!m_isReturning)
-	{
-		// 目的地に近いか
-		D3DXVECTOR3 diff = pos - m_TargetPos;
-		fDistanceToGoal = D3DXVec3Length(&diff);
-	}
-	else
-	{
-		// 元居た座標にもどってくる
-		D3DXVECTOR3 diff = pos - m_SavePos;
-		fDistanceToGoal = D3DXVec3Length(&diff);
-	}
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
 
-	// 目標に近づいたら
+	// 目的地までの距離を計算
+	float fDistanceToGoal = D3DXVec3Length(&vecToTarget);
+
+	// 目標に近づいた
 	if (fDistanceToGoal <= 2.0f)
 	{
 		m_isSet = true;
-		SetMove(VECTOR3_NULL);
+		SetPos(targetPos);		// 座標を目的地にぴったり合わせる
+		SetMove(VECTOR3_NULL);	// 移動を止める
+
+		// 到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
 		return;
 	}
 
-	// 目的角の計算
-	float fTargetRot = 0.0f;
-	int MoveType = GetMoveType();
+	// ベクトルを正規化して移動方向（向き）を決定
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
-	switch (MoveType)
-	{
-	case MOVING::MOVE_FRONT_Z: fTargetRot = -D3DX_PI;       break;	// 手前(-Z)
-	case MOVING::MOVE_BACK_Z:  fTargetRot = 0.0f;          break;	// 奥行き(+Z)
-	case MOVING::MOVE_LEFT:    fTargetRot = -D3DX_PI / 2.0f; break; // 左(-X)
-	case MOVING::MOVE_RIGHT:   fTargetRot = D3DX_PI / 2.0f;  break; // 右(+X)
-	default: break;
-	}
-
-	// 向きの反転
-	if (m_isReturning)
-	{
-		fTargetRot += D3DX_PI;
-	}
-
-	// 移動方向の計算
-	D3DXVECTOR3 forward;
-	forward.x = sinf(fTargetRot) * m_fSpeed;
-	forward.y = 0.0f;
-	forward.z = cosf(fTargetRot) * m_fSpeed;
-
-	// 移動方向から向きを計算
-	fTargetRot = atan2f(-forward.x, -forward.z);
+	// 角度を計算
+	float fTargetRot = atan2f(-moveVec.x, -moveVec.z);
 
 	// 目的角を設定
 	SetRotDest(D3DXVECTOR3(GetRotDest().x, -fTargetRot, GetRotDest().z));
 
-	// 移動量の設定
-	SetMove(forward);
+	// スピードを適用して移動量を設定
+	moveVec *= m_fSpeed;
+	SetMove(moveVec);
 
 	// 移動モーション
 	GetMotion()->SetMotion(MOTION::WALK, true, 5);
