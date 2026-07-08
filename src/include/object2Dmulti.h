@@ -60,12 +60,13 @@ public:
 	void Draw(void);
 	void SetAnchorPoint(VERTEX_2D_MULTI* pVtx);
 	void SetTexture(const char* pRegisterName,const int& nIdx);
-	void SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col);
+	//void SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col);
+	void SetUV(const float fRatio);
 
 public:
 
-	inline void SetUV(float TexU, float TexV);
 	inline void SetCol(D3DXCOLOR col) { m_col = col; }
+	inline void SetAlpha(float fAlpha) { m_col.a = fAlpha; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }
 	inline void SetSize(float fWidth, float fHeight) { m_fWidth = fWidth, m_fHeight = fHeight; }

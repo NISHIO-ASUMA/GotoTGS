@@ -40,9 +40,17 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// İ’èˆ—
+	void SetRatio(float fRatio) { m_fRatio = fRatio; }
+
+	// î•ñæ“¾ˆ—
+	float GetRatio(void) const { return m_fRatio; }
+
 	// ¶¬ˆ—
 	static CVigilancegauge* Create(const Gauge& gauge, const char* BTEXTURE, const char* MTEXTURE);
 
 private:
 
+	// Œ»İ‚Ì”ä—¦
+	float m_fRatio;
 };

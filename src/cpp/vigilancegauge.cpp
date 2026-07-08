@@ -14,12 +14,12 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "easing.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority)
+CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority),
+m_fRatio(NULL)
 {
 
 }
@@ -85,6 +85,11 @@ void CVigilancegauge::Update(void)
 {
 	// 親の更新処理
 	CObject2DMulti::Update();
+
+	m_fRatio = 0.5f;
+
+	// テクスチャのUVを比率分動かす
+	CObject2DMulti::SetUV(m_fRatio);
 }
 
 //=========================================================

@@ -173,21 +173,10 @@ void CObject2DMulti::Update(void)
 	SetAnchorPoint(pVtx);
 
 	// 頂点カラーの設定
-	pVtx[0].col =
-	pVtx[1].col =
-	pVtx[2].col =
+	pVtx[0].col = 
+	pVtx[1].col = 
+	pVtx[2].col = 
 	pVtx[3].col = m_col;
-
-	// テクスチャ座標の設定
-	pVtx[0].tex_u = 0.0f; pVtx[0].tex_v = 0.0f;
-	pVtx[1].tex_u = 1.0f; pVtx[1].tex_v = 0.0f;
-	pVtx[2].tex_u = 0.0f; pVtx[2].tex_v = 1.0f;
-	pVtx[3].tex_u = 1.0f; pVtx[3].tex_v = 1.0f;
-
-	pVtx[0].texMulti_u = 0.0f; pVtx[0].texMulti_v = 0.0f;
-	pVtx[1].texMulti_u = 1.0f; pVtx[1].texMulti_v = 0.0f;
-	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 1.0f;
-	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 1.0f;
 
 	// アンロック
 	m_pVtxBuff->Unlock();
@@ -235,7 +224,9 @@ void CObject2DMulti::Draw(void)
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_CURRENT);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_TEXTURE);
+
 		}
+		
 	}
 
 	// 頂点バッファの設定
@@ -362,10 +353,37 @@ void CObject2DMulti::SetTexture(const char* pRegisterName, const int& nIdx)
 	// 指定したステージにインデックスを格納
 	m_apTexture[nIdx] = nIdxTexture;
 }
+
 //==========================================================
-// 点滅関数
+// UV設定
 //==========================================================
-void CObject2DMulti::SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col)
+void CObject2DMulti::SetUV(const float fRatio)
 {
+	// クランプ処理
+	Clump(fRatio, 0.0f, 1.0f);
+
+	// 頂点情報のポインタ
+	VERTEX_2D_MULTI* pVtx = nullptr;
+
+	// 頂点バッファをロックし,頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	// テクスチャ座標の設定
+	// １枚目は固定
+	pVtx[0].tex_u = 0.0f; pVtx[0].tex_v = 0.0f;
+	pVtx[1].tex_u = 1.0f; pVtx[1].tex_v = 0.0f;
+	pVtx[2].tex_u = 0.0f; pVtx[2].tex_v = 1.0f;
+	pVtx[3].tex_u = 1.0f; pVtx[3].tex_v = 1.0f;
+
+	// 現在のテクスチャのUVを計算
+	float vOffset = 1.0f - fRatio;
+
+	pVtx[0].texMulti_u = 0.0f; pVtx[0].texMulti_v = 0.0f + vOffset;
+	pVtx[1].texMulti_u = 1.0f; pVtx[1].texMulti_v = 0.0f + vOffset;
+	pVtx[2].texMulti_u = 0.0f; pVtx[2].texMulti_v = 1.0f + vOffset;
+	pVtx[3].texMulti_u = 1.0f; pVtx[3].texMulti_v = 1.0f + vOffset;
+
+	// アンロック
+	m_pVtxBuff->Unlock();
 
 }

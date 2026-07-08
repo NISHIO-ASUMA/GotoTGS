@@ -77,4 +77,6 @@ private:
 	CVigilanceicon* pIcon;		// アイコンのポインタ
 	CVigilancegauge* pGauge;	// ゲージのポインタ
 	bool m_bUse;				// 使用するかどうか
+	int m_nFram;
+	int m_nCount;
 };
