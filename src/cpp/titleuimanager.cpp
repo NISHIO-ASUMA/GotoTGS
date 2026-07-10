@@ -112,6 +112,7 @@ CTitleuiManager::CTitleuiManager() : m_nSelectIdx(NULL),
 m_pUi{},
 m_pStartUiList{},
 m_isFinishSlideUi(false),
+m_isSelectFinish(false),
 m_fSlideRatio(NULL)
 {
 
@@ -155,6 +156,7 @@ HRESULT CTitleuiManager::Init(void)
 
 	// 再起動用の変数を初期化する
 	m_isFinishSlideUi = false;
+	m_isSelectFinish = false;
 	m_fSlideRatio = NULL;
 
 	return S_OK;
@@ -171,6 +173,9 @@ void CTitleuiManager::Uninit(void)
 //=========================================================
 void CTitleuiManager::Update(void)
 {
+	// 選択終わったら処理を通させない
+	if (m_isSelectFinish) return;
+
 	// スライド中なら
 	if (!m_isFinishSlideUi)
 	{
@@ -261,14 +266,17 @@ void CTitleuiManager::Update(void)
 	if (key->GetTrigger(DIK_RETURN) || pad->GetTrigger(CJoyPad::JOYKEY_A) || pad->GetTrigger(CJoyPad::JOYKEY_START)
 		|| mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
+		// 判定フラグを起動
+		m_isSelectFinish = true;
+
 		// サウンド取得
 		CSound* pSound = CManager::GetInstance()->GetSound();
 		if (pSound == nullptr) return;
 
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
-
-		// 遷移
+		
+		// シーン遷移(後ほどチュートリアルに変更)
 		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CGame>());
 		return;
 	}

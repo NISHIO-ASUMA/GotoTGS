@@ -28,6 +28,7 @@ m_fMoveDistance(NULL),
 m_MoveType(NULL),
 m_nStopCount(NULL),
 m_fSpeed(NULL),
+m_nMotionNumber(NULL),
 m_TargetPos(VECTOR3_NULL),
 m_SavePos(VECTOR3_NULL),
 m_nMoveTypeIndex(NULL),
@@ -52,7 +53,8 @@ CWalkFriend* CWalkFriend::Create
 	const char* MotionName, 
 	const int& nMoveType, 
 	const float& fMoveValue,
-	const float& fSpeed
+	const float& fSpeed,
+	const int& nMotionNumber
 )
 {
 	// インスタンス生成
@@ -68,7 +70,7 @@ CWalkFriend* CWalkFriend::Create
 	pWalk->SetMoveValue(fMoveValue);
 	pWalk->SetMoveSpeed(fSpeed);
 	pWalk->SetMathTargetPos(pos);
-
+	pWalk->SetMotionNumber(nMotionNumber);
 	pWalk->SetUseOutLine(true);
 	pWalk->SetOutlineColor(D3DXVECTOR4(1.0f, 0.0f, 1.0f, 1.0f));
 
@@ -132,11 +134,16 @@ void CWalkFriend::Update(void)
 		// 移動しない
 		SetMove(VECTOR3_NULL);
 
-		// クラスだけ更新
+		// もし"遊びモーション番号"なら
+		if (this->m_nMotionNumber == MOTION::PLAY)
+			GetMotion()->SetMotion(MOTION::PLAY,true,5);
+		else
+			GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+
+		// 親クラスだけ更新
 		CMoveCharactor::Update();
 		return;
 	}
-
 	// 各移動方向に応じた処理
 	UpdateMovingType();
 
@@ -261,12 +268,23 @@ void CWalkFriend::UpdateNormal(void)
 		return;
 	}
 
-	// ベクトルを正規化して移動方向（向き）を決定
+	// ベクトルを正規化して移動方向を決定
 	D3DXVECTOR3 moveVec;
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
-	// 角度を計算
-	float fTargetRot = atan2f(-moveVec.x, -moveVec.z);
+	// 変数初期化
+	float fTargetRot = NULL;
+
+	// X方向の時は変更する
+	if (m_MoveType == MOVING::MOVE_LEFT || m_MoveType == MOVING::MOVE_RIGHT)
+	{
+		fTargetRot = atan2f(moveVec.x, -moveVec.z);
+	}
+	else
+	{
+		// 既存の計算式
+		fTargetRot = atan2f(-moveVec.x, -moveVec.z);
+	}
 
 	// 目的角を設定
 	SetRotDest(D3DXVECTOR3(GetRotDest().x, -fTargetRot, GetRotDest().z));

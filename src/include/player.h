@@ -44,6 +44,7 @@ public:
 	void ChangeState(CPlayerStateBase* pState, int nID);
 	void MoveKeyboard(float speed);
 	void MoveJoypad(float speed);
+	void MoveCrossPadButton(float speed);
 
 	/// <summary>
 	/// ƒvƒŒƒCƒ„[¶¬ˆ—

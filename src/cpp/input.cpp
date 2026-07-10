@@ -500,6 +500,16 @@ bool CJoyPad::GetRightStick(void)
 }
 
 //=========================================================
+// 十字キー入力判定
+//=========================================================
+bool CJoyPad::GetCrossKeyInput(CJoyPad* pPad)
+{
+	return	pPad->GetPress(CJoyPad::JOYKEY_UP) ||
+		pPad->GetPress(CJoyPad::JOYKEY_DOWN) ||
+		pPad->GetPress(CJoyPad::JOYKEY_LEFT) ||
+		pPad->GetPress(CJoyPad::JOYKEY_RIGHT);
+}
+//=========================================================
 // マウスのコンストラクタ
 //=========================================================
 CInputMouse::CInputMouse()

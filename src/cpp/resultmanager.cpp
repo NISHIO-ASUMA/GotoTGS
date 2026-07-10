@@ -77,12 +77,16 @@ void CResultManager::Update(void)
 	// 入力デバイスを取得
 	CInputKeyboard* pInput = CManager::GetInstance()->GetInputKeyboard();
 	CJoyPad* pJyoPad = CManager::GetInstance()->GetJoyPad();
+	CInputMouse* pMouse = CManager::GetInstance()->GetMouse();
 
+	// nullチェック
 	if (pInput == nullptr) return;
 	if (pJyoPad == nullptr) return;
+	if (pMouse == nullptr) return;
 
-	// 決定キーが押された
-	if ((pInput->GetTrigger(DIK_RETURN) || pJyoPad->GetTrigger(pJyoPad->JOYKEY_A)))
+	// 何らかの画面遷移キー
+	if ((pInput->GetTrigger(DIK_RETURN) || pJyoPad->GetTrigger(pJyoPad->JOYKEY_A) || pJyoPad->GetTrigger(pJyoPad->JOYKEY_START))
+		|| pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// ポインタ取得
 		CFade* pFade = CManager::GetInstance()->GetFade();

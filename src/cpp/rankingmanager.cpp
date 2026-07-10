@@ -70,7 +70,8 @@ void CRankingManager::Update(void)
 	// キー入力で画面遷移
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_RETURN) ||
 		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A) ||
-		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START))
+		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START)||
+		CManager::GetInstance()->GetMouse()->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// フェード取得
 		CFade* pFade = CManager::GetInstance()->GetFade();

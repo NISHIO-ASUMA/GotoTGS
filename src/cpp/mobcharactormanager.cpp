@@ -49,11 +49,12 @@ CWalkFriend* CMobCharactorManager::CreateManager
 	const char* pMotionName, 
 	const int nMoveType, 
 	const float fMoveValue,
-	const float fMoveSpeed
+	const float fMoveSpeed,
+	const int nMotion
 )
 {
 	// インスタンス生成
-	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName,nMoveType,fMoveValue, fMoveSpeed);
+	CWalkFriend* pMob = CWalkFriend::Create(pos, rot, pMotionName,nMoveType,fMoveValue, fMoveSpeed, nMotion);
 
 	// 動的配列内に追加
 	if (pMob)

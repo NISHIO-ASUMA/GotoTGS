@@ -53,12 +53,13 @@ public:
 	/// <returns></returns>
 	static CWalkFriend* Create
 	(
-		const D3DXVECTOR3& pos, 
+		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot,
-		const char * MotionName,
+		const char* MotionName,
 		const int& nMoveType,
 		const float& fMoveValue = 30.0f,
-		const float& fSpeed = 1.5f
+		const float& fSpeed = 1.5f,
+		const int& nMotionNumber = 0
 	);
 
 public:
@@ -86,7 +87,7 @@ public:
 		NONE,			// 移動しない
 		MOVE_FRONT_Z,	// -Z(手前)
 		MOVE_BACK_Z,	// +Z(奥行き)
-		MOVE_LEFT,		// 左方向
+		MOVE_LEFT,		// 左方向(X方向)
 		MOVE_RIGHT,		// 右方向
 		MOVE_MAX
 	};
@@ -95,6 +96,7 @@ private:
 
 	void SetFileName(const char* pFileName) { m_pFileName = pFileName; }
 	void SetMoveType(const int& nType) { m_MoveType = nType; }
+	void SetMotionNumber(const int& nNumber) { m_nMotionNumber = nNumber; }
 	void SetMoveValue(const float& fDistance) { m_fMoveDistance = fDistance; }
 	void SetMoveSpeed(const float& fMoveSpeed) { m_fSpeed = fMoveSpeed; }
 	void SetSavePos(const D3DXVECTOR3& pos) { m_SavePos = pos; }
@@ -116,6 +118,7 @@ private:
 	int m_MoveType;				// 移動方向の種類
 	int m_nStopCount;			// 待機時間
 	int m_nMoveTypeIndex;		// 移動のインデックス
+	int m_nMotionNumber;		// モーションの使う番号
 	const char* m_pFileName;	// ファイルパス
 	float m_fMoveDistance;		// 移動する距離
 	float m_fSpeed;				// 移動速度
