@@ -1,6 +1,6 @@
 //=========================================================
 //
-// 進捗ゲージの処理 [ progressgauge.h ]
+// ゲージの指針の処理 [ gaugeneedle.h ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -13,47 +13,45 @@
 //*********************************************************
 // インクルード
 //*********************************************************
-#include "object2D.h"
+#include "object2Drotation.h"
 
 //*********************************************************
-// 前方宣言
+// ゲージの指針クラスを定義
 //*********************************************************
-class CGaugeneedle;
-
-//*********************************************************
-// 進捗ゲージクラスを定義
-//*********************************************************
-class CProgressgauge:public CObject2D
+class CGaugeneedle :public CObject2DRotation
 {
 public:
 
-	CProgressgauge(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
-	~CProgressgauge();
+	CGaugeneedle(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	~CGaugeneedle();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
 
+	// 設定処理
+	void AddTask(void) { m_nTask++; }	// タスクの数加算
+	void AddAFK(void) { m_nAFK++; }		// さぼりの数加算
+
 	// 情報取得処理
-	CGaugeneedle* GetGaugeneedle(void) const { return m_gaugeneedle; }
+	inline int GetTaskCount(void) const { return m_nTask; }
+	inline int GetAFKCount(void) const { return m_nAFK; }
 
 	// 生成処理
-	static CProgressgauge* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
+	static CGaugeneedle* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
 
 private:
-
 	//*******************************
 	// 定数構造体宣言
 	//*******************************
 	struct Config
 	{
-		static constexpr float LIFE_RATIO = 0.7f;		// 体力の初期割合
-		static constexpr float GAUGE_RATIO = 0.02f;		// ゲージの増減割合
+		static constexpr float PIVOT_X = 0.5f;	// X軸の回転基準点
+		static constexpr float PIVOT_Y = 0.8f;	// Y軸の回転基準点
 	};
 
 	// メンバ変数
-	int m_nTask;					// タスクをこなした数
-	int m_nAFK;						// さぼりをこなした数
-	CGaugeneedle* m_gaugeneedle;	// 指針のポインタ
+	int m_nTask;							// タスクをこなした数
+	int m_nAFK;								// さぼりをこなした数
 };

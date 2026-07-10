@@ -220,6 +220,7 @@
     <ClCompile Include="src\cpp\gametime.cpp" />
     <ClCompile Include="src\cpp\gamewallmodel.cpp" />
     <ClCompile Include="src\cpp\gauge.cpp" />
+    <ClCompile Include="src\cpp\gaugeneedle.cpp" />
     <ClCompile Include="src\cpp\input.cpp" />
     <ClCompile Include="src\cpp\instancemodel.cpp" />
     <ClCompile Include="src\cpp\instancemodelmanager.cpp" />
@@ -251,6 +252,7 @@
     <ClCompile Include="src\cpp\object.cpp" />
     <ClCompile Include="src\cpp\object2D.cpp" />
     <ClCompile Include="src\cpp\object2Dmulti.cpp" />
+    <ClCompile Include="src\cpp\object2Drotation.cpp" />
     <ClCompile Include="src\cpp\object3D.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
@@ -384,6 +386,7 @@
     <ClInclude Include="src\include\gametime.h" />
     <ClInclude Include="src\include\gamewallmodel.h" />
     <ClInclude Include="src\include\gauge.h" />
+    <ClInclude Include="src\include\gaugeneedle.h" />
     <ClInclude Include="src\include\input.h" />
     <ClInclude Include="src\include\instancemodel.h" />
     <ClInclude Include="src\include\instancemodelmanager.h" />
@@ -416,6 +419,7 @@
     <ClInclude Include="src\include\object.h" />
     <ClInclude Include="src\include\object2D.h" />
     <ClInclude Include="src\include\object2Dmulti.h" />
+    <ClInclude Include="src\include\object2Drotation.h" />
     <ClInclude Include="src\include\object3D.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />

@@ -328,10 +328,10 @@ void CPCDeskwork::Task(const auto& pClear)
 {
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	// 進捗ゲージのポインタ
-	auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+	//// 進捗ゲージのポインタ
+	//auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
 
-	if (pScore == nullptr || pProgressgauge == nullptr)
+	if (pScore == nullptr /*|| pProgressgauge == nullptr*/)
 	{// ヌルチェック
 		return;
 	}
@@ -349,8 +349,8 @@ void CPCDeskwork::Task(const auto& pClear)
 	// クールタイムを始める
 	SetTime(true);
 
-	// こなしたタスクの数を増やす
-	pProgressgauge->AddTask();
+	//// こなしたタスクの数を増やす
+	//pProgressgauge->AddTask();
 
 	// スコア加算
 	pScore->AddScore(100);

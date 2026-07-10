@@ -1,6 +1,6 @@
 //=========================================================
 //
-// 進捗ゲージの処理 [ progressgauge.cpp ]
+// ゲージの指針の処理 [ gaugeneedle.cpp ]
 // Author: Takahashi Misaki
 //
 //=========================================================
@@ -8,18 +8,17 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "progressgauge.h"
+#include "gaugeneedle.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "gaugeneedle.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CProgressgauge::CProgressgauge(int nPriority) :CObject2D(nPriority),
+CGaugeneedle::CGaugeneedle(int nPriority) :CObject2DRotation(nPriority),
 m_nTask(NULL),	// タスクをこなした数
 m_nAFK(NULL)	// さぼりをこなした数
 {
@@ -29,7 +28,7 @@ m_nAFK(NULL)	// さぼりをこなした数
 //=========================================================
 // デストラクタ
 //=========================================================
-CProgressgauge::~CProgressgauge()
+CGaugeneedle::~CGaugeneedle()
 {
 
 }
@@ -37,42 +36,35 @@ CProgressgauge::~CProgressgauge()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CProgressgauge* CProgressgauge::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
+CGaugeneedle* CGaugeneedle::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
 {
-	// 進捗ゲージのポインタ
-	CProgressgauge* pProgressgauge = new CProgressgauge;
+	// ゲージの指針のポインタ
+	CGaugeneedle* pGaugeneedle = new CGaugeneedle;
 
 	// ヌルチェック
-	if (pProgressgauge == nullptr) return nullptr;
+	if (pGaugeneedle == nullptr) return nullptr;
 
-	// 進捗ゲージの位置設定
-	pProgressgauge->SetPos(pos);
-	pProgressgauge->SetWidth(fWidth);
-	pProgressgauge->SetHeight(fHeight);
-	pProgressgauge->SetCol(COLOR_WHITE);
-	pProgressgauge->SetTexture("progressgauge000.jpg");
+	// ゲージの指針の設定
+	pGaugeneedle->SetPos(pos);														// 位置
+	pGaugeneedle->SetPivot(D3DXVECTOR3(Config::PIVOT_X, Config::PIVOT_Y, 0.0f));	// 回転の基準点
+	pGaugeneedle->SetAngle(0.0f);													// 角度
+	pGaugeneedle->SetCol(COLOR_WHITE);												// 色
+	pGaugeneedle->SetSize(D3DXVECTOR2(fWidth, fHeight));							// サイズ
+	pGaugeneedle->SetTexture("needle000.jpg");										// テクスチャ
 
 	// 初期化が失敗した場合
-	if (FAILED(pProgressgauge->Init())) return nullptr;
+	if (FAILED(pGaugeneedle->Init())) return nullptr;
 
-	return pProgressgauge;
+	return pGaugeneedle;
 }
 
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CProgressgauge::Init(void)
+HRESULT CGaugeneedle::Init(void)
 {
 	// 親の初期化処理
-	CObject2D::Init();
-
-	// 進捗ゲージの情報を取得
-	D3DXVECTOR3 pos = GetPos();
-	float fWidth = GetWidth();
-	float fHeight = GetHeight();
-
-	// 指針の生成処理
-	m_gaugeneedle = CGaugeneedle::Create(pos, fWidth, fHeight);
+	CObject2DRotation::Init();
 
 	return S_OK;
 }
@@ -80,41 +72,28 @@ HRESULT CProgressgauge::Init(void)
 //=========================================================
 // 終了処理
 //=========================================================
-void CProgressgauge::Uninit(void)
+void CGaugeneedle::Uninit(void)
 {
 	// 親の終了処理
-	CObject2D::Uninit();
+	CObject2DRotation::Uninit();
 
-	// ポインタの破棄
-	if (m_gaugeneedle != nullptr)
-	{
-		// 終了処理
-		m_gaugeneedle->Uninit();
-		m_gaugeneedle = nullptr;
-	}
-	
 }
 
 //=========================================================
 // 更新処理
 //=========================================================
-void CProgressgauge::Update(void)
+void CGaugeneedle::Update(void)
 {
 	// 親の更新処理
-	CObject2D::Update();
-
-	// 指針の更新処理
-	m_gaugeneedle->Update();
+	CObject2DRotation::Update();
 }
 
 //=========================================================
 // 描画処理
 //=========================================================
-void CProgressgauge::Draw(void)
+void CGaugeneedle::Draw(void)
 {
 	// 親の描画処理
-	CObject2D::Draw();
+	CObject2DRotation::Draw();
 
-	// 指針の描画処理
-	m_gaugeneedle->Draw();
 }

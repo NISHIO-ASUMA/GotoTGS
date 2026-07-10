@@ -421,6 +421,12 @@
     <Filter Include="ヘッダー ファイル\AddFile\Chikada\effect">
       <UniqueIdentifier>{ccabb3db-2b22-48ec-b834-e944893c316a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Takahashi\Progressgauge">
+      <UniqueIdentifier>{80bcf1fa-248c-43bb-b97b-67e3afbc2d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Takahashi\Progressgauge">
+      <UniqueIdentifier>{e967fb09-7f9b-47eb-87e7-351868b80074}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -861,9 +867,6 @@
     <ClCompile Include="src\cpp\gametime.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Other%27s</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\progressgauge.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi\Other%27s</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\pcui.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
     </ClCompile>
@@ -893,6 +896,15 @@
     </ClCompile>
     <ClCompile Include="src\cpp\particle.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\object2Drotation.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\progressgauge.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Progressgauge</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\gaugeneedle.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Progressgauge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1340,9 +1352,6 @@
     <ClInclude Include="src\include\gametime.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Other%27s</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\progressgauge.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi\Other%27s</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\afkgamecenter.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
     </ClInclude>
@@ -1375,6 +1384,15 @@
     </ClInclude>
     <ClInclude Include="src\include\particle.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\object2Drotation.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\progressgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Progressgauge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\gaugeneedle.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Progressgauge</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
