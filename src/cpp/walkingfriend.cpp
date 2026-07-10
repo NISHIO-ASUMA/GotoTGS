@@ -261,12 +261,23 @@ void CWalkFriend::UpdateNormal(void)
 		return;
 	}
 
-	// ベクトルを正規化して移動方向（向き）を決定
+	// ベクトルを正規化して移動方向を決定
 	D3DXVECTOR3 moveVec;
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
-	// 角度を計算
-	float fTargetRot = atan2f(-moveVec.x, -moveVec.z);
+	// 変数初期化
+	float fTargetRot = NULL;
+
+	// X方向の時は変更する
+	if (m_MoveType == MOVING::MOVE_LEFT || m_MoveType == MOVING::MOVE_RIGHT)
+	{
+		fTargetRot = atan2f(moveVec.x, -moveVec.z);
+	}
+	else
+	{
+		// 既存の計算式
+		fTargetRot = atan2f(-moveVec.x, -moveVec.z);
+	}
 
 	// 目的角を設定
 	SetRotDest(D3DXVECTOR3(GetRotDest().x, -fTargetRot, GetRotDest().z));

@@ -112,6 +112,7 @@ public:
 	float GetRightStickY(void);
 
 	bool GetRightStick(void);
+	bool GetCrossKeyInput(CJoyPad* pPad);
 
 	inline XINPUT_STATE* GetStickAngle(void) { return &m_joyKeyState; }
 
