@@ -260,7 +260,8 @@ void CPlayer::Update(void)
 	// ジョイパッド操作
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
 	{
-		MoveJoypad(player::fSpeed);
+		MoveCrossPadButton(player::fSpeed); // 十字キー操作
+		MoveJoypad(player::fSpeed);			// スティック判定
 	}
 	
 	// ステートマシンの更新処理
@@ -693,6 +694,142 @@ void CPlayer::MoveJoypad(float speed)
 	{
 		// 位置の更新
 		SetMove(move);
+
+		// 目的の向きを設定
+		SetRotDest(RotDest);
+
+		// 移動モーション設定
+		GetMotion()->SetMotion(CPlayer::MOTION::MOVE);
+
+		m_nCntAfk = 0;
+	}
+}
+//=================================================
+// 十字キーでの移動バージョン
+//=================================================
+void CPlayer::MoveCrossPadButton(float speed)
+{
+	// パッドのポインタ
+	CJoyPad* pGamePad = CManager::GetInstance()->GetJoyPad();
+
+	// カメラのポインタ
+	CCamera* pCamera = CManager::GetInstance()->GetCamera();
+
+	// 向きの取得
+	D3DXVECTOR3 rot = pCamera->GetRot();
+
+	// ビューマトリックスの取得
+	auto ViewMatrix = pCamera->GetView();
+
+	// さぼっているかの判定
+	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
+	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
+
+	// サボりキー入力判定
+	if (bAfkSmoke && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	else if (!bAfkSmoke) m_bAfkSmoke = false;
+
+	if (bAfkTV && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
+	else if (!bAfkTV) m_bAfkTV = false;
+
+	if (bAfkMagazine && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
+	else if (!bAfkMagazine) m_bAfkMagazine = false;
+
+	if (bAfkGameCenter && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
+	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+
+	// ビュー行列の逆行列を計算
+	D3DXMATRIX invViewMat;
+	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
+
+	// 逆行列からカメラの方向ベクトルを抽出
+	D3DXVECTOR3 camForward = D3DXVECTOR3(invViewMat._31, invViewMat._32, invViewMat._33);
+	D3DXVECTOR3 camRight = D3DXVECTOR3(invViewMat._11, invViewMat._12, invViewMat._13);
+
+	// XZ平面の移動にするため、Y成分を0にする
+	camForward.y = NULL;
+	camRight.y = NULL;
+
+	// 方向ベクトルの正規化
+	D3DXVec3Normalize(&camForward, &camForward);
+	D3DXVec3Normalize(&camRight, &camRight);
+
+	// 移動方向の計算
+	D3DXVECTOR3 moveDir = VECTOR3_NULL;
+
+	// 目的の向き
+	D3DXVECTOR3 RotDest = GetRotDest();
+
+
+	//**********************************
+	// 移動計算ブロック
+	//**********************************
+	if (pGamePad->GetPress(CJoyPad::JOYKEY_UP))
+	{
+		moveDir += camForward;
+		RotDest.y = rot.y + D3DX_PI;
+
+		// 移動判定をtrueに
+		m_bMove = true;
+	}
+	if (pGamePad->GetPress(CJoyPad::JOYKEY_DOWN))
+	{
+		moveDir -= camForward;
+		RotDest.y = rot.y;
+
+		// 移動判定をtrueに
+		m_bMove = true;
+	}
+	if (pGamePad->GetPress(CJoyPad::JOYKEY_RIGHT))
+	{
+		moveDir += camRight;
+		RotDest.y = rot.y - D3DX_PI * HALF;
+
+		// 移動判定をtrueに
+		m_bMove = true;
+	}
+	if (pGamePad->GetPress(CJoyPad::JOYKEY_LEFT))
+	{
+		moveDir -= camRight;
+		RotDest.y = rot.y + D3DX_PI * HALF;
+
+		// 移動判定をtrueに
+		m_bMove = true;
+	}
+
+	// サボり判定が有効な物があったら
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter)
+	{
+		m_nCntAfk++;
+		if (m_nCntAfk >= 120)
+		{
+			CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			m_nCntAfk = 0;
+		}
+	}
+
+	// 十字キーが押されていなかったら
+	else if (!pGamePad->GetPress(CJoyPad::JOYKEY_UP) &&
+			 !pGamePad->GetPress(CJoyPad::JOYKEY_DOWN) &&
+			 !pGamePad->GetPress(CJoyPad::JOYKEY_RIGHT) &&
+			 !pGamePad->GetPress(CJoyPad::JOYKEY_LEFT))
+	{
+		GetMotion()->SetMotion(CPlayer::MOTION::NEUTRAL, true, 5);
+		m_nCntAfk = 0;
+	}
+	// 移動入力がある場合
+	else if (m_bMove)
+	{
+		// 移動の正規化
+		D3DXVec3Normalize(&moveDir, &moveDir);
+
+		// 位置の更新
+		SetMove(moveDir * speed);
+
+		// 移動方向から向きを計算
+		RotDest.y = atan2f(-moveDir.x, -moveDir.z);
 
 		// 目的の向きを設定
 		SetRotDest(RotDest);

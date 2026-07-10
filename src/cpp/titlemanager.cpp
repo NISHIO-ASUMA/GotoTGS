@@ -91,7 +91,7 @@ void CTitleManager::Update(void)
 	if (pMouse == nullptr) return;
 
 	// キー入力時の判定
-	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START)) ||
+	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A)) || 
 		pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// サウンド取得

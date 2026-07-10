@@ -86,7 +86,7 @@ public:
 		NONE,			// ˆÚ“®‚µ‚È‚¢
 		MOVE_FRONT_Z,	// -Z(Žè‘O)
 		MOVE_BACK_Z,	// +Z(‰œs‚«)
-		MOVE_LEFT,		// ¶•ûŒü
+		MOVE_LEFT,		// ¶•ûŒü(X•ûŒü)
 		MOVE_RIGHT,		// ‰E•ûŒü
 		MOVE_MAX
 	};
