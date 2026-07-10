@@ -47,11 +47,22 @@
     "ObjectTag": "Charactor",
     "Charactortag": "Move",
     "CharactorName": "Walking",
+    "MotionName": "data/MOTION/Mob/MobMotion03.txt",
+    "MoveType": 2,
+    "MoveDistance": 500.0,
+    "MoveSpeed": 1.5,
+    "Pos": [ 1328.0, 0.0, -984.0 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "Move",
+    "CharactorName": "Walking",
     "MotionName": "data/MOTION/Mob/MobMotion01.txt",
-    "MoveType": 3,
+    "MoveType": 0,
     "MoveDistance": 300.0,
     "MoveSpeed": 1.0,
-    "Pos": [ 1328.0, 0.0, -984.0 ],
+    "Pos": [ 952.0, 0.0, -529.0 ],
     "Rot": [ 0.0, 1.57, 0.0 ]
   }
 ]

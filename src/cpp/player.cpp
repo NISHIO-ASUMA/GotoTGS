@@ -260,8 +260,16 @@ void CPlayer::Update(void)
 	// ジョイパッド操作
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
 	{
-		MoveCrossPadButton(player::fSpeed); // 十字キー操作
-		MoveJoypad(player::fSpeed);			// スティック判定
+		// 十字キーの入力がある場合は十字キーの移動だけを行う
+		if (Pad->GetCrossKeyInput(Pad) == true)
+		{
+			MoveCrossPadButton(player::fSpeed);
+		}
+		else
+		{
+			// 十字キーが押されていない場合は、スティックの判定を行う
+			MoveJoypad(player::fSpeed);
+		}
 	}
 	
 	// ステートマシンの更新処理
@@ -589,8 +597,7 @@ void CPlayer::MoveJoypad(float speed)
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 	if (!pJoyPad) return;
 
-	// 十字判定があったかどうか
-	if (pJoyPad->GetCrossKeyInput(pJoyPad) == true) return;
+	//if (pJoyPad->GetCrossKeyInput(pJoyPad) == true) return; 	// 十字判定があったかどうか
 
 	XINPUT_STATE* pState = pJoyPad->GetStickAngle();
 
@@ -657,6 +664,7 @@ void CPlayer::MoveJoypad(float speed)
 		if (fMag < DeadZone)
 		{
 			m_bMove = false;
+			SetMove(VECTOR3_NULL);
 		}
 		else if (fMag > DeadZone)
 		{
@@ -673,6 +681,10 @@ void CPlayer::MoveJoypad(float speed)
 			move.z += MoveZ * speed;
 			RotDest.y = atan2f(-MoveX, -MoveZ);
 			m_bMove = true;
+		}
+		else
+		{
+			m_bMove = false;
 		}
 	}
 
@@ -714,9 +726,6 @@ void CPlayer::MoveCrossPadButton(float speed)
 {
 	// パッドのポインタ
 	CJoyPad* pGamePad = CManager::GetInstance()->GetJoyPad();
-
-	// もしスティックの入力があるなら
-	if (pGamePad->GetLeftStick()) return;
 
 	// カメラのポインタ
 	CCamera* pCamera = CManager::GetInstance()->GetCamera();
@@ -767,6 +776,9 @@ void CPlayer::MoveCrossPadButton(float speed)
 
 	// 目的の向き
 	D3DXVECTOR3 RotDest = GetRotDest();
+
+	// フラグ初期化
+	m_bMove = false;
 
 	//**********************************
 	// 移動計算ブロック
