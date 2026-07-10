@@ -109,10 +109,12 @@ void CPauseManager::Update(void)
 	// 入力デバイス取得
 	CInputKeyboard* pKey = CManager::GetInstance()->GetInputKeyboard();
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
+	CInputMouse* pMouse = CManager::GetInstance()->GetMouse();
 
 	// nullチェック
 	if (pKey == nullptr) return;
 	if (pJoyPad == nullptr) return;
+	if (pMouse == nullptr) return;
 
 	// サウンド取得
 	CSound* pSound = CManager::GetInstance()->GetSound();
@@ -177,8 +179,8 @@ void CPauseManager::Update(void)
 		}
 	}
 
-	// Enterキー or Aボタン入力
-	if (pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
+	// Enterキー or Aボタン入力 or マウスクリック入力
+	if (pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A) || pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
 	{
 		// サウンド再生
 		pSound->Play(pSound->SOUND_LABEL_RETURN);
