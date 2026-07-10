@@ -71,6 +71,7 @@ private:
 private:
 
 	bool m_isFinishSlideUi;				// スライド終了判定
+	bool m_isSelectFinish;				// 選択終わり判定
 	float m_fSlideRatio;				// スライドの進行度
 	CUi* m_pStartUiList[START_UI_NUM];	// 初期でおいてあるui群
 };

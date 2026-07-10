@@ -28,6 +28,7 @@ m_fMoveDistance(NULL),
 m_MoveType(NULL),
 m_nStopCount(NULL),
 m_fSpeed(NULL),
+m_nMotionNumber(NULL),
 m_TargetPos(VECTOR3_NULL),
 m_SavePos(VECTOR3_NULL),
 m_nMoveTypeIndex(NULL),
@@ -52,7 +53,8 @@ CWalkFriend* CWalkFriend::Create
 	const char* MotionName, 
 	const int& nMoveType, 
 	const float& fMoveValue,
-	const float& fSpeed
+	const float& fSpeed,
+	const int& nMotionNumber
 )
 {
 	// インスタンス生成
@@ -68,7 +70,7 @@ CWalkFriend* CWalkFriend::Create
 	pWalk->SetMoveValue(fMoveValue);
 	pWalk->SetMoveSpeed(fSpeed);
 	pWalk->SetMathTargetPos(pos);
-
+	pWalk->SetMotionNumber(nMotionNumber);
 	pWalk->SetUseOutLine(true);
 	pWalk->SetOutlineColor(D3DXVECTOR4(1.0f, 0.0f, 1.0f, 1.0f));
 
@@ -132,11 +134,16 @@ void CWalkFriend::Update(void)
 		// 移動しない
 		SetMove(VECTOR3_NULL);
 
-		// クラスだけ更新
+		// もし"遊びモーション番号"なら
+		if (this->m_nMotionNumber == MOTION::PLAY)
+			GetMotion()->SetMotion(MOTION::PLAY,true,5);
+		else
+			GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+
+		// 親クラスだけ更新
 		CMoveCharactor::Update();
 		return;
 	}
-
 	// 各移動方向に応じた処理
 	UpdateMovingType();
 

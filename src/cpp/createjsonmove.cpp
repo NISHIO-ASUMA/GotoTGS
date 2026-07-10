@@ -41,6 +41,9 @@ void CJsonCreateMove::Create(const JsonMove::json& Jsondata)
 	// 移動タイプの設定
 	int nType = CJsonConverter::ConverterInt(Jsondata, "MoveType");
 
+	// 動作タイプの設定
+	int nMotion = CJsonConverter::ConverterInt(Jsondata, "MotionIdx");
+
 	// 移動距離の設定
 	float fMoveValue = CJsonConverter::ConverterFloat(Jsondata, "MoveDistance");
 
@@ -56,7 +59,8 @@ void CJsonCreateMove::Create(const JsonMove::json& Jsondata)
 			str.c_str(), 
 			nType, 
 			fMoveValue,
-			fMoveSpeed
+			fMoveSpeed,
+			nMotion
 		);
 	}
 }

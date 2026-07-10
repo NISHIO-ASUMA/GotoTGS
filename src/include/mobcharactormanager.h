@@ -70,11 +70,24 @@ public:
 	/// <summary>
 	/// 管理クラス内で生成
 	/// </summary>
-	/// <param name="pos">生成座標</param>
+	/// <param name="pos">座標</param>
 	/// <param name="rot">角度</param>
-	/// <param name= "pMotionName">モーションファイル</param>
+	/// <param name="pMotionName">スクリプト名</param>
+	/// <param name="nMoveType">移動方向</param>
+	/// <param name="fMoveValue">移動量</param>
+	/// <param name="fMoveSpeed">移動速度</param>
+	/// <param name="nMotion">モーション番号</param>
 	/// <returns></returns>
-	CWalkFriend* CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const char* pMotionName,const int nMoveType,const float fMoveValue, const float fMoveSpeed);
+	CWalkFriend* CreateManager
+	(
+		const D3DXVECTOR3& pos, 
+		const D3DXVECTOR3& rot,
+		const char* pMotionName,
+		const int nMoveType,
+		const float fMoveValue, 
+		const float fMoveSpeed, 
+		const int nMotion
+	);
 
 private:
 
