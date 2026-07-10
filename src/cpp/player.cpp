@@ -215,7 +215,7 @@ void CPlayer::Update(void)
 	//*********************************************************
 	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
 	//*********************************************************
-	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)/*isPcDeskWork || isCopyDeskWork*/
+	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)
 	{
 		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
 		{// 終了キーを押していない場合
@@ -240,9 +240,6 @@ void CPlayer::Update(void)
 
 		// 起動したタスクを非アクティブにする [add Misaki]
 		pDesk->SetTaskType(pDesk->GetTaskType());
-
-		// カメラ固定フラグ無効化
-		CManager::GetInstance()->GetCamera()->SetCameraMove(false);
 
 		// タスク中は移動や他の当たり判定をさせないためにリターン
 		return;
@@ -312,10 +309,7 @@ void CPlayer::Update(void)
 		{
 			// 当たっている かつ Fキー入力
 			if (Key->GetTrigger(DIK_F) || Pad->GetTrigger(CJoyPad::JOYKEY_START))
-			{
-				// カメラ固定フラグ有効化
-				CManager::GetInstance()->GetCamera()->SetCameraMove(true);
-				
+			{				
 				switch (Colliders->nType)
 				{
 				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add Misaki]
@@ -329,8 +323,6 @@ void CPlayer::Update(void)
 						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
 					}
 
-					// カメラ固定フラグ無効化
-					CManager::GetInstance()->GetCamera()->SetCameraMove(false);
 					break;
 
 				default:

@@ -47,6 +47,17 @@
     "ObjectTag": "Charactor",
     "Charactortag": "Move",
     "CharactorName": "Walking",
+    "MotionName": "data/MOTION/Mob/MobMotion01.txt",
+    "MoveType": 0,
+    "MoveDistance": 0.0,
+    "MoveSpeed": 1.0,
+    "Pos": [ 952.0, 0.0, -529.0 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "Move",
+    "CharactorName": "Walking",
     "MotionName": "data/MOTION/Mob/MobMotion03.txt",
     "MoveType": 2,
     "MoveDistance": 500.0,
@@ -58,11 +69,33 @@
     "ObjectTag": "Charactor",
     "Charactortag": "Move",
     "CharactorName": "Walking",
-    "MotionName": "data/MOTION/Mob/MobMotion01.txt",
+    "MotionName": "data/MOTION/Mob/MobMotion03.txt",
     "MoveType": 0,
-    "MoveDistance": 300.0,
+    "MoveDistance": 0.0,
     "MoveSpeed": 1.0,
-    "Pos": [ 952.0, 0.0, -529.0 ],
+    "Pos": [ 1249.0, 0.0, 465.0 ],
+    "Rot": [ 0.0, 0.0, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "Move",
+    "CharactorName": "Walking",
+    "MotionName": "data/MOTION/Mob/MobMotion04.txt",
+    "MoveType": 0,
+    "MoveDistance": 0.0,
+    "MoveSpeed": 1.0,
+    "Pos": [ 2199.0, 0.0, -606.0 ],
+    "Rot": [ 0.0, 1.57, 0.0 ]
+  },
+  {
+    "ObjectTag": "Charactor",
+    "Charactortag": "Move",
+    "CharactorName": "Walking",
+    "MotionName": "data/MOTION/Mob/MobMotion04.txt",
+    "MoveType": 1,
+    "MoveDistance": 250.0,
+    "MoveSpeed": 0.5,
+    "Pos": [ 2367.0, 0.0, -2.0 ],
     "Rot": [ 0.0, 1.57, 0.0 ]
   }
 ]
