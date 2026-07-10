@@ -814,7 +814,7 @@ void CPlayer::MoveCrossPadButton(float speed)
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
-			CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			//CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
 			m_nCntAfk = 0;
 		}
 	}

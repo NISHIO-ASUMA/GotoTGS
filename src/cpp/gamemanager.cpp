@@ -69,13 +69,5 @@ void CGameManager::Uninit(void)
 //=========================================================
 void CGameManager::Update(void)
 {
-#ifdef _DEBUG
-	// ‰æ–Ê‘JˆÚ
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F5))
-	{
-		// ƒŠƒUƒ‹ƒg‰æ–Ê‚É‘JˆÚ
-		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CResult>());
-		return;
-	}
-#endif
+
 }
