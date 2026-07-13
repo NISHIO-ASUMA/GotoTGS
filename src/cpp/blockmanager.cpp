@@ -24,6 +24,7 @@
 #include "jsonmanager.h"
 #include "manager.h"
 #include "camera.h"
+#include "movecharactor.h"
 
 //*********************************************************
 // Žg—p–¼‘O‹óŠÔ

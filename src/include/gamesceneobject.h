@@ -61,8 +61,6 @@ public:
 
 private:
 
-	static CGameSceneObject* m_pInstance;	// シングルトン変数
-
 	CGameSceneObject();			// コンストラクタ
 	void CreatePointer(void);	// 初期化処理関数分け
 

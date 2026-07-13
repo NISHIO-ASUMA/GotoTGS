@@ -20,6 +20,8 @@
 #include "input.h"
 #include "game.h"
 #include "fade.h"
+#include "tutorialplayer.h"
+#include "camera.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -37,7 +39,8 @@ namespace TUTORIALOBJECT
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr)
+CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr),
+m_pTutoPlayer(nullptr)
 {
 	
 }
@@ -55,14 +58,19 @@ HRESULT CTutorialObject::Init(void)
 {
 	//  jsonマネージャー取得
 	CJsonManager* pManager = CManager::GetInstance()->GetJsonManager();
-
-	// 使用するオブジェクト読み込み
 	pManager->Load(TUTORIALOBJECT::LoadName);
 
 	// ステージマップ読み込み
 	m_pBlockManager = std::make_unique<CBlockManager>();
 	pManager->SetBlockManager(m_pBlockManager.get());
 	m_pBlockManager->Init();
+
+	// 操作キャラクター生成
+	m_pTutoPlayer = CTutorialPlayer::Create(D3DXVECTOR3(-160.0f, 0.0f, 95.0f), VECTOR3_NULL);
+
+	//// カメラに追従するキャラクターのポインタをセット
+	//CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pTutoPlayer);
+	//CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
 
 	return S_OK;
 }
@@ -86,7 +94,12 @@ void CTutorialObject::Uninit(void)
 //=========================================================
 void CTutorialObject::Update(void)
 {
+	//// カメラの追従ターゲット設定
+	//CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
 
+	// 管理クラス更新
+	if (m_pBlockManager)
+		m_pBlockManager->Update();
 }
 //=========================================================
 // インスタンス取得
@@ -94,7 +107,10 @@ void CTutorialObject::Update(void)
 CTutorialObject* CTutorialObject::GetInstance(void)
 {
 	// nullなら
-	if (m_pInstance == nullptr) m_pInstance = new CTutorialObject;
+	if (m_pInstance == nullptr)
+	{
+		m_pInstance = new CTutorialObject;
+	}
 
 	// インスタンスを返す
 	return m_pInstance;

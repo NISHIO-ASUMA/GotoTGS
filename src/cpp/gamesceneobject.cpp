@@ -53,11 +53,6 @@
 #include "mobcharactormanager.h"	// 西尾追加
 
 //*********************************************************
-// 静的メンバ変数
-//*********************************************************
-CGameSceneObject* CGameSceneObject::m_pInstance = nullptr;		// シングルトン変数
-
-//*********************************************************
 // 定数名前空間
 //*********************************************************
 namespace GAMEOBJECT
@@ -95,11 +90,8 @@ CGameSceneObject::~CGameSceneObject()
 //=========================================================
 CGameSceneObject* CGameSceneObject::GetInstance(void)
 {
-	// nullなら
-	if (m_pInstance == nullptr) m_pInstance = new CGameSceneObject;
-
-	// インスタンスを返す
-	return m_pInstance;
+	static CGameSceneObject Instance;
+	return &Instance;
 }
 
 //=========================================================

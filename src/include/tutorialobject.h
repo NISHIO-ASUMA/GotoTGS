@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CBlockManager;
+class CTutorialPlayer;
 
 //*********************************************************
 // チュートリアルで使うオブジェクトを管理するクラスを定義
@@ -33,6 +34,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 
+	CTutorialPlayer* GetTutorilaPlayer(void) { return m_pTutoPlayer; }
+
 	inline CBlockManager* GetBlockManager(void) const { return m_pBlockManager.get(); }
 	static CTutorialObject* GetInstance(void);
 
@@ -42,5 +45,7 @@ private:
 
 	static CTutorialObject* m_pInstance;			// シングルトン変数
 
+private:
 	std::unique_ptr<CBlockManager>m_pBlockManager;	// ブロック管理クラス
+	CTutorialPlayer* m_pTutoPlayer;					// チュートリアルプレイヤー
 };
