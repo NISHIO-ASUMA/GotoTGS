@@ -143,6 +143,9 @@ HRESULT CGameSceneObject::Init(void)
 	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
 
+	// ゲーセンの上のビル
+	CBlock::Create(D3DXVECTOR3(1656.0f, 322.0f, 122.0f), VECTOR3_NULL, D3DXVECTOR3(0.85f, 0.25f, 1.85f), "STAGEOBJ/bill01.x");
+
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
