@@ -340,14 +340,44 @@ void CCOPYDeskwork::ControlResult(int& nCount)
 		return;
 	}
 
-	if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
-		(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
-		(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
-		(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_D) ||
-		(pJoypad->GetPress(CJoyPad::JOYKEY_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_A) ||
-		(pJoypad->GetPress(CJoyPad::JOYKEY_B) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_B) ||
-		(pJoypad->GetPress(CJoyPad::JOYKEY_X) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_X) ||
-		(pJoypad->GetPress(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_Y))
+	//************************************************************
+	// ADD : 西尾 現在の操作のタイプに応じて入力取得を変化させる
+	//************************************************************
+	int nControl = CTitleuiManager::GetInstance()->GetSelectIdx();
+
+	// 入力制御フラグ
+	bool isInputControl = false;
+
+	switch (nControl)
+	{
+	case CONTROL::CONTROL_NONE:
+		break;
+
+	case CONTROL::CONTROL_KEY:
+		if ((pKeyboard->GetPress(DIK_W) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
+			(pKeyboard->GetPress(DIK_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
+			(pKeyboard->GetPress(DIK_S) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
+			(pKeyboard->GetPress(DIK_D) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYBOARD_D))
+		{
+			isInputControl = true;
+		}
+		break;
+
+	case CONTROL::CONTROL_PAD:
+		if ((pJoypad->GetPress(CJoyPad::JOYKEY_A) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_A) ||
+			(pJoypad->GetPress(CJoyPad::JOYKEY_B) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_B) ||
+			(pJoypad->GetPress(CJoyPad::JOYKEY_X) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_X) ||
+			(pJoypad->GetPress(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[TEXTURE_KEY]->GetKey() == CDeskworkUI::KEYPAD_Y))
+		{
+			isInputControl = true;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	if (isInputControl)
 	{// 正解を押した時
 		// 色をグレーにする
 		m_pDeskUI[TEXTURE_KEY]->ChangeCol(COLOR_GLAY);

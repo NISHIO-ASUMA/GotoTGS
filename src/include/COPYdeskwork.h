@@ -53,7 +53,7 @@ private:
 	// メンバ関数
 	bool CoolTime(const auto& pClear);				// クールタイム中の処理
 	void Task(const auto& pClear);					// タスク中の処理
-	void ControlResult(int& nCount);		// コントローラーを押した結果の処理
+	void ControlResult(int& nCount);				// コントローラーを押した結果の処理
 
 	//************************************
 	// 定数構造体宣言

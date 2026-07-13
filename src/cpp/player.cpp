@@ -217,7 +217,36 @@ void CPlayer::Update(void)
 	//*********************************************************
 	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)
 	{
-		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
+		// 入力フラグ
+		bool isInputKey = false;
+
+		// 操作の種類によって使える物を変化させる
+		switch (m_nControlTypes)
+		{
+		case CPlayer::CONTROLTYPE_NONE:
+			break;
+
+		case CPlayer::CONTROLTYPE_KEY:
+
+			if (Key->GetTrigger(DIK_F))
+			{
+				isInputKey = true;
+			}
+			break;
+
+		case CPlayer::CONTROLTYPE_PAD:
+
+			if (Pad->GetTrigger(CJoyPad::JOYKEY_START))
+			{
+				isInputKey = true;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		if (!isInputKey)
 		{// 終了キーを押していない場合
 			// モーション更新だけ挟んでreturnする
 			CMoveCharactor::Update();

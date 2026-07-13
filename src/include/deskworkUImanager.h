@@ -69,6 +69,19 @@ public:
 	static void MinusCOPYTask(void) { m_nCOPYTaskNum--; }
 	static void MinusDOCUMENTTask(void) { m_nDOCUMENTTaskNum--; }
 
+public: // 西尾追加
+	//**********************
+	// コントロールタイプ
+	//**********************
+	enum CONTROL
+	{
+		CONTROL_NONE,
+		CONTROL_KEY,	// キーマウ
+		CONTROL_PAD,	// パッド
+		CONTROL_MAX
+	};
+
+
 private:
 
 	// メンバ変数
