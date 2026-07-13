@@ -293,7 +293,7 @@ void CPlayer::Update(void)
 		else
 		{
 			// 十字キーが押されていない場合は、スティックの判定を行う
-			MoveJoypad(player::fSpeed);
+			MoveJoypad(2.5f);
 		}
 	}
 	

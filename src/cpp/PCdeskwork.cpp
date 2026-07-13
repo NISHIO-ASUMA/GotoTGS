@@ -379,43 +379,84 @@ bool CPCDeskwork::ControlResult(void)
 		return false;
 	}
 
-	if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_W) ||
-		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_A) ||
-		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_S) ||
-		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYBOARD_D) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_A) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_B) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_B) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_X) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_X) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[m_nNowIdx]->GetKey() == CDeskworkUI::KEYPAD_Y))
-	{// 正解を押した時
+	//**************************************
+	// ADD 西尾 : リファクタリングと判定ロジックの修正
+	//**************************************
+	
+	// プレイヤーの操作キーインデックス取得
+	int nControl = CTitleuiManager::GetInstance()->GetSelectIdx();
 
-		// 色を半透明にする
-		m_pDeskUI[m_nNowIdx]->SetAlpha(0.5f);
+	// 現在のタスクのUIのポインタ取得
+	auto* pCurrentUI = m_pDeskUI[m_nNowIdx];
 
-		// 次のタスクに移る
+	// 現在要求されている正解のキー情報を格納
+	auto targetKey = pCurrentUI->GetKey();
+
+	// 入力情報を保持するローカル構造体
+	struct InputMapping
+	{
+		bool isTriggered;	// 入力されたフラグ
+		int requiredKey;	// 必要なキー
+	};
+
+	// 現在キーの入力判定を持つ動的配列
+	std::vector<InputMapping> activeInputs;
+
+	// 現在の操作タイプに応じた入力だけを判定する
+	if (nControl == CONTROL::CONTROL_KEY)
+	{// キーボード
+		activeInputs =
+		{
+			{ pKeyboard->GetTrigger(DIK_W), CDeskworkUI::KEYBOARD_W },
+			{ pKeyboard->GetTrigger(DIK_A), CDeskworkUI::KEYBOARD_A },
+			{ pKeyboard->GetTrigger(DIK_S), CDeskworkUI::KEYBOARD_S },
+			{ pKeyboard->GetTrigger(DIK_D), CDeskworkUI::KEYBOARD_D }
+		};
+	}
+	else if (nControl == CONTROL::CONTROL_PAD)
+	{// ゲームパッド
+		activeInputs =
+		{
+			{ pJoypad->GetTrigger(CJoyPad::JOYKEY_A), CDeskworkUI::KEYPAD_A },
+			{ pJoypad->GetTrigger(CJoyPad::JOYKEY_B), CDeskworkUI::KEYPAD_B },
+			{ pJoypad->GetTrigger(CJoyPad::JOYKEY_X), CDeskworkUI::KEYPAD_X },
+			{ pJoypad->GetTrigger(CJoyPad::JOYKEY_Y), CDeskworkUI::KEYPAD_Y }
+		};
+	}
+
+	// キー入力判定フラグ
+	bool hasAnyInput = false;
+	bool isCorrectInput = false;
+
+	// 配列を見て、正解と一致の場合ループを終了する
+	for (const auto& input : activeInputs)
+	{
+		if (input.isTriggered)
+		{
+			hasAnyInput = true;
+
+			if (input.requiredKey == targetKey)
+			{
+				isCorrectInput = true;
+				break; // 正解
+			}
+		}
+	}
+
+	// 入力結果のui変化
+	if (isCorrectInput)
+	{
+		// 正解の処理
+		pCurrentUI->SetAlpha(HALF);
 		m_nNowIdx++;
-
 		return true;
 	}
-	else if ((pKeyboard->GetTrigger(DIK_W) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_W) ||
-		(pKeyboard->GetTrigger(DIK_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_A) ||
-		(pKeyboard->GetTrigger(DIK_S) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_S) ||
-		(pKeyboard->GetTrigger(DIK_D) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYBOARD_D) || 
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_A) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_A) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_B) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_B) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_X) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_X) ||
-		(pJoypad->GetTrigger(CJoyPad::JOYKEY_Y) == true && m_pDeskUI[m_nNowIdx]->GetKey() != CDeskworkUI::KEYPAD_Y))
-	{// 不正解を押した時
-
-		// 色を赤にする
-		m_pDeskUI[m_nNowIdx]->ChangeCol(COLOR_RED, true);
-
-		// 失敗した状態にする
+	else if (hasAnyInput)
+	{
+		// 不正解の処理
+		pCurrentUI->ChangeCol(COLOR_RED, true);
 		m_bFalse = true;
-
-		// クールタイムを始める
 		SetTime(true);
-
 		return false;
 	}
 
