@@ -56,6 +56,9 @@ HRESULT CTutorialObject::Init(void)
 	//  jsonマネージャー取得
 	CJsonManager* pManager = CManager::GetInstance()->GetJsonManager();
 
+	// 使用するオブジェクト読み込み
+	pManager->Load(TUTORIALOBJECT::LoadName);
+
 	// ステージマップ読み込み
 	m_pBlockManager = std::make_unique<CBlockManager>();
 	pManager->SetBlockManager(m_pBlockManager.get());
