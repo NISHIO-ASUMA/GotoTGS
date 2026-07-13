@@ -165,8 +165,8 @@ void CObject2DRotation::Update(void)
 	float fPivotH = m_fHeight * m_pivot.y;
 
 	// 各頂点座標
-	float PosX[4] = { -fPivotW, fPivotW - fPivotW, -fPivotW			  , fPivotW - fPivotW };
-	float PosY[4] = { -fPivotH, -fPivotH		 , m_fHeight - fPivotH, m_fHeight - fPivotH };
+	float PosX[4] = { -fPivotW, m_fWidth - fPivotW, -fPivotW		   , m_fWidth - fPivotW };
+	float PosY[4] = { -fPivotH, -fPivotH		  , m_fHeight - fPivotH, m_fHeight - fPivotH };
 
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx;

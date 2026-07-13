@@ -50,7 +50,7 @@ CGaugeneedle* CGaugeneedle::Create(const D3DXVECTOR3& pos, const float& fWidth, 
 	pGaugeneedle->SetAngle(0.0f);													// 角度
 	pGaugeneedle->SetCol(COLOR_WHITE);												// 色
 	pGaugeneedle->SetSize(D3DXVECTOR2(fWidth, fHeight));							// サイズ
-	pGaugeneedle->SetTexture("needle000.jpg");										// テクスチャ
+	pGaugeneedle->SetTexture("needle000.png");										// テクスチャ
 
 	// 初期化が失敗した場合
 	if (FAILED(pGaugeneedle->Init())) return nullptr;

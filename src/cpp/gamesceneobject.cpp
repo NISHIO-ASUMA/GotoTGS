@@ -293,7 +293,7 @@ void CGameSceneObject::CreatePointer(void)
 	m_pScore = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.f, 80.0f);
 
 	// 進捗ゲージの生成 Misaki
-	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(250.0f, 50.0f, 0.0f), 400.0f, 40.0f);
+	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(200.0f, 70.0f, 0.0f), 100.0f, 70.0f);
 
 	// イベントUIの生成 Misaki
 	m_pEventUI = CEventUI::Create();

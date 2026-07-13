@@ -63,7 +63,7 @@ public:
 	inline void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }
 	inline void SetSize(float fWidth, float fHeight) { m_fWidth = fWidth, m_fHeight = fHeight; }
 	inline void SetWidth(float fWidth) { m_fWidth = fWidth; }
-	inline void SetHeight(float fHeight) { m_fWidth = fHeight; }
+	inline void SetHeight(float fHeight) { m_fHeight = fHeight; }
 	inline void SetAnchor(int Type = ANCHORTYPE_CENTER) { m_nAnchorType = Type; }
 	inline void SetDrawType(int nType) { m_nDrawType = nType; }
 
