@@ -19,7 +19,6 @@
 // 前方宣言
 //*********************************************************
 class CBlockManager;
-class CWorldWallManager;
 
 //*********************************************************
 // チュートリアルで使うオブジェクトを管理するクラスを定義
@@ -44,5 +43,4 @@ private:
 	static CTutorialObject* m_pInstance;			// シングルトン変数
 
 	std::unique_ptr<CBlockManager>m_pBlockManager;	// ブロック管理クラス
-	std::unique_ptr<CWorldWallManager>m_pWorldWall;	// 壁管理クラス
 };

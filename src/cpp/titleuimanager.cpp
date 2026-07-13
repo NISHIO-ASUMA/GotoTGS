@@ -24,6 +24,7 @@
 #include "game.h"
 #include "sound.h"
 #include "fade.h"
+#include "tutorial.h"
 
 //*********************************************************
 // 定数名前空間
@@ -276,8 +277,8 @@ void CTitleuiManager::Update(void)
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
 		
-		// シーン遷移(後ほどチュートリアルに変更)
-		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CGame>());
+		// チュートリアルシーン遷移
+		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CTutorial>());
 		return;
 	}
 }
@@ -304,7 +305,7 @@ void CTitleuiManager::SlideStartUi(void)
 
 		D3DXVECTOR3 currentPos = m_pStartUiList[nCntStart]->GetPos();
 
-		// 直線的な移動なので通常の Lerp
+		// Lerp関数
 		currentPos.x = Lerp(SLIDESTARTUI::CreatePos[nCntStart].x, TARGET_OUT_X, m_fSlideRatio);
 		m_pStartUiList[nCntStart]->SetPos(currentPos);
 	}

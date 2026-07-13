@@ -16,8 +16,10 @@
 #include "manager.h"
 #include "blockmanager.h"
 #include "jsonmanager.h"
-#include "worldwallmanager.h"
-#include "meshfield.h"
+#include "jsonmanager.h"
+#include "input.h"
+#include "game.h"
+#include "fade.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -29,17 +31,13 @@ CTutorialObject* CTutorialObject::m_pInstance = nullptr; // シングルトン変数
 //*********************************************************
 namespace TUTORIALOBJECT
 {
-	const D3DXVECTOR3 TopAntPos		= { 0.0f, 0.0f, -450.0f };	// 操作アリ座標
-	const D3DXVECTOR3 ArrayAntPos	= { 350.0f, 0.0f, 0.0f };	// 仲間アリ座標
-	const D3DXVECTOR3 FeedPos		= { -500.0f, 0.0f, 0.0f };	// 餌座標
 	constexpr const char* LoadName	= "data/JSON/Tutorialobject.json"; // 読み込みjsonファイル
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr),
-m_pWorldWall(nullptr)
+CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr)
 {
 	
 }
@@ -55,17 +53,13 @@ CTutorialObject::~CTutorialObject()
 //=========================================================
 HRESULT CTutorialObject::Init(void)
 {
-	// メッシュ生成
-	//CMeshField::Create(VECTOR3_NULL, 4000, 4000, 1, 1);
+	//  jsonマネージャー取得
+	CJsonManager* pManager = CManager::GetInstance()->GetJsonManager();
 
-	//// チュートリアルで使うオブジェクトの読み込み
-	//auto JsonManager = CManager::GetInstance()->GetJsonManager();
-	//JsonManager->Load(TUTORIALOBJECT::LoadName);
-
-	//// ステージマップ読み込み
-	//m_pBlockManager = std::make_unique<CBlockManager>();
-	//JsonManager->SetBlockManager(m_pBlockManager.get());
-	//m_pBlockManager->Init();
+	// ステージマップ読み込み
+	m_pBlockManager = std::make_unique<CBlockManager>();
+	pManager->SetBlockManager(m_pBlockManager.get());
+	m_pBlockManager->Init();
 
 	return S_OK;
 }
@@ -76,9 +70,6 @@ void CTutorialObject::Uninit(void)
 {
 	// ブロックマネージャーポインタの破棄
 	m_pBlockManager.reset();
-
-	// 世界の壁の破棄
-	m_pWorldWall.reset();
 
 	// インスタンスの破棄
 	if (m_pInstance)
