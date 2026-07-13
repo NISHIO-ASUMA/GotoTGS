@@ -48,8 +48,9 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float LIFE_RATIO = 0.7f;		// 体力の初期割合
-		static constexpr float GAUGE_RATIO = 0.02f;		// ゲージの増減割合
+		static constexpr float MAX_ANGLE = 0.41f;		// 傾く角度の最大値
+		static constexpr float NEEDLE_WIDTH = 20.0f;	// 横幅
+		static constexpr float NEEDLE_HEIGHT = 100.0f;	// 縦幅
 	};
 
 	// メンバ変数

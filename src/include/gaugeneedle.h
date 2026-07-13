@@ -48,7 +48,7 @@ private:
 	struct Config
 	{
 		static constexpr float PIVOT_X = 0.5f;	// X軸の回転基準点
-		static constexpr float PIVOT_Y = 0.8f;	// Y軸の回転基準点
+		static constexpr float PIVOT_Y = 0.9f;	// Y軸の回転基準点
 	};
 
 	// メンバ変数
