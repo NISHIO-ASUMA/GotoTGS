@@ -40,8 +40,9 @@ CDebugproc* CRenderer::m_pDebug = nullptr;	// デバッグプロセスへのポインタ
 //=========================================================
 CRenderer::CRenderer() : m_pD3D(nullptr),
 m_pD3DDevice(nullptr),
-m_fps(NULL)
-{
+m_fps(NULL),
+m_BackBuffColor(D3DCOLOR_RGBA(221, 234, 238, 255)) // 水色
+{//R:246 G : 180 B : 131 夕焼け色
 	
 }
 //=========================================================
@@ -214,7 +215,7 @@ void CRenderer::Draw(void)
 	m_pD3DDevice->Clear(0,
 		NULL,
 		(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL),
-		D3DCOLOR_RGBA(221,234,238, 255), 1.0f, 0);
+		m_BackBuffColor, 1.0f, 0);
 
 	// 描画開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
@@ -258,4 +259,11 @@ void CRenderer::OnWireFrame(void)
 void CRenderer::OffWireFrame(void)
 {
 	m_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+}
+//=========================================================
+// バックバッファのカラーを変更する
+//=========================================================
+void CRenderer::SetBackBuffColor(const D3DXCOLOR& col)
+{
+	m_BackBuffColor = col;
 }

@@ -43,6 +43,7 @@ public:
 	void Draw(void);
 	void OnWireFrame(void);
 	void OffWireFrame(void);
+	void SetBackBuffColor(const D3DXCOLOR& col);
 	void SetSize(UINT uWidth, UINT uHeight) { m_Width = uWidth, m_Height = uHeight; }
 	void GetFps(const int& nFps) { m_fps = nFps; }
 
@@ -62,6 +63,9 @@ private:
 	D3DPRESENT_PARAMETERS m_d3dpp;		// プレゼンテーションパラメータ
 	UINT m_Width;						// ウィンドウ横幅
 	UINT m_Height;						// ウィンドウ高さ
+
+	D3DXCOLOR m_BackBuffColor;			// 空の色
+private:
 
 	LPDIRECT3DVERTEXBUFFER9 m_instanceVB;	// インスタンシング用頂点バッファ
 	std::unordered_map<int, std::vector<CInstanceModel*>> m_RegisterInstObject = {}; // インスタンシング登録配列

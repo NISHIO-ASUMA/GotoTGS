@@ -291,7 +291,6 @@ void CPlayer::Update(void)
 		m_pBoxCollider->SetPosOld(GetOldPos());
 	}
 	
-//*************************************************
 // ADD : 西尾追加 タスクを起こせる球との当たり判定をとり、その時のキー入力でタスク発生(指定したもの)
 
 	// インスタンス取得
@@ -454,6 +453,9 @@ void CPlayer::ChangeState(CPlayerStateBase* pState, int nID)
 //=================================================
 void CPlayer::MoveKeyboard(float speed)
 {
+	// キー操作タイプじゃないなら
+	if (m_nControlTypes != CONTROLTYPE_KEY) return;
+
 	// キーボードのポインタ
 	CInputKeyboard* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 
@@ -585,6 +587,9 @@ void CPlayer::MoveKeyboard(float speed)
 //=================================================
 void CPlayer::MoveJoypad(float speed)
 {
+	// パッド操作タイプじゃないなら
+	if (m_nControlTypes != CONTROLTYPE_PAD) return;
+
 	// ジョイパッドのポインタ
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 	if (!pJoyPad) return;
@@ -716,6 +721,9 @@ void CPlayer::MoveJoypad(float speed)
 //=================================================
 void CPlayer::MoveCrossPadButton(float speed)
 {
+	// パッド操作タイプじゃないなら
+	if (m_nControlTypes != CONTROLTYPE_PAD) return;
+
 	// パッドのポインタ
 	CJoyPad* pGamePad = CManager::GetInstance()->GetJoyPad();
 
