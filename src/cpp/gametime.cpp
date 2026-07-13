@@ -15,6 +15,7 @@
 //*********************************************************
 #include "manager.h"
 #include "number.h"
+#include "template.h"
 
 //=========================================================
 // コンストラクタ
@@ -25,6 +26,7 @@ m_nSeconds(NULL),
 m_nMinutes(NULL),
 m_nDecTime(NULL),
 m_nCounter(NULL),
+m_nMaxTime(NULL),
 m_fWidth(NULL),
 m_fHeight(NULL),
 m_pos(VECTOR3_NULL)
@@ -70,6 +72,9 @@ CGametime* CGametime::Create(const D3DXVECTOR3& pos, const float& fWidth, const 
 //=========================================================
 HRESULT CGametime::Init(void)
 {
+	// 開始時の時間を格納
+	m_nMaxTime = Config::NUMTIME;
+
 	// 全体の時間を設定
 	m_nAllTime = Config::NUMTIME;
 
@@ -154,7 +159,6 @@ void CGametime::Uninit(void)
 			delete m_pNumberSeconds[nDigit];
 			m_pNumberSeconds[nDigit] = nullptr;
 		}
-
 	}
 
 	// オブジェクト自身の破棄
@@ -177,7 +181,6 @@ void CGametime::Update(void)
 	{
 		// カウンターを0にする
 		m_nCounter = 0;
-
 		return;
 	}
 
@@ -212,6 +215,29 @@ void CGametime::Update(void)
 	// それぞれの数字の計算処理
 	Seconds();
 	Minutes();
+
+	// 世界のカラー変更
+	if (m_nMaxTime > 0)
+	{
+		// 割合
+		float rate = 1.0f - (static_cast<float>(m_nAllTime) / static_cast<float>(m_nMaxTime));
+
+		// クランプする
+		rate = Clump(rate, 0.0f, 1.0f);
+
+		// 開始のカラーの値
+		D3DXCOLOR startColor(102.0f / 255.0f, 204.0f / 255.0f, 1.0f, 1.0f);	// 水色
+
+		// 終了時のカラーの値
+		D3DXCOLOR endColor(245.0f / 255.0f, 106.0f / 255.0f, 0.0f, 1.0f);	// オレンジ
+
+		// 割合の中間色を設定する
+		D3DXCOLOR currentColor;
+		D3DXColorLerp(&currentColor, &startColor, &endColor, rate);
+
+		// バックバッファのカラーを反映
+		CManager::GetInstance()->GetRenderer()->SetBackBuffColor(currentColor);
+	}
 }
 
 //=========================================================

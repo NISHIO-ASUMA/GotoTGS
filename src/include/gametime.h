@@ -72,6 +72,7 @@ private:
 	void Seconds(void);	// 秒数処理
 
 	// メンバ変数
+	int m_nMaxTime;		// 開始時の最大時間
 	int m_nAllTime;		// 全体の時間
 	int m_nSeconds;		// 現在の時間（秒数）
 	int m_nMinutes;		// 現在の時間（分数）

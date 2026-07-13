@@ -41,7 +41,7 @@ CDebugproc* CRenderer::m_pDebug = nullptr;	// デバッグプロセスへのポインタ
 CRenderer::CRenderer() : m_pD3D(nullptr),
 m_pD3DDevice(nullptr),
 m_fps(NULL),
-m_BackBuffColor(D3DCOLOR_RGBA(221, 234, 238, 255)) // 水色
+m_BackBuffColor(D3DCOLOR_RGBA(102, 204, 255, 255)) // 水色
 {//R:246 G : 180 B : 131 夕焼け色
 	
 }
