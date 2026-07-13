@@ -219,8 +219,7 @@ void CPlayer::Update(void)
 	{
 		if (!Key->GetTrigger(DIK_F) && !Pad->GetTrigger(CJoyPad::JOYKEY_START))
 		{// 終了キーを押していない場合
-
-			// モーション更新だけ挟んでreturn
+			// モーション更新だけ挟んでreturnする
 			CMoveCharactor::Update();
 			return;
 		}
@@ -291,8 +290,6 @@ void CPlayer::Update(void)
 		m_pBoxCollider->SetPosOld(GetOldPos());
 	}
 	
-// ADD : 西尾追加 タスクを起こせる球との当たり判定をとり、その時のキー入力でタスク発生(指定したもの)
-
 	// インスタンス取得
 	const auto& InteractPoint = CWorldUICollision::GetInstance()->GetInteractPoints();
 	if (!&InteractPoint) return;
@@ -306,8 +303,35 @@ void CPlayer::Update(void)
 		// プレイヤーの球と判定し、有効なら
 		if (CollisionSphere(Colliders->pCollider.get()))
 		{
-			// 当たっている かつ Fキー入力
-			if (Key->GetTrigger(DIK_F) || Pad->GetTrigger(CJoyPad::JOYKEY_START))
+			// 入力フラグ
+			bool isInputKey = false;
+
+			// 操作の種類によって使える物を変化させる
+			switch (m_nControlTypes)
+			{
+			case CPlayer::CONTROLTYPE_NONE:
+				break;
+
+			case CPlayer::CONTROLTYPE_KEY:
+				if (Key->GetTrigger(DIK_F))
+				{
+					isInputKey = true;
+				}
+				break;
+
+			case CPlayer::CONTROLTYPE_PAD:
+				if (Pad->GetTrigger(CJoyPad::JOYKEY_START))
+				{
+					isInputKey = true;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			// タスクの起動処理
+			if (isInputKey)
 			{				
 				switch (Colliders->nType)
 				{
@@ -593,8 +617,6 @@ void CPlayer::MoveJoypad(float speed)
 	// ジョイパッドのポインタ
 	CJoyPad* pJoyPad = CManager::GetInstance()->GetJoyPad();
 	if (!pJoyPad) return;
-
-	//if (pJoyPad->GetCrossKeyInput(pJoyPad) == true) return; 	// 十字判定があったかどうか
 
 	XINPUT_STATE* pState = pJoyPad->GetStickAngle();
 
