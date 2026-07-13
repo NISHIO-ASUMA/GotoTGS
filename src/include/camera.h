@@ -18,6 +18,7 @@ class CPlayer;
 class CBlock;
 class CAutoMaticDoor;
 class CSideOpenDoor;
+class CMoveCharactor;
 
 //*********************************************************
 // カメラクラスを定義
@@ -111,7 +112,7 @@ public:
 	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
 	/// <param name="pBlock">判定するブロックの外部ポインタ</param>
 	/// <returns></returns>
-	bool CollisionTorayBlock(CPlayer* pPlayer = nullptr,CBlock * pBlock = nullptr);
+	bool CollisionTorayBlock(CBlock * pBlock = nullptr);
 
 	/// <summary>
 	/// 西尾追加 : カメラから見たプレイヤーとの透過オブジェクト判定
@@ -119,7 +120,7 @@ public:
 	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
 	/// <param name="pBlock">判定するクラスの外部ポインタ</param>
 	/// <returns></returns>
-	bool CollisionTorayDoor(CPlayer* pPlayer = nullptr, CAutoMaticDoor* pDoor = nullptr);
+	bool CollisionTorayDoor(CAutoMaticDoor* pDoor = nullptr);
 
 	/// <summary>
 	/// 西尾追加 : カメラから見たプレイヤーとの透過判定
@@ -127,13 +128,14 @@ public:
 	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
 	/// <param name="pDoor">判定するクラスのポインタ</param>
 	/// <returns></returns>
-	bool CollisionToraySide(CPlayer* pPlayer = nullptr, CSideOpenDoor* pDoor = nullptr);
+	bool CollisionToraySide(CSideOpenDoor* pDoor = nullptr);
 
 public:
 
 	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
 	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
 	void SetCameraMove(const bool& isMove) { m_isMove = isMove; }
+	void SetAnyCharactorPointer(CMoveCharactor* pCharactor = nullptr) { m_pCharactor = pCharactor; }
 
 	inline D3DXVECTOR3 GetRot(void) const { return m_pCamera.rot; }
 	inline D3DXVECTOR3 GetPos(void) const { return m_pCamera.posV; }
@@ -149,6 +151,7 @@ private:
 
 private:
 	Camera m_pCamera;				// カメラ構造体変数
+	CMoveCharactor* m_pCharactor;	// キャラクターのポインタ
 	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
 	int m_nControlTypes;			// 操作種類
 	bool m_isMove;					// カメラ動かせるかどうかのフラグ

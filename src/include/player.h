@@ -65,7 +65,7 @@ public:
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 
 	inline D3DXVECTOR3 GetPrevPos(void) const { return m_TvPrevPos; }
-	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxCollider.get(); }
+	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
 	void SetPrevPos(const D3DXVECTOR3& pos) { m_TvPrevPos = pos; }

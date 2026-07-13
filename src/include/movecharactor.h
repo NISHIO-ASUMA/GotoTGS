@@ -27,6 +27,8 @@
 //*********************************************************
 class CShadowStencil;
 class CModel;
+class CSphereCollider;
+class CBoxCollider;
 
 //*********************************************************
 // 動くキャラクタークラスを定義
@@ -81,6 +83,10 @@ public:
 	/// <param name=""></param>
 	/// <returns>
 	inline CMotion* GetMotion(void) { return m_pMotion.get(); }
+
+	// 子クラスで取得の窓口を作る
+	virtual CSphereCollider* GetSphereCollider(void) { return nullptr; }
+	virtual CBoxCollider* GetBoxCollider(void) { return nullptr; }
 
 private:
 

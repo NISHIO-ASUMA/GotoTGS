@@ -52,7 +52,8 @@ namespace TITLECAMERAINFO
 CCamera::CCamera() : m_pCamera(ClearDefault()),
 m_pThirdPersonPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE),
-m_isMove(false)
+m_isMove(false),
+m_pCharactor(nullptr)
 {
 	
 }
@@ -396,16 +397,16 @@ void CCamera::TitleCamera(void)
 //==============================================================
 // カメラから見て透過させる時の当たり判定関数
 //==============================================================
-bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
+bool CCamera::CollisionTorayBlock(CBlock* pBlock)
 {
 	// null値チェック
-	if (!pPlayer || !pBlock) return false;
+	if (!m_pCharactor || !pBlock) return false;
 
 	// 判定用変数
 	bool isCollision = false;
 
 	// プレイヤー情報取得
-	const auto& PlayerPos = pPlayer->GetPos();
+	const auto& PlayerPos = m_pCharactor->GetPos();
 
 	// 判定ブロック情報
 	const auto& BlockPos = pBlock->GetPos();
@@ -453,16 +454,16 @@ bool CCamera::CollisionTorayBlock(CPlayer* pPlayer, CBlock* pBlock)
 //==============================================================
 // 別クラス判別バージョン
 //==============================================================
-bool CCamera::CollisionTorayDoor(CPlayer* pPlayer, CAutoMaticDoor* pDoor)
+bool CCamera::CollisionTorayDoor(CAutoMaticDoor* pDoor)
 {
 	// null値チェック
-	if (!pPlayer || !pDoor) return false;
+	if (!m_pCharactor || !pDoor) return false;
 
 	// 判定用変数
 	bool isCollision = false;
 
 	// プレイヤー情報取得
-	const auto& PlayerPos = pPlayer->GetPos();
+	const auto& PlayerPos = m_pCharactor->GetPos();
 
 	// 判定ブロック情報
 	const auto& BlockPos = pDoor->GetPos();
@@ -510,16 +511,16 @@ bool CCamera::CollisionTorayDoor(CPlayer* pPlayer, CAutoMaticDoor* pDoor)
 //==============================================================
 // 別クラス判別バージョン
 //==============================================================
-bool CCamera::CollisionToraySide(CPlayer* pPlayer, CSideOpenDoor* pDoor)
+bool CCamera::CollisionToraySide(CSideOpenDoor* pDoor)
 {
 	// null値チェック
-	if (!pPlayer || !pDoor) return false;
+	if (!m_pCharactor || !pDoor) return false;
 
 	// 判定用変数
 	bool isCollision = false;
 
 	// プレイヤー情報取得
-	const auto& PlayerPos = pPlayer->GetPos();
+	const auto& PlayerPos = m_pCharactor->GetPos();
 
 	// 判定ブロック情報
 	const auto& BlockPos = pDoor->GetPos();

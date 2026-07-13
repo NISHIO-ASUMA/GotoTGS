@@ -107,7 +107,6 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 //=========================================================
 HRESULT CGameSceneObject::Init(void)
 {
-#if 1
 	// ゲームで使うオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(GAMEOBJECT::LoadName);
@@ -149,8 +148,8 @@ HRESULT CGameSceneObject::Init(void)
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
-	// ブロックマネージャーに生成されたプレイヤーのポインタをセット
-	m_pBlocks->SetPlayerPoint(m_pPlayer);
+	// カメラに追従するキャラクターのポインタをセット
+	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
 
 	// カメラのターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
@@ -172,8 +171,6 @@ HRESULT CGameSceneObject::Init(void)
 
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
-
-#endif
 	return S_OK;
 }
 

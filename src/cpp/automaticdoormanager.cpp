@@ -101,10 +101,6 @@ void CAutoMaticDoorManager::Uninit(void)
 //=========================================================
 void CAutoMaticDoorManager::Update(void)
 {
-	// プレイヤー取得
-	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
-	if (Player == nullptr) return;
-
 	// カメラ取得
 	const auto& Camera = CManager::GetInstance()->GetCamera();
 
@@ -112,7 +108,7 @@ void CAutoMaticDoorManager::Update(void)
 	for (auto Door : m_pAutoDoors)
 	{
 		// カメラの透過条件に入っているかチェック
-		if (Camera->CollisionTorayDoor(Player, Door))
+		if (Camera->CollisionTorayDoor(Door))
 		{
 			// 対象モデルの透明度を設定する
 			Door->SetCol(D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 0.3f));

@@ -87,10 +87,6 @@ void CSideOpenDoorManager::Uninit(void)
 //=========================================================
 void CSideOpenDoorManager::Update(void)
 {
-	// プレイヤー取得
-	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
-	if (Player == nullptr) return;
-
 	// カメラ取得
 	const auto& Camera = CManager::GetInstance()->GetCamera();
 	if (Camera == nullptr) return;
@@ -99,7 +95,7 @@ void CSideOpenDoorManager::Update(void)
 	for (auto Door : m_pSideOpenDoors)
 	{
 		// カメラの透過条件に入っているかチェック
-		if (Camera->CollisionToraySide(Player, Door))
+		if (Camera->CollisionToraySide(Door))
 		{
 			// 対象モデルの透明度を設定する
 			Door->SetCol(D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 0.3f));

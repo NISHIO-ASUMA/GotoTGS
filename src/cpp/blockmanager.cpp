@@ -34,7 +34,7 @@ using json = nlohmann::json; // jsonクラスの使用
 // コンストラクタ
 //=========================================================
 CBlockManager::CBlockManager() : m_pBlocks{},
-m_pPlayer(nullptr)
+m_pCharactor(nullptr)
 {
 
 }
@@ -90,9 +90,6 @@ void CBlockManager::Uninit(void)
 //=========================================================
 void CBlockManager::Update(void)
 {
-	// ポインタがnullなら
-	if (!m_pPlayer) return;
-
 	// カメラ取得
 	const auto& Camera = CManager::GetInstance()->GetCamera();
 
@@ -100,7 +97,7 @@ void CBlockManager::Update(void)
 	for (auto Blocks : m_pBlocks)
 	{
 		// カメラの透過条件に入っているかチェック
-		if (Camera->CollisionTorayBlock(m_pPlayer, Blocks))
+		if (Camera->CollisionTorayBlock(Blocks))
 		{
 			// 対象モデルの透明度を設定する
 			Blocks->SetCol(D3DCOLORVALUE(1.0f, 1.0f, 1.0f, 0.3f));

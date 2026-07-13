@@ -25,6 +25,7 @@
 //*********************************************************
 class CBoxCollider;
 class CPlayer;
+class CMoveCharactor;
 
 //*********************************************************
 // ブロック一括管理クラスを定義
@@ -73,15 +74,15 @@ public:
 public:
 
 	/// <summary>
-	/// プレイヤーのポインタを格納する
+	/// キャラクターのポインタを格納する
 	/// </summary>
-	/// <param name="pPlayer">プレイヤーの外部ポインタ</param>
+	/// <param name="pCharactor">外部ポインタ</param>
 	/// <returns></returns>
-	void SetPlayerPoint(CPlayer* pPlayer = nullptr) { m_pPlayer = pPlayer; }
+	void SetCharactorPoint(CMoveCharactor* pCharactor = nullptr) { m_pCharactor = pCharactor; }
 
 private:
 
 	static constexpr const char* FILE_NAME = "data/JSON/GameMap.json";	// ファイル名
 	std::vector<CBlock*>m_pBlocks;										// 配置するブロックの動的配列
-	CPlayer* m_pPlayer;													// プレイヤー格納ポインタ
+	CMoveCharactor* m_pCharactor;										// 動くキャラクター
 };
