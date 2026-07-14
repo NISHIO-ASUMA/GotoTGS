@@ -54,9 +54,9 @@ namespace TITLECAMERAINFO
 //*********************************************************
 namespace RANKINGCAMERAINFO
 {
-	const D3DXVECTOR3 InitPosV = { 405.0f,54.0f, -127.0f };		// カメラ初期座標
-	const D3DXVECTOR3 InitPosR = { 415.0f, 51.0f, -127.0f };	// カメラ初期座標
-	const D3DXVECTOR3 InitRot = { 1.78f, 1.56f, 0.0f };			// カメラ初期角度
+	const D3DXVECTOR3 InitPosV = { 405.0f,40.0f, -127.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitPosR = { 415.0f,40.0f, -127.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitRot = { 1.57f, 1.57f, 0.0f };			// カメラ初期角度
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 	constexpr float Distance = 10.0f;							// 初期の距離
 }

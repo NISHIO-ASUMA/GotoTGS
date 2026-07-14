@@ -56,7 +56,7 @@ HRESULT CRankingManager::Init(void)
 
 	// BGMÄ¶
 	Sound->Play(CSound::SOUND_LABEL_RANKING);
-
+	
 	return S_OK;
 }
 //=========================================================
