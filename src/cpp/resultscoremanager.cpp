@@ -3,8 +3,6 @@
 // リザルト用スコア管理処理 [ resultscoremanager.cpp ]
 // Author: Asuma Nishio
 // 
-// NOTE : これから複数のスコアを読み込む形に変わる
-//        今は単体のスコアを読み込む形に変更しているだけ
 //
 //=========================================================
 
@@ -66,13 +64,13 @@ HRESULT CResultScoreManager::Init(void)
 	// スコアファイル読み込み
 	Load();
 
-	// スコアを生成する
-	m_pResultScore[info.IDX_LAZY] = CResultScore::Create(D3DXVECTOR3(1250.0f, 230.0f, 0.0f), 140.0f, 50.0f);	// サボりスコア
-	m_pResultScore[info.IDX_TASK] = CResultScore::Create(D3DXVECTOR3(1250.0f, 400.0f, 0.0f), 140.0f, 50.0f);	// タスクスコア
-	m_pResultScore[info.IDX_ALL] = CResultScore::Create(D3DXVECTOR3(1255.0f, 630.0f, 0.0f), 160.0f, 60.0f);		// 最終スコア
+	// スコアを生成する ( NOTE : 位置と大きさ調整必要 )
+	m_pResultScore[info.IDX_LAZY] = CResultScore::Create(D3DXVECTOR3(360.0f, 230.0f, 0.0f), 140.0f, 55.0f);		// サボりスコア
+	m_pResultScore[info.IDX_TASK] = CResultScore::Create(D3DXVECTOR3(980.0f,230.0f, 0.0f), 140.0f, 55.0f);		// タスクスコア
+	m_pResultScore[info.IDX_ALL] =  CResultScore::Create(D3DXVECTOR3(680.0f, 630.0f, 0.0f), 160.0f, 80.0f);		// 最終スコア
 
-	// 最終スコアを計算し、出力
-	m_nLastScore = MathScoreResult(m_nLazyScore, m_nTaskScore);
+	// 最終スコアを計算し、出力する
+	m_nLastScore = MathScoreResult(m_nTaskScore, m_nLazyScore);
 
 	// アニメーションするスコアをセットする
 	m_pResultScore[info.IDX_LAZY]->SetAnimScore(m_nLazyScore);
@@ -86,7 +84,7 @@ HRESULT CResultScoreManager::Init(void)
 //=======================================================
 void CResultScoreManager::Uninit(void)
 {
-	// 最終スコアを書き出す(ランキング用に持ち込む)
+	// 最終スコアを書き出す(ランキング用に書き出し)
 	m_pResultScore[Config::IDX_ALL]->Save();
 
 	// ロードクラスの破棄
@@ -109,13 +107,13 @@ void CResultScoreManager::Load(void)
 	m_nTaskScore = m_pLoad->LoadInt(Config::TASKSCORE);
 }
 //=======================================================
-// デストラクタ
+// 引き算計算
 //=======================================================
-int CResultScoreManager::MathScoreResult(int& nScore1, int& nScore2)
+int CResultScoreManager::MathScoreResult(int& nMinScore, int& nMaxScore)
 {
 	// 格納用変数
 	int nResultScore = 0;
-	nResultScore = nScore1 + nScore2;
+	nResultScore = nMaxScore - nMinScore;
 
 	// 計算結果を返す
 	return nResultScore;

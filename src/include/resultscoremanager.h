@@ -55,12 +55,12 @@ private:
 	CResultScoreManager();
 
 	/// <summary>
-	/// 2つのint型を計算して結果を返す関数
+	/// 2つのint型を計算して引き算結果を返す関数
 	/// </summary>
-	/// <param name="nScore1"></param>
-	/// <param name="nScore2"></param>
+	/// <param name="nMinScore">小さいほうのスコア</param>
+	/// <param name="nMaxScore">大きい方のスコア</param>
 	/// <returns></returns>
-	int MathScoreResult(int& nScore1, int& nScore2);
+	int MathScoreResult(int& nMinScore, int& nMaxScore);
 
 private:
 
