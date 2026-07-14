@@ -62,5 +62,6 @@ private:
 	int m_nAFK;			// さぼりをこなした数
 	int m_nCount;		// 現在のカウント
 	bool m_bStart;		// 動いているかどうか
+	bool m_bDir;		// どの方向に進むか
 	float m_fOldAngle;	// 元の角度
 };
