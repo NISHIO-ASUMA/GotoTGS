@@ -3,6 +3,8 @@
 // ランキングのオブジェクト管理 [ rankingobject.cpp ]
 // Author: Asuma Nishio
 //
+// NOTE : ださいのなおしましょう
+// 
 //=========================================================
 
 //*********************************************************
@@ -61,7 +63,7 @@ HRESULT CRankingObject::Init(void)
 	CUi::Create(CENTERPOS,0,HALFWIDTH,HALFHEIGHT,"rankingback.jpg",false);
 
 	// ランキングスコア生成
-	//CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
+	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
 	return S_OK;
 }

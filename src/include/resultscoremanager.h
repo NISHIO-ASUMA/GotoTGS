@@ -54,14 +54,24 @@ private:
 
 	CResultScoreManager();
 
+	/// <summary>
+	/// 2つのint型を計算して結果を返す関数
+	/// </summary>
+	/// <param name="nScore1"></param>
+	/// <param name="nScore2"></param>
+	/// <returns></returns>
+	int MathScoreResult(int& nScore1, int& nScore2);
+
+private:
+
 	//***************************
 	// 定数格納構造体
 	//***************************
 	struct Config
 	{
-		static constexpr int IDX_LAZY			  = 0;			// サボりスコアインデックス
-		static constexpr int IDX_TASK			  = 1;			// タスクスコアインデックス
-		static constexpr int IDX_ALL			  = 2;			// 最終スコアインデックス
+		static constexpr int IDX_LAZY			  = 0;								// サボりスコアインデックス
+		static constexpr int IDX_TASK			  = 1;								// タスクスコアインデックス
+		static constexpr int IDX_ALL			  = 2;								// 最終スコアインデックス
 		static constexpr const char* LAZYSCORE	  = "data/SCORE/LazyScore.bin";		// サボりのスコア
 		static constexpr const char* TASKSCORE	  = "data/SCORE/TaskScore.bin";		// タスクのスコア
 		static constexpr const char* ALLSCORE	  = "data/SCORE/AllScore.bin";		// 最終スコア
@@ -71,8 +81,8 @@ private:
 
 	int m_nLazyScore;		// サボりスコアを格納
 	int m_nTaskScore;		// タスクスコアを格納
-	int m_nLastScore;		// 最終スコアを格納
+	int m_nLastScore;		// 最終計算スコアを格納
 
-	std::array<CResultScore*, Config::IDX_TASK>m_pResultScore;	// リザルトスコアポインタ
-	std::unique_ptr<CLoad>m_pLoad;								// ロードクラスのポインタ
+	std::array<CResultScore*, Config::IDX_ALL + 1>m_pResultScore;	// リザルトスコアポインタ
+	std::unique_ptr<CLoad>m_pLoad;									// ロードクラスのポインタ
 };

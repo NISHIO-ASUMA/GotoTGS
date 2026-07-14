@@ -71,7 +71,6 @@ m_pTimer(nullptr),
 m_pScore(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
-m_pWorldWallManager(nullptr),
 m_pVigilanceUImanager(nullptr)
 {
 
@@ -203,16 +202,6 @@ void CGameSceneObject::Uninit(void)
 
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
-
-	// 世界の壁の破棄
-	m_pWorldWallManager.reset();
-
-	// インスタンスの破棄
-	if (m_pInstance)
-	{
-		delete m_pInstance;
-		m_pInstance = nullptr;
-	}
 }
 
 //=========================================================
@@ -246,11 +235,19 @@ void CGameSceneObject::Update(void)
 
 #ifdef _DEBUG
 	// スコアの保存処理の検証
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F2))
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
+	{
+		// 加算
+		m_pScore->AddScore(100);
+	}
+
+	// スコアの保存処理の検証
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
 	{
 		// 書き出し処理
 		m_pScore->SaveScore("data/SCORE/LazyScore.bin");
 	}
+
 #endif // _DEBUG
 }
 

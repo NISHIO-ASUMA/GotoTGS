@@ -112,13 +112,15 @@ void CNumber::Uninit(void)
 //=========================================================
 void CNumber::Update(void)
 {
-
+	if (!m_isUse) return;
 }
 //=========================================================
 // 描画処理
 //=========================================================
 void CNumber::Draw(void)
 {
+	if (!m_isUse) return;
+
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 

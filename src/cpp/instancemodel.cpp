@@ -105,7 +105,7 @@ void CInstanceModel::Uninit(void)
 //=========================================================
 void CInstanceModel::Update(const D3DXMATRIX& mtx)
 {
-#ifdef NDEBUG
+#ifdef _DEBUG
 	// インデックスが-1なら
 	if (m_nModelIdx == -1)
 		return;

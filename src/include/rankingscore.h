@@ -15,11 +15,13 @@
 //*********************************************************
 #include <array>
 #include <algorithm>
+#include <memory>
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "object.h"
+#include "load.h"
 
 //*********************************************************
 // 前方宣言
@@ -78,6 +80,7 @@ private:
 
 	std::array<int, Config::RANKING_MAX>m_aRankData;				  // スコア配列
 	CNumber* m_apNumber[Config::RANKING_MAX][Config::RANKSCOREDIGIT]; // 各スコアと桁数
+	std::unique_ptr<CLoad> m_pLoad;									  // ロードクラス関数
 
 	D3DXVECTOR3 m_pos;		// 座標
 	float m_fWidth;			// 横幅

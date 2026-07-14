@@ -125,13 +125,24 @@ void CScore::Update(void)
 	{
 		// 桁数ごとに分割する値を計算
 		int nDigit = nScore % Config::NUM_DIGIT;
-		nScore /= Config::NUM_DIGIT;
 
 		// ナンバー更新
 		m_apNumber[nCntScore]->Update();
 
 		// 桁更新
 		m_apNumber[nCntScore]->SetDigit(nDigit);
+
+		if (nScore > 0 || nCntScore == 0)
+		{
+			m_apNumber[nCntScore]->SetIsUse(true);  // 表示
+		}
+		else
+		{
+			m_apNumber[nCntScore]->SetIsUse(false); // 非表示
+		}
+
+		// 次の桁へ
+		nScore /= Config::NUM_DIGIT;
 	}
 }
 //=========================================================
@@ -139,13 +150,15 @@ void CScore::Update(void)
 //=========================================================
 void CScore::Draw(void)
 {
-#ifdef _DEBUG
 	// 数字の描画
 	for (auto number : m_apNumber)
 	{
-		number->Draw();
+		// trueなら描画をする
+		if (number->GetIsUse())
+		{
+			number->Draw();
+		}
 	}
-#endif // _DEBUG
 }
 //=========================================================
 // スコア加算処理

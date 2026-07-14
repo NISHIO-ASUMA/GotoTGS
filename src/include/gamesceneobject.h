@@ -22,7 +22,6 @@ class CBlockManager;
 class CPlayer;				// [ Asuma add ]
 class CGametime;
 class CScore;
-class CWorldWallManager;
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
@@ -49,7 +48,6 @@ public:
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }								// Misaki
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }			// Misaki
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }								// Misaki
-	CWorldWallManager* GetWorldWall(void)const { return m_pWorldWallManager.get(); }
 	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }			// Misaki
 
 	/// <summary>
@@ -76,5 +74,4 @@ private:
 	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ Misaki
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
-	std::unique_ptr<CWorldWallManager>m_pWorldWallManager;	// 世界の壁管理クラスのポインタ
 };

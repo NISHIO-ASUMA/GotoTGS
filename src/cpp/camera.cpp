@@ -370,18 +370,11 @@ void CCamera::ThirdPersonView(void)
 //==============================================================
 void CCamera::ResultCamera(void)
 {
-	m_pCamera.posV = CAMERAINFO::InitPos;	// カメラの位置
-	m_pCamera.posR = VECTOR3_NULL;			// カメラの見ている位置
-	m_pCamera.vecU = CAMERAINFO::InitVecU;	// 上方向ベクトル
-	m_pCamera.rot = CAMERAINFO::InitRot;	// 角度
-
-	// 距離を計算
-	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
-	float fRoty = m_pCamera.posV.y - m_pCamera.posR.y;
-	float fRotz = m_pCamera.posV.z - m_pCamera.posR.z;
-
-	// 視点から注視点までの距離
-	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
+	m_pCamera.posV = TITLECAMERAINFO::InitPos;			// カメラの位置
+	m_pCamera.posR = VECTOR3_NULL;						// カメラの見ている位置
+	m_pCamera.vecU = TITLECAMERAINFO::InitVecU;			// 上方向ベクトル
+	m_pCamera.rot = TITLECAMERAINFO::InitRot;			// 角度
+	m_pCamera.fDistance = TITLECAMERAINFO::Distance;	// 距離
 }
 //==============================================================
 // タイトルのカメラ処理

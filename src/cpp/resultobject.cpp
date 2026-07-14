@@ -50,11 +50,15 @@ CResultObject::~CResultObject()
 //=========================================================
 HRESULT CResultObject::Init(void)
 {
-	//// マップ読み込み
-	//m_pBlock = std::make_unique<CBlockManager>();
-	//auto jsonManager = CManager::GetInstance()->GetJsonManager();
-	//jsonManager->SetBlockManager(m_pBlock.get());
-	//m_pBlock->Init();
+#ifdef NDEBUG
+	// マップ読み込み
+	m_pBlock = std::make_unique<CBlockManager>();
+	auto jsonManager = CManager::GetInstance()->GetJsonManager();
+	jsonManager->SetBlockManager(m_pBlock.get());
+
+	// ブロック管理クラスの初期化
+	m_pBlock->Init();
+#endif // NDEBUG
 
 	// リザルトシーンオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();

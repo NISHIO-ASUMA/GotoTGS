@@ -37,8 +37,8 @@ CResult::~CResult()
 //=========================================================
 HRESULT CResult::Init(void)
 {
-	// カメラ初期化
-	CManager::GetInstance()->GetCamera()->Init();
+	// カメラの設定を変更する
+	CManager::GetInstance()->GetCamera()->ResultCamera();
 
 	// リザルトマネージャーの初期化
 	CResultManager::GetInstance()->Init();

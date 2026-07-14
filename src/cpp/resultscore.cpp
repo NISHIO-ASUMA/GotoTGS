@@ -145,7 +145,8 @@ void CResultScore::Draw(void)
 	// ナンバーの描画
 	for (auto number : m_pNumber)
 	{
-		number->Draw();
+		if (number->GetIsUse())
+			number->Draw();
 	}
 }
 //=========================================================
@@ -191,13 +192,24 @@ void CResultScore::UpdateAnimScore(void)
 	{
 		// 桁数ごとに分割する値を計算
 		int nDigit = nScore % Config::NUM_DIGIT;
-		nScore /= Config::NUM_DIGIT;
 
 		// ナンバーの更新
 		m_pNumber[nCntScore]->Update();
 
 		// 桁更新
 		m_pNumber[nCntScore]->SetDigit(nDigit);
+
+		if (nScore > 0 || nCntScore == 0)
+		{
+			m_pNumber[nCntScore]->SetIsUse(true);  // 表示
+		}
+		else
+		{
+			m_pNumber[nCntScore]->SetIsUse(false); // 非表示
+		}
+
+		// 次の桁へ
+		nScore /= Config::NUM_DIGIT;
 	}
 }
 //=========================================================

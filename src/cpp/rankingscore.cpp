@@ -22,7 +22,8 @@
 CRankingScore::CRankingScore(int nPriority) : CObject(nPriority),
 m_fHeight(NULL),
 m_fWidth(NULL),
-m_pos(VECTOR3_NULL)
+m_pos(VECTOR3_NULL),
+m_pLoad(nullptr)
 {
 	for (int nCntData = 0; nCntData < Config::RANKING_MAX; nCntData++)
 	{
@@ -111,6 +112,9 @@ HRESULT CRankingScore::Init(void)
 //=========================================================
 void CRankingScore::Uninit(void)
 {
+	// ポインタの破棄
+	m_pLoad.reset();
+
 	// 使っている桁数分の破棄
 	for (int nRankData = 0; nRankData < Config::RANKING_MAX; nRankData++)
 	{
@@ -144,10 +148,24 @@ void CRankingScore::Update(void)
 		{
 			// 1桁ずつ取り出す
 			int nNum = nScore % Config::DIGITNUM;
-			nScore /= Config::DIGITNUM;
+
+			// ナンバー更新
+			m_apNumber[nRank][nDigit]->Update();
 
 			// 桁更新
 			m_apNumber[nRank][nDigit]->SetDigit(nNum);
+
+			if (nScore > 0 || nDigit == 0)
+			{
+				m_apNumber[nRank][nDigit]->SetIsUse(true);  // 表示
+			}
+			else
+			{
+				m_apNumber[nRank][nDigit]->SetIsUse(false); // 非表示
+			}
+
+			// 数値の割合計算処理
+			nScore /= Config::DIGITNUM;
 		}
 	}
 }
@@ -171,5 +189,6 @@ void CRankingScore::Draw(void)
 //=========================================================
 void CRankingScore::Load(void)
 {
-	// 読み込み処理をloadクラスに変更
+	// 固定配列に格納する
+	m_aRankData = m_pLoad->LoadIntToFixedArray("data/SCORE/ResultScore.bin");
 }

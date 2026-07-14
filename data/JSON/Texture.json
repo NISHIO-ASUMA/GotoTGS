@@ -56,5 +56,6 @@
   { "Texture": "data/TEXTURE/vending04.jpg" },
   { "Texture": "data/TEXTURE/vending04_1.jpg" },
   { "Texture": "data/TEXTURE/wall00.jpg" },
-  { "Texture": "data/TEXTURE/wall01.jpg" }
+  { "Texture": "data/TEXTURE/wall01.jpg" },
+  { "Texture": "data/TEXTURE/resultback_text.jpg" }
 ]

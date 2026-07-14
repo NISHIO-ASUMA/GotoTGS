@@ -180,10 +180,9 @@ void CTutorialPlayer::Uninit(void)
 //=========================================================
 void CTutorialPlayer::Update(void)
 {
-#if 1
+#if 0
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
-#else
 
 	//*********************************************************
 	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
@@ -396,15 +395,6 @@ void CTutorialPlayer::Draw(void)
 {
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
-
-	// プレイヤー座標のデバッグ表示
-	CDebugproc::Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
-	CDebugproc::Draw(0, 180);
-
-#ifdef _DEBUG
-	// モーションのデバッグ表示
-	//GetMotion()->Debug();
-#endif
 }
 //=========================================================
 // 当たり判定
@@ -685,7 +675,6 @@ void CTutorialPlayer::MoveJoypad(float speed)
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
-			//CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
 			m_nCntAfk = 0;
 		}
 	}
