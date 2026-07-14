@@ -15,11 +15,12 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
-#include "gamesceneobject.h"
 #include "score.h"
-#include "progressgauge.h"
 #include "ui.h"
+#include "progressgauge.h"
+#include "gaugeneedle.h"
 #include "titleuimanager.h"
+#include "gamesceneobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -276,13 +277,13 @@ void CCOPYDeskwork::Task(const auto& pClear)
 {
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	//// 進捗ゲージのポインタ
-	//auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+	// 指針のポインタ
+	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
-	if (pScore == nullptr /*|| pProgressgauge == nullptr*/)
+	if (pScore == nullptr || pGaugeneedle == nullptr)
 	{// ヌルチェック
 		return;
 	}
@@ -310,8 +311,8 @@ void CCOPYDeskwork::Task(const auto& pClear)
 	// スコア加算
 	pScore->AddScore(100);
 
-	//// こなしたタスクの数を増やす
-	//pProgressgauge->AddTask();
+	// こなしたタスクの数を増やす
+	pGaugeneedle->AddTask();
 
 	// 点滅を始める
 	pClear->SetUse(true);
