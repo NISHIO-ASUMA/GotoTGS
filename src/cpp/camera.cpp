@@ -24,7 +24,7 @@
 #include "titleuimanager.h"
 
 //*********************************************************
-// 定数宣言
+// 定数名前空間宣言
 //*********************************************************
 namespace CAMERAINFO
 {
@@ -37,6 +37,9 @@ namespace CAMERAINFO
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 }
 
+//*********************************************************
+// タイトル用の定数名前空間宣言
+//*********************************************************
 namespace TITLECAMERAINFO
 {
 	const D3DXVECTOR3 InitPos = { -178.0f, 166.0f, -63.0f };	// カメラ初期座標
@@ -44,6 +47,18 @@ namespace TITLECAMERAINFO
 	const D3DXVECTOR3 InitRot = { 2.02f, 0.54f, 0.0f };			// カメラ初期角度
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 	constexpr float Distance = 380.0f;							// 初期の距離
+}
+
+//*********************************************************
+// ランキング用の定数名前空間宣言
+//*********************************************************
+namespace RANKINGCAMERAINFO
+{
+	const D3DXVECTOR3 InitPosV = { 405.0f,54.0f, -127.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitPosR = { 415.0f, 51.0f, -127.0f };	// カメラ初期座標
+	const D3DXVECTOR3 InitRot = { 1.78f, 1.56f, 0.0f };			// カメラ初期角度
+	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
+	constexpr float Distance = 10.0f;							// 初期の距離
 }
 
 //=========================================================
@@ -128,6 +143,11 @@ void CCamera::Update(void)
 	{
 		// 固定カメラに設定
 		ResultCamera();
+	}
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RANKING)
+	{
+		// 固定カメラに設定
+		RankingCamera();
 	}
 
 	// 角度の正規化
@@ -386,6 +406,17 @@ void CCamera::TitleCamera(void)
 	m_pCamera.vecU = TITLECAMERAINFO::InitVecU;			// 上方向ベクトル
 	m_pCamera.rot = TITLECAMERAINFO::InitRot;			// 角度
 	m_pCamera.fDistance = TITLECAMERAINFO::Distance;	// 距離
+}
+//==============================================================
+// ランキングのカメラ処理
+//==============================================================
+void CCamera::RankingCamera(void)
+{
+	m_pCamera.posV = RANKINGCAMERAINFO::InitPosV;			// カメラの位置
+	m_pCamera.posR = RANKINGCAMERAINFO::InitPosR;			// カメラの見ている位置
+	m_pCamera.vecU = RANKINGCAMERAINFO::InitVecU;			// 上方向ベクトル
+	m_pCamera.rot = RANKINGCAMERAINFO::InitRot;				// 角度
+	m_pCamera.fDistance = RANKINGCAMERAINFO::Distance;		// 距離
 }
 //==============================================================
 // カメラから見て透過させる時の当たり判定関数

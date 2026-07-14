@@ -18,6 +18,7 @@
 #include "input.h"
 #include "sound.h"
 #include "title.h"
+#include "camera.h"
 
 //=========================================================
 // インスタンス取得
@@ -46,6 +47,9 @@ CRankingManager::~CRankingManager()
 //=========================================================
 HRESULT CRankingManager::Init(void)
 {
+	// カメラを設定する
+	CManager::GetInstance()->GetCamera()->RankingCamera();
+
 	// サウンド取得
 	auto Sound = CManager::GetInstance()->GetSound();
 	if (Sound == nullptr)return E_FAIL;

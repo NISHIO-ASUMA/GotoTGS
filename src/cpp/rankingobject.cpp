@@ -19,6 +19,7 @@
 #include "rankingscore.h"
 #include "jsonmanager.h"
 #include "ui.h"
+#include "blockmanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -39,7 +40,7 @@ namespace RANKINGOBJECT
 //=========================================================
 // コンストラクタ
 //=========================================================
-CRankingObject::CRankingObject()
+CRankingObject::CRankingObject() : m_pBlock(nullptr)
 {
 	
 }
@@ -55,13 +56,18 @@ CRankingObject::~CRankingObject()
 //=========================================================
 HRESULT CRankingObject::Init(void)
 {
-	// ランキングで使うオブジェクトの読み込み
-	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	jsonmanager->Load(RANKINGOBJECT::LoadName);
+	// ブロックマネージャー生成
+	m_pBlock = std::make_unique<CBlockManager>();
+	const auto& jsonManager = CManager::GetInstance()->GetJsonManager();
+	jsonManager->SetBlockManager(m_pBlock.get());
 
-	// 背景設定
-	CUi::Create(CENTERPOS,0,HALFWIDTH,HALFHEIGHT,"rankingback.jpg",false);
+	// 初期化とポインタセット
+	m_pBlock->Init();
 
+	// フィールド読み込み
+	jsonManager->Load(RANKINGOBJECT::LoadName);
+
+	// TODO : ランキングと同期して棒グラフのポリゴン出す
 	// ランキングスコア生成
 	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
@@ -72,6 +78,9 @@ HRESULT CRankingObject::Init(void)
 //=========================================================
 void CRankingObject::Uninit(void)
 {
+	// ポインタの破棄
+	m_pBlock.reset();
+
 	// インスタンスの破棄
 	if (m_pInstance)
 	{
