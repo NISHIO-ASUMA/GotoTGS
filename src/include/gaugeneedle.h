@@ -30,9 +30,12 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// 角度正規化
+	inline void NormalizAngle(float& fAngle);
+
 	// 設定処理
-	void AddTask(void) { m_nTask++; }	// タスクの数加算
-	void AddAFK(void) { m_nAFK++; }		// さぼりの数加算
+	void AddTask(void);		// タスクの数加算
+	void AddAFK(void);		// さぼりの数加算
 
 	// 情報取得処理
 	inline int GetTaskCount(void) const { return m_nTask; }
@@ -47,11 +50,17 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float PIVOT_X = 0.5f;	// X軸の回転基準点
-		static constexpr float PIVOT_Y = 0.9f;	// Y軸の回転基準点
+		static constexpr float PIVOT_X = 0.5f;		// X軸の回転基準点
+		static constexpr float PIVOT_Y = 0.9f;		// Y軸の回転基準点
+		static constexpr float MAX_ANGLE = 0.43f;	// 傾く角度の最大値
+		static constexpr float MOVE_ANGLE = 0.1f;	// 移動量
+		static constexpr int MAX_FREAM = 60;		// 移動に掛かるフレーム数
 	};
 
 	// メンバ変数
-	int m_nTask;							// タスクをこなした数
-	int m_nAFK;								// さぼりをこなした数
+	int m_nTask;		// タスクをこなした数
+	int m_nAFK;			// さぼりをこなした数
+	int m_nCount;		// 現在のカウント
+	bool m_bStart;		// 動いているかどうか
+	float m_fOldAngle;	// 元の角度
 };

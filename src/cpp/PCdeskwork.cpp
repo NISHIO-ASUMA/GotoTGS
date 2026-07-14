@@ -15,12 +15,13 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
-#include "gamesceneobject.h"
 #include "score.h"
-#include "progressgauge.h"
 #include "ui.h"
 #include "easing.h"
+#include "progressgauge.h"
+#include "gaugeneedle.h"
 #include "titleuimanager.h"
+#include "gamesceneobject.h"
 
 //*********************************************************
 // 定数名前空間
@@ -328,8 +329,8 @@ void CPCDeskwork::Task(const auto& pClear)
 {
 	// スコアのポインタ
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	//// 進捗ゲージのポインタ
-	//auto* pProgressgauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+	// 指針のポインタ
+	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 
 	if (pScore == nullptr /*|| pProgressgauge == nullptr*/)
 	{// ヌルチェック
@@ -349,8 +350,8 @@ void CPCDeskwork::Task(const auto& pClear)
 	// クールタイムを始める
 	SetTime(true);
 
-	//// こなしたタスクの数を増やす
-	//pProgressgauge->AddTask();
+	// こなしたタスクの数を増やす
+	pGaugeneedle->AddTask();
 
 	// スコア加算
 	pScore->AddScore(100);

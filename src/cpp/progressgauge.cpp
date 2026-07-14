@@ -16,7 +16,6 @@
 #include "manager.h"
 #include "input.h"
 #include "gaugeneedle.h"
-#include "template.h"
 
 //=========================================================
 // コンストラクタ
@@ -72,7 +71,7 @@ HRESULT CProgressgauge::Init(void)
 	D3DXVECTOR3 pos = GetPos();
 
 	// 高さをずらす
-	pos.y += 40.0f;
+	pos.y += Config::POS_Y_VALUE;
 
 	// 指針の生成処理
 	m_gaugeneedle = CGaugeneedle::Create(pos, Config::NEEDLE_WIDTH, Config::NEEDLE_HEIGHT);
@@ -103,38 +102,9 @@ void CProgressgauge::Uninit(void)
 //=========================================================
 void CProgressgauge::Update(void)
 {
-	// キーボードのポインタ
-	auto* pKeyboard = CManager::GetInstance()->GetInputKeyboard();
 
 	// 親の更新処理
 	CObject2D::Update();
-
-	// 現在の角度
-	float fAngle = m_gaugeneedle->GetAngle();;
-
-	if (pKeyboard->GetPress(DIK_LEFT) == true)
-	{// 左回り
-		fAngle -= 0.01f;
-	}
-	else if (pKeyboard->GetPress(DIK_RIGHT) == true)
-	{// 右回り
-		fAngle += 0.01f;
-	}
-
-	if (fAngle <= -D3DX_PI * Config::MAX_ANGLE)
-	{
-		fAngle = -D3DX_PI * Config::MAX_ANGLE;
-	}
-	else if (fAngle >= D3DX_PI * Config::MAX_ANGLE)
-	{
-		fAngle = D3DX_PI * Config::MAX_ANGLE;
-	}
-
-	// 正規化
-	fAngle = NormalAngle(fAngle);
-
-	// 角度を設定
-	m_gaugeneedle->SetAngle(fAngle);
 
 	// 指針の更新処理
 	m_gaugeneedle->Update();

@@ -48,7 +48,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float MAX_ANGLE = 0.41f;		// åXÇ≠äpìxÇÃç≈ëÂíl
+		static constexpr float POS_Y_VALUE = 40.0f;		// ècé≤ÇÃÇ∏ÇÁÇ∑ó 
 		static constexpr float NEEDLE_WIDTH = 20.0f;	// â°ïù
 		static constexpr float NEEDLE_HEIGHT = 100.0f;	// ècïù
 	};
