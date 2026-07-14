@@ -25,6 +25,7 @@ m_nTask(NULL),			// タスクをこなした数
 m_nAFK(NULL),			// さぼりをこなした数
 m_nCount(NULL),			// 現在のカウント
 m_bStart(false),		// 動いているかどうか
+m_bDir(false),			// どの方向に進むか
 m_fOldAngle(NULL)		// 元の角度
 {
 
@@ -111,14 +112,24 @@ void CGaugeneedle::Update(void)
 		return;
 	}
 
+	float fFream = NULL;		// 1フレームの割合
+	float fNowRatio = NULL;		// 現在のフレームの割合
+	float fMoveAngle = NULL;	// 移動量
+
 	// 1フレームの割合
-	float fFream = CEasing::SetEase(m_nCount, Config::MAX_FREAM);
+	fFream = CEasing::SetEase(m_nCount, Config::MAX_FREAM);
 
-	// 現在のフレームの割合 揺れあり
-	float fNowRatio = CEasing::EaseOutElastic(fFream);
+	// 揺れながら移動
+	fNowRatio = CEasing::EaseOutElastic(fFream);
 
-	// 移動量の計算
-	float fMoveAngle = GetAngle() + (Config::MOVE_ANGLE * (1.0f - fNowRatio));
+	if (m_bDir != false)
+	{// 右方向に進む場合
+		fMoveAngle = GetAngle() + (Config::MOVE_ANGLE * (1.0f - fNowRatio));
+	}
+	else
+	{// 左方向に移動
+		fMoveAngle = GetAngle() - (Config::MOVE_ANGLE * (1.0f - fNowRatio));
+	}
 
 	// 角度正規化
 	NormalizAngle(fMoveAngle);
@@ -150,6 +161,9 @@ void CGaugeneedle::AddTask(void)
 
 	// ゲージを動かしている状態にする
 	m_bStart = true;
+
+	// 左に進むようにする
+	m_bDir = false;
 }
 
 //=========================================================
@@ -163,6 +177,8 @@ void CGaugeneedle::AddAFK(void)
 	// ゲージを動かしている状態にする
 	m_bStart = true;
 
+	// 右に進むようにする
+	m_bDir = true;
 }
 
 //=========================================================

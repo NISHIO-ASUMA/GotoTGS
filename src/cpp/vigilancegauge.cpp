@@ -90,7 +90,7 @@ void CVigilancegauge::Update(void)
 	// ŽÀŒ±
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
 	{
-		m_fRatio += 0.1f;
+		m_fRatio += 0.01f;
 	}
 
 	if (m_fRatio >= 1.0f)
