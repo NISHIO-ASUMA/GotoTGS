@@ -9,9 +9,6 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "vigilanceUImanager.h"
-#include "vigilanceicon.h"
-#include "vigilancegauge.h"
-#include "vigilancelevel.h"
 
 //*********************************************************
 // インクルードファイル

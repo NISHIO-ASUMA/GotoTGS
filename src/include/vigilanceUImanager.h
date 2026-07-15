@@ -14,13 +14,9 @@
 // インクルード
 //*********************************************************
 #include "object.h"
-
-//*********************************************************
-// 前方宣言
-//*********************************************************
-class CVigilanceicon;
-class CVigilancegauge;
-class CVigilancelevel;
+#include "vigilanceicon.h"
+#include "vigilancegauge.h"
+#include "vigilancelevel.h"
 
 //*********************************************************
 //  警戒度UIマネージャーに対するクラスを定義
