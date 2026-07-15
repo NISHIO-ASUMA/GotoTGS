@@ -30,9 +30,9 @@ public:
 	// 警戒度レベルの構造体
 	struct Level
 	{
-		D3DXVECTOR3 pos;
-		float fWidth;
-		float fHeight;
+		D3DXVECTOR3 pos;	// 位置
+		float fWidth;		// 横幅
+		float fHeight;		// 縦幅
 	};
 
 	CVigilancelevel(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
