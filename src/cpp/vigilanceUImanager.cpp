@@ -112,19 +112,19 @@ void CVigilanceUIManager::Uninit(void)
 {
 	// 各ポインタの終了処理
 	if (m_pIcon != nullptr)
-	{
+	{// アイコン
 		m_pIcon->Uninit();
 		m_pIcon = nullptr;
 	}
 
 	if (m_pGauge != nullptr)
-	{
+	{// ゲージ
 		m_pGauge->Uninit();
 		m_pGauge = nullptr;
 	}
 
 	if (m_pLevel != nullptr)
-	{
+	{// レベル
 		m_pLevel->Uninit();
 		m_pLevel = nullptr;
 	}
@@ -139,6 +139,9 @@ void CVigilanceUIManager::Update(void)
 	m_pIcon->Update();
 	m_pGauge->Update();
 	m_pLevel->Update();
+
+	// レベルの数値設定処理
+	m_pLevel->SetLevel(m_pGauge->GetLevelCount());
 
 }
 

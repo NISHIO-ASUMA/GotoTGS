@@ -136,16 +136,8 @@ void CVigilancelevel::Update(void)
 	{
 		if (m_apNumber[nCount] != nullptr)
 		{// nullチェック
-
-			//// 現在の数値
-			//int nDigit = 0;
-
-			//// 桁更新
-			//m_apNumber[nCount]->SetDigit(nDigit);
-
 			// ナンバーの更新処理
 			m_apNumber[nCount]->Update();
-
 		}
 	}
 
@@ -169,4 +161,32 @@ void CVigilancelevel::Draw(void)
 
 	// 親の描画処理
 	CObject2D::Draw();
+}
+
+//=========================================================
+// 数値設定処理
+//=========================================================
+void CVigilancelevel::SetLevel(const int& nLevel)
+{
+	// 数値を代入
+	int nValue = nLevel;
+
+	// 配列ナンバーの更新処理
+	for (int nCount = 0; nCount < Config::NUM_SCORE; nCount++)
+	{
+		if (m_apNumber[nCount] != nullptr)
+		{// nullチェック
+	
+			// 現在の数値
+			int nDigit = nValue % Config::NUM_DIGIT;
+	
+			// 桁更新
+			m_apNumber[nCount]->SetDigit(nDigit);
+		
+			// 次の桁へ
+			nValue /= Config::NUM_DIGIT;
+
+		}
+	}
+
 }
