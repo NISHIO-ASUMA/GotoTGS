@@ -97,7 +97,6 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_isPcWork(false),
-m_TvPrevPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_nCntAfk(NULL)
 {

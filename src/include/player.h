@@ -31,6 +31,32 @@ class CJoyPad;
 class CPlayer : public CMoveCharactor
 {
 public:
+	//************************
+	// モーション列挙型
+	//************************
+	enum MOTION
+	{
+		NEUTRAL,		// 通常
+		MOVE,			// 移動
+		SMOKE,			// 煙草
+		TV,				// テレビ
+		MAGAZINE,		// 雑誌
+		GAME,			// ゲーセン
+		MAX
+	};
+
+	//*************************
+	// 操作メニュータイプ
+	//*************************
+	enum CONTROLTYPE
+	{
+		CONTROLTYPE_NONE,	// デフォルト
+		CONTROLTYPE_KEY,	// キーマウ
+		CONTROLTYPE_PAD,	// ゲームパッド
+		CONTROLTYPE_MAX
+	};
+
+public:
 
 	CPlayer(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
 	~CPlayer();
@@ -39,8 +65,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
-	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
-	bool CollisionSphere(CSphereCollider* pOther);
+
 	void ChangeState(CPlayerStateBase* pState, int nID);
 	void MoveKeyboard(float speed);
 	void MoveJoypad(float speed);
@@ -64,47 +89,16 @@ public:
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 
-	inline D3DXVECTOR3 GetPrevPos(void) const { return m_TvPrevPos; }
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
-	void SetPrevPos(const D3DXVECTOR3& pos) { m_TvPrevPos = pos; }
-public:
-
-	//************************
-	// モーション列挙型
-	//************************
-	enum MOTION
-	{
-		NEUTRAL,
-		MOVE,
-		SMOKE,
-		TV,
-		MAGAZINE,
-		GAME,
-		MAX
-	};
-
-	//*************************
-	// 操作メニュータイプ
-	//*************************
-	enum CONTROLTYPE
-	{
-		CONTROLTYPE_NONE,
-		CONTROLTYPE_KEY,
-		CONTROLTYPE_PAD,
-		CONTROLTYPE_MAX
-	};
-
-//***********************************
-// 西尾追加
 public:
 
 	/// <summary>
 	/// 特定動作時にアイテムを追加する関数
 	/// </summary>
-	/// <param name="pModelName"></param>
-	/// <param name="parttype"></param>
+	/// <param name="pModelName">生成したいモデルの名前</param>
+	/// <param name="parttype">どのパーツか</param>
 	void AddItemSet(const char* pModelName, CModel::PARTTYPE parttype,const D3DXVECTOR3& rot = VECTOR3_NULL,const D3DXVECTOR3& offpos = VECTOR3_NULL)
 	{
 		// nullじゃなかったら破棄する
@@ -146,14 +140,58 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// 矩形のコライダーとの当たり判定
+	/// </summary>
+	/// <param name="pOther">判定先のコライダー</param>
+	/// <param name="OutPos">出力する座標</param>
+	/// <returns></returns>
+	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos);
+
+	/// <summary>
+	/// 球形のコライダーとの当たり判定
+	/// </summary>
+	/// <param name="pOther">判定先の球コライダー</param>
+	/// <returns></returns>
+	bool CollisionSphere(CSphereCollider* pOther);
+
+	/// <summary>
+	/// マップに配置されているブロック等の当たり判定
+	/// </summary>
+	/// <param name="pos">現在座標</param>
 	void UpdateBlockCollision(D3DXVECTOR3 pos);
+
+	/// <summary>
+	/// 自動ドアとの当たり判定処理
+	/// </summary>
+	/// <param name="pos">現在座標</param>
 	void UpdateAutoDoorCollision(D3DXVECTOR3 pos);
+
+	/// <summary>
+	/// 両開きのドアとの当たり判定処理
+	/// </summary>
+	/// <param name="pos">現在座標</param>
+	/// <param name="key">キーボードクラスのポインタ</param>
+	/// <param name="pad">ゲームパッドクラスのポインタ</param>
 	void UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad);
+
+	/// <summary>
+	/// 敵の視界との当たり判定
+	/// </summary>
+	/// <param name="UpdatePos">更新された座標</param>
 	void CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos);
 
+	/// <summary>
+	/// テレビの方を向く関数
+	/// </summary>
+	/// <param name=""></param>
 	void MathTVRotation(void);
+
+	/// <summary>
+	/// PC作業の方向に向く関数
+	/// </summary>
+	/// <param name=""></param>
 	void MathDeskRotation(void);
-//****************************************************
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -166,11 +204,8 @@ private:
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	int m_nCntAfk;										// さぼっているときのゲージの加算
 
-//***********************************
-// 西尾追加
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
-	D3DXVECTOR3 m_TvPrevPos;				  // テレビサボりの座標
 	int m_nControlTypes;					  // 操作種類
 	bool m_isPcWork;						  // デスクワークか
 };
