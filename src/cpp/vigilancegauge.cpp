@@ -90,12 +90,18 @@ void CVigilancegauge::Update(void)
 	// 実験
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
 	{
-		m_fRatio += 0.01f;
+		// 比率を増やす
+		m_fRatio += 0.05f;
 	}
 
+	// 最大比率を超えたら
 	if (m_fRatio >= 1.0f)
 	{
+		// 比率を元に戻す
 		m_fRatio = 0.0f;
+
+		// レベルを上げる
+		m_nLevelCount++;
 	}
 
 	// テクスチャのUVを比率分動かす
