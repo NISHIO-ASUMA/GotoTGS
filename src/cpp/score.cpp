@@ -27,7 +27,8 @@ m_rot(VECTOR3_NULL),
 m_fHeight(NULL),
 m_fWidth(NULL),
 m_apNumber{},
-m_pLoad{}
+m_pLoad{},
+m_isDraw(true)
 {
 }
 //=========================================================
@@ -40,7 +41,7 @@ CScore::~CScore()
 //=========================================================
 // 生成処理
 //=========================================================
-CScore* CScore::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
+CScore* CScore::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight, const bool& isDraw)
 {
 	// スコアインスタンス生成
 	CScore* pScore = new CScore;
@@ -50,6 +51,7 @@ CScore* CScore::Create(const D3DXVECTOR3& pos, const float& fWidth, const float&
 	pScore->SetPos(pos);
 	pScore->SetWidth(fWidth);
 	pScore->SetHeight(fHeight);
+	pScore->m_isDraw = isDraw;
 
 	// 初期化失敗時
 	if (FAILED(pScore->Init())) return nullptr;
@@ -74,11 +76,11 @@ HRESULT CScore::Init(void)
 		// 初期化処理
 		m_apNumber[nCnt]->Init(D3DXVECTOR3(m_pos.x - (fTexPos * Config::DIGIT_VALUE * nCnt), m_pos.y,0.0f), fTexPos, m_fHeight);
 
-		// ナンバー変数のサイズ
-		m_apNumber[nCnt]->SetSize(fTexPos, m_fHeight);
+		//// ナンバー変数のサイズ
+		//m_apNumber[nCnt]->SetSize(fTexPos, m_fHeight);
 
-		// 座標設定
-		m_apNumber[nCnt]->SetPos(m_pos);
+		//// 座標設定
+		//m_apNumber[nCnt]->SetPos(m_pos);
 
 		// テクスチャセット
 		m_apNumber[nCnt]->SetTexture(Config::TEX_NAME);
@@ -117,6 +119,8 @@ void CScore::Uninit(void)
 //=========================================================
 void CScore::Update(void)
 {
+	if (!m_isDraw) return;
+
 	// スコア格納
 	int nScore = m_nScore;
 
@@ -150,6 +154,8 @@ void CScore::Update(void)
 //=========================================================
 void CScore::Draw(void)
 {
+	if (!m_isDraw) return;
+
 	// 数字の描画
 	for (auto number : m_apNumber)
 	{

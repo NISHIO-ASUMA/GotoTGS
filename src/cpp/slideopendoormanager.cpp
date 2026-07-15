@@ -17,6 +17,7 @@
 #include "camera.h"
 #include "gamesceneobject.h"
 #include "player.h"
+#include "sound.h"
 
 //*********************************************************
 // 定数名前空間
@@ -127,4 +128,8 @@ void CSideOpenDoorManager::OpenSideDoor(const std::vector<int>& targetIndices)
 			m_pSideOpenDoors[nIdx]->RotationDoorFlag();
 		}
 	}
+
+	// サウンド再生
+	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SIDEDOOR_SE);
+	return;
 }

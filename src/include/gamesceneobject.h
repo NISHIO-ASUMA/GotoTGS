@@ -42,13 +42,20 @@ public:
 	void Update(void);
 	void Draw(void);
 
+//*********************************
+// 西尾 : スコア関連の取得
+	CScore* GetScore(void) const { return m_pScoreTask; }		// タスクのスコアの物
+	CScore* GetScoreDitch(void) const { return m_pScoreDitch; } // サボりの物
+	CScore* GetScoreAllGame(void) const { return m_pScoreAll; }	// 今現在ゲームで表示している物
+//*********************************
+
 	CGametime* GetTime(void) const { return m_pTimer; }
-	CScore* GetScore(void) const { return m_pScore; }
-	CPlayer* GetPlayer(void) const { return m_pPlayer; }								// [ Asuma add ]
-	CDeskwork* GetDesk(void) const { return m_pDeskwork; }								// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }			// Misaki
-	CEventUI* GetEventUI(void) const { return m_pEventUI; }								// Misaki
-	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }			// Misaki
+	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// [ Asuma add ]
+	CDeskwork* GetDesk(void) const { return m_pDeskwork; }										// Misaki
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
+	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
+	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }					// Misaki
+	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -64,14 +71,17 @@ private:
 
 private:
 
-	CScore* m_pScore;								// スコアクラスのポインタ
-	CGametime* m_pTimer;							// タイマークラスのポインタ
-	CDeskwork* m_pDeskwork;							// タスクのポインタ Misaki
-	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ Misaki
-	CEventUI* m_pEventUI;							// イベントUIのポインタ Misaki
-	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ [ Asuma add ]
+	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
+	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
+	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
+
+	CGametime* m_pTimer;							// タイマークラスのポインタ			Misaki
+	CDeskwork* m_pDeskwork;							// タスクのポインタ					Misaki
+	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ				Misaki
+	CEventUI* m_pEventUI;							// イベントUIのポインタ				Misaki
+	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ		[ Asuma add ]
 	CTutorialLines* m_pTutoriallines;				// チュートリアルのセリフのポインタ Misaki
-	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ Misaki
+	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ				Misaki
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 };

@@ -68,7 +68,9 @@ namespace GAMEOBJECT
 //=========================================================
 CGameSceneObject::CGameSceneObject() : m_pBlocks(nullptr),
 m_pTimer(nullptr),
-m_pScore(nullptr),
+m_pScoreTask(nullptr),
+m_pScoreDitch(nullptr),
+m_pScoreAll(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr)
@@ -146,7 +148,9 @@ HRESULT CGameSceneObject::Init(void)
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	// スコア初期化
-	m_pScore->DeleteScore();
+	m_pScoreTask->DeleteScore();
+	m_pScoreDitch->DeleteScore();
+	m_pScoreAll->DeleteScore();
 
 	// サイドに開くドアの管理クラスを生成
 	CSideOpenDoorManager::GetInstance()->Init();
@@ -170,6 +174,16 @@ HRESULT CGameSceneObject::Init(void)
 //=========================================================
 void CGameSceneObject::Uninit(void)
 {
+	// 破棄される前に書き出し実行
+	if (m_pScoreDitch)
+		m_pScoreDitch->SaveScore("data/SCORE/LazyScore.bin");
+
+	if (m_pScoreTask)
+	{
+		m_pScoreTask->ScoreChangeMath(-1); // 値の反転をする
+		m_pScoreTask->SaveScore("data/SCORE/TaskScore.bin");
+	}
+
 	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
 
@@ -230,6 +244,17 @@ void CGameSceneObject::Update(void)
 	// 自動ドアコライダー管理クラスの更新
 	CAutoMaticDoorCollision::GetInstance()->Update();
 
+	// 全体スコアの更新
+	if (m_pScoreAll)
+	{
+		// スコアの値をもらい、allに加算していく
+		int ScoreDitch = m_pScoreDitch->GetScore();
+		int ScoreTask = m_pScoreTask->GetScore();
+
+		// セットする
+		m_pScoreAll->SetScore(ScoreDitch + ScoreTask);
+	}
+
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
 
@@ -238,14 +263,14 @@ void CGameSceneObject::Update(void)
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
 	{
 		// 加算
-		m_pScore->AddScore(100);
+		m_pScoreDitch->AddScore(1000);
 	}
 
 	// スコアの保存処理の検証
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_B))
 	{
 		// 書き出し処理
-		m_pScore->SaveScore("data/SCORE/LazyScore.bin");
+		m_pScoreTask->SaveScore("data/SCORE/LazyScore.bin");
 	}
 
 #endif // _DEBUG
@@ -278,8 +303,14 @@ void CGameSceneObject::CreatePointer(void)
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
+//********************************************
+ 
 	// スコア生成
-	m_pScore = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.f, 80.0f);
+	m_pScoreTask = CScore::Create(VECTOR3_NULL, 200.0f, 80.0f,false);
+	m_pScoreDitch = CScore::Create(VECTOR3_NULL, 200.0f, 80.0f,false);
+	m_pScoreAll = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.0f, 80.0f);
+
+//********************************************
 
 	// 進捗ゲージの生成 Misaki
 	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(200.0f, 70.0f, 0.0f), 100.0f, 70.0f);

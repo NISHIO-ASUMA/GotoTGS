@@ -27,18 +27,20 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
-#include "PCdeskwork.h"			// Misaki
-#include "COPYdeskwork.h"		// Misaki
-#include "DOCUMENTdeskwork.h"	// Misaki
+#include "PCdeskwork.h"				// 髙橋追加
+#include "COPYdeskwork.h"			// 髙橋追加
+#include "DOCUMENTdeskwork.h"		// 髙橋追加
+#include "vigilanceUImanager.h"		// 髙橋追加
+#include "vigilanceUImanager.h"		// 髙橋追加
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 #include "afkmanager.h"
 #include "afktv.h"
 #include "afksmoke.h"
 #include "afkmagazine.h"
-#include "automaticdoormanager.h" // 西尾追加
-#include "automatic_door.h"		  // 西尾追加
-#include "autodoor_collision.h"	  // 西尾追加
+#include "automaticdoormanager.h"	// 西尾追加
+#include "automatic_door.h"			// 西尾追加
+#include "autodoor_collision.h"		// 西尾追加
 #include "outline.h"
 #include "afkgamecenter.h"
 #include "titleuimanager.h"
@@ -95,7 +97,6 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_isPcWork(false),
-m_TvPrevPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_nCntAfk(NULL)
 {
@@ -266,7 +267,7 @@ void CPlayer::Update(void)
 			m_isPcWork = false;
 		}
 
-		// 起動したタスクを非アクティブにする [add Misaki]
+		// 起動したタスクを非アクティブにする [add 髙橋]
 		pDesk->SetTaskType(pDesk->GetTaskType());
 
 		// タスク中は移動や他の当たり判定をさせないためにリターン
@@ -364,10 +365,10 @@ void CPlayer::Update(void)
 			{				
 				switch (Colliders->nType)
 				{
-				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add Misaki]
+				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add 髙橋]
 					break;
 
-				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add Misaki]
+				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add 髙橋]
 				
 					// 両方がnullじゃない状態
 					if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
@@ -1056,6 +1057,9 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 	// 敵管理クラスを取得する
 	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
 
+	// 警戒度ゲージを取得 [add 髙橋]
+	const auto& Gauge = CGameSceneObject::GetInstance()->GetVigilanceUIManager()->GetGauge();
+
 	// 敵の中での判定取得
 	for (auto& IdxEnemy : Enemy)
 	{
@@ -1064,6 +1068,13 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 		{
 			// 対象の敵の動きを変更する(プレイヤーを追従するかどうかのフラグを変更する )
 			//IdxEnemy->SetTargetChaseFlag(true);
+
+			// 現在のゲージの量を取得 [add 髙橋]
+			float fNowRatio = Gauge->GetRatio();
+
+			// 警戒度ゲージを増やす [add 髙橋]
+			Gauge->SetRatio(fNowRatio + 0.002f);
+
 			break;
 		}
 	}

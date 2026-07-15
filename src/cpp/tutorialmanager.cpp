@@ -55,7 +55,7 @@ HRESULT CTutorialManager::Init(void)
 	if (pSound == nullptr) return E_FAIL;
 
 	// サウンド再生
-	pSound->Play(CSound::SOUND_LABEL_TUTORIALBGM);
+	//pSound->Play(CSound::SOUND_LABEL_TUTORIALBGM);
 
 	return S_OK;
 }
@@ -76,7 +76,7 @@ void CTutorialManager::Update(void)
 	auto* Mouse = CManager::GetInstance()->GetMouse();
 	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
-	// キー入力で遷移 仮で制作中
+	// キー入力で遷移 ( 仮 )
 	if (Key->GetTrigger(DIK_RETURN) ||
 		Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) ||
 		Pad->GetTrigger(CJoyPad::JOYKEY_A) ||

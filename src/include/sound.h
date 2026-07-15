@@ -47,6 +47,17 @@ public:
 		SOUND_LABEL_PAUSESTART,		// 開始音
 		SOUND_LABEL_QUEEN,			// 女王ヒット
 		SOUND_LABEL_START,			// ゲーム開始音
+
+
+		// ****************** ここから今回の追加SE ****************:
+		SOUND_LABEL_TASKCLEAR_SE,	// タスク成功音
+		SOUND_LABEL_KEY_CLEAR_SE,	// キー入力成功音
+		SOUND_LABEL_TASKMISS_SE,	// タスクキー入力ミス音
+		SOUND_LABEL_COPYTASK_SE,	// コピー機の音
+		SOUND_LABEL_SIDEDOOR_SE,	// 両開きのドアの音
+		SOUND_LABEL_AUTODOOR_SE,	// 自動ドアの音
+
+		SOUND_LABEL_PCSTART_SE,		// パソコンの音
 		SOUND_LABEL_MAX
 	};
 
@@ -103,6 +114,13 @@ private:
 		{"data/SE/pausekey.wav",0},			 // ポーズキー
 		{"data/SE/QueenHit.wav",0},			 // 女王ヒット
 		{"data/SE/Startbgm.wav",0},			 // ゲーム開始画面音
+		{"data/SE/TaskComp.wav",0},			 // タスク成功音
+		{"data/SE/typeSE.wav",0},			 // タスクキー入力成功音
+		{"data/SE/typemissSE.wav",0},		 // タスクキー入力失敗音
+		{"data/SE/copySE.wav",0},			 // タスクキー入力失敗音
+		{"data/SE/officedoorSE.wav",0},			 // 両開きの音
+		{"data/SE/automaticSE.wav",0},			 // 自動ドアの音
+		{"data/SE/pcSE.wav",0},			 // パソコン開始の音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

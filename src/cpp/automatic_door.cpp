@@ -19,6 +19,7 @@
 #include "xfilemanager.h"
 #include "renderer.h"
 #include "player.h"
+#include "sound.h"
 
 //*********************************************************
 // 定数名前空間
@@ -187,6 +188,9 @@ void CAutoMaticDoor::Update(void)
 			pos.z = m_vBasePos.z;
 			SetPos(pos);
 			m_nState = STATE_CLOSE_WAIT;
+
+			// ここでサウンドのフラグリセット
+			m_isSoundPlay = false;
 		}
 
 		break;
@@ -249,6 +253,16 @@ void CAutoMaticDoor::OpenDoorFlag(void)
 	// 閉じている、または閉じ中の時だけ開く
 	if (m_nState == STATE_CLOSE_WAIT || m_nState == STATE_CLOSING)
 	{
+		// 空いている状態にする
 		m_nState = STATE_OPENING;
+
+		if (!m_isSoundPlay)
+		{
+			// サウンド再生
+			CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_AUTODOOR_SE);
+			// サウンドフラグ有効化
+			m_isSoundPlay = true;
+		}
+		return;
 	}
 }

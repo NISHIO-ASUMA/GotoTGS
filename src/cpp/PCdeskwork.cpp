@@ -22,6 +22,7 @@
 #include "gaugeneedle.h"
 #include "titleuimanager.h"
 #include "gamesceneobject.h"
+#include "sound.h"
 
 //*********************************************************
 // 定数名前空間
@@ -331,6 +332,8 @@ void CPCDeskwork::Task(const auto& pClear)
 	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
 	// 指針のポインタ
 	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+	// サウンドクラスのポインタ
+	auto* pSound = CManager::GetInstance()->GetSound();
 
 	if (pScore == nullptr /*|| pProgressgauge == nullptr*/)
 	{// ヌルチェック
@@ -354,7 +357,10 @@ void CPCDeskwork::Task(const auto& pClear)
 	pGaugeneedle->AddTask();
 
 	// スコア加算
-	pScore->AddScore(100);
+	pScore->AddScore(-100);
+
+	// サウンド再生 ( 成功音 )
+	pSound->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);
 
 	// 点滅を始める
 	pClear->SetUse(true);
@@ -450,6 +456,9 @@ bool CPCDeskwork::ControlResult(void)
 		// 正解の処理
 		pCurrentUI->SetAlpha(HALF);
 		m_nNowIdx++;
+
+		// サウンド再生 ( 成功音 )
+		CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_KEY_CLEAR_SE);
 		return true;
 	}
 	else if (hasAnyInput)
@@ -458,6 +467,9 @@ bool CPCDeskwork::ControlResult(void)
 		pCurrentUI->ChangeCol(COLOR_RED, true);
 		m_bFalse = true;
 		SetTime(true);
+
+		// サウンド再生 ( 失敗音 )
+		CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_TASKMISS_SE);
 		return false;
 	}
 

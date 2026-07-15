@@ -9,8 +9,6 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "vigilanceUImanager.h"
-#include "vigilanceicon.h"
-#include "vigilancegauge.h"
 
 //*********************************************************
 // インクルードファイル
@@ -21,8 +19,9 @@
 // コンストラクタ
 //=========================================================
 CVigilanceUIManager::CVigilanceUIManager(int nPriority) :CObject(nPriority),
-pIcon(nullptr),
-pGauge(nullptr),
+m_pIcon(nullptr),
+m_pLevel(nullptr),
+m_pGauge(nullptr),
 m_bUse(false)
 {
 
@@ -69,7 +68,17 @@ HRESULT CVigilanceUIManager::Init(void)
 	icon.fHeight = Config::ICON_HEIGHT;
 
 	// アイコンの生成処理
-	pIcon = CVigilanceicon::Create(icon, Config::ICON_TEXNAME);
+	m_pIcon = CVigilanceicon::Create(icon, Config::ICON_TEXNAME);
+
+	// レベルの構造体
+	CVigilancelevel::Level level;
+	level.pos = icon.pos;
+	level.pos.y += Config::LEVEL_Y_VALUE;
+	level.fWidth = Config::LEVEL_WIDTH;
+	level.fHeight = Config::LEVEL_HEIGHT;
+
+	// レベルの生成処理
+	m_pLevel = CVigilancelevel::Create(level);
 
 	// ゲージの構造体
 	CVigilancegauge::Gauge gauge;
@@ -80,7 +89,7 @@ HRESULT CVigilanceUIManager::Init(void)
 	gauge.nAnchorType = CObject2DMulti::ANCHORTYPE_BOTTOMSIDE;
 
 	// ゲージの生成処理
-	pGauge = CVigilancegauge::Create(gauge, Config::GAUGE_TEXNAME_BASE, Config::GAUGE_TEXNAME_MULTI);
+	m_pGauge = CVigilancegauge::Create(gauge, Config::GAUGE_TEXNAME_BASE, Config::GAUGE_TEXNAME_MULTI);
 
 	icon.pos.x = gauge.pos.x;
 	icon.pos.y = Config::GAUGE_POS_Y;
@@ -99,17 +108,24 @@ HRESULT CVigilanceUIManager::Init(void)
 void CVigilanceUIManager::Uninit(void)
 {
 	// 各ポインタの終了処理
-	if (pIcon != nullptr)
-	{
-		pIcon->Uninit();
-		pIcon = nullptr;
+	if (m_pIcon != nullptr)
+	{// アイコン
+		m_pIcon->Uninit();
+		m_pIcon = nullptr;
 	}
 
-	if (pGauge != nullptr)
-	{
-		pGauge->Uninit();
-		pGauge = nullptr;
+	if (m_pLevel != nullptr)
+	{// レベル
+		m_pLevel->Uninit();
+		m_pLevel = nullptr;
 	}
+
+	if (m_pGauge != nullptr)
+	{// ゲージ
+		m_pGauge->Uninit();
+		m_pGauge = nullptr;
+	}
+
 }
 
 //=========================================================
@@ -117,7 +133,13 @@ void CVigilanceUIManager::Uninit(void)
 //=========================================================
 void CVigilanceUIManager::Update(void)
 {
+	// 各ポインタの更新処理
+	m_pIcon->Update();
+	m_pLevel->Update();
+	m_pGauge->Update();
 
+	// レベルの数値設定処理
+	m_pLevel->SetLevel(m_pGauge->GetLevelCount());
 }
 
 //=========================================================
@@ -125,5 +147,9 @@ void CVigilanceUIManager::Update(void)
 //=========================================================
 void CVigilanceUIManager::Draw(void)
 {
+	// 各ポインタの更新処理
+	m_pIcon->Draw();
+	m_pLevel->Draw();
+	m_pGauge->Draw();
 
 }

@@ -19,6 +19,7 @@
 #include "DOCUMENTdeskwork.h"
 #include "input.h"
 #include "titleuimanager.h"
+#include "sound.h"
 
 //=========================================================
 // 静的メンバ変数宣言
@@ -224,6 +225,8 @@ void CDeskwork::SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool&
 		SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);
 		SetTexture(Config::PC_TEXNAME);
 
+		// パソコンの開始サウンド再生
+		CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_PCSTART_SE);
 		break;
 
 	// コピー機タスクの場合

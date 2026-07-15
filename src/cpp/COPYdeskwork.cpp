@@ -21,6 +21,7 @@
 #include "gaugeneedle.h"
 #include "titleuimanager.h"
 #include "gamesceneobject.h"
+#include "sound.h"
 
 //=========================================================
 // コンストラクタ
@@ -309,10 +310,13 @@ void CCOPYDeskwork::Task(const auto& pClear)
 	SetTime(true);
 
 	// スコア加算
-	pScore->AddScore(100);
+	pScore->AddScore(-100);
 
 	// こなしたタスクの数を増やす
 	pGaugeneedle->AddTask();
+
+	// サウンド再生 ( 成功音 )
+	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);
 
 	// 点滅を始める
 	pClear->SetUse(true);
@@ -323,7 +327,6 @@ void CCOPYDeskwork::Task(const auto& pClear)
 
 	// こなしたPCタスクの数を1つ減らす
 	MinusPCTask();
-
 }
 
 //=========================================================
@@ -393,7 +396,6 @@ void CCOPYDeskwork::ControlResult(int& nCount)
 
 		// 横幅を設定
 		m_pDeskUI[TEXTURE_GAGE]->SetWidth(fWidth);
-
 	}
 	else
 	{

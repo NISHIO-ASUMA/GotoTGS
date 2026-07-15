@@ -104,6 +104,7 @@ private:
 	MOVETYPE m_nMoveType;						// 移動方向の種類インデックス
 	float m_fMoveSpeed;							// 移動速度
 	bool m_isZTestEneble;						// 透明化判定を受けるかどうか
+	bool m_isSoundPlay;							// サウンド再生タイミング
 	D3DXVECTOR3 m_Size;							// サイズ
 private:
 

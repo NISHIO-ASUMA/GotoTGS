@@ -76,7 +76,7 @@ private:
 		static constexpr int WRITE_SCORE		= 5;							// 書き出し数
 		static constexpr int MAX_ANIMTIME		= 180;							// 最大継続時間
 		static constexpr float POSX_VALUE		= 2.0f;							// X座標加算値
-		static constexpr const char* TEXNAME	= "number_black.png";			// テクスチャ名
+		static constexpr const char* TEXNAME	= "number_k.png";				// テクスチャ名
 		static constexpr const char* SAVEFILE	= "data/SCORE/ResultScore.bin"; // 書き出すファイル名
 
 	};

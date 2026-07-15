@@ -50,6 +50,7 @@ public:
 	static CCOPYDeskwork* Create(const D3DXVECTOR3& pos, const bool& bUse = false);
 
 private:
+
 	// メンバ関数
 	bool CoolTime(const auto& pClear);				// クールタイム中の処理
 	void Task(const auto& pClear);					// タスク中の処理

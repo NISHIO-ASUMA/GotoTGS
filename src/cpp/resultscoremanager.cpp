@@ -64,10 +64,10 @@ HRESULT CResultScoreManager::Init(void)
 	// スコアファイル読み込み
 	Load();
 
-	// スコアを生成する ( NOTE : 位置と大きさ調整必要 )
-	m_pResultScore[info.IDX_LAZY] = CResultScore::Create(D3DXVECTOR3(360.0f, 230.0f, 0.0f), 140.0f, 55.0f);		// サボりスコア
-	m_pResultScore[info.IDX_TASK] = CResultScore::Create(D3DXVECTOR3(980.0f,230.0f, 0.0f), 140.0f, 55.0f);		// タスクスコア
-	m_pResultScore[info.IDX_ALL] =  CResultScore::Create(D3DXVECTOR3(680.0f, 630.0f, 0.0f), 160.0f, 80.0f);		// 最終スコア
+	// スコアを生成する
+	m_pResultScore[info.IDX_LAZY] = CResultScore::Create(D3DXVECTOR3(360.0f, 230.0f, 0.0f), 140.0f, 55.0f);	// サボりスコア
+	m_pResultScore[info.IDX_TASK] = CResultScore::Create(D3DXVECTOR3(1045.0f,230.0f, 0.0f), 140.0f, 55.0f);	// タスクスコア
+	m_pResultScore[info.IDX_ALL] =  CResultScore::Create(D3DXVECTOR3(680.0f, 595.0f, 0.0f), 160.0f, 80.0f);	// 最終スコア
 
 	// 最終スコアを計算し、出力する
 	m_nLastScore = MathScoreResult(m_nTaskScore, m_nLazyScore);
@@ -113,6 +113,8 @@ int CResultScoreManager::MathScoreResult(int& nMinScore, int& nMaxScore)
 {
 	// 格納用変数
 	int nResultScore = 0;
+
+	// 計算式
 	nResultScore = nMaxScore - nMinScore;
 
 	// 計算結果を返す
