@@ -11,6 +11,12 @@
 #include "rankingscore.h"
 
 //*********************************************************
+// システムインクルード
+//*********************************************************
+#include <algorithm>
+#include <vector>
+
+//*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "number.h"
@@ -189,6 +195,45 @@ void CRankingScore::Draw(void)
 //=========================================================
 void CRankingScore::Load(void)
 {
-	// 固定配列に格納する
-	m_aRankData = m_pLoad->LoadIntToFixedArray("data/SCORE/ResultScore.bin");
+	// クラス生成
+	m_pLoad = std::make_unique<CLoad>();
+
+	// リザルトから来た最新の1つのスコアを読み込む
+	int LoadresultScore = m_pLoad->LoadInt("data/SCORE/ResultScore.bin");
+	if (LoadresultScore == -1) 	return;
+
+	// 既存のランキングデータがあれば読み込む
+	m_aRankData = m_pLoad->LoadIntToFixedArray("data/SCORE/Ranking.bin");
+
+	// 現在の値を取得
+	int rank5thScore = m_aRankData[Config::RANKING_MAX - 1];
+
+	// 5番目のランキングの値以下なら
+	if (LoadresultScore <= rank5thScore) return;
+
+	// 格納用の配列
+	std::vector<int> ScoreVector;
+	ScoreVector.reserve(Config::RANKING_MAX + 1);
+
+	// データを配列に入れる
+	for (int score : m_aRankData)
+	{
+		ScoreVector.push_back(score);
+	}
+
+	// 最新スコアを追加
+	ScoreVector.push_back(LoadresultScore);
+
+	// 降順ソート
+	std::sort(ScoreVector.begin(), ScoreVector.end(), std::greater<int>());
+
+	// ランキングの分だけ配列に保存する
+	for (int nCnt = 0; nCnt < Config::RANKING_MAX; nCnt++)
+	{
+		m_aRankData[nCnt] = ScoreVector[nCnt];
+	}
+
+	// 新しいランキングデータを書き出す
+	if (m_pLoad)
+		m_pLoad->SaveIntToFixedArray("data/SCORE/Ranking.bin", m_aRankData);
 }

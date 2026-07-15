@@ -27,7 +27,6 @@
 //*********************************************************
 class CLoad;
 
-// CObject継承は自動的にUpdateとDrawが呼ばれるs
 //*********************************************************
 // スコアクラスを定義
 //*********************************************************
@@ -51,7 +50,8 @@ public:
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_fHeight = fHeight; }
-
+	
+	inline void ScoreChangeMath(const int& nChangeValue) { m_nScore = m_nScore * nChangeValue; }
 	inline int GetScore(void) const { return m_nScore; }
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 
@@ -66,7 +66,8 @@ public:
 	(
 		const D3DXVECTOR3& pos,
 		const float& fWidth = 100.0f,
-		const float& fHeight = 100.0f
+		const float& fHeight = 100.0f,
+		const bool& isDraw = true
 	);
 
 private: 
@@ -89,6 +90,7 @@ private:
 	int m_nScore;		// スコア保持用
 	float m_fWidth;		// 横幅
 	float m_fHeight;	// 高さ
+	bool m_isDraw;		// 描画するかどうか
 
 	std::array<CNumber*, Config::NUM_SCORE>m_apNumber;	// 桁数分のナンバーのポインタ
 	std::unique_ptr<CLoad>m_pLoad;						// ユニークポインタ

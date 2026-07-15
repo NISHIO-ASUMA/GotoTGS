@@ -109,7 +109,7 @@ namespace SLIDESTARTUI
 //=========================================================
 // コンストラクタ
 //=========================================================
-CTitleuiManager::CTitleuiManager() : m_nSelectIdx(NULL),
+CTitleuiManager::CTitleuiManager() : m_nSelectIdx(1),
 m_pUi{},
 m_pStartUiList{},
 m_isFinishSlideUi(false),

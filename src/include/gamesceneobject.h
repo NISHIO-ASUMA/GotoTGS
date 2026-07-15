@@ -42,8 +42,14 @@ public:
 	void Update(void);
 	void Draw(void);
 
+//*********************************
+// 西尾 : スコア関連の取得
+	CScore* GetScore(void) const { return m_pScoreTask; }		// タスクのスコアの物
+	CScore* GetScoreDitch(void) const { return m_pScoreDitch; } // サボりの物
+	CScore* GetScoreAllGame(void) const { return m_pScoreAll; }	// 今現在ゲームで表示している物
+//*********************************
+
 	CGametime* GetTime(void) const { return m_pTimer; }
-	CScore* GetScore(void) const { return m_pScore; }
 	CPlayer* GetPlayer(void) const { return m_pPlayer; }								// [ Asuma add ]
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }								// Misaki
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }			// Misaki
@@ -64,7 +70,10 @@ private:
 
 private:
 
-	CScore* m_pScore;								// スコアクラスのポインタ
+	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
+	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
+	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
+
 	CGametime* m_pTimer;							// タイマークラスのポインタ
 	CDeskwork* m_pDeskwork;							// タスクのポインタ Misaki
 	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ Misaki
