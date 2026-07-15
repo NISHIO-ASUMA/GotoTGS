@@ -47,9 +47,9 @@ CVigilanceicon* CVigilanceicon::Create(const Icon& icon, const char* TEXNAME)
 	if (FAILED(pVigilancegauge->Init())) return nullptr;
 
 	// 各設定処理
-	pVigilancegauge->SetPos(icon.pos);
-	pVigilancegauge->SetSize(icon.fWidth, icon.fHeight);
-	pVigilancegauge->SetTexture(TEXNAME);
+	pVigilancegauge->SetPos(icon.pos);						// 位置
+	pVigilancegauge->SetSize(icon.fWidth, icon.fHeight);	// サイズ
+	pVigilancegauge->SetTexture(TEXNAME);					// テクスチャ名
 
 	return pVigilancegauge;
 }
