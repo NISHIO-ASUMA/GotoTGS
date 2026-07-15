@@ -19,9 +19,9 @@
   },
   {
     "ObjectTag": "Ui",
-    "Pos": [ 640.0, 230.0, 0.0 ],
+    "Pos": [ 660.0, 230.0, 0.0 ],
     "FlashFrame": 0,
-    "Width": 140.0,
+    "Width": 110.0,
     "Height": 25.0,
     "Texture": "vending04_1.jpg",
     "AlphaTest": false,

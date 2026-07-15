@@ -57,8 +57,8 @@ private:
 	/// <summary>
 	/// 2つのint型を計算して引き算結果を返す関数
 	/// </summary>
-	/// <param name="nMinScore">小さいほうのスコア</param>
-	/// <param name="nMaxScore">大きい方のスコア</param>
+	/// <param name="nMinScore">小さいほうのスコア(タスク分)</param>
+	/// <param name="nMaxScore">大きい方のスコア(サボり分)</param>
 	/// <returns></returns>
 	int MathScoreResult(int& nMinScore, int& nMaxScore);
 
