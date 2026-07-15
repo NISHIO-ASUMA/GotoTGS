@@ -50,11 +50,12 @@ public:
 //*********************************
 
 	CGametime* GetTime(void) const { return m_pTimer; }
-	CPlayer* GetPlayer(void) const { return m_pPlayer; }								// [ Asuma add ]
-	CDeskwork* GetDesk(void) const { return m_pDeskwork; }								// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }			// Misaki
-	CEventUI* GetEventUI(void) const { return m_pEventUI; }								// Misaki
-	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }			// Misaki
+	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// [ Asuma add ]
+	CDeskwork* GetDesk(void) const { return m_pDeskwork; }										// Misaki
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
+	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
+	CTutorialLines* GetTutoriallines(void)const { return m_pTutoriallines; }					// Misaki
+	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -74,13 +75,13 @@ private:
 	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
 	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
 
-	CGametime* m_pTimer;							// タイマークラスのポインタ
-	CDeskwork* m_pDeskwork;							// タスクのポインタ Misaki
-	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ Misaki
-	CEventUI* m_pEventUI;							// イベントUIのポインタ Misaki
-	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ [ Asuma add ]
+	CGametime* m_pTimer;							// タイマークラスのポインタ			Misaki
+	CDeskwork* m_pDeskwork;							// タスクのポインタ					Misaki
+	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ				Misaki
+	CEventUI* m_pEventUI;							// イベントUIのポインタ				Misaki
+	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ		[ Asuma add ]
 	CTutorialLines* m_pTutoriallines;				// チュートリアルのセリフのポインタ Misaki
-	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ Misaki
+	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ				Misaki
 
 	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
 };
