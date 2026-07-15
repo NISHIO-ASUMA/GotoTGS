@@ -43,6 +43,9 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// 設定処理
+	void SetLevel(const int& nLevel);	// 数値設定
+
 	// 生成処理
 	static CVigilancelevel* Create(const Level& level);
 
@@ -57,8 +60,8 @@ private:
 		static constexpr int NUM_DIGIT = 10;						// 表示する分割桁数の値
 		static constexpr float DIGIT_VALUE = 2.0f;					// 加算量
 		static constexpr float INTERVAL_VALUE = 10.0f;				// レベルと数値の間隔
-		static constexpr const char* TEX_NUMBER = "number005.png";	// ナンバーのテクスチャ名
-		static constexpr const char* TEX_LEVEL = "lebel000.png";	// レベルのテクスチャ名
+		static constexpr const char* TEX_NUMBER = "number012.png";	// ナンバーのテクスチャ名
+		static constexpr const char* TEX_LEVEL = "lebel_red.png";	// レベルのテクスチャ名
 	};
 
 	// メンバ変数

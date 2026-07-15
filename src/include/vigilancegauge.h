@@ -45,12 +45,14 @@ public:
 
 	// 情報取得処理
 	float GetRatio(void) const { return m_fRatio; }
+	int GetLevelCount(void) const { return m_nLevelCount; }
 
 	// 生成処理
 	static CVigilancegauge* Create(const Gauge& gauge, const char* BTEXTURE, const char* MTEXTURE);
 
 private:
 
-	// 現在の比率
-	float m_fRatio;
+	// メンバ変数
+	float m_fRatio;		// 現在の比率
+	int m_nLevelCount;	// 現在のレベルカウント
 };
