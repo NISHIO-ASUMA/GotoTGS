@@ -909,6 +909,9 @@
     <ClCompile Include="src\cpp\tutorialplayer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\vigilancelevel.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1399,6 +1402,9 @@
     </ClInclude>
     <ClInclude Include="src\include\tutorialplayer.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\vigilancelevel.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

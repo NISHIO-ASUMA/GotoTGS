@@ -316,6 +316,7 @@
     <ClCompile Include="src\cpp\ui.cpp" />
     <ClCompile Include="src\cpp\vigilancegauge.cpp" />
     <ClCompile Include="src\cpp\vigilanceicon.cpp" />
+    <ClCompile Include="src\cpp\vigilancelevel.cpp" />
     <ClCompile Include="src\cpp\vigilanceUImanager.cpp" />
     <ClCompile Include="src\cpp\walkingfriend.cpp" />
     <ClCompile Include="src\cpp\worldUIcollision.cpp" />
@@ -481,6 +482,7 @@
     <ClInclude Include="src\include\ui.h" />
     <ClInclude Include="src\include\vigilancegauge.h" />
     <ClInclude Include="src\include\vigilanceicon.h" />
+    <ClInclude Include="src\include\vigilancelevel.h" />
     <ClInclude Include="src\include\vigilanceUImanager.h" />
     <ClInclude Include="src\include\walkingfriend.h" />
     <ClInclude Include="src\include\worldUIcollision.h" />

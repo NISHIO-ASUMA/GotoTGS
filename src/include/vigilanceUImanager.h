@@ -20,6 +20,7 @@
 //*********************************************************
 class CVigilanceicon;
 class CVigilancegauge;
+class CVigilancelevel;
 
 //*********************************************************
 //  警戒度UIマネージャーに対するクラスを定義
@@ -41,6 +42,9 @@ public:
 
 	// 情報取得処理
 	bool GetUse(void) { return m_bUse; }
+	CVigilanceicon* GetIcon(void) const { return m_pIcon; }
+	CVigilancegauge* GetGauge(void) const { return m_pGauge; }
+	CVigilancelevel* GetLevel(void) const { return m_pLevel; }
 
 	// 生成処理
 	static CVigilanceUIManager* Create(const bool& bUse);
@@ -62,6 +66,11 @@ private:
 		static constexpr float ICON_POS_Y = 600.0f;							// Y軸の位置
 		static constexpr const char* ICON_TEXNAME = "vigilanceicon.png";	// アイコンのテクスチャ
 
+		// レベルの定数
+		static constexpr float LEVEL_WIDTH = 30.0f;		// 横幅
+		static constexpr float LEVEL_HEIGHT = 30.0f;	// 縦幅
+		static constexpr float LEVEL_Y_VALUE = 40.0f;	// Y軸のずらす量
+
 		// ゲージの定数
 		static constexpr float GAUGE_WIDTH = 100.0f;									// 横幅
 		static constexpr float GAUGE_HEIGHT = 100.0f;									// 縦幅
@@ -74,9 +83,8 @@ private:
 	};
 
 	// メンバ変数
-	CVigilanceicon* pIcon;		// アイコンのポインタ
-	CVigilancegauge* pGauge;	// ゲージのポインタ
-	bool m_bUse;				// 使用するかどうか
-	int m_nFram;
-	int m_nCount;
+	CVigilanceicon* m_pIcon;		// アイコンのポインタ
+	CVigilancegauge* m_pGauge;		// ゲージのポインタ
+	CVigilancelevel* m_pLevel;		// レベルのポインタ
+	bool m_bUse;					// 使用するかどうか
 };

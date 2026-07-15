@@ -74,11 +74,11 @@ HRESULT CScore::Init(void)
 		// 初期化処理
 		m_apNumber[nCnt]->Init(D3DXVECTOR3(m_pos.x - (fTexPos * Config::DIGIT_VALUE * nCnt), m_pos.y,0.0f), fTexPos, m_fHeight);
 
-		// ナンバー変数のサイズ
-		m_apNumber[nCnt]->SetSize(fTexPos, m_fHeight);
+		//// ナンバー変数のサイズ
+		//m_apNumber[nCnt]->SetSize(fTexPos, m_fHeight);
 
-		// 座標設定
-		m_apNumber[nCnt]->SetPos(m_pos);
+		//// 座標設定
+		//m_apNumber[nCnt]->SetPos(m_pos);
 
 		// テクスチャセット
 		m_apNumber[nCnt]->SetTexture(Config::TEX_NAME);
