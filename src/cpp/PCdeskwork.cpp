@@ -354,7 +354,7 @@ void CPCDeskwork::Task(const auto& pClear)
 	pGaugeneedle->AddTask();
 
 	// スコア加算
-	pScore->AddScore(100);
+	pScore->AddScore(-100);
 
 	// 点滅を始める
 	pClear->SetUse(true);

@@ -103,7 +103,7 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 
 	// スコア加算
-	pScore->AddScore(1000);
+	pScore->AddScore(-1000);
 
 	// こなしたタスクの数を増やす
 	pGaugeneedle->AddTask();
