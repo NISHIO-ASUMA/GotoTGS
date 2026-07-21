@@ -42,6 +42,7 @@ public:
 		TV,				// テレビ
 		MAGAZINE,		// 雑誌
 		GAME,			// ゲーセン
+		FOOD,			// 飲食
 		MAX
 	};
 
