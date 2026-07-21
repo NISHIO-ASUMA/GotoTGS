@@ -88,6 +88,7 @@ public:
 	bool GetAfkTV(void) { return m_bAfkTV; }
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
+	bool GetAfkEating(void) { return m_bAfkEating; }
 
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
@@ -202,6 +203,7 @@ private:
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
+	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
 	int m_nCntAfk;										// さぼっているときのゲージの加算
 
 private:

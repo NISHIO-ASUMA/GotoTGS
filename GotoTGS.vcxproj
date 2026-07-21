@@ -161,6 +161,7 @@
     <ClCompile Include="src\cpp\afkgamecenter.cpp" />
     <ClCompile Include="src\cpp\afkmagazine.cpp" />
     <ClCompile Include="src\cpp\afkmanager.cpp" />
+    <ClCompile Include="src\cpp\afkeating.cpp" />
     <ClCompile Include="src\cpp\afksmoke.cpp" />
     <ClCompile Include="src\cpp\afktv.cpp" />
     <ClCompile Include="src\cpp\afktvpolygon.cpp" />
@@ -331,6 +332,7 @@
     <ClInclude Include="src\include\afkgamecenter.h" />
     <ClInclude Include="src\include\afkmagazine.h" />
     <ClInclude Include="src\include\afkmanager.h" />
+    <ClInclude Include="src\include\afkeating.h" />
     <ClInclude Include="src\include\afksmoke.h" />
     <ClInclude Include="src\include\afktv.h" />
     <ClInclude Include="src\include\afktvpolygon.h" />
