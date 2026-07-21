@@ -48,8 +48,9 @@ public:
 	static CTutorialLines* Create(const bool& bUse = false);
 
 	// 情報取得処理
-	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景
-	CLines* GetLines(void) { return m_pLines; }			// セリフ
+	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景のポインタ
+	CLines* GetLines(void) { return m_pLines; }			// セリフのポインタ
+	bool GetUse(void) const { return m_bUse; }			// 使用しているかどうか
 
 private:
 

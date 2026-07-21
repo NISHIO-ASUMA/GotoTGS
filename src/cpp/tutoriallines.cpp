@@ -98,11 +98,18 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
-	// マウスのポインタ
-	auto* pMouse = CManager::GetInstance()->GetMouse();
+	// 入力取得
+	auto* Key = CManager::GetInstance()->GetInputKeyboard();
+	auto* Mouse = CManager::GetInstance()->GetMouse();
+	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
-	if (pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) != true || m_bUse != true)
-	{// 左クリックをしていない場合
+	// キー入力してない場合
+	if (!Key->GetTrigger(DIK_RETURN) ||
+		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) ||
+		!Pad->GetTrigger(CJoyPad::JOYKEY_A) ||
+		!Pad->GetTrigger(CJoyPad::JOYKEY_START) || 
+		!m_bUse)
+	{
 		return;
 	}
 
