@@ -71,6 +71,9 @@ HRESULT CRankingObject::Init(void)
 	// ランキングスコア生成
 	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
+	// ランキングの横棒生成
+	CRankingGlaph::Create();
+
 	return S_OK;
 }
 //=========================================================
