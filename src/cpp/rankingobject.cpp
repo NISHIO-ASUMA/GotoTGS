@@ -20,6 +20,7 @@
 #include "jsonmanager.h"
 #include "ui.h"
 #include "blockmanager.h"
+#include "rankinggraphmanager.h"
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -31,8 +32,8 @@ CRankingObject* CRankingObject::m_pInstance = nullptr; // シングルトン変数
 //*********************************************************
 namespace RANKINGOBJECT
 {
-	const D3DXVECTOR3 ScorePos		= { 870.0f, 160.0f, 0.0f };	// ランキングスコアの座標
-	constexpr float ScoreWidth		= 250.0f;					// ポリゴンの横幅
+	const D3DXVECTOR3 ScorePos		= { 1100.0f, 160.0f, 0.0f };	// ランキングスコアの座標
+	constexpr float ScoreWidth		= 200.0f;					// ポリゴンの横幅
 	constexpr float ScoreHeight		= 40.0f;					// ポリゴンの高さ
 	constexpr const char* LoadName	= "data/JSON/Rankingobject.json"; // 読み込むjsonファイル
 };
@@ -72,7 +73,7 @@ HRESULT CRankingObject::Init(void)
 	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
 	// ランキングの横棒生成
-	CRankingGlaph::Create();
+	CRankingGraphManager::GetInstance()->Init(D3DXVECTOR3(250.0f, 160.0f, 0.0f), 40.0f);
 
 	return S_OK;
 }
@@ -81,6 +82,9 @@ HRESULT CRankingObject::Init(void)
 //=========================================================
 void CRankingObject::Uninit(void)
 {
+	// ランキングの横棒生成
+	CRankingGraphManager::GetInstance()->Uninit();
+
 	// ポインタの破棄
 	m_pBlock.reset();
 
