@@ -57,7 +57,7 @@ public:
 	void SetTexture(const char* pRegisterName);
 	void SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col);
 
-	inline void SetCol(D3DXCOLOR col) { m_col = col; }
+	inline void SetCol(const D3DXCOLOR& col = COLOR_WHITE) { m_col = col; }
 	inline void SetUV(float TexU, float TexV);
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetRot(const D3DXVECTOR3& rot) { m_rot = rot; }

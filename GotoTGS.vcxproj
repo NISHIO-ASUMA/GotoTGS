@@ -278,6 +278,8 @@
     <ClCompile Include="src\cpp\police.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
+    <ClCompile Include="src\cpp\rankinggraph.cpp" />
+    <ClCompile Include="src\cpp\rankinggraphmanager.cpp" />
     <ClCompile Include="src\cpp\rankingmanager.cpp" />
     <ClCompile Include="src\cpp\rankingobject.cpp" />
     <ClCompile Include="src\cpp\rankingscore.cpp" />
@@ -442,6 +444,8 @@
     <ClInclude Include="src\include\police.h" />
     <ClInclude Include="src\include\progressgauge.h" />
     <ClInclude Include="src\include\ranking.h" />
+    <ClInclude Include="src\include\rankinggraph.h" />
+    <ClInclude Include="src\include\rankinggraphmanager.h" />
     <ClInclude Include="src\include\rankingmanager.h" />
     <ClInclude Include="src\include\rankingobject.h" />
     <ClInclude Include="src\include\rankingscore.h" />
