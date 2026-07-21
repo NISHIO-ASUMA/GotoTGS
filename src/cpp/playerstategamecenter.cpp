@@ -76,5 +76,5 @@ void CPlayerStateGameCenter::OnUpdate()
 //=========================================================
 void CPlayerStateGameCenter::OnExit()
 {
-	m_pPlayer->DeleteItem();
+	
 }

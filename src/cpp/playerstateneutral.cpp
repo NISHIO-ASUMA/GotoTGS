@@ -14,6 +14,7 @@
 #include "playerstatemagazine.h"
 #include "playerstatetv.h"
 #include "playerstategamecenter.h"
+#include "playerstateeating.h"
 #include "player.h"
 
 //=========================================================
@@ -64,7 +65,11 @@ void CPlayerStateNeutral::OnUpdate()
 	{
 		// ステートをテレビにチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateGameCenter(), ID_GAMECENTER);
-
+	}
+	else if (m_pPlayer->GetAfkEating())
+	{
+		// ステートを飲食にチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateEating(), ID_FOOD);
 	}
 }
 
