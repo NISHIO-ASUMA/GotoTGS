@@ -32,6 +32,7 @@
 #include "DOCUMENTdeskwork.h"		// ûü‹´’Ç‰Á
 #include "vigilanceUImanager.h"		// ûü‹´’Ç‰Á
 #include "vigilanceUImanager.h"		// ûü‹´’Ç‰Á
+#include "gaugeneedle.h"			// ûü‹´’Ç‰Á
 #include "worldUIcollision.h"
 #include "collisionsphere.h"
 #include "afkmanager.h"
@@ -601,7 +602,7 @@ void CPlayer::MoveKeyboard(float speed)
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
-			//CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
 		}
 	}
@@ -743,7 +744,7 @@ void CPlayer::MoveJoypad(float speed)
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
-			//CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
 		}
 	}
@@ -874,7 +875,7 @@ void CPlayer::MoveCrossPadButton(float speed)
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
-			//CGameSceneObject::GetInstance()->GetProgressgauge()->AddAFK();
+			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
 		}
 	}
