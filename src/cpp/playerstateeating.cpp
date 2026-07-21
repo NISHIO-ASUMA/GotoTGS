@@ -61,7 +61,7 @@ void CPlayerStateEating::OnUpdate()
 	if (m_pPlayer->FOOD != m_pPlayer->GetMotion()->GetMotionType())
 	{
 		// ƒ‚[ƒVƒ‡ƒ“•ÏX
-		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::FOOD);
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::FOOD,true,3);
 	}
 
 	if (!m_pPlayer->GetAfkGameCenter())
