@@ -55,6 +55,9 @@ public:
 		float fHeight
 	);
 
+public:
+	void SettingUi(const D3DXVECTOR3& pos, float fWidth, float fHeight);
+
 private:
 
 	//*************************************
