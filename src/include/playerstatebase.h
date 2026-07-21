@@ -50,6 +50,7 @@ public:
 		ID_MAGAZINE,
 		ID_TV,
 		ID_GAMECENTER,
+		ID_FOOD,
 		ID_MAX
 	};
 
