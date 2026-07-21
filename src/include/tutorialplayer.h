@@ -88,6 +88,7 @@ public:
 		TV,
 		MAGAZINE,
 		GAME,
+		FOOD,
 		MAX
 	};
 
