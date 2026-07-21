@@ -27,7 +27,6 @@
 #include "deskwork.h"				// 髙橋追加
 #include "progressgauge.h"			// 髙橋追加
 #include "eventUI.h"				// 髙橋追加
-#include "tutoriallines.h"			// 髙橋追加
 #include "vigilanceUImanager.h"		// 髙橋追加
 
 #include "player.h"					// 近田追加
@@ -317,9 +316,6 @@ void CGameSceneObject::CreatePointer(void)
 
 	// イベントUIの生成 Misaki
 	m_pEventUI = CEventUI::Create();
-
-	// チュートリアルのセリフの生成 Misaki
-	m_pTutoriallines = CTutorialLines::Create();
 
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);

@@ -22,6 +22,7 @@
 #include "fade.h"
 #include "tutorialplayer.h"
 #include "camera.h"
+#include "tutoriallines.h"			// 髙橋追加
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -71,6 +72,9 @@ HRESULT CTutorialObject::Init(void)
 	//// カメラに追従するキャラクターのポインタをセット
 	//CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pTutoPlayer);
 	//CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
+
+	// チュートリアルのセリフの生成 Misaki
+	m_plines = CTutorialLines::Create(true);
 
 	return S_OK;
 }
