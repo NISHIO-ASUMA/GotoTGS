@@ -20,6 +20,7 @@
 //*********************************************************
 class CBlockManager;
 class CTutorialPlayer;
+class CTutorialLines;		// Misaki
 
 //*********************************************************
 // チュートリアルで使うオブジェクトを管理するクラスを定義
@@ -37,6 +38,7 @@ public:
 	CTutorialPlayer* GetTutorilaPlayer(void) { return m_pTutoPlayer; }
 
 	inline CBlockManager* GetBlockManager(void) const { return m_pBlockManager.get(); }
+	CTutorialLines* GetTutoriallines(void)const { return m_plines; }	// Misaki
 	static CTutorialObject* GetInstance(void);
 
 private:
@@ -48,4 +50,5 @@ private:
 private:
 	std::unique_ptr<CBlockManager>m_pBlockManager;	// ブロック管理クラス
 	CTutorialPlayer* m_pTutoPlayer;					// チュートリアルプレイヤー
+	CTutorialLines* m_plines;						// セリフのポインタ Misaki
 };
