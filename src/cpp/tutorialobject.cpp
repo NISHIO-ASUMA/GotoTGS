@@ -104,6 +104,21 @@ void CTutorialObject::Update(void)
 	// 管理クラス更新
 	if (m_pBlockManager)
 		m_pBlockManager->Update();
+
+	// セリフがまだ出ているなら繰り返す
+	if (m_plines->GetUse())
+		return;
+
+	//// フェード取得
+	//CFade* pFade = CManager::GetInstance()->GetFade();
+
+	//if (pFade != nullptr)
+	//{
+	//	// 画面切り替え
+	//	pFade->SetFade(std::make_unique<CGame>());
+	//	return;
+	//}
+
 }
 //=========================================================
 // インスタンス取得
