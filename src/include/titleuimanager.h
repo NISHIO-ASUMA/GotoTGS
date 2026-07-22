@@ -52,7 +52,7 @@ private:
 	CTitleuiManager(); // 格納コンストラクタ
 
 	void SlideStartUi(void); // 初期uiのスライド処理関数
-	void SlideSelectUi(void); // 選択肢のスライド処理関数
+	void InputCheck(void);	// 入力判定
 
 private:
 
@@ -72,6 +72,7 @@ private:
 
 	bool m_isFinishSlideUi;				// スライド終了判定
 	bool m_isSelectFinish;				// 選択終わり判定
+	bool m_isInputSet;					// 入力判定
 	float m_fSlideRatio;				// スライドの進行度
 	CUi* m_pStartUiList[START_UI_NUM];	// 初期でおいてあるui群
 };

@@ -30,7 +30,7 @@ namespace AFKEATING
 //*********************************************************
 namespace PARTICLE
 {
-	const D3DXVECTOR3 Pos = { -225.0f, 38.0, -202.0f };	// 位置
+	const D3DXVECTOR3 Pos = { -225.0f, 38.0, -205.0f };	// 位置
 	const D3DXCOLOR col = { 0.5f, 0.5f, 0.5f, 0.5f };	// カラー
 	constexpr float fRadius = 10.0f;					// 範囲の半径
 };
@@ -108,8 +108,7 @@ void CAfkEating::Update(void)
 
 	float fColR = (float)(rand() / (RAND_MAX + 1.0f));
 	float fColG = (float)(rand() / (RAND_MAX + 1.0f));
-	float fColB = (float)(rand() / (RAND_MAX + 1.0f));
 
-	m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, fColB, 1.0f));
+	m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, 0.0f, 1.0f));
 
 }

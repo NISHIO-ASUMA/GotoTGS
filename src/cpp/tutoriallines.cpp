@@ -23,7 +23,10 @@
 //=========================================================
 CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority),
 m_bUse(false),
+m_bTutorial(false),
+m_bAgain(false),
 m_nNowIdx(NULL),
+m_nCountSkip(NULL),
 m_pLines(nullptr),
 m_pBG(nullptr)
 {
@@ -98,23 +101,58 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
+	// 使用してない場合とチュートリアルを進めている場合は更新しない
+	if (!m_bUse || m_bTutorial) return;
+
 	// 入力取得
 	auto* Key = CManager::GetInstance()->GetInputKeyboard();
 	auto* Mouse = CManager::GetInstance()->GetMouse();
 	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
-	// キー入力してない場合
-	if ((!Key->GetTrigger(DIK_RETURN) &&
-		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_A) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_START)) ||
-		!m_bUse)
+	// スキップ機能
+	if (Key->GetPress(DIK_RETURN) && Pad->GetPress(CJoyPad::JOYKEY_Y))
 	{
+		// カウントを進める
+		m_nCountSkip++;
+
+		// 最大カウントを超えていなかったら
+		if (m_nCountSkip <= Config::MAX_COUNT) return;
+
+		// 現在の番号を初期化
+		m_nNowIdx = NULL;
+
+		// 使用していない状態にする
+		m_bUse = false;
+
+		// 各ポインタを状況に合わせて状態を設定する
+		m_pBG->SetUse(m_bUse);
+		m_pLines->SetUse(m_bUse);
+
 		return;
 	}
+	else
+	{
+		// カウントを初期化
+		m_nCountSkip = NULL;
+	}
+
+	// キー入力したかどうか
+	if (!Key->GetTrigger(DIK_RETURN) &&
+		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) &&
+		!Pad->GetTrigger(CJoyPad::JOYKEY_A) &&
+		!Pad->GetTrigger(CJoyPad::JOYKEY_START))
+		return;
 
 	// 現在の番号を一つ進める
 	m_nNowIdx++;
+
+	//// 実践をやっている場合
+	//if (m_nNowIdx == LINESTYPE_3 ||
+	//	m_nNowIdx == LINESTYPE_5 || 
+	//	m_nNowIdx == LINESTYPE_6 )
+	//{
+
+	//}
 
 	if (m_nNowIdx < LINESTYPE_MAX)
 	{// 総数を超えていない場合
@@ -128,6 +166,10 @@ void CTutorialLines::Update(void)
 	// 使用していない状態にする
 	m_bUse = false;
 
+	// 現在の番号を初期化
+	m_nNowIdx = NULL;
+
+	// 各ポインタを状況に合わせて状態を設定する
 	m_pBG->SetUse(m_bUse);
 	m_pLines->SetUse(m_bUse);
 }
