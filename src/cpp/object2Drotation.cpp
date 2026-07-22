@@ -57,11 +57,9 @@ CObject2DRotation* CObject2DRotation::Create(const D3DXVECTOR3 pos,
 	const D3DXVECTOR2 size,
 	const char* pRegisterName)
 {
-	// インスタンス生成
-	CObject2DRotation* pObject2DRotation;
-
-	// インスタンス生成
-	pObject2DRotation = new CObject2DRotation;
+	// ローカル生成
+	CObject2DRotation* pObject2DRotation = new CObject2DRotation;
+	if (pObject2DRotation == nullptr) return nullptr;
 
 	// 各設定処理
 	pObject2DRotation->SetPos(pos);					// 位置
@@ -72,7 +70,8 @@ CObject2DRotation* CObject2DRotation::Create(const D3DXVECTOR3 pos,
 	pObject2DRotation->SetTexture(pRegisterName);	// テクスチャの名前
 
 	// 初期化処理
-	pObject2DRotation->Init();
+	if (FAILED(pObject2DRotation->Init()))
+		return nullptr;
 
 	return pObject2DRotation;
 }
