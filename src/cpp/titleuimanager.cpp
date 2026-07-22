@@ -114,6 +114,7 @@ m_pUi{},
 m_pStartUiList{},
 m_isFinishSlideUi(false),
 m_isSelectFinish(false),
+m_isInputSet(false),
 m_fSlideRatio(NULL)
 {
 
@@ -174,6 +175,9 @@ void CTitleuiManager::Uninit(void)
 //=========================================================
 void CTitleuiManager::Update(void)
 {
+	// 入力検知関数
+	InputCheck();
+
 	// 選択終わったら処理を通させない
 	if (m_isSelectFinish) return;
 
@@ -277,9 +281,12 @@ void CTitleuiManager::Update(void)
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
 		
-		// チュートリアルシーン遷移
-		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CTutorial>());
-		return;
+		if (m_isFinishSlideUi && m_isSelectFinish)
+		{
+			// チュートリアルシーンへ遷移
+			CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CTutorial>());
+			return;
+		}
 	}
 }
 //=========================================================
@@ -288,7 +295,7 @@ void CTitleuiManager::Update(void)
 void CTitleuiManager::SlideStartUi(void)
 {
 	// フラグが未使用なら
-	if (!CTitleManager::GetInstance()->GetIsKeyInput()) return;
+	if (!m_isInputSet) return;
 
 	// スライドの速度
 	constexpr float SLIDE_SPEED = 0.05f;
@@ -327,7 +334,7 @@ void CTitleuiManager::SlideStartUi(void)
 	}
 
 	// 目標のところに到達したら終了処理
-	if (m_fSlideRatio >= 1.0f)
+	if (m_fSlideRatio >= 0.5f)
 	{
 		// スライド終了フラグを有効化
 		m_isFinishSlideUi = true;
@@ -337,6 +344,37 @@ void CTitleuiManager::SlideStartUi(void)
 		{
 			m_pStartUiList[nCntStart]->Uninit();
 		}
+		return;
+	}
+}
+//=========================================================
+// スライドする処理
+//=========================================================
+void CTitleuiManager::InputCheck(void)
+{
+	// 入力デバイス取得
+	auto* pKey = CManager::GetInstance()->GetInputKeyboard();
+	auto* pJoyPad = CManager::GetInstance()->GetJoyPad();
+	auto* pMouse = CManager::GetInstance()->GetMouse();
+
+	// 取得失敗時
+	if (pKey == nullptr) return;
+	if (pJoyPad == nullptr) return;
+	if (pMouse == nullptr) return;
+
+	// キー入力時の判定
+	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A)) ||
+		pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
+	{
+		// サウンド取得
+		CSound* pSound = CManager::GetInstance()->GetSound();
+		if (pSound == nullptr) return;
+
+		// 入力判定を有効化
+		m_isInputSet = true;
+
+		// サウンド再生
+		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
 		return;
 	}
 }

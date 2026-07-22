@@ -77,32 +77,5 @@ void CTitleManager::Uninit(void)
 //=========================================================
 void CTitleManager::Update(void)
 {
-	// フラグが有効なら下の処理をスキップ
-	if (isKeyinputSet) return;
 
-	// 入力デバイス取得
-	auto * pKey = CManager::GetInstance()->GetInputKeyboard();
-	auto * pJoyPad = CManager::GetInstance()->GetJoyPad();
-	auto* pMouse = CManager::GetInstance()->GetMouse();
-
-	// 取得失敗時
-	if (pKey == nullptr) return;
-	if (pJoyPad == nullptr) return;
-	if (pMouse == nullptr) return;
-
-	// キー入力時の判定
-	if ((pKey->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_START) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A)) || 
-		pMouse->GetTriggerDown(CInputMouse::MOUSE_LEFT))
-	{
-		// サウンド取得
-		CSound* pSound = CManager::GetInstance()->GetSound();
-		if (pSound == nullptr) return;
-
-		// 入力判定を有効化
-		isKeyinputSet = true;
-
-		// サウンド再生
-		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
-		return;
-	}
 }
