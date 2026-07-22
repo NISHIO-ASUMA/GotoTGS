@@ -55,10 +55,10 @@ HRESULT CRankingGraphManager::Init
 	// 描画位置の基準設定
 	D3DXVECTOR3 currentPos = pos;
 
-	for (int i = 0; i < Config::DATA_MAX; ++i)
+	for (int nCnt = 0; nCnt < Config::DATA_MAX; ++nCnt)
 	{
 		// スコアの値を配列から取得
-		int score = m_pScoreData[i];
+		int score = m_pScoreData[nCnt];
 
 		float currentWidth = 0.0f;
 		if (maxScore > 0 && score > 0)
@@ -69,10 +69,10 @@ HRESULT CRankingGraphManager::Init
 		}
 
 		// ui生成
-		m_pGraphUi[i] = CRankingGraph::Create(currentPos, currentWidth, fHeight);
+		m_pGraphUi[nCnt] = CRankingGraph::Create(currentPos, currentWidth, fHeight);
 
-		// Y座標をずらす
-		currentPos.y += UI_Config::POS_Y_VALUE;
+		// Y座標をずらす ( カウントのしきい値を加算 )
+		currentPos.y += UI_Config::POS_Y_VALUE + (nCnt * 4);
 	}
 
 	return S_OK;

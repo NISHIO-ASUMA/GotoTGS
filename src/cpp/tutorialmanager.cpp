@@ -71,24 +71,5 @@ void CTutorialManager::Uninit(void)
 //=========================================================
 void CTutorialManager::Update(void)
 {
-	// 入力取得
-	auto* Key = CManager::GetInstance()->GetInputKeyboard();
-	auto* Mouse = CManager::GetInstance()->GetMouse();
-	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
-	// キー入力で遷移 ( 仮 )
-	if (Key->GetTrigger(DIK_RETURN) ||
-		Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) ||
-		Pad->GetTrigger(CJoyPad::JOYKEY_A) ||
-		Pad->GetTrigger(CJoyPad::JOYKEY_START))
-	{
-		// フェード取得
-		CFade* pFade = CManager::GetInstance()->GetFade();
-		if (pFade != nullptr)
-		{
-			// 画面切り替え
-			pFade->SetFade(std::make_unique<CGame>());
-			return;
-		}
-	}
 }

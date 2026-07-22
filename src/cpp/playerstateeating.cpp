@@ -64,6 +64,7 @@ void CPlayerStateEating::OnUpdate()
 		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::FOOD,true,3);
 	}
 
+	// 近田のバグがいい感じになっていたからこのままいってみよう
 	if (!m_pPlayer->GetAfkGameCenter())
 	{
 		// ステートを移動にチェンジ
