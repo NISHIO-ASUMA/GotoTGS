@@ -50,6 +50,7 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "mobcharactormanager.h"	// 西尾追加
+#include "boss.h"
 
 //*********************************************************
 // 定数名前空間
@@ -165,6 +166,10 @@ HRESULT CGameSceneObject::Init(void)
 
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
+
+	// テスト生成
+	CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+
 	return S_OK;
 }
 
