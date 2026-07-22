@@ -25,11 +25,20 @@ namespace AFKEATING
 	const D3DXVECTOR3 Pos = { -195.0f, 14.0, -202.0f };	// 位置
 	constexpr float fRadius = 5.0f;						// 範囲の半径
 };
+//*********************************************************
+// 名前空間(パーティクル)
+//*********************************************************
+namespace PARTICLE
+{
+	const D3DXVECTOR3 Pos = { -225.0f, 38.0, -202.0f };	// 位置
+	const D3DXCOLOR col = { 0.5f, 0.5f, 0.5f, 0.5f };	// カラー
+	constexpr float fRadius = 10.0f;					// 範囲の半径
+};
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfkEating::CAfkEating()
+CAfkEating::CAfkEating() : m_pParticle(nullptr)
 {
 
 }
@@ -68,6 +77,9 @@ HRESULT CAfkEating::Init(void)
 	// 親クラスの初期化処理
 	CAfk::Init(AFKEATING::Pos, AFKEATING::fRadius);
 
+	// パーティクル生成
+	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_SMOKE);
+
 	return S_OK;
 }
 //=========================================================
@@ -85,4 +97,19 @@ void CAfkEating::Update(void)
 {
 	// 親クラスの更新処理
 	CAfk::Update();
+
+	if (m_pParticle == nullptr)return;
+
+	// プレイヤーがさぼっているか判定用の変数
+	bool bAfkEating = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkEating();
+
+	if (bAfkEating) m_pParticle->SetUse(true);
+	else m_pParticle->SetUse(false);
+
+	float fColR = (float)(rand() / (RAND_MAX + 1.0f));
+	float fColG = (float)(rand() / (RAND_MAX + 1.0f));
+	float fColB = (float)(rand() / (RAND_MAX + 1.0f));
+
+	m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, fColB, 1.0f));
+
 }
