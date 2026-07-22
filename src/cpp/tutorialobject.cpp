@@ -69,9 +69,9 @@ HRESULT CTutorialObject::Init(void)
 	// 操作キャラクター生成
 	m_pTutoPlayer = CTutorialPlayer::Create(D3DXVECTOR3(-160.0f, 0.0f, 95.0f), VECTOR3_NULL);
 
-	//// カメラに追従するキャラクターのポインタをセット
-	//CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pTutoPlayer);
-	//CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
+	// カメラに追従するキャラクターのポインタをセット
+	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pTutoPlayer);
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
 
 	// チュートリアルのセリフの生成 Misaki
 	m_plines = CTutorialLines::Create(true);
@@ -98,8 +98,8 @@ void CTutorialObject::Uninit(void)
 //=========================================================
 void CTutorialObject::Update(void)
 {
-	//// カメラの追従ターゲット設定
-	//CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
+	// カメラの追従ターゲット設定
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
 
 	// 管理クラス更新
 	if (m_pBlockManager)
