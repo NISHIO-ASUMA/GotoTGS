@@ -166,6 +166,9 @@ void CTutorialLines::Update(void)
 	// 使用していない状態にする
 	m_bUse = false;
 
+	// 現在の番号を初期化
+	m_nNowIdx = NULL;
+
 	// 各ポインタを状況に合わせて状態を設定する
 	m_pBG->SetUse(m_bUse);
 	m_pLines->SetUse(m_bUse);
