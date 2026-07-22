@@ -160,6 +160,7 @@ HRESULT CTitleuiManager::Init(void)
 	m_isFinishSlideUi = false;
 	m_isSelectFinish = false;
 	m_fSlideRatio = NULL;
+	m_isInputSet = false;
 
 	return S_OK;
 }
@@ -177,9 +178,6 @@ void CTitleuiManager::Update(void)
 {
 	// 入力検知関数
 	InputCheck();
-
-	// 選択終わったら処理を通させない
-	if (m_isSelectFinish) return;
 
 	// スライド中なら
 	if (!m_isFinishSlideUi)
@@ -370,8 +368,8 @@ void CTitleuiManager::InputCheck(void)
 		CSound* pSound = CManager::GetInstance()->GetSound();
 		if (pSound == nullptr) return;
 
-		// 入力判定を有効化
-		m_isInputSet = true;
+		if (!m_isInputSet)
+			m_isInputSet = true;
 
 		// サウンド再生
 		pSound->Play(CSound::SOUND_LABEL_TITLEENTER);
