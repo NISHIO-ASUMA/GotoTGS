@@ -104,10 +104,10 @@ void CTutorialLines::Update(void)
 	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
 	// ƒL[“ü—Í‚µ‚Ä‚È‚¢ê‡
-	if (!Key->GetTrigger(DIK_RETURN) ||
-		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) ||
-		!Pad->GetTrigger(CJoyPad::JOYKEY_A) ||
-		!Pad->GetTrigger(CJoyPad::JOYKEY_START) || 
+	if ((!Key->GetTrigger(DIK_RETURN) &&
+		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) &&
+		!Pad->GetTrigger(CJoyPad::JOYKEY_A) &&
+		!Pad->GetTrigger(CJoyPad::JOYKEY_START)) ||
 		!m_bUse)
 	{
 		return;

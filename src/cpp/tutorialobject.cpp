@@ -109,15 +109,15 @@ void CTutorialObject::Update(void)
 	if (m_plines->GetUse())
 		return;
 
-	//// フェード取得
-	//CFade* pFade = CManager::GetInstance()->GetFade();
+	// フェード取得
+	CFade* pFade = CManager::GetInstance()->GetFade();
 
-	//if (pFade != nullptr)
-	//{
-	//	// 画面切り替え
-	//	pFade->SetFade(std::make_unique<CGame>());
-	//	return;
-	//}
+	if (pFade != nullptr)
+	{
+		// 画面切り替え
+		pFade->SetFade(std::make_unique<CGame>());
+		return;
+	}
 
 }
 //=========================================================
