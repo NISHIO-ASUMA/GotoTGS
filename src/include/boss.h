@@ -64,4 +64,7 @@ public:
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+
+private:
+	int m_nViewIdx;										// ビューポイントの巡回インデックス番号
 };
