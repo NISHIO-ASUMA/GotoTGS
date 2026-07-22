@@ -41,6 +41,9 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	void MoveInOffice(const D3DXVECTOR3& pos);
+	void MoveOfficePoint(const D3DXVECTOR3& pos);
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -67,4 +70,6 @@ private:
 
 private:
 	int m_nViewIdx;										// ビューポイントの巡回インデックス番号
+	bool m_isOutSideIn;									// 外から移動しているフラグ
+	bool m_isOfficeMove;								// オフィス内で移動するフラグ
 };
