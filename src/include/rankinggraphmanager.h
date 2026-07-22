@@ -67,12 +67,12 @@ private:
 	//*************************************
 	struct UI_Config
 	{
-		static constexpr float POS_Y_VALUE = 65.0f;	// ずらすY座標値
-		static constexpr float MAX_WIDTH = 400.0f;	// 最大値の横幅
+		static constexpr float POS_Y_VALUE = 100.0f;		// ずらすY座標値
+		static constexpr float MAX_WIDTH = 490.0f;			// 最大値の横幅
 	};
 
 private:
-	std::unique_ptr<CLoad> m_pLoad;					// 読み込みクラス
-	std::array<int, Config::DATA_MAX> m_pScoreData;	// ランキングから来たデータの配列
-	std::array<CRankingGraph*, Config::DATA_MAX> m_pGraphUi; // ui配列
+	std::unique_ptr<CLoad> m_pLoad;								// 読み込みクラス
+	std::array<int, Config::DATA_MAX> m_pScoreData;				// ランキングから来たデータの配列
+	std::array<CRankingGraph*, Config::DATA_MAX> m_pGraphUi;	// ui配列
 };

@@ -123,11 +123,12 @@ void CCamera::Update(void)
 #endif
 
 	// ゲームのみ追従カメラ設定
-	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME)
+	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME || CManager::GetInstance()->GetScene() == CScene::MODE_TUTORIAL)
 	{
 		// 追従モードならそのカメラに設定
 		if (m_pCamera.nMode == MODE_THIRD)
 		{
+			// 追従視点
 			ThirdPersonView();
 
 			// 移動フラグがfalseならフリック対応
@@ -137,6 +138,7 @@ void CCamera::Update(void)
 	}
 	else if (CManager::GetInstance()->GetScene() == CScene::MODE_TITLE)
 	{
+		// 固定カメラに設定
 		TitleCamera();
 	}
 	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)

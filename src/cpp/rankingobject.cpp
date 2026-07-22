@@ -68,12 +68,11 @@ HRESULT CRankingObject::Init(void)
 	// フィールド読み込み
 	jsonManager->Load(RANKINGOBJECT::LoadName);
 
-	// TODO : ランキングと同期して棒グラフのポリゴン出す
 	// ランキングスコア生成
 	CRankingScore::Create(RANKINGOBJECT::ScorePos, RANKINGOBJECT::ScoreWidth, RANKINGOBJECT::ScoreHeight);
 
 	// ランキングの横棒生成
-	CRankingGraphManager::GetInstance()->Init(D3DXVECTOR3(250.0f, 160.0f, 0.0f), 40.0f);
+	CRankingGraphManager::GetInstance()->Init(D3DXVECTOR3(230.0f, 135.0f, 0.0f), 60.0f);
 
 	return S_OK;
 }
