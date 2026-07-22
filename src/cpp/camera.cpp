@@ -123,7 +123,8 @@ void CCamera::Update(void)
 #endif
 
 	// ゲームのみ追従カメラ設定
-	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME || CManager::GetInstance()->GetScene() == CScene::MODE_TUTORIAL)
+	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME || 
+		CManager::GetInstance()->GetScene() == CScene::MODE_TUTORIAL)
 	{
 		// 追従モードならそのカメラに設定
 		if (m_pCamera.nMode == MODE_THIRD)

@@ -2,7 +2,6 @@
 //
 // ìGÇÃèàóù [ enemy.cpp ]
 // Author: Asuma Nishio
-// NOTE : úpújÇ∑ÇÈè„éiÇÃÉNÉâÉX
 // 
 //========================================================
 
@@ -331,7 +330,7 @@ void CEnemy::DrawEyeSight(void)
 		int idx = i + 1;
 		vFan[idx].pos = vFan[0].pos + dir * Eyesight::EYE_RADIUS;
 		vFan[idx].nor = VECTOR3_NULL;
-		vFan[idx].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.6f);;
+		vFan[idx].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.6f);
 		vFan[idx].tex = VECTOR2_NULL;
 	}
 

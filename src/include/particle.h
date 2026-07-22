@@ -29,6 +29,7 @@ public:
 		TYPE_SPRAY,		// スプレー噴射
 		TYPE_FLAME,		// 火炎放射
 		TYPE_THUNDER,	// 落雷
+		TYPE_NEARBY,	// 近辺
 		TYPE_MAX
 	}TYPE;
 
@@ -43,6 +44,7 @@ public:
 	// 取得処理
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
+	D3DXVECTOR3 GetMove(void) { return m_move; }
 	bool GetUse(void) { return m_bUse; }
 
 	// 静的メンバ関数
@@ -51,6 +53,7 @@ public:
 
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
+	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 	void SetColor(D3DXCOLOR col) { m_col = col; }
 	void SetRadius(float fRadius) { m_fRadius = fRadius; }
 	void SetType(TYPE type) { m_type = type; }
@@ -62,6 +65,7 @@ private:
 	void Spray(void);				// スプレー状態
 	void Flame(void);				// 火炎放射状態
 	void Thunder(void);				// 雷状態
+	void Nearby(void);				// オブジェクトの周りからパーティクルが出る状態
 
 	// 静的メンバ変数
 	static D3DXVECTOR3 m_TargetPos;	// 目標位置
@@ -69,6 +73,7 @@ private:
 	// メンバ変数
 	D3DXVECTOR3 m_pos;				// 位置
 	D3DXVECTOR3 m_rot;				// 角度
+	D3DXVECTOR3 m_move;				// 移動量
 	D3DXCOLOR m_col;				// 色
 	TYPE m_type;					// 種類
 	int m_nCreateTime;				// 生成時間

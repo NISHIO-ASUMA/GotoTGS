@@ -33,6 +33,7 @@ namespace EFFECT
 //=========================================================
 CParticle::CParticle() : m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
+m_move(VECTOR3_NULL),
 m_col(V_COLOR_WHITE),
 m_nCreateTime(NULL),
 m_fRadius(NULL),
@@ -107,7 +108,9 @@ void CParticle::Update(void)
 	case TYPE_THUNDER:
 		Thunder();
 		break;
-
+	case TYPE_NEARBY:
+		Nearby();
+		break;
 	default:
 		break;
 	}
@@ -137,13 +140,14 @@ void CParticle::None(void)
 	move.y = cosf(phi) * fLength;
 	move.z = sinf(phi) * sinf(theta) * fLength;
 
-	// 色・サイズ・寿命の設定
+	// 移動量・色・サイズ・寿命の設定
+	SetMove(move);
 	D3DXCOLOR col = m_col;
 	float fRadius = m_fRadius;
 	int nLife = 30;
 
 	// エフェクトの生成
-	CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_NONE);
+	CEffect::Create(pos, m_rot, m_move, col, nLife, fRadius, CEffect::TYPE_NONE);
 }
 //=========================================================
 // 舞い上がる煙
@@ -304,5 +308,41 @@ void CParticle::Thunder(void)
 
 		 // エフェクトの生成
 		CEffect::Create(pos, m_rot, MiniMove * 35.0f, col, nMiniLife, br, CEffect::TYPE_THUNDER);
+	}
+}
+//=========================================================
+// 近辺
+//=========================================================
+void CParticle::Nearby(void)
+{
+	// ローカル変数に位置と色を設定
+	D3DXVECTOR3 pos = m_pos;
+	D3DXVECTOR3 move;
+	D3DXCOLOR col = m_col;
+
+	// 角度の設定
+	float angle = m_rot.y + (D3DX_PI / 2);
+
+	for (int i = 0; i < 18; i++)
+	{
+		float spread = D3DXToRadian((rand() % EFFECT::nMax - EFFECT::nMin) / 10.0f);
+		float dir = angle + spread;
+
+		float speed = 3.0f + (rand() % 150) / 50.0f;
+
+		move.x = -sinf(dir) * speed;
+		move.y = ((rand() % 100) - 50) / 200.0f;
+		move.z = -cosf(dir) * speed;
+
+		// 粒子の半径
+		float fRadius = m_fRadius * 0.8f + ((rand() % 5) / 2.0f);
+
+		SetMove(move);
+
+		// 寿命短め
+		int nLife = 12 + rand() % 5;
+
+		// エフェクトの生成
+		CEffect::Create(pos, m_rot, m_move, col, nLife, fRadius, CEffect::TYPE_NONE);
 	}
 }

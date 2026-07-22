@@ -1,6 +1,6 @@
 //========================================================
 //
-// ボス処理 [ boss.h ]
+// 社長処理 [ boss.h ]
 // Author: Asuma Nishio
 //
 //========================================================
@@ -41,6 +41,9 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	void MoveInOffice(const D3DXVECTOR3& pos);
+	void MoveOfficePoint(const D3DXVECTOR3& pos);
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -64,4 +67,13 @@ public:
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+
+private:
+	int m_nViewIdx;							// ビューポイントの巡回インデックス番号
+	int m_nOfficeViewIdx;					// オフィス内の巡回インデックス番号
+	int m_nCoolTime;						// セットポジションについた時のクールタイム
+
+private:
+	bool m_isOutSideIn;						// 外から移動しているフラグ
+	bool m_isOfficeMove;					// オフィス内で移動するフラグ
 };
