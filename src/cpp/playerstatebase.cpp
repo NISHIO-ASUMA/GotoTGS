@@ -10,6 +10,11 @@
 //*********************************************************
 #include "playerstatebase.h"
 
+//=================================================
+// 静的メンバ変数
+//=================================================
+CPlayerStateBase* CPlayerStateBase::m_pInstance = nullptr; // インスタンス変数
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -24,5 +29,22 @@ m_nID(NULL)
 //=========================================================
 CPlayerStateBase::~CPlayerStateBase()
 {
+	// シングルトンの破棄
+	if (m_pInstance)
+	{
+		delete m_pInstance;
+		m_pInstance = nullptr;
+	}
+}
 
+//=========================================================
+// インスタンス取得処理
+//=========================================================
+CPlayerStateBase* CPlayerStateBase::GetInstance(void)
+{
+	// nullチェック
+	if (m_pInstance == nullptr)m_pInstance = new CPlayerStateBase;
+
+	// 生成されたインスタンスを返す
+	return m_pInstance;
 }

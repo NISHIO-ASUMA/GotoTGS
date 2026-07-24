@@ -47,6 +47,7 @@
 #include "afkgamecenter.h"
 #include "titleuimanager.h"
 #include "progressgauge.h"
+#include "score.h"
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
@@ -93,6 +94,10 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
+m_nCntAfk(NULL),
+m_nTimeScore(NULL),
+m_nAddScore(NULL),
+m_nScoreCnt(NULL),
 m_bMove(false),
 m_bAfkSmoke(false),
 m_bAfkTV(false),
@@ -100,8 +105,9 @@ m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_bAfkEating(false),
 m_isPcWork(false),
-m_nControlTypes(CONTROLTYPE_NONE),
-m_nCntAfk(NULL)
+m_bAfkChange(false),
+m_bAfkCheck(false),
+m_nControlTypes(CONTROLTYPE_NONE)
 {
 
 }
@@ -602,6 +608,48 @@ void CPlayer::MoveKeyboard(float speed)
 		m_bMove = true;
 	}
 	
+	// オフィス内のサボり判定が有効な物があったら
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine)
+	{
+		m_nTimeScore++;
+		if (m_nScoreCnt == NULL)
+		{
+			m_nAddScore = 100;
+		}
+		if ((60 * m_nScoreCnt) < m_nTimeScore && (60 * (m_nScoreCnt + 1)) * m_nTimeScore)
+		{
+			CGameSceneObject::GetInstance()->GetScore()->AddScore(m_nAddScore);
+			m_nScoreCnt++;
+			
+			switch (m_nScoreCnt)
+			{
+			case 1:
+				m_nAddScore = 150;
+				break;
+			case 2:
+				m_nAddScore = 200;
+				break;
+			case 3:
+				m_nAddScore = 100;
+				break;
+			case 4:
+				m_nAddScore = 50;
+				break;
+			case 5:
+				m_nAddScore = 10;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine)
+	{
+		m_nScoreCnt = NULL;
+		m_nTimeScore = NULL;
+	}
+
 	// サボり判定が有効な物があったら
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating)
 	{

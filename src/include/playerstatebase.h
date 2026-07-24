@@ -38,6 +38,9 @@ public:
 
 	void SetOwner(CPlayer* pPlayer) { m_pPlayer = pPlayer; }
 
+	// インスタンス生成用関数
+	static CPlayerStateBase* GetInstance(void);
+
 public:
 	//************************
 	// ステート列挙型
@@ -58,5 +61,6 @@ protected:
 	CPlayer* m_pPlayer; // プレイヤーのポインタ変数
 
 private:
-	int m_nID;			// ID番号
+	static CPlayerStateBase* m_pInstance;	// シングルトン変数
+	int m_nID;							// ID番号
 };

@@ -199,13 +199,18 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
+	int m_nCntAfk;										// さぼっているときのゲージの加算
+	int m_nTimeScore;									// スコアタイム用変数
+	int m_nAddScore;										// 加算スコア
+	int m_nScoreCnt;										// スコア用カウント
 	bool m_bMove;										// 移動したかどうかの判定変数
 	bool m_bAfkSmoke;									// たばこさぼりの判定変数
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
-	int m_nCntAfk;										// さぼっているときのゲージの加算
+	bool m_bAfkChange;									// さぼりのID切り替え用変数
+	bool m_bAfkCheck;									// さぼりが連続しているかどうかの判定用変数
 
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
