@@ -169,6 +169,7 @@
     <ClCompile Include="src\cpp\afkuimanager.cpp" />
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
+    <ClCompile Include="src\cpp\auditor.cpp" />
     <ClCompile Include="src\cpp\autodoor_collision.cpp" />
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
     <ClCompile Include="src\cpp\automatic_door.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="src\cpp\rankingmanager.cpp" />
     <ClCompile Include="src\cpp\rankingobject.cpp" />
     <ClCompile Include="src\cpp\rankingscore.cpp" />
+    <ClCompile Include="src\cpp\receptionist.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\cpp\result.cpp" />
     <ClCompile Include="src\cpp\resultmanager.cpp" />
@@ -341,6 +343,7 @@
     <ClInclude Include="src\include\afkuimanager.h" />
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
+    <ClInclude Include="src\include\auditor.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
     <ClInclude Include="src\include\automaticdoormanager.h" />
     <ClInclude Include="src\include\automatic_door.h" />
@@ -453,6 +456,7 @@
     <ClInclude Include="src\include\rankingmanager.h" />
     <ClInclude Include="src\include\rankingobject.h" />
     <ClInclude Include="src\include\rankingscore.h" />
+    <ClInclude Include="src\include\receptionist.h" />
     <ClInclude Include="src\include\renderer.h" />
     <ClInclude Include="src\include\result.h" />
     <ClInclude Include="src\include\resultmanager.h" />

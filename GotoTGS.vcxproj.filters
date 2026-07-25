@@ -346,9 +346,6 @@
     <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\Mob">
       <UniqueIdentifier>{e750484a-a1bd-481f-b13f-c5df4e4ca99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\AddFile\Nishio\mob">
-      <UniqueIdentifier>{9ffbc454-c60f-4f88-b66e-4f651fcb0b36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\AddFile\Nishio\Boss">
       <UniqueIdentifier>{56281bdb-3887-4486-9702-695a2ad9bf86}</UniqueIdentifier>
     </Filter>
@@ -426,6 +423,21 @@
     </Filter>
     <Filter Include="ソース ファイル\AddFile\Takahashi\Progressgauge">
       <UniqueIdentifier>{e967fb09-7f9b-47eb-87e7-351868b80074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\Reception">
+      <UniqueIdentifier>{37ea12a3-bec9-4bd1-a02f-4f4f10df297a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\mob">
+      <UniqueIdentifier>{9ffbc454-c60f-4f88-b66e-4f651fcb0b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Reception">
+      <UniqueIdentifier>{dd437a18-1372-42bf-98ec-9d87bff39a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\auditor">
+      <UniqueIdentifier>{a7345022-3ee8-4536-bd2d-0828cadcb742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\auditor">
+      <UniqueIdentifier>{24f74b2f-0a96-42b0-bc1c-acb11cb55700}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -924,6 +936,12 @@
     <ClCompile Include="src\cpp\playerstateeating.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\receptionist.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\Reception</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditor.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1269,7 +1287,7 @@
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
     <ClInclude Include="src\include\mobcharactormanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\mob</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\mob</Filter>
     </ClInclude>
     <ClInclude Include="src\include\autodoor_collision.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
@@ -1429,6 +1447,12 @@
     </ClInclude>
     <ClInclude Include="src\include\playerstateeating.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\receptionist.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Reception</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditor.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

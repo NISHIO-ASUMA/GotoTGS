@@ -391,5 +391,35 @@
   },
   {
     "Model": "data/MODEL/POLICE/09_Police_footL.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/00_Auditor_body.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/01_Auditor_head.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/02_Auditor_armR.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/03_Auditor_handR.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/04_Auditor_armL.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/05_Auditor_handL.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/06_Auditor_legR.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/07_Auditor_footR.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/08_Auditor_legL.x"
+  },
+  {
+    "Model": "data/MODEL/AUDITOR/09_Auditor_footL.x"
   }
 ]

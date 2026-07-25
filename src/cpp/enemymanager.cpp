@@ -98,3 +98,11 @@ void CEnemyManager::Update(void)
 	// ƒJƒEƒ“ƒg‰ÁZ
 	m_nStageCount++;
 }
+//=========================================================
+// “G‚Ì¶¬’Ç‰ÁŠÖ”
+//=========================================================
+void CEnemyManager::AddEnemy(const D3DXVECTOR3& pos)
+{
+	// V‹K’Ç‰Á¶¬
+	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL));
+}

@@ -19,9 +19,10 @@
 // 前方宣言
 //*********************************************************
 class CBlockManager;
-class CPlayer;				// [ Asuma add ]
 class CGametime;
 class CScore;
+class CPlayer;				// Asuma
+class CReceptionist;		// Asuma
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
@@ -49,7 +50,8 @@ public:
 //*********************************
 
 	CGametime* GetTime(void) const { return m_pTimer; }
-	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// [ Asuma add ]
+	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// Asuma
+	CReceptionist* GetReception(void) const { return m_pReception; }							// Asuma
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }										// Misaki
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
@@ -73,12 +75,16 @@ private:
 	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
 	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
 
+private:
 	CGametime* m_pTimer;							// タイマークラスのポインタ		Misaki
 	CDeskwork* m_pDeskwork;							// タスクのポインタ				Misaki
 	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ			Misaki
 	CEventUI* m_pEventUI;							// イベントUIのポインタ			Misaki
-	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]
 	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ			Misaki
 
-	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロックマネージャークラスのポインタ
+private:
+	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]
+	CReceptionist* m_pReception;					// 外に行く受付人				[ Asuma Add ]
+
+	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ
 };

@@ -50,7 +50,9 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "mobcharactormanager.h"	// 西尾追加
+
 #include "boss.h"
+#include "receptionist.h"
 
 //*********************************************************
 // 定数名前空間
@@ -73,7 +75,8 @@ m_pScoreDitch(nullptr),
 m_pScoreAll(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
-m_pVigilanceUImanager(nullptr)
+m_pVigilanceUImanager(nullptr),
+m_pReception(nullptr)
 {
 
 }
@@ -167,8 +170,9 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
-	// テスト生成
-	CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+	// テスト生成 ( ボス )
+	//CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+
 
 	return S_OK;
 }
@@ -324,4 +328,7 @@ void CGameSceneObject::CreatePointer(void)
 
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
+
+	// 受付人を生成 ( 外に行くドア付近に生成している )
+	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 }

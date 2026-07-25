@@ -56,6 +56,20 @@ public:
 	inline const CEnemy* GetEnemyIdx(const int& nIdx) { return m_pEnemys[nIdx]; }
 
 	/// <summary>
+	/// 敵の追加関数
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	void AddEnemy(const D3DXVECTOR3& pos);
+
+	/// <summary>
+	/// 管理クラス内で生成
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	/// <param name="rot">角度</param>
+	/// <returns></returns>
+	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot);
+
+	/// <summary>
 	/// シングルトン取得処理
 	/// </summary>
 	/// <param name=""></param>
@@ -65,14 +79,6 @@ public:
 		static CEnemyManager Instance;
 		return &Instance;
 	};
-
-	/// <summary>
-	/// 管理クラス内で生成
-	/// </summary>
-	/// <param name="pos">生成座標</param>
-	/// <param name="rot">角度</param>
-	/// <returns></returns>
-	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot);
 
 private:
 

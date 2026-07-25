@@ -49,10 +49,10 @@ public:
 
 private:
 
-	CTitleuiManager(); // 格納コンストラクタ
+	CTitleuiManager();		// 格納コンストラクタ
 
 	void SlideStartUi(void); // 初期uiのスライド処理関数
-	void InputCheck(void);	// 入力判定
+	void InputCheck(void);	 // 入力判定
 
 private:
 
