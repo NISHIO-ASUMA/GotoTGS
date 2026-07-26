@@ -68,7 +68,11 @@ CCamera::CCamera() : m_pCamera(ClearDefault()),
 m_pThirdPersonPos(VECTOR3_NULL),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_isMove(false),
-m_pCharactor(nullptr)
+m_pCharactor(nullptr),
+m_currentAnim{},
+m_isAnimating(false),
+m_nCurrentFrame(NULL),
+m_nTotalFrames(NULL)
 {
 	
 }
@@ -98,6 +102,7 @@ HRESULT CCamera::Init(void)
 	m_pCamera.fDistance = sqrtf((fRotx * fRotx) + (fRoty * fRoty) + (fRotz * fRotz));
 
 	// 移動フラグ
+	m_currentAnim.AnimData.clear();
 	m_isMove = false;
 
 	// 操作の種類を設定する(パッドかキーマウかどうか)
@@ -110,6 +115,7 @@ HRESULT CCamera::Init(void)
 //=========================================================
 void CCamera::Uninit(void)
 {
+	m_currentAnim.AnimData.clear();
 	m_pCharactor = nullptr;
 }
 //=========================================================
@@ -591,6 +597,224 @@ bool CCamera::CollisionToraySide(CSideOpenDoor* pDoor)
 	}
 
 	return isCollision;
+}
+//==============================================================
+// アニメーション起動
+//==============================================================
+void CCamera::PlayAnimation(const AnimData& data)
+{
+	// データがないなら
+	if (data.AnimData.empty()) return;
+
+	// 各情報を初期化、代入
+	m_currentAnim = data;
+	m_isAnimating = true;
+	m_nCurrentFrame = 0;
+	m_pCamera.nCntAnim = 0;
+}
+//==============================================================
+// アニメーション更新
+//==============================================================
+void CCamera::UpdateAnim(void)
+{
+	// データが空、またはキーが1つしかない場合は処理しない
+	if (m_currentAnim.AnimData.empty() || m_currentAnim.AnimData.size() < 2)
+	{
+		m_isAnimating = false;
+		return;
+	}
+
+	// キー数を取得
+	int numKeys = (int)m_currentAnim.AnimData.size();
+
+	// 次のキ―
+	int nextKey = m_nCurrentFrame + 1;
+
+	// ループ時のインデックス巡回処理
+	if (m_currentAnim.isLoop)
+	{
+		nextKey %= numKeys;
+	}
+
+	const auto& curKeyData = m_currentAnim.AnimData[m_nCurrentFrame];
+	const auto& nxtKeyData = m_currentAnim.AnimData[nextKey];
+
+	int targetFrame = (curKeyData.nAnimFrame > 0) ? curKeyData.nAnimFrame : 1;
+	float fRateFrame = (float)m_pCamera.nCntAnim / (float)targetFrame;
+	if (fRateFrame > 1.0f) fRateFrame = 1.0f;
+
+	// 各種差分算出
+	D3DXVECTOR3 diffPosV = nxtKeyData.posV - curKeyData.posV;
+	D3DXVECTOR3 diffPosR = nxtKeyData.posR - curKeyData.posR;
+	D3DXVECTOR3 diffRot = nxtKeyData.rot - curKeyData.rot;
+
+	// 角度の正規化
+	auto NormalizeAngle = [](float& angle)
+	{
+		if (angle > D3DX_PI)  angle -= CAMERAINFO::NorRot;
+		if (angle < -D3DX_PI) angle += CAMERAINFO::NorRot;
+	};
+
+	// 正規化ラムダ式
+	NormalizeAngle(diffRot.x);
+	NormalizeAngle(diffRot.y);
+	NormalizeAngle(diffRot.z);
+
+	// カメラパラメータの線形補間適用
+	m_pCamera.posV = curKeyData.posV + diffPosV * fRateFrame;
+	m_pCamera.posR = curKeyData.posR + diffPosR * fRateFrame;
+	m_pCamera.rot = curKeyData.rot + diffRot * fRateFrame;
+	m_pCamera.fDistance = curKeyData.fDistance + (nxtKeyData.fDistance - curKeyData.fDistance) * fRateFrame;
+
+	// フレームカウンタ進行管理
+	if (m_pCamera.nCntAnim >= targetFrame)
+	{
+		m_nCurrentFrame++;
+		m_pCamera.nCntAnim = 0;
+
+		if (m_nCurrentFrame >= numKeys - 1)
+		{
+			if (m_currentAnim.isLoop)
+			{
+				// 最初に戻す
+				m_nCurrentFrame = 0;
+			}
+			else
+			{
+				// ループじゃないとき
+				const auto& lastKey = m_currentAnim.AnimData.back();
+				m_pCamera.posV = lastKey.posV;
+				m_pCamera.posR = lastKey.posR;
+				m_pCamera.rot = lastKey.rot;
+				m_pCamera.fDistance = lastKey.fDistance;
+
+				// カウンタ初期化＆停止
+				m_nCurrentFrame = 0;
+				m_pCamera.nCntAnim = 0;
+				m_isAnimating = false;
+
+				// 編集モード
+				SetMode(MODE_NONE);
+			}
+		}
+	}
+	else
+	{
+		m_pCamera.nCntAnim++;
+	}
+}
+//==============================================================
+// アニメーション読み込み
+//==============================================================
+HRESULT CCamera::LoadAnimation(const std::string& path)
+{
+	// ファイル読み込み
+	std::ifstream file(path);
+
+	// 例外チェック
+	if (!file.is_open()) return E_FAIL;
+
+	// ローカル保存データ
+	AnimData tempAnim;
+	tempAnim.isLoop = false;
+
+	// 読み込むラインと現在データの変数設定
+	std::string line;
+	bool inKeySet = false;
+	AnimDataKey currentKey = {};
+
+	// 読み込むラインがなくなるまで回す
+	while (std::getline(file, line))
+	{
+		// 無かったらスキップ
+		if (line.empty()) continue;
+
+		// "//"と"#"を探してコメントアウトを除去
+		size_t commentPos = line.find("//");
+		if (commentPos != std::string::npos) line = line.substr(0, commentPos);
+		commentPos = line.find("#");
+		if (commentPos != std::string::npos) line = line.substr(0, commentPos);
+
+		// 読んだ部分とトークンを設定する
+		std::stringstream ss(line);
+		std::string token;
+		ss >> token;
+
+		// トークンが無かったらスキップ
+		if (token.empty()) continue;
+
+		if (token == "LOOP")
+		{
+			char equal;
+			int loopVal;
+			ss >> equal >> loopVal;
+			tempAnim.isLoop = (loopVal != 0);
+		}
+		else if (token == "NUM_ALLKEY")
+		{
+			char equal;
+			int numKeys;
+			ss >> equal >> numKeys;
+
+			// サイズの確保
+			tempAnim.AnimData.reserve(numKeys);
+		}
+		else if (token == "KEYSET")
+		{
+			inKeySet = true;
+
+			// キー情報を初期化
+			currentKey = AnimDataKey{};
+		}
+		else if (token == "END_KEYSET")
+		{
+			// 動的配列に追加
+			tempAnim.AnimData.push_back(currentKey);
+
+			// セットフラグ無効化
+			inKeySet = false;
+		}
+		else if (inKeySet)
+		{
+			// 各トークンごとの処理
+			if (token == "FRAME")
+			{
+				char equal; ss >> equal >> currentKey.nAnimFrame;
+			}
+			else if (token == "POSV")
+			{
+				char equal; ss >> equal >> currentKey.posV.x >> currentKey.posV.y >> currentKey.posV.z;
+			}
+			else if (token == "POSR")
+			{
+				char equal; ss >> equal >> currentKey.posR.x >> currentKey.posR.y >> currentKey.posR.z;
+			}
+			else if (token == "ROT")
+			{
+				char equal; ss >> equal >> currentKey.rot.x >> currentKey.rot.y >> currentKey.rot.z;
+			}
+			else if (token == "DISTANCE")
+			{
+				char equal; ss >> equal >> currentKey.fDistance;
+			}
+		}
+
+		// 最終行ならwhile終了
+		if (token == "END_ANIMCAMERA") break;
+	}
+
+	// ファイル閉じる
+	file.close();
+
+	// アニメーションの再生をする
+	if (!tempAnim.AnimData.empty())
+	{
+		// 現在のデータに入れる
+		m_currentAnim = tempAnim;
+		return S_OK;
+	}
+
+	return E_FAIL;
 }
 //==============================================================
 // 値のクリア関数

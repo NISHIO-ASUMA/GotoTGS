@@ -41,7 +41,6 @@
 #include "doorui.h"					// 近田追加
 #include "afktvpolygon.h"			// 近田追加
 
-#include "enemy.h"					// 西尾追加
 #include "worldUIcollision.h"		// 西尾追加
 #include "camera.h"					// 西尾追加
 #include "automaticdoormanager.h"	// 西尾追加
@@ -50,9 +49,10 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "mobcharactormanager.h"	// 西尾追加
-
 #include "boss.h"
 #include "receptionist.h"
+#include "auditormanager.h"
+#include <resulticon.h>
 
 //*********************************************************
 // 定数名前空間
@@ -135,6 +135,9 @@ HRESULT CGameSceneObject::Init(void)
 	// 敵管理クラス生成
 	CEnemyManager::GetInstance()->Init();
 	
+	// 外の監査役を生成 ( Asuma )
+	CAuditorManager::GetInstance()->Init();
+
 	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
 
@@ -171,9 +174,10 @@ HRESULT CGameSceneObject::Init(void)
 	CMobCharactorManager::GetInstance()->Init();
 
 	// テスト生成 ( ボス )
-	//CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+	CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
 
-
+	//// テスト生成 ( リザルトアイコン ) → 検証済みなのでコメント化 消さないでね
+	//CResultIcon::Create(D3DXVECTOR3(640.0f, 360.0f, 0.0f), 150.0f, 150.0f, "ATM.jpg");
 	return S_OK;
 }
 
@@ -218,6 +222,9 @@ void CGameSceneObject::Uninit(void)
 
 	// 敵管理クラスの終了
 	CEnemyManager::GetInstance()->Uninit();
+
+	// 外の監査役の終了
+	CAuditorManager::GetInstance()->Uninit();
 
 	// モブキャラクター管理クラスの終了
 	CMobCharactorManager::GetInstance()->Uninit();
@@ -273,14 +280,12 @@ void CGameSceneObject::Update(void)
 		// 加算
 		m_pScoreDitch->AddScore(1000);
 	}
-
 	// スコアの保存処理の検証
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_B))
 	{
 		// 書き出し処理
 		m_pScoreTask->SaveScore("data/SCORE/LazyScore.bin");
 	}
-
 #endif // _DEBUG
 }
 
@@ -329,6 +334,6 @@ void CGameSceneObject::CreatePointer(void)
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
 
-	// 受付人を生成 ( 外に行くドア付近に生成している )
+	// 受付人を生成 ( 外に行くドア付近に生成しているよ )
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 }

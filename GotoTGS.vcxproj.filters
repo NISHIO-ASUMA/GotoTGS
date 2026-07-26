@@ -924,15 +924,6 @@
     <ClCompile Include="src\cpp\vigilancelevel.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\rankinggraph.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\rankinggraphmanager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\afkeating.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\playerstateeating.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -941,6 +932,24 @@
     </ClCompile>
     <ClCompile Include="src\cpp\auditor.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\rankinggraph.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\rankinggraphmanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\afkeating.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\afk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resulticon.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonauditor.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1436,12 +1445,6 @@
     <ClInclude Include="src\include\vigilancelevel.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\rankinggraph.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\rankinggraphmanager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\afkeating.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -1451,8 +1454,23 @@
     <ClInclude Include="src\include\receptionist.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Reception</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\rankinggraphmanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\rankinggraph.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resulticon.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
     <ClInclude Include="src\include\auditor.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonauditor.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

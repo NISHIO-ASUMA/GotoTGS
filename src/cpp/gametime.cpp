@@ -44,6 +44,7 @@ m_pos(VECTOR3_NULL)
 //=========================================================
 CGametime::~CGametime()
 {
+
 }
 
 //=========================================================
@@ -130,7 +131,7 @@ HRESULT CGametime::Init(void)
 
 		// テクスチャ設定
 		m_pNumberSeconds[nDigit]->SetTexture(Config::TEXNAME);
-
+		m_pNumberSeconds[nDigit]->SetTexture(Config::TEXNAME);
 	}
 
 	return S_OK;
@@ -244,7 +245,8 @@ void CGametime::Update(void)
 // 描画処理
 //=========================================================
 void CGametime::Draw(void)
-{
+{// デバッグ時のみだけ出す
+#ifdef _DEBUG
 	// 桁数分表示
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
@@ -252,6 +254,7 @@ void CGametime::Draw(void)
 		m_pNumberMinutes[nDigit]->Draw();
 		m_pNumberSeconds[nDigit]->Draw();
 	}
+#endif // _DEBUG
 }
 
 //=========================================================

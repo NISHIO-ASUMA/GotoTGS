@@ -41,8 +41,8 @@ namespace BOSS_INFO
 //*********************************************************
 namespace OFFICE_INFO
 {
-	constexpr int COOLTIME = 60;
-	constexpr int NUM_OFFICEPOINT = 12;
+	constexpr int COOLTIME = 120;
+	constexpr int NUM_OFFICEPOINT = 18;
 
 	// ローカルビューポイント
 	const D3DXVECTOR3 OfficeMovePoint[NUM_OFFICEPOINT] =
@@ -54,8 +54,14 @@ namespace OFFICE_INFO
 		{-217.0f,0.0f,-140.0f},
 		{85.0f,0.0f,-153.0f},
 		{90.0f,0.0f,36.0f},
+		{174.0f,0.0f,33.0f},
+		{168.0f,0.0f,-187.0f},
+		{174.0f,0.0f,33.0f},
 		{405.0f,0.0f,23.0f},
 		{413.0f,0.0f,183.0f},
+		{264.0f,0.0f,200.0f},
+		{260.0f,0.0f,358.0f},
+		{264.0f,0.0f,200.0f},
 		{169.0f,0.0f,191.0f},
 		{-83.0f,0.0f,240.0f},
 		{-50.0f,0.0f,323.0f},

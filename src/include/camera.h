@@ -11,6 +11,12 @@
 #pragma once 
 
 //*********************************************************
+// システムインクルード
+//*********************************************************
+#include <vector>
+#include <string>
+
+//*********************************************************
 // 前方宣言
 //*********************************************************
 class CInputMouse;
@@ -35,6 +41,7 @@ public:
 		MODE_NONE,
 		MODE_THIRD,
 		MODE_MOUSE,
+		MODE_ANIM,
 		MODE_MAX
 	};
 
@@ -62,6 +69,7 @@ public:
 		D3DXVECTOR3 posRDest;		// 目的座標
 		float fDistance;			// カメラの距離
 		int nMode;					// カメラのモード
+		int nCntAnim;
 	};
 
 	CCamera();
@@ -138,6 +146,33 @@ public:
 
 public:
 
+	//********************************
+	// カメラアニメーションキー構造体
+	//********************************
+	struct AnimDataKey
+	{
+		D3DXVECTOR3 posV;	// 視点
+		D3DXVECTOR3 posR;	// 注視点
+		D3DXVECTOR3 rot;	// 向き
+		float fDistance;	// カメラの距離
+		int nAnimFrame;		// このキーに到達するフレーム
+	};
+
+	//**********************************
+	// カメラアニメーションデータ構造体
+	//**********************************
+	struct AnimData
+	{
+		std::vector<AnimDataKey> AnimData; // 構造体の動的配列
+		bool isLoop;						// ループするかどうか
+	};
+
+	void PlayAnimation(const AnimData& data);		// アニメーション開始
+	HRESULT LoadAnimation(const std::string& path); // アニメーション読み込み
+	void SetAnimData(const AnimData& data) { m_currentAnim = data; }
+
+public:
+
 	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
 	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
 	void SetCameraMove(const bool& isMove) { m_isMove = isMove; }
@@ -156,9 +191,21 @@ private:
 	Camera ClearDefault(void);	// クリア用関数
 
 private:
+
 	Camera m_pCamera;				// カメラ構造体変数
 	CMoveCharactor* m_pCharactor;	// キャラクターのポインタ
 	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
 	int m_nControlTypes;			// 操作種類
 	bool m_isMove;					// カメラ動かせるかどうかのフラグ
+
+private:
+	void UpdateAnim(void);
+
+private: // アニメーション関連事項
+
+	AnimData m_currentAnim;		// 現在再生中のアニメーションデータ
+	bool m_isAnimating;			// アニメーション再生中フラグ
+	int m_nCurrentFrame;		// 現在の再生フレームカウンター
+	int m_nTotalFrames;			// アニメーションの総フレーム数
+
 };

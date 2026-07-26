@@ -19,16 +19,11 @@
 #include "jsonmanager.h"
 
 //*********************************************************
-// 静的メンバ変数宣言
-//*********************************************************
-CResultObject* CResultObject::m_pInstance = nullptr;				// シングルトン変数
-
-//*********************************************************
 // 定数宣言空間
 //*********************************************************
 namespace RESULTOBJECT
 {
-	constexpr const char* LoadName = "data/JSON/Resultobject.json"; // 読み込むjsonファイル
+	constexpr const char* LoadName = "data/JSON/Resultobject.json"; // 配置物jsonファイル
 };
 
 //=========================================================
@@ -79,25 +74,12 @@ void CResultObject::Uninit(void)
 
 	// ステージマップの破棄
 	m_pBlock.reset();
-
-	// インスタンスの破棄
-	if (m_pInstance)
-	{
-		delete m_pInstance;
-		m_pInstance = nullptr;
-	}
 }
 //=========================================================
 // インスタンス取得処理
 //=========================================================
 CResultObject* CResultObject::GetInstance(void)
 {
-	// nullなら生成
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new CResultObject;
-	}
-
-	// インスタンスを返す
-	return m_pInstance;
+	static CResultObject Instance;
+	return &Instance;
 }

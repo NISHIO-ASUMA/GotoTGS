@@ -42,9 +42,7 @@ public:
 
 private:
 
-	CResultObject();
+	CResultObject();						// コンストラクタ
 
-	static CResultObject* m_pInstance;	// シングルトン変数
-
-	std::unique_ptr<CBlockManager>m_pBlock;						// ステージマップ
+	std::unique_ptr<CBlockManager>m_pBlock;	// ステージマップ
 };

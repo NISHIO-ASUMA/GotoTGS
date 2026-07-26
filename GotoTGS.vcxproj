@@ -170,6 +170,7 @@
     <ClCompile Include="src\cpp\alert.cpp" />
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\auditor.cpp" />
+    <ClCompile Include="src\cpp\auditormanager.cpp" />
     <ClCompile Include="src\cpp\autodoor_collision.cpp" />
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
     <ClCompile Include="src\cpp\automatic_door.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\cpp\collisionsphere.cpp" />
     <ClCompile Include="src\cpp\COPYdeskwork.cpp" />
     <ClCompile Include="src\cpp\copyui.cpp" />
+    <ClCompile Include="src\cpp\createjsonauditor.cpp" />
     <ClCompile Include="src\cpp\createjsonblock.cpp" />
     <ClCompile Include="src\cpp\createjsonblocknormal.cpp" />
     <ClCompile Include="src\cpp\createjsoncharactor.cpp" />
@@ -289,6 +291,7 @@
     <ClCompile Include="src\cpp\receptionist.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\cpp\result.cpp" />
+    <ClCompile Include="src\cpp\resulticon.cpp" />
     <ClCompile Include="src\cpp\resultmanager.cpp" />
     <ClCompile Include="src\cpp\resultobject.cpp" />
     <ClCompile Include="src\cpp\resultscore.cpp" />
@@ -344,6 +347,7 @@
     <ClInclude Include="src\include\alert.h" />
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\auditor.h" />
+    <ClInclude Include="src\include\auditormanager.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
     <ClInclude Include="src\include\automaticdoormanager.h" />
     <ClInclude Include="src\include\automatic_door.h" />
@@ -360,6 +364,7 @@
     <ClInclude Include="src\include\collisionsphere.h" />
     <ClInclude Include="src\include\COPYdeskwork.h" />
     <ClInclude Include="src\include\copyui.h" />
+    <ClInclude Include="src\include\createjsonauditor.h" />
     <ClInclude Include="src\include\createjsonblock.h" />
     <ClInclude Include="src\include\createjsonblocknormal.h" />
     <ClInclude Include="src\include\createjsoncharactor.h" />
@@ -459,6 +464,7 @@
     <ClInclude Include="src\include\receptionist.h" />
     <ClInclude Include="src\include\renderer.h" />
     <ClInclude Include="src\include\result.h" />
+    <ClInclude Include="src\include\resulticon.h" />
     <ClInclude Include="src\include\resultmanager.h" />
     <ClInclude Include="src\include\resultobject.h" />
     <ClInclude Include="src\include\resultscore.h" />
