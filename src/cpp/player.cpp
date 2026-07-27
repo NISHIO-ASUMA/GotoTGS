@@ -95,7 +95,6 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
-m_AfkType(AFKTYPE_NONE),
 m_nCntAfk(NULL),
 m_nTimeScore(NULL),
 m_nAddScore(NULL),
@@ -532,31 +531,23 @@ void CPlayer::MoveKeyboard(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
-	auto bAfkBench = CAfkManager::Instance()->GetAfkBench()->GetAfk();
-
-	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
+	// たばこさぼり
+	SetAfk(AFKTYPE_SMOKE, pKeyboard->GetTrigger(DIK_F));
 	
-	if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
-	
-	if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
+	// TVさぼり
+	SetAfk(AFKTYPE_TV, pKeyboard->GetTrigger(DIK_F));
 
-	if (bAfkGameCenter && pKeyboard->GetTrigger(DIK_F)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+	// 雑誌さぼり
+	SetAfk(AFKTYPE_MAGAZINE, pKeyboard->GetTrigger(DIK_F));
 
-	if (bAfkEating && pKeyboard->GetTrigger(DIK_F)) m_bAfkEating = m_bAfkEating ? false : true;
-	else if (!bAfkEating) m_bAfkEating = false;
+	// ゲームセンターさぼり
+	SetAfk(AFKTYPE_GAMECENTER, pKeyboard->GetTrigger(DIK_F));
 
-	if (bAfkBench && pKeyboard->GetTrigger(DIK_F)) m_bAfkBench = m_bAfkBench ? false : true;
-	else if (!bAfkBench) m_bAfkBench = false;
+	// 飲食さぼり
+	SetAfk(AFKTYPE_EATING, pKeyboard->GetTrigger(DIK_F));
+
+	// ベンチさぼり
+	SetAfk(AFKTYPE_BENCH, pKeyboard->GetTrigger(DIK_F));
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -613,61 +604,8 @@ void CPlayer::MoveKeyboard(float speed)
 		m_bMove = true;
 	}
 	
-	// オフィス内のサボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkEating)
-	{
-		m_nTimeScore++;
-		if ((60 * m_nScoreCnt) < m_nTimeScore)
-		{		
-			// スコア加算
-			CGameSceneObject::GetInstance()->GetScore()->AddScore(m_nAddScore);
-			m_nScoreCnt++;
-
-			// スコアの加算値上昇
-			switch (m_nScoreCnt)
-			{
-			case 1:
-				m_nAddScore = 100;
-				break;
-			case 2:
-				m_nAddScore = 150;
-				break;
-			case 3:
-				m_nAddScore = 200;
-				break;
-			case 4:
-				m_nAddScore = 100;
-				break;
-			case 5:
-				m_nAddScore = 50;
-				break;
-			case 6:
-				m_nAddScore = 10;
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	// 外回りのさぼりが有効だったら
-	if (m_bAfkGameCenter || m_bAfkBench)
-	{
-		m_nTimeScore++;
-		if (60 < m_nTimeScore)
-		{
-			CGameSceneObject::GetInstance()->GetScore()->AddScore(200);
-			m_nTimeScore = NULL;
-		}
-	}
-
-	// もしさぼり全部が無効だったら
-	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating && !m_bAfkBench)
-	{
-		// スコア加算値の上昇カウントとスコア加算タイムをリセット
-		m_nScoreCnt = NULL;
-		m_nTimeScore = NULL;
-	}
+	// さぼり時のスコア加算
+	AfkScore();
 
 	// サボり判定が有効な物があったら
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
@@ -734,27 +672,23 @@ void CPlayer::MoveJoypad(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
+	// たばこさぼり
+	SetAfk(AFKTYPE_SMOKE, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START))m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
+	// TVさぼり
+	SetAfk(AFKTYPE_TV, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkTV && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
+	// 雑誌さぼり
+	SetAfk(AFKTYPE_MAGAZINE, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkMagazine && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
+	// ゲームセンターさぼり
+	SetAfk(AFKTYPE_GAMECENTER, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkGameCenter && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+	// 飲食さぼり
+	SetAfk(AFKTYPE_EATING, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkEating && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkEating = m_bAfkEating ? false : true;
-	else if (!bAfkEating) m_bAfkEating = false;
+	// ベンチさぼり
+	SetAfk(AFKTYPE_BENCH, pJoyPad->GetTrigger(CJoyPad::JOYKEY_START));
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -816,8 +750,11 @@ void CPlayer::MoveJoypad(float speed)
 		}
 	}
 
+	// さぼり時のスコア加算
+	AfkScore();
+
 	// モーションチェンジ
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
@@ -867,30 +804,24 @@ void CPlayer::MoveCrossPadButton(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
 
-	// サボりキー入力判定
-	if (bAfkSmoke && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
+	// たばこさぼり
+	SetAfk(AFKTYPE_SMOKE, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkTV && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
+	// TVさぼり
+	SetAfk(AFKTYPE_TV, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkMagazine && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
+	// 雑誌さぼり
+	SetAfk(AFKTYPE_MAGAZINE, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkGameCenter && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+	// ゲームセンターさぼり
+	SetAfk(AFKTYPE_GAMECENTER, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	if (bAfkEating && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkEating = m_bAfkEating ? false : true;
-	else if (!bAfkEating) m_bAfkEating = false;
+	// 飲食さぼり
+	SetAfk(AFKTYPE_EATING, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
-	//SetAfk(bAfkEating, pGamePad->GetTrigger(CJoyPad::JOYKEY_START))
+	// ベンチさぼり
+	SetAfk(AFKTYPE_BENCH, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -953,8 +884,11 @@ void CPlayer::MoveCrossPadButton(float speed)
 		m_bMove = true;
 	}
 
+	// さぼり時のスコア加算
+	AfkScore();
+
 	// サボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
@@ -1208,11 +1142,103 @@ void CPlayer::MathDeskRotation(void)
 //=================================================
 void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 {
-	switch (m_AfkType)
+	// さぼっているかの判定
+	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
+	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
+	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
+	auto bAfkBench = CAfkManager::Instance()->GetAfkBench()->GetAfk();
+
+	switch (AfkType)
 	{
 	case AFKTYPE_SMOKE:
-
+		// サボりキー入力判定
+		if (bAfkSmoke && bInput) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+		else if (!bAfkSmoke) m_bAfkSmoke = false;
+		break;
+	case AFKTYPE_TV:
+		if (bAfkTV && bInput) m_bAfkTV = m_bAfkTV ? false : true;
+		else if (!bAfkTV) m_bAfkTV = false;
+		break;
+	case AFKTYPE_MAGAZINE:
+		if (bAfkMagazine && bInput) m_bAfkMagazine = m_bAfkMagazine ? false : true;
+		else if (!bAfkMagazine) m_bAfkMagazine = false;
+		break;
+	case AFKTYPE_GAMECENTER:
+		if (bAfkGameCenter && bInput) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
+		else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+		break;
+	case AFKTYPE_EATING:
+		if (bAfkEating && bInput) m_bAfkEating = m_bAfkEating ? false : true;
+		else if (!bAfkEating) m_bAfkEating = false;
+		break;
+	case AFKTYPE_BENCH:
+		if (bAfkBench && bInput) m_bAfkBench = m_bAfkBench ? false : true;
+		else if (!bAfkBench) m_bAfkBench = false;
+		break;
 	default:
 		break;
+	}
+}
+//=================================================
+// さぼり時のスコア加算関数
+//=================================================
+void CPlayer::AfkScore(void)
+{
+	// オフィス内のサボり判定が有効な物があったら
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkEating)
+	{
+		m_nTimeScore++;
+		if ((60 * m_nScoreCnt) < m_nTimeScore)
+		{
+			// スコア加算
+			CGameSceneObject::GetInstance()->GetScore()->AddScore(m_nAddScore);
+			m_nScoreCnt++;
+
+			// スコアの加算値上昇
+			switch (m_nScoreCnt)
+			{
+			case 1:
+				m_nAddScore = 100;
+				break;
+			case 2:
+				m_nAddScore = 150;
+				break;
+			case 3:
+				m_nAddScore = 200;
+				break;
+			case 4:
+				m_nAddScore = 100;
+				break;
+			case 5:
+				m_nAddScore = 50;
+				break;
+			case 6:
+				m_nAddScore = 10;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	// 外回りのさぼりが有効だったら
+	if (m_bAfkGameCenter || m_bAfkBench)
+	{
+		m_nTimeScore++;
+		if (60 < m_nTimeScore)
+		{
+			CGameSceneObject::GetInstance()->GetScore()->AddScore(200);
+			m_nTimeScore = NULL;
+		}
+	}
+
+	// もしさぼり全部が無効だったら
+	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating && !m_bAfkBench)
+	{
+		// スコア加算値の上昇カウントとスコア加算タイムをリセット
+		m_nScoreCnt = NULL;
+		m_nTimeScore = NULL;
 	}
 }
