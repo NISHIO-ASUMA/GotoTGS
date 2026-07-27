@@ -19,6 +19,7 @@
 #include "progressgauge.h"
 #include "gaugeneedle.h"
 #include "gamesceneobject.h"
+#include "titleuimanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -110,4 +111,12 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 	// 書類タスクの数の加算処理
 	AddDOCUMENTTask();
+
+	// チュートリアル以外なら処理しない
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+		return;
+
+	// チュートリアルが終わった状態にする
+	CDeskworkUIManager::SetTutorial();
+
 }

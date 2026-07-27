@@ -20,6 +20,7 @@
 // 前方宣言
 //*********************************************************
 class CEnemy;
+class CGametime;
 
 //*********************************************************
 // 敵の複数管理クラスを定義
@@ -33,6 +34,12 @@ public:
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
+
+	/// <summary>
+	/// タイマークラスのポインタを受け取る
+	/// </summary>
+	/// <param name="pTime"></param>
+	void SetTimeContainer(CGametime* pTime = nullptr) { m_pTimeContainer = pTime; }
 
 	/// <summary>
 	/// 配列の最大数を取得する
@@ -88,7 +95,9 @@ private:
 
 private:
 	std::vector<CEnemy*>m_pEnemys; // 敵の管理配列
+	CGametime* m_pTimeContainer;	// タイムクラスの入れ物
 
 private:
-	int m_nStageCount; // 敵の増加時間カウント
+	int m_nStageCount;		// 敵の増加時間カウント
+	int m_nIntervalCount;	// 生成インターバルカウント
 };
