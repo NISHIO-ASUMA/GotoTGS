@@ -109,7 +109,7 @@ public:
 	bool GetAfkEating(void) { return m_bAfkEating; }
 
 	void SetAfk(AFKTYPE AfkType, bool bInput);
-
+	void AfkScore(void);
 
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
@@ -219,7 +219,6 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
-	AFKTYPE m_AfkType;									// さぼりタイプ
 	int m_nCntAfk;										// さぼっているときのゲージの加算
 	int m_nTimeScore;									// スコアタイム用変数
 	int m_nAddScore;									// 加算スコア
