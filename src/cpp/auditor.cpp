@@ -305,7 +305,6 @@ void CAuditor::DrawEyeSight(void)
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, oldColorArg2);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, oldAlphaOp);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
-
 }
 //========================================================
 // Ž‹ŠE‚Æ‚Ì”»’è

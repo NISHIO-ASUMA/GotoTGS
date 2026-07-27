@@ -69,7 +69,7 @@ public:
 		D3DXVECTOR3 posRDest;		// 目的座標
 		float fDistance;			// カメラの距離
 		int nMode;					// カメラのモード
-		int nCntAnim;
+		int nCntAnim;				// アニメーションカウント
 	};
 
 	CCamera();
