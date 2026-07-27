@@ -20,8 +20,7 @@
 // コンストラクタ
 //=========================================================
 CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority),
-m_fRatio(NULL),
-m_nLevelCount(NULL)
+m_fRatio(NULL)
 {
 
 }
@@ -88,24 +87,14 @@ void CVigilancegauge::Update(void)
 	// 親の更新処理
 	CObject2DMulti::Update();
 
-	// 実験
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
-	{
-		// 比率を増やす
-		m_fRatio += 0.05f;
-	}
+	// 比率を増やす
+	m_fRatio += Config::RATIO_VALUE;
 
 	// 最大比率を超えたら
 	if (m_fRatio >= 1.0f)
 	{
 		// 比率を元に戻す
 		m_fRatio = 0.0f;
-
-		if (m_nLevelCount < 10)
-		{// レベル10を最大にする
-			// レベルを上げる
-			m_nLevelCount++;
-		}
 	}
 
 	// テクスチャのUVを比率分動かす

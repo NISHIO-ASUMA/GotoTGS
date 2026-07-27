@@ -44,15 +44,22 @@ public:
 	void SetRatio(float fRatio) { m_fRatio = fRatio; }	// 比率
 
 	// 情報取得処理
-	float GetRatio(void) const { return m_fRatio; }				// 現在の比率
-	int GetLevelCount(void) const { return m_nLevelCount; }		// 現在のレベルカウント
+	float GetRatio(void) const { return m_fRatio; }	// 現在の比率
 
 	// 生成処理
 	static CVigilancegauge* Create(const Gauge& gauge, const char* BTEXTURE, const char* MTEXTURE);
 
 private:
 
+	//*******************************
+	// 定数構造体宣言
+	//*******************************
+	struct Config
+	{
+		static constexpr float RATIO_VALUE = 1.0f / 2400.0f;		// 加算量
+
+	};
+
 	// メンバ変数
 	float m_fRatio;		// 現在の比率
-	int m_nLevelCount;	// 現在のレベルカウント
 };

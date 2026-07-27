@@ -22,7 +22,9 @@
 #include "fade.h"
 #include "tutorialplayer.h"
 #include "camera.h"
-#include "tutoriallines.h"			// 髙橋追加
+#include "ui.h"
+#include "tutoriallines.h"	// 髙橋追加
+#include "deskwork.h"		// 髙橋追加
 
 //*********************************************************
 // 静的メンバ変数宣言
@@ -41,7 +43,8 @@ namespace TUTORIALOBJECT
 // コンストラクタ
 //=========================================================
 CTutorialObject::CTutorialObject() : m_pBlockManager(nullptr),
-m_pTutoPlayer(nullptr)
+m_pTutoPlayer(nullptr),
+m_pDeskwork(nullptr)
 {
 	
 }
@@ -66,6 +69,9 @@ HRESULT CTutorialObject::Init(void)
 	pManager->SetBlockManager(m_pBlockManager.get());
 	m_pBlockManager->Init();
 
+	// タスクの判定を取る球形コライダー管理クラスを生成
+	CWorldUICollision::GetInstance()->Init();
+
 	// 操作キャラクター生成
 	m_pTutoPlayer = CTutorialPlayer::Create(D3DXVECTOR3(-160.0f, 0.0f, 95.0f), VECTOR3_NULL);
 
@@ -76,6 +82,9 @@ HRESULT CTutorialObject::Init(void)
 	// チュートリアルのセリフの生成 Misaki
 	m_plines = CTutorialLines::Create(true);
 
+	// タスクの生成 Misaki
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+
 	return S_OK;
 }
 //=========================================================
@@ -85,6 +94,9 @@ void CTutorialObject::Uninit(void)
 {
 	// ブロックマネージャーポインタの破棄
 	m_pBlockManager.reset();
+
+	m_pDeskwork = nullptr;
+	m_plines = nullptr;
 
 	// インスタンスの破棄
 	if (m_pInstance)
