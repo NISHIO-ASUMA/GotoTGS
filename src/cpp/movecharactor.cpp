@@ -30,6 +30,7 @@ m_rot(VECTOR3_NULL),
 m_rotDest(VECTOR3_NULL),
 m_scale(INITSCALE),
 m_OutLineColor(OUTLINE_COLOR),
+m_fOutLineSize(0.44f),
 m_pModel{},
 m_pMotion{},
 m_pShadowS{},
@@ -181,7 +182,8 @@ void CMoveCharactor::Draw(void)
 	// アウトラインシェーダー関数
 	for (auto& model : m_pModel)
 	{
-		model->DrawOutLine(m_OutLineColor);
+		// 実際の描画
+		model->DrawOutLine(m_OutLineColor, m_fOutLineSize);
 	}
 
 	// シェーダー終了

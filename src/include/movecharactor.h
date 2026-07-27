@@ -69,6 +69,7 @@ public:
 	inline void SetUseStencil(const bool isUse = false) { m_isStencilUse = isUse; }
 	inline void SetUseOutLine(const bool isUse = false) { m_isOutLine = isUse; }
 	inline void SetOutlineColor(const D3DXVECTOR4& color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f)) { m_OutLineColor = color; }
+	inline void SetOutLineSize(const float fSize = 0.44f) { m_fOutLineSize = fSize;}
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	inline D3DXVECTOR3 GetOldPos(void) const { return m_posOld; }
@@ -104,6 +105,7 @@ private:
 	CShadowStencil* m_pShadowS;			// ステンシルシャドウクラスのポインタ
 
 	float m_fMoveValue;		// 移動加算値
+	float m_fOutLineSize;	// アウトラインサイズ
 	bool m_isStencilUse;	// ステンシルシャドウを使うか
 	bool m_isOutLine;		// アウトラインを使うかどうか
 };

@@ -84,6 +84,7 @@ CEnemy* CEnemy::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
 	pEnemy->SetUseOutLine(true);
+	pEnemy->SetOutLineSize(0.35f);
 
 	// ‰Šú‰»Ý’èŽž
 	if (FAILED(pEnemy->Init())) return nullptr;

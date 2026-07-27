@@ -102,6 +102,8 @@ CBoss* CBoss::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pBoss->SetPos(pos);
 	pBoss->SetRot(rot);
+	pBoss->SetUseOutLine(true);
+	pBoss->SetOutLineSize(0.4f);
 
 	// 初期化設定時
 	if (FAILED(pBoss->Init())) return nullptr;
