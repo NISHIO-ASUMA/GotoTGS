@@ -421,5 +421,35 @@
   },
   {
     "Model": "data/MODEL/AUDITOR/09_Auditor_footL.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/00_Approver_body.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/01_Approver_head.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/02_Approver_armR.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/03_Approver_handR.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/04_Approver_armL.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/05_Approver_handL.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/06_Approver_legR.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/07_Approver_footR.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/08_Approver_legL.x"
+  },
+  {
+    "Model": "data/MODEL/APPROVER/09_Approver_footL.x"
   }
 ]

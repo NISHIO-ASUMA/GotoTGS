@@ -17,6 +17,7 @@
 #include "jsonconverter.h"
 #include "auditormanager.h"
 #include "jsonmanager.h"
+#include "auditor.h"
 
 //===================================================================
 // 生成処理
@@ -36,6 +37,12 @@ void CJsonCreateAuditor::Create(const json& Jsondata)
 	// 角度情報の設定
 	D3DXVECTOR3 rot = CJsonConverter::ConverterVec3(Jsondata, "rot");
 
-	// 実際のブロック生成
-	AuditorManager->CreateInManager(pos, rot);
+	// 種類情報の設定
+	int nType = CJsonConverter::ConverterInt(Jsondata, "movetype");
+
+	// 変換する
+	CAuditor::MOVE_POINTTYPE type = static_cast<CAuditor::MOVE_POINTTYPE>(nType);
+
+	// 実際のキャラクター生成
+	AuditorManager->CreateInManager(pos, rot, type);
 }
