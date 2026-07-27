@@ -20,6 +20,7 @@
 #include "input.h"
 #include "titleuimanager.h"
 #include "sound.h"
+#include "scene.h"
 
 //=========================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
@@ -191,6 +192,7 @@ void CDeskwork::Update(void)
 
 		break;
 	}
+
 }
 
 //=========================================================

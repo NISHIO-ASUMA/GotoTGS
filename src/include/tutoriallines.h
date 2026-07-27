@@ -106,7 +106,6 @@ private:
 	};
 	
 	bool m_bUse;				// 使用しているかどうか
-	bool m_bTutorial;			// チュートリアルをこなしているかどうか
 	bool m_bAgain;				// もう一度するかどうか
 	int m_nNowIdx;				// 現在使用しているテクスチャの番号
 	int m_nCountSkip;			// スキップする為のカウント
