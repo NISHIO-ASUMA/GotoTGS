@@ -30,9 +30,9 @@ namespace AFKTV
 //*********************************************************
 namespace PARTICLE
 {
-	const D3DXVECTOR3 Pos = { -249.0f, 47.0f, 380.0f };	// 位置
+	const D3DXVECTOR3 Pos = { -219.0f, 67.0f, 365.0f };	// 位置
 	const D3DXCOLOR col = { 0.5f, 0.5f, 0.5f, 0.5f };	// カラー
-	constexpr float fRadius = 10.0f;					// 範囲の半径
+	constexpr float fRadius = 3.0f;					// 範囲の半径
 };
 
 //=========================================================
