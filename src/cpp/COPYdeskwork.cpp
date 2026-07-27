@@ -231,26 +231,6 @@ void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 bool CCOPYDeskwork::CoolTime(const auto& pClear)
 {
-	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
-	{// チュートリアル以外での処理
-
-		// スコアのポインタ
-		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-		// 指針のポインタ
-		auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
-
-		if (pScore == nullptr || pGaugeneedle == nullptr)
-		{// ヌルチェック
-			return false;
-		}
-
-		// スコア加算
-		pScore->AddScore(-1000);
-
-		// こなしたタスクの数を増やす
-		pGaugeneedle->AddTask();
-	}
-
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
@@ -332,6 +312,27 @@ void CCOPYDeskwork::Task(const auto& pClear)
 	// 点滅を始める
 	pClear->SetUse(true);
 	pClear->SetUseFlash(true);
+
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+	{// チュートリアル以外での処理
+
+		// スコアのポインタ
+		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+		// 指針のポインタ
+		auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+
+		if (pScore == nullptr || pGaugeneedle == nullptr)
+		{// ヌルチェック
+			return;
+		}
+
+		// スコア加算
+		pScore->AddScore(-100);
+
+		// こなしたタスクの数を増やす
+		pGaugeneedle->AddTask();
+
+	}
 
 	// こなしたコピー機タスクの数を一つ増やす
 	AddCOPYTask();

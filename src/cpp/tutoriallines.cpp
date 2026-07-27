@@ -119,7 +119,7 @@ void CTutorialLines::Update(void)
 	auto* Pad = CManager::GetInstance()->GetJoyPad();
 
 	// スキップ機能
-	if (Key->GetPress(DIK_RETURN) && Pad->GetPress(CJoyPad::JOYKEY_Y))
+	if (Key->GetPress(DIK_SPACE) || Pad->GetPress(CJoyPad::JOYKEY_Y))
 	{
 		// カウントを進める
 		m_nCountSkip++;
