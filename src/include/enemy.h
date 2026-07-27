@@ -75,6 +75,17 @@ public:
 	};
 
 	//***************************
+	// 移動する種類
+	//***************************
+	enum MOVETYPE
+	{
+		MOVETYPE_NORMAL,	// 通常状態
+		MOVETYPE_SMOKE,		// 煙草回りの動き
+		MOVETYPE_TV,		// TVと食事スペース辺りの動き
+		MOVETYPE_MAX
+	};
+
+	//***************************
 	// 定数構造体
 	//***************************
 	struct Config
@@ -82,6 +93,8 @@ public:
 		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
 		static constexpr float BOX_RANGE = 50.0f;	 // 矩形範囲
 		static constexpr int DIVIDE = 16;			 // メッシュの分割数
+		static constexpr int COOL_TIME = 60;		 // クールタイム
+		static constexpr int COOL_TIME_DOUBLE = 120;		 // 2倍のクールタイム
 	};
 
 	//***************************
@@ -94,9 +107,27 @@ public:
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
+public:
+
 	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag;}
 
+	/// <summary>
+	/// 通常の敵の動き(巡回ポイントで動く)
+	/// </summary>
+	/// <param name=""></param>
 	void UpdateMoveViewPoint(void);
+
+	/// <summary>
+	/// 煙草の回りを回る敵の動き ( 巡回ポイントで動く )
+	/// </summary>
+	/// <param name=""></param>
+	void UpdateMovingSmoke(void);
+
+	/// <summary>
+	/// TV回りを巡回する敵の動き
+	/// </summary>
+	/// <param name=""></param>
+	void UpdateMovingTV(void);
 
 /// <summary>
 /// 西尾追加 : 窓口の関数をまとめて格納しているpublic メソッド

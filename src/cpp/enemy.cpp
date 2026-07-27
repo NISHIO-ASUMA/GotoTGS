@@ -27,6 +27,7 @@
 #include "statemachine.h"
 #include "enemystatebase.h"
 #include "enemystateneutral.h"
+#include "enemyutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -39,7 +40,7 @@ namespace EnemyInfo
 	constexpr float SPEED = 1.0f; // 移動速度
 	constexpr float RANGE = 2.0f; // 判定範囲
 
-	// ビューポイント配列
+	// ビューポイント配列 ( 最初に出てきている敵 )
 	const D3DXVECTOR3 ViewPoint[VIEWPOINT] =
 	{
 		{-95.0f, 0.0f, 235.5f},
@@ -173,7 +174,7 @@ void CEnemy::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// ビューポイント追従処理
+// 通常ビューポイント追従処理
 //========================================================
 void CEnemy::UpdateMoveViewPoint(void)
 {	
@@ -204,10 +205,142 @@ void CEnemy::UpdateMoveViewPoint(void)
 		SetPos(targetPos);
 
 		// 停止時間を設定
-		m_nStopTime = 60;
+		m_nStopTime = Config::COOL_TIME;
 
 		// インデックス設定
 		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, EnemyInfo::VIEWPOINT - 1);
+
+		// 目的地に到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= EnemyInfo::SPEED;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 煙草回りを周回する動き
+//========================================================
+void CEnemy::UpdateMovingSmoke(void)
+{
+	// 停止カウント中の処理
+	if (m_nStopTime > 0)
+	{
+		// デクリメント
+		m_nStopTime--;
+
+		// ニュートラルにする
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = SMOKE_AND_MAGAZINE::ViewPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= EnemyInfo::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nStopTime = Config::COOL_TIME_DOUBLE;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, SMOKE_AND_MAGAZINE::ALL_POINT - 1);
+
+		// 目的地に到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= EnemyInfo::SPEED;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// TVらへんを周回する動き
+//========================================================
+void CEnemy::UpdateMovingTV(void)
+{
+	// 停止カウント中の処理
+	if (m_nStopTime > 0)
+	{
+		// デクリメント
+		m_nStopTime--;
+
+		// ニュートラルにする
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = TV_AND_EATING::ViewPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= EnemyInfo::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nStopTime = Config::COOL_TIME_DOUBLE;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, TV_AND_EATING::ALL_POINT - 1);
 
 		// 目的地に到着した瞬間にモーションを切り替える
 		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);

@@ -31,19 +31,25 @@ public:
 	void Draw(void) override;
 
 	/// <summary>
+	/// 使うテクスチャを決定する関数
+	/// </summary>
+	/// <param name="nScore"></param>
+	void MathScoreTexture(const int& nScore);
+
+	/// <summary>
 	/// 生成処理
 	/// </summary>
 	/// <param name="pos">座標</param>
 	/// <param name="fWidth">横幅</param>
 	/// <param name="fHeight">高さ</param>
-	/// <param name="pFileName">テクスチャファイル</param>
+	/// <param name="nScore">スコアの値</param>
 	/// <returns></returns>
 	static CResultIcon* Create
 	(
 		const D3DXVECTOR3& pos, 
 		const float fWidth, 
 		const float fHeight, 
-		const char* pFileName
+		const int nScore
 	);
 
 private:

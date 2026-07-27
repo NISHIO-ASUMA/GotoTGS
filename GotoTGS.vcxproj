@@ -393,6 +393,7 @@
     <ClInclude Include="src\include\enemystatechase.h" />
     <ClInclude Include="src\include\enemystateneutral.h" />
     <ClInclude Include="src\include\enemystateserch.h" />
+    <ClInclude Include="src\include\enemyutility.h" />
     <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\eventcutin.h" />
     <ClInclude Include="src\include\eventUI.h" />
