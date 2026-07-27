@@ -954,6 +954,9 @@
     <ClCompile Include="src\cpp\afkbench.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\playerstatebench.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1480,6 +1483,9 @@
     </ClInclude>
     <ClInclude Include="src\include\auditorutility.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatebench.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

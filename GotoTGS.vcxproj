@@ -273,6 +273,7 @@
     </ClCompile>
     <ClCompile Include="src\cpp\pcui.cpp" />
     <ClCompile Include="src\cpp\player.cpp" />
+    <ClCompile Include="src\cpp\playerstatebench.cpp" />
     <ClCompile Include="src\cpp\playerstateeating.cpp" />
     <ClCompile Include="src\cpp\playerstategamecenter.cpp" />
     <ClCompile Include="src\cpp\playerstatemagazine.cpp" />
@@ -448,6 +449,7 @@
     <ClInclude Include="src\include\pch.h" />
     <ClInclude Include="src\include\pcui.h" />
     <ClInclude Include="src\include\player.h" />
+    <ClInclude Include="src\include\playerstatebench.h" />
     <ClInclude Include="src\include\playerstateeating.h" />
     <ClInclude Include="src\include\playerstategamecenter.h" />
     <ClInclude Include="src\include\playerstatemagazine.h" />

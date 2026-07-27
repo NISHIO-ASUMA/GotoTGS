@@ -54,6 +54,7 @@ public:
 		ID_TV,
 		ID_GAMECENTER,
 		ID_FOOD,
+		ID_BENCH,
 		ID_MAX
 	};
 

@@ -8,14 +8,14 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "playerstateeating.h"
+#include "playerstatebench.h"
 #include "playerstateneutral.h"
 #include "player.h"
 
 //=========================================================
 // 名前空間
 //=========================================================
-namespace AFKEATING
+namespace AFKBENCH
 {
 	const D3DXVECTOR3 PosDest = { -225.0f, 38.0, -205.0f };	// 目的の位置
 }
@@ -23,15 +23,15 @@ namespace AFKEATING
 //=========================================================
 // コンストラクタ
 //=========================================================
-CPlayerStateEating::CPlayerStateEating()
+CPlayerStateBench::CPlayerStateBench()
 {
-	SetID(ID_FOOD);
+	SetID(ID_BENCH);
 }
 
 //=========================================================
 // デストラクタ
 //=========================================================
-CPlayerStateEating::~CPlayerStateEating()
+CPlayerStateBench::~CPlayerStateBench()
 {
 
 }
@@ -39,33 +39,24 @@ CPlayerStateEating::~CPlayerStateEating()
 //=========================================================
 // 状態開始
 //=========================================================
-void CPlayerStateEating::OnStart()
+void CPlayerStateBench::OnStart()
 {
-	// ゲーム機とプレイヤーの距離の差
-	D3DXVECTOR3 diff = m_pPlayer->GetPos() - AFKEATING::PosDest;
-
-	// 角度
-	float fAngle = atan2f(diff.x, diff.z);
-
-	// 角度の設定
-	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL, fAngle, NULL));
 
 }
 
 //=========================================================
 // 状態更新
 //=========================================================
-void CPlayerStateEating::OnUpdate()
+void CPlayerStateBench::OnUpdate()
 {
 	// モーションが違ったら
-	if (m_pPlayer->FOOD != m_pPlayer->GetMotion()->GetMotionType())
+	if (m_pPlayer->BENCH != m_pPlayer->GetMotion()->GetMotionType())
 	{
 		// モーション変更
-		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::FOOD,true,3);
+		//m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::BENCH, true, 3);
 	}
 
-	// 近田のバグがいい感じになっていたからこのままいってみよう
-	if (!m_pPlayer->GetAfkGameCenter())
+	if (!m_pPlayer->GetAfkBench())
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
@@ -75,7 +66,7 @@ void CPlayerStateEating::OnUpdate()
 //=========================================================
 // 状態終了
 //=========================================================
-void CPlayerStateEating::OnExit()
+void CPlayerStateBench::OnExit()
 {
 
 }

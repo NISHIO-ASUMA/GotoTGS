@@ -44,6 +44,7 @@ public:
 		MAGAZINE,		// 雑誌
 		GAME,			// ゲーセン
 		FOOD,			// 飲食
+		BENCH,			// ベンチ
 		MAX
 	};
 
@@ -107,6 +108,7 @@ public:
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 	bool GetAfkEating(void) { return m_bAfkEating; }
+	bool GetAfkBench(void) { return m_bAfkBench; }
 
 	void SetAfk(AFKTYPE AfkType, bool bInput);
 	void AfkScore(void);

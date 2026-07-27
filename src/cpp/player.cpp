@@ -1200,22 +1200,22 @@ void CPlayer::AfkScore(void)
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 100;
+				m_nAddScore = 1000;
 				break;
 			case 2:
-				m_nAddScore = 150;
+				m_nAddScore = 1500;
 				break;
 			case 3:
-				m_nAddScore = 200;
+				m_nAddScore = 2000;
 				break;
 			case 4:
-				m_nAddScore = 100;
+				m_nAddScore = 1000;
 				break;
 			case 5:
-				m_nAddScore = 50;
+				m_nAddScore = 500;
 				break;
 			case 6:
-				m_nAddScore = 10;
+				m_nAddScore = 100;
 				break;
 			default:
 				break;
@@ -1229,7 +1229,7 @@ void CPlayer::AfkScore(void)
 		m_nTimeScore++;
 		if (60 < m_nTimeScore)
 		{
-			CGameSceneObject::GetInstance()->GetScore()->AddScore(200);
+			CGameSceneObject::GetInstance()->GetScore()->AddScore(2000);
 			m_nTimeScore = NULL;
 		}
 	}
