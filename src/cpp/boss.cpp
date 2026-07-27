@@ -16,6 +16,7 @@
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "template.h"
+#include "manager.h"
 
 //*********************************************************
 // 定数名前空間
@@ -202,6 +203,178 @@ void CBoss::Draw(void)
 {
 	// キャラクター描画
 	CMoveCharactor::Draw();
+
+	if (!m_isOfficeMove) return;
+
+	// 扇形の描画処理
+
+}
+//========================================================
+// 扇形の描画処理
+//========================================================
+void CBoss::DrawEyeSight(void)
+{
+	// 現在の設定を取得
+	D3DXVECTOR3 enemyPos = GetPos();
+	D3DXVECTOR3 rot = GetRot();
+	float halfAngle = D3DXToRadian(Eyesight::EYE_ANGLE / 2.0f);
+
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+	if (!pDevice) return;
+
+	//==========================================
+	// 現在のデバイス設定を保存
+	//==========================================
+	DWORD oldLighting, oldAlphaBlend, oldSrcBlend, oldDestBlend, oldCullMode;
+	DWORD oldColorOp, oldColorArg2, oldAlphaOp, oldAlphaArg2;
+	LPDIRECT3DBASETEXTURE9 pOldTexture = nullptr;
+	D3DXMATRIX matOldWorld, matIdentity;
+
+	// レンダー状態の取得
+	pDevice->GetRenderState(D3DRS_LIGHTING, &oldLighting);
+	pDevice->GetRenderState(D3DRS_ALPHABLENDENABLE, &oldAlphaBlend);
+	pDevice->GetRenderState(D3DRS_SRCBLEND, &oldSrcBlend);
+	pDevice->GetRenderState(D3DRS_DESTBLEND, &oldDestBlend);
+	pDevice->GetRenderState(D3DRS_CULLMODE, &oldCullMode);
+
+	// テクスチャステージ状態の取得
+	pDevice->GetTexture(0, &pOldTexture);
+	pDevice->GetTextureStageState(0, D3DTSS_COLOROP, &oldColorOp);
+	pDevice->GetTextureStageState(0, D3DTSS_COLORARG2, &oldColorArg2);
+	pDevice->GetTextureStageState(0, D3DTSS_ALPHAOP, &oldAlphaOp);
+	pDevice->GetTextureStageState(0, D3DTSS_ALPHAARG2, &oldAlphaArg2);
+
+	// 行列の取得
+	pDevice->GetTransform(D3DTS_WORLD, &matOldWorld);
+
+	//==========================================
+	// 視界描画用の設定を適用
+	//==========================================
+	pDevice->SetTexture(0, nullptr);
+	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG2);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG2);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	// マトリックスの設定
+	D3DXMatrixIdentity(&matIdentity);
+	pDevice->SetTransform(D3DTS_WORLD, &matIdentity);
+
+	//==========================================
+	// 頂点バッファの構築と描画
+	//==========================================
+	std::vector<VERTEX_3D> vFan(1 + (Config::DIVIDE + 1));
+
+	// 中心点
+	vFan[0].pos = D3DXVECTOR3(enemyPos.x, enemyPos.y + 0.1f, enemyPos.z);
+	vFan[0].nor = VECTOR3_NULL;
+	vFan[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.6f);
+	vFan[0].tex = VECTOR2_NULL;
+
+	// 外周点
+	for (int nCnt = 0; nCnt <= Config::DIVIDE; ++nCnt)
+	{
+		// 角度計算
+		float t = (float)nCnt / (float)Config::DIVIDE;
+		float currentAngle = rot.y - halfAngle + (D3DXToRadian(Eyesight::EYE_ANGLE) * t);
+
+		D3DXVECTOR3 dir(-sinf(currentAngle), 0.0f, -cosf(currentAngle));
+
+		int idx = nCnt + 1;
+		vFan[idx].pos = vFan[0].pos + dir * Eyesight::EYE_RADIUS;
+		vFan[idx].nor = VECTOR3_NULL;
+		vFan[idx].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.6f);
+		vFan[idx].tex = VECTOR2_NULL;
+	}
+
+	// 頂点フォーマットの設定	
+	pDevice->SetFVF(FVF_VERTEX_3D);
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, Config::DIVIDE, &vFan[0], sizeof(VERTEX_3D));
+
+	//==========================================
+	// すべてのデバイス設定を完全に元に戻す
+	//==========================================
+	pDevice->SetTransform(D3DTS_WORLD, &matOldWorld);
+
+	pDevice->SetRenderState(D3DRS_LIGHTING, oldLighting);
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, oldAlphaBlend);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, oldSrcBlend);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, oldDestBlend);
+	pDevice->SetRenderState(D3DRS_CULLMODE, oldCullMode);
+
+	// テクスチャを戻す
+	pDevice->SetTexture(0, pOldTexture);
+	if (pOldTexture) pOldTexture->Release();
+
+	// テクスチャステージチャートの再設定
+	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, oldColorOp);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, oldColorArg2);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, oldAlphaOp);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
+}
+//========================================================
+// 視界との当たり判定処理
+//========================================================
+bool CBoss::CheckEyesight(const D3DXVECTOR3& TargetPos)
+{
+	// 現在座標を取得
+	D3DXVECTOR3 MyPos = GetPos();
+
+	// 高さの判定
+	float heightDiff = fabsf(TargetPos.y - MyPos.y);
+
+	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
+	{
+		return false; // 高さが範囲外
+	}
+
+	// 距離の判定
+	D3DXVECTOR3 diff = TargetPos - MyPos;
+	diff.y = 0.0f;
+
+	// 距離の2乗を計算
+	float sqrDistance = D3DXVec3LengthSq(&diff);
+
+	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS)
+	{
+		return false; // 判定外
+	}
+
+	// ゼロ除算
+	if (sqrDistance < 0.0001f) return true;
+
+	// 角度を取得
+	D3DXVECTOR3 rot = GetRot();
+
+	// 角度から方向ベクトルを生成
+	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
+	D3DXVec3Normalize(&enemyForward, &enemyForward);
+
+	// 方向ベクトルを正規化
+	D3DXVECTOR3 diffDir;
+	D3DXVec3Normalize(&diffDir, &diff);
+
+	// 内積を計算
+	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
+
+	// 角度のコサイン値を計算
+	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
+	float cosHalfAngle = cosf(halfAngleRad);
+
+	// 内積判定
+	if (dot >= cosHalfAngle)
+	{
+		return true; // 視界に入っている
+	}
+
+	return false;
 }
 //========================================================
 // オフィス内に侵入する処理

@@ -44,6 +44,9 @@ public:
 	void MoveInOffice(const D3DXVECTOR3& pos);
 	void MoveOfficePoint(const D3DXVECTOR3& pos);
 
+	void DrawEyeSight(void);
+	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -62,6 +65,27 @@ public:
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動	
 		MAX
+	};
+
+private:
+	//***************************
+	// 定数構造体
+	//***************************
+	struct Config
+	{
+		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
+		static constexpr float BOX_RANGE = 50.0f;	 // 矩形範囲
+		static constexpr int DIVIDE = 16;			 // メッシュの分割数
+	};
+
+	//***************************
+	// 扇形の当たり判定
+	//***************************
+	struct Eyesight
+	{
+		static constexpr float EYE_RADIUS = 100.0f;		// 視界の届く距離
+		static constexpr float EYE_ANGLE = 45.0f;		// 視野角
+		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
 private:

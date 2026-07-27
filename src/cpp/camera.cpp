@@ -128,6 +128,14 @@ void CCamera::Update(void)
 	MouseView(CManager::GetInstance()->GetMouse());
 #endif
 
+	// もしアニメーションモードだったら
+	if (m_pCamera.nMode == CCamera::MODE_ANIM && m_isAnimating)
+	{
+		// アニメーション更新だけしてreturnする
+		UpdateAnim();
+		return;
+	}
+
 	// ゲームのみ追従カメラ設定
 	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME || 
 		CManager::GetInstance()->GetScene() == CScene::MODE_TUTORIAL)
@@ -620,7 +628,11 @@ void CCamera::UpdateAnim(void)
 	// データが空、またはキーが1つしかない場合は処理しない
 	if (m_currentAnim.AnimData.empty() || m_currentAnim.AnimData.size() < 2)
 	{
+		// フラグリセットする
 		m_isAnimating = false;
+
+		// カメラモードを"追従"に変更する
+		m_pCamera.nMode = MODE_THIRD;
 		return;
 	}
 
