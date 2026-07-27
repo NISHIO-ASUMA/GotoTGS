@@ -62,4 +62,8 @@ private:
 
 	// ƒƒ“ƒo•Ï”
 	float m_fRatio;		// Œ»İ‚Ì”ä—¦
+
+private:	// ¼”ö’Ç‰Á : ¶¬‚·‚é•¨‚ÌŠÖ”‚í‚¯
+	void CreateCharactor(const int nNumber);
+
 };

@@ -15,6 +15,7 @@
 //*********************************************************
 #include "manager.h"
 #include "input.h"
+#include "enemymanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -59,6 +60,7 @@ CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge, const char* BTEXTUR
 	return pGauge;
 }
 
+
 //=========================================================
 // 初期化処理
 //=========================================================
@@ -80,7 +82,7 @@ void CVigilancegauge::Uninit(void)
 }
 
 //=========================================================
-// 更新処理
+// 更新処理 ( TODO : 西尾 ここの最大値に達する処理の時に敵を生成する処理を追加する  )
 //=========================================================
 void CVigilancegauge::Update(void)
 {
@@ -93,6 +95,10 @@ void CVigilancegauge::Update(void)
 	// 最大比率を超えたら
 	if (m_fRatio >= 1.0f)
 	{
+		// NOTE : ここに追加 ( 出すUIの種類によって生成するものを変更する UIからのランダム値を受け取ってその値を使う)
+
+
+
 		// 比率を元に戻す
 		m_fRatio = 0.0f;
 	}
@@ -108,4 +114,26 @@ void CVigilancegauge::Draw(void)
 {
 	// 親の描画処理
 	CObject2DMulti::Draw();
+}
+
+//=========================================================
+// 生成するものを変化させる処理
+//=========================================================
+void CVigilancegauge::CreateCharactor(const int nNumber)
+{
+	switch (nNumber)
+	{
+	case 0:
+		// 敵を生成
+		CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
+		break;
+
+	case 1:
+		// ボス ( 社長 )を生成 → これは一回だけかな
+
+		break;
+
+	default:
+		break;
+	}
 }
