@@ -134,7 +134,8 @@ HRESULT CGameSceneObject::Init(void)
 
 	// 敵管理クラス生成
 	CEnemyManager::GetInstance()->Init();
-	
+	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
+
 	// 外の監査役を生成 ( Asuma )
 	CAuditorManager::GetInstance()->Init();
 
@@ -176,8 +177,6 @@ HRESULT CGameSceneObject::Init(void)
 	// テスト生成 ( ボス )
 	CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
 
-	//// テスト生成 ( リザルトアイコン ) → 検証済みなのでコメント化 消さないでね
-	//CResultIcon::Create(D3DXVECTOR3(640.0f, 360.0f, 0.0f), 150.0f, 150.0f, "ATM.jpg");
 	return S_OK;
 }
 
@@ -241,8 +240,11 @@ void CGameSceneObject::Update(void)
 	// カメラの追従ターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
-	// 西尾 タスクの判定を取る球形コライダー管理クラスを更新
+	// タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
+
+	// 敵管理クラスの更新
+	CEnemyManager::GetInstance()->Update();
 
 	// さぼりをまとめたマネージャーの更新処理
 	CAfkManager::Instance()->Update();
@@ -288,7 +290,6 @@ void CGameSceneObject::Update(void)
 	}
 #endif // _DEBUG
 }
-
 //=========================================================
 // 描画処理
 //=========================================================
@@ -296,7 +297,6 @@ void CGameSceneObject::Draw(void)
 {
 	
 }
-
 //=========================================================
 // ポインタの生成を行う関数
 //=========================================================

@@ -17,6 +17,7 @@
 #include "spherecollider.h"
 #include "manager.h"
 #include "template.h"
+#include "auditorutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -24,21 +25,13 @@
 namespace AUDITOR_INFO
 {
 	constexpr const char* FILENAME = "data/MOTION/Auditor/AuditorMotion.txt"; // モーションファイル
+	constexpr float RANGE = 2.0f;											  // 判別判定
 };
 
 //*********************************************************
-// ポイントを動く定数名前空間 ( 後々開地君次第で変更する )
+// 使用する名前空間
 //*********************************************************
-namespace MOVE_VIEWPOINT
-{
-	constexpr int MAX_POINT = 1;
-
-	// 巡回ポイント
-	const D3DXVECTOR3 LocalPoint[MAX_POINT] =
-	{
-		{600.0f,0.0f,400.0f}
-	};
-};
+using namespace AuditorUtility;	// ポイントデータの配列情報の格納先
 
 //========================================================
 // コンストラクタ
@@ -49,7 +42,8 @@ m_nOfficeViewIdx(NULL),
 m_nViewIdx(NULL),
 m_nTargetIdx(NULL),
 m_pBoxColiider(nullptr),
-m_pSphereColiider(nullptr)
+m_pSphereColiider(nullptr),
+m_MoveTypeData(MOVE_POINTTYPE::OFFICENEAR)
 {
 }
 //========================================================
@@ -62,7 +56,7 @@ CAuditor::~CAuditor()
 //========================================================
 // 生成処理
 //========================================================
-CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const MOVE_POINTTYPE& type)
 {
 	// インスタンス生成
 	CAuditor* pAuditor = new CAuditor;
@@ -73,6 +67,7 @@ CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	pAuditor->SetRot(rot);
 	pAuditor->SetUseOutLine(true);
 	pAuditor->SetOutlineColor();
+	pAuditor->m_MoveTypeData = type;
 
 	// 初期化失敗時
 	if (FAILED(pAuditor->Init())) return nullptr;
@@ -109,11 +104,8 @@ void CAuditor::Uninit(void)
 //========================================================
 void CAuditor::Update(void)
 {
-	// 座標取得
-	auto pos = GetPos();
-
 	// ポイント間座標の更新
-	MovePointOutSide(pos);
+	MovingTypeOutSide();
 
 	// 座標の更新
 	CMoveCharactor::UpdatePosition();
@@ -133,15 +125,37 @@ void CAuditor::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// ポイント間を動く処理 ( 巡回ポイントが決定次第 )
+// ポイントごとの周回起点
 //========================================================
-void CAuditor::MovePointOutSide(const D3DXVECTOR3& pos)
+void CAuditor::MovingTypeOutSide(void)
 {
-#if 0
-	// 停止カウント中の処理
-	if (m_nStopTime > 0)
+	switch (m_MoveTypeData)
 	{
-		m_nStopTime--;
+	case CAuditor::OFFICENEAR:	// オフィス近く
+		UpdateOffice();
+		break;
+	case CAuditor::GAMECENTER:	// ゲーセン付近
+		UpdateGameCenter();
+		break;
+	case CAuditor::SOBAANDBAR:	// 蕎麦屋
+		UpdateSoba();
+		break;
+	case CAuditor::MAPLEFT:		// マップ左側
+		UpdateMapLeft();
+		break;
+	default:
+		break;
+	}
+}
+//========================================================
+// オフィス周りの更新
+//========================================================
+void CAuditor::UpdateOffice(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
 
 		// 待機中はニュートラルモーション
 		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
@@ -150,7 +164,7 @@ void CAuditor::MovePointOutSide(const D3DXVECTOR3& pos)
 
 	// 現在の座標とターゲットの座標を取得
 	D3DXVECTOR3 pos = GetPos();
-	D3DXVECTOR3 targetPos = MOVE_VIEWPOINT::LocalPopint[m_nTargetIdx];
+	D3DXVECTOR3 targetPos = OfficePoint[m_nTargetIdx];
 
 	// 目的地へのベクトルを計算
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
@@ -159,18 +173,83 @@ void CAuditor::MovePointOutSide(const D3DXVECTOR3& pos)
 	float distance = D3DXVec3Length(&vecToTarget);
 
 	// 到着判定
-	if (distance <= 2.0f)
+	if (distance <= AUDITOR_INFO::RANGE)
 	{
 		// 座標を目的地に合わせる
 		SetPos(targetPos);
 
 		// 停止時間を設定
-		m_nStopTime = 60;
+		m_nCoolTime = 60;
 
 		// インデックス設定
-		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, MOVE_VIEWPOINT::MAX_POINT - 1);
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, OFFICE_POINT - 1);
 
-		// 目的地に到着した瞬間にモーションを切り替える
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL,true,5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 蕎麦屋付近の更新
+//========================================================
+void CAuditor::UpdateSoba(void)
+{	
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = SobaPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, SOBA_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
 		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
 		return;
 	}
@@ -197,7 +276,136 @@ void CAuditor::MovePointOutSide(const D3DXVECTOR3& pos)
 
 	// 目標角度をセット
 	SetRotDest(rotDest);
-#endif
+}
+//========================================================
+// ゲームセンターの更新
+//========================================================
+void CAuditor::UpdateGameCenter(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = GameCenterPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, GAME_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE,true,3);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 左サイドの動き更新
+//========================================================
+void CAuditor::UpdateMapLeft(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = LeftSidePoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, LEFTSIDE_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
 }
 //========================================================
 // 扇形判定の描画
@@ -305,7 +513,6 @@ void CAuditor::DrawEyeSight(void)
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, oldColorArg2);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, oldAlphaOp);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
-
 }
 //========================================================
 // 視界との判定

@@ -74,7 +74,7 @@ HRESULT CReceptionist::Init(void)
 	// 親クラスの初期化処理
 	CNoMoveCharactor::Init();
 
-	// モーションロード ( ここのモーションファイルの中のモデルは出来次第変更する )
+	// モーションロード
 	MotionLoad(MOTION_NAME, MOTION::MAX, true);
 
 	// 回転軸から角度を生成

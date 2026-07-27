@@ -24,6 +24,7 @@ class CPlayerStateBase;
 class CStateMachine;
 class CInputKeyboard;
 class CJoyPad;
+class CInput;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -56,6 +57,22 @@ public:
 		CONTROLTYPE_PAD,	// ゲームパッド
 		CONTROLTYPE_MAX
 	};
+
+	//*************************
+	// さぼりの種類
+	//*************************
+	enum AFKTYPE
+	{
+		AFKTYPE_NONE,
+		AFKTYPE_SMOKE,
+		AFKTYPE_TV,
+		AFKTYPE_MAGAZINE,
+		AFKTYPE_GAMECENTER,
+		AFKTYPE_EATING,
+		AFKTYPE_BENCH,
+		AFKTYPE_MAX
+	};
+
 
 public:
 
@@ -90,6 +107,9 @@ public:
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 	bool GetAfkEating(void) { return m_bAfkEating; }
+
+	void SetAfk(AFKTYPE AfkType, bool bInput);
+	void AfkScore(void);
 
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
@@ -201,17 +221,15 @@ private:
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	int m_nCntAfk;										// さぼっているときのゲージの加算
 	int m_nTimeScore;									// スコアタイム用変数
-	int m_nAddScore;										// 加算スコア
-	int m_nScoreCnt;										// スコア用カウント
+	int m_nAddScore;									// 加算スコア
+	int m_nScoreCnt;									// スコア用カウント
 	bool m_bMove;										// 移動したかどうかの判定変数
 	bool m_bAfkSmoke;									// たばこさぼりの判定変数
 	bool m_bAfkTV;										// TVさぼりの判定変数
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
-	bool m_bAfkChange;									// さぼりのID切り替え用変数
-	bool m_bAfkCheck;									// さぼりが連続しているかどうかの判定用変数
-
+	bool m_bAfkBench;									// ベンチでさぼっている時の判定変数
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類

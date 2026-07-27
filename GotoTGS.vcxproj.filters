@@ -948,8 +948,11 @@
     <ClCompile Include="src\cpp\auditormanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\createjsonauditor.cpp">
+    <ClCompile Include="src\cpp\afkbench.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\createjsonauditor.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1471,6 +1474,12 @@
     </ClInclude>
     <ClInclude Include="src\include\createjsonauditor.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkbench.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

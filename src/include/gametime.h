@@ -26,6 +26,23 @@ class CNumber;
 class CGametime :public CObject
 {
 public:
+	//************************************
+	// 定数構造体宣言
+	//************************************
+	struct Config
+	{
+		static constexpr float VALUE_WIDTH = 150.0f;			// 横幅の増加分
+		static constexpr float VALUE_FLOAT = 2.0f;				// ずらす基準値
+		static constexpr const char* TEXNAME = "time.png";		// テクスチャ名
+		static constexpr int DIGIT_TIME = 2;					// 桁数
+		static constexpr int DIVIDE = 10;						// 桁分割の値
+		static constexpr int CARVETIME = 60;					// カウント上限
+#ifdef _DEBUG
+		static constexpr int NUMTIME = 60;						// 最大タイマー
+#else
+		static constexpr int NUMTIME = 240;						// 最大タイマー ( 一旦4分で見てみる )
+#endif // _DEBUG
+	};
 
 	CGametime(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CGametime();
@@ -49,23 +66,6 @@ public:
 
 private:
 
-	//************************************
-	// 定数構造体宣言
-	//************************************
-	struct Config
-	{
-		static constexpr float VALUE_WIDTH = 150.0f;			// 横幅の増加分
-		static constexpr float VALUE_FLOAT = 2.0f;				// ずらす基準値
-		static constexpr const char* TEXNAME = "time.png";		// テクスチャ名
-		static constexpr int DIGIT_TIME = 2;					// 桁数
-		static constexpr int DIVIDE = 10;						// 桁分割の値
-		static constexpr int CARVETIME = 60;					// カウント上限
-#ifdef _DEBUG
-		static constexpr int NUMTIME = 60;						// 最大タイマー
-#else
-		static constexpr int NUMTIME = 240;						// 最大タイマー ( 一旦4分で見てみる )
-#endif // _DEBUG
-	};
 
 	// メンバ関数
 	void Minutes(void);	// 分数処理

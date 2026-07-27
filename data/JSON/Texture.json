@@ -57,5 +57,11 @@
   { "Texture": "data/TEXTURE/vending04_1.jpg" },
   { "Texture": "data/TEXTURE/wall00.jpg" },
   { "Texture": "data/TEXTURE/wall01.jpg" },
-  { "Texture": "data/TEXTURE/resultback_text.jpg" }
+  { "Texture": "data/TEXTURE/resultback_text.jpg" },
+  { "Texture": "data/TEXTURE/ResultIcon/bucklehman.png" },
+  { "Texture": "data/TEXTURE/ResultIcon/Dalarryman.png" },
+  { "Texture": "data/TEXTURE/ResultIcon/Saboriman.png" },
+  { "Texture": "data/TEXTURE/ResultIcon/workman.png" },
+  { "Texture": "data/TEXTURE/ResultIcon/yesman.png" }
+
 ]

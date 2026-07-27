@@ -23,6 +23,7 @@ class CAfkTV;
 class CAfkMagazine;
 class CAfkGameCenter;
 class CAfkEating;
+class CAfkBench;
 
 //*********************************************************
 // ブロックオブジェクトクラスを定義
@@ -44,6 +45,7 @@ public:
 	CAfkMagazine* GetAfkMagazine(void) { return m_pAfkMagazine; }
 	CAfkGameCenter* GetAfkGameCenter(void) { return m_pAfkGameCenter; }
 	CAfkEating* GetAfkEating(void) { return m_pAfkEating; }
+	CAfkBench* GetAfkBench(void) { return m_pAfkBench; }
 
 	// インスタンス生成用関数
 	static CAfkManager* Instance(void);
@@ -56,6 +58,7 @@ private:
 	CAfkMagazine* m_pAfkMagazine;		// 漫画さぼりのポインタ
 	CAfkGameCenter* m_pAfkGameCenter;	// ゲームセンターさぼりのポインタ
 	CAfkEating* m_pAfkEating;			// 飲食さぼりのポインタ
+	CAfkBench* m_pAfkBench;				// ベンチさぼりのポインタ
 
 };
 

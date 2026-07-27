@@ -33,6 +33,28 @@ class CAuditor : public CMoveCharactor
 {
 public:
 
+	//***************************
+	// モーション列挙型
+	//***************************
+	enum MOTION
+	{
+		NEUTRAL,	// ニュートラル
+		MOVE,		// 移動
+		MAX
+	};
+
+	//***************************
+	// 移動タイプの定義
+	//***************************
+	enum MOVE_POINTTYPE
+	{
+		OFFICENEAR,		// オフィス付近
+		GAMECENTER,		// ゲーセン
+		SOBAANDBAR,		// 蕎麦と居酒屋
+		MAPLEFT,		// マップの左側
+		MOVE_POINTTYPE_MAX
+	};
+
 	CAuditor(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
 	~CAuditor();
 
@@ -51,19 +73,7 @@ public:
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
 	/// <returns></returns>
-	static CAuditor* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot);
-
-public:
-
-	//***************************
-	// モーション列挙型
-	//***************************
-	enum MOTION
-	{
-		NEUTRAL,	// ニュートラル
-		MOVE,		// 移動
-		MAX
-	};
+	static CAuditor* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const MOVE_POINTTYPE& type);
 
 private:
 	//***************************
@@ -82,13 +92,22 @@ private:
 	struct Eyesight
 	{
 		static constexpr float EYE_RADIUS = 100.0f;		// 視界の届く距離
-		static constexpr float EYE_ANGLE = 45.0f;		// 視野角
+		static constexpr float EYE_ANGLE = 70.0f;		// 視野角
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
 private:
+	void MovingTypeOutSide(void);
+
+	void UpdateOffice(void);
+	void UpdateSoba(void);
+	void UpdateGameCenter(void);
+	void UpdateMapLeft(void);
+
+private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+	MOVE_POINTTYPE m_MoveTypeData;						// 移動の種類
 
 private:
 	int m_nViewIdx;							// ビューポイントの巡回インデックス番号
