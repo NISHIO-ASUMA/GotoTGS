@@ -52,7 +52,7 @@ public:
 		GAMECENTER,		// ゲーセン
 		SOBAANDBAR,		// 蕎麦と居酒屋
 		MAPLEFT,		// マップの左側
-		MAX
+		MOVE_POINTTYPE_MAX
 	};
 
 	CAuditor(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
