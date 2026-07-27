@@ -1478,5 +1478,8 @@
     <ClInclude Include="src\include\afkbench.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\auditorutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

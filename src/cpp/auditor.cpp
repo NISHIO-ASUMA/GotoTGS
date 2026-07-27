@@ -17,6 +17,7 @@
 #include "spherecollider.h"
 #include "manager.h"
 #include "template.h"
+#include "auditorutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -24,7 +25,13 @@
 namespace AUDITOR_INFO
 {
 	constexpr const char* FILENAME = "data/MOTION/Auditor/AuditorMotion.txt"; // モーションファイル
+	constexpr float RANGE = 2.0f;											  // 判別判定
 };
+
+//*********************************************************
+// 使用する名前空間
+//*********************************************************
+using namespace AuditorUtility;	// ポイントデータの配列情報の格納先
 
 //========================================================
 // コンストラクタ
@@ -125,20 +132,280 @@ void CAuditor::MovingTypeOutSide(void)
 	switch (m_MoveTypeData)
 	{
 	case CAuditor::OFFICENEAR:	// オフィス近く
-
+		UpdateOffice();
 		break;
 	case CAuditor::GAMECENTER:	// ゲーセン付近
-
+		UpdateGameCenter();
 		break;
 	case CAuditor::SOBAANDBAR:	// 蕎麦屋
-
+		UpdateSoba();
 		break;
 	case CAuditor::MAPLEFT:		// マップ左側
-
+		UpdateMapLeft();
 		break;
 	default:
 		break;
 	}
+}
+//========================================================
+// オフィス周りの更新
+//========================================================
+void CAuditor::UpdateOffice(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = OfficePoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, OFFICE_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 蕎麦屋付近の更新
+//========================================================
+void CAuditor::UpdateSoba(void)
+{	
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = SobaPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, SOBA_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// ゲームセンターの更新
+//========================================================
+void CAuditor::UpdateGameCenter(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = GameCenterPoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, GAME_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 左サイドの動き更新
+//========================================================
+void CAuditor::UpdateMapLeft(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = LeftSidePoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, LEFTSIDE_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
 }
 //========================================================
 // 扇形判定の描画
