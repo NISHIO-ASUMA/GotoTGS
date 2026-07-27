@@ -239,6 +239,26 @@ void CPCDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 bool CPCDeskwork::CoolTime(const auto& pClear)
 {
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+	{// チュートリアル以外での処理
+
+		// スコアのポインタ
+		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+		// 指針のポインタ
+		auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+
+		if (pScore == nullptr || pGaugeneedle == nullptr)
+		{// ヌルチェック
+			return false;
+		}
+
+		// スコア加算
+		pScore->AddScore(-100);
+
+		// こなしたタスクの数を増やす
+		pGaugeneedle->AddTask();
+	}
+
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
@@ -335,17 +355,8 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 //=========================================================
 void CPCDeskwork::Task(const auto& pClear)
 {
-	// スコアのポインタ
-	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	// 指針のポインタ
-	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 	// サウンドクラスのポインタ
 	auto* pSound = CManager::GetInstance()->GetSound();
-
-	if (pScore == nullptr /*|| pProgressgauge == nullptr*/)
-	{// ヌルチェック
-		return;
-	}
 
 	if (ControlResult() != true)
 	{// 間違ったボタンを押した場合
@@ -359,12 +370,6 @@ void CPCDeskwork::Task(const auto& pClear)
 
 	// クールタイムを始める
 	SetTime(true);
-
-	// こなしたタスクの数を増やす
-	pGaugeneedle->AddTask();
-
-	// スコア加算
-	pScore->AddScore(-100);
 
 	// サウンド再生 ( 成功音 )
 	pSound->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);

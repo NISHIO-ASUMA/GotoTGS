@@ -98,16 +98,20 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 		return;
 	}
 
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+	{// チュートリアル以外での処理
+
 	// スコアのポインタ
-	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	// 指針のポインタ
-	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+		// 指針のポインタ
+		auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 
-	// スコア加算
-	pScore->AddScore(-1000);
+		// スコア加算
+		pScore->AddScore(-1000);
 
-	// こなしたタスクの数を増やす
-	pGaugeneedle->AddTask();
+		// こなしたタスクの数を増やす
+		pGaugeneedle->AddTask();
+	}
 
 	// 書類タスクの数の加算処理
 	AddDOCUMENTTask();

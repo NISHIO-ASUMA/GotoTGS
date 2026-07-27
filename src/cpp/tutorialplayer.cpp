@@ -25,7 +25,7 @@
 #include "blockmanager.h"
 #include "jsonmanager.h"
 #include "deskwork.h"
-#include "gamesceneobject.h"
+#include "tutorialobject.h"
 #include "debugproc.h"
 #include "PCdeskwork.h"			
 #include "COPYdeskwork.h"		
@@ -64,6 +64,21 @@ namespace TutorilaPlayer
 	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
 	constexpr float SphereSize = 60.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
+};
+
+//*********************************************************
+// 定数名前空間 ( タスク関連時 )
+//*********************************************************
+namespace Player_Info
+{
+	// テレビ関係
+	const D3DXVECTOR3 TV_CHARACTORPOS = { -244.0f, 10.5f,277.0f };
+	const D3DXVECTOR3 TV_DESTPOS = { -248.0f, 12.0f, 362.0f };
+
+	// デスクワーク関係
+	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
+	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
+
 };
 
 //=========================================================
@@ -182,7 +197,7 @@ void CTutorialPlayer::Update(void)
 {
 #if 0
 	// タスクの情報を取得
-	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+	auto* pDesk = CTutorialObject::GetInstance()->GetDesk();
 
 	//*********************************************************
 	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
@@ -247,6 +262,9 @@ void CTutorialPlayer::Update(void)
 
 #endif
 
+	// タスクの情報を取得
+	auto* pDesk = CTutorialObject::GetInstance()->GetDesk();
+
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
 	const auto& Pad = CManager::GetInstance()->GetJoyPad();
@@ -255,10 +273,72 @@ void CTutorialPlayer::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 oldpos = GetOldPos();
 
+	//*********************************************************
+	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
+	//*********************************************************
+	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)
+	{
+		// 入力フラグ
+		bool isInputKey = false;
+
+		// 操作の種類によって使える物を変化させる
+		switch (m_nControlTypes)
+		{
+		case CTutorialPlayer::CONTROLTYPE_NONE:
+			break;
+
+		case CTutorialPlayer::CONTROLTYPE_KEY:
+
+			if (Key->GetTrigger(DIK_F))
+			{
+				isInputKey = true;
+			}
+			break;
+
+		case CTutorialPlayer::CONTROLTYPE_PAD:
+
+			if (Pad->GetTrigger(CJoyPad::JOYKEY_START))
+			{
+				isInputKey = true;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		if (!isInputKey)
+		{// 終了キーを押していない場合
+			// モーション更新だけ挟んでreturnする
+			CMoveCharactor::Update();
+			return;
+		}
+
+		// ADD : 西尾 さっき行っていた作業が"デスクワーク"なら
+		if (pDesk->GetTaskType() == CWorldUICollision::TYPE_PC)
+		{
+			// プレイヤーの座標を戻す
+			SetPos(Player_Info::DESK_RETURNPOS);
+
+			// 角度を変更
+			SetRot(VECTOR3_NULL);
+
+			// フラグをリセットする
+			m_isPcWork = false;
+		}
+
+		// 起動したタスクを非アクティブにする [add 髙橋]
+		pDesk->SetTaskType(pDesk->GetTaskType());
+
+		// タスク中は移動や他の当たり判定をさせないためにリターン
+		return;
+	}
+
+
 	if (m_nControlTypes == CONTROLTYPE_KEY)
 	{
 		// キーボード操作
-		//MoveKeyboard(TutorilaPlayer::fSpeed);
+		MoveKeyboard(TutorilaPlayer::fSpeed);
 	}
 	// ジョイパッド操作
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
@@ -350,29 +430,30 @@ void CTutorialPlayer::Update(void)
 
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add Misaki]
 
-					//// 両方がnullじゃない状態
-					//if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
-					//{
-					//	pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
-					//}
+					// 両方がnullじゃない状態
+					if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
+					{
+						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
+					}
 
 					break;
 
 				default:
 
-					//// nullじゃない状態
-					//if (pDesk)
-					//{
-					//	// デスクワーク時
-					//	if (Colliders->nType == CWorldUICollision::TYPE_PC)
-					//	{
-					//		// PCタスクの時の動作関数
-					//		MathDeskRotation();
-					//	}
+					// nullじゃない状態
+					if (pDesk)
+					{
+						// デスクワーク時
+						if (Colliders->nType == CWorldUICollision::TYPE_PC)
+						{
+							// PCタスクの時の動作関数
+							MathDeskRotation();
+						}
 
-					//	// タスクを起動する
-					//	pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
-					//}
+						// タスクを起動する
+						pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
+					}
+
 					break;
 				}
 
@@ -454,23 +535,23 @@ void CTutorialPlayer::MoveKeyboard(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
+	//// さぼっているかの判定
+	//auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
+	//auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
+	//auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
+	//auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 
-	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
+	//if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+	//else if (!bAfkSmoke) m_bAfkSmoke = false;
 
-	if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
+	//if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
+	//else if (!bAfkTV) m_bAfkTV = false;
 
-	if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
+	//if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
+	//else if (!bAfkMagazine) m_bAfkMagazine = false;
 
-	if (bAfkGameCenter && pKeyboard->GetTrigger(DIK_F)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
+	//if (bAfkGameCenter && pKeyboard->GetTrigger(DIK_F)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
+	//else if (!bAfkGameCenter) m_bAfkGameCenter = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
