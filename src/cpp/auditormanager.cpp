@@ -13,7 +13,6 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "auditor.h"
 #include "manager.h"
 #include "jsonmanager.h"
 
@@ -72,8 +71,8 @@ void CAuditorManager::Update(void)
 //========================================================
 // ポインタ生成と配列追加関数
 //========================================================
-void CAuditorManager::CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+void CAuditorManager::CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const CAuditor::MOVE_POINTTYPE& type)
 {
 	// 新規追加生成
-	m_pAuditor.push_back(CAuditor::Create(pos, rot));
+	m_pAuditor.push_back(CAuditor::Create(pos, rot, type));
 }

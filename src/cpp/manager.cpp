@@ -150,7 +150,8 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	m_pFade->SetFade(std::make_unique<CGame>());
 #else
 	// シーンセット
-	m_pFade->SetFade(std::make_unique<CTitle>());
+	m_pFade->SetFade(std::make_unique<CGame>());
+	//m_pFade->SetFade(std::make_unique<CTitle>());
 #endif // _DEBUG
 
 	// 乱数の種を一度宣言する

@@ -350,6 +350,7 @@
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\auditor.h" />
     <ClInclude Include="src\include\auditormanager.h" />
+    <ClInclude Include="src\include\auditorutility.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
     <ClInclude Include="src\include\automaticdoormanager.h" />
     <ClInclude Include="src\include\automatic_door.h" />
