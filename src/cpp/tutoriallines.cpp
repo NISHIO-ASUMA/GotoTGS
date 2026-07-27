@@ -17,13 +17,13 @@
 #include "lines.h"
 #include "tutoriallinesBG.h"
 #include "input.h"
+#include "deskworkUImanager.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CTutorialLines::CTutorialLines(int nPriority) :CObject(nPriority),
 m_bUse(false),
-m_bTutorial(false),
 m_bAgain(false),
 m_nNowIdx(NULL),
 m_nCountSkip(NULL),
@@ -102,7 +102,16 @@ void CTutorialLines::Uninit(void)
 void CTutorialLines::Update(void)
 {
 	// 使用してない場合とチュートリアルを進めている場合は更新しない
-	if (!m_bUse || m_bTutorial) return;
+	if (!m_bUse || CDeskworkUIManager::GetTutorial()) return;
+
+	// 実践をやった場合
+	if (m_nNowIdx == LINESTYPE_3 ||
+		m_nNowIdx == LINESTYPE_5 ||
+		m_nNowIdx == LINESTYPE_6)
+	{
+		// 現在の番号を一つ進める
+		m_nNowIdx++;
+	}
 
 	// 入力取得
 	auto* Key = CManager::GetInstance()->GetInputKeyboard();
@@ -146,13 +155,16 @@ void CTutorialLines::Update(void)
 	// 現在の番号を一つ進める
 	m_nNowIdx++;
 
-	//// 実践をやっている場合
-	//if (m_nNowIdx == LINESTYPE_3 ||
-	//	m_nNowIdx == LINESTYPE_5 || 
-	//	m_nNowIdx == LINESTYPE_6 )
-	//{
+	// 実践をやる場合
+	if (m_nNowIdx == LINESTYPE_3 ||
+		m_nNowIdx == LINESTYPE_5 ||
+		m_nNowIdx == LINESTYPE_6)
+	{
+		// 実践をやっている状態にする
+		CDeskworkUIManager::SetTutorial(true);
 
-	//}
+		return;
+	}
 
 	if (m_nNowIdx < LINESTYPE_MAX)
 	{// 総数を超えていない場合

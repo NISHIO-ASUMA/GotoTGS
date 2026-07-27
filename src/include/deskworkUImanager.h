@@ -50,6 +50,7 @@ public:
 	inline void SetUse(const bool& bUse) { m_bUse = bUse; }
 	inline void SetTime(const bool& bTime) { m_bTime = bTime; }
 	inline void SetCountTime(const int& nCountTime) { m_nCountTime = nCountTime; }
+	static void SetTutorial(const bool& bTutorial = false) { m_bTutorial = bTutorial; }
 
 	// 情報取得処理
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
@@ -65,6 +66,7 @@ public:
 	static int GetPCTaskNum(void) { return m_nPCTaskNum; }
 	static int GetCOPYTaskNum(void) { return m_nCOPYTaskNum; }
 	static int GetDOCUMENTTaskNum(void) { return m_nDOCUMENTTaskNum; }
+	static bool GetTutorial(void) { return m_bTutorial; }
 	static void MinusPCTask(void) { m_nPCTaskNum--; }
 	static void MinusCOPYTask(void) { m_nCOPYTaskNum--; }
 	static void MinusDOCUMENTTask(void) { m_nDOCUMENTTaskNum--; }
@@ -95,4 +97,6 @@ private:
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
 	static int m_nCOPYTaskNum;		// こなしたコピー機タスクの数
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
+	static bool m_bTutorial;		// チュートリアルをこなしたかどうか
+
 };
