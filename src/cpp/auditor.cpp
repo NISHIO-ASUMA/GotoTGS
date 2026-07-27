@@ -26,20 +26,6 @@ namespace AUDITOR_INFO
 	constexpr const char* FILENAME = "data/MOTION/Auditor/AuditorMotion.txt"; // モーションファイル
 };
 
-//*********************************************************
-// ポイントを動く定数名前空間 ( 後々開地君次第で変更する )
-//*********************************************************
-namespace MOVE_VIEWPOINT
-{
-	constexpr int MAX_POINT = 1;
-
-	// 巡回ポイント
-	const D3DXVECTOR3 LocalPoint[MAX_POINT] =
-	{
-		{600.0f,0.0f,400.0f}
-	};
-};
-
 //========================================================
 // コンストラクタ
 //========================================================
@@ -49,7 +35,8 @@ m_nOfficeViewIdx(NULL),
 m_nViewIdx(NULL),
 m_nTargetIdx(NULL),
 m_pBoxColiider(nullptr),
-m_pSphereColiider(nullptr)
+m_pSphereColiider(nullptr),
+m_MoveTypeData(MOVE_POINTTYPE::OFFICENEAR)
 {
 }
 //========================================================
@@ -62,7 +49,7 @@ CAuditor::~CAuditor()
 //========================================================
 // 生成処理
 //========================================================
-CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const MOVE_POINTTYPE& type)
 {
 	// インスタンス生成
 	CAuditor* pAuditor = new CAuditor;
@@ -73,6 +60,7 @@ CAuditor* CAuditor::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	pAuditor->SetRot(rot);
 	pAuditor->SetUseOutLine(true);
 	pAuditor->SetOutlineColor();
+	pAuditor->m_MoveTypeData = type;
 
 	// 初期化失敗時
 	if (FAILED(pAuditor->Init())) return nullptr;
@@ -109,11 +97,8 @@ void CAuditor::Uninit(void)
 //========================================================
 void CAuditor::Update(void)
 {
-	// 座標取得
-	auto pos = GetPos();
-
 	// ポイント間座標の更新
-	MovePointOutSide(pos);
+	MovingTypeOutSide();
 
 	// 座標の更新
 	CMoveCharactor::UpdatePosition();
@@ -133,71 +118,27 @@ void CAuditor::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// ポイント間を動く処理 ( 巡回ポイントが決定次第 )
+// ポイントごとの周回起点
 //========================================================
-void CAuditor::MovePointOutSide(const D3DXVECTOR3& pos)
+void CAuditor::MovingTypeOutSide(void)
 {
-#if 0
-	// 停止カウント中の処理
-	if (m_nStopTime > 0)
+	switch (m_MoveTypeData)
 	{
-		m_nStopTime--;
+	case CAuditor::OFFICENEAR:	// オフィス近く
 
-		// 待機中はニュートラルモーション
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
-		return;
+		break;
+	case CAuditor::GAMECENTER:	// ゲーセン付近
+
+		break;
+	case CAuditor::SOBAANDBAR:	// 蕎麦屋
+
+		break;
+	case CAuditor::MAPLEFT:		// マップ左側
+
+		break;
+	default:
+		break;
 	}
-
-	// 現在の座標とターゲットの座標を取得
-	D3DXVECTOR3 pos = GetPos();
-	D3DXVECTOR3 targetPos = MOVE_VIEWPOINT::LocalPopint[m_nTargetIdx];
-
-	// 目的地へのベクトルを計算
-	D3DXVECTOR3 vecToTarget = targetPos - pos;
-
-	// 目的地までの距離を計算
-	float distance = D3DXVec3Length(&vecToTarget);
-
-	// 到着判定
-	if (distance <= 2.0f)
-	{
-		// 座標を目的地に合わせる
-		SetPos(targetPos);
-
-		// 停止時間を設定
-		m_nStopTime = 60;
-
-		// インデックス設定
-		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, MOVE_VIEWPOINT::MAX_POINT - 1);
-
-		// 目的地に到着した瞬間にモーションを切り替える
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
-		return;
-	}
-
-	// ベクトルを正規化
-	D3DXVECTOR3 moveVec;
-	D3DXVec3Normalize(&moveVec, &vecToTarget);
-
-	// 移動量
-	moveVec *= 1.5f;
-	SetMove(moveVec);
-
-	// 移動モーションを設定
-	GetMotion()->SetMotion(MOTION::MOVE);
-
-	// 角度を計算
-	float angleY = atan2(-moveVec.x, -moveVec.z);
-
-	// 現在の目標角度
-	D3DXVECTOR3 rotDest = GetRotDest();
-
-	// 角度を正規化
-	rotDest.y = NormalAngle(angleY);
-
-	// 目標角度をセット
-	SetRotDest(rotDest);
-#endif
 }
 //========================================================
 // 扇形判定の描画

@@ -48,11 +48,12 @@ public:
 public:
 
 	/// <summary>
-	/// managerで生成する
+	/// 管理クラス内で生成
 	/// </summary>
 	/// <param name="pos">座標</param>
 	/// <param name="rot">角度</param>
-	void CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot);
+	/// <param name="type">種類</param>
+	void CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const CAuditor::MOVE_POINTTYPE& type);
 
 	/// <summary>
 	/// 配列のサイズ(最大の長さ)を取得
