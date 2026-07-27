@@ -34,20 +34,21 @@
 #include "vigilanceUImanager.h"		// 髙橋追加
 #include "gaugeneedle.h"			// 髙橋追加
 #include "worldUIcollision.h"
-#include "collisionsphere.h"
-#include "afkmanager.h"
-#include "afktv.h"
-#include "afksmoke.h"
-#include "afkmagazine.h"
-#include "afkeating.h"
+#include "collisionsphere.h"		// 近田追加
+#include "afkmanager.h"				// 近田追加
+#include "afktv.h"					// 近田追加
+#include "afksmoke.h"				// 近田追加
+#include "afkmagazine.h"			// 近田追加
+#include "afkeating.h"				// 近田追加
 #include "automaticdoormanager.h"	// 西尾追加
 #include "automatic_door.h"			// 西尾追加
 #include "autodoor_collision.h"		// 西尾追加
 #include "outline.h"
-#include "afkgamecenter.h"
-#include "titleuimanager.h"
+#include "afkgamecenter.h"			// 近田追加
+#include "titleuimanager.h"			// 近田追加
 #include "progressgauge.h"
-#include "score.h"
+#include "score.h"					// 近田追加
+#include "afkbench.h"				// 近田追加
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
@@ -94,6 +95,7 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
+m_AfkType(AFKTYPE_NONE),
 m_nCntAfk(NULL),
 m_nTimeScore(NULL),
 m_nAddScore(NULL),
@@ -104,9 +106,8 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_bAfkEating(false),
+m_bAfkBench(false),
 m_isPcWork(false),
-m_bAfkChange(false),
-m_bAfkCheck(false),
 m_nControlTypes(CONTROLTYPE_NONE)
 {
 
@@ -537,6 +538,7 @@ void CPlayer::MoveKeyboard(float speed)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
+	auto bAfkBench = CAfkManager::Instance()->GetAfkBench()->GetAfk();
 
 	if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
 	else if (!bAfkSmoke) m_bAfkSmoke = false;
@@ -552,6 +554,9 @@ void CPlayer::MoveKeyboard(float speed)
 
 	if (bAfkEating && pKeyboard->GetTrigger(DIK_F)) m_bAfkEating = m_bAfkEating ? false : true;
 	else if (!bAfkEating) m_bAfkEating = false;
+
+	if (bAfkBench && pKeyboard->GetTrigger(DIK_F)) m_bAfkBench = m_bAfkBench ? false : true;
+	else if (!bAfkBench) m_bAfkBench = false;
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -609,33 +614,34 @@ void CPlayer::MoveKeyboard(float speed)
 	}
 	
 	// オフィス内のサボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkEating)
 	{
 		m_nTimeScore++;
-		if (m_nScoreCnt == NULL)
-		{
-			m_nAddScore = 100;
-		}
-		if ((60 * m_nScoreCnt) < m_nTimeScore && (60 * (m_nScoreCnt + 1)) * m_nTimeScore)
-		{
+		if ((60 * m_nScoreCnt) < m_nTimeScore)
+		{		
+			// スコア加算
 			CGameSceneObject::GetInstance()->GetScore()->AddScore(m_nAddScore);
 			m_nScoreCnt++;
-			
+
+			// スコアの加算値上昇
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 150;
-				break;
-			case 2:
-				m_nAddScore = 200;
-				break;
-			case 3:
 				m_nAddScore = 100;
 				break;
+			case 2:
+				m_nAddScore = 150;
+				break;
+			case 3:
+				m_nAddScore = 200;
+				break;
 			case 4:
-				m_nAddScore = 50;
+				m_nAddScore = 100;
 				break;
 			case 5:
+				m_nAddScore = 50;
+				break;
+			case 6:
 				m_nAddScore = 10;
 				break;
 			default:
@@ -644,18 +650,32 @@ void CPlayer::MoveKeyboard(float speed)
 		}
 	}
 
-	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine)
+	// 外回りのさぼりが有効だったら
+	if (m_bAfkGameCenter || m_bAfkBench)
 	{
+		m_nTimeScore++;
+		if (60 < m_nTimeScore)
+		{
+			CGameSceneObject::GetInstance()->GetScore()->AddScore(200);
+			m_nTimeScore = NULL;
+		}
+	}
+
+	// もしさぼり全部が無効だったら
+	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating && !m_bAfkBench)
+	{
+		// スコア加算値の上昇カウントとスコア加算タイムをリセット
 		m_nScoreCnt = NULL;
 		m_nTimeScore = NULL;
 	}
 
 	// サボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
 		{
+			// さぼった回数を加算
 			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
 		}
@@ -869,6 +889,8 @@ void CPlayer::MoveCrossPadButton(float speed)
 
 	if (bAfkEating && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkEating = m_bAfkEating ? false : true;
 	else if (!bAfkEating) m_bAfkEating = false;
+
+	//SetAfk(bAfkEating, pGamePad->GetTrigger(CJoyPad::JOYKEY_START))
 
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
@@ -1180,4 +1202,17 @@ void CPlayer::MathDeskRotation(void)
 	// 目的の角度を設定
 	SetRotDest(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 	SetRot(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
+}
+//=================================================
+// さぼりの起動
+//=================================================
+void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
+{
+	switch (m_AfkType)
+	{
+	case AFKTYPE_SMOKE:
+
+	default:
+		break;
+	}
 }

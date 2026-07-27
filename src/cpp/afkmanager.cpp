@@ -18,6 +18,7 @@
 #include "afkmagazine.h"
 #include "afkgamecenter.h"
 #include "afkeating.h"
+#include "afkbench.h"
 
 //=================================================
 // 静的メンバ変数
@@ -31,7 +32,8 @@ CAfkManager::CAfkManager() : m_pAfkSmoke(nullptr),
 m_pAfkTV(nullptr),
 m_pAfkMagazine(nullptr),
 m_pAfkGameCenter(nullptr),
-m_pAfkEating(nullptr)
+m_pAfkEating(nullptr),
+m_pAfkBench(nullptr)
 {
 
 }
@@ -67,6 +69,10 @@ HRESULT CAfkManager::Init(void)
 	// 飲食さぼりの初期化処理
 	m_pAfkEating = new CAfkEating;
 	m_pAfkEating->Init();
+
+	// ベンチさぼりの初期化処理
+	m_pAfkBench = new CAfkBench;
+	m_pAfkBench->Init();
 
 	return S_OK;
 }
@@ -115,6 +121,14 @@ void CAfkManager::Uninit(void)
 		m_pAfkEating = nullptr;
 	}
 
+	// ベンチさぼりの破棄処理
+	if (m_pAfkBench)
+	{
+		m_pAfkBench->Uninit();
+		delete m_pAfkBench;
+		m_pAfkBench = nullptr;
+	}
+
 	// シングルトンの破棄
 	if (m_pInstance)
 	{
@@ -142,6 +156,8 @@ void CAfkManager::Update(void)
 	// 飲食さぼりの更新処理
 	m_pAfkEating->Update();
 
+	// 飲食さぼりの更新処理
+	m_pAfkBench->Update();
 }
 //=========================================================
 // インスタンス取得処理
