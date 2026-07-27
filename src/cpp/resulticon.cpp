@@ -47,7 +47,7 @@ HRESULT CResultIcon::Init(void)
 	// •Ï”‚Ì‰Šú’l‚ğİ’è
 	m_isAnimating = true;
 	m_nFrameCount = 0;
-	m_fStartScale = 3.0f;
+	m_fStartScale = 5.0f;
 	m_nMaxFrame = 40;
 
 	return S_OK;

@@ -185,7 +185,7 @@ void CAuditor::UpdateOffice(void)
 		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, OFFICE_POINT - 1);
 
 		// 目的地に到着したらモーションを切り替える
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		GetMotion()->SetMotion(MOTION::NEUTRAL,true,5);
 		return;
 	}
 
@@ -328,7 +328,7 @@ void CAuditor::UpdateGameCenter(void)
 	SetMove(moveVec);
 
 	// 移動モーションを設定
-	GetMotion()->SetMotion(MOTION::MOVE);
+	GetMotion()->SetMotion(MOTION::MOVE,true,3);
 
 	// 角度を計算
 	float angleY = atan2(-moveVec.x, -moveVec.z);
