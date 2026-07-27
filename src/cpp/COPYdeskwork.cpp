@@ -268,6 +268,13 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	pClear->SetUse(false);
 	pClear->SetUseFlash(false);
 
+	// チュートリアル以外なら処理しない
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+		return true;
+
+	// チュートリアルが終わった状態にする
+	CDeskworkUIManager::SetTutorial();
+
 	return true;
 }
 

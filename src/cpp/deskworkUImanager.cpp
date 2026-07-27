@@ -20,6 +20,7 @@
 int CDeskworkUIManager::m_nPCTaskNum = NULL;
 int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
 int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
+bool CDeskworkUIManager::m_bTutorial = NULL;
 
 //=========================================================
 // コンストラクタ
@@ -34,6 +35,7 @@ m_nCountTime(NULL)
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;
 	m_nDOCUMENTTaskNum = NULL;
+	m_bTutorial = false;
 }
 
 //=========================================================
