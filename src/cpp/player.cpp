@@ -1193,7 +1193,7 @@ void CPlayer::AfkScore(void)
 		if ((60 * m_nScoreCnt) < m_nTimeScore)
 		{
 			// スコア加算
-			CGameSceneObject::GetInstance()->GetScore()->AddScore(m_nAddScore);
+			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
 			m_nScoreCnt++;
 
 			// スコアの加算値上昇

@@ -104,7 +104,7 @@ void CEnemyManager::Update(void)
 	int nAllTime = m_pTimeContainer->GetAllTime();
 
 	// NOTE : 現在は一旦20秒に一体追加で行こうかな
-	if (nAllTime > 0 && (nAllTime % 20) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
+	if (nAllTime > 0 && (nAllTime % 60) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
 	{
 		// 敵を生成する ( ここの座標は後々変更 )
 		AddEnemy(VECTOR3_NULL);

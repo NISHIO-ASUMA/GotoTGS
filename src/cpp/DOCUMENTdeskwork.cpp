@@ -111,6 +111,7 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
+		return;
 	}
 
 	// 書類タスクの数の加算処理
