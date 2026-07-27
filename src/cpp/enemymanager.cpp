@@ -16,6 +16,7 @@
 #include "enemy.h"
 #include "jsonmanager.h"
 #include "manager.h"
+#include "gametime.h"
 
 //*********************************************************
 // 定数名前空間
@@ -29,7 +30,8 @@ namespace ENEMY_MANAGER
 // コンストラクタ
 //=========================================================
 CEnemyManager::CEnemyManager() : m_pEnemys{},
-m_nStageCount(NULL)
+m_nStageCount(NULL),
+m_nIntervalCount(-1)
 {
 
 }
@@ -95,8 +97,21 @@ void CEnemyManager::Uninit(void)
 //=========================================================
 void CEnemyManager::Update(void)
 {
-	// カウント加算
-	m_nStageCount++;
+	// nullチェック
+	if (!m_pTimeContainer) return;
+
+	// 最大時間を取得
+	int nAllTime = m_pTimeContainer->GetAllTime();
+
+	// NOTE : 現在は一旦20秒に一体追加で行こうかな
+	if (nAllTime > 0 && (nAllTime % 20) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
+	{
+		// 敵を生成する ( ここの座標は後々変更 )
+		AddEnemy(VECTOR3_NULL);
+
+		// 生成時間を変更して、このフレームでは一回のみ入るようにする
+		m_nIntervalCount = nAllTime;
+	}
 }
 //=========================================================
 // 敵の生成追加関数

@@ -17,6 +17,7 @@
 #include "resultscoremanager.h"
 #include "blockmanager.h"
 #include "jsonmanager.h"
+#include "resulticon.h"
 
 //*********************************************************
 // 定数宣言空間
@@ -61,6 +62,9 @@ HRESULT CResultObject::Init(void)
 
 	// リザルトのスコア生成
 	CResultScoreManager::GetInstancce()->Init();
+
+	// アイコン生成
+	//CResultIcon::Create(D3DXVECTOR3(1020.0f, 570.0f, 0.0f), 130.0f, 130.0f, "ResultIcon/Saboriman.png");
 
 	return S_OK;
 }

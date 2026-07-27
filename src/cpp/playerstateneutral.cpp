@@ -15,6 +15,7 @@
 #include "playerstatetv.h"
 #include "playerstategamecenter.h"
 #include "playerstateeating.h"
+#include "playerstatebench.h"
 #include "player.h"
 
 //=========================================================
@@ -70,6 +71,12 @@ void CPlayerStateNeutral::OnUpdate()
 	{
 		// ステートを飲食にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateEating(), ID_FOOD);
+	}
+	// 近田のバグがいい感じになっていたからこのままいってみよう
+	else if (m_pPlayer->GetAfkBench())
+	{
+		// ステートを移動にチェンジ
+		m_pPlayer->ChangeState(new CPlayerStateBench(), ID_BENCH);
 	}
 }
 
