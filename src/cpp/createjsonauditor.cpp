@@ -38,11 +38,8 @@ void CJsonCreateAuditor::Create(const json& Jsondata)
 	D3DXVECTOR3 rot = CJsonConverter::ConverterVec3(Jsondata, "rot");
 
 	// 種類情報の設定
-	int nType = CJsonConverter::ConverterInt(Jsondata, "movetype");
-
-	// 変換する
-	CAuditor::MOVE_POINTTYPE type = static_cast<CAuditor::MOVE_POINTTYPE>(nType);
+	int nType = CJsonConverter::ConverterInt(Jsondata, "Type");
 
 	// 実際のキャラクター生成
-	AuditorManager->CreateInManager(pos, rot, type);
+	AuditorManager->CreateInManager(pos, rot, static_cast<CAuditor::MOVE_POINTTYPE>(nType));
 }

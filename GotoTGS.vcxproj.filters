@@ -948,14 +948,16 @@
     <ClCompile Include="src\cpp\auditormanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\createjsonauditor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\afkbench.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\cpp\playerstatebench.cpp">
       <Filter>ソース ファイル</Filter>
+=======
+    <ClCompile Include="src\cpp\createjsonauditor.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+>>>>>>> a1cd21df2d6ccc79a1e879b49827fff166d3a9d6
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

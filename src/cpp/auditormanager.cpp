@@ -48,7 +48,7 @@ HRESULT CAuditorManager::Init(void)
 
 	// 外部ファイルロード
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	jsonmanager->SetAuditorManager(this->GetInstance());
+	jsonmanager->SetAuditorManager(GetInstance());
 	jsonmanager->Load(AUDITOR_INFO::FILE);
 
 	return S_OK;

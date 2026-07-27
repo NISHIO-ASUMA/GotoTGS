@@ -3,24 +3,24 @@
     "ObjectTag": "Auditor",
     "pos": [ 820.0, 0.0, -300.0 ],
     "rot": [ 0.0, 0.0, 0.0 ],
-    "movetype": [ 0 ]
+    "Type": 0
   },
   {
     "ObjectTag": "Auditor",
     "pos": [ 1400.0, 0.0, 505.0 ],
     "rot": [ 0.0, 0.0, 0.0 ],
-    "movetype": [ 1 ]
+    "Type": 1
   },
   {
     "ObjectTag": "Auditor",
     "pos": [ 2186.0, 0.0, 320.0 ],
     "rot": [ 0.0, 0.0, 0.0 ],
-    "movetype": [ 2 ]
+    "Type": 2
   },
   {
     "ObjectTag": "Auditor",
     "pos": [ 1705.0, 0.0, 840.0 ],
     "rot": [ 0.0, 0.0, 0.0 ],
-    "movetype": [ 3 ]
+    "Type": 3 
   }
 ]

@@ -26,7 +26,7 @@ namespace AuditorUtility
 	};
 
 	// ÉQÅ[ÉZÉìèÑâÒ
-	constexpr int GAME_POINT = 9;
+	constexpr int GAME_POINT = 10;
 	const D3DXVECTOR3 GameCenterPoint[GAME_POINT] =
 	{
 		{1400.0f, 0.0f, 222.0f},
@@ -37,7 +37,8 @@ namespace AuditorUtility
 		{1525.0f, 0.0f, 390.0f},
 		{1530.0f, 0.0f, 103.0f},
 		{1150.0f, 0.0f, 115.0f},
-		{1143.0f, 0.0f, 333.0f}
+		{1143.0f, 0.0f, 333.0f},
+		{1400.0f, 0.0f, 333.0f}
 	};
 
 	// ãºîûâÆèÑâÒ
