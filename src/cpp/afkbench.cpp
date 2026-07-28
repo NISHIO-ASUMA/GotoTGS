@@ -76,8 +76,8 @@ HRESULT CAfkBench::Init(D3DXVECTOR3 pos)
 	// 親クラスの初期化処理
 	CAfk::Init(pos, AFKBENCH::fRadius);
 
-	// パーティクル生成
-	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NONE);
+	//// パーティクル生成
+	//m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NONE);
 
 	return S_OK;
 }
@@ -97,17 +97,17 @@ void CAfkBench::Update(void)
 	// 親クラスの更新処理
 	CAfk::Update();
 
-	if (m_pParticle == nullptr)return;
+	//if (m_pParticle == nullptr)return;
 
-	// プレイヤーがさぼっているか判定用の変数
-	bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
+	//// プレイヤーがさぼっているか判定用の変数
+	//bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
 
-	if (bAfkGameCenter) m_pParticle->SetUse(true);
-	else m_pParticle->SetUse(false);
+	//if (bAfkGameCenter) m_pParticle->SetUse(true);
+	//else m_pParticle->SetUse(false);
 
-	float fColR = (float)(rand() / (RAND_MAX + 1.0f));
-	float fColG = (float)(rand() / (RAND_MAX + 1.0f));
-	float fColB = (float)(rand() / (RAND_MAX + 1.0f));
+	//float fColR = (float)(rand() / (RAND_MAX + 1.0f));
+	//float fColG = (float)(rand() / (RAND_MAX + 1.0f));
+	//float fColB = (float)(rand() / (RAND_MAX + 1.0f));
 
-	m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, fColB, 1.0f));
+	//m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, fColB, 1.0f));
 }

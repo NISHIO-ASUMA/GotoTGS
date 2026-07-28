@@ -50,6 +50,7 @@ private:
 	D3DXCOLOR m_col;					// カラー
 
 	int m_nIdxTexture;					// テクスチャインデックス
+	int m_nTimeCnt;						// カウント用変数
 	int m_FlashCount;					// 点滅間隔
 	bool m_bDisplay;					// 表示するかの判定変数
 };
