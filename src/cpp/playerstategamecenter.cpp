@@ -49,7 +49,9 @@ void CPlayerStateGameCenter::OnStart()
 
 	// Šp“x‚ÌÝ’è
 	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL,fAngle,NULL));
-	
+
+	// ‰ñ”‰ÁŽZ
+	m_pPlayer->AddGameCenter();
 }
 
 //=========================================================

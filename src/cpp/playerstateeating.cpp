@@ -50,6 +50,8 @@ void CPlayerStateEating::OnStart()
 	// 角度の設定
 	m_pPlayer->SetRotDest(D3DXVECTOR3(NULL, fAngle, NULL));
 
+	// 回数加算
+	m_pPlayer->AddEating();
 }
 
 //=========================================================
@@ -65,7 +67,7 @@ void CPlayerStateEating::OnUpdate()
 	}
 
 	// 近田のバグがいい感じになっていたからこのままいってみよう
-	if (!m_pPlayer->GetAfkGameCenter())
+	if (!m_pPlayer->GetAfkEating())
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);

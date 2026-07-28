@@ -41,6 +41,9 @@ void CPlayerStateMagazine::OnStart()
 		D3DXVECTOR3(-1.57f, 0.0f, 0.0f),
 		D3DXVECTOR3(5.0f, 0.0f, -7.0f)
 	);
+
+	//‰ñ”‰ÁZ
+	m_pPlayer->AddMagazine();
 }
 
 //=========================================================
