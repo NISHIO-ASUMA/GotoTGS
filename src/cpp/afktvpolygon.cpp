@@ -34,19 +34,22 @@ namespace AFKTVPOLYGON
 	const D3DXVECTOR3 Pos = { -249.0f, 47.0f, 360.5f };		// 3D画像の座標
 	constexpr float fWidth = 28.0f;							// 横幅
 	constexpr float fHeight = 18.0f;						// 縦幅
-	constexpr const char* Button_NAME = "tv_anime.jpg";		// TVのテクスチャ名
+	constexpr const char* TV1_NAME = "TV_1.jpg";		// TVのテクスチャ名1
+	constexpr const char* TV2_NAME = "TV_2.jpg";		// TVのテクスチャ名2
+	constexpr const char* TV3_NAME = "TV_3.jpg";		// TVのテクスチャ名3
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfkTVPolygon::CAfkTVPolygon(int nPriority) : CObject(nPriority), 
+CAfkTVPolygon::CAfkTVPolygon(int nPriority) : CObject(nPriority),
 m_pVtxBuff(nullptr),
 m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_col(COLOR_WHITE),
 m_nIdxTexture(-1),
 m_FlashCount(NULL),
+m_nTimeCnt(NULL),
 m_bDisplay(true),
 m_mtxWorld{}
 {
@@ -71,7 +74,7 @@ CAfkTVPolygon* CAfkTVPolygon::Create(void)
 	// オブジェクトセット
 	pAfkTVPolygon->SetPos(AFKTVPOLYGON::Pos);
 	pAfkTVPolygon->SetRot(VECTOR3_NULL);
-	pAfkTVPolygon->SetTexture(AFKTVPOLYGON::Button_NAME);
+	pAfkTVPolygon->SetTexture(AFKTVPOLYGON::TV1_NAME);
 
 	// 初期化失敗時
 	if (FAILED(pAfkTVPolygon->Init())) return nullptr;
@@ -197,6 +200,28 @@ void CAfkTVPolygon::Update(void)
 
 	// 行列計算
 	m_mtxWorld = mtxRot * mtxTrans;
+
+	m_nTimeCnt++;
+	if (m_nTimeCnt > 60)
+	{
+		int nTex = (rand() / (RAND_MAX + 1));
+
+		switch (nTex)
+		{
+		case 1:
+			SetTexture(AFKTVPOLYGON::TV1_NAME);
+			break;
+		case 2:
+			SetTexture(AFKTVPOLYGON::TV2_NAME);
+			break;
+		case 3:
+			SetTexture(AFKTVPOLYGON::TV3_NAME);
+			break;
+		default:
+			break;
+		}
+		m_nTimeCnt = NULL;
+	}
 }
 //=========================================================
 // 描画処理
