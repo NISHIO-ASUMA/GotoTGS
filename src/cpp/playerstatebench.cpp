@@ -17,7 +17,7 @@
 //=========================================================
 namespace AFKBENCH
 {
-	const D3DXVECTOR3 PosDest = { -225.0f, 38.0, -205.0f };	// 目的の位置
+	const D3DXVECTOR3 ReturnPos = { 800.4f, 0.0f, 1303.6f };	// ベンチから戻るときの位置
 }
 
 //=========================================================
@@ -41,7 +41,8 @@ CPlayerStateBench::~CPlayerStateBench()
 //=========================================================
 void CPlayerStateBench::OnStart()
 {
-
+	// プレイヤーの現在座標をベンチの上にセットする
+	m_pPlayer->MathBenchRotation();
 }
 
 //=========================================================
@@ -53,7 +54,7 @@ void CPlayerStateBench::OnUpdate()
 	if (m_pPlayer->BENCH != m_pPlayer->GetMotion()->GetMotionType())
 	{
 		// モーション変更
-		//m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::BENCH, true, 3);
+		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::BENCH, true, 3);
 	}
 
 	if (!m_pPlayer->GetAfkBench())
@@ -68,5 +69,6 @@ void CPlayerStateBench::OnUpdate()
 //=========================================================
 void CPlayerStateBench::OnExit()
 {
-
+	// 固定の座標にもどる
+	m_pPlayer->SetPos(AFKBENCH::ReturnPos);
 }

@@ -9,6 +9,7 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "enemystateneutral.h"
+#include "enemystateserch.h"
 
 //*********************************************************
 // インクルードファイル
@@ -49,6 +50,13 @@ void CEnemyStateNeutral::OnUpdate()
 
 	// 通常のポインタ移動をする
 	m_pEnemy->UpdateMoveViewPoint();
+
+	// もし索敵範囲に入っていたら、疑い状態に変更する
+	if (m_pEnemy->CheckEyesight())
+	{
+		// ステート生成
+		//m_pEnemy->ChangeState(new);
+	}
 }
 //=========================================================
 // 状態終了

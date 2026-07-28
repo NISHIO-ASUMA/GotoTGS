@@ -203,7 +203,7 @@ public:
 	/// 敵の視界との当たり判定
 	/// </summary>
 	/// <param name="UpdatePos">更新された座標</param>
-	void CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos);
+	void CollisionEnemyEyesite(void);
 
 	/// <summary>
 	/// テレビの方を向く関数
@@ -216,6 +216,13 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void MathDeskRotation(void);
+
+	/// <summary>
+	/// ベンチで寝るときの向き調整関数
+	/// </summary>
+	/// <param name=""></param>
+	void MathBenchRotation(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー

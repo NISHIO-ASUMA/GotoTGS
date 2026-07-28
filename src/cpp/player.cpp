@@ -85,6 +85,8 @@ namespace Player_Info
 	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
 	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
 
+	// ベンチ関係
+	const D3DXVECTOR3 BENCH_CHARACTORPOS = { 792.4f, 14.0f, 1303.6f };
 };
 
 //=========================================================
@@ -420,7 +422,7 @@ void CPlayer::Update(void)
 	UpdateAutoDoorCollision(UpdatePos);
 
 	// 敵の視界との当たり判定
-	CollisionEnemyEyesite(UpdatePos);
+	CollisionEnemyEyesite();
 
 	// オフィス内のドアとの判定
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
@@ -1071,7 +1073,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 //=================================================
 // 敵の視界との当たり判定
 //=================================================
-void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
+void CPlayer::CollisionEnemyEyesite(void)
 {
 	// 敵管理クラスを取得する
 	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
@@ -1083,7 +1085,7 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 	for (auto& IdxEnemy : Enemy)
 	{
 		// 見つかる扇方の範囲内だったら
-		if (IdxEnemy->CheckEyesight(UpdatePos))
+		if (IdxEnemy->CheckEyesight())
 		{
 			// 対象の敵の動きを変更する(プレイヤーを追従するかどうかのフラグを変更する )
 			//IdxEnemy->SetTargetChaseFlag(true);
@@ -1137,6 +1139,15 @@ void CPlayer::MathDeskRotation(void)
 	SetRotDest(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 	SetRot(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 }
+//=================================================
+// ベンチの向きを調整するための計算関数 
+//=================================================
+void CPlayer::MathBenchRotation(void)
+{
+	// 座標をセットする
+	SetPos(Player_Info::BENCH_CHARACTORPOS);
+}
+
 //=================================================
 // さぼりの起動
 //=================================================
@@ -1217,6 +1228,7 @@ void CPlayer::AfkScore(void)
 			default:
 				break;
 			}
+
 			// スコア加算
 			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
 			m_nScoreCnt++;
