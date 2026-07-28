@@ -45,7 +45,7 @@ public:
 	CAfkMagazine* GetAfkMagazine(void) { return m_pAfkMagazine; }
 	CAfkGameCenter* GetAfkGameCenter(void) { return m_pAfkGameCenter; }
 	CAfkEating* GetAfkEating(void) { return m_pAfkEating; }
-	CAfkBench* GetAfkBench(void) { return m_pAfkBench; }
+	CAfkBench* GetAfkBench(int nIdx) { return m_pAfkBench[nIdx]; }
 
 	// インスタンス生成用関数
 	static CAfkManager* Instance(void);
@@ -58,7 +58,7 @@ private:
 	CAfkMagazine* m_pAfkMagazine;		// 漫画さぼりのポインタ
 	CAfkGameCenter* m_pAfkGameCenter;	// ゲームセンターさぼりのポインタ
 	CAfkEating* m_pAfkEating;			// 飲食さぼりのポインタ
-	CAfkBench* m_pAfkBench;				// ベンチさぼりのポインタ
+	CAfkBench* m_pAfkBench[4];				// ベンチさぼりのポインタ
 
 };
 

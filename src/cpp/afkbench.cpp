@@ -22,7 +22,6 @@
 //*********************************************************
 namespace AFKBENCH
 {
-	const D3DXVECTOR3 Pos = { 792.4f, 14.0f, 1303.6f };	// 位置
 	constexpr float fRadius = 25.0f;					// 範囲の半径
 };
 //*********************************************************
@@ -57,25 +56,25 @@ CAfkBench::~CAfkBench()
 CAfkBench* CAfkBench::Create(const D3DXVECTOR3& pos)
 {
 	// インスタンス生成
-	CAfkBench* pAfkGameCenter = new CAfkBench;
-	if (pAfkGameCenter == nullptr) return nullptr;
+	CAfkBench* pAfkBench = new CAfkBench;
+	if (pAfkBench == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pAfkGameCenter->SetPos(AFKBENCH::Pos);
+	pAfkBench->SetPos(pos);
 
 	// 初期化失敗時
-	if (FAILED(pAfkGameCenter->Init())) return nullptr;
+	if (FAILED(pAfkBench->Init(pos))) return nullptr;
 
 	// ポインタを返す
-	return pAfkGameCenter;
+	return pAfkBench;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CAfkBench::Init(void)
+HRESULT CAfkBench::Init(D3DXVECTOR3 pos)
 {
 	// 親クラスの初期化処理
-	CAfk::Init(AFKBENCH::Pos, AFKBENCH::fRadius);
+	CAfk::Init(pos, AFKBENCH::fRadius);
 
 	// パーティクル生成
 	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NONE);

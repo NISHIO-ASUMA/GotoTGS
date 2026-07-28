@@ -120,10 +120,14 @@ void CAfk2DUI::Update(void)
 	bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkMagazine();
 	bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
 	bool bAfkEating = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkEating();
-	bool bAfkBench = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkEating();
-
+	bool bAfkBench[4];
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		bAfkBench[nCnt] = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkBench(nCnt);
+	}
 	// さぼっていなかったら
-	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter && !bAfkEating && !bAfkBench)
+	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter && !bAfkEating && 
+		!bAfkBench[0] && !bAfkBench[1] && !bAfkBench[2] && !bAfkBench[3])
 	{
 		m_bDisplay = true;
 		SetTexture(AFK2DUI::Button_NAME);
@@ -143,10 +147,16 @@ void CAfk2DUI::Draw(void)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
-	auto bAfkBench = CAfkManager::Instance()->GetAfkBench()->GetAfk();
+	bool bAfkBench[4];
+
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		bAfkBench[nCnt] = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
+	}
 
 	// 親クラスの描画処理
-	if(bAfkSmoke || bAfkTV || bAfkMagazine || bAfkGameCenter || bAfkEating || bAfkBench)CObject2D::Draw();
+	if(bAfkSmoke || bAfkTV || bAfkMagazine || bAfkGameCenter || bAfkEating || 
+		bAfkBench[0] || bAfkBench[1] || bAfkBench[2] || bAfkBench[3])CObject2D::Draw();
 }
 //=========================================================
 // イージングサイン使用関数

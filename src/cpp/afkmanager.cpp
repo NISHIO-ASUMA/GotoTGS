@@ -25,6 +25,18 @@
 //=================================================
 CAfkManager* CAfkManager::m_pInstance = nullptr; // インスタンス変数
 
+//*********************************************************
+// 名前空間
+//*********************************************************
+namespace AFKBENCH
+{
+	const D3DXVECTOR3 StationPos = { 792.4f, 14.0f, 1303.6f };		// 駅のベンチの位置
+	const D3DXVECTOR3 GameCenterPos = { 1461.1f, 14.0f,317.0f };	// ゲームセンターのベンチの位置
+	const D3DXVECTOR3 IzakayaPos = { 1527.5f, 14.0f, -962.4f };		// 居酒屋のベンチの位置
+	const D3DXVECTOR3 OfficePos = { 734.4f, 14.0f, -468.0f };		// オフィス横のベンチの位置
+	constexpr int MAX_BENCH = 4;									// ベンチの最大数
+};
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -32,10 +44,12 @@ CAfkManager::CAfkManager() : m_pAfkSmoke(nullptr),
 m_pAfkTV(nullptr),
 m_pAfkMagazine(nullptr),
 m_pAfkGameCenter(nullptr),
-m_pAfkEating(nullptr),
-m_pAfkBench(nullptr)
+m_pAfkEating(nullptr)
 {
-
+	for (int nCnt = 0; nCnt < AFKBENCH::MAX_BENCH; nCnt++)
+	{
+		m_pAfkBench[nCnt] = NULL;
+	}
 }
 
 //=========================================================
@@ -71,8 +85,15 @@ HRESULT CAfkManager::Init(void)
 	m_pAfkEating->Init();
 
 	// ベンチさぼりの初期化処理
-	m_pAfkBench = new CAfkBench;
-	m_pAfkBench->Init();
+	for (int nCnt = 0; nCnt < AFKBENCH::MAX_BENCH; nCnt++)
+	{
+		m_pAfkBench[nCnt] = new CAfkBench;
+	}
+
+	m_pAfkBench[0]->Init(AFKBENCH::StationPos);
+	m_pAfkBench[1]->Init(AFKBENCH::GameCenterPos);
+	m_pAfkBench[2]->Init(AFKBENCH::IzakayaPos);
+	m_pAfkBench[3]->Init(AFKBENCH::OfficePos);
 
 	return S_OK;
 }
@@ -121,12 +142,15 @@ void CAfkManager::Uninit(void)
 		m_pAfkEating = nullptr;
 	}
 
-	// ベンチさぼりの破棄処理
-	if (m_pAfkBench)
+	for (int nCnt = 0; nCnt < AFKBENCH::MAX_BENCH; nCnt++)
 	{
-		m_pAfkBench->Uninit();
-		delete m_pAfkBench;
-		m_pAfkBench = nullptr;
+		// ベンチさぼりの破棄処理
+		if (m_pAfkBench[nCnt])
+		{
+			m_pAfkBench[nCnt]->Uninit();
+			delete m_pAfkBench[nCnt];
+			m_pAfkBench[nCnt] = nullptr;
+		}
 	}
 
 	// シングルトンの破棄
@@ -156,8 +180,11 @@ void CAfkManager::Update(void)
 	// 飲食さぼりの更新処理
 	m_pAfkEating->Update();
 
-	// 飲食さぼりの更新処理
-	m_pAfkBench->Update();
+	for (int nCnt = 0; nCnt < AFKBENCH::MAX_BENCH; nCnt++)
+	{
+		// 飲食さぼりの更新処理
+		m_pAfkBench[nCnt]->Update();
+	}
 }
 //=========================================================
 // インスタンス取得処理

@@ -34,7 +34,7 @@ public:
 	CAfkBench();
 	~CAfkBench();
 
-	HRESULT Init(void);
+	HRESULT Init(D3DXVECTOR3 pos);
 	void Uninit(void);
 	void Update(void);
 
