@@ -49,6 +49,13 @@ void CEnemyStateNeutral::OnUpdate()
 
 	// 通常のポインタ移動をする
 	m_pEnemy->UpdateMoveViewPoint();
+
+	// もし索敵範囲に入っていたら、疑い状態に変更する
+	if (m_pEnemy->CheckEyesight())
+	{
+		// ステート生成
+
+	}
 }
 //=========================================================
 // 状態終了

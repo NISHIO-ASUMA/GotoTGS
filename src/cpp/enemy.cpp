@@ -59,6 +59,7 @@ m_pSphereColiider(nullptr),
 m_pMachine(nullptr),
 m_isCheckPoint(false),
 m_isTargetChase(false),
+m_pDestCharactor(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
 m_playerTargetPos(VECTOR3_NULL)
@@ -75,7 +76,7 @@ CEnemy::~CEnemy()
 //========================================================
 // 生成処理
 //========================================================
-CEnemy* CEnemy::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CEnemy* CEnemy::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const MOVETYPE& Movetype)
 {
 	// インスタンス生成
 	CEnemy* pEnemy = new CEnemy;
@@ -84,6 +85,7 @@ CEnemy* CEnemy::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
+	pEnemy->SetMoveType(Movetype);
 	pEnemy->SetUseOutLine(true);
 	pEnemy->SetOutLineSize(0.35f);
 
@@ -494,13 +496,17 @@ void CEnemy::DrawEyeSight(void)
 //========================================================
 // 扇形の視界判定
 //========================================================
-bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
+bool CEnemy::CheckEyesight(void)
 {
+	// もしnullなら
+	if (!m_pDestCharactor) return false;
+
 	// 敵の現在座標を取得
 	D3DXVECTOR3 enemyPos = GetPos();
+	D3DXVECTOR3 CharactorPos = m_pDestCharactor->GetPos();
 
 	// 高さの判定
-	float heightDiff = fabsf(TargetPos.y - enemyPos.y);
+	float heightDiff = fabsf(CharactorPos.y - enemyPos.y);
 
 	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
 	{
@@ -508,7 +514,7 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 	}
 
 	// 距離の判定
-	D3DXVECTOR3 diff = TargetPos - enemyPos;
+	D3DXVECTOR3 diff = CharactorPos - enemyPos;
 	diff.y = 0.0f;
 
 	// 距離の2乗を計算
@@ -543,8 +549,6 @@ bool CEnemy::CheckEyesight(const D3DXVECTOR3& TargetPos)
 	// 内積判定
 	if (dot >= cosHalfAngle)
 	{
-		// 状態変更
-		
 		return true; // 視界に入っている
 	}
 
