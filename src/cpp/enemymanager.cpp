@@ -78,7 +78,7 @@ void CEnemyManager::LoadJson(void)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CEnemyManager::Init(CMoveCharactor * pCharactor)
+HRESULT CEnemyManager::Init(CPlayer* pCharactor)
 {
 	// 配列の切り離し
 	m_pEnemys.clear();
@@ -106,19 +106,6 @@ void CEnemyManager::Update(void)
 {
 	// nullチェック
 	if (!m_pTimeContainer) return;
-
-	// 最大時間を取得
-	int nAllTime = m_pTimeContainer->GetAllTime();
-
-	// NOTE : 現在は一旦40秒に一体追加で行こうかな
-	if (nAllTime > 0 && (nAllTime % 60) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
-	{
-		// 敵を生成する ( ここの座標は後々変更 )
-		CreateManager(VECTOR3_NULL,VECTOR3_NULL,CEnemy::MOVETYPE_SMOKE);
-
-		// 生成時間を変更して、このフレームでは一回のみ入るようにする
-		m_nIntervalCount = nAllTime;
-	}
 }
 //=========================================================
 // 敵の生成追加関数

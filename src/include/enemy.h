@@ -27,6 +27,8 @@ class CSphereCollider;
 class CBoxCollider;
 class CStateMachine;
 class CEnemyStateBase;
+class CPlayer;
+class CBillboard;
 
 //*********************************************************
 // 敵キャラクタークラスを定義
@@ -44,6 +46,7 @@ public:
 		MOVE,		// 移動モーション
 		DOUBT,		// 疑いモーション
 		CHASEDASH,	// 追いかけモーション
+		CATCH,		// 捕まえるモーション
 		MAX
 	};
 
@@ -140,20 +143,27 @@ public:
 	void SetTargetIdx(int idx) { m_nTargetIdx = idx; }
 	void SetStopTime(int time) { m_nStopTime = time; }
 	void SetMoveType(const MOVETYPE& Type) { m_MoveType = Type; }
-	void SetCharactorPointer(CMoveCharactor* pCharactor) { m_pDestCharactor = pCharactor; }
+	void SetCharactorPointer(CPlayer* pCharactor) { m_pDestCharactor = pCharactor; }
 
 	int  GetStopTime(void) const { return m_nStopTime; }
 	int GetTargetIndex(void) const { return m_nTargetIdx; }
 	MOVETYPE GetMoveType(void) const { return m_MoveType; }
-	CMoveCharactor* GetInCharactor(void) const { return m_pDestCharactor; }
+	CPlayer* GetInCharactor(void) const { return m_pDestCharactor; }
 	D3DXVECTOR3 GetPlayerTargetPos(void) const { return m_playerTargetPos; }
+	CBillboard* GetChaseIcon(void) const { return m_pChaseIcon; }
+
+private:
+
+	D3DXVECTOR3 CalculateObstacleAvoidance(const D3DXVECTOR3& pos, const D3DXVECTOR3& forwardDir);
 
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+
+	CBillboard* m_pChaseIcon;							// 追跡アイコンのビルボード
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
-	CMoveCharactor* m_pDestCharactor;					// 判定先のキャラクターポインタ
+	CPlayer* m_pDestCharactor;							// 判定先のキャラクターポインタ
 	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
 	MOVETYPE m_MoveType;								// 動きの種類
 

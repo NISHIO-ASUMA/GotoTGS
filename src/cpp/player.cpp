@@ -131,7 +131,9 @@ m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_bAfkEating(false),
 m_isPcWork(false),
-m_nControlTypes(CONTROLTYPE_NONE)
+m_isCatchEnemy(false),
+m_nControlTypes(CONTROLTYPE_NONE),
+m_isEnableLazy(false)
 {
 	for (int nCnt = 0; nCnt < 4; nCnt++)
 	{
@@ -199,6 +201,7 @@ HRESULT CPlayer::Init(void)
 
 	// フラグの再初期化
 	m_isPcWork = false;
+	m_isCatchEnemy = false;
 
 	return S_OK;
 }
@@ -241,6 +244,14 @@ void CPlayer::Update(void)
 	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加
 	//        西尾追記 : 2026/06/08 自動ドアの判別設定と判定の修正
 	//		  西尾追記 : 2026/06/16 モデルが出ないバグを修正 ステート追加
+
+	// もし上司に捕まってしまったら
+	if (m_isCatchEnemy == true)
+	{
+		// モーションだけ更新
+		CMoveCharactor::UpdateMotionOnly();
+		return;
+	}
 
 	// タスクの情報を取得
 	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
@@ -1205,39 +1216,51 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 		bAfkBench[nCnt] = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
 	}
 
+	// 各AFK状態の更新（入力があれば反転、無効エリアなら解除）
 	switch (AfkType)
 	{
 	case AFKTYPE_SMOKE:
-		// サボりキー入力判定
-		if (bAfkSmoke && bInput) m_bAfkSmoke = m_bAfkSmoke ? false : true;
+		if (bAfkSmoke && bInput) m_bAfkSmoke = !m_bAfkSmoke;
 		else if (!bAfkSmoke) m_bAfkSmoke = false;
 		break;
 	case AFKTYPE_TV:
-		if (bAfkTV && bInput) m_bAfkTV = m_bAfkTV ? false : true;
+		if (bAfkTV && bInput) m_bAfkTV = !m_bAfkTV;
 		else if (!bAfkTV) m_bAfkTV = false;
 		break;
 	case AFKTYPE_MAGAZINE:
-		if (bAfkMagazine && bInput) m_bAfkMagazine = m_bAfkMagazine ? false : true;
+		if (bAfkMagazine && bInput) m_bAfkMagazine = !m_bAfkMagazine;
 		else if (!bAfkMagazine) m_bAfkMagazine = false;
 		break;
 	case AFKTYPE_GAMECENTER:
-		if (bAfkGameCenter && bInput) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
+		if (bAfkGameCenter && bInput) m_bAfkGameCenter = !m_bAfkGameCenter;
 		else if (!bAfkGameCenter) m_bAfkGameCenter = false;
 		break;
 	case AFKTYPE_EATING:
-		if (bAfkEating && bInput) m_bAfkEating = m_bAfkEating ? false : true;
+		if (bAfkEating && bInput) m_bAfkEating = !m_bAfkEating;
 		else if (!bAfkEating) m_bAfkEating = false;
 		break;
 	case AFKTYPE_BENCH:
 		for (int nCnt = 0; nCnt < 4; nCnt++)
 		{
-			if (bAfkBench[nCnt] && bInput) m_bAfkBench[nCnt]= m_bAfkBench[nCnt] ? false : true;
+			if (bAfkBench[nCnt] && bInput) m_bAfkBench[nCnt] = !m_bAfkBench[nCnt];
 			else if (!bAfkBench[nCnt]) m_bAfkBench[nCnt] = false;
 		}
 		break;
 	default:
 		break;
 	}
+
+
+	// どれかのサボりフラグがtrueならm_isEnableLazyもtrueにする
+	m_isEnableLazy = (m_bAfkSmoke ||
+					m_bAfkTV ||
+					m_bAfkMagazine ||
+					m_bAfkGameCenter ||
+					m_bAfkEating ||
+					m_bAfkBench[0] ||
+					m_bAfkBench[1] ||
+					m_bAfkBench[2] ||
+					m_bAfkBench[3]);
 }
 //=================================================
 // さぼり時のスコア加算関数

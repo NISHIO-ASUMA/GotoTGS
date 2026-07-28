@@ -173,7 +173,7 @@ HRESULT CGameSceneObject::Init(void)
 	CMobCharactorManager::GetInstance()->Init();
 
 	// テスト生成 ( ボス )
-	CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+	//CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
 
 	return S_OK;
 }

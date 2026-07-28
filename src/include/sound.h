@@ -49,7 +49,7 @@ public:
 		SOUND_LABEL_START,			// ゲーム開始音
 
 
-		// ****************** ここから今回の追加SE ****************:
+		// ****************** ここから今回の追加SE ****************
 		SOUND_LABEL_TASKCLEAR_SE,	// タスク成功音
 		SOUND_LABEL_KEY_CLEAR_SE,	// キー入力成功音
 		SOUND_LABEL_TASKMISS_SE,	// タスクキー入力ミス音
@@ -58,6 +58,7 @@ public:
 		SOUND_LABEL_AUTODOOR_SE,	// 自動ドアの音
 
 		SOUND_LABEL_PCSTART_SE,		// パソコンの音
+		SOUND_LABEL_ACTIVECHARACTOR_SE,	// 敵追加出現音
 		SOUND_LABEL_MAX
 	};
 
@@ -119,8 +120,9 @@ private:
 		{"data/SE/typemissSE.wav",0},		 // タスクキー入力失敗音
 		{"data/SE/copySE.wav",0},			 // タスクキー入力失敗音
 		{"data/SE/officedoorSE.wav",0},			 // 両開きの音
-		{"data/SE/automaticSE.wav",0},			 // 自動ドアの音
-		{"data/SE/pcSE.wav",0},			 // パソコン開始の音
+		{"data/SE/automaticSE.wav",0},		// 自動ドアの音
+		{"data/SE/pcSE.wav",0},				// パソコン開始の音
+		{"data/SE/ActiveCharactor.wav",0}	// 敵追加の音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

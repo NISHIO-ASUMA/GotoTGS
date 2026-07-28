@@ -2,7 +2,10 @@
 //
 // チュートリアルのセリフ処理 [ tutoriallines.cpp ]
 // Author: Takahashi Misaki
-//
+//	
+// 場所を示す矢印を配置 ( Asuma )
+//CBlock::Create(D3DXVECTOR3(-55.0f, 80.0f, 180.0f), D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f), D3DXVECTOR3(HALF, HALF, HALF), "STAGEOBJ/yajirusi.x");
+// 
 //=========================================================
 
 //*********************************************************
@@ -21,6 +24,7 @@
 #include "deskwork.h"
 #include "tutorialobject.h"
 #include "tutorialplayer.h"
+#include "pointobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -32,7 +36,8 @@ m_nNowIdx(NULL),
 m_nCountSkip(NULL),
 m_pLines(nullptr),
 m_pBG(nullptr),
-m_pTutoPlayer(nullptr)
+m_pTutoPlayer(nullptr),
+m_pArrow{}
 {
 
 }
@@ -70,6 +75,9 @@ CTutorialLines* CTutorialLines::Create(const bool& bUse)
 //=========================================================
 HRESULT CTutorialLines::Init(void)
 {
+	// 配列初期化
+	m_pArrow.clear();
+
 	// 現在の番号を初期化
 	m_nNowIdx = LINESTYPE_1;
 
@@ -87,6 +95,9 @@ HRESULT CTutorialLines::Init(void)
 	m_pBG->SetUse(m_bUse);
 	m_pLines->SetUse(m_bUse);
 
+	// 矢印生成
+	CreateArrow();
+
 	return S_OK;
 }
 
@@ -95,6 +106,9 @@ HRESULT CTutorialLines::Init(void)
 //=========================================================
 void CTutorialLines::Uninit(void)
 {
+	// 配列消去
+	m_pArrow.clear();
+
 	// 各ポインタをヌルにする
 	m_pBG = nullptr;
 	m_pLines = nullptr;
@@ -202,6 +216,23 @@ void CTutorialLines::SetNextTutorial(void)
 		// 対象オブジェクトの状態を変更する
 		if (m_pTutoPlayer)
 			m_pTutoPlayer->SetDefaultState();
+
+		// 2個目の矢印を起動
+		m_pArrow[0]->SetIsDraw(false);
+		m_pArrow[1]->SetIsDraw(true);
+	}
+
+	if (m_nNowIdx == LINESTYPE_6)
+	{
+		// 3個目の矢印を起動
+		m_pArrow[1]->SetIsDraw(false);
+		m_pArrow[2]->SetIsDraw(true);
+	}
+
+	if (m_nNowIdx == LINESTYPE_7)
+	{
+		// 矢印の描画をなくす
+		m_pArrow[2]->SetIsDraw(false);
 	}
 
 	// セリフを番号に合わせる
@@ -215,4 +246,40 @@ void CTutorialLines::SetNextTutorial(void)
 
 	// 実践をやっていない状態にする
 	CDeskworkUIManager::SetTutorial(false);
+}
+
+//=========================================================
+// 矢印生成
+//=========================================================
+void CTutorialLines::CreateArrow(void)
+{
+	// 矢印オブジェクトを生成 (PC)
+	m_pArrow.push_back(CPointObject::Create
+						(D3DXVECTOR3(-55.0f, 80.0f, 180.0f),
+						 D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+						 D3DXVECTOR3(HALF, HALF, HALF),
+						"STAGEOBJ/yajirusi.x")
+	);
+
+	// 矢印オブジェクトを生成 (コピー)
+	m_pArrow.push_back(CPointObject::Create
+					   (D3DXVECTOR3(150.0f, 100.0f, 370.0f),
+						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+						D3DXVECTOR3(HALF, HALF, HALF),
+						"STAGEOBJ/yajirusi.x")
+	);
+
+
+	// 矢印オブジェクトを生成 (提出)
+	m_pArrow.push_back(CPointObject::Create
+					   (D3DXVECTOR3(40.0f, 80.0f, 280.0f),
+						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+						D3DXVECTOR3(HALF, HALF, HALF),
+						"STAGEOBJ/yajirusi.x")
+	);
+
+	// 描画起動( 最初のオブジェクトのみ )
+	m_pArrow[0]->SetIsDraw(true);
+	m_pArrow[1]->SetIsDraw(false);
+	m_pArrow[2]->SetIsDraw(false);
 }

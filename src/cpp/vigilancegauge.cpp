@@ -16,12 +16,18 @@
 #include "manager.h"
 #include "input.h"
 #include "enemymanager.h"
+#include "gamesceneobject.h"
+#include "gametime.h"
+#include "ui.h"
+#include "sound.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CVigilancegauge::CVigilancegauge(int nPriority) :CObject2DMulti(nPriority),
-m_fRatio(NULL)
+m_fRatio(NULL),
+m_nActiveCount(NULL),
+m_pActiveUi(nullptr)
 {
 
 }
@@ -60,7 +66,6 @@ CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge, const char* BTEXTUR
 	return pGauge;
 }
 
-
 //=========================================================
 // 初期化処理
 //=========================================================
@@ -68,6 +73,10 @@ HRESULT CVigilancegauge::Init(void)
 {
 	// 親の初期化処理
 	CObject2DMulti::Init();
+
+	// ui生成
+	m_pActiveUi = CUi::Create(D3DXVECTOR3(640.0f, 90.0f, 0.0f), 0, 300.0f, 65.0f, "addchar00.png");
+	m_pActiveUi->SetUse(false);
 
 	return S_OK;
 }
@@ -82,7 +91,7 @@ void CVigilancegauge::Uninit(void)
 }
 
 //=========================================================
-// 更新処理 ( TODO : 西尾 ここの最大値に達する処理の時に敵を生成する処理を追加する )
+// 更新処理
 //=========================================================
 void CVigilancegauge::Update(void)
 {
@@ -95,14 +104,48 @@ void CVigilancegauge::Update(void)
 	// 最大比率を超えたら
 	if (m_fRatio >= 1.0f)
 	{
-		// NOTE : ここに追加 ( 出すUIの種類によって生成するものを変更する UIからのランダム値を受け取ってその値を使う)
+		// 1 or 2をランダム化
+		int nRand = rand() % 2 + 1;
 
+		// 敵を生成する
+		switch (nRand)
+		{
+		case 1:
+			CEnemyManager::GetInstance()->CreateManager(D3DXVECTOR3(420.0f,0.0f,190.0f), VECTOR3_NULL, CEnemy::MOVETYPE_SMOKE); // 煙草
+			break;
 
+		case 2:
+			CEnemyManager::GetInstance()->CreateManager(D3DXVECTOR3(-120.0f, 0.0f, 240.0f), VECTOR3_NULL, CEnemy::MOVETYPE_TV);	 // TV
+			break;
+
+		default:
+			CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL, CEnemy::MOVETYPE_NORMAL);					// デフォルト
+			break;
+		}
+
+		// uiを表示する
+		m_pActiveUi->SetUse(true);
+		m_nActiveCount = NULL;
+
+		// サウンド再生
+		CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_ACTIVECHARACTOR_SE);
 
 		// 比率を元に戻す
 		m_fRatio = 0.0f;
 	}
 
+	if (m_pActiveUi->GetUse())
+	{
+		// カウントを加算
+		m_nActiveCount++;
+
+		// 3秒経過したら表示をOFFにする
+		if (m_nActiveCount >= 180)
+		{
+			m_pActiveUi->SetUse(false);
+			m_nActiveCount = NULL;
+		}
+	}
 	// テクスチャのUVを比率分動かす
 	CObject2DMulti::SetUV(m_fRatio);
 }
@@ -117,7 +160,7 @@ void CVigilancegauge::Draw(void)
 }
 
 //=========================================================
-// 生成するものを変化させる処理
+// 生成するものを変化させる処理 ( 後々改良案件 )
 //=========================================================
 void CVigilancegauge::CreateCharactor(const int nNumber)
 {

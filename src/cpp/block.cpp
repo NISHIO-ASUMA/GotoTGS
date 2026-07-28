@@ -2,7 +2,6 @@
 //
 // ブロック処理 [ block.cpp ]
 // Author: Asuma Nishio
-// NOTE : マップ内に配置しているものは基本このクラス
 // 
 //=========================================================
 
@@ -192,5 +191,5 @@ bool CBlock::Collision(CBoxCollider* pOther, D3DXVECTOR3* OutPos)
 	if (m_pCollider == nullptr) return false;
 
 	// 矩形同士の当たり判定を返す
-	return CCollisionBox::Collision(m_pCollider.get(), pOther, OutPos);
+	return CCollisionBox::CollisionEx(m_pCollider.get(), pOther, OutPos);
 }

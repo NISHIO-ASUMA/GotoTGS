@@ -22,7 +22,7 @@
 #include "fade.h"
 #include "tutorialplayer.h"
 #include "camera.h"
-#include "ui.h"
+#include "billboard.h"
 #include "tutoriallines.h"	// 髙橋追加
 #include "deskwork.h"		// 髙橋追加
 
@@ -78,6 +78,9 @@ HRESULT CTutorialObject::Init(void)
 	// カメラに追従するキャラクターのポインタをセット
 	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pTutoPlayer);
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pTutoPlayer->GetPos());
+
+	// 上司のデスクのかご
+	CBlock::Create(D3DXVECTOR3(40.0f, 36.0f, 280.0f), VECTOR3_NULL, INITSCALE, "STAGEOBJ/basket.x");
 
 	// チュートリアルのセリフの生成 Misaki
 	m_plines = CTutorialLines::Create(true);

@@ -17,6 +17,7 @@
 #include "manager.h"
 #include "enemystateneutral.h"
 #include "enemystatechase.h"
+#include "billboard.h"
 
 //=========================================================
 // コンストラクタ
@@ -49,6 +50,11 @@ void CEnemyStateDoubt::OnStart(void)
 //=========================================================
 void CEnemyStateDoubt::OnUpdate(void)
 {
+	// フラグoff
+	const auto& icon = m_pEnemy->GetChaseIcon();
+	if (icon)
+		icon->SetDrawFlags(false);
+
 	// もし視界内に入っていたら
 	if (m_pEnemy->CheckEyesight())
 	{

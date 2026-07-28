@@ -39,12 +39,14 @@ public:
 	inline void SetCol(D3DXCOLOR col = COLOR_WHITE) { m_col = col; }
 	inline void SetSize(float fWidth, float fHeight) { m_fWidth = fWidth, m_fHeight = fHeight; }
 	inline void SetEnableZtest(bool isflags) { m_isTests = isflags; }
+	inline void SetDrawFlags(const bool isDrawFlags) { m_isDraw = isDrawFlags; }
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; };
 	inline D3DXVECTOR3 GetRot(void) const { return m_rot; };
 	inline D3DXCOLOR GetCol(void) const { return m_col; };
 	inline float GetWidth(void) const { return m_fWidth; }
 	inline float GetHeight(void) const { return m_fHeight; }
+	inline bool GetIsDrawFlags(void) const { return m_isDraw; }
 
 	/// <summary>
 	/// 生成処理
@@ -67,10 +69,10 @@ public:
 private:
 
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// 頂点バッファ
-	D3DXVECTOR3 m_rot;	// 角度情報
-	D3DXVECTOR3 m_pos;	// 座標情報
-	D3DXCOLOR m_col;	// 色情報
-	D3DXMATRIX m_mtxWorld;	// ワールドマトリックス
+	D3DXVECTOR3 m_rot;					// 角度情報
+	D3DXVECTOR3 m_pos;					// 座標情報
+	D3DXCOLOR m_col;					// 色情報
+	D3DXMATRIX m_mtxWorld;				// ワールドマトリックス
 
 	int m_nIdxTexture;			// テクスチャインデックス
 	int m_FlashCount;			// 点滅間隔
@@ -78,4 +80,5 @@ private:
 	int m_nPatterAnim;			// アニメ―ションパターン
 	float m_fHeight, m_fWidth;	// 横幅,高さ
 	bool m_isTests;				// Zテストするかどうか
+	bool m_isDraw;				// 描画フラグ
 };

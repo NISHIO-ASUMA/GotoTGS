@@ -20,6 +20,7 @@
 #include "enemy.h"
 #include "manager.h"
 #include "input.h"
+#include "billboard.h"
 
 //=========================================================
 // コンストラクタ
@@ -51,6 +52,11 @@ void CEnemyStateNeutral::OnUpdate()
 	// nullなら
 	if (!m_pEnemy) return;
 
+	// フラグoff
+	const auto& icon = m_pEnemy->GetChaseIcon();
+	if (icon)
+		icon->SetDrawFlags(false);
+
 	// もし索敵範囲に入っていたら、疑い状態に変更する
 	if (m_pEnemy->CheckEyesight())
 	{
@@ -75,7 +81,7 @@ void CEnemyStateNeutral::OnUpdate()
 		break;
 
 	default:
-		m_pEnemy->UpdateMoveViewPoint();
+		m_pEnemy->UpdateMoveViewPoint();	// 通常
 		break;
 	}
 }

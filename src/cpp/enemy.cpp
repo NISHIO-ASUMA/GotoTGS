@@ -28,7 +28,8 @@
 #include "enemystatebase.h"
 #include "enemystateneutral.h"
 #include "enemyutility.h"
-
+#include "billboard.h"
+#include "jsonmanager.h"
 //*********************************************************
 // 定数名前空間
 //*********************************************************
@@ -60,6 +61,7 @@ m_pMachine(nullptr),
 m_isCheckPoint(false),
 m_isTargetChase(false),
 m_pDestCharactor(nullptr),
+m_pChaseIcon(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
 m_playerTargetPos(VECTOR3_NULL)
@@ -128,6 +130,10 @@ HRESULT CEnemy::Init(void)
 		ChangeState(new CEnemyStateNeutral(), CEnemyStateBase::ID_NEUTRAL);
 	}
 
+	// アイコン生成
+	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,10.0f,10.0f,"ui_chaseicon.png");
+	m_pChaseIcon->SetDrawFlags(false);
+
 	return S_OK;
 }
 //========================================================
@@ -176,13 +182,20 @@ void CEnemy::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// 対象を追いかける関数
+// 対象を追いかける関数 (　ここでマップに配置されている物を避けて向かうアルゴリズムにしたいがどうやろうか )
 //========================================================
 void CEnemy::ChaseMoving(void)
 {
 	// 現在の座標とターゲットの座標を取得
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 描画フラグがoffなら
+	if (!m_pChaseIcon->GetIsDrawFlags())
+		m_pChaseIcon->SetDrawFlags(true);
+
+	// uiアイコンの座標を更新
+	m_pChaseIcon->SetPos(D3DXVECTOR3(pos.x, pos.y + 80.0f, pos.z));
 
 	// 目的地へのベクトルを計算
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
@@ -191,19 +204,13 @@ void CEnemy::ChaseMoving(void)
 	float distance = D3DXVec3Length(&vecToTarget);
 
 	// 到着判定 ( ここを何とか修正してプレイヤーを捕まえるようにする )
-	if (distance <= EnemyInfo::RANGE)
+	if (distance <= 3.0f)
 	{
-		// 座標を目的地に合わせる
-		SetPos(targetPos);
-
-		// 停止時間を設定
-		m_nStopTime = Config::COOL_TIME;
-
-		// インデックス設定
-		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, EnemyInfo::VIEWPOINT - 1);
+		// プレイヤーを捕まえる
+		m_pDestCharactor->SetCatchEnemy(true);
 
 		// 目的地に到着した瞬間にモーションを切り替える
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		GetMotion()->SetMotion(MOTION::CATCH, true,3);
 		return;
 	}
 
@@ -212,7 +219,7 @@ void CEnemy::ChaseMoving(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED * 2.5f;
+	moveVec *= EnemyInfo::SPEED * 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -555,6 +562,10 @@ bool CEnemy::CheckEyesight(void)
 {
 	// もしnullなら
 	if (!m_pDestCharactor) return false;
+
+	// もしサボっていなかったら
+	if (!m_pDestCharactor->GetIsLazy())
+		return false;
 
 	// 敵の現在座標を取得
 	D3DXVECTOR3 enemyPos = GetPos();

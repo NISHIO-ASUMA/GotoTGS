@@ -33,6 +33,7 @@ public:
 	// İ’èˆ—
 	void SetUseFlash(const bool& bUse) { m_isFlash = bUse; }	// Misaki
 	void SetUse(const bool& bUse) { m_bUse = bUse; }			// Misaki
+	bool GetUse(void) const { return m_bUse; }
 
 	/// <summary>
 	/// ƒ|ƒCƒ“ƒ^¶¬ŠÖ”

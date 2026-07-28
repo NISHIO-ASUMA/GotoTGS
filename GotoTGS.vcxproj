@@ -284,6 +284,7 @@
     <ClCompile Include="src\cpp\playerstatemove.cpp" />
     <ClCompile Include="src\cpp\playerstateneutral.cpp" />
     <ClCompile Include="src\cpp\playerstatetv.cpp" />
+    <ClCompile Include="src\cpp\pointobject.cpp" />
     <ClCompile Include="src\cpp\police.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
@@ -465,6 +466,7 @@
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\playerstatetv.h" />
+    <ClInclude Include="src\include\pointobject.h" />
     <ClInclude Include="src\include\police.h" />
     <ClInclude Include="src\include\progressgauge.h" />
     <ClInclude Include="src\include\ranking.h" />

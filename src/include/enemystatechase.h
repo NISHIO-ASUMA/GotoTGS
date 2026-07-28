@@ -32,4 +32,5 @@ public:
 private:
 
 	int m_nStayCount;	// ’â~’†‚ÌƒJƒEƒ“ƒg
+	bool m_isDoubt;	// ‹^‚¢ó‘Ô‚©‚Ç‚¤‚©
 };

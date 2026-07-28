@@ -149,7 +149,7 @@ float CCollisionBox::MathRadius
 			halfSize.z * fabsf(D3DXVec3Dot(&localZ, &axis));  // Z²‚Ì’·‚³‚Ì“àÏ
 }
 //=========================================================
-// ‰ñ“]‚ğl—¶‚µ‚½“–‚½‚è”»’è
+// ‰ñ“]‚ğl—¶‚µ‚½“–‚½‚è”»’è ( OBB )
 //=========================================================
 bool CCollisionBox::CollisionEx(CBoxCollider* thisCollider, CBoxCollider* OtherCollider, D3DXVECTOR3* pOutPos)
 {

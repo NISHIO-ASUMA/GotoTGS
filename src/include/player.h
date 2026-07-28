@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤー処理 [ player.cpp ]
+// プレイヤー処理 [ player.h ]
 // Author: Shouya Chikada
 // 
 //=========================================================
@@ -74,7 +74,6 @@ public:
 		AFKTYPE_MAX
 	};
 
-
 public:
 
 	CPlayer(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));
@@ -124,6 +123,7 @@ public:
 	void AddGameCenter(void) { m_nGameCenter++; }
 	void AddEating(void) { m_nEating++; }
 	void AddBench(void) { m_nBench++; }
+
 	//************************************************
 	// さぼりのカウント用関数(ゲッター)
 	//************************************************
@@ -134,12 +134,16 @@ public:
 	int GetEating(void) { return m_nEating; }
 	int GetBench(void) { return m_nBench; }
 
-
 	void SetAfk(AFKTYPE AfkType, bool bInput);
 	void AfkScore(void);
 
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
+
+	// 西尾追加
+	void SetCatchEnemy(const bool isFlags) { m_isCatchEnemy = isFlags; }
+	bool GetIsCatch(void) { return m_isCatchEnemy; } // 捕まった
+	bool GetIsLazy(void) { return m_isEnableLazy; }
 
 public:
 
@@ -258,7 +262,7 @@ private:
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
-	bool m_bAfkBench[4];									// ベンチでさぼっている時の判定変数
+	bool m_bAfkBench[4];								// ベンチでさぼっている時の判定変数
 
 	//************************************************
 	// さぼりのカウント用変数
@@ -274,4 +278,8 @@ private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類
 	bool m_isPcWork;						  // デスクワークか
+
+	// 西尾追加
+	bool m_isCatchEnemy;					  // 上司に捕まってしまった
+	bool m_isEnableLazy;					  // サボり中の判定
 };

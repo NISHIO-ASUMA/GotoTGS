@@ -16,13 +16,20 @@
 #include "object2Dmulti.h"
 
 //*********************************************************
+// 前方宣言
+//*********************************************************
+class CUi;
+
+//*********************************************************
 //  警戒ゲージに対するクラスを定義
 //*********************************************************
 class CVigilancegauge:public CObject2DMulti
 {
 public:
 
+	//**************************
 	// 警戒度のゲージの構造体
+	//**************************
 	struct Gauge
 	{
 		D3DXVECTOR3 pos;	// 位置
@@ -56,7 +63,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float RATIO_VALUE = 0.5f / 2400.0f;		// 加算量
+		static constexpr float RATIO_VALUE = 1.0f / 3600.0f;		// 加算量
 
 	};
 
@@ -66,4 +73,7 @@ private:
 private:	// 西尾追加 : 生成する物の関数わけ
 	void CreateCharactor(const int nNumber);
 
+private:
+	CUi* m_pActiveUi;		// 出現したときに通知するui
+	int m_nActiveCount;		// 表示カウント
 };

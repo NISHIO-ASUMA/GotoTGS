@@ -21,7 +21,7 @@
 // 前方宣言
 //*********************************************************
 class CGametime;
-class CMoveCharactor;
+class CPlayer;
 
 //*********************************************************
 // 敵の複数管理クラスを定義
@@ -32,7 +32,7 @@ public:
 
 	~CEnemyManager();
 
-	HRESULT Init(CMoveCharactor* pCharactor = nullptr);
+	HRESULT Init(CPlayer* pCharactor = nullptr);
 	void Uninit(void);
 	void Update(void);
 
@@ -73,7 +73,7 @@ public:
 	/// キャラクターのポインタをセットする
 	/// </summary>
 	/// <param name="pCharactor">判定したいキャラクターのポインタ</param>
-	void SetCharactor(CMoveCharactor* pCharactor) { m_pDestCharactorPointer = pCharactor; }
+	void SetCharactor(CPlayer* pCharactor) { m_pDestCharactorPointer = pCharactor; }
 
 	/// <summary>
 	/// 管理クラス内で生成
@@ -88,7 +88,7 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	CMoveCharactor* GetCharactorPointer(void) const { return m_pDestCharactorPointer; }
+	CPlayer* GetCharactorPointer(void) const { return m_pDestCharactorPointer; }
 
 	/// <summary>
 	/// シングルトン取得処理
@@ -108,9 +108,9 @@ private:
 	void LoadJson(void);
 
 private:
-	std::vector<CEnemy*>m_pEnemys; // 敵の管理配列
-	CGametime* m_pTimeContainer;	// タイムクラスの入れ物
-	CMoveCharactor* m_pDestCharactorPointer;	// 動くキャラクターのクラスの入れ物
+	std::vector<CEnemy*>m_pEnemys;		// 敵の管理配列
+	CGametime* m_pTimeContainer;		// タイムクラスの入れ物
+	CPlayer* m_pDestCharactorPointer;	// 動くキャラクターのクラスの入れ物
 
 private:
 	int m_nStageCount;		// 敵の増加時間カウント

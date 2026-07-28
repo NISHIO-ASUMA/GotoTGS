@@ -102,6 +102,9 @@ void CUi::Uninit(void)
 //=========================================================
 void CUi::Update(void)
 {
+	if (!m_bUse)
+		return;
+
 	// フェード透明化フラグ有効時
 	if (m_isAlphaEnable)
 	{
@@ -123,6 +126,9 @@ void CUi::Update(void)
 //=========================================================
 void CUi::Draw(void)
 {
+	if (!m_bUse)
+		return;
+
 	// デバイス取得
 	const auto& Device = CManager::GetInstance()->GetRenderer()->GetDevice();
 
@@ -134,12 +140,10 @@ void CUi::Draw(void)
 		Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	}
 	
-	if (m_bUse != false)
-	{// 表示するかどうか Misaki
-		// 親クラスの描画
-		CObject2D::Draw();
-	}
-
+	// 表示するかどうか Misaki
+	// 親クラスの描画
+	CObject2D::Draw();
+	
 	// αテスト有効時
 	if (m_isAlphaTest)
 	{

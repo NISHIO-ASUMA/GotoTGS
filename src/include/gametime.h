@@ -40,7 +40,7 @@ public:
 #ifdef _DEBUG
 		static constexpr int NUMTIME = 180;						// 最大タイマー
 #else
-		static constexpr int NUMTIME = 240;						// 最大タイマー ( 一旦4分で見てみる )
+		static constexpr int NUMTIME = 180;						// 最大タイマー ( 一旦3分で見てみる )
 #endif // _DEBUG
 	};
 

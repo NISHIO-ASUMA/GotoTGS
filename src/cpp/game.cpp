@@ -22,6 +22,7 @@
 #include "result.h"
 #include "fade.h"
 #include "gametime.h"
+#include "player.h"
 
 #ifdef _DEBUG
 #include "debugproc.h"
@@ -134,6 +135,14 @@ void CGame::Update(void)
 
 		// 時間が0になったら
 		if (CGameSceneObject::GetInstance()->GetTime()->GetAllTime() <= 0)
+		{
+			// ゲーム終了状態に設定
+			m_pState->SetProgress(CGameState::PROGRESS_END);
+			return;
+		}
+
+		// プレイヤーが捕まっていたら
+		if (CGameSceneObject::GetInstance()->GetPlayer()->GetIsCatch() == true)
 		{
 			// ゲーム終了状態に設定
 			m_pState->SetProgress(CGameState::PROGRESS_END);

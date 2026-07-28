@@ -42,6 +42,7 @@
   { "Texture": "data/TEXTURE/number003.png" },
   { "Texture": "data/TEXTURE/number004.png" },
   { "Texture": "data/TEXTURE/pictogram.png" },
+  { "Texture": "data/TEXTURE/per.png" },
   { "Texture": "data/TEXTURE/PauseBack.png" },
   { "Texture": "data/TEXTURE/pause_continue.png" },
   { "Texture": "data/TEXTURE/pause_quit.png" },

@@ -35,6 +35,7 @@ m_nPatterAnim(NULL),
 m_nIdxTexture(-1),
 m_col(COLOR_WHITE),
 m_isTests(true),
+m_isDraw(true),
 m_pVtxBuff(nullptr),
 m_mtxWorld{}
 {
@@ -139,6 +140,9 @@ void CBillboard::Uninit(void)
 //=========================================================
 void CBillboard::Update(void)
 {
+	// 描画フラグ
+	if (!m_isDraw) return;
+
 	// 頂点情報のポインタ
 	VERTEX_3D* pVtx = nullptr;
 
@@ -171,6 +175,9 @@ void CBillboard::Update(void)
 //=========================================================
 void CBillboard::Draw(void)
 {
+	// 描画フラグ
+	if (!m_isDraw) return;
+
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 

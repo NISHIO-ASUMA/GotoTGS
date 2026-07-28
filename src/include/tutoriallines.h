@@ -11,9 +11,14 @@
 #pragma once
 
 //*********************************************************
-// インクルード
+// システムインクルードファイル
 //*********************************************************
-#include "object2D.h"
+#include <vector>
+
+//*********************************************************
+// インクルードファイル
+//*********************************************************
+#include "object.h"
 
 //*********************************************************
 // 前方宣言
@@ -21,6 +26,7 @@
 class CTutorialLinesBG;
 class CLines;
 class CTutorialPlayer;
+class CPointObject;
 
 //*********************************************************
 // チュートリアルのセリフに対するクラスを定義
@@ -118,4 +124,12 @@ private:
 	CTutorialLinesBG* m_pBG;	// 背景のポインタ
 	CLines* m_pLines;			// セリフのポインタ
 	CTutorialPlayer* m_pTutoPlayer; // チュートリアルのプレイヤーポインタの入れ物
+
+/// <summary>
+/// ADD : 西尾  オブジェクトの追加
+/// </summary>
+private:
+	void CreateArrow(void);
+private:
+	std::vector<CPointObject*> m_pArrow;	// 矢印オブジェクト
 };
