@@ -323,7 +323,7 @@ void CParticle::Nearby(void)
 	// Šp“x‚Ìİ’è
 	float angle = m_rot.y + (D3DX_PI / 2);
 
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		float spread = D3DXToRadian((rand() % EFFECT::nMax - EFFECT::nMin) / 10.0f);
 		float dir = angle + spread;

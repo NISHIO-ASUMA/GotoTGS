@@ -103,6 +103,10 @@ public:
 	);
 	
 	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
+
+	//************************************************
+	// さぼっている時の判定用変数(ゲッター)
+	//************************************************
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
@@ -110,6 +114,26 @@ public:
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 	bool GetAfkEating(void) { return m_bAfkEating; }
 	bool GetAfkBench(int nIdx) { return m_bAfkBench[nIdx]; }
+
+	//************************************************
+	// さぼりのカウント用関数
+	//************************************************
+	void AddSmoke(void) { m_nSmoke++; }
+	void AddTV(void) { m_nTV++; }
+	void AddMagazine(void) { m_nMagazine++; }
+	void AddGameCenter(void) { m_nGameCenter++; }
+	void AddEating(void) { m_nEating++; }
+	void AddBench(void) { m_nBench++; }
+	//************************************************
+	// さぼりのカウント用関数(ゲッター)
+	//************************************************
+	int GetSmoke(void) { return m_nSmoke; }
+	int GetTV(void) { return m_nTV; }
+	int GetMagazine(void) { return m_nMagazine; }
+	int GetGameCenter(void) { return m_nGameCenter; }
+	int GetEating(void) { return m_nEating; }
+	int GetBench(void) { return m_nBench; }
+
 
 	void SetAfk(AFKTYPE AfkType, bool bInput);
 	void AfkScore(void);
@@ -241,6 +265,17 @@ private:
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
 	bool m_bAfkBench[4];									// ベンチでさぼっている時の判定変数
+
+	//************************************************
+	// さぼりのカウント用変数
+	//************************************************
+	int m_nSmoke;										// たばこを吸った回数カウント用変数
+	int m_nTV;											// TVを見た回数カウント用変数
+	int m_nMagazine;									// 雑誌を読んだ回数カウント用変数
+	int m_nGameCenter;									// ゲームセンターで遊んだ回数カウント用変数
+	int m_nEating;										// 飲食スペースでお菓子を食べた回数カウント用変数
+	int m_nBench;										// ベンチで寝た回数カウント用変数
+
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類

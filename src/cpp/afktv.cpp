@@ -79,7 +79,7 @@ HRESULT CAfkTV::Init(void)
 	CAfk::Init(AFKTV::Pos, AFKTV::fRadius);
 
 	// パーティクル生成
-	//m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NEARBY);
+	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NEARBY);
 
 	return S_OK;
 }
@@ -99,17 +99,17 @@ void CAfkTV::Update(void)
 	// 親クラスの更新処理
 	CAfk::Update();
 
-	//if (m_pParticle == nullptr)return;
+	if (m_pParticle == nullptr)return;
 
-	//// プレイヤーがさぼっているか判定用の変数
-	//bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
+	// プレイヤーがさぼっているか判定用の変数
+	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
 
-	//if (bAfkTV) m_pParticle->SetUse(true);
-	//else m_pParticle->SetUse(false);
+	if (bAfkTV) m_pParticle->SetUse(true);
+	else m_pParticle->SetUse(false);
 
-	//float fColR = (float)(rand() / (RAND_MAX + 1.0f));
-	//float fColG = (float)(rand() / (RAND_MAX + 1.0f));
+	float fColR = (float)(rand() / (RAND_MAX + 1.0f));
+	float fColG = (float)(rand() / (RAND_MAX + 1.0f));
 
-	//m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, 0.0f, 1.0f));
+	m_pParticle->SetColor(D3DXCOLOR(fColR, fColG, 0.0f, 1.0f));
 
 }

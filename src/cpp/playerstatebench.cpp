@@ -35,6 +35,9 @@ void CPlayerStateBench::OnStart()
 {
 	// プレイヤーの現在座標をベンチの上にセットする
 	m_pPlayer->MathBenchRotation();
+
+	// 回数加算
+	m_pPlayer->AddSmoke();
 }
 
 //=========================================================
