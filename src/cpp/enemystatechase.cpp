@@ -2,8 +2,6 @@
 //
 // プレイヤーを追いかける状態のクラス[ enemystatechase.cpp ]
 // Author: Asuma Nishio
-//
-// NOTE : 追従していく、そこでのplayerへの失敗判定とかも必要
 // 
 //=========================================================
 
@@ -16,11 +14,13 @@
 // インクルードファイル
 //*********************************************************
 #include "enemy.h"
+#include "enemystateneutral.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEnemyStateChase::CEnemyStateChase()
+CEnemyStateChase::CEnemyStateChase() : CEnemyStateBase(),
+m_nStayCount(NULL)
 {
 	SetID(ID_CHASE);
 }
@@ -36,19 +36,26 @@ CEnemyStateChase::~CEnemyStateChase()
 //=========================================================
 void CEnemyStateChase::OnStart(void)
 {
-
+	// 追従フラグセット
+	//m_pEnemy->SetTargetChaseFlag(true);
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CEnemyStateChase::OnUpdate(void)
 {
+	// 追いかける関数を呼ぶ
+	m_pEnemy->ChaseMoving();
 
+	// 追いかけていて、視界の範囲から一定時間逃れている かつ 30カウント経過したらニュートラル状態に戻す
+	// その時はモーションを"疑い"にする
+	// if ()
 }
 //=========================================================
 // 終了関数
 //=========================================================
 void CEnemyStateChase::OnExit(void)
 {
-
+	// 念のため、フラグ解除
+	//m_pEnemy->SetTargetChaseFlag(false);
 }

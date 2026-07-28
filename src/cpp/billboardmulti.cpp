@@ -1,6 +1,6 @@
 //=========================================================
 //
-// ビルボードマルチテクスチャ適用処理 [ billboardmulti.cpp ]
+// ビルボードマルチテクスチャ処理 [ billboardmulti.cpp ]
 // Author: Asuma Nishio
 //
 //=========================================================
@@ -101,10 +101,10 @@ HRESULT CBillboardMulti::Init(void)
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(-m_fWidth, m_fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_fWidth, m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(-m_fWidth, -m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_fWidth, -m_fHeight, 0.0f);
+	pVtx[0].pos = 
+	pVtx[1].pos = 
+	pVtx[2].pos = 
+	pVtx[3].pos = VECTOR3_NULL;
 
 	// 法線情報の設定
 	pVtx[0].nor =
@@ -203,9 +203,9 @@ void CBillboardMulti::Draw(void)
 	// ライトを無効にする
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
+	// Zテストの設定（変更前の状態を覚えておく）
 	if (m_isTests)
 	{
-		// Zテストを適用
 		pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
 		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	}
@@ -248,7 +248,7 @@ void CBillboardMulti::Draw(void)
 		int nIdx = m_apTexture[nCnt];
 		if (nIdx < 0) continue;
 
-		LPDIRECT3DTEXTURE9 pTexData = CManager::GetInstance()->GetTexture()->GetAddress(nIdx);
+		LPDIRECT3DTEXTURE9 pTexData = pTextureManager->GetAddress(nIdx);
 		if (pTexData == nullptr) continue;
 
 		pDevice->SetTexture(static_cast<DWORD>(nCnt), pTexData);
@@ -262,31 +262,33 @@ void CBillboardMulti::Draw(void)
 		}
 		else
 		{
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_BLENDTEXTUREALPHA);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT);
+			// テクスチャの乗算設定
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_MODULATE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE); // 2枚目の色
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT); // 1枚目の結果
 
+			// アルファ値の乗算
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_CURRENT);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_TEXTURE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 		}
 	}
-
-	// 頂点バッファの設定
-	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_3D_MULTI));
-
-	// FVF設定
-	pDevice->SetFVF(FVF_VERTEX_3D_MULTI);
 
 	// ポリゴン描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-	// クリーンアップ
 	for (int i = 0; i < static_cast<int>(m_apTexture.size()); i++)
 	{
 		pDevice->SetTexture(i, nullptr);
 	}
 
+	for (int i = 1; i < static_cast<int>(m_apTexture.size()); i++)
+	{
+		pDevice->SetTextureStageState(i, D3DTSS_COLOROP, D3DTOP_DISABLE);
+		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+	}
+
+	// 標準の Direct3D9 設定に戻す
 	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
@@ -295,14 +297,17 @@ void CBillboardMulti::Draw(void)
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
 
-	for (int i = 1; i < static_cast<int>(m_apTexture.size()); i++)
+	// Z書き込み許可を必ず TRUE に戻す
+	if (m_isTests)
 	{
-		pDevice->SetTextureStageState(i, D3DTSS_COLOROP, D3DTOP_DISABLE);
-		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 	}
+
+	// ライトを有効に戻す
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 //=========================================================
-// テクスチャセット
+// テクスチャセット ( 基底クラスから取得 )
 //=========================================================
 void CBillboardMulti::SetTexture(const char* pRegisterName, const int& nIdx)
 {
@@ -323,7 +328,7 @@ void CBillboardMulti::SetTexture(const char* pRegisterName, const int& nIdx)
 	if (nIdxTexture == -1) return;
 
 	// 配列サイズを設定
-	if (nIdx >= m_apTexture.size())
+	if (nIdx >= static_cast<int>(m_apTexture.size()))
 	{
 		m_apTexture.resize(nIdx + 1, -1);
 	}

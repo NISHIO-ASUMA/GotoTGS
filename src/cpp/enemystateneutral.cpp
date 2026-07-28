@@ -41,7 +41,7 @@ CEnemyStateNeutral::~CEnemyStateNeutral()
 void CEnemyStateNeutral::OnStart()
 {
 	// モーションセット
-	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true, 5);
+	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true,3);
 }
 //=========================================================
 // 状態更新
@@ -60,8 +60,24 @@ void CEnemyStateNeutral::OnUpdate()
 	}
 
 	// 通常のポインタ移動をする
-	m_pEnemy->UpdateMoveViewPoint();
+	switch (m_pEnemy->GetMoveType())
+	{
+	case CEnemy::MOVETYPE_NORMAL:
+		m_pEnemy->UpdateMoveViewPoint();	// PC辺り
+		break;
 
+	case CEnemy::MOVETYPE_SMOKE:
+		m_pEnemy->UpdateMovingSmoke();		// 煙草辺り
+		break;
+
+	case CEnemy::MOVETYPE_TV:
+		m_pEnemy->UpdateMovingTV();			// TV辺り
+		break;
+
+	default:
+		m_pEnemy->UpdateMoveViewPoint();
+		break;
+	}
 }
 //=========================================================
 // 状態終了

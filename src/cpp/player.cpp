@@ -446,9 +446,6 @@ void CPlayer::Update(void)
 	// 自動ドアとの判定
 	UpdateAutoDoorCollision(UpdatePos);
 
-	// 敵の視界との当たり判定
-	CollisionEnemyEyesite();
-
 	// オフィス内のドアとの判定
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
 
@@ -1092,41 +1089,10 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 			if (m_pSphereCollider)
 			{
 				m_pSphereCollider->SetPos(pos);
-				
 			}
 			
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
-			break;
-		}
-	}
-}
-//=================================================
-// 敵の視界との当たり判定
-//=================================================
-void CPlayer::CollisionEnemyEyesite(void)
-{
-	// 敵管理クラスを取得する
-	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
-
-	// 警戒度ゲージを取得 [add 髙橋]
-	const auto& Gauge = CGameSceneObject::GetInstance()->GetVigilanceUIManager()->GetGauge();
-
-	// 敵の中での判定取得
-	for (auto& IdxEnemy : Enemy)
-	{
-		// 見つかる扇方の範囲内だったら
-		if (IdxEnemy->CheckEyesight())
-		{
-			// 対象の敵の動きを変更する(プレイヤーを追従するかどうかのフラグを変更する )
-			//IdxEnemy->SetTargetChaseFlag(true);
-
-			// 現在のゲージの量を取得 [add 髙橋]
-			float fNowRatio = Gauge->GetRatio();
-
-			// 警戒度ゲージを増やす [add 髙橋]
-			Gauge->SetRatio(fNowRatio + 0.002f);
-
 			break;
 		}
 	}

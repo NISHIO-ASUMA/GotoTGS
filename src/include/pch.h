@@ -50,10 +50,10 @@
 //*********************************************************
 // FVFマクロ定義
 //*********************************************************
-#define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)					// [2D]頂点フォーマット
-#define FVF_VERTEX_3D (D3DFVF_XYZ | D3DFVF_NORMAL |  D3DFVF_DIFFUSE | D3DFVF_TEX1)		// [3D]頂点フォーマット
-#define FVF_VERTEX_2D_MULTI (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 | D3DFVF_TEX2)		// [2Dマルチ]頂点フォーマット
-#define FVF_VERTEX_3D_MULTI (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2)			// [3Dマルチ]頂点フォーマット
+#define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)									// [2D]頂点フォーマット
+#define FVF_VERTEX_3D (D3DFVF_XYZ | D3DFVF_NORMAL |  D3DFVF_DIFFUSE | D3DFVF_TEX1)						// [3D]頂点フォーマット
+#define FVF_VERTEX_2D_MULTI (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 | D3DFVF_TEX2)				// [2Dマルチ]頂点フォーマット
+#define FVF_VERTEX_3D_MULTI (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1 | D3DFVF_TEX2)	// [3Dマルチ]頂点フォーマット
 
 //*********************************************************
 // クリア変数マクロ定義

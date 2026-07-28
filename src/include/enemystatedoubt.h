@@ -14,6 +14,7 @@
 // インクルードファイル
 //*********************************************************
 #include "enemystatebase.h"
+#include "enemydoubtgauge.h"
 
 //*********************************************************
 // 疑い状態クラスを定義
@@ -30,7 +31,9 @@ public:
 	void OnExit(void) override;
 
 private:
-	int m_nDoubtCount;	// 疑いカウントの上限
+
+	int m_nDoubtCount;			// 疑いカウントの上限
+	CEnemyDoubtGauge* m_pGauge;	// 疑いゲージ
 
 private:
 

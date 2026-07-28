@@ -16,7 +16,7 @@
 #include "enemystatebase.h"
 
 //*********************************************************
-// 追従状態クラスを定義
+// 追従状態のクラスを定義
 //*********************************************************
 class CEnemyStateChase : public CEnemyStateBase
 {
@@ -31,4 +31,5 @@ public:
 
 private:
 
+	int m_nStayCount;	// 停止中のカウント
 };

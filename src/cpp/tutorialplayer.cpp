@@ -140,14 +140,9 @@ HRESULT CTutorialPlayer::Init(void)
 	// モーション読み込み
 	MotionLoad(TutorilaPlayer::SCRIPT, MAX, false);
 
-	//// インスタンス生成
-	//m_pMachine = new CStateMachine;
-
-	//// 初期ステートをセット
-	//ChangeState(new CTutorialPlayerStateNeutral(), CTutorialPlayerStateBase::ID_NEUTRAL);
-
+	// オブジェクトの回転角度を取得
 	D3DXMATRIX matRot;
-	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
+	D3DXVECTOR3 rot = GetRot(); 
 
 	// X, Y, Zの回転を合成して回転行列を作成
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);

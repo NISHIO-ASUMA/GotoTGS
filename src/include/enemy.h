@@ -43,6 +43,7 @@ public:
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動モーション
 		DOUBT,		// 疑いモーション
+		CHASEDASH,	// 追いかけモーション
 		MAX
 	};
 
@@ -66,7 +67,11 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+
 	void DrawEyeSight(void);
+	void ChaseMoving(void);
+	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag; }
+
 	bool CheckEyesight(void);
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
 
@@ -109,8 +114,6 @@ public:
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
-	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag;}
-
 	/// <summary>
 	/// 通常の敵の動き( 巡回ポイントで動く )
 	/// </summary>
@@ -129,9 +132,6 @@ public:
 	/// <param name=""></param>
 	void UpdateMovingTV(void);
 
-/// <summary>
-/// 西尾追加 : 窓口の関数をまとめて格納しているpublic メソッド
-/// </summary>
 public:
 
 	void DecrementStopTime(void) { if (m_nStopTime > 0) m_nStopTime--; }
@@ -146,21 +146,20 @@ public:
 	int GetTargetIndex(void) const { return m_nTargetIdx; }
 	MOVETYPE GetMoveType(void) const { return m_MoveType; }
 	CMoveCharactor* GetInCharactor(void) const { return m_pDestCharactor; }
-
 	D3DXVECTOR3 GetPlayerTargetPos(void) const { return m_playerTargetPos; }
 
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
-
-	bool m_isCheckPoint;								// ポイントに到着したかどうか
-	int m_nStopTime;									// 停止しているカウント
-	int m_nTargetIdx;									// 向かう目的地のインデックス
-	bool m_isTargetChase;								// 追跡
-
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	CMoveCharactor* m_pDestCharactor;					// 判定先のキャラクターポインタ
 	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
 	MOVETYPE m_MoveType;								// 動きの種類
+
+private:
+	bool m_isCheckPoint;								// ポイントに到着したかどうか
+	bool m_isTargetChase;								// 追跡判定
+	int m_nStopTime;									// 停止しているカウント
+	int m_nTargetIdx;									// 向かう目的地のインデックス
 };

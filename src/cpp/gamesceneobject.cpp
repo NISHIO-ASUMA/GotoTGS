@@ -52,7 +52,7 @@
 #include "boss.h"
 #include "receptionist.h"
 #include "auditormanager.h"
-#include <resulticon.h>
+#include "enemydoubtgauge.h"
 
 //*********************************************************
 // ’è”–¼‘O‹óŠÔ

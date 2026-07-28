@@ -225,12 +225,6 @@ public:
 	void UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad);
 
 	/// <summary>
-	/// 敵の視界との当たり判定
-	/// </summary>
-	/// <param name="UpdatePos">更新された座標</param>
-	void CollisionEnemyEyesite(void);
-
-	/// <summary>
 	/// テレビの方を向く関数
 	/// </summary>
 	/// <param name=""></param>

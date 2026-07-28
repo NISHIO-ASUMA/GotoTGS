@@ -1502,11 +1502,11 @@
     <ClInclude Include="src\include\enemystatedoubt.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\enemydoubtgauge.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\billboardmulti.h">
       <Filter>ヘッダー ファイル\ObjectClass\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemydoubtgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

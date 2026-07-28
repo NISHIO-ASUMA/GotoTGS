@@ -105,7 +105,7 @@ HRESULT CCamera::Init(void)
 	m_currentAnim.AnimData.clear();
 	m_isMove = false;
 
-	// 操作の種類を設定する(パッドかキーマウかどうか)
+	// 操作の種類を設定する (パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
 
 	return S_OK;
@@ -136,7 +136,7 @@ void CCamera::Update(void)
 		return;
 	}
 
-	// ゲームのみ追従カメラ設定
+	// 追従カメラ設定
 	if (CManager::GetInstance()->GetScene() == CScene::MODE_GAME || 
 		CManager::GetInstance()->GetScene() == CScene::MODE_TUTORIAL)
 	{
