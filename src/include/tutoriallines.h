@@ -20,6 +20,7 @@
 //*********************************************************
 class CTutorialLinesBG;
 class CLines;
+class CTutorialPlayer;
 
 //*********************************************************
 // チュートリアルのセリフに対するクラスを定義
@@ -57,11 +58,13 @@ public:
 
 	// 設定処理
 	void SetNextTutorial(void);		// 次のチュートリアルに進む設定
+	void SetPlayer(CTutorialPlayer* pPlayer = nullptr) { m_pTutoPlayer = pPlayer; }
 
 	// 情報取得処理
 	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景のポインタ
 	CLines* GetLines(void) { return m_pLines; }			// セリフのポインタ
 	bool GetUse(void) const { return m_bUse; }			// 使用しているかどうか
+	int GetNowIdxNumber(void) const { return m_nNowIdx; }
 
 private:
 
@@ -114,4 +117,5 @@ private:
 	int m_nCountSkip;			// スキップする為のカウント
 	CTutorialLinesBG* m_pBG;	// 背景のポインタ
 	CLines* m_pLines;			// セリフのポインタ
+	CTutorialPlayer* m_pTutoPlayer; // チュートリアルのプレイヤーポインタの入れ物
 };

@@ -196,73 +196,6 @@ void CTutorialPlayer::Uninit(void)
 //=========================================================
 void CTutorialPlayer::Update(void)
 {
-#if 0
-	// タスクの情報を取得
-	auto* pDesk = CTutorialObject::GetInstance()->GetDesk();
-
-	//*********************************************************
-	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
-	//*********************************************************
-	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)
-	{
-		// 入力フラグ
-		bool isInputKey = false;
-
-		// 操作の種類によって使える物を変化させる
-		switch (m_nControlTypes)
-		{
-		case CTutorialPlayer::CONTROLTYPE_NONE:
-			break;
-
-		case CTutorialPlayer::CONTROLTYPE_KEY:
-
-			if (Key->GetTrigger(DIK_F))
-			{
-				isInputKey = true;
-			}
-			break;
-
-		case CTutorialPlayer::CONTROLTYPE_PAD:
-
-			if (Pad->GetTrigger(CJoyPad::JOYKEY_START))
-			{
-				isInputKey = true;
-			}
-			break;
-
-		default:
-			break;
-		}
-
-		if (!isInputKey)
-		{// 終了キーを押していない場合
-			// モーション更新だけ挟んでreturnする
-			CMoveCharactor::Update();
-			return;
-		}
-
-		// ADD : 西尾 さっき行っていた作業が"デスクワーク"なら
-		if (pDesk->GetTaskType() == CWorldUICollision::TYPE_PC)
-		{
-			// プレイヤーの座標を戻す
-			SetPos(VECTOR3_NULL);
-
-			// 角度を変更
-			SetRot(VECTOR3_NULL);
-
-			// フラグをリセットする
-			m_isPcWork = false;
-		}
-
-		// 起動したタスクを非アクティブにする [add Misaki]
-		pDesk->SetTaskType(pDesk->GetTaskType());
-
-		// タスク中は移動や他の当たり判定をさせないためにリターン
-		return;
-	}
-
-#endif
-
 	// タスクの情報を取得
 	auto* pDesk = CTutorialObject::GetInstance()->GetDesk();
 
@@ -347,12 +280,12 @@ void CTutorialPlayer::Update(void)
 		// 十字キーの入力がある場合は十字キーの移動だけを行う
 		if (Pad->GetCrossKeyInput(Pad) == true)
 		{
-			//MoveCrossPadButton(TutorilaPlayer::fSpeed);
+			MoveCrossPadButton(TutorilaPlayer::fSpeed);
 		}
 		else
 		{
 			// 十字キーが押されていない場合は、スティックの判定を行う
-			//MoveJoypad(3.75f);
+			MoveJoypad(3.75f);
 		}
 	}
 
@@ -536,24 +469,6 @@ void CTutorialPlayer::MoveKeyboard(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	//// さぼっているかの判定
-	//auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	//auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	//auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	//auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-
-	//if (bAfkSmoke && pKeyboard->GetTrigger(DIK_F)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	//else if (!bAfkSmoke) m_bAfkSmoke = false;
-
-	//if (bAfkTV && pKeyboard->GetTrigger(DIK_F)) m_bAfkTV = m_bAfkTV ? false : true;
-	//else if (!bAfkTV) m_bAfkTV = false;
-
-	//if (bAfkMagazine && pKeyboard->GetTrigger(DIK_F)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	//else if (!bAfkMagazine) m_bAfkMagazine = false;
-
-	//if (bAfkGameCenter && pKeyboard->GetTrigger(DIK_F)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	//else if (!bAfkGameCenter) m_bAfkGameCenter = false;
-
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
 	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
@@ -673,24 +588,6 @@ void CTutorialPlayer::MoveJoypad(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-
-	if (bAfkSmoke && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START))m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
-
-	if (bAfkTV && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
-
-	if (bAfkMagazine && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
-
-	if (bAfkGameCenter && pJoyPad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
-
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
 	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
@@ -801,25 +698,6 @@ void CTutorialPlayer::MoveCrossPadButton(float speed)
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
 
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-
-	// サボりキー入力判定
-	if (bAfkSmoke && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkSmoke = m_bAfkSmoke ? false : true;
-	else if (!bAfkSmoke) m_bAfkSmoke = false;
-
-	if (bAfkTV && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkTV = m_bAfkTV ? false : true;
-	else if (!bAfkTV) m_bAfkTV = false;
-
-	if (bAfkMagazine && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkMagazine = m_bAfkMagazine ? false : true;
-	else if (!bAfkMagazine) m_bAfkMagazine = false;
-
-	if (bAfkGameCenter && pGamePad->GetTrigger(CJoyPad::JOYKEY_START)) m_bAfkGameCenter = m_bAfkGameCenter ? false : true;
-	else if (!bAfkGameCenter) m_bAfkGameCenter = false;
-
 	// ビュー行列の逆行列を計算
 	D3DXMATRIX invViewMat;
 	D3DXMatrixInverse(&invViewMat, NULL, &ViewMatrix);
@@ -921,6 +799,20 @@ void CTutorialPlayer::MoveCrossPadButton(float speed)
 
 		m_nCntAfk = 0;
 	}
+}
+//=================================================
+// 元の状態に戻す
+//=================================================
+void CTutorialPlayer::SetDefaultState(void)
+{
+	// プレイヤーの座標を戻す
+	SetPos(Player_Info::DESK_RETURNPOS);
+
+	// 角度を変更
+	SetRot(VECTOR3_NULL);
+
+	// フラグをリセットする
+	m_isPcWork = false;
 }
 //=================================================
 // ブロックとのコリジョン判定関数わけ
