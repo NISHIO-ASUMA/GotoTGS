@@ -13,14 +13,6 @@
 #include "player.h"
 
 //=========================================================
-// 名前空間
-//=========================================================
-namespace AFKBENCH
-{
-	const D3DXVECTOR3 ReturnPos = { 800.4f, 0.0f, 1303.6f };	// ベンチから戻るときの位置
-}
-
-//=========================================================
 // コンストラクタ
 //=========================================================
 CPlayerStateBench::CPlayerStateBench()
@@ -57,7 +49,8 @@ void CPlayerStateBench::OnUpdate()
 		m_pPlayer->GetMotion()->SetMotion(CPlayer::MOTION::BENCH, true, 3);
 	}
 
-	if (!m_pPlayer->GetAfkBench())
+	if (!m_pPlayer->GetAfkBench(0) && !m_pPlayer->GetAfkBench(1)
+		&& !m_pPlayer->GetAfkBench(2) && !m_pPlayer->GetAfkBench(3))
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
@@ -70,5 +63,5 @@ void CPlayerStateBench::OnUpdate()
 void CPlayerStateBench::OnExit()
 {
 	// 固定の座標にもどる
-	m_pPlayer->SetPos(AFKBENCH::ReturnPos);
+	m_pPlayer->SetPos(m_pPlayer->GetPosOld());
 }
