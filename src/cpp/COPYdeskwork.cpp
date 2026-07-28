@@ -136,6 +136,9 @@ void CCOPYDeskwork::Uninit(void)
 //=========================================================
 void CCOPYDeskwork::Update(void)
 {
+	// 使えない状態なら
+	if (GetCan() != true) return;
+
 	// 親の更新処理
 	CDeskworkUIManager::Update();
 
@@ -275,6 +278,9 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	{
 		// チュートリアルを進める
 		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
+
+		// 使えない状態にする
+		SetCan();
 
 		return true;
 	}

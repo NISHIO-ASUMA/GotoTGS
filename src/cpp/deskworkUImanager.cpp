@@ -30,6 +30,7 @@ m_pos(VECTOR3_NULL),
 m_pClearUI(nullptr),
 m_bUse(false),
 m_bTime(false),
+m_bCan(false),
 m_nCountTime(NULL)
 {
 	m_nPCTaskNum = NULL;
@@ -69,6 +70,9 @@ HRESULT CDeskworkUIManager::Init(void)
 	// カウントを初期化
 	m_nCountTime = NULL;
 
+	// 使える状態にする
+	m_bCan = true;
+
 	return S_OK;
 }
 
@@ -86,10 +90,9 @@ void CDeskworkUIManager::Uninit(void)
 // 更新処理
 //=========================================================
 void CDeskworkUIManager::Update(void)
-{
+{	
 	// 乱数の種
 	srand((unsigned int)time(0));
-
 }
 
 //=========================================================

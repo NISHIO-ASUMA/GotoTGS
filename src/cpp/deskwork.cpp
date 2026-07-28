@@ -220,6 +220,9 @@ void CDeskwork::SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool&
 	// PCタスクの場合
 	case CWorldUICollision::TYPE_PC:
 	
+		// 使用できない状態なら
+		if(!m_pPCDeskUI->GetCan()) return;
+
 		// PCタスクUIの透明度を設定
 		m_pPCDeskUI->SetAlphaUI(bUse);
 
@@ -233,6 +236,9 @@ void CDeskwork::SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool&
 
 	// コピー機タスクの場合
 	case CWorldUICollision::TYPE_COPY:
+
+		// 使用できない状態なら
+		if (!m_pCOPYDeskUI->GetCan()) return;
 
 		// コピー機タスクUIの透明度を設定
 		m_pCOPYDeskUI->SetAlphaUI(bUse);

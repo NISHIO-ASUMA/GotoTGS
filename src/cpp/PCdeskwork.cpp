@@ -150,6 +150,9 @@ void CPCDeskwork::Uninit(void)
 //=========================================================
 void CPCDeskwork::Update(void)
 {
+	// 使えない状態なら
+	if (GetCan() != true) return;
+
 	// 親の更新処理
 	CDeskworkUIManager::Update();
 
@@ -309,9 +312,6 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	// 現在選択している番号を初期化
 	m_nNowIdx = 0;
 
-	// 失敗していない状態にする
-	m_bFalse = false;
-
 	// クールタイムが始まっていない状態にする
 	SetTime(false);
 
@@ -323,13 +323,19 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	pClear->SetUseFlash(false);
 
 	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && !m_bFalse)
 	{
 		// チュートリアルを進める
 		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
 
+		// 使えない状態にする
+		SetCan();
+
 		return true;
 	}
+
+	// 失敗していない状態にする
+	m_bFalse = false;
 
 	return true;
 }

@@ -373,12 +373,11 @@ void CTutorialPlayer::Update(void)
 					break;
 
 				default:
-
 					// nullじゃない状態
 					if (pDesk)
 					{
 						// デスクワーク時
-						if (Colliders->nType == CWorldUICollision::TYPE_PC)
+						if (Colliders->nType == CWorldUICollision::TYPE_PC && pDesk->GetPCDeskUI()->GetCan())
 						{
 							// PCタスクの時の動作関数
 							MathDeskRotation();

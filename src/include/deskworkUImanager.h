@@ -50,6 +50,7 @@ public:
 	inline void SetUse(const bool& bUse) { m_bUse = bUse; }
 	inline void SetTime(const bool& bTime) { m_bTime = bTime; }
 	inline void SetCountTime(const int& nCountTime) { m_nCountTime = nCountTime; }
+	inline void SetCan(const bool& bCan = false) { m_bCan = bCan; }
 	static void SetTutorial(const bool& bTutorial = false) { m_bTutorial = bTutorial; }
 
 	// 情報取得処理
@@ -58,6 +59,7 @@ public:
 	inline bool GetUse(void) const { return m_bUse; }
 	inline bool GetTime(void) const { return m_bTime; }
 	inline int GetCountTime(void) const { return m_nCountTime; }
+	inline bool GetCan(void)const { return m_bCan; }
 
 	// 静的メンバ関数
 	static void AddPCTask(void) { m_nPCTaskNum++; }
@@ -92,6 +94,7 @@ private:
 	bool m_bUse;			// 使用しているかどうか	
 	bool m_bTime;			// クールタイム中かどうか
 	int m_nCountTime;		// 時間をカウントする変数
+	bool m_bCan;			// 使えるかどうか
 
 	// 静的メンバ変数
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
