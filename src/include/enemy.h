@@ -42,7 +42,7 @@ public:
 	{
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動モーション
-		SEARCH,		// 疑いモーション
+		DOUBT,		// 疑いモーション
 		MAX
 	};
 

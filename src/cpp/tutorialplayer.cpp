@@ -48,6 +48,7 @@
 #include "sideopendoorcollision.h"	
 #include "enemymanager.h"			
 #include "enemy.h"					
+#include "tutoriallines.h"
 
 //*********************************************************
 // 名前空間
@@ -998,7 +999,7 @@ void CTutorialPlayer::MathDeskRotation(void)
 	GetMotion()->SetMotion(CTutorialPlayer::MOTION::TV, true, 3);
 
 	// プレイヤーの位置をデスク用の固定座標にセット
-	SetPos(VECTOR3_NULL);
+	SetPos(D3DXVECTOR3(-63.0f, 16.0f, 185.0f));
 
 	// 向きたい角度
 	float fRotY = D3DX_PI * 0.5f;

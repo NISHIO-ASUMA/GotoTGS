@@ -128,11 +128,11 @@ struct VERTEX_3D
 //*********************************************************
 struct VERTEX_3D_MULTI
 {
-	D3DXVECTOR3 pos;	// 頂点座標
-	D3DXVECTOR3 nor;	// 法線ベクトル
-	D3DCOLOR col;		// 頂点カラー
-	D3DXVECTOR2 tex;	// テクスチャ座標
-	D3DXVECTOR2 texM;	// マルチテクスチャ
+	D3DXVECTOR3 pos;		// 頂点座標
+	D3DXVECTOR3 nor;		// 法線ベクトル
+	D3DCOLOR col;			// 頂点カラー
+	D3DXVECTOR2 tex;		// テクスチャ座標(1枚目)
+	D3DXVECTOR2 texMulti;	// マルチテクスチャ(2枚目)
 };
 
 //*********************************************************

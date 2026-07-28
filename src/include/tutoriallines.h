@@ -55,6 +55,9 @@ public:
 	// 生成処理
 	static CTutorialLines* Create(const bool& bUse = false);
 
+	// 設定処理
+	void SetNextTutorial(void);		// 次のチュートリアルに進む設定
+
 	// 情報取得処理
 	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景のポインタ
 	CLines* GetLines(void) { return m_pLines; }			// セリフのポインタ
