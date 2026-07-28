@@ -20,6 +20,7 @@
 #include "deskworkUImanager.h"
 #include "deskwork.h"
 #include "tutorialobject.h"
+#include "tutorialplayer.h"
 
 //=========================================================
 // コンストラクタ
@@ -30,7 +31,8 @@ m_bAgain(false),
 m_nNowIdx(NULL),
 m_nCountSkip(NULL),
 m_pLines(nullptr),
-m_pBG(nullptr)
+m_pBG(nullptr),
+m_pTutoPlayer(nullptr)
 {
 
 }
@@ -113,7 +115,6 @@ void CTutorialLines::Update(void)
 	{
 		// 実践をやっている状態にする
 		CDeskworkUIManager::SetTutorial(true);
-
 		return;
 	}
 
@@ -195,6 +196,14 @@ void CTutorialLines::SetNextTutorial(void)
 	// 現在の番号を一つ進める
 	m_nNowIdx++;
 
+	// 対象と一致するとき( パソコンタスクが終わった時 )
+	if (m_nNowIdx == LINESTYPE_4)
+	{
+		// 対象オブジェクトの状態を変更する
+		if (m_pTutoPlayer)
+			m_pTutoPlayer->SetDefaultState();
+	}
+
 	// セリフを番号に合わせる
 	m_pLines->SetTexture(m_LinesType[m_nNowIdx]);
 
@@ -205,6 +214,5 @@ void CTutorialLines::SetNextTutorial(void)
 	pDesk->SetTaskType(pDesk->GetTaskType());
 
 	// 実践をやっていない状態にする
-	CDeskworkUIManager::SetTutorial();
-
+	CDeskworkUIManager::SetTutorial(false);
 }

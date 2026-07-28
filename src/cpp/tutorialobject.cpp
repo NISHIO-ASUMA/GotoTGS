@@ -81,6 +81,7 @@ HRESULT CTutorialObject::Init(void)
 
 	// チュートリアルのセリフの生成 Misaki
 	m_plines = CTutorialLines::Create(true);
+	m_plines->SetPlayer(m_pTutoPlayer);
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));

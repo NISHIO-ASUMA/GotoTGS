@@ -38,10 +38,10 @@ namespace PC_DESKWORK
 // コンストラクタ
 //=========================================================
 CPCDeskwork::CPCDeskwork() :CDeskworkUIManager(),
-m_nNowIdx(NULL),
-m_bFalse(false),
 m_BasePos(VECTOR3_NULL),
-m_Offsetpos(VECTOR3_NULL)
+m_Offsetpos(VECTOR3_NULL),
+m_nNowIdx(NULL),
+m_bFalse(false)
 {
 
 }
