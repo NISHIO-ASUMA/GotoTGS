@@ -957,11 +957,8 @@
     <ClCompile Include="src\cpp\tutorialplayer.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\eemystatedoubt.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="src\include\enemystatedoubt.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
