@@ -85,6 +85,8 @@ namespace Player_Info
 	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
 	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
 
+	// ベンチ関係
+	const D3DXVECTOR3 BENCH_CHARACTORPOS = { 792.4f, 14.0f, 1303.6f };
 };
 
 //=========================================================
@@ -1138,6 +1140,15 @@ void CPlayer::MathDeskRotation(void)
 	SetRot(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 }
 //=================================================
+// ベンチの向きを調整するための計算関数 
+//=================================================
+void CPlayer::MathBenchRotation(void)
+{
+	// 座標をセットする
+	SetPos(Player_Info::BENCH_CHARACTORPOS);
+}
+
+//=================================================
 // さぼりの起動
 //=================================================
 void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
@@ -1217,6 +1228,7 @@ void CPlayer::AfkScore(void)
 			default:
 				break;
 			}
+
 			// スコア加算
 			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
 			m_nScoreCnt++;

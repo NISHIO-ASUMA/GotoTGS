@@ -216,6 +216,13 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void MathDeskRotation(void);
+
+	/// <summary>
+	/// ベンチで寝るときの向き調整関数
+	/// </summary>
+	/// <param name=""></param>
+	void MathBenchRotation(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー

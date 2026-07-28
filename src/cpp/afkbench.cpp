@@ -23,7 +23,7 @@
 namespace AFKBENCH
 {
 	const D3DXVECTOR3 Pos = { 792.4f, 14.0f, 1303.6f };	// 位置
-	constexpr float fRadius = 20.0f;					// 範囲の半径
+	constexpr float fRadius = 25.0f;					// 範囲の半径
 };
 //*********************************************************
 // 名前空間(パーティクル)
