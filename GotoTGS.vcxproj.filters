@@ -957,6 +957,12 @@
     <ClCompile Include="src\cpp\tutorialplayer.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\eemystatedoubt.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\include\enemystatedoubt.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1489,6 +1495,9 @@
     </ClInclude>
     <ClInclude Include="src\include\enemyutility.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatedoubt.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
