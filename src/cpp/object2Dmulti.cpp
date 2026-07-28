@@ -384,5 +384,4 @@ void CObject2DMulti::SetUV(const float fRatio)
 
 	// ƒAƒ“ƒƒbƒN
 	m_pVtxBuff->Unlock();
-
 }

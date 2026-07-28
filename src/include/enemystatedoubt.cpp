@@ -54,8 +54,9 @@ void CEnemyStateDoubt::OnUpdate(void)
 
 		// ui表示(はてなマーク)
 
+
 		// モーションセット ( 疑い )
-		//m_pEnemy->GetMotion()->SetMotion()
+		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT, true, 3);
 	}
 
 	// もし上限値を超えていたら
