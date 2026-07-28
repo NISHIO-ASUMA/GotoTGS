@@ -21,7 +21,7 @@
 CEnemyStateSerch::CEnemyStateSerch()
 {
 	// idセット
-	SetID(ID_SERCH);
+	//SetID(ID_SERCH);
 }
 //=========================================================
 // デストラクタ

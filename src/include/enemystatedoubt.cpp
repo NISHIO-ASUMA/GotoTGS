@@ -1,17 +1,13 @@
 //=========================================================
 //
-// 敵の通常状態クラス [ enemystateneutral.cpp ]
-// Author : Asuma Nishio
-// 
-// TODO : state doubt ( ダウト )
-// 
+// プレイヤーを疑っている状態のクラス [ enemystatedoubt.cpp ]
+// Author: Asuma Nishio
+//
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "enemystateneutral.h"
-#include "enemystateserch.h"
 #include "enemystatedoubt.h"
 
 //*********************************************************
@@ -19,54 +15,62 @@
 //*********************************************************
 #include "enemy.h"
 #include "manager.h"
-#include "input.h"
+#include "enemystateneutral.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEnemyStateNeutral::CEnemyStateNeutral()
+CEnemyStateDoubt::CEnemyStateDoubt() : CEnemyStateBase(),
+m_nDoubtCount(0)
 {
-	SetID(ID_NEUTRAL);
+	// IDセット
+	SetID(ID_DOUBT);
 }
 //=========================================================
 // デストラクタ
 //=========================================================
-CEnemyStateNeutral::~CEnemyStateNeutral()
+CEnemyStateDoubt::~CEnemyStateDoubt()
 {
 
 }
 //=========================================================
-// 状態開始
+// 開始関数
 //=========================================================
-void CEnemyStateNeutral::OnStart()
+void CEnemyStateDoubt::OnStart(void)
 {
 	// モーションセット
-	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true, 5);
+	//m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::);
 }
 //=========================================================
-// 状態更新
+// 更新関数
 //=========================================================
-void CEnemyStateNeutral::OnUpdate()
+void CEnemyStateDoubt::OnUpdate(void)
 {
-	// nullなら
-	if (!m_pEnemy) return;
-
-	// もし索敵範囲に入っていたら、疑い状態に変更する
+	// もし視界内に入っていたら
 	if (m_pEnemy->CheckEyesight())
 	{
-		// ステート生成
-		m_pEnemy->ChangeState(new CEnemyStateDoubt(),ID_DOUBT);
-		return;
+		// カウントを加算
+		m_nDoubtCount++;
+
+		// ui表示(はてなマーク)
+
+		// モーションセット ( 疑い )
+		//m_pEnemy->GetMotion()->SetMotion()
 	}
 
-	// 通常のポインタ移動をする
-	m_pEnemy->UpdateMoveViewPoint();
+	// もし上限値を超えていたら
+	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT)
+	{
+		// 猛追ステートに変更する
 
+		return;
+	}
 }
 //=========================================================
-// 状態終了
+// 終了関数
 //=========================================================
-void CEnemyStateNeutral::OnExit()
+void CEnemyStateDoubt::OnExit(void)
 {
-
+	// リセット
+	m_nDoubtCount = 0;
 }

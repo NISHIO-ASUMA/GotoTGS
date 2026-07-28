@@ -51,9 +51,12 @@ CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& 
 	// インスタンス生成
 	CEnemy* pEnemy = CEnemy::Create(pos,rot, MoveType);
 
-	// 動的配列内追加
 	if (pEnemy)
 	{
+		// 判定をするポインタを設定
+		pEnemy->SetCharactorPointer(m_pDestCharactorPointer);
+
+		// 動的確保
 		m_pEnemys.push_back(pEnemy);
 	}
 
@@ -75,10 +78,13 @@ void CEnemyManager::LoadJson(void)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CEnemyManager::Init(void)
+HRESULT CEnemyManager::Init(CMoveCharactor * pCharactor)
 {
 	// 配列の切り離し
 	m_pEnemys.clear();
+
+	// ポインタセット
+	m_pDestCharactorPointer = pCharactor;
 
 	// 外部ファイル読み込み
 	LoadJson();
@@ -108,7 +114,7 @@ void CEnemyManager::Update(void)
 	if (nAllTime > 0 && (nAllTime % 60) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
 	{
 		// 敵を生成する ( ここの座標は後々変更 )
-		AddEnemy(VECTOR3_NULL);
+		CreateManager(VECTOR3_NULL,VECTOR3_NULL,CEnemy::MOVETYPE_SMOKE);
 
 		// 生成時間を変更して、このフレームでは一回のみ入るようにする
 		m_nIntervalCount = nAllTime;
@@ -119,10 +125,10 @@ void CEnemyManager::Update(void)
 //=========================================================
 void CEnemyManager::AddEnemy(const D3DXVECTOR3& pos)
 {
-	// 新規追加生成
-	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL, CEnemy::MOVETYPE_NORMAL));
-
 	// 敵のポインタを生成
 	if (m_pDestCharactorPointer != nullptr)
 		m_pEnemys.back()->SetCharactorPointer(m_pDestCharactorPointer);
+
+	// 新規追加生成
+	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL, CEnemy::MOVETYPE_NORMAL));
 }
