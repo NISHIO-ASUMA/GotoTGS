@@ -48,6 +48,7 @@
 #include "sideopendoorcollision.h"	
 #include "enemymanager.h"			
 #include "enemy.h"					
+#include "tutoriallines.h"
 
 //*********************************************************
 // –¼‘O‹óŠÔ

@@ -960,6 +960,12 @@
     <ClCompile Include="src\include\enemystatedoubt.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\enemydoubtgauge.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\billboardmulti.cpp">
+      <Filter>ソース ファイル\ObjectClass\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1495,6 +1501,12 @@
     </ClInclude>
     <ClInclude Include="src\include\enemystatedoubt.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemydoubtgauge.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\billboardmulti.h">
+      <Filter>ヘッダー ファイル\ObjectClass\3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
