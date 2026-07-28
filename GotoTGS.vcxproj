@@ -206,7 +206,6 @@
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp" />
     <ClCompile Include="src\cpp\doorui.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
-    <ClCompile Include="src\cpp\eemystatedoubt.cpp" />
     <ClCompile Include="src\cpp\effect.cpp" />
     <ClCompile Include="src\cpp\enemy.cpp" />
     <ClCompile Include="src\cpp\enemymanager.cpp" />
