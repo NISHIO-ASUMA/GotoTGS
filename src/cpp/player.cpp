@@ -422,7 +422,7 @@ void CPlayer::Update(void)
 	UpdateAutoDoorCollision(UpdatePos);
 
 	// “G‚ÌŽ‹ŠE‚Æ‚Ì“–‚½‚è”»’è
-	CollisionEnemyEyesite(UpdatePos);
+	CollisionEnemyEyesite();
 
 	// ƒIƒtƒBƒX“à‚ÌƒhƒA‚Æ‚Ì”»’è
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
@@ -1073,7 +1073,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 //=================================================
 // “G‚ÌŽ‹ŠE‚Æ‚Ì“–‚½‚è”»’è
 //=================================================
-void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
+void CPlayer::CollisionEnemyEyesite(void)
 {
 	// “GŠÇ—ƒNƒ‰ƒX‚ðŽæ“¾‚·‚é
 	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
@@ -1085,7 +1085,7 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 	for (auto& IdxEnemy : Enemy)
 	{
 		// Œ©‚Â‚©‚éî•û‚Ì”ÍˆÍ“à‚¾‚Á‚½‚ç
-		if (IdxEnemy->CheckEyesight(UpdatePos))
+		if (IdxEnemy->CheckEyesight())
 		{
 			// ‘ÎÛ‚Ì“G‚Ì“®‚«‚ð•ÏX‚·‚é(ƒvƒŒƒCƒ„[‚ð’Ç]‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO‚ð•ÏX‚·‚é )
 			//IdxEnemy->SetTargetChaseFlag(true);

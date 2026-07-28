@@ -9,6 +9,7 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "enemystateneutral.h"
+#include "enemystateserch.h"
 
 //*********************************************************
 // インクルードファイル
@@ -54,7 +55,7 @@ void CEnemyStateNeutral::OnUpdate()
 	if (m_pEnemy->CheckEyesight())
 	{
 		// ステート生成
-
+		//m_pEnemy->ChangeState(new);
 	}
 }
 //=========================================================
