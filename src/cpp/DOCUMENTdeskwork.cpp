@@ -20,6 +20,8 @@
 #include "gaugeneedle.h"
 #include "gamesceneobject.h"
 #include "titleuimanager.h"
+#include "tutorialobject.h"
+#include "tutoriallines.h"
 
 //=========================================================
 // コンストラクタ
@@ -123,10 +125,12 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	AddDOCUMENTTask();
 
 	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
-		return;
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
+	{
+		// チュートリアルを進める
+		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
 
-	// チュートリアルが終わった状態にする
-	CDeskworkUIManager::SetTutorial();
+		return;
+	}
 
 }

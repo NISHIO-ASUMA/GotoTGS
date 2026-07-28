@@ -18,6 +18,8 @@
 #include "tutoriallinesBG.h"
 #include "input.h"
 #include "deskworkUImanager.h"
+#include "deskwork.h"
+#include "tutorialobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -104,13 +106,15 @@ void CTutorialLines::Update(void)
 	// 使用してない場合とチュートリアルを進めている場合は更新しない
 	if (!m_bUse || CDeskworkUIManager::GetTutorial()) return;
 
-	// 実践をやった場合
+	// 実践をやる場合
 	if (m_nNowIdx == LINESTYPE_3 ||
 		m_nNowIdx == LINESTYPE_5 ||
 		m_nNowIdx == LINESTYPE_6)
 	{
-		// 現在の番号を一つ進める
-		m_nNowIdx++;
+		// 実践をやっている状態にする
+		CDeskworkUIManager::SetTutorial(true);
+
+		return;
 	}
 
 	// 入力取得
@@ -155,21 +159,10 @@ void CTutorialLines::Update(void)
 	// 現在の番号を一つ進める
 	m_nNowIdx++;
 
-	// 実践をやる場合
-	if (m_nNowIdx == LINESTYPE_3 ||
-		m_nNowIdx == LINESTYPE_5 ||
-		m_nNowIdx == LINESTYPE_6)
-	{
-		// 実践をやっている状態にする
-		CDeskworkUIManager::SetTutorial(true);
-
-		return;
-	}
-
 	if (m_nNowIdx < LINESTYPE_MAX)
 	{// 総数を超えていない場合
 
-		// セリフを一つ進める
+		// セリフを番号に合わせる
 		m_pLines->SetTexture(m_LinesType[m_nNowIdx]);
 
 		return;
@@ -191,5 +184,27 @@ void CTutorialLines::Update(void)
 //=========================================================
 void CTutorialLines::Draw(void)
 {
+
+}
+
+//=========================================================
+// 次のチュートリアルに進む設定処理
+//=========================================================
+void CTutorialLines::SetNextTutorial(void)
+{
+	// 現在の番号を一つ進める
+	m_nNowIdx++;
+
+	// セリフを番号に合わせる
+	m_pLines->SetTexture(m_LinesType[m_nNowIdx]);
+
+	// タスクの情報を取得
+	auto* pDesk = CTutorialObject::GetInstance()->GetDesk();
+
+	// タスクをしていない状態にする
+	pDesk->SetTaskType(pDesk->GetTaskType());
+
+	// 実践をやっていない状態にする
+	CDeskworkUIManager::SetTutorial();
 
 }

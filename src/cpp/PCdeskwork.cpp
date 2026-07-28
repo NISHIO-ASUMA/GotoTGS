@@ -23,6 +23,8 @@
 #include "titleuimanager.h"
 #include "gamesceneobject.h"
 #include "sound.h"
+#include "tutorialobject.h"
+#include "tutoriallines.h"
 
 //*********************************************************
 // 定数名前空間
@@ -321,11 +323,13 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	pClear->SetUseFlash(false);
 
 	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
-		return true;
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
+	{
+		// チュートリアルを進める
+		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
 
-	// チュートリアルが終わった状態にする
-	CDeskworkUIManager::SetTutorial();
+		return true;
+	}
 
 	return true;
 }
