@@ -42,7 +42,7 @@ namespace AuditorUtility
 	};
 
 	// ãºîûâÆèÑâÒ
-	constexpr int SOBA_POINT = 7;
+	constexpr int SOBA_POINT = 8;
 	const D3DXVECTOR3 SobaPoint[SOBA_POINT] =
 	{
 		{2142.0f, 0.0f, -460.0f},
@@ -51,7 +51,9 @@ namespace AuditorUtility
 		{1303.0f, 0.0f, -644.0f},
 		{1377.0f, 0.0f, -360.0f},
 		{1952.0f, 0.0f, -377.0f},
-		{1948.0f, 0.0f, 297.0f}
+		{1948.0f, 0.0f, 297.0f},
+		{2186.0f, 0.0f, 300.0f}
+
 	};
 
 	// É}ÉbÉvÇÃç∂ë§èÑâÒ
@@ -63,6 +65,6 @@ namespace AuditorUtility
 		{922.0f, 0.0f, 938.0f},
 		{2042.0f, 0.0f, 942.0f},
 		{2178.0f, 0.0f,612.0f},
-		{2237.0f, 0.0f, 1140.0f}
+		{2137.0f, 0.0f, 1140.0f}
 	};
 };
