@@ -1192,9 +1192,6 @@ void CPlayer::AfkScore(void)
 		m_nTimeScore++;
 		if ((60 * m_nScoreCnt) < m_nTimeScore)
 		{
-			// スコア加算
-			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
-			m_nScoreCnt++;
 
 			// スコアの加算値上昇
 			switch (m_nScoreCnt)
@@ -1220,6 +1217,10 @@ void CPlayer::AfkScore(void)
 			default:
 				break;
 			}
+			// スコア加算
+			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
+			m_nScoreCnt++;
+
 		}
 	}
 
@@ -1238,7 +1239,7 @@ void CPlayer::AfkScore(void)
 	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating && !m_bAfkBench)
 	{
 		// スコア加算値の上昇カウントとスコア加算タイムをリセット
-		m_nScoreCnt = NULL;
+		m_nScoreCnt = 1;
 		m_nTimeScore = NULL;
 	}
 }
