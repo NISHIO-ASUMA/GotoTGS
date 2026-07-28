@@ -32,7 +32,7 @@ public:
 
 	~CEnemyManager();
 
-	HRESULT Init(void);
+	HRESULT Init(CMoveCharactor* pCharactor = nullptr);
 	void Uninit(void);
 	void Update(void);
 

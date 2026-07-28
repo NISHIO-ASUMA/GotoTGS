@@ -145,8 +145,7 @@ HRESULT CGameSceneObject::Init(void)
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
 	// 敵管理クラス生成
-	CEnemyManager::GetInstance()->Init();
-	CEnemyManager::GetInstance()->SetCharactor(m_pPlayer);
+	CEnemyManager::GetInstance()->Init(m_pPlayer);
 	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
 
 	// カメラに追従するキャラクターのポインタをセット
