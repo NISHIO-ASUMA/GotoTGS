@@ -37,6 +37,35 @@ CResultIcon::~CResultIcon()
 
 }
 //========================================================
+// 生成処理
+//========================================================
+CResultIcon* CResultIcon::Create
+(
+	const D3DXVECTOR3& pos,
+	const float fWidth,
+	const float fHeight,
+	const int nScore
+)
+{
+	// インスタンス生成
+	CResultIcon* pIcon = new CResultIcon;
+	if (pIcon == nullptr) return nullptr;
+
+	// 初期化失敗時
+	if (FAILED(pIcon->Init())) return nullptr;
+
+	// 目的地の座標と本来のサイズを保持
+	pIcon->m_targetPos = pos;
+	pIcon->m_targetSize = D3DXVECTOR3(fWidth, fHeight, 0.0f);
+
+	// オブジェクト設定
+	pIcon->SetPos(pos);
+	pIcon->SetSize(fWidth, fHeight);
+	pIcon->MathScoreTexture(nScore);
+
+	return pIcon;
+}
+//========================================================
 // 初期化処理
 //========================================================
 HRESULT CResultIcon::Init(void)
@@ -47,7 +76,7 @@ HRESULT CResultIcon::Init(void)
 	// 変数の初期値を設定
 	m_isAnimating = true;
 	m_nFrameCount = 0;
-	m_fStartScale = 5.0f;
+	m_fStartScale = 6.0f;
 	m_nMaxFrame = 40;
 
 	return S_OK;
@@ -103,31 +132,19 @@ void CResultIcon::Draw(void)
 	CObject2D::Draw();
 }
 //========================================================
-// 生成処理
+// 使うテクスチャを設定する関数
 //========================================================
-CResultIcon* CResultIcon::Create
-(
-	const D3DXVECTOR3& pos, 
-	const float fWidth, 
-	const float fHeight, 
-	const char* pFileName
-)
-{
-	// インスタンス生成
-	CResultIcon* pIcon = new CResultIcon;
-	if (pIcon == nullptr) return nullptr;
+void CResultIcon::MathScoreTexture(const int& nScore)
+{// ここは主に称号のテクスチャを設定する
 
-	// 初期化失敗時
-	if (FAILED(pIcon->Init())) return nullptr;
-
-	// 目的地の座標と本来のサイズを保持
-	pIcon->m_targetPos = pos;
-	pIcon->m_targetSize = D3DXVECTOR3(fWidth, fHeight, 0.0f);
-
-	// オブジェクト設定
-	pIcon->SetPos(pos);
-	pIcon->SetSize(fWidth, fHeight);
-	pIcon->SetTexture(pFileName);
-
-	return pIcon;
+	if (nScore <= 0)
+		SetTexture("ResultIcon/yesman.png");
+	else if (nScore <= 3000)
+		SetTexture("ResultIcon/workman.png");
+	else if (nScore <= 6000)
+		SetTexture("ResultIcon/Saboriman.png");
+	else if (nScore <= 12000)
+		SetTexture("ResultIcon/Dalarryman.png");
+	else
+		SetTexture("ResultIcon/bucklehman.png");
 }

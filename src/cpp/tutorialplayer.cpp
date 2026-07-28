@@ -62,9 +62,9 @@ namespace TutorilaPlayer
 	/// <summary>
 	/// 以下、西尾追加
 	/// </summary>
-	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
-	constexpr float SphereSize = 60.0f;									  // 球形サイズ
-	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
+	constexpr float BoxSize = 50.0f;										// 矩形サイズ
+	constexpr float SphereSize = 60.0f;										// 球形サイズ
+	constexpr const char* SCRIPT = "data/MOTION/Player/TutorialMotion.txt"; // テキストファイル
 };
 
 //*********************************************************

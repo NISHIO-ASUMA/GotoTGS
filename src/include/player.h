@@ -102,13 +102,14 @@ public:
 		const D3DXVECTOR3& rot
 	);
 	
+	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
 	bool GetAfkMagazine(void) { return m_bAfkMagazine; }
 	bool GetAfkGameCenter(void) { return m_bAfkGameCenter; }
 	bool GetAfkEating(void) { return m_bAfkEating; }
-	bool GetAfkBench(void) { return m_bAfkBench; }
+	bool GetAfkBench(int nIdx) { return m_bAfkBench[nIdx]; }
 
 	void SetAfk(AFKTYPE AfkType, bool bInput);
 	void AfkScore(void);
@@ -203,7 +204,7 @@ public:
 	/// 敵の視界との当たり判定
 	/// </summary>
 	/// <param name="UpdatePos">更新された座標</param>
-	void CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos);
+	void CollisionEnemyEyesite(void);
 
 	/// <summary>
 	/// テレビの方を向く関数
@@ -216,11 +217,19 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void MathDeskRotation(void);
+
+	/// <summary>
+	/// ベンチで寝るときの向き調整関数
+	/// </summary>
+	/// <param name=""></param>
+	void MathBenchRotation(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
+	D3DXVECTOR3 m_posOld;								// 過去の位置
 	int m_nCntAfk;										// さぼっているときのゲージの加算
 	int m_nTimeScore;									// スコアタイム用変数
 	int m_nAddScore;									// 加算スコア
@@ -231,7 +240,7 @@ private:
 	bool m_bAfkMagazine;								// 漫画さぼりの判定変数
 	bool m_bAfkGameCenter;								// ゲームセンターさぼりの判定変数
 	bool m_bAfkEating;									// 飲食スペースでさぼっているときの判定変数
-	bool m_bAfkBench;									// ベンチでさぼっている時の判定変数
+	bool m_bAfkBench[4];									// ベンチでさぼっている時の判定変数
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類

@@ -176,6 +176,7 @@
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
     <ClCompile Include="src\cpp\automatic_door.cpp" />
     <ClCompile Include="src\cpp\billboard.cpp" />
+    <ClCompile Include="src\cpp\billboardmulti.cpp" />
     <ClCompile Include="src\cpp\block.cpp" />
     <ClCompile Include="src\cpp\blockmanager.cpp" />
     <ClCompile Include="src\cpp\boss.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="src\cpp\easing.cpp" />
     <ClCompile Include="src\cpp\effect.cpp" />
     <ClCompile Include="src\cpp\enemy.cpp" />
+    <ClCompile Include="src\cpp\enemydoubtgauge.cpp" />
     <ClCompile Include="src\cpp\enemymanager.cpp" />
     <ClCompile Include="src\cpp\enemystatebase.cpp" />
     <ClCompile Include="src\cpp\enemystatechase.cpp" />
@@ -333,6 +335,7 @@
     <ClCompile Include="src\cpp\worldUIcollision.cpp" />
     <ClCompile Include="src\cpp\worldwallmanager.cpp" />
     <ClCompile Include="src\cpp\xfilemanager.cpp" />
+    <ClCompile Include="src\include\enemystatedoubt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\afk.h" />
@@ -356,6 +359,7 @@
     <ClInclude Include="src\include\automaticdoormanager.h" />
     <ClInclude Include="src\include\automatic_door.h" />
     <ClInclude Include="src\include\billboard.h" />
+    <ClInclude Include="src\include\billboardmulti.h" />
     <ClInclude Include="src\include\block.h" />
     <ClInclude Include="src\include\blockmanager.h" />
     <ClInclude Include="src\include\boss.h" />
@@ -388,11 +392,14 @@
     <ClInclude Include="src\include\easing.h" />
     <ClInclude Include="src\include\effect.h" />
     <ClInclude Include="src\include\enemy.h" />
+    <ClInclude Include="src\include\enemydoubtgauge.h" />
     <ClInclude Include="src\include\enemymanager.h" />
     <ClInclude Include="src\include\enemystatebase.h" />
+    <ClInclude Include="src\include\enemystatedoubt.h" />
     <ClInclude Include="src\include\enemystatechase.h" />
     <ClInclude Include="src\include\enemystateneutral.h" />
     <ClInclude Include="src\include\enemystateserch.h" />
+    <ClInclude Include="src\include\enemyutility.h" />
     <ClInclude Include="src\include\event.h" />
     <ClInclude Include="src\include\eventcutin.h" />
     <ClInclude Include="src\include\eventUI.h" />

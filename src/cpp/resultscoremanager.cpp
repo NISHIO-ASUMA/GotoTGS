@@ -25,6 +25,7 @@
 #include "ranking.h"
 #include "load.h"
 #include "template.h"
+#include "resulticon.h"
 
 //=========================================================
 // コンストラクタ
@@ -32,7 +33,8 @@
 CResultScoreManager::CResultScoreManager() : m_pResultScore{},
 m_nTaskScore(NULL),
 m_nLazyScore(NULL),
-m_nLastScore(NULL)
+m_nLastScore(NULL),
+m_pLoad(nullptr)
 {
 }
 //=======================================================
@@ -76,6 +78,9 @@ HRESULT CResultScoreManager::Init(void)
 	m_pResultScore[info.IDX_LAZY]->SetAnimScore(m_nLazyScore);
 	m_pResultScore[info.IDX_TASK]->SetAnimScore(m_nTaskScore);
 	m_pResultScore[info.IDX_ALL]->SetAnimScore(m_nLastScore);
+
+	// アイコン生成クラス
+	CResultIcon::Create(D3DXVECTOR3(1020.0f, 570.0f, 0.0f), 130.0f, 130.0f,m_nLastScore);
 
 	return S_OK;
 }

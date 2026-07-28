@@ -56,7 +56,7 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float RATIO_VALUE = 1.0f / 2400.0f;		// ‰ÁŽZ—Ê
+		static constexpr float RATIO_VALUE = 0.5f / 2400.0f;		// ‰ÁŽZ—Ê
 
 	};
 

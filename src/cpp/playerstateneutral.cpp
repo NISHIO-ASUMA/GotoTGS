@@ -72,8 +72,9 @@ void CPlayerStateNeutral::OnUpdate()
 		// ステートを飲食にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateEating(), ID_FOOD);
 	}
-	// 近田のバグがいい感じになっていたからこのままいってみよう
-	else if (m_pPlayer->GetAfkBench())
+
+	else if (m_pPlayer->GetAfkBench(0) || m_pPlayer->GetAfkBench(1)
+		|| m_pPlayer->GetAfkBench(2) || m_pPlayer->GetAfkBench(3))
 	{
 		// ステートを移動にチェンジ
 		m_pPlayer->ChangeState(new CPlayerStateBench(), ID_BENCH);

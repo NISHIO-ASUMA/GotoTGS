@@ -84,7 +84,25 @@ namespace Player_Info
 	// デスクワーク関係
 	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
 	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
+};
 
+//*********************************************************
+// 定数名前空間 ( ベンチ関連 )
+//*********************************************************
+namespace Player_Bench
+{
+	// ベンチ関係
+	const D3DXVECTOR3 STATION_CHARACTORPOS = { 792.4f, 18.0f, 1303.6f };	// 駅のベンチの座標
+	const D3DXVECTOR3 STATION_DESTPOS = { 792.4f, 18.0f, 1403.6f };			// 駅のベンチの目的座標
+
+	const D3DXVECTOR3 GAMECENTER_CHARACTORPOS = { 1461.1f, 18.0f, 317.0f };	// ゲームセンターのベンチの座標
+	const D3DXVECTOR3 GAMECENTER_DESTPOS = { 1461.1f, 18.0f, 417.0f };		// ゲームセンターのベンチの目的座標
+
+	const D3DXVECTOR3 IZAKAYA_CHARACTORPOS = { 1527.5f, 18.0f, -962.4f };	// 居酒屋のベンチの座標
+	const D3DXVECTOR3 IZAKAYA_DESTPOS = { 1527.5f, 18.0f, -1062.4f };		// 居酒屋のベンチの目的座標
+
+	const D3DXVECTOR3 OFFICE_CHARACTORPOS = { 734.4f, 18.0f, -468.0f };		// オフィス横のベンチの座標
+	const D3DXVECTOR3 OFFICE_DESTPOS = { 834.4f, 18.0f, -468.0f };			// オフィス横のベンチの目的座標
 };
 
 //=========================================================
@@ -95,6 +113,7 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
+m_posOld(VECTOR3_NULL),
 m_nCntAfk(NULL),
 m_nTimeScore(NULL),
 m_nAddScore(NULL),
@@ -105,11 +124,13 @@ m_bAfkTV(false),
 m_bAfkMagazine(false),
 m_bAfkGameCenter(false),
 m_bAfkEating(false),
-m_bAfkBench(false),
 m_isPcWork(false),
 m_nControlTypes(CONTROLTYPE_NONE)
 {
-
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		m_bAfkBench[nCnt] = false;
+	}
 }
 //=========================================================
 // デストラクタ
@@ -420,7 +441,7 @@ void CPlayer::Update(void)
 	UpdateAutoDoorCollision(UpdatePos);
 
 	// 敵の視界との当たり判定
-	CollisionEnemyEyesite(UpdatePos);
+	CollisionEnemyEyesite();
 
 	// オフィス内のドアとの判定
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
@@ -608,7 +629,8 @@ void CPlayer::MoveKeyboard(float speed)
 	AfkScore();
 
 	// サボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating 
+		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
@@ -754,7 +776,8 @@ void CPlayer::MoveJoypad(float speed)
 	AfkScore();
 
 	// モーションチェンジ
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating
+		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
@@ -888,7 +911,8 @@ void CPlayer::MoveCrossPadButton(float speed)
 	AfkScore();
 
 	// サボり判定が有効な物があったら
-	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating || m_bAfkBench)
+	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkGameCenter || m_bAfkEating
+		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
 		if (m_nCntAfk >= 120)
@@ -933,8 +957,11 @@ void CPlayer::MoveCrossPadButton(float speed)
 //=================================================
 void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
 {
-	// スキップする
-	if (m_bAfkTV) return; 
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		// スキップする
+		if (m_bAfkTV || m_bAfkBench[nCnt]) return;
+	}
 	if (m_isPcWork)
 	{
 		return;
@@ -1071,7 +1098,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 //=================================================
 // 敵の視界との当たり判定
 //=================================================
-void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
+void CPlayer::CollisionEnemyEyesite(void)
 {
 	// 敵管理クラスを取得する
 	const auto& Enemy = CEnemyManager::GetInstance()->GetEnemyData();
@@ -1083,7 +1110,7 @@ void CPlayer::CollisionEnemyEyesite(const D3DXVECTOR3& UpdatePos)
 	for (auto& IdxEnemy : Enemy)
 	{
 		// 見つかる扇方の範囲内だったら
-		if (IdxEnemy->CheckEyesight(UpdatePos))
+		if (IdxEnemy->CheckEyesight())
 		{
 			// 対象の敵の動きを変更する(プレイヤーを追従するかどうかのフラグを変更する )
 			//IdxEnemy->SetTargetChaseFlag(true);
@@ -1138,6 +1165,57 @@ void CPlayer::MathDeskRotation(void)
 	SetRot(D3DXVECTOR3(0.0f, -fRotY, 0.0f));
 }
 //=================================================
+// ベンチの向きを調整するための計算関数 
+//=================================================
+void CPlayer::MathBenchRotation(void)
+{
+	// 元の位置を保存
+	m_posOld = GetPos();
+	D3DXVECTOR3 VectorBench;
+
+	// 駅のベンチ
+	if (m_bAfkBench[0])
+	{
+		// 座標をセットする
+		SetPos(Player_Bench::STATION_CHARACTORPOS);
+		// 対象ベクトルを作成
+		VectorBench = Player_Bench::STATION_DESTPOS - GetPos();
+	}
+	// ゲームセンターのベンチ
+	if (m_bAfkBench[1])
+	{
+		// 座標をセットする
+		SetPos(Player_Bench::GAMECENTER_CHARACTORPOS);
+		// 対象ベクトルを作成
+		VectorBench = Player_Bench::GAMECENTER_DESTPOS - GetPos();
+	}
+	// 居酒屋のベンチ
+	if (m_bAfkBench[2])
+	{
+		// 座標をセットする
+		SetPos(Player_Bench::IZAKAYA_CHARACTORPOS);
+		// 対象ベクトルを作成
+		VectorBench = Player_Bench::IZAKAYA_DESTPOS - GetPos();
+	}
+	// オフィスのベンチ
+	if (m_bAfkBench[3])
+	{
+		// 座標をセットする
+		SetPos(Player_Bench::OFFICE_CHARACTORPOS);
+		// 対象ベクトルを作成
+		VectorBench = Player_Bench::OFFICE_DESTPOS - GetPos();
+	}
+
+
+	// 回転角を生成
+	float fRotY = atan2f(-VectorBench.x, -VectorBench.z);
+
+	// 角度を設定
+	SetRotDest(D3DXVECTOR3(0.0f, fRotY, 0.0f));
+	SetRot(D3DXVECTOR3(0.0f, fRotY, 0.0f));
+}
+
+//=================================================
 // さぼりの起動
 //=================================================
 void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
@@ -1148,7 +1226,12 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
 	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
 	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
-	auto bAfkBench = CAfkManager::Instance()->GetAfkBench()->GetAfk();
+	bool bAfkBench[4];
+
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		bAfkBench[nCnt] = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
+	}
 
 	switch (AfkType)
 	{
@@ -1174,8 +1257,11 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 		else if (!bAfkEating) m_bAfkEating = false;
 		break;
 	case AFKTYPE_BENCH:
-		if (bAfkBench && bInput) m_bAfkBench = m_bAfkBench ? false : true;
-		else if (!bAfkBench) m_bAfkBench = false;
+		for (int nCnt = 0; nCnt < 4; nCnt++)
+		{
+			if (bAfkBench[nCnt] && bInput) m_bAfkBench[nCnt]= m_bAfkBench[nCnt] ? false : true;
+			else if (!bAfkBench[nCnt]) m_bAfkBench[nCnt] = false;
+		}
 		break;
 	default:
 		break;
@@ -1192,9 +1278,6 @@ void CPlayer::AfkScore(void)
 		m_nTimeScore++;
 		if ((60 * m_nScoreCnt) < m_nTimeScore)
 		{
-			// スコア加算
-			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
-			m_nScoreCnt++;
 
 			// スコアの加算値上昇
 			switch (m_nScoreCnt)
@@ -1220,11 +1303,17 @@ void CPlayer::AfkScore(void)
 			default:
 				break;
 			}
+
+			// スコア加算
+			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
+			m_nScoreCnt++;
+
 		}
 	}
 
 	// 外回りのさぼりが有効だったら
-	if (m_bAfkGameCenter || m_bAfkBench)
+	if (m_bAfkGameCenter || m_bAfkBench[0] || m_bAfkBench[1]
+		|| m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nTimeScore++;
 		if (60 < m_nTimeScore)
@@ -1235,10 +1324,11 @@ void CPlayer::AfkScore(void)
 	}
 
 	// もしさぼり全部が無効だったら
-	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating && !m_bAfkBench)
+	if (!m_bAfkSmoke && !m_bAfkTV && !m_bAfkMagazine && !m_bAfkGameCenter && !m_bAfkEating 
+		&& !m_bAfkBench[0] && !m_bAfkBench[1] && !m_bAfkBench[2] && !m_bAfkBench[3])
 	{
 		// スコア加算値の上昇カウントとスコア加算タイムをリセット
-		m_nScoreCnt = NULL;
+		m_nScoreCnt = 1;
 		m_nTimeScore = NULL;
 	}
 }

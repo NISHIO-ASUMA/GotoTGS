@@ -82,7 +82,7 @@ void CVigilancegauge::Uninit(void)
 }
 
 //=========================================================
-// 更新処理 ( TODO : 西尾 ここの最大値に達する処理の時に敵を生成する処理を追加する  )
+// 更新処理 ( TODO : 西尾 ここの最大値に達する処理の時に敵を生成する処理を追加する )
 //=========================================================
 void CVigilancegauge::Update(void)
 {
@@ -125,7 +125,7 @@ void CVigilancegauge::CreateCharactor(const int nNumber)
 	{
 	case 0:
 		// 敵を生成
-		CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
+		//CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
 		break;
 
 	case 1:

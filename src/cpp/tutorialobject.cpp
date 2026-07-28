@@ -117,14 +117,16 @@ void CTutorialObject::Update(void)
 	if (m_pBlockManager)
 		m_pBlockManager->Update();
 
-	// セリフがまだ出ているなら繰り返す
-	if (m_plines->GetUse())
-		return;
+	//// セリフがまだ出ているなら繰り返す
+	//if (m_plines->GetUse())
+	//	return;
 
 	// フェード取得
 	CFade* pFade = CManager::GetInstance()->GetFade();
 
-	if (pFade != nullptr)
+	// NOTE : 長押しするのめんどくさいのでやるならトリガーにしてください
+	if (pFade != nullptr && (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_SPACE) || 
+							 CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START)))
 	{
 		// 画面切り替え
 		pFade->SetFade(std::make_unique<CGame>());

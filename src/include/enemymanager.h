@@ -15,12 +15,13 @@
 //*********************************************************
 #include <memory>
 #include <vector>
+#include "enemy.h"
 
 //*********************************************************
 // 前方宣言
 //*********************************************************
-class CEnemy;
 class CGametime;
+class CMoveCharactor;
 
 //*********************************************************
 // 敵の複数管理クラスを定義
@@ -31,7 +32,7 @@ public:
 
 	~CEnemyManager();
 
-	HRESULT Init(void);
+	HRESULT Init(CMoveCharactor* pCharactor = nullptr);
 	void Uninit(void);
 	void Update(void);
 
@@ -69,12 +70,25 @@ public:
 	void AddEnemy(const D3DXVECTOR3& pos);
 
 	/// <summary>
+	/// キャラクターのポインタをセットする
+	/// </summary>
+	/// <param name="pCharactor">判定したいキャラクターのポインタ</param>
+	void SetCharactor(CMoveCharactor* pCharactor) { m_pDestCharactorPointer = pCharactor; }
+
+	/// <summary>
 	/// 管理クラス内で生成
 	/// </summary>
 	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
 	/// <returns></returns>
-	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot);
+	CEnemy* CreateManager(const D3DXVECTOR3& pos,const D3DXVECTOR3& rot,const CEnemy::MOVETYPE& MoveType);
+
+	/// <summary>
+	/// 格納されているキャラクターのポインタを返す
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	CMoveCharactor* GetCharactorPointer(void) const { return m_pDestCharactorPointer; }
 
 	/// <summary>
 	/// シングルトン取得処理
@@ -96,6 +110,7 @@ private:
 private:
 	std::vector<CEnemy*>m_pEnemys; // 敵の管理配列
 	CGametime* m_pTimeContainer;	// タイムクラスの入れ物
+	CMoveCharactor* m_pDestCharactorPointer;	// 動くキャラクターのクラスの入れ物
 
 private:
 	int m_nStageCount;		// 敵の増加時間カウント
