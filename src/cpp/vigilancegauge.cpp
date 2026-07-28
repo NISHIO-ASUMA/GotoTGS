@@ -125,7 +125,7 @@ void CVigilancegauge::CreateCharactor(const int nNumber)
 	{
 	case 0:
 		// “G‚ð¶¬
-		CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
+		//CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
 		break;
 
 	case 1:

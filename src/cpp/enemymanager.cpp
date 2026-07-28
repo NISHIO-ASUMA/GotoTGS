@@ -31,7 +31,8 @@ namespace ENEMY_MANAGER
 //=========================================================
 CEnemyManager::CEnemyManager() : m_pEnemys{},
 m_nStageCount(NULL),
-m_nIntervalCount(-1)
+m_nIntervalCount(-1),
+m_pDestCharactorPointer(nullptr)
 {
 
 }
@@ -45,10 +46,10 @@ CEnemyManager::~CEnemyManager()
 //=========================================================
 // ŽÀÛ‚Ì¶¬ˆ—
 //=========================================================
-CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const CEnemy::MOVETYPE& MoveType)
 {
 	// ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
-	CEnemy* pEnemy = CEnemy::Create(pos,rot);
+	CEnemy* pEnemy = CEnemy::Create(pos,rot, MoveType);
 
 	// “®“I”z—ñ“à’Ç‰Á
 	if (pEnemy)
@@ -103,7 +104,7 @@ void CEnemyManager::Update(void)
 	// Å‘åŽžŠÔ‚ðŽæ“¾
 	int nAllTime = m_pTimeContainer->GetAllTime();
 
-	// NOTE : Œ»Ý‚Íˆê’U20•b‚Éˆê‘Ì’Ç‰Á‚Ås‚±‚¤‚©‚È
+	// NOTE : Œ»Ý‚Íˆê’U40•b‚Éˆê‘Ì’Ç‰Á‚Ås‚±‚¤‚©‚È
 	if (nAllTime > 0 && (nAllTime % 60) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
 	{
 		// “G‚ð¶¬‚·‚é ( ‚±‚±‚ÌÀ•W‚ÍŒãX•ÏX )
@@ -119,5 +120,9 @@ void CEnemyManager::Update(void)
 void CEnemyManager::AddEnemy(const D3DXVECTOR3& pos)
 {
 	// V‹K’Ç‰Á¶¬
-	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL));
+	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL, CEnemy::MOVETYPE_NORMAL));
+
+	// “G‚Ìƒ|ƒCƒ“ƒ^‚ð¶¬
+	if (m_pDestCharactorPointer != nullptr)
+		m_pEnemys.back()->SetCharactorPointer(m_pDestCharactorPointer);
 }

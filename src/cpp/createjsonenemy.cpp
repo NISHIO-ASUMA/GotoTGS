@@ -36,6 +36,9 @@ void CJsonCreateEnemy::Create(const json& Jsondata)
 	// 角度情報の設定
 	D3DXVECTOR3 rot = CJsonConverter::ConverterVec3(Jsondata, "rot");
 
+	// 種類情報の設定
+	int nType = CJsonConverter::ConverterInt(Jsondata, "Type");
+
 	// 実際のブロック生成
-	EnemyManager->CreateManager(pos, rot);
+	EnemyManager->CreateManager(pos, rot,static_cast<CEnemy::MOVETYPE>(nType));
 }
