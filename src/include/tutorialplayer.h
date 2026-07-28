@@ -48,6 +48,7 @@ public:
 	void MoveKeyboard(float speed);
 	void MoveJoypad(float speed);
 	void MoveCrossPadButton(float speed);
+	void SetDefaultState(void);
 
 	/// <summary>
 	/// ƒvƒŒƒCƒ„[¶¬ˆ—
