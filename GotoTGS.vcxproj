@@ -333,6 +333,7 @@
     <ClCompile Include="src\cpp\worldUIcollision.cpp" />
     <ClCompile Include="src\cpp\worldwallmanager.cpp" />
     <ClCompile Include="src\cpp\xfilemanager.cpp" />
+    <ClCompile Include="src\include\enemystatedoubt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\afk.h" />
@@ -390,6 +391,7 @@
     <ClInclude Include="src\include\enemy.h" />
     <ClInclude Include="src\include\enemymanager.h" />
     <ClInclude Include="src\include\enemystatebase.h" />
+    <ClInclude Include="src\include\enemystatedoubt.h" />
     <ClInclude Include="src\include\enemystatechase.h" />
     <ClInclude Include="src\include\enemystateneutral.h" />
     <ClInclude Include="src\include\enemystateserch.h" />

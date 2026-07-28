@@ -31,7 +31,8 @@ namespace ENEMY_MANAGER
 //=========================================================
 CEnemyManager::CEnemyManager() : m_pEnemys{},
 m_nStageCount(NULL),
-m_nIntervalCount(-1)
+m_nIntervalCount(-1),
+m_pDestCharactorPointer(nullptr)
 {
 
 }
@@ -45,14 +46,17 @@ CEnemyManager::~CEnemyManager()
 //=========================================================
 // 実際の生成処理
 //=========================================================
-CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CEnemy* CEnemyManager::CreateManager(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const CEnemy::MOVETYPE& MoveType)
 {
 	// インスタンス生成
-	CEnemy* pEnemy = CEnemy::Create(pos,rot);
+	CEnemy* pEnemy = CEnemy::Create(pos,rot, MoveType);
 
-	// 動的配列内追加
 	if (pEnemy)
 	{
+		// 判定をするポインタを設定
+		pEnemy->SetCharactorPointer(m_pDestCharactorPointer);
+
+		// 動的確保
 		m_pEnemys.push_back(pEnemy);
 	}
 
@@ -74,10 +78,13 @@ void CEnemyManager::LoadJson(void)
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CEnemyManager::Init(void)
+HRESULT CEnemyManager::Init(CMoveCharactor * pCharactor)
 {
 	// 配列の切り離し
 	m_pEnemys.clear();
+
+	// ポインタセット
+	m_pDestCharactorPointer = pCharactor;
 
 	// 外部ファイル読み込み
 	LoadJson();
@@ -103,11 +110,11 @@ void CEnemyManager::Update(void)
 	// 最大時間を取得
 	int nAllTime = m_pTimeContainer->GetAllTime();
 
-	// NOTE : 現在は一旦20秒に一体追加で行こうかな
+	// NOTE : 現在は一旦40秒に一体追加で行こうかな
 	if (nAllTime > 0 && (nAllTime % 60) == 0 && nAllTime != m_nIntervalCount && nAllTime != CGametime::Config::NUMTIME)
 	{
 		// 敵を生成する ( ここの座標は後々変更 )
-		AddEnemy(VECTOR3_NULL);
+		CreateManager(VECTOR3_NULL,VECTOR3_NULL,CEnemy::MOVETYPE_SMOKE);
 
 		// 生成時間を変更して、このフレームでは一回のみ入るようにする
 		m_nIntervalCount = nAllTime;
@@ -118,6 +125,10 @@ void CEnemyManager::Update(void)
 //=========================================================
 void CEnemyManager::AddEnemy(const D3DXVECTOR3& pos)
 {
+	// 敵のポインタを生成
+	if (m_pDestCharactorPointer != nullptr)
+		m_pEnemys.back()->SetCharactorPointer(m_pDestCharactorPointer);
+
 	// 新規追加生成
-	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL));
+	m_pEnemys.push_back(CEnemy::Create(pos, VECTOR3_NULL, CEnemy::MOVETYPE_NORMAL));
 }

@@ -132,10 +132,6 @@ HRESULT CGameSceneObject::Init(void)
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
-	// 敵管理クラス生成
-	CEnemyManager::GetInstance()->Init();
-	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
-
 	// 外の監査役を生成 ( Asuma )
 	CAuditorManager::GetInstance()->Init();
 
@@ -148,10 +144,12 @@ HRESULT CGameSceneObject::Init(void)
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
+	// 敵管理クラス生成
+	CEnemyManager::GetInstance()->Init(m_pPlayer);
+	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
+
 	// カメラに追従するキャラクターのポインタをセット
 	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
-
-	// カメラのターゲット設定
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	// スコア初期化
