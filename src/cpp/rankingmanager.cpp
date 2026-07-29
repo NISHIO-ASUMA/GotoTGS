@@ -55,7 +55,7 @@ HRESULT CRankingManager::Init(void)
 	if (Sound == nullptr)return E_FAIL;
 
 	// BGMÄ¶
-	//Sound->Play(CSound::SOUND_LABEL_RANKING);
+	Sound->Play(CSound::SOUND_LABEL_RANKING);
 	
 	return S_OK;
 }

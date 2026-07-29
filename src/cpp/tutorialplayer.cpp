@@ -372,7 +372,8 @@ void CTutorialPlayer::Update(void)
 					if (pDesk)
 					{
 						// デスクワーク時
-						if (Colliders->nType == CWorldUICollision::TYPE_PC && pDesk->GetPCDeskUI()->GetCan())
+						if (Colliders->nType == CWorldUICollision::TYPE_PC && 
+							(pDesk->GetPCDeskUI()->GetCan() && pDesk->GetPCDeskUI()->GetTutorial()))
 						{
 							// PCタスクの時の動作関数
 							MathDeskRotation();

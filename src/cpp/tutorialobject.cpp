@@ -99,6 +99,7 @@ void CTutorialObject::Uninit(void)
 	// ブロックマネージャーポインタの破棄
 	m_pBlockManager.reset();
 
+	// ポインタのnull化
 	m_pDeskwork = nullptr;
 	m_plines = nullptr;
 
@@ -124,9 +125,9 @@ void CTutorialObject::Update(void)
 	// フェード取得
 	CFade* pFade = CManager::GetInstance()->GetFade();
 
-	// NOTE : 長押しするのめんどくさいのでやるならトリガーにしてください
+	// トリガーで遷移
 	if (pFade != nullptr && (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_SPACE) ||
-		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START)))
+		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_BACK)))
 	{
 		// 画面切り替え
 		pFade->SetFade(std::make_unique<CGame>());
@@ -138,8 +139,8 @@ void CTutorialObject::Update(void)
 	{
 		// 画面切り替え
 		pFade->SetFade(std::make_unique<CGame>());
+		return;
 	}
-
 }
 //=========================================================
 // インスタンス取得

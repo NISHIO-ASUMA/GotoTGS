@@ -26,6 +26,7 @@ m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_fHeight(NULL),
 m_fWidth(NULL),
+m_nMinusScoreKeep(NULL),
 m_apNumber{},
 m_pLoad{},
 m_isDraw(true)
@@ -173,6 +174,17 @@ void CScore::AddScore(int nValue)
 {
 	// スコア加算
 	m_nScore += nValue;
+	
+	// もし0以下になったら
+	if (m_nScore <= 0)
+		m_nScore = 0;
+}
+//=========================================================
+// マイナス分を加算する
+//=========================================================
+void CScore::AddScoreMinus(const int nValue)
+{
+	m_nMinusScoreKeep += nValue;
 }
 //=========================================================
 // スコア初期化
@@ -188,4 +200,12 @@ void CScore::SaveScore(const char* SaveName)
 {
 	// 一個の数値を書き出す
 	m_pLoad->SaveInt(SaveName, m_nScore);
+}
+//=========================================================
+// スコア書き出し処理 ( マイナスされた分 )
+//=========================================================
+void CScore::SaveScoreMinus(const char* SaveName)
+{
+	// 一個の数値を書き出す
+	m_pLoad->SaveInt(SaveName, m_nMinusScoreKeep);
 }

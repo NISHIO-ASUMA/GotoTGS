@@ -16,5 +16,17 @@
     "SegmentX": 1,
     "SegmentZ": 1,
     "Texture": "data/TEXTURE/field00.jpg"
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 1130.0, 70.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 150.0,
+    "Height": 70.0,
+    "Texture": "skip000.png",
+    "AlphaTest": false,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
   }
 ]

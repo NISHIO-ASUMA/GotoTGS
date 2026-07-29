@@ -337,7 +337,7 @@ void CCOPYDeskwork::Task(const auto& pClear)
 		}
 
 		// スコア加算
-		pScore->AddScore(-100);
+		pScore->AddScoreMinus(-100);
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
