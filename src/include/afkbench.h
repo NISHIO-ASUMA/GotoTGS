@@ -38,6 +38,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 
+	void SetDisplay(bool bDisplay) { m_bDisplay = bDisplay; }
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -50,5 +52,6 @@ public:
 
 private:
 	CParticle* m_pParticle;		// パーティクル用のポインタ変数
+	bool m_bDisplay;			// パーティクル表示の判定用変数
 };
 
