@@ -215,10 +215,19 @@ void CResultScore::UpdateAnimScore(void)
 //=========================================================
 // アニメーションするスコアをセットする関数
 //=========================================================
-void CResultScore::SetAnimScore(const int& nDestScore)
+void CResultScore::SetAnimScore(int& nDestScore)
 {
+	// 0以下の場合
+	if (nDestScore <= 0)
+	{
+		m_nLoadScore = nDestScore * -1; // 正の値にコンバートする
+	}
+	else
+	{
+		m_nLoadScore = nDestScore;  // 目的のスコアを設定
+	}
+
 	m_nStartScore = 0;			// 初期化
-	m_nLoadScore = nDestScore;  // 目的のスコアを設定
 	m_nCurrentScore = 0;		// 現在の値
 
 	m_nTimer = 0;				// カウントタイマー
