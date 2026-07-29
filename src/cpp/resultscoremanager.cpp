@@ -120,7 +120,7 @@ int CResultScoreManager::MathScoreResult(int& nMinScore, int& nMaxScore)
 	int nResultScore = 0;
 
 	// ŒvŽZŽ®
-	nResultScore = nMaxScore - nMinScore;
+	nResultScore = nMaxScore + nMinScore;
 
 	// ŒvŽZŒ‹‰Ê‚ð•Ô‚·
 	return nResultScore;

@@ -256,6 +256,7 @@
     <ClCompile Include="src\cpp\movecharactor.cpp" />
     <ClCompile Include="src\cpp\nomovecharactor.cpp" />
     <ClCompile Include="src\cpp\number.cpp" />
+    <ClCompile Include="src\cpp\number3d.cpp" />
     <ClCompile Include="src\cpp\object.cpp" />
     <ClCompile Include="src\cpp\object2D.cpp" />
     <ClCompile Include="src\cpp\object2Dmulti.cpp" />
@@ -303,6 +304,7 @@
     <ClCompile Include="src\cpp\resultscoremanager.cpp" />
     <ClCompile Include="src\cpp\scene.cpp" />
     <ClCompile Include="src\cpp\score.cpp" />
+    <ClCompile Include="src\cpp\scorepop.cpp" />
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
     <ClCompile Include="src\cpp\sideopendoor.cpp" />
@@ -443,6 +445,7 @@
     <ClInclude Include="src\include\movecharactor.h" />
     <ClInclude Include="src\include\nomovecharactor.h" />
     <ClInclude Include="src\include\number.h" />
+    <ClInclude Include="src\include\number3d.h" />
     <ClInclude Include="src\include\object.h" />
     <ClInclude Include="src\include\object2D.h" />
     <ClInclude Include="src\include\object2Dmulti.h" />
@@ -485,6 +488,7 @@
     <ClInclude Include="src\include\resultscoremanager.h" />
     <ClInclude Include="src\include\scene.h" />
     <ClInclude Include="src\include\score.h" />
+    <ClInclude Include="src\include\scorepop.h" />
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
     <ClInclude Include="src\include\sideopendoor.h" />
