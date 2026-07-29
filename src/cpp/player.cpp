@@ -54,6 +54,7 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "enemy.h"					// 西尾追加
+#include "scorepop.h"
 
 //*********************************************************
 // 名前空間
@@ -1301,6 +1302,11 @@ void CPlayer::AfkScore(void)
 
 			// スコア加算
 			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
+
+			// スコアのポップ生成
+			CScorePop::Create(D3DXVECTOR3(GetPos().x, GetPos().y + 45.0f, GetPos().z), m_nAddScore,5.0f,15.0f);
+
+			// 回数を加算
 			m_nScoreCnt++;
 
 		}
@@ -1313,7 +1319,12 @@ void CPlayer::AfkScore(void)
 		m_nTimeScore++;
 		if (60 < m_nTimeScore)
 		{
+			// 加算
 			CGameSceneObject::GetInstance()->GetScore()->AddScore(2000);
+
+			// スコアのポップ生成
+			CScorePop::Create(D3DXVECTOR3(GetPos().x, GetPos().y + 40.0f, GetPos().z), 2000, 15.0f, 25.0f);
+
 			m_nTimeScore = NULL;
 		}
 	}

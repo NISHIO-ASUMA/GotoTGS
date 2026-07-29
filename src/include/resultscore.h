@@ -42,7 +42,8 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	void Save(void);
-	void SetAnimScore(const int& nDestScore);
+	void SetAnimScore(int& nDestScore);
+	void ConvertValue(void);
 
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
