@@ -19,6 +19,8 @@
 #include "afkgamecenter.h"
 #include "afkeating.h"
 #include "afkbench.h"
+#include "gamesceneobject.h"
+#include "player.h"
 
 //=================================================
 // 静的メンバ変数
@@ -180,10 +182,18 @@ void CAfkManager::Update(void)
 	// 飲食さぼりの更新処理
 	m_pAfkEating->Update();
 
+	bool bAfkBench[4];
+
 	for (int nCnt = 0; nCnt < AFKBENCH::MAX_BENCH; nCnt++)
 	{
 		// 飲食さぼりの更新処理
 		m_pAfkBench[nCnt]->Update();
+
+		// プレイヤーがさぼっているか判定用の変数
+		bAfkBench[nCnt] = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkBench(nCnt);
+
+		if (bAfkBench[nCnt]) m_pAfkBench[nCnt]->SetDisplay(true);
+		else m_pAfkBench[nCnt]->SetDisplay(false);
 	}
 }
 //=========================================================

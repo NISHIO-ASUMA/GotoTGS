@@ -111,6 +111,9 @@ void CParticle::Update(void)
 	case TYPE_NEARBY:
 		Nearby();
 		break;
+	case TYPE_SLEEP:
+		Sleep();
+		break;
 	default:
 		break;
 	}
@@ -336,4 +339,38 @@ void CParticle::Nearby(void)
 
 	// エフェクトの生成
 	CEffect::Create(pos, m_rot, m_move, col, nLife, fRadius, CEffect::TYPE_NONE);
+}
+//=========================================================
+// 眠るときのZのやつ
+//=========================================================
+void CParticle::Sleep(void)
+{
+	// ローカル変数
+	D3DXVECTOR3 move;
+
+	// 位置・色・サイズの設定
+	D3DXVECTOR3 pos = m_pos;
+	D3DXCOLOR col = m_col;
+	float fRadius = m_fRadius;
+
+	m_nCreateTime--;
+	if (m_nCreateTime < 0)
+	{
+		for (int nCntAppear = 0; nCntAppear < 3; nCntAppear++)
+		{
+
+			float xRand = ((float)(rand() % EFFECT::nMax) - EFFECT::nMin) / 100.0f;
+			float zRand = ((float)(rand() % EFFECT::nMax) - EFFECT::nMin) / 100.0f;
+			float ySpeed = ((float)(rand() % 50) / 50) + 0.001f;
+
+			move = D3DXVECTOR3(xRand, ySpeed, zRand);
+
+			// 寿命の設定
+			int nLife = 40 + rand() % 20;
+
+			// エフェクトの生成
+			CEffect::Create(pos, m_rot, move, col, nLife, fRadius, CEffect::TYPE_SLEEP);
+			m_nCreateTime = 15;
+		}
+	}
 }

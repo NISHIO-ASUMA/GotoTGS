@@ -29,6 +29,7 @@ public:
 	{
 		TYPE_NONE = 0,
 		TYPE_THUNDER,
+		TYPE_SLEEP,
 		TYPE_MAX
 	}TYPE;
 

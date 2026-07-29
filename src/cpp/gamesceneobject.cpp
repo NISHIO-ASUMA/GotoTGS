@@ -185,12 +185,11 @@ void CGameSceneObject::Uninit(void)
 {
 	// 破棄される前に書き出し実行
 	if (m_pScoreDitch)
-		m_pScoreDitch->SaveScore("data/SCORE/LazyScore.bin");
+		m_pScoreDitch->SaveScore("data/SCORE/LazyScore.bin");		// サボり
 
 	if (m_pScoreTask)
 	{
-		m_pScoreTask->ScoreChangeMath(-1); // 値の反転をする
-		m_pScoreTask->SaveScore("data/SCORE/TaskScore.bin");
+		m_pScoreTask->SaveScoreMinus("data/SCORE/TaskScore.bin");	// タスク
 	}
 
 	// タスクの判定を取る球形コライダー管理クラスを破棄
@@ -263,8 +262,8 @@ void CGameSceneObject::Update(void)
 	if (m_pScoreAll)
 	{
 		// スコアの値をもらい、allに加算していく
-		int ScoreDitch = m_pScoreDitch->GetScore();
-		int ScoreTask = m_pScoreTask->GetScore();
+		int ScoreDitch = m_pScoreDitch->GetScore();		// 通常加算
+		int ScoreTask = m_pScoreTask->GetScoreMinus();	// タスクはマイナスになる
 
 		// セットする
 		m_pScoreAll->SetScore(ScoreDitch + ScoreTask);

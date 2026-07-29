@@ -122,6 +122,10 @@ HRESULT CEffect::Init(void)
 	{
 		m_nIdxTex = pTex->Register("data/TEXTURE/effect001.png");
 	}
+	else if (m_Type == TYPE_SLEEP)
+	{
+		m_nIdxTex = pTex->Register("data/TEXTURE/z.jpg");
+	}
 	
 	return S_OK;
 }
