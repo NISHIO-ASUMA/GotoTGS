@@ -43,8 +43,10 @@ public:
 	void Draw(void) override;
 
 	void AddScore(int nValue);
+	void AddScoreMinus(const int nValue);
 	void DeleteScore(void);
 	void SaveScore(const char * SaveName);
+	void SaveScoreMinus(const char* SaveName);
 
 	inline void SetScore(const int& nDestScore) { m_nScore = nDestScore; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
@@ -53,6 +55,7 @@ public:
 	
 	inline void ScoreChangeMath(const int& nChangeValue) { m_nScore = m_nScore * nChangeValue; }
 	inline int GetScore(void) const { return m_nScore; }
+	inline int GetScoreMinus(void) { return m_nMinusScoreKeep; }
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 
 	/// <summary>
@@ -87,7 +90,8 @@ private:
 	D3DXVECTOR3 m_pos;	// 座標
 	D3DXVECTOR3 m_rot;	// 角度
 	
-	int m_nScore;		// スコア保持用
+	int m_nScore;			// スコア保持用
+	int m_nMinusScoreKeep; // マイナス分を保持する変数
 	float m_fWidth;		// 横幅
 	float m_fHeight;	// 高さ
 	bool m_isDraw;		// 描画するかどうか

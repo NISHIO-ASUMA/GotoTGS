@@ -2,9 +2,6 @@
 //
 // チュートリアルのセリフ処理 [ tutoriallines.cpp ]
 // Author: Takahashi Misaki
-//	
-// 場所を示す矢印を配置 ( Asuma )
-//CBlock::Create(D3DXVECTOR3(-55.0f, 80.0f, 180.0f), D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f), D3DXVECTOR3(HALF, HALF, HALF), "STAGEOBJ/yajirusi.x");
 // 
 //=========================================================
 
@@ -26,6 +23,7 @@
 #include "tutorialplayer.h"
 #include "pointobject.h"
 #include "billboard.h"
+#include "titleuimanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -80,6 +78,9 @@ HRESULT CTutorialLines::Init(void)
 	// 配列初期化
 	m_pArrow.clear();
 
+	// 今回の操作種類を取得してそれに応じてテクスチャを変更
+	int nIdxControl = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	// 現在の番号を初期化
 	m_nNowIdx = LINESTYPE_1;
 
@@ -98,7 +99,7 @@ HRESULT CTutorialLines::Init(void)
 	m_pLines->SetUse(m_bUse);
 
 	// 矢印生成
-	CreateArrow();
+	CreateArrow(nIdxControl);
 
 	return S_OK;
 }
@@ -121,8 +122,11 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
+	// フラグの検証チェック用変数
+	bool isGetTutorial = CDeskworkUIManager::GetTutorial();
+
 	// 使用してない場合とチュートリアルを進めている場合は更新しない
-	if (!m_bUse || CDeskworkUIManager::GetTutorial()) return;
+	if (!m_bUse || isGetTutorial) return;
 
 	// 実践をやる場合
 	if (m_nNowIdx == LINESTYPE_3 ||
@@ -262,10 +266,22 @@ void CTutorialLines::SetNextTutorial(void)
 //=========================================================
 // 矢印生成
 //=========================================================
-void CTutorialLines::CreateArrow(void)
+void CTutorialLines::CreateArrow(int& nIdx)
 {
+	const char* TexName = {};
+
+	// 操作インデックスによってテクスチャ名を変更する
+	if (nIdx == 1)
+	{
+		TexName = "Fbutton.png";
+	}
+	else
+	{
+		TexName = "startbutton.png";
+	}
+
 	// ビルボード生成
-	m_pKeyUi = CBillboard::Create(D3DXVECTOR3(-55.0f, 60.0f, 180.0f), VECTOR3_NULL, 10.0f, 10.0f, "Fbutton.png");
+	m_pKeyUi = CBillboard::Create(D3DXVECTOR3(-55.0f, 60.0f, 180.0f), VECTOR3_NULL, 10.0f, 10.0f, TexName);
 
 	// 矢印オブジェクトを生成 (PC)
 	m_pArrow.push_back(CPointObject::Create
