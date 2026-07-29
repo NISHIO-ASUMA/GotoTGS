@@ -173,6 +173,10 @@ void CScore::AddScore(int nValue)
 {
 	// スコア加算
 	m_nScore += nValue;
+
+	// もし0以下になったら
+	if (m_nScore <= 0)
+		m_nScore = 0;
 }
 //=========================================================
 // スコア初期化

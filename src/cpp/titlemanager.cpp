@@ -57,7 +57,7 @@ HRESULT CTitleManager::Init(void)
 	if (pSound == nullptr) return E_FAIL;
 
 	// サウンド再生
-	//pSound->Play(CSound::SOUND_LABEL_TITLE_BGM);
+	pSound->Play(CSound::SOUND_LABEL_TITLE_BGM);
 
 	// フラグ初期化
 	isKeyinputSet = false;

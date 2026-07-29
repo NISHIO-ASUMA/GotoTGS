@@ -52,13 +52,13 @@ HRESULT CTutorialManager::Init(void)
 {
 	// カメラ初期化
 	CManager::GetInstance()->GetCamera()->Init();
-
+	
 	// サウンド取得
 	CSound* pSound = CManager::GetInstance()->GetSound();
 	if (pSound == nullptr) return E_FAIL;
 
 	// サウンド再生
-	//pSound->Play(CSound::SOUND_LABEL_TUTORIALBGM);
+	pSound->Play(CSound::SOUND_LABEL_TUTORIALBGM);
 
 	return S_OK;
 }

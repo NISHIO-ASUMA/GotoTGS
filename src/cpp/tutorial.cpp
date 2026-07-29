@@ -15,6 +15,8 @@
 //*********************************************************
 #include "tutorialmanager.h"
 #include "tutorialobject.h"
+#include "manager.h"
+#include "input.h"
 
 //=========================================================
 // コンストラクタ
@@ -35,6 +37,9 @@ CTutorial::~CTutorial()
 //=========================================================
 HRESULT CTutorial::Init(void)
 {	
+	// カーソルの非表示
+	CManager::GetInstance()->GetMouse()->SetCursorVisibility(false);
+
 	// チュートリアルマネージャー初期化
 	CTutorialManager::GetInstance()->Init();
 
