@@ -1308,7 +1308,6 @@ void CPlayer::AfkScore(void)
 
 			// 回数を加算
 			m_nScoreCnt++;
-
 		}
 	}
 
@@ -1319,8 +1318,8 @@ void CPlayer::AfkScore(void)
 		m_nTimeScore++;
 		if (60 < m_nTimeScore)
 		{
-			// 加算
-			CGameSceneObject::GetInstance()->GetScore()->AddScore(2000);
+			// 加算 ( サボり )
+			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(2000);
 
 			// スコアのポップ生成
 			CScorePop::Create(D3DXVECTOR3(GetPos().x, GetPos().y + 40.0f, GetPos().z), 2000, 15.0f, 25.0f);
