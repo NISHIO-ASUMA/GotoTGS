@@ -77,6 +77,14 @@ HRESULT CResultScoreManager::Init(void)
 	// アニメーションするスコアをセットする
 	m_pResultScore[info.IDX_LAZY]->SetAnimScore(m_nLazyScore);
 	m_pResultScore[info.IDX_TASK]->SetAnimScore(m_nTaskScore);
+
+	// 計算された最終スコアが0以下なら
+	if (m_nLastScore <= 0)
+	{
+		m_nLastScore = NULL;
+	}
+
+	// 最終スコアをセット
 	m_pResultScore[info.IDX_ALL]->SetAnimScore(m_nLastScore);
 
 	// アイコン生成クラス

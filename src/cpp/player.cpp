@@ -1272,29 +1272,32 @@ void CPlayer::AfkScore(void)
 	if (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine || m_bAfkEating)
 	{
 		m_nTimeScore++;
+
 		if ((60 * m_nScoreCnt) < m_nTimeScore)
 		{
-
 			// スコアの加算値上昇
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 1000;
-				break;
-			case 2:
-				m_nAddScore = 1500;
-				break;
-			case 3:
-				m_nAddScore = 2000;
-				break;
-			case 4:
-				m_nAddScore = 1000;
-				break;
-			case 5:
 				m_nAddScore = 500;
 				break;
+			case 2:
+				m_nAddScore = 800;
+				break;
+			case 3:
+				m_nAddScore = 1000;
+				break;
+			case 4:
+				m_nAddScore = 300;
+				break;
+			case 5:
+				m_nAddScore = 150;
+				break;
 			case 6:
-				m_nAddScore = 100;
+				m_nAddScore = 50;
+				break;
+			case 7:
+				m_nAddScore = 1;
 				break;
 			default:
 				break;
@@ -1316,15 +1319,44 @@ void CPlayer::AfkScore(void)
 		|| m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nTimeScore++;
-		if (60 < m_nTimeScore)
+		if ((60 * m_nScoreCnt) < m_nTimeScore)
 		{
+			// スコアの加算値上昇
+			switch (m_nScoreCnt)
+			{
+			case 1:
+				m_nAddScore = 800;
+				break;
+			case 2:
+				m_nAddScore = 1400;
+				break;
+			case 3:
+				m_nAddScore = 2000;
+				break;
+			case 4:
+				m_nAddScore = 500;
+				break;
+			case 5:
+				m_nAddScore = 250;
+				break;
+			case 6:
+				m_nAddScore = 100;
+				break;
+			case 7:
+				m_nAddScore = 1;
+				break;
+			default:
+				break;
+			}
+
 			// 加算 ( サボり )
-			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(2000);
+			CGameSceneObject::GetInstance()->GetScoreDitch()->AddScore(m_nAddScore);
 
 			// スコアのポップ生成
-			CScorePop::Create(D3DXVECTOR3(GetPos().x, GetPos().y + 40.0f, GetPos().z), 2000, 15.0f, 25.0f);
+			CScorePop::Create(D3DXVECTOR3(GetPos().x, GetPos().y + 40.0f, GetPos().z), m_nAddScore, 15.0f, 25.0f);
 
-			m_nTimeScore = NULL;
+			// カウント加算
+			m_nScoreCnt++;
 		}
 	}
 

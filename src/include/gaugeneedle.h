@@ -40,6 +40,7 @@ public:
 	// 情報取得処理
 	inline int GetTaskCount(void) const { return m_nTask; }
 	inline int GetAFKCount(void) const { return m_nAFK; }
+	inline bool GetIsFinish(void) const { return m_isFinish; }
 
 	// 生成処理
 	static CGaugeneedle* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
@@ -64,4 +65,5 @@ private:
 	bool m_bStart;		// 動いているかどうか
 	bool m_bDir;		// どの方向に進むか
 	float m_fOldAngle;	// 元の角度
+	bool m_isFinish;	// タスクの最大値判定
 };
