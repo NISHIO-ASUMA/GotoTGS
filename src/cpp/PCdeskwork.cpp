@@ -151,7 +151,7 @@ void CPCDeskwork::Uninit(void)
 void CPCDeskwork::Update(void)
 {
 	// 使えない状態なら
-	if (GetCan() != true) return;
+	if (!GetCan()) return;
 
 	// 親の更新処理
 	CDeskworkUIManager::Update();
@@ -244,13 +244,24 @@ void CPCDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 bool CPCDeskwork::CoolTime(const auto& pClear)
 {
+	// チュートリアル以外なら処理しない
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && !m_bFalse)
+	{
+		// チュートリアルを進める
+		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
+
+		// 使えない状態にする
+		SetCan();
+
+		return false;
+	}
+
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
 	if (nCountTime <= Config::TIME_COOL)
 	{// クールタイムを数える
-		nCountTime++;
-		SetCountTime(nCountTime);
+		SetCountTime(++nCountTime);
 
 		if (m_bFalse != false)
 		{// 失敗している場合
@@ -321,18 +332,6 @@ bool CPCDeskwork::CoolTime(const auto& pClear)
 	// 点滅を止める
 	pClear->SetUse(false);
 	pClear->SetUseFlash(false);
-
-	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && !m_bFalse)
-	{
-		// チュートリアルを進める
-		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
-
-		// 使えない状態にする
-		SetCan();
-
-		return true;
-	}
 
 	// 失敗していない状態にする
 	m_bFalse = false;
