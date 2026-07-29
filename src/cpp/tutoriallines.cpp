@@ -25,6 +25,7 @@
 #include "tutorialobject.h"
 #include "tutorialplayer.h"
 #include "pointobject.h"
+#include "billboard.h"
 
 //=========================================================
 // コンストラクタ
@@ -37,6 +38,7 @@ m_nCountSkip(NULL),
 m_pLines(nullptr),
 m_pBG(nullptr),
 m_pTutoPlayer(nullptr),
+m_pKeyUi(nullptr),
 m_pArrow{}
 {
 
@@ -220,6 +222,9 @@ void CTutorialLines::SetNextTutorial(void)
 		// 2個目の矢印を起動
 		m_pArrow[0]->SetIsDraw(false);
 		m_pArrow[1]->SetIsDraw(true);
+
+		// 起動したらビルボードの位置も移動する
+		m_pKeyUi->SetPos(D3DXVECTOR3(150.0f, 65.0f, 360.0f));
 	}
 
 	if (m_nNowIdx == LINESTYPE_6)
@@ -227,12 +232,18 @@ void CTutorialLines::SetNextTutorial(void)
 		// 3個目の矢印を起動
 		m_pArrow[1]->SetIsDraw(false);
 		m_pArrow[2]->SetIsDraw(true);
+
+		// 起動したらビルボードの位置も移動する
+		m_pKeyUi->SetPos(D3DXVECTOR3(40.0f, 50.0f, 280.0f));
 	}
 
 	if (m_nNowIdx == LINESTYPE_7)
 	{
 		// 矢印の描画をなくす
 		m_pArrow[2]->SetIsDraw(false);
+
+		// uiの消去
+		m_pKeyUi->Uninit();
 	}
 
 	// セリフを番号に合わせる
@@ -253,9 +264,12 @@ void CTutorialLines::SetNextTutorial(void)
 //=========================================================
 void CTutorialLines::CreateArrow(void)
 {
+	// ビルボード生成
+	m_pKeyUi = CBillboard::Create(D3DXVECTOR3(-55.0f, 60.0f, 180.0f), VECTOR3_NULL, 10.0f, 10.0f, "Fbutton.png");
+
 	// 矢印オブジェクトを生成 (PC)
 	m_pArrow.push_back(CPointObject::Create
-						(D3DXVECTOR3(-55.0f, 80.0f, 180.0f),
+						(D3DXVECTOR3(-55.0f, 120.0f, 180.0f),
 						 D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						 D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
@@ -263,7 +277,7 @@ void CTutorialLines::CreateArrow(void)
 
 	// 矢印オブジェクトを生成 (コピー)
 	m_pArrow.push_back(CPointObject::Create
-					   (D3DXVECTOR3(150.0f, 100.0f, 370.0f),
+					   (D3DXVECTOR3(150.0f, 120.0f, 370.0f),
 						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
@@ -272,7 +286,7 @@ void CTutorialLines::CreateArrow(void)
 
 	// 矢印オブジェクトを生成 (提出)
 	m_pArrow.push_back(CPointObject::Create
-					   (D3DXVECTOR3(40.0f, 80.0f, 280.0f),
+					   (D3DXVECTOR3(40.0f, 110.0f, 280.0f),
 						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")

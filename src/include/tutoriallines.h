@@ -27,6 +27,7 @@ class CTutorialLinesBG;
 class CLines;
 class CTutorialPlayer;
 class CPointObject;
+class CBillboard;
 
 //*********************************************************
 // チュートリアルのセリフに対するクラスを定義
@@ -132,4 +133,5 @@ private:
 	void CreateArrow(void);
 private:
 	std::vector<CPointObject*> m_pArrow;	// 矢印オブジェクト
+	CBillboard* m_pKeyUi;					// キー入力表示のui
 };
