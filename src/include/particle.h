@@ -30,6 +30,7 @@ public:
 		TYPE_FLAME,		// 火炎放射
 		TYPE_THUNDER,	// 落雷
 		TYPE_NEARBY,	// 近辺
+		TYPE_SLEEP,		// 眠る
 		TYPE_MAX
 	}TYPE;
 
@@ -66,6 +67,7 @@ private:
 	void Flame(void);				// 火炎放射状態
 	void Thunder(void);				// 雷状態
 	void Nearby(void);				// オブジェクトの周りからパーティクルが出る状態
+	void Sleep(void);				// 寝る状態
 
 	// 静的メンバ変数
 	static D3DXVECTOR3 m_TargetPos;	// 目標位置
