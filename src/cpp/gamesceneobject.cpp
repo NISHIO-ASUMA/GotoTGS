@@ -53,6 +53,9 @@
 #include "receptionist.h"
 #include "auditormanager.h"
 #include "enemydoubtgauge.h"
+#include "gaugeneedle.h"
+#include "fade.h"
+#include "result.h"
 
 //*********************************************************
 // 定数名前空間
@@ -267,6 +270,14 @@ void CGameSceneObject::Update(void)
 
 		// セットする
 		m_pScoreAll->SetScore(ScoreDitch + ScoreTask);
+	}
+
+	// 指針の取得 ( マックスまでタスクしたらの時 )
+	auto* pNeedle = m_pProgressgauge->GetGaugeneedle();
+	if (pNeedle->GetIsFinish() == true)
+	{
+		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CResult>());
+		return;
 	}
 
 	// ブロック管理クラスの更新処理
