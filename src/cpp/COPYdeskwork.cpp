@@ -137,7 +137,7 @@ void CCOPYDeskwork::Uninit(void)
 void CCOPYDeskwork::Update(void)
 {
 	// 使えない状態なら
-	if (GetCan() != true) return;
+	if (!GetCan()) return;
 
 	// 親の更新処理
 	CDeskworkUIManager::Update();
@@ -236,6 +236,18 @@ void CCOPYDeskwork::SetAlphaUI(const bool& bUse)
 //=========================================================
 bool CCOPYDeskwork::CoolTime(const auto& pClear)
 {
+	// チュートリアル以外なら処理しない
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
+	{
+		// チュートリアルを進める
+		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
+
+		// 使えない状態にする
+		SetCan();
+
+		return false;
+	}
+
 	// 現在のカウント
 	int nCountTime = GetCountTime();
 
@@ -272,18 +284,6 @@ bool CCOPYDeskwork::CoolTime(const auto& pClear)
 	// 点滅を止める
 	pClear->SetUse(false);
 	pClear->SetUseFlash(false);
-
-	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
-	{
-		// チュートリアルを進める
-		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
-
-		// 使えない状態にする
-		SetCan();
-
-		return true;
-	}
 
 	return true;
 }
