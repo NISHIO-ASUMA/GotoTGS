@@ -84,6 +84,7 @@ void CDeskworkUIManager::Uninit(void)
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;
 	m_nDOCUMENTTaskNum = NULL;
+	m_bTutorial = false;
 }
 
 //=========================================================

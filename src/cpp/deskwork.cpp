@@ -215,6 +215,16 @@ void CDeskwork::Draw(void)
 //=========================================================
 void CDeskwork::SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool& bUse)
 {
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL&&
+		!m_pPCDeskUI->GetTutorial() && !m_pCOPYDeskUI->GetTutorial())
+	{// チュートリアルで実践をやれる状態じゃない時
+
+		// タスクしていない状態に変更
+		m_TaskType = CWorldUICollision::TYPE_NONE;
+
+		return;
+	}
+
 	switch (TaskType)
 	{
 	// PCタスクの場合

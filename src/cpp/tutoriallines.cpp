@@ -2,9 +2,6 @@
 //
 // チュートリアルのセリフ処理 [ tutoriallines.cpp ]
 // Author: Takahashi Misaki
-//	
-// 場所を示す矢印を配置 ( Asuma )
-//CBlock::Create(D3DXVECTOR3(-55.0f, 80.0f, 180.0f), D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f), D3DXVECTOR3(HALF, HALF, HALF), "STAGEOBJ/yajirusi.x");
 // 
 //=========================================================
 
@@ -25,6 +22,8 @@
 #include "tutorialobject.h"
 #include "tutorialplayer.h"
 #include "pointobject.h"
+#include "billboard.h"
+#include "titleuimanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -37,6 +36,7 @@ m_nCountSkip(NULL),
 m_pLines(nullptr),
 m_pBG(nullptr),
 m_pTutoPlayer(nullptr),
+m_pKeyUi(nullptr),
 m_pArrow{}
 {
 
@@ -78,6 +78,9 @@ HRESULT CTutorialLines::Init(void)
 	// 配列初期化
 	m_pArrow.clear();
 
+	// 今回の操作種類を取得してそれに応じてテクスチャを変更
+	int nIdxControl = CTitleuiManager::GetInstance()->GetSelectIdx();
+
 	// 現在の番号を初期化
 	m_nNowIdx = LINESTYPE_1;
 
@@ -96,7 +99,7 @@ HRESULT CTutorialLines::Init(void)
 	m_pLines->SetUse(m_bUse);
 
 	// 矢印生成
-	CreateArrow();
+	CreateArrow(nIdxControl);
 
 	return S_OK;
 }
@@ -119,8 +122,11 @@ void CTutorialLines::Uninit(void)
 //=========================================================
 void CTutorialLines::Update(void)
 {
+	// フラグの検証チェック用変数
+	bool isGetTutorial = CDeskworkUIManager::GetTutorial();
+
 	// 使用してない場合とチュートリアルを進めている場合は更新しない
-	if (!m_bUse || CDeskworkUIManager::GetTutorial()) return;
+	if (!m_bUse || isGetTutorial) return;
 
 	// 実践をやる場合
 	if (m_nNowIdx == LINESTYPE_3 ||
@@ -220,6 +226,9 @@ void CTutorialLines::SetNextTutorial(void)
 		// 2個目の矢印を起動
 		m_pArrow[0]->SetIsDraw(false);
 		m_pArrow[1]->SetIsDraw(true);
+
+		// 起動したらビルボードの位置も移動する
+		m_pKeyUi->SetPos(D3DXVECTOR3(150.0f, 65.0f, 360.0f));
 	}
 
 	if (m_nNowIdx == LINESTYPE_6)
@@ -227,12 +236,18 @@ void CTutorialLines::SetNextTutorial(void)
 		// 3個目の矢印を起動
 		m_pArrow[1]->SetIsDraw(false);
 		m_pArrow[2]->SetIsDraw(true);
+
+		// 起動したらビルボードの位置も移動する
+		m_pKeyUi->SetPos(D3DXVECTOR3(40.0f, 50.0f, 280.0f));
 	}
 
 	if (m_nNowIdx == LINESTYPE_7)
 	{
 		// 矢印の描画をなくす
 		m_pArrow[2]->SetIsDraw(false);
+
+		// uiの消去
+		m_pKeyUi->Uninit();
 	}
 
 	// セリフを番号に合わせる
@@ -251,11 +266,26 @@ void CTutorialLines::SetNextTutorial(void)
 //=========================================================
 // 矢印生成
 //=========================================================
-void CTutorialLines::CreateArrow(void)
+void CTutorialLines::CreateArrow(int& nIdx)
 {
+	const char* TexName = {};
+
+	// 操作インデックスによってテクスチャ名を変更する
+	if (nIdx == 1)
+	{
+		TexName = "Fbutton.png";
+	}
+	else
+	{
+		TexName = "startbutton.png";
+	}
+
+	// ビルボード生成
+	m_pKeyUi = CBillboard::Create(D3DXVECTOR3(-55.0f, 60.0f, 180.0f), VECTOR3_NULL, 10.0f, 10.0f, TexName);
+
 	// 矢印オブジェクトを生成 (PC)
 	m_pArrow.push_back(CPointObject::Create
-						(D3DXVECTOR3(-55.0f, 80.0f, 180.0f),
+						(D3DXVECTOR3(-55.0f, 120.0f, 180.0f),
 						 D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						 D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
@@ -263,7 +293,7 @@ void CTutorialLines::CreateArrow(void)
 
 	// 矢印オブジェクトを生成 (コピー)
 	m_pArrow.push_back(CPointObject::Create
-					   (D3DXVECTOR3(150.0f, 100.0f, 370.0f),
+					   (D3DXVECTOR3(150.0f, 120.0f, 370.0f),
 						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
@@ -272,7 +302,7 @@ void CTutorialLines::CreateArrow(void)
 
 	// 矢印オブジェクトを生成 (提出)
 	m_pArrow.push_back(CPointObject::Create
-					   (D3DXVECTOR3(40.0f, 80.0f, 280.0f),
+					   (D3DXVECTOR3(40.0f, 110.0f, 280.0f),
 						D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
