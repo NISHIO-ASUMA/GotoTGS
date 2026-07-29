@@ -78,7 +78,7 @@ HRESULT CAfkBench::Init(D3DXVECTOR3 pos)
 	CAfk::Init(pos, AFKBENCH::fRadius);
 
 	// パーティクル生成
-	m_pParticle = CParticle::Create(pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_SLEEP);
+	m_pParticle = CParticle::Create(D3DXVECTOR3(pos.x,pos.y + 5.0f,pos.z), VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_SLEEP);
 
 	return S_OK;
 }
