@@ -67,6 +67,7 @@ HRESULT CTutorialObject::Init(void)
 	// ステージマップ読み込み
 	m_pBlockManager = std::make_unique<CBlockManager>();
 	pManager->SetBlockManager(m_pBlockManager.get());
+	m_pBlockManager->SetLoadFileName("data/JSON/TutoMap.json");
 	m_pBlockManager->Init();
 
 	// タスクの判定を取る球形コライダー管理クラスを生成

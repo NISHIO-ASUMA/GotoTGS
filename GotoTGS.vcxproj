@@ -469,6 +469,7 @@
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\playerstatetv.h" />
+    <ClInclude Include="src\include\playerutility.h" />
     <ClInclude Include="src\include\pointobject.h" />
     <ClInclude Include="src\include\police.h" />
     <ClInclude Include="src\include\progressgauge.h" />

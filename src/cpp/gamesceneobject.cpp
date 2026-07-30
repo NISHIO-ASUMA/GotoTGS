@@ -49,6 +49,7 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "mobcharactormanager.h"	// 西尾追加
+#include "afk2dui.h"
 #include "boss.h"
 #include "receptionist.h"
 #include "auditormanager.h"
@@ -79,6 +80,7 @@ m_pScoreAll(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr),
+m_pAfk2DUI(nullptr),
 m_pReception(nullptr)
 {
 
@@ -124,7 +126,7 @@ HRESULT CGameSceneObject::Init(void)
 	CAfkManager::Instance()->Init();
 
 	// さぼっているときのUIの生成
-	CAfk2DUI::Create();
+	m_pAfk2DUI = CAfk2DUI::Create();
 
 	// ドア用チュートリアルUIの生成
 	CDoorUI::Create();
@@ -272,13 +274,13 @@ void CGameSceneObject::Update(void)
 		m_pScoreAll->SetScore(ScoreDitch + ScoreTask);
 	}
 
-	// 指針の取得 ( マックスまでタスクしたらの時 )
-	auto* pNeedle = m_pProgressgauge->GetGaugeneedle();
-	if (pNeedle->GetIsFinish() == true)
-	{
-		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CResult>());
-		return;
-	}
+	//// 指針の取得 ( マックスまでタスクしたらの時 )
+	//auto* pNeedle = m_pProgressgauge->GetGaugeneedle();
+	//if (pNeedle->GetIsFinish() == true)
+	//{
+	//	CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CResult>());
+	//	return;
+	//}
 
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
@@ -316,6 +318,7 @@ void CGameSceneObject::CreatePointer(void)
 	jsonManager->SetBlockManager(m_pBlocks.get());
 
 	// 初期化とポインタセット
+	m_pBlocks->SetLoadFileName();
 	m_pBlocks->Init();
 
 	// タスクの生成 Misaki

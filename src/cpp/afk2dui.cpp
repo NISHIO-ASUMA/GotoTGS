@@ -26,9 +26,9 @@
 #include "afkeating.h"
 #include "afkbench.h"
 
-//=================================================
+//*********************************************************
 // 名前空間
-//=================================================
+//*********************************************************
 namespace AFK2DUI
 {
 	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };			// 2D画像の座標
@@ -43,8 +43,8 @@ namespace AFK2DUI
 //=========================================================
 // コンストラクタ
 //=========================================================
-CAfk2DUI::CAfk2DUI() : m_pos(VECTOR3_NULL),
-m_fMaxFrame(NULL),
+CAfk2DUI::CAfk2DUI(int nPriority) : CObject2D(nPriority)
+,m_fMaxFrame(NULL),
 m_fCountFrame(NULL),
 m_bAfkButton(false),
 m_bEasing(false),
@@ -108,61 +108,32 @@ void CAfk2DUI::Uninit(void)
 //=========================================================
 void CAfk2DUI::Update(void)
 {
-	// 親クラスの更新処理
-	CObject2D::Update();
+	// 非表示ならスキップする
+	if (!m_bDisplay) return;
 
 	// イージング
 	EasingSine();
 
-	// プレイヤーがさぼっているか判定用の変数
-	bool bAfkSmoke = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkSmoke();
-	bool bAfkTV = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkTV();
-	bool bAfkMagazine = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkMagazine();
-	bool bAfkGameCenter = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkGameCenter();
-	bool bAfkEating = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkEating();
-	bool bAfkBench[4];
-	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
-		bAfkBench[nCnt] = CGameSceneObject::GetInstance()->GetPlayer()->GetAfkBench(nCnt);
-	}
-	// さぼっていなかったら
-	if (!bAfkSmoke && !bAfkTV && !bAfkMagazine && !bAfkGameCenter && !bAfkEating && 
-		!bAfkBench[0] && !bAfkBench[1] && !bAfkBench[2] && !bAfkBench[3])
-	{
-		m_bDisplay = true;
-		SetTexture(AFK2DUI::Button_NAME);
-	}
-	// さぼっていたら
-	else m_bDisplay = false;
+	// 親クラスの更新処理
+	CObject2D::Update();
 }
 //=========================================================
 // 描画処理
 //=========================================================
 void CAfk2DUI::Draw(void)
 {
+	// 非表示ならスキップする
 	if (!m_bDisplay) return;
 
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
-	bool bAfkBench[4];
-
-	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
-		bAfkBench[nCnt] = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
-	}
-
-	// 親クラスの描画処理
-	if(bAfkSmoke || bAfkTV || bAfkMagazine || bAfkGameCenter || bAfkEating || 
-		bAfkBench[0] || bAfkBench[1] || bAfkBench[2] || bAfkBench[3])CObject2D::Draw();
+	// 親クラスの描画
+	CObject2D::Draw();
 }
 //=========================================================
 // イージングサイン使用関数
 //=========================================================
 void CAfk2DUI::EasingSine(void)
 {
+#if 0
 	// 位置の取得
 	auto pos = GetPos();
 
@@ -220,4 +191,45 @@ void CAfk2DUI::EasingSine(void)
 		// イージング判定を無効にする
 		m_bEasing = false;
 	}
+#else
+
+	// カウントの増減
+	if (!m_bEasing)
+	{
+		m_fCountFrame += 1.0f;
+		if (m_fCountFrame >= m_fMaxFrame)
+		{
+			m_fCountFrame = m_fMaxFrame;
+			m_bEasing = true; // 反転
+		}
+	}
+	else
+	{
+		m_fCountFrame -= 1.0f;
+		if (m_fCountFrame <= 0.0f)
+		{
+			m_fCountFrame = 0.0f;
+			m_bEasing = false; // 反転
+		}
+	}
+
+	// 座標を取得
+	auto pos = GetPos();
+
+	// 開始時
+	D3DXVECTOR2 Apper = { AFK2DUI::Apper.x * pos.x, AFK2DUI::Apper.y * pos.y };
+
+	// 目的地
+	D3DXVECTOR2 Dest = { AFK2DUI::Dest.x * pos.x,  AFK2DUI::Dest.y * pos.y };
+
+	// イージングの割合計算
+	float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
+
+	// 差分と大きさの計算
+	D3DXVECTOR2 Diff = { Dest.x - Apper.x, Dest.y - Apper.y };
+	D3DXVECTOR2 Size = Apper + Diff * Ratio;
+
+	// オブジェクトのサイズの設定
+	CObject2D::SetSize(Size.x, Size.y);
+#endif
 }

@@ -2,7 +2,6 @@
 //
 // プレイヤーを追いかける状態のクラス[ enemystatechase.cpp ]
 // Author: Asuma Nishio
-// ここの関数修正する
 // 
 //=========================================================
 
@@ -16,6 +15,8 @@
 //*********************************************************
 #include "enemy.h"
 #include "enemystateneutral.h"
+#include "player.h"
+#include "billboard.h"
 
 //=========================================================
 // コンストラクタ
@@ -38,6 +39,10 @@ CEnemyStateChase::~CEnemyStateChase()
 //=========================================================
 void CEnemyStateChase::OnStart(void)
 {
+	// まずレベルを1上げる
+	m_pEnemy->SetMoveSpeed(1);
+	m_pEnemy->SetEyeAngle(1);
+
 	m_nStayCount = 0;
 	m_isDoubt = false;
 }
@@ -45,51 +50,46 @@ void CEnemyStateChase::OnStart(void)
 // 更新関数
 //=========================================================
 void CEnemyStateChase::OnUpdate(void)
-{
-	// すでに視界から外れて停止中の処理
+{// 「プレイヤーがタスクを起動したら追いかけを終了する」
+
+	// プレイヤー取得
+	CPlayer* pPlayer = m_pEnemy->GetInCharactor();
+	if (!pPlayer) return;
+
+	// タスク起動後の停止期間
 	if (m_isDoubt)
 	{
-		// 停止時間中にもう一度プレイヤーが視界に入ったかチェック
-		if (m_pEnemy->CheckEyesight())
+		// 滞在カウントを加算
+		m_nStayCount++;
+
+		// アイコンオフ
+		m_pEnemy->GetChaseIcon()->SetDrawFlags(false);
+
+		// 2秒間経過したらニュートラルへ遷移
+		if (m_nStayCount >= 120)
 		{
-			// Doubt状態を解除して追跡に戻す
-			m_isDoubt = false;
-			m_nStayCount = 0;
-
-			// 追跡モーションに戻す
-			m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::CHASEDASH);
+			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
 		}
-		else
-		{
-			m_nStayCount++;
-
-			// 2秒間経過したらニュートラルへ遷移
-			if (m_nStayCount >= 120)
-			{
-				// ステートマシン変更
-				m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
-				return;
-			}
-
-			// 視界外のまま停止している間はこれ以上追跡を行わない
-			return;
-		}
+		return; // 停止維持
 	}
 
-	// 通常の追跡 
-	if (!m_pEnemy->CheckEyesight())
+	// 追跡中の処理
+	if (pPlayer->IsTaskWorking())
 	{
-		// フラグ起動
+		// タスク起動を検知
 		m_isDoubt = true;
-		m_nStayCount = 0; 
+		m_nStayCount = 0;
 
 		// モーション変更
 		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT);
 		m_pEnemy->SetMove(VECTOR3_NULL);
+
+		// アイコンオフ
+		m_pEnemy->GetChaseIcon()->SetDrawFlags(false);
 	}
 	else
 	{
-		// 視界内にいる間は通常通り追いかける
+		// タスクが起動されるまでは追いかける
 		m_pEnemy->ChaseMoving();
 	}
 }

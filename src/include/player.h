@@ -65,12 +65,12 @@ public:
 	enum AFKTYPE
 	{
 		AFKTYPE_NONE,
-		AFKTYPE_SMOKE,
-		AFKTYPE_TV,
-		AFKTYPE_MAGAZINE,
-		AFKTYPE_GAMECENTER,
-		AFKTYPE_EATING,
-		AFKTYPE_BENCH,
+		AFKTYPE_SMOKE,		// 煙草
+		AFKTYPE_TV,			// テレビ
+		AFKTYPE_MAGAZINE,	// 雑誌読み
+		AFKTYPE_GAMECENTER,	// ゲームセンター
+		AFKTYPE_EATING,		// 食事
+		AFKTYPE_BENCH,		// 公園のベンチ
 		AFKTYPE_MAX
 	};
 
@@ -142,8 +142,9 @@ public:
 
 	// 西尾追加
 	void SetCatchEnemy(const bool isFlags) { m_isCatchEnemy = isFlags; }
-	bool GetIsCatch(void) { return m_isCatchEnemy; } // 捕まった
+	bool GetIsCatch(void) { return m_isCatchEnemy; }
 	bool GetIsLazy(void) { return m_isEnableLazy; }
+	bool IsTaskWorking(void) const;
 
 public:
 
@@ -173,7 +174,7 @@ public:
 		m_pSubItemModels->OffSetPos(offpos);
 		m_pSubItemModels->OffSetRot(rot);
 
-		// アウトラインせってい
+		// アウトラインセット
 		m_pSubItemModels->SetUseOutLine(true);
 	}
 
@@ -246,6 +247,12 @@ public:
 	/// <param name=""></param>
 	void MathBenchRotation(void);
 
+	/// <summary>
+	/// afkのui関連回りの起動関数
+	/// </summary>
+	/// <param name=""></param>
+	void UpdateAfkUiState(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -273,6 +280,12 @@ private:
 	int m_nGameCenter;									// ゲームセンターで遊んだ回数カウント用変数
 	int m_nEating;										// 飲食スペースでお菓子を食べた回数カウント用変数
 	int m_nBench;										// ベンチで寝た回数カウント用変数
+
+	//************************************************
+	// さぼりのクールタイム用
+	//************************************************
+	int m_nAfkCoolTime[AFKTYPE_MAX];	// 通常のサボり用クールタイムタイマー
+	int m_nCoolTimeBench[4];			// ベンチ専用のクールタイムタイマー
 
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル

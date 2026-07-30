@@ -35,7 +35,8 @@ using json = nlohmann::json; // jsonクラスの使用
 // コンストラクタ
 //=========================================================
 CBlockManager::CBlockManager() : m_pBlocks{},
-m_pCharactor(nullptr)
+m_pCharactor(nullptr),
+m_pLoadFileName{}
 {
 
 }
@@ -119,7 +120,7 @@ HRESULT CBlockManager::Load(void)
 {
 	// jsonファイル読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
-	jsonmanager->Load(FILE_NAME);
+	jsonmanager->Load(m_pLoadFileName);
 
 	return S_OK;
 }

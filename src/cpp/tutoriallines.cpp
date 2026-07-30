@@ -17,6 +17,7 @@
 #include "lines.h"
 #include "tutoriallinesBG.h"
 #include "input.h"
+#include "ui.h"
 #include "deskworkUImanager.h"
 #include "deskwork.h"
 #include "tutorialobject.h"
@@ -173,8 +174,8 @@ void CTutorialLines::Update(void)
 	// キー入力したかどうか
 	if (!Key->GetTrigger(DIK_RETURN) &&
 		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_A) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_START))
+		!Pad->GetTrigger(CJoyPad::JOYKEY_A)
+		)
 		return;
 
 	// 現在の番号を一つ進める
@@ -231,6 +232,7 @@ void CTutorialLines::SetNextTutorial(void)
 		m_pKeyUi->SetPos(D3DXVECTOR3(150.0f, 65.0f, 360.0f));
 	}
 
+	// 対象と一致するとき ( コピー機が終わった時 )
 	if (m_nNowIdx == LINESTYPE_6)
 	{
 		// 3個目の矢印を起動
@@ -241,6 +243,7 @@ void CTutorialLines::SetNextTutorial(void)
 		m_pKeyUi->SetPos(D3DXVECTOR3(40.0f, 50.0f, 280.0f));
 	}
 
+	// 書類タスクをこなしたら
 	if (m_nNowIdx == LINESTYPE_7)
 	{
 		// 矢印の描画をなくす
@@ -273,11 +276,21 @@ void CTutorialLines::CreateArrow(int& nIdx)
 	// 操作インデックスによってテクスチャ名を変更する
 	if (nIdx == 1)
 	{
+		// テクスチャ名を設定
 		TexName = "Fbutton.png";
+
+		// ガイドになるUiを生成
+		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip000.png");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 0, 100.0f, 70.0f, "stepnext_key.jpg");
 	}
 	else
 	{
+		// テクスチャ名を設定
 		TexName = "startbutton.png";
+
+		// ガイドになるUiを生成
+		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip001.png");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 0, 100.0f, 70.0f, "stepnext_button.jpg");
 	}
 
 	// ビルボード生成

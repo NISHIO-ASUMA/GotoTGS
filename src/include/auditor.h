@@ -64,7 +64,6 @@ public:
 	void Draw(void) override;
 
 	void DrawEyeSight(void);
-	void MovePointOutSide(const D3DXVECTOR3& pos);
 	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
 
 	/// <summary>
@@ -97,8 +96,8 @@ private:
 	};
 
 private:
-	void MovingTypeOutSide(void);
 
+	void MovingTypeOutSide(void);
 	void UpdateOffice(void);
 	void UpdateSoba(void);
 	void UpdateGameCenter(void);

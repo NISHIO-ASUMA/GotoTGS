@@ -53,11 +53,11 @@ CBillboardMulti::~CBillboardMulti()
 //=========================================================
 CBillboardMulti* CBillboardMulti::Create
 (
-	const D3DXVECTOR3& pos, 
-	const D3DXVECTOR3& rot, 
-	float fWidth, 
-	float fHeight, 
-	const char* pTexName1, 
+	const D3DXVECTOR3& pos,
+	const D3DXVECTOR3& rot,
+	float fWidth,
+	float fHeight,
+	const char* pTexName1,
 	const char* pTexName2
 )
 {
@@ -265,7 +265,7 @@ void CBillboardMulti::Draw(void)
 			// テクスチャの乗算設定
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_MODULATE);
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE); // 2枚目の色
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT); // 1枚目の結果
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT); // 1枚目の結果の加算
 
 			// アルファ値の乗算
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
@@ -288,7 +288,7 @@ void CBillboardMulti::Draw(void)
 		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 	}
 
-	// 標準の Direct3D9 設定に戻す
+	// 設定を戻す
 	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
@@ -297,7 +297,7 @@ void CBillboardMulti::Draw(void)
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
 
-	// Z書き込み許可を必ず TRUE に戻す
+	// Zテストの設定を戻す
 	if (m_isTests)
 	{
 		pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);

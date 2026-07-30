@@ -1526,5 +1526,8 @@
     <ClInclude Include="src\include\scorepop.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\playerutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

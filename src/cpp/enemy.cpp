@@ -64,6 +64,9 @@ m_pDestCharactor(nullptr),
 m_pChaseIcon(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
+m_nLevelPoint(NULL),
+m_fEyeAngle(NULL),
+m_fMoveSpeed(NULL),
 m_playerTargetPos(VECTOR3_NULL)
 {
 
@@ -134,6 +137,10 @@ HRESULT CEnemy::Init(void)
 	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,10.0f,10.0f,"ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
 
+	// 初期値を設定
+	m_fMoveSpeed = EnemyInfo::SPEED;
+	m_fEyeAngle = Eyesight::EYE_ANGLE;
+
 	return S_OK;
 }
 //========================================================
@@ -182,7 +189,7 @@ void CEnemy::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// 対象を追いかける関数 (　ここでマップに配置されている物を避けて向かうアルゴリズムにしたいがどうやろうか )
+// 対象を追いかける関数
 //========================================================
 void CEnemy::ChaseMoving(void)
 {
@@ -199,12 +206,13 @@ void CEnemy::ChaseMoving(void)
 
 	// 目的地へのベクトルを計算
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
 
 	// 目的地までの距離を計算
 	float distance = D3DXVec3Length(&vecToTarget);
 
-	// 到着判定 ( ここを何とか修正してプレイヤーを捕まえるようにする )
-	if (distance <= 3.0f)
+	// 到着判定
+	if (distance <= Config::CATCH_RANGE)
 	{
 		// プレイヤーを捕まえる
 		m_pDestCharactor->SetCatchEnemy(true);
@@ -219,7 +227,7 @@ void CEnemy::ChaseMoving(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED * 2.0f;
+	moveVec *= m_fMoveSpeed * 1.1f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -284,7 +292,7 @@ void CEnemy::UpdateMoveViewPoint(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -350,7 +358,7 @@ void CEnemy::UpdateMovingSmoke(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -416,7 +424,7 @@ void CEnemy::UpdateMovingTV(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -433,6 +441,83 @@ void CEnemy::UpdateMovingTV(void)
 
 	// 目標角度をセット
 	SetRotDest(rotDest);
+}
+//========================================================
+// 敵の速度設定
+//========================================================
+void CEnemy::SetMoveSpeed(const int nLevel)
+{
+	// レベル加算
+	m_nLevelPoint += nLevel;
+
+	// レベル値によって速度の設定を変更する
+	switch (m_nLevelPoint)
+	{
+	case LEVEL_SYSTEM_0:
+		m_fMoveSpeed = EnemyInfo::SPEED;
+		break;
+
+	case LEVEL_SYSTEM_1:
+		m_fMoveSpeed = 1.5f;
+		break;
+
+	case LEVEL_SYSTEM_2:
+		m_fMoveSpeed = 2.0f;
+		break;
+
+	case LEVEL_SYSTEM_3:
+		m_fMoveSpeed = 3.0f;
+		break;
+
+	case LEVEL_SYSTEM_4:
+		m_fMoveSpeed = 3.5f;
+		break;
+
+	case LEVEL_SYSTEM_5:
+		m_fMoveSpeed = 4.0f;
+		break;
+	default:
+		m_fMoveSpeed = 5.0f;	// 最大越えたとき
+		break;
+	}
+}
+//========================================================
+// 敵の視界の範囲設定
+//========================================================
+void CEnemy::SetEyeAngle(const int nLevel)
+{
+	// レベル加算
+	m_nLevelPoint += nLevel;
+
+	// レベル値によって範囲の大きさを変更する
+	switch (m_nLevelPoint)
+	{
+	case LEVEL_SYSTEM_0:
+		m_fEyeAngle = Eyesight::EYE_ANGLE;
+		break;
+
+	case LEVEL_SYSTEM_1:
+		m_fEyeAngle = 55.0f;
+		break;
+
+	case LEVEL_SYSTEM_2:
+		m_fEyeAngle = 65.0f;
+		break;
+
+	case LEVEL_SYSTEM_3:
+		m_fEyeAngle = 75.0f;
+		break;
+
+	case LEVEL_SYSTEM_4:
+		m_fEyeAngle = 85.0f;
+		break;
+
+	case LEVEL_SYSTEM_5:
+		m_fEyeAngle = 100.0f;
+		break;
+	default:
+		break;
+	}
 }
 //========================================================
 // ステート変更処理
@@ -456,7 +541,7 @@ void CEnemy::DrawEyeSight(void)
 	// 現在の設定を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 rot = GetRot();
-	float halfAngle = D3DXToRadian(Eyesight::EYE_ANGLE / 2.0f);
+	float halfAngle = D3DXToRadian(m_fEyeAngle / 2.0f);
 
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -521,7 +606,7 @@ void CEnemy::DrawEyeSight(void)
 	for (int i = 0; i <= Config::DIVIDE; ++i)
 	{
 		float t = (float)i / (float)Config::DIVIDE;
-		float currentAngle = rot.y - halfAngle + (D3DXToRadian(Eyesight::EYE_ANGLE) * t);
+		float currentAngle = rot.y - halfAngle + (D3DXToRadian(m_fEyeAngle) * t);
 
 		D3DXVECTOR3 dir(-sinf(currentAngle), 0.0f, -cosf(currentAngle));
 
@@ -560,65 +645,41 @@ void CEnemy::DrawEyeSight(void)
 //========================================================
 bool CEnemy::CheckEyesight(void)
 {
-	// もしnullなら
+	// nullなら
 	if (!m_pDestCharactor) return false;
 
-	// もしサボっていなかったら
-	if (!m_pDestCharactor->GetIsLazy())
-		return false;
+	// プレイヤーがサボっていなければ反応しない
+	if (!m_pDestCharactor->GetIsLazy()) return false;
 
-	// 敵の現在座標を取得
+	// 敵とプレイヤーの現在座標を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 CharactorPos = m_pDestCharactor->GetPos();
 
-	// 高さの判定
+	// 高さ判定
 	float heightDiff = fabsf(CharactorPos.y - enemyPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f) return false;
 
-	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
-	{
-		return false; // 高さが範囲外
-	}
-
-	// 距離の判定
+	// 距離判定
 	D3DXVECTOR3 diff = CharactorPos - enemyPos;
 	diff.y = 0.0f;
-
-	// 距離の2乗を計算
 	float sqrDistance = D3DXVec3LengthSq(&diff);
 
-	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS)
-	{
-		return false; // 判定外
-	}
-
-	// ゼロ除算
+	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS) return false;
 	if (sqrDistance < 0.0001f) return true;
 
-	// 角度を取得
+	// 角度判定
 	D3DXVECTOR3 rot = GetRot();
-
-	// 角度から方向ベクトルを生成
 	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
 	D3DXVec3Normalize(&enemyForward, &enemyForward);
 
-	// 方向ベクトルを正規化
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
-	// 内積を計算
 	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
+	float cosHalfAngle = cosf(D3DXToRadian(m_fEyeAngle));
 
-	// 角度のコサイン値を計算
-	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
-	float cosHalfAngle = cosf(halfAngleRad);
-
-	// 内積判定
-	if (dot >= cosHalfAngle)
-	{
-		return true; // 視界に入っている
-	}
-
-	return false;
+	// サボり中で、かつ扇形視界に入っている場合
+	return (dot >= cosHalfAngle);
 }
 //========================================================
 // 矩形コリジョン判定

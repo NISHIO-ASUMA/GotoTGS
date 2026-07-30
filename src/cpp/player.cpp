@@ -27,12 +27,14 @@
 #include "deskwork.h"
 #include "gamesceneobject.h"
 #include "debugproc.h"
+#include "outline.h"
 #include "PCdeskwork.h"				// 髙橋追加
 #include "COPYdeskwork.h"			// 髙橋追加
 #include "DOCUMENTdeskwork.h"		// 髙橋追加
 #include "vigilanceUImanager.h"		// 髙橋追加
 #include "vigilanceUImanager.h"		// 髙橋追加
 #include "gaugeneedle.h"			// 髙橋追加
+#include "progressgauge.h"
 #include "worldUIcollision.h"
 #include "collisionsphere.h"		// 近田追加
 #include "afkmanager.h"				// 近田追加
@@ -40,71 +42,22 @@
 #include "afksmoke.h"				// 近田追加
 #include "afkmagazine.h"			// 近田追加
 #include "afkeating.h"				// 近田追加
+#include "afkgamecenter.h"			// 近田追加
+#include "titleuimanager.h"			// 近田追加
+#include "score.h"					// 近田追加
+#include "afkbench.h"				// 近田追加
+
 #include "automaticdoormanager.h"	// 西尾追加
 #include "automatic_door.h"			// 西尾追加
 #include "autodoor_collision.h"		// 西尾追加
-#include "outline.h"
-#include "afkgamecenter.h"			// 近田追加
-#include "titleuimanager.h"			// 近田追加
-#include "progressgauge.h"
-#include "score.h"					// 近田追加
-#include "afkbench.h"				// 近田追加
 #include "slideopendoormanager.h"	// 西尾追加
 #include "sideopendoor.h"			// 西尾追加
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "enemy.h"					// 西尾追加
-#include "scorepop.h"
-
-//*********************************************************
-// 名前空間
-//*********************************************************
-namespace player
-{
-	constexpr float fSpeed = 5.0f;			// プレイヤーの移動スピード
-	constexpr float fInput = 0.0001f;		// 移動処理に使うキーが入力されてるか比較する用の変数
-	constexpr float fJoyInput = 2000.0f;	// ジョイパッドのスティック入力の値
-
-	/// <summary>
-	/// 以下、西尾追加
-	/// </summary>
-	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
-	constexpr float SphereSize = 60.0f;									  // 球形サイズ
-	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
-};
-
-//*********************************************************
-// 定数名前空間 ( タスク関連時 )
-//*********************************************************
-namespace Player_Info
-{
-	// テレビ関係
-	const D3DXVECTOR3 TV_CHARACTORPOS = { -244.0f, 10.5f,277.0f };
-	const D3DXVECTOR3 TV_DESTPOS = { -248.0f, 12.0f, 362.0f };
-
-	// デスクワーク関係
-	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
-	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
-};
-
-//*********************************************************
-// 定数名前空間 ( ベンチ関連 )
-//*********************************************************
-namespace Player_Bench
-{
-	// ベンチ関係
-	const D3DXVECTOR3 STATION_CHARACTORPOS = { 792.4f, 18.0f, 1303.6f };	// 駅のベンチの座標
-	const D3DXVECTOR3 STATION_DESTPOS = { 792.4f, 18.0f, 1403.6f };			// 駅のベンチの目的座標
-
-	const D3DXVECTOR3 GAMECENTER_CHARACTORPOS = { 1461.1f, 18.0f, 317.0f };	// ゲームセンターのベンチの座標
-	const D3DXVECTOR3 GAMECENTER_DESTPOS = { 1461.1f, 18.0f, 417.0f };		// ゲームセンターのベンチの目的座標
-
-	const D3DXVECTOR3 IZAKAYA_CHARACTORPOS = { 1527.5f, 18.0f, -962.4f };	// 居酒屋のベンチの座標
-	const D3DXVECTOR3 IZAKAYA_DESTPOS = { 1527.5f, 18.0f, -1062.4f };		// 居酒屋のベンチの目的座標
-
-	const D3DXVECTOR3 OFFICE_CHARACTORPOS = { 734.4f, 18.0f, -468.0f };		// オフィス横のベンチの座標
-	const D3DXVECTOR3 OFFICE_DESTPOS = { 834.4f, 18.0f, -468.0f };			// オフィス横のベンチの目的座標
-};
+#include "scorepop.h"				// 西尾追加
+#include "afk2dui.h"
+#include "playerutility.h"
 
 //=========================================================
 // コンストラクタ
@@ -139,6 +92,12 @@ m_isEnableLazy(false)
 	for (int nCnt = 0; nCnt < 4; nCnt++)
 	{
 		m_bAfkBench[nCnt] = false;
+		m_nCoolTimeBench[nCnt] = NULL;
+	}
+
+	for (int nCool = 0; nCool < AFKTYPE_MAX;nCool++) 
+	{
+		m_nAfkCoolTime[nCool] = NULL;
 	}
 }
 //=========================================================
@@ -236,22 +195,30 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	//******************************************************
-	// NOTE : 西尾追記 2026/05/18
-	//        今はPCの作業のみだけどこれから複数のタスクの判定も組んであげる形に変更になる
-	//		　髙橋追記 2026/05/19
-	//		　コピー機用の処理を追加しました
-	//        西尾追記 : カメラの固定化する処理を追加したよ
-	//		  西尾追記 : 2026/06/05 自動ドアの処理を追加
-	//        西尾追記 : 2026/06/08 自動ドアの判別設定と判定の修正
-	//		  西尾追記 : 2026/06/16 モデルが出ないバグを修正 ステート追加
-
 	// もし上司に捕まってしまったら
 	if (m_isCatchEnemy == true)
 	{
 		// モーションだけ更新
 		CMoveCharactor::UpdateMotionOnly();
 		return;
+	}
+	
+	// クールタイムのカウントダウン処理
+	for (int nTime = 0; nTime < AFKTYPE_MAX; nTime++)
+	{
+		if (m_nAfkCoolTime[nTime] > 0)
+		{
+			m_nAfkCoolTime[nTime]--;	// デクリメント
+		}
+	}
+
+	// ベンチ用カウントダウン
+	for (int nBench = 0; nBench < 4; nBench++)
+	{
+		if (m_nCoolTimeBench[nBench] > 0)
+		{
+			m_nCoolTimeBench[nBench]--;	// デクリメント
+		}
 	}
 
 	// タスクの情報を取得
@@ -261,9 +228,7 @@ void CPlayer::Update(void)
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
 	const auto& Pad = CManager::GetInstance()->GetJoyPad();
 
-	//*********************************************************
-	// ADD: 西尾 タスク中にキーが押されたら、タスクを閉じる
-	//*********************************************************
+	// タスク中にキーが押されたら、タスクを閉じる
 	if (pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE && pDesk->GetTaskType() != CWorldUICollision::TYPE_DOCUMENT)
 	{
 		// 入力フラグ
@@ -297,12 +262,12 @@ void CPlayer::Update(void)
 
 		if (!isInputKey)
 		{// 終了キーを押していない場合
-			// モーション更新だけ挟んでreturnする
+			// 更新だけ挟んでreturnする
 			CMoveCharactor::Update();
 			return;
 		}
 
-		// ADD : 西尾 さっき行っていた作業が"デスクワーク"なら
+		// さっき行っていた作業が"デスクワーク"なら
 		if (pDesk->GetTaskType() == CWorldUICollision::TYPE_PC)
 		{
 			// プレイヤーの座標を戻す
@@ -452,6 +417,9 @@ void CPlayer::Update(void)
 		}
 	}
 
+	// AFKの2DUI更新処理
+	UpdateAfkUiState();
+
 	// ブロックとの判定
 	UpdateBlockCollision(UpdatePos);
 
@@ -510,6 +478,142 @@ void CPlayer::Draw(void)
 	// モーションのデバッグ表示
 	GetMotion()->Debug();
 #endif
+}
+//=================================================
+// さぼりの起動
+//=================================================
+void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
+{
+	// サボり判定
+	if (AfkType >= AFKTYPE_SMOKE && AfkType <= AFKTYPE_EATING)
+	{
+		// サボりマネージャーから該当エリアの判定を取得
+		bool bInArea = false;
+		switch (AfkType) 
+		{
+		case AFKTYPE_SMOKE:      bInArea = CAfkManager::Instance()->GetAfkSmoke()->GetAfk(); break;
+		case AFKTYPE_TV:         bInArea = CAfkManager::Instance()->GetAfkTV()->GetAfk(); break;
+		case AFKTYPE_MAGAZINE:   bInArea = CAfkManager::Instance()->GetAfkMagazine()->GetAfk(); break;
+		case AFKTYPE_GAMECENTER: bInArea = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk(); break;
+		case AFKTYPE_EATING:     bInArea = CAfkManager::Instance()->GetAfkEating()->GetAfk(); break;
+		default: break;
+		}
+
+		// 操作対象のフラグポインタを取得
+		bool* pAfkFlag = nullptr;
+		switch (AfkType)
+		{
+		case AFKTYPE_SMOKE:      pAfkFlag = &m_bAfkSmoke; break;
+		case AFKTYPE_TV:         pAfkFlag = &m_bAfkTV; break;
+		case AFKTYPE_MAGAZINE:   pAfkFlag = &m_bAfkMagazine; break;
+		case AFKTYPE_GAMECENTER: pAfkFlag = &m_bAfkGameCenter; break;
+		case AFKTYPE_EATING:     pAfkFlag = &m_bAfkEating; break;
+		default: break;
+		}
+
+		if (pAfkFlag && bInArea && bInput)
+		{
+			if (!(*pAfkFlag))
+			{
+				// クールタイム中でなければ起動
+				if (m_nAfkCoolTime[AfkType] <= 0) *pAfkFlag = true;
+			}
+			else
+			{
+				// クールタイム発生
+				*pAfkFlag = false;
+				m_nAfkCoolTime[AfkType] = player::AFK_COOL_TIME;
+			}
+		}
+	}
+
+	// ベンチのサボり処理
+	else if (AfkType == AFKTYPE_BENCH)
+	{
+		for (int nCnt = 0; nCnt < 4; nCnt++)
+		{
+			bool bInArea = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
+
+			if (bInArea && bInput)
+			{
+				if (!m_bAfkBench[nCnt])
+				{
+					if (m_nCoolTimeBench[nCnt] <= 0) m_bAfkBench[nCnt] = true;
+				}
+				else
+				{
+					m_bAfkBench[nCnt] = false;
+					m_nCoolTimeBench[nCnt] = player::AFK_COOL_TIME;
+				}
+			}
+			else if (!bInArea)
+			{
+				if (m_bAfkBench[nCnt]) m_nCoolTimeBench[nCnt] = player::AFK_COOL_TIME;
+				m_bAfkBench[nCnt] = false;
+			}
+		}
+	}
+
+	// サボり中フラグの更新
+	m_isEnableLazy = (m_bAfkSmoke || m_bAfkTV || m_bAfkMagazine ||
+		m_bAfkGameCenter || m_bAfkEating ||
+		m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3]);
+}
+//=================================================
+// さぼりの2Dui表示
+//=================================================
+void CPlayer::UpdateAfkUiState(void)
+{
+	// afk2Duiクラス取得
+	auto pUI = CGameSceneObject::GetInstance()->GetAfk2DUIPointer();
+	if (!pUI) return;
+
+	// サボり可能なエリア内かつクールタイム外かを判定するフラグ
+	bool bCanAfkAnywhere = false;
+
+	//サボりのチェック
+	for (int nType = AFKTYPE_SMOKE; nType <= AFKTYPE_EATING; nType++)
+	{
+		bool bInArea = false;
+		switch (nType)
+		{
+		case AFKTYPE_SMOKE:      bInArea = CAfkManager::Instance()->GetAfkSmoke()->GetAfk(); break;
+		case AFKTYPE_TV:         bInArea = CAfkManager::Instance()->GetAfkTV()->GetAfk(); break;
+		case AFKTYPE_MAGAZINE:   bInArea = CAfkManager::Instance()->GetAfkMagazine()->GetAfk(); break;
+		case AFKTYPE_GAMECENTER: bInArea = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk(); break;
+		case AFKTYPE_EATING:     bInArea = CAfkManager::Instance()->GetAfkEating()->GetAfk(); break;
+		default: break;
+		}
+
+		// エリア内にいて、かつクールタイム中でなければ表示可能
+		if (bInArea && m_nAfkCoolTime[nType] <= 0)
+		{
+			bCanAfkAnywhere = true;
+			break;
+		}
+	}
+
+	// ベンチのチェック判定
+	if (!bCanAfkAnywhere)
+	{
+		for (int nCnt = 0; nCnt < 4; nCnt++)
+		{
+			bool bInArea = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
+
+			// ベンチのエリア内にいて、かつクールタイム中でなければ表示可能
+			if (bInArea && m_nCoolTimeBench[nCnt] <= 0)
+			{
+				bCanAfkAnywhere = true;
+				break;
+			}
+		}
+	}
+
+	// サボり開始可能な状態の時にUIを表示
+	bool bShouldDisplay = (!m_isEnableLazy && bCanAfkAnywhere);
+
+	// UIに表示状態を設定
+	pUI->SetisDisplay(bShouldDisplay);
 }
 //=========================================================
 // 当たり判定
@@ -841,7 +945,6 @@ void CPlayer::MoveCrossPadButton(float speed)
 
 	// ビューマトリックスの取得
 	auto ViewMatrix = pCamera->GetView();
-
 
 	// たばこさぼり
 	SetAfk(AFKTYPE_SMOKE, pGamePad->GetTrigger(CJoyPad::JOYKEY_START));
@@ -1198,71 +1301,6 @@ void CPlayer::MathBenchRotation(void)
 	SetRotDest(D3DXVECTOR3(0.0f, fRotY, 0.0f));
 	SetRot(D3DXVECTOR3(0.0f, fRotY, 0.0f));
 }
-
-//=================================================
-// さぼりの起動
-//=================================================
-void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
-{
-	// さぼっているかの判定
-	auto bAfkSmoke = CAfkManager::Instance()->GetAfkSmoke()->GetAfk();
-	auto bAfkTV = CAfkManager::Instance()->GetAfkTV()->GetAfk();
-	auto bAfkMagazine = CAfkManager::Instance()->GetAfkMagazine()->GetAfk();
-	auto bAfkGameCenter = CAfkManager::Instance()->GetAfkGameCenter()->GetAfk();
-	auto bAfkEating = CAfkManager::Instance()->GetAfkEating()->GetAfk();
-	bool bAfkBench[4];
-
-	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
-		bAfkBench[nCnt] = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
-	}
-
-	// 各AFK状態の更新（入力があれば反転、無効エリアなら解除）
-	switch (AfkType)
-	{
-	case AFKTYPE_SMOKE:
-		if (bAfkSmoke && bInput) m_bAfkSmoke = !m_bAfkSmoke;
-		else if (!bAfkSmoke) m_bAfkSmoke = false;
-		break;
-	case AFKTYPE_TV:
-		if (bAfkTV && bInput) m_bAfkTV = !m_bAfkTV;
-		else if (!bAfkTV) m_bAfkTV = false;
-		break;
-	case AFKTYPE_MAGAZINE:
-		if (bAfkMagazine && bInput) m_bAfkMagazine = !m_bAfkMagazine;
-		else if (!bAfkMagazine) m_bAfkMagazine = false;
-		break;
-	case AFKTYPE_GAMECENTER:
-		if (bAfkGameCenter && bInput) m_bAfkGameCenter = !m_bAfkGameCenter;
-		else if (!bAfkGameCenter) m_bAfkGameCenter = false;
-		break;
-	case AFKTYPE_EATING:
-		if (bAfkEating && bInput) m_bAfkEating = !m_bAfkEating;
-		else if (!bAfkEating) m_bAfkEating = false;
-		break;
-	case AFKTYPE_BENCH:
-		for (int nCnt = 0; nCnt < 4; nCnt++)
-		{
-			if (bAfkBench[nCnt] && bInput) m_bAfkBench[nCnt] = !m_bAfkBench[nCnt];
-			else if (!bAfkBench[nCnt]) m_bAfkBench[nCnt] = false;
-		}
-		break;
-	default:
-		break;
-	}
-
-
-	// どれかのサボりフラグがtrueならm_isEnableLazyもtrueにする
-	m_isEnableLazy = (m_bAfkSmoke ||
-					m_bAfkTV ||
-					m_bAfkMagazine ||
-					m_bAfkGameCenter ||
-					m_bAfkEating ||
-					m_bAfkBench[0] ||
-					m_bAfkBench[1] ||
-					m_bAfkBench[2] ||
-					m_bAfkBench[3]);
-}
 //=================================================
 // さぼり時のスコア加算関数
 //=================================================
@@ -1368,4 +1406,29 @@ void CPlayer::AfkScore(void)
 		m_nScoreCnt = 1;
 		m_nTimeScore = NULL;
 	}
+}
+//=================================================
+// 追跡状態からタスクになったかどうか
+//=================================================
+bool CPlayer::IsTaskWorking(void) const
+{
+	// PCデスク作業中
+	if (m_isPcWork) return true;
+
+	// タスク起動中
+	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+
+	// nullじゃないなら
+	if (pDesk)
+	{
+		auto type = pDesk->GetTaskType();
+
+		// 作業タスク画面に入っているか
+		if (type != CWorldUICollision::TYPE_NONE && type != CWorldUICollision::TYPE_DOCUMENT)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

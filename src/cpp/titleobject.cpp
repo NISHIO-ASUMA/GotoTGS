@@ -60,6 +60,7 @@ HRESULT CTitleObject::Init(void)
 	// É}ÉbÉvê∂ê¨
 	m_pBlock = std::make_unique<CBlockManager>();
 	JsonManager->SetBlockManager(m_pBlock.get());
+	m_pBlock->SetLoadFileName();
 	m_pBlock->Init();
 
 	return S_OK;

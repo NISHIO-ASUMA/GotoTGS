@@ -137,13 +137,13 @@ void CResultIcon::Draw(void)
 void CResultIcon::MathScoreTexture(const int& nScore)
 {// ここは主に称号のテクスチャを設定する
 
-	if (nScore <= 50000)
+	if (nScore <= 30000)
 		SetTexture("ResultIcon/yesman.png");
-	else if (nScore <= 120000)
+	else if (nScore <= 60000)
 		SetTexture("ResultIcon/workman.png");
-	else if (nScore <= 200000)
+	else if (nScore <= 150000)
 		SetTexture("ResultIcon/Saboriman.png");
-	else if (nScore <= 250000)
+	else if (nScore <= 200000)
 		SetTexture("ResultIcon/Dalarryman.png");
 	else
 		SetTexture("ResultIcon/bucklehman.png");
