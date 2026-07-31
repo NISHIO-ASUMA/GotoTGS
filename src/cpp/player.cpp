@@ -137,18 +137,18 @@ HRESULT CPlayer::Init(void)
 	if (pAfk)
 	{
 		// 座標指定
-		if (pAfk->GetAfkSmoke())	m_pCoolTimeUi[AFKTYPE_SMOKE] = CAfkCoolTimeUi::Create(pAfk->GetAfkSmoke()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
-		if (pAfk->GetAfkTV())		m_pCoolTimeUi[AFKTYPE_TV] = CAfkCoolTimeUi::Create(pAfk->GetAfkTV()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
-		if (pAfk->GetAfkMagazine())	m_pCoolTimeUi[AFKTYPE_MAGAZINE] = CAfkCoolTimeUi::Create(pAfk->GetAfkMagazine()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
-		if (pAfk->GetAfkGameCenter())m_pCoolTimeUi[AFKTYPE_GAMECENTER] = CAfkCoolTimeUi::Create(pAfk->GetAfkGameCenter()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
-		if (pAfk->GetAfkEating())	m_pCoolTimeUi[AFKTYPE_EATING] = CAfkCoolTimeUi::Create(pAfk->GetAfkEating()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+		if (pAfk->GetAfkSmoke())	m_pCoolTimeUi[AFKTYPE_SMOKE] = CAfkCoolTimeUi::Create(pAfk->GetAfkSmoke()->GetPos() + player::UI_POS_VALUE);
+		if (pAfk->GetAfkTV())		m_pCoolTimeUi[AFKTYPE_TV] = CAfkCoolTimeUi::Create(pAfk->GetAfkTV()->GetPos() +  player::UI_POS_VALUE);
+		if (pAfk->GetAfkMagazine())	m_pCoolTimeUi[AFKTYPE_MAGAZINE] = CAfkCoolTimeUi::Create(pAfk->GetAfkMagazine()->GetPos() +  player::UI_POS_VALUE);
+		if (pAfk->GetAfkGameCenter())m_pCoolTimeUi[AFKTYPE_GAMECENTER] = CAfkCoolTimeUi::Create(pAfk->GetAfkGameCenter()->GetPos() +  player::UI_POS_VALUE);
+		if (pAfk->GetAfkEating())	m_pCoolTimeUi[AFKTYPE_EATING] = CAfkCoolTimeUi::Create(pAfk->GetAfkEating()->GetPos() +  player::UI_POS_VALUE);
 
 		// ベンチ用UI生成
 		for (int nBench = 0; nBench < Player_Bench::BENCH_MAX; nBench++)
 		{
 			if (pAfk->GetAfkBench(nBench))
 			{
-				m_pCoolTimeUiBench[nBench] = CAfkCoolTimeUi::Create(pAfk->GetAfkBench(nBench)->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+				m_pCoolTimeUiBench[nBench] = CAfkCoolTimeUi::Create(pAfk->GetAfkBench(nBench)->GetPos() +  player::UI_POS_VALUE);
 			}
 		}
 	}
