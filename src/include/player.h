@@ -25,6 +25,7 @@ class CStateMachine;
 class CInputKeyboard;
 class CJoyPad;
 class CInput;
+class CAfkCoolTimeUi;	// サボりがクールタイム中の時にだすuiクラス
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -290,9 +291,12 @@ private:
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類
-	bool m_isPcWork;						  // デスクワークか
+	bool m_isPcWork;						  // デスクワークかどうか
 
 	// 西尾追加
 	bool m_isCatchEnemy;					  // 上司に捕まってしまった
 	bool m_isEnableLazy;					  // サボり中の判定
+
+	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];					 // 通常サボり用
+	CAfkCoolTimeUi* m_pCoolTimeUiBench[4]; // ベンチ4箇所用
 };

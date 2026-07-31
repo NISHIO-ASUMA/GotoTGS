@@ -975,6 +975,9 @@
     <ClCompile Include="src\cpp\scorepop.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\afkbattime.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1528,6 +1531,9 @@
     </ClInclude>
     <ClInclude Include="src\include\playerutility.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\player\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkbattime.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

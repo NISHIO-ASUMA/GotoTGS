@@ -64,11 +64,13 @@ m_isEnableLazy(false)
 	{
 		m_bAfkBench[nCnt] = false;
 		m_nCoolTimeBench[nCnt] = NULL;
+		m_pCoolTimeUiBench[nCnt] = nullptr;
 	}
 
 	for (int nCool = 0; nCool < AFKTYPE_MAX;nCool++) 
 	{
 		m_nAfkCoolTime[nCool] = NULL;
+		m_pCoolTimeUi[nCool] = nullptr;
 	}
 }
 //=========================================================
@@ -129,6 +131,27 @@ HRESULT CPlayer::Init(void)
 
 	// 操作の種類を設定する(パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
+
+	// 各サボりポイントの位置を取得してUIを生成
+	CAfkManager* pAfk = CAfkManager::Instance();
+	if (pAfk)
+	{
+		// 座標指定
+		if (pAfk->GetAfkSmoke())	m_pCoolTimeUi[AFKTYPE_SMOKE] = CAfkCoolTimeUi::Create(pAfk->GetAfkSmoke()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+		if (pAfk->GetAfkTV())		m_pCoolTimeUi[AFKTYPE_TV] = CAfkCoolTimeUi::Create(pAfk->GetAfkTV()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+		if (pAfk->GetAfkMagazine())	m_pCoolTimeUi[AFKTYPE_MAGAZINE] = CAfkCoolTimeUi::Create(pAfk->GetAfkMagazine()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+		if (pAfk->GetAfkGameCenter())m_pCoolTimeUi[AFKTYPE_GAMECENTER] = CAfkCoolTimeUi::Create(pAfk->GetAfkGameCenter()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+		if (pAfk->GetAfkEating())	m_pCoolTimeUi[AFKTYPE_EATING] = CAfkCoolTimeUi::Create(pAfk->GetAfkEating()->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+
+		// ベンチ用UI生成
+		for (int nBench = 0; nBench < Player_Bench::BENCH_MAX; nBench++)
+		{
+			if (pAfk->GetAfkBench(nBench))
+			{
+				m_pCoolTimeUiBench[nBench] = CAfkCoolTimeUi::Create(pAfk->GetAfkBench(nBench)->GetPos() + D3DXVECTOR3(0.0f, 80.0f, 0.0f));
+			}
+		}
+	}
 
 	// フラグの再初期化
 	m_isPcWork = false;
@@ -460,7 +483,7 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 	{
 		// サボりマネージャーから該当エリアの判定を取得
 		bool bInArea = false;
-		switch (AfkType) 
+		switch (AfkType)
 		{
 		case AFKTYPE_SMOKE:      bInArea = CAfkManager::Instance()->GetAfkSmoke()->GetAfk(); break;
 		case AFKTYPE_TV:         bInArea = CAfkManager::Instance()->GetAfkTV()->GetAfk(); break;
@@ -486,14 +509,23 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 		{
 			if (!(*pAfkFlag))
 			{
-				// クールタイム中でなければ起動
-				if (m_nAfkCoolTime[AfkType] <= 0) *pAfkFlag = true;
+				// クールタイム中でなければサボり開始
+				if (m_nAfkCoolTime[AfkType] <= 0)
+				{
+					*pAfkFlag = true;
+				}
 			}
 			else
 			{
-				// クールタイム発生
+				// 終了
 				*pAfkFlag = false;
 				m_nAfkCoolTime[AfkType] = player::AFK_COOL_TIME;
+
+				// サボり終了コマンドが押されたため、対応するUIを起動
+				if (m_pCoolTimeUi[AfkType])
+				{
+					m_pCoolTimeUi[AfkType]->StartSet();
+				}
 			}
 		}
 	}
@@ -509,16 +541,28 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 			{
 				if (!m_bAfkBench[nCnt])
 				{
-					if (m_nCoolTimeBench[nCnt] <= 0) m_bAfkBench[nCnt] = true;
+					// クールタイム中でなければサボり開始
+					if (m_nCoolTimeBench[nCnt] <= 0)
+					{
+						m_bAfkBench[nCnt] = true;
+					}
 				}
 				else
 				{
+					// 終了
 					m_bAfkBench[nCnt] = false;
 					m_nCoolTimeBench[nCnt] = player::AFK_COOL_TIME;
+
+					// サボり終了コマンドが押されたため、対応するベンチのUIを起動
+					if (m_pCoolTimeUiBench[nCnt])
+					{
+						m_pCoolTimeUiBench[nCnt]->StartSet();
+					}
 				}
 			}
 			else if (!bInArea)
 			{
+				// エリア外に出た場合の強制終了
 				if (m_bAfkBench[nCnt]) m_nCoolTimeBench[nCnt] = player::AFK_COOL_TIME;
 				m_bAfkBench[nCnt] = false;
 			}
@@ -531,7 +575,7 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 		m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3]);
 }
 //=================================================
-// さぼりの2Dui表示
+// さぼりの2Dui表示 ( 参考までに )
 //=================================================
 void CPlayer::UpdateAfkUiState(void)
 {

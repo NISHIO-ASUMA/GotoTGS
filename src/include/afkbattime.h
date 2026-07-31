@@ -1,7 +1,7 @@
 //=========================================================
 //
-// AFKBench処理 [ afkbench.h ]
-// Author: Shouya Chikada
+// サボりの出来ない時間を表示するui処理 [ afkbattime.h ]
+// Author: Asuma Nishio
 //
 //=========================================================
 
@@ -18,40 +18,35 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "afk.h"
+#include "billboardmulti.h"
 
 //*********************************************************
-// 前方宣言
+// サボりが出来ない時間を表示するuiクラスを定義
 //*********************************************************
-class CParticle;
-
-//*********************************************************
-// ベンチサボりクラスを定義
-//*********************************************************
-class CAfkBench : public CAfk
+class CAfkCoolTimeUi : public CBillboardMulti
 {
 public:
-	CAfkBench();
-	~CAfkBench();
 
-	HRESULT Init(D3DXVECTOR3 pos);
-	void Uninit(void);
-	void Update(void);
+	CAfkCoolTimeUi(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
+	~CAfkCoolTimeUi();
 
-	void SetDisplay(bool bDisplay) { m_bDisplay = bDisplay; }
+	HRESULT Init(void) override;
+	void Uninit(void) override;
+	void Update(void) override;
+	void Draw(void) override;
+
+	void StartSet(void);
+	void SetUse(const bool isUse) { m_isUse = isUse; }
+	bool GetUse(void) const { return m_isUse; }
 
 	/// <summary>
 	/// 生成処理
 	/// </summary>
-	/// <param name="pos">生成処理</param>
+	/// <param name="pos">生成座標</param>
 	/// <returns></returns>
-	static CAfkBench* Create
-	(
-		const D3DXVECTOR3& pos
-	);
+	static CAfkCoolTimeUi* Create(const D3DXVECTOR3& pos);
 
 private:
-	CParticle* m_pParticle;		// パーティクル用のポインタ変数
-	bool m_bDisplay;			// パーティクル表示の判定用変数
+	bool m_isUse;		// 使用中かどうか
+	float m_fRatio;		// 割合値
 };
-

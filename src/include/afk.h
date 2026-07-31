@@ -21,7 +21,7 @@
 class CSphereCollider;
 
 //*********************************************************
-// ブロックオブジェクトクラスを定義
+// サボりクラスを定義
 //*********************************************************
 class CAfk
 {
@@ -48,6 +48,7 @@ public:
 	bool CollisionSphere(CSphereCollider* pOther);
 
 	// ゲッター
+	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 	bool GetAfk(void) { return m_bAfk; }
 

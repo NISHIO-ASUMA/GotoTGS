@@ -26,7 +26,7 @@ class CAfkEating;
 class CAfkBench;
 
 //*********************************************************
-// ブロックオブジェクトクラスを定義
+// サボり管理クラスを定義
 //*********************************************************
 class CAfkManager
 {
@@ -59,6 +59,5 @@ private:
 	CAfkGameCenter* m_pAfkGameCenter;	// ゲームセンターさぼりのポインタ
 	CAfkEating* m_pAfkEating;			// 飲食さぼりのポインタ
 	CAfkBench* m_pAfkBench[4];				// ベンチさぼりのポインタ
-
 };
 
