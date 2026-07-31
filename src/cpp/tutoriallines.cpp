@@ -186,7 +186,6 @@ void CTutorialLines::Update(void)
 
 		// セリフを番号に合わせる
 		m_pLines->SetTexture(m_LinesType[m_nNowIdx]);
-
 		return;
 	}
 
@@ -281,7 +280,7 @@ void CTutorialLines::CreateArrow(int& nIdx)
 
 		// ガイドになるUiを生成
 		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip000.png");
-		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 0, 100.0f, 70.0f, "stepnext_key.jpg");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 80, 100.0f, 70.0f, "stepnext_key.jpg", true, false, 0);
 	}
 	else
 	{
@@ -290,7 +289,7 @@ void CTutorialLines::CreateArrow(int& nIdx)
 
 		// ガイドになるUiを生成
 		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip001.png");
-		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 0, 100.0f, 70.0f, "stepnext_button.jpg");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 80, 100.0f, 70.0f, "stepnext_button.jpg",true, false, 0);
 	}
 
 	// ビルボード生成
@@ -311,7 +310,6 @@ void CTutorialLines::CreateArrow(int& nIdx)
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
 	);
-
 
 	// 矢印オブジェクトを生成 (提出)
 	m_pArrow.push_back(CPointObject::Create

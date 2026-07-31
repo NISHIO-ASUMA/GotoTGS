@@ -28,35 +28,6 @@
 #include "gamesceneobject.h"
 #include "debugproc.h"
 #include "outline.h"
-#include "PCdeskwork.h"				// 髙橋追加
-#include "COPYdeskwork.h"			// 髙橋追加
-#include "DOCUMENTdeskwork.h"		// 髙橋追加
-#include "vigilanceUImanager.h"		// 髙橋追加
-#include "vigilanceUImanager.h"		// 髙橋追加
-#include "gaugeneedle.h"			// 髙橋追加
-#include "progressgauge.h"
-#include "worldUIcollision.h"
-#include "collisionsphere.h"		// 近田追加
-#include "afkmanager.h"				// 近田追加
-#include "afktv.h"					// 近田追加
-#include "afksmoke.h"				// 近田追加
-#include "afkmagazine.h"			// 近田追加
-#include "afkeating.h"				// 近田追加
-#include "afkgamecenter.h"			// 近田追加
-#include "titleuimanager.h"			// 近田追加
-#include "score.h"					// 近田追加
-#include "afkbench.h"				// 近田追加
-
-#include "automaticdoormanager.h"	// 西尾追加
-#include "automatic_door.h"			// 西尾追加
-#include "autodoor_collision.h"		// 西尾追加
-#include "slideopendoormanager.h"	// 西尾追加
-#include "sideopendoor.h"			// 西尾追加
-#include "sideopendoorcollision.h"	// 西尾追加
-#include "enemymanager.h"			// 西尾追加
-#include "enemy.h"					// 西尾追加
-#include "scorepop.h"				// 西尾追加
-#include "afk2dui.h"
 #include "playerutility.h"
 
 //=========================================================
@@ -89,7 +60,7 @@ m_isCatchEnemy(false),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_isEnableLazy(false)
 {
-	for (int nCnt = 0; nCnt < 4; nCnt++)
+	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
 		m_bAfkBench[nCnt] = false;
 		m_nCoolTimeBench[nCnt] = NULL;
@@ -213,7 +184,7 @@ void CPlayer::Update(void)
 	}
 
 	// ベンチ用カウントダウン
-	for (int nBench = 0; nBench < 4; nBench++)
+	for (int nBench = 0; nBench < Player_Bench::BENCH_MAX; nBench++)
 	{
 		if (m_nCoolTimeBench[nBench] > 0)
 		{
@@ -312,7 +283,7 @@ void CPlayer::Update(void)
 	}
 	
 	// ステートマシンの更新処理
-	m_pMachine->Update();
+	if (m_pMachine) m_pMachine->Update();
 
 	// スフィアコライダー座標の更新
 	if (m_pSphereCollider)
@@ -596,7 +567,7 @@ void CPlayer::UpdateAfkUiState(void)
 	// ベンチのチェック判定
 	if (!bCanAfkAnywhere)
 	{
-		for (int nCnt = 0; nCnt < 4; nCnt++)
+		for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 		{
 			bool bInArea = CAfkManager::Instance()->GetAfkBench(nCnt)->GetAfk();
 
@@ -1075,16 +1046,15 @@ void CPlayer::MoveCrossPadButton(float speed)
 //=================================================
 void CPlayer::UpdateBlockCollision(D3DXVECTOR3 pos)
 {
-	for (int nCnt = 0; nCnt < 4; nCnt++)
+	if (m_isPcWork) return;
+
+	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
 		// スキップする
 		if (m_bAfkTV || m_bAfkBench[nCnt]) return;
 	}
-	if (m_isPcWork)
-	{
-		return;
-	}
 
+	// ブロック管理クラスを取得
 	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
 	if (!BlockManager) return;
 
@@ -1429,6 +1399,5 @@ bool CPlayer::IsTaskWorking(void) const
 			return true;
 		}
 	}
-
 	return false;
 }

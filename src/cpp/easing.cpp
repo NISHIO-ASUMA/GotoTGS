@@ -47,7 +47,7 @@ float CEasing::EaseOutsine(float t)
 //=============================================================
 float CEasing::EaseInOutSine(float t)
 {
-	return -(cos(D3DX_PI * t) - 1.0f) * 0.5f;
+	return -(cosf(D3DX_PI * t) - 1.0f) * 0.5f;
 }
 
 //=============================================================

@@ -133,66 +133,6 @@ void CAfk2DUI::Draw(void)
 //=========================================================
 void CAfk2DUI::EasingSine(void)
 {
-#if 0
-	// 位置の取得
-	auto pos = GetPos();
-
-	// 初期の大きさ
-	D3DXVECTOR2 Apper = { AFK2DUI::Apper.x * pos.x, AFK2DUI::Apper.y * pos.y };
-	// 目標の大きさ
-	D3DXVECTOR2 Dest = { AFK2DUI::Dest.x * pos.x,AFK2DUI::Dest.y * pos.y };
-
-	// イージング判定が無効なら
-	if (m_bEasing == false)
-	{
-		// アニメーションカウンターを進める
-		m_fCountFrame++;
-
-		// 設定する大きさの変数
-		D3DXVECTOR2 Size = {};
-		// 今のアニメーションの進行割合を計算
-		float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
-		// 最終的な大きさから初期の大きさからの差分
-		D3DXVECTOR2 Diff = { Dest.x - Apper.x,Dest.y - Apper.y };
-		// 今の大きさを計算
-		Size = Apper + Diff * Ratio;
-
-		// サイズの設定
-		CObject2D::SetSize(Size.x, Size.y);
-
-	}
-	// イージング判定が有効なら
-	else if (m_bEasing == true)
-	{
-		// アニメーションカウンターを進める
-		m_fCountFrame--;
-
-		// 設定する大きさの変数
-		D3DXVECTOR2 Size = {};
-		// 今のアニメーションの進行割合を計算
-		float Ratio = CEasing::EaseInOutSine(m_fCountFrame / m_fMaxFrame);
-		// 最終的な大きさから初期の大きさからの差分
-		D3DXVECTOR2 Diff = { Dest.x + Apper.x,Dest.y + Apper.y };
-		// 今の大きさを計算
-		Size = Apper - Diff * Ratio;
-
-		// サイズの設定
-		CObject2D::SetSize(Size.x, Size.y);
-	}
-	// フレームカウントがマックスフレームと一緒になったら
-	else if (m_fCountFrame == m_fMaxFrame)
-	{
-		// イージング判定を有効にする
-		m_bEasing = true;
-	}
-	// フレームカウントが0.0fなら
-	else if (m_fCountFrame == 0.0f)
-	{
-		// イージング判定を無効にする
-		m_bEasing = false;
-	}
-#else
-
 	// カウントの増減
 	if (!m_bEasing)
 	{
@@ -231,5 +171,4 @@ void CAfk2DUI::EasingSine(void)
 
 	// オブジェクトのサイズの設定
 	CObject2D::SetSize(Size.x, Size.y);
-#endif
 }

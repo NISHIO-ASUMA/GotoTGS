@@ -22,6 +22,7 @@
 #include "renderer.h"
 #include "template.h"
 #include "texture.h"
+#include "easing.h"
 
 //=========================================================
 // コンストラクタ
@@ -242,7 +243,7 @@ void CObject2D::SetUV(float TexU, float TexV)
 	m_pVtxBuff->Unlock();
 }
 //===========================================================
-// 点滅関数
+// 点滅関数 ( イージングで点滅 )
 //===========================================================
 void CObject2D::SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col)
 {
@@ -260,24 +261,11 @@ void CObject2D::SetFlash(const int nFirstcount, const int nEndcount, const D3DXC
 	if (nCycle <= 0) nCycle = 1;
 
 	// 進行度を設定
-	float fProgress = static_cast<float>((m_nColorCount - nFirstcount) % nCycle) / static_cast<float>(nCycle);
-
-	// 透明度を格納する
-	float alpha = NULL;
-
-	if (fProgress < 0.5f)
-	{
-		// 線形補間
-		alpha = Lerp(0.5f, 1.0f, fProgress * 2.0f);
-	}
-	else
-	{
-		// 線形補間
-		alpha = Lerp(1.0f, 0.5f, (fProgress - 0.5f) * 2.0f);
-	}
+	float fProgress = static_cast<float>((m_nColorCount - nFirstcount)) / static_cast<float>(nCycle);
+	float fAlpha = CEasing::EaseInOutSine(fProgress);
 
 	// カラー設定
-	D3DXCOLOR ChangeCol(col.r, col.g, col.b, alpha);
+	D3DXCOLOR ChangeCol(col.r, col.g, col.b, fAlpha);
 
 	// 現在カラーに適用
 	SetCol(ChangeCol);

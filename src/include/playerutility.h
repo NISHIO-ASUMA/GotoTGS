@@ -11,6 +11,38 @@
 #pragma once
 
 //*********************************************************
+// インクルードファイル
+//*********************************************************
+#include "PCdeskwork.h"				// 髙橋追加
+#include "COPYdeskwork.h"			// 髙橋追加
+#include "DOCUMENTdeskwork.h"		// 髙橋追加
+#include "vigilanceUImanager.h"		// 髙橋追加
+#include "vigilanceUImanager.h"		// 髙橋追加
+#include "gaugeneedle.h"			// 髙橋追加
+#include "progressgauge.h"
+#include "worldUIcollision.h"
+#include "collisionsphere.h"		// 近田追加
+#include "afkmanager.h"				// 近田追加
+#include "afktv.h"					// 近田追加
+#include "afksmoke.h"				// 近田追加
+#include "afkmagazine.h"			// 近田追加
+#include "afkeating.h"				// 近田追加
+#include "afkgamecenter.h"			// 近田追加
+#include "titleuimanager.h"			// 近田追加
+#include "score.h"					// 近田追加
+#include "afkbench.h"				// 近田追加
+#include "automaticdoormanager.h"	// 西尾追加
+#include "automatic_door.h"			// 西尾追加
+#include "autodoor_collision.h"		// 西尾追加
+#include "slideopendoormanager.h"	// 西尾追加
+#include "sideopendoor.h"			// 西尾追加
+#include "sideopendoorcollision.h"	// 西尾追加
+#include "enemymanager.h"			// 西尾追加
+#include "enemy.h"					// 西尾追加
+#include "scorepop.h"				// 西尾追加
+#include "afk2dui.h"
+
+//*********************************************************
 // 基本の情報を保持している名前空間
 //*********************************************************
 namespace player
@@ -59,4 +91,6 @@ namespace Player_Bench
 
 	const D3DXVECTOR3 OFFICE_CHARACTORPOS = { 734.4f, 18.0f, -468.0f };		// オフィス横のベンチの座標
 	const D3DXVECTOR3 OFFICE_DESTPOS = { 834.4f, 18.0f, -468.0f };			// オフィス横のベンチの目的座標
+
+	constexpr int BENCH_MAX = 4;
 };

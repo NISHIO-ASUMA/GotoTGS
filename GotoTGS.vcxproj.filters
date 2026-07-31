@@ -1527,7 +1527,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\playerutility.h">
-      <Filter>ヘッダー ファイル\AddFile\Chikada\player</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
