@@ -37,7 +37,7 @@ namespace AFK2DUI
 	constexpr float fWidth = 250.0f;							// 横幅
 	constexpr float fHeight = 75.0f;							// 縦幅
 	constexpr float fMaxFrame = 60.0f;							// マックスフレーム
-	constexpr const char* Button_NAME = "AfkButton.png";		// チュートリアルuiのテクスチャ名
+	constexpr const char* Button_NAME = "AfkButton.png";		// サボりuiのテクスチャ名
 };
 
 //=========================================================

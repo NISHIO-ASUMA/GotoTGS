@@ -128,9 +128,6 @@ HRESULT CGameSceneObject::Init(void)
 	// さぼっているときのUIの生成
 	m_pAfk2DUI = CAfk2DUI::Create();
 
-	// ドア用チュートリアルUIの生成
-	CDoorUI::Create();
-
 	// テレビ用ポリゴンの生成
 	CAfkTVPolygon::Create();
 
@@ -153,10 +150,6 @@ HRESULT CGameSceneObject::Init(void)
 	CEnemyManager::GetInstance()->Init(m_pPlayer);
 	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
 
-	// カメラに追従するキャラクターのポインタをセット
-	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
-	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
-
 	// スコア初期化
 	m_pScoreTask->DeleteScore();
 	m_pScoreDitch->DeleteScore();
@@ -177,8 +170,15 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
-	// テスト生成 ( ボス )
-	//CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+//**********************************
+// ADD 西尾 : クラスに格納するポインタ等の設定
+//**********************************
+	// ドア用UIの生成
+	CDoorUI::Create(m_pPlayer);
+
+	// カメラに追従するキャラクターのポインタをセット
+	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	return S_OK;
 }
@@ -345,6 +345,6 @@ void CGameSceneObject::CreatePointer(void)
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
 
-	// 受付人を生成 ( 外に行くドア付近に生成しているよ )
+	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 }

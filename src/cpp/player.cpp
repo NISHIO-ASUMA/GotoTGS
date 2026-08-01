@@ -58,7 +58,8 @@ m_bAfkEating(false),
 m_isPcWork(false),
 m_isCatchEnemy(false),
 m_nControlTypes(CONTROLTYPE_NONE),
-m_isEnableLazy(false)
+m_isEnableLazy(false),
+m_isSetOutSideTask(false)
 {
 	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
@@ -156,7 +157,7 @@ HRESULT CPlayer::Init(void)
 	// フラグの再初期化
 	m_isPcWork = false;
 	m_isCatchEnemy = false;
-
+	m_isSetOutSideTask = false;
 	return S_OK;
 }
 //=========================================================
@@ -417,11 +418,11 @@ void CPlayer::Update(void)
 	// ブロックとの判定
 	UpdateBlockCollision(UpdatePos);
 
-	// 自動ドアとの判定
-	UpdateAutoDoorCollision(UpdatePos);
-
 	// オフィス内のドアとの判定
 	UpdateSideDoorCollision(UpdatePos,Key,Pad);
+
+	// 自動ドアとの判定
+	UpdateAutoDoorCollision(UpdatePos);
 
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
@@ -575,7 +576,7 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 		m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3]);
 }
 //=================================================
-// さぼりの2Dui表示 ( 参考までに )
+// さぼりの2Dui表示
 //=================================================
 void CPlayer::UpdateAfkUiState(void)
 {
@@ -1189,6 +1190,14 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 //=================================================
 void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad)
 {
+	// もし"外回りタスク"が起動されていないなら
+	if (!m_isSetOutSideTask)
+	{
+		// uiを表示してリターンする
+
+		return;
+	}
+
 	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance();	// コライダークラス
 	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();		// ドア管理クラス
 	if (!pSideDoorCollision || !pSideDoorManager) return;

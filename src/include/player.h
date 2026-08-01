@@ -102,11 +102,11 @@ public:
 		const D3DXVECTOR3& rot
 	);
 	
+public:
+
 	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
 
-	//************************************************
 	// さぼっている時の判定用変数(ゲッター)
-	//************************************************
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
@@ -115,9 +115,7 @@ public:
 	bool GetAfkEating(void) { return m_bAfkEating; }
 	bool GetAfkBench(int nIdx) { return m_bAfkBench[nIdx]; }
 
-	//************************************************
 	// さぼりのカウント用関数
-	//************************************************
 	void AddSmoke(void) { m_nSmoke++; }
 	void AddTV(void) { m_nTV++; }
 	void AddMagazine(void) { m_nMagazine++; }
@@ -125,9 +123,7 @@ public:
 	void AddEating(void) { m_nEating++; }
 	void AddBench(void) { m_nBench++; }
 
-	//************************************************
 	// さぼりのカウント用関数(ゲッター)
-	//************************************************
 	int GetSmoke(void) { return m_nSmoke; }
 	int GetTV(void) { return m_nTV; }
 	int GetMagazine(void) { return m_nMagazine; }
@@ -143,8 +139,11 @@ public:
 
 	// 西尾追加
 	void SetCatchEnemy(const bool isFlags) { m_isCatchEnemy = isFlags; }
+	void SetOutSideFlags(const bool isStartFlag) { m_isSetOutSideTask = isStartFlag; }
+
 	bool GetIsCatch(void) { return m_isCatchEnemy; }
 	bool GetIsLazy(void) { return m_isEnableLazy; }
+	bool GetIsTaskOutSide(void) { return m_isSetOutSideTask; }
 	bool IsTaskWorking(void) const;
 
 public:
@@ -294,9 +293,9 @@ private:
 	bool m_isPcWork;						  // デスクワークかどうか
 
 	// 西尾追加
-	bool m_isCatchEnemy;					  // 上司に捕まってしまった
-	bool m_isEnableLazy;					  // サボり中の判定
-
-	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];					 // 通常サボり用
-	CAfkCoolTimeUi* m_pCoolTimeUiBench[4]; // ベンチ4箇所用
+	bool m_isCatchEnemy;						// 上司に捕まってしまった判定
+	bool m_isEnableLazy;						// 「サボり中であるか」の判定変数
+	bool m_isSetOutSideTask;					// 「外回りタスクを開始したか」どうか
+	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];	// 通常サボり用
+	CAfkCoolTimeUi* m_pCoolTimeUiBench[4];		// ベンチ4箇所用
 };
