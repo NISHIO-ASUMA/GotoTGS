@@ -36,6 +36,7 @@
 #include "instancemotionmanager.h"
 #include "jsonmanager.h"
 #include "pausemanager.h"
+#include "overworkresult.h"
 
 //*********************************************************
 // 定数名前空間宣言
@@ -147,10 +148,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 
 #ifdef _DEBUG
 	// デバッグ用シーンセット
-	m_pFade->SetFade(std::make_unique<CTutorial>());
+	m_pFade->SetFade(std::make_unique<CTitle>());
 #else
 	// シーンセット
 	//m_pFade->SetFade(std::make_unique<CGame>());
+	//m_pFade->SetFade(std::make_unique<COverWorkResult>());
 	m_pFade->SetFade(std::make_unique<CTitle>());
 #endif // _DEBUG
 
@@ -175,6 +177,9 @@ void CManager::Uninit(void)
 
 	// サウンドインスタンスの破棄
 	m_pSound.reset();
+
+	// ライトの破棄
+	m_pLight.reset();
 
 	// カメラインスタンスの破棄
 	m_pCamera.reset();

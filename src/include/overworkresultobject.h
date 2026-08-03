@@ -47,5 +47,5 @@ private:
 
 	COverWorkResultObject();					// コンストラクタ
 
-	//std::unique_ptr<CBlockManager>m_pBlock;		// ステージマップ
+	std::unique_ptr<CBlockManager>m_pBlock;		// ステージマップ
 };

@@ -156,7 +156,8 @@ void CCamera::Update(void)
 		// ŒÅ’èƒJƒƒ‰‚Éİ’è
 		TitleCamera();
 	}
-	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT || 
+			CManager::GetInstance()->GetScene() == CScene::MODE_OVERWORK)
 	{
 		// ŒÅ’èƒJƒƒ‰‚Éİ’è
 		ResultCamera();
