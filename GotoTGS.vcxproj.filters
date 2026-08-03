@@ -987,6 +987,9 @@
     <ClCompile Include="src\cpp\overworkresultobject.cpp">
       <Filter>ソース ファイル\Scene\SceneObject</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\outsidework.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1552,6 +1555,9 @@
     </ClInclude>
     <ClInclude Include="src\include\overworkresultobject.h">
       <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\outsidework.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

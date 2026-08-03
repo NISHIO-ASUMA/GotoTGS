@@ -65,13 +65,16 @@ public:
 	static void AddPCTask(void) { m_nPCTaskNum++; }
 	static void AddCOPYTask(void) { m_nCOPYTaskNum++; }
 	static void AddDOCUMENTTask(void);
+	static void AddOutsideTask(void);
 	static int GetPCTaskNum(void) { return m_nPCTaskNum; }
 	static int GetCOPYTaskNum(void) { return m_nCOPYTaskNum; }
 	static int GetDOCUMENTTaskNum(void) { return m_nDOCUMENTTaskNum; }
+	static int GetOutsideTaskNum(void) { return m_nOutsideTaskNum; }
 	static bool GetTutorial(void) { return m_bTutorial; }
 	static void MinusPCTask(void) { m_nPCTaskNum--; }
 	static void MinusCOPYTask(void) { m_nCOPYTaskNum--; }
 	static void MinusDOCUMENTTask(void) { m_nDOCUMENTTaskNum--; }
+	static void MinusOutsideTask(void) { m_nOutsideTaskNum--; }
 
 public: // 西尾追加
 	//**********************
@@ -100,6 +103,7 @@ private:
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
 	static int m_nCOPYTaskNum;		// こなしたコピー機タスクの数
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
+	static int m_nOutsideTaskNum;	// こなした外出タスクの数
 	static bool m_bTutorial;		// チュートリアルをこなしたかどうか
 
 };

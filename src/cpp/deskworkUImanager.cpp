@@ -97,13 +97,25 @@ void CDeskworkUIManager::Update(void)
 }
 
 //=========================================================
-// 書類の数の加算処理
+// 書類タスクの加算処理
 //=========================================================
 void CDeskworkUIManager::AddDOCUMENTTask(void)
 {
-	// こなしたコピー機タスクの数を加算
+	// こなしたコピー機タスクの分だけ加算
 	m_nDOCUMENTTaskNum += m_nCOPYTaskNum;
 
 	//  コピー機タスクの数を初期化
 	m_nCOPYTaskNum = NULL;
+}
+
+//=========================================================
+// 外出タスクの加算処理
+//=========================================================
+void CDeskworkUIManager::AddOutsideTask(void)
+{
+	// こなした書類タスクの分だけ加算
+	m_nOutsideTaskNum += m_nDOCUMENTTaskNum;
+
+	// 書類タスクの数を初期化
+	m_nDOCUMENTTaskNum = NULL;
 }
