@@ -130,8 +130,6 @@ void CParticle::Draw(void)
 //=========================================================
 void CParticle::None(void)
 {
-	D3DXVECTOR3 move;
-
 	// 今の位置を設定
 	D3DXVECTOR3 pos = m_pos;
 
@@ -139,12 +137,12 @@ void CParticle::None(void)
 	float phi = D3DXToRadian(rand() % 180);					// 仰角
 	float fLength = (float)(rand() % 3) / 2.0f + 0.5f;
 
-	move.x = sinf(phi) * cosf(theta) * fLength;
-	move.y = cosf(phi) * fLength;
-	move.z = sinf(phi) * sinf(theta) * fLength;
+	// 移動量の設定
+	m_move.x = sinf(phi) * cosf(theta) * fLength;
+	m_move.y = cosf(phi) * fLength;
+	m_move.z = sinf(phi) * sinf(theta) * fLength;
 
-	// 移動量・色・サイズ・寿命の設定
-	SetMove(move);
+	// 色・サイズ・寿命の設定
 	D3DXCOLOR col = m_col;
 	float fRadius = m_fRadius;
 	int nLife = 30;
@@ -318,8 +316,6 @@ void CParticle::Thunder(void)
 //=========================================================
 void CParticle::Nearby(void)
 {
-	D3DXVECTOR3 move;
-
 	// 今の位置を設定
 	D3DXVECTOR3 pos = m_pos;
 
@@ -327,12 +323,12 @@ void CParticle::Nearby(void)
 	float phi = D3DXToRadian(rand() % 180);					// 仰角
 	float fLength = (float)(rand() % 3) / 2.0f + 0.5f;
 
-	move.x = sinf(phi) * cosf(theta) * fLength;
-	move.y = cosf(phi) * fLength;
-	move.z = sinf(phi) * sinf(theta) * fLength;
+	// 移動量の設定
+	m_move.x = sinf(phi) * cosf(theta) * fLength;
+	m_move.y = cosf(phi) * fLength;
+	m_move.z = sinf(phi) * sinf(theta) * fLength;
 
-	// 移動量・色・サイズ・寿命の設定
-	SetMove(move);
+	// 色・サイズ・寿命の設定
 	D3DXCOLOR col = m_col;
 	float fRadius = m_fRadius;
 	int nLife = 30;
