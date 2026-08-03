@@ -10,10 +10,23 @@
 //*********************************************************
 #include "overworkresultobject.h"
 
+//*********************************************************
+// インクルードファイル
+//*********************************************************
+#include "manager.h"
+#include "camera.h"
+#include "blockmanager.h"
+#include "jsonmanager.h"
+#include "ui.h"
+#include "meshfield.h"
+#include "light.h"
+
+// #include "overworkman.h"
+
 //=========================================================
 // コンストラクタ
 //=========================================================
-COverWorkResultObject::COverWorkResultObject()
+COverWorkResultObject::COverWorkResultObject() : m_pBlock(nullptr)
 {
 
 }
@@ -29,6 +42,21 @@ COverWorkResultObject::~COverWorkResultObject()
 //=========================================================
 HRESULT COverWorkResultObject::Init(void)
 {
+	// ライトの値チェンジ
+	CManager::GetInstance()->GetLight()->SetLight();
+
+	// カメラ設定
+	CManager::GetInstance()->GetCamera()->Init();
+
+	// ロゴuiを生成
+	CUi::Create(CENTERPOS, 0, 450.0f, 130.0f, "toomuchwork.png");
+	
+	// メッシュフィールド
+	CMeshField::Create(VECTOR3_NULL, 1000.0f, 1000.0f,30,30, "data/TEXTURE/field00.jpg");
+
+	// 倒れているキャラクターを生成
+
+
 	return S_OK;
 }
 //=========================================================
@@ -36,5 +64,5 @@ HRESULT COverWorkResultObject::Init(void)
 //=========================================================
 void COverWorkResultObject::Uninit(void)
 {
-
+	m_pBlock.reset();
 }

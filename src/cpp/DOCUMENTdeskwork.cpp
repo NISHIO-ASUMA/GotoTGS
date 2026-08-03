@@ -160,6 +160,7 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	{
 		// スコアのポインタ
 		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+
 		// 指針のポインタ
 		CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 		if (pScore == nullptr || pGaugeneedle == nullptr) return;

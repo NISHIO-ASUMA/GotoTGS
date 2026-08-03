@@ -200,7 +200,9 @@ void CPlayer::Update(void)
 		CMoveCharactor::UpdateMotionOnly();
 		return;
 	}
-	
+
+	// NOTE : 後に西尾が担当する
+#if 0
 	// 指針の取得
 	// ゲームシーンのオブジェクトから進捗ゲージを取得
 	auto* pProgressGauge = CGameSceneObject::GetInstance()->GetProgressgauge();
@@ -253,6 +255,7 @@ void CPlayer::Update(void)
 			}
 		}
 	}
+#endif
 
 	// クールタイムのカウントダウン処理
 	for (int nTime = 0; nTime < AFKTYPE_MAX; nTime++)

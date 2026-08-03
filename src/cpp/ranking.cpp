@@ -15,6 +15,8 @@
 //*********************************************************
 #include "rankingobject.h"
 #include "rankingmanager.h"
+#include "manager.h"
+#include "light.h"
 
 //=========================================================
 // コンストラクタ
@@ -35,6 +37,9 @@ CRanking::~CRanking()
 //=========================================================
 HRESULT CRanking::Init(void)
 {
+	// ライトの値初期化
+	CManager::GetInstance()->GetLight()->Init();
+
 	// ランキングマネージャーの初期化処理
 	CRankingManager::GetInstance()->Init();
 
