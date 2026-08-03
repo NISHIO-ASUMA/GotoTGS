@@ -145,29 +145,30 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	m_pParticle->SetUse(true);
 
 	// チュートリアルでの処理
-	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && 
+		!CTutorialObject::GetInstance()->GetTutoriallines()->GetIsComp())
 	{
 		// チュートリアルを進める
 		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
-
 		return;
 	}
 
-	// スコアのポインタ
-	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-	// 指針のポインタ
-	auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+	// もしチュートリアル以外であったなら
+	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
+	{
+		// スコアのポインタ
+		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+		// 指針のポインタ
+		CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+		if (pScore == nullptr || pGaugeneedle == nullptr) return;
 
-	// ヌルチェック
-	if (pScore == nullptr || pGaugeneedle == nullptr) return;
+		// スコア加算
+		pScore->AddScoreMinus(-1000);
 
-	// スコア加算
-	pScore->AddScoreMinus(-1000);
+		// こなしたタスクの数を増やす
+		pGaugeneedle->AddTask();
 
-	// こなしたタスクの数を増やす
-	pGaugeneedle->AddTask();
-
-	// 書類タスクの数の加算処理
-	AddDOCUMENTTask();
-
+		// 書類タスクの数の加算処理
+		AddDOCUMENTTask();
+	}
 }

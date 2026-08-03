@@ -38,7 +38,8 @@ m_pLines(nullptr),
 m_pBG(nullptr),
 m_pTutoPlayer(nullptr),
 m_pKeyUi(nullptr),
-m_pArrow{}
+m_pArrow{},
+m_isComplite(false)
 {
 
 }
@@ -102,6 +103,8 @@ HRESULT CTutorialLines::Init(void)
 	// 矢印生成
 	CreateArrow(nIdxControl);
 
+	// フラグリセット
+	m_isComplite = false;
 	return S_OK;
 }
 
@@ -250,6 +253,9 @@ void CTutorialLines::SetNextTutorial(void)
 
 		// uiの消去
 		m_pKeyUi->Uninit();
+
+		// フラグを有効化
+		m_isComplite = true;
 	}
 
 	// セリフを番号に合わせる

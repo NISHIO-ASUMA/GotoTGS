@@ -981,6 +981,12 @@
     <ClCompile Include="src\cpp\overworkresult.cpp">
       <Filter>ソース ファイル\Scene\SceneBase</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\overworkresultmanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkresultobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1540,6 +1546,12 @@
     </ClInclude>
     <ClInclude Include="src\include\overworkresult.h">
       <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresultmanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresultobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

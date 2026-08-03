@@ -266,6 +266,8 @@
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
     <ClCompile Include="src\cpp\overworkresult.cpp" />
+    <ClCompile Include="src\cpp\overworkresultmanager.cpp" />
+    <ClCompile Include="src\cpp\overworkresultobject.cpp" />
     <ClCompile Include="src\cpp\particle.cpp" />
     <ClCompile Include="src\cpp\pause.cpp" />
     <ClCompile Include="src\cpp\pausemanager.cpp" />
@@ -457,6 +459,8 @@
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />
     <ClInclude Include="src\include\overworkresult.h" />
+    <ClInclude Include="src\include\overworkresultmanager.h" />
+    <ClInclude Include="src\include\overworkresultobject.h" />
     <ClInclude Include="src\include\particle.h" />
     <ClInclude Include="src\include\pause.h" />
     <ClInclude Include="src\include\pausemanager.h" />

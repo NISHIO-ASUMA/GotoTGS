@@ -28,6 +28,7 @@ public:
 		MODE_TUTORIAL,	// チュートリアル
 		MODE_GAME,		// ゲーム
 		MODE_RESULT,	// リザルト
+		MODE_OVERWORK,	// 過労死
 		MODE_LOSERESULT,// 失敗リザルト
 		MODE_RANKING,	// ランキング
 		MODE_MAX
