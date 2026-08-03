@@ -14,12 +14,11 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "overworkresultobject.h"
 #include "input.h"
 #include "fade.h"
 #include "title.h"
-
-//#include "overworkresultmanager.h"
+#include "overworkresultobject.h"
+#include "overworkresultmanager.h"
 
 //==========================================================
 // コンストラクタ
@@ -40,6 +39,9 @@ COverWorkResult::~COverWorkResult()
 //==========================================================
 HRESULT COverWorkResult::Init(void)
 {
+	// 管理クラス生成
+	COverWorkResultManager::GetInstance()->Init();
+
 	// オブジェクト生成
 	COverWorkResultObject::GetInstance()->Init();
 
@@ -50,6 +52,9 @@ HRESULT COverWorkResult::Init(void)
 //==========================================================
 void COverWorkResult::Uninit(void)
 {
+	// 管理クラス終了
+	COverWorkResultManager::GetInstance()->Uninit();
+
 	// オブジェクト終了
 	COverWorkResultObject::GetInstance()->Uninit();
 }
@@ -58,18 +63,18 @@ void COverWorkResult::Uninit(void)
 //==========================================================
 void COverWorkResult::Update(void)
 {
-	// キー遷移
+	// フェード取得
 	CFade* pFade = CManager::GetInstance()->GetFade();
 
 	// トリガーで遷移
-	if (pFade != nullptr && (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_SPACE) ||
-		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_BACK)))
+	if (pFade != nullptr && (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_RETURN) ||
+		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A) || 
+		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START)))
 	{
-		// 画面切り替え
+		// タイトル画面に遷移
 		pFade->SetFade(std::make_unique<CTitle>());
 		return;
 	}
-
 }
 //==========================================================
 // 描画処理

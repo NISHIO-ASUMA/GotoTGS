@@ -91,12 +91,6 @@
     <Filter Include="ヘッダー ファイル\ObjectClass\XFile">
       <UniqueIdentifier>{c610c6b7-aff2-4cb3-bc7e-0a91227cf098}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Effect">
-      <UniqueIdentifier>{86c1a98c-432b-4f61-98e8-5baf8b58507c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Effect">
-      <UniqueIdentifier>{f70fbd5f-fb8a-41b3-a482-248a3c626c89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\JsonUtil">
       <UniqueIdentifier>{db469dad-13e4-4145-95d9-2b0d5bfaca49}</UniqueIdentifier>
     </Filter>
@@ -226,38 +220,8 @@
     <Filter Include="ヘッダー ファイル\Number\Score">
       <UniqueIdentifier>{317dccb2-a0e0-4a08-9229-b6b900642260}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Charactor">
-      <UniqueIdentifier>{583a06ec-ea67-4918-b764-58d30280e892}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor">
-      <UniqueIdentifier>{97497e45-38b1-4832-b440-84a43e3b1e4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\XFile">
       <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\Player">
-      <UniqueIdentifier>{f6dcf11d-ee5a-44fa-99ba-61c04601f1c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\Enemy">
-      <UniqueIdentifier>{052f2e9d-19da-4ca1-b15c-5035da6f2992}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\Player">
-      <UniqueIdentifier>{61b2d422-c895-469f-b808-ad12ef318882}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\Enemy">
-      <UniqueIdentifier>{9f206bbc-994f-4b44-be1b-26734d76b972}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\boss">
-      <UniqueIdentifier>{43218d2c-9988-4951-a62e-9abb5dc0bb8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\boss">
-      <UniqueIdentifier>{b8748ade-aa36-43fa-8f20-af1a9948ed15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\friend">
-      <UniqueIdentifier>{44fab2a6-d893-44b5-b6c0-ab15cdc8248f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\friend">
-      <UniqueIdentifier>{11cb81b3-aad0-4436-8d17-034cf2fb43bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\AddFile">
       <UniqueIdentifier>{cb5f10f3-5a45-4ca0-ab52-05d464a1e8c0}</UniqueIdentifier>
@@ -438,6 +402,12 @@
     </Filter>
     <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\auditor">
       <UniqueIdentifier>{24f74b2f-0a96-42b0-bc1c-acb11cb55700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\client">
+      <UniqueIdentifier>{17b36adb-290d-4f1e-9d95-c92ecf2c0241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\client">
+      <UniqueIdentifier>{e2f29736-a165-492a-901e-3e4f997a6c3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

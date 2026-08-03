@@ -105,5 +105,4 @@ private:
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
 	static int m_nOutsideTaskNum;	// こなした外出タスクの数
 	static bool m_bTutorial;		// チュートリアルをこなしたかどうか
-
 };

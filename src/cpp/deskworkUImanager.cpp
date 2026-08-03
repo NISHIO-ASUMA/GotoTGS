@@ -16,10 +16,13 @@
 #include "manager.h"
 #include "ui.h"
 
+//*********************************************************
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
+//*********************************************************
 int CDeskworkUIManager::m_nPCTaskNum = NULL;
 int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
 int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
+int CDeskworkUIManager::m_nOutsideTaskNum = NULL;
 bool CDeskworkUIManager::m_bTutorial = NULL;
 
 //=========================================================
