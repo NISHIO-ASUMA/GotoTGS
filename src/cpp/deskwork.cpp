@@ -183,15 +183,10 @@ void CDeskwork::Update(void)
 		m_pCOPYDeskUI->SetAlphaUI(NULL);
 
 		break;
-
-	// 書類タスクの場合
-	case CWorldUICollision::TYPE_DOCUMENT:
-
-		// 書類タスクの更新処理
-		m_pDOCUMENTDesk->Update();
-
-		break;
 	}
+
+	// 書類タスクの更新処理
+	m_pDOCUMENTDesk->Update();
 
 }
 
