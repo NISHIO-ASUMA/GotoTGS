@@ -59,6 +59,7 @@ namespace player
 	constexpr float SphereSize = 60.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 	constexpr int AFK_COOL_TIME = 600;									  // 再起動できるクールタイム時間
+	constexpr int DEATH_LIMIT_FRAME = 360;								  // 死亡時間タイマーの上限値
 	const D3DXVECTOR3 UI_POS_VALUE = { 0.0f,80.0f,0.0f };
 };
 

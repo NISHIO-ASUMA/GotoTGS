@@ -37,6 +37,9 @@ CTitle::~CTitle()
 //=========================================================
 HRESULT CTitle::Init(void)
 {
+	// バックバッファのカラーを戻す
+	CManager::GetInstance()->GetRenderer()->SetBackBuffColor();
+
 	// カメラ初期化
 	CManager::GetInstance()->GetCamera()->Init();
 

@@ -274,14 +274,6 @@ void CGameSceneObject::Update(void)
 		m_pScoreAll->SetScore(ScoreDitch + ScoreTask);
 	}
 
-	//// 指針の取得 ( マックスまでタスクしたらの時 )
-	//auto* pNeedle = m_pProgressgauge->GetGaugeneedle();
-	//if (pNeedle->GetIsFinish() == true)
-	//{
-	//	CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CResult>());
-	//	return;
-	//}
-
 	// ブロック管理クラスの更新処理
 	if (m_pBlocks) m_pBlocks->Update();
 

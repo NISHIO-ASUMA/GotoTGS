@@ -978,6 +978,9 @@
     <ClCompile Include="src\cpp\scorepop.cpp">
       <Filter>ソース ファイル\Number\Score</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\overworkresult.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1534,6 +1537,9 @@
     </ClInclude>
     <ClInclude Include="src\include\tutorialplayer.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresult.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

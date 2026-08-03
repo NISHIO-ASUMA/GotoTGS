@@ -28,6 +28,7 @@
 #include "gamesceneobject.h"
 #include "debugproc.h"
 #include "outline.h"
+#include "fade.h"
 #include "playerutility.h"
 
 //=========================================================
@@ -59,7 +60,9 @@ m_isPcWork(false),
 m_isCatchEnemy(false),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_isEnableLazy(false),
-m_isSetOutSideTask(false)
+m_isSetOutSideTask(false),
+m_nDeathTimer(NULL),
+m_isTaskMaxOver(false)
 {
 	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
@@ -198,6 +201,59 @@ void CPlayer::Update(void)
 		return;
 	}
 	
+	// 指針の取得
+	// ゲームシーンのオブジェクトから進捗ゲージを取得
+	auto* pProgressGauge = CGameSceneObject::GetInstance()->GetProgressgauge();
+	if (pProgressGauge)
+	{
+		auto* pNeedle = pProgressGauge->GetGaugeneedle();
+		if (pNeedle && pNeedle->GetIsFinish())
+		{
+			// 初めて上限に達した瞬間にタイマーをセット
+			if (!m_isTaskMaxOver)
+			{
+				m_isTaskMaxOver = true;
+				m_nDeathTimer = player::DEATH_LIMIT_FRAME;
+
+				// 起動中のタスクを強制終了する
+
+				// 画面を暗くする ( ライトの明るさを落とす )
+				
+				// uiの描画を開始
+			}
+		}
+	}
+
+	// タスク超過状態の処理
+	if (m_isTaskMaxOver)
+	{
+		// 6秒の間にサボりを起動できたらカウント解除
+		if (m_isEnableLazy)
+		{
+			m_isTaskMaxOver = false;
+			m_nDeathTimer = 0;
+		}
+		else
+		{
+			// カウントダウン
+			m_nDeathTimer--;
+
+			// 6秒間サボれなかったらゲームオーバー
+			if (m_nDeathTimer <= 0)
+			{// この瞬間だけ"当たり判定をoff"にする
+				// モーション変更
+				//GetMotion()->SetMotion(CPlayer::MOTION::OVERWORK, true, 2);
+
+				// モーションだけ更新
+				CMoveCharactor::UpdateMotionOnly();
+
+				// 画面遷移する
+				//CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CWorkOverResult>());
+				return;
+			}
+		}
+	}
+
 	// クールタイムのカウントダウン処理
 	for (int nTime = 0; nTime < AFKTYPE_MAX; nTime++)
 	{
@@ -286,10 +342,14 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 oldpos = GetOldPos();
 
+	// 速度の調整値
+	float MoveSpeed = m_isTaskMaxOver ? 2.0f : player::fSpeed;
+	float PadLStick = m_isTaskMaxOver ? 1.75f : 3.75f;
+
 	if (m_nControlTypes == CONTROLTYPE_KEY)
 	{
 		// キーボード操作
-		MoveKeyboard(player::fSpeed);
+		MoveKeyboard(MoveSpeed);
 	}
 	// ジョイパッド操作
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
@@ -297,12 +357,12 @@ void CPlayer::Update(void)
 		// 十字キーの入力がある場合は十字キーの移動だけを行う
 		if (Pad->GetCrossKeyInput(Pad) == true)
 		{
-			MoveCrossPadButton(player::fSpeed);
+			MoveCrossPadButton(MoveSpeed);
 		}
 		else
 		{
 			// 十字キーが押されていない場合は、スティックの判定を行う
-			MoveJoypad(3.75f);
+			MoveJoypad(PadLStick);
 		}
 	}
 	
@@ -369,7 +429,7 @@ void CPlayer::Update(void)
 			}
 
 			// タスクの起動処理
-			if (isInputKey)
+			if (isInputKey && !m_isTaskMaxOver)
 			{				
 				switch (Colliders->nType)
 				{

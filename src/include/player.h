@@ -25,10 +25,10 @@ class CStateMachine;
 class CInputKeyboard;
 class CJoyPad;
 class CInput;
-class CAfkCoolTimeUi;	// サボりがクールタイム中の時にだすuiクラス
+class CAfkCoolTimeUi;
 
 //*********************************************************
-// プレイヤーオブジェクトクラスを定義
+// プレイヤーオブジェクトクラスを定義 ( これからモーション数2個増える )
 //*********************************************************
 class CPlayer : public CMoveCharactor
 {
@@ -298,4 +298,7 @@ private:
 	bool m_isSetOutSideTask;					// 「外回りタスクを開始したか」どうか
 	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];	// 通常サボり用
 	CAfkCoolTimeUi* m_pCoolTimeUiBench[4];		// ベンチ4箇所用
+
+	int  m_nDeathTimer;							// 死亡カウントダウンタイマー
+	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
 };
