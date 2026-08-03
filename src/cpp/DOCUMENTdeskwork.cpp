@@ -144,6 +144,9 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	// パーティクルをONにする
 	m_pParticle->SetUse(true);
 
+	// 書類タスクの数の加算処理
+	AddDOCUMENTTask();
+
 	// チュートリアルでの処理
 	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && 
 		!CTutorialObject::GetInstance()->GetTutoriallines()->GetIsComp())
@@ -167,8 +170,5 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
-
-		// 書類タスクの数の加算処理
-		AddDOCUMENTTask();
 	}
 }
