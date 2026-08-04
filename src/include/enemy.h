@@ -88,8 +88,11 @@ public:
 	void DrawEyeSight(void);
 	void ChaseMoving(void);
 	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag; }
+	void StartChase(const bool isStartflag) { m_isStartChase = isStartflag; }
 
 	bool CheckEyesight(void);
+	bool CheckRayToAngleRange(void);
+	bool CheckObstacle(void);
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	/// <summary>
@@ -127,9 +130,10 @@ public:
 	//***************************
 	struct Eyesight
 	{
-		static constexpr float EYE_RADIUS = 100.0f;		// 視界の届く距離
-		static constexpr float EYE_ANGLE = 45.0f;		// 視野角
+		static constexpr float EYE_RADIUS = 60.0f;		// 視界の届く距離
+		static constexpr float EYE_ANGLE = 70.0f;		// 視野角
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
+		static constexpr float EYE_RANGE = 250.0f;		// 視界の長さ
 	};
 
 	/// <summary>
@@ -164,6 +168,7 @@ public:
 
 	int  GetStopTime(void) const { return m_nStopTime; }
 	int GetTargetIndex(void) const { return m_nTargetIdx; }
+	bool GetStartChaseFlags(void) const { return m_isStartChase; }
 	MOVETYPE GetMoveType(void) const { return m_MoveType; }
 	CPlayer* GetInCharactor(void) const { return m_pDestCharactor; }
 	D3DXVECTOR3 GetPlayerTargetPos(void) const { return m_playerTargetPos; }
@@ -183,6 +188,7 @@ private:
 private:
 	bool m_isCheckPoint;								// ポイントに到着したかどうか
 	bool m_isTargetChase;								// 追跡判定
+	bool m_isStartChase;								// チェイス開始判定フラグ
 	int m_nStopTime;									// 停止しているカウント
 	int m_nTargetIdx;									// 向かう目的地のインデックス
 	int m_nLevelPoint;									// 警戒度のレベル値

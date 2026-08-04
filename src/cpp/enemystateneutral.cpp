@@ -57,8 +57,8 @@ void CEnemyStateNeutral::OnUpdate()
 	if (icon)
 		icon->SetDrawFlags(false);
 
-	// もし索敵範囲に入っていたら、疑い状態に変更する
-	if (m_pEnemy->CheckEyesight())
+	// もし自身の視界内に入っていたら
+	if (m_pEnemy->CheckRayToAngleRange())
 	{
 		// ステート生成
 		m_pEnemy->ChangeState(new CEnemyStateDoubt(),ID_DOUBT);

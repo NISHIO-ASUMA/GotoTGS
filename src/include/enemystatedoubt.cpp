@@ -56,7 +56,7 @@ void CEnemyStateDoubt::OnUpdate(void)
 		icon->SetDrawFlags(false);
 
 	// ‚à‚µ‹ŠE“à‚É“ü‚Á‚Ä‚¢‚½‚ç
-	if (m_pEnemy->CheckEyesight())
+	if (m_pEnemy->CheckRayToAngleRange())
 	{
 		// ƒJƒEƒ“ƒg‚ğ‰ÁZ
 		m_nDoubtCount++;

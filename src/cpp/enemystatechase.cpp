@@ -42,6 +42,7 @@ void CEnemyStateChase::OnStart(void)
 	// ‚Ü‚¸ƒŒƒxƒ‹‚ğ1ã‚°‚é
 	m_pEnemy->SetMoveSpeed(1);
 	m_pEnemy->SetEyeAngle(1);
+	m_pEnemy->StartChase(true);
 
 	m_nStayCount = 0;
 	m_isDoubt = false;
@@ -69,6 +70,7 @@ void CEnemyStateChase::OnUpdate(void)
 		if (m_nStayCount >= 120)
 		{
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
+			m_pEnemy->StartChase(false);
 		}
 		return; // ’â~ˆÛ
 	}
