@@ -39,6 +39,7 @@ m_pBoxCollider(nullptr),
 m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
+m_pEnemyManagerOutSide(nullptr),
 m_posOld(VECTOR3_NULL),
 m_nCntAfk(NULL),
 m_nTimeScore(NULL),
@@ -62,7 +63,11 @@ m_nControlTypes(CONTROLTYPE_NONE),
 m_isEnableLazy(false),
 m_isSetOutSideTask(false),
 m_nDeathTimer(NULL),
-m_isTaskMaxOver(false)
+m_nInitTaskWorkingTime(NULL),
+m_nNoActiveTaskTime(NULL),
+m_nTaskClearBonusTime(NULL),
+m_isTaskMaxOver(false),
+m_isInitTaskTime(false)
 {
 	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
@@ -161,6 +166,11 @@ HRESULT CPlayer::Init(void)
 	m_isPcWork = false;
 	m_isCatchEnemy = false;
 	m_isSetOutSideTask = false;
+
+	// 初期の許容時間を設定 
+	// これは最初に「仕事をしていましたよー」の時間分 最初から捕まるといやだから最初だけすぐ捕まらないようにする値
+	m_nInitTaskWorkingTime = player::TASK_LIMIT_WORKING;
+
 	return S_OK;
 }
 //=========================================================
@@ -200,6 +210,9 @@ void CPlayer::Update(void)
 		CMoveCharactor::UpdateMotionOnly();
 		return;
 	}
+
+	// 初期時間減算関数
+	DecleInitTaskTime();
 
 	// NOTE : 後に西尾が担当する
 #if 0
@@ -693,6 +706,25 @@ void CPlayer::UpdateAfkUiState(void)
 
 	// UIに表示状態を設定
 	pUI->SetisDisplay(bShouldDisplay);
+}
+//=========================================================
+// 初期時間を減らすための関数
+//=========================================================
+void CPlayer::DecleInitTaskTime(void)
+{
+	// trueなら
+	if (m_isInitTaskTime) return;
+
+	// 0以下なら
+	if (m_nInitTaskWorkingTime <= 0)
+	{
+		m_nInitTaskWorkingTime = 0;
+		m_isInitTaskTime = true;
+		return;
+	}
+
+	// デクリメントする
+	m_nInitTaskWorkingTime--;
 }
 //=========================================================
 // 当たり判定
@@ -1294,6 +1326,33 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 			
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
+			break;
+		}
+	}
+}
+//=========================================================
+// 付近の敵の警戒度を下げる
+//=========================================================
+void CPlayer::LowerLevelToEnemy(void)
+{
+	// 敵管理クラスnullチェック
+	if (!m_pEnemyManagerOutSide) return;
+
+	// 敵の全体を取得
+	int nNumAll = m_pEnemyManagerOutSide->GetAllEnemys();
+	if (nNumAll <= 0) return;
+
+	for (int nCnt = 0; nCnt < nNumAll; nCnt++)
+	{
+		// 敵単体クラスを取得
+		CEnemy* pEnemy = m_pEnemyManagerOutSide->GetEnemyIdx(nCnt);
+		if (!pEnemy) continue;
+
+		// 球形範囲に当たっていたら
+		if (this->CollisionSphere(pEnemy->GetSphereCollider()))
+		{
+			// 敵のレベルポイントを下げ,警戒度によるパラメーターを落ち着かせる
+			pEnemy->LevelDown(10.0f);
 			break;
 		}
 	}

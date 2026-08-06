@@ -67,12 +67,15 @@ void CEnemyStateDoubt::OnUpdate(void)
 
 		// 疑いモーションセット
 		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT, true, 3);
+
+		// この時にレベルを徐徐に加算する
+		m_pEnemy->AddLevel(0.1f);
 	}
 	else
 	{
 		// ゲージのクリア
 		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0025f);
+		m_pGauge->SetRatio(0.0020f);
 
 		// もし完全クリアなら状態を元に戻す
 		if (m_pGauge->GetNormalFlag())

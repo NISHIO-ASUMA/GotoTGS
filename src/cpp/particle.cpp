@@ -50,7 +50,7 @@ CParticle::~CParticle()
 //=========================================================
 // ¶¬ˆ—
 //=========================================================
-CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius, TYPE type)
+CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius, TYPE type, D3DXVECTOR3 move)
 {
 	CParticle* pParticle = new CParticle;
 
@@ -61,6 +61,7 @@ CParticle* CParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, fl
 	pParticle->SetRot(rot);
 	pParticle->SetColor(col);
 	pParticle->SetRadius(fRadius);
+	pParticle->SetMove(move);
 	pParticle->SetType(type);
 
 	// ‰Šú‰»¸”s

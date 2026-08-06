@@ -31,6 +31,7 @@ bool CDeskworkUIManager::m_bTutorial = NULL;
 CDeskworkUIManager::CDeskworkUIManager() :
 m_pos(VECTOR3_NULL),
 m_pClearUI(nullptr),
+m_pPlayer(nullptr),
 m_bUse(false),
 m_bTime(false),
 m_bCan(false),
@@ -116,9 +117,11 @@ void CDeskworkUIManager::AddDOCUMENTTask(void)
 //=========================================================
 void CDeskworkUIManager::AddOutsideTask(void)
 {
+#if 0
 	// こなした書類タスクの分だけ加算
 	m_nOutsideTaskNum += m_nDOCUMENTTaskNum;
 
 	// 書類タスクの数を初期化
 	m_nDOCUMENTTaskNum = NULL;
+#endif
 }

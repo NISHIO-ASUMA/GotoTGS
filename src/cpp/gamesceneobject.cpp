@@ -176,6 +176,9 @@ HRESULT CGameSceneObject::Init(void)
 	// ドア用UIの生成
 	CDoorUI::Create(m_pPlayer);
 
+	// 敵管理クラスのポインタセット
+	m_pPlayer->OutSideEnemyPointer(CEnemyManager::GetInstance());
+
 	// カメラに追従するキャラクターのポインタをセット
 	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());

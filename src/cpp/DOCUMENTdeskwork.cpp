@@ -31,7 +31,7 @@ namespace PARTICLE
 {
 	const D3DXVECTOR3 Pos = { 40.0f,36.0f,280.0f };		// 位置
 	const D3DXCOLOR col = { 0.5f, 0.5f, 1.0f, 0.5f };	// カラー
-	constexpr float fRadius = 15.0f;						// 範囲の半径
+	constexpr float fRadius = 15.0f;					// 範囲の半径
 	constexpr int nTime = 15;							// 表示する時間
 };
 

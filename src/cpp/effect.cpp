@@ -81,7 +81,7 @@ HRESULT CEffect::Init(void)
 		&m_pVtxBuff,
 		NULL);
 
-	VERTEX_3D* pVtx = NULL;
+	VERTEX_3D* pVtx = nullptr;
 	//頂点バッファをロックし、頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
@@ -150,7 +150,7 @@ void CEffect::Uninit(void)
 //=========================================================
 void CEffect::Update(void)
 {
-	if (!m_bUse)
+	if (!m_bUse || m_nLife <= 0)
 	{
 		Uninit();
 		return;

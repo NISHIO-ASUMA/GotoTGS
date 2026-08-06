@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CUi;
+class CPlayer;
 
 //*********************************************************
 // タスクUIマネージャークラスを定義
@@ -51,6 +52,7 @@ public:
 	inline void SetTime(const bool& bTime) { m_bTime = bTime; }
 	inline void SetCountTime(const int& nCountTime) { m_nCountTime = nCountTime; }
 	inline void SetCan(const bool& bCan = false) { m_bCan = bCan; }
+	inline void SetPlayerPointer(CPlayer* pPlayer = nullptr) { m_pPlayer = pPlayer; }
 	static void SetTutorial(const bool& bTutorial = false) { m_bTutorial = bTutorial; }
 
 	// 情報取得処理
@@ -60,6 +62,7 @@ public:
 	inline bool GetTime(void) const { return m_bTime; }
 	inline int GetCountTime(void) const { return m_nCountTime; }
 	inline bool GetCan(void)const { return m_bCan; }
+	CPlayer* GetPlayerPointer(void) { return m_pPlayer; }
 
 	// 静的メンバ関数
 	static void AddPCTask(void) { m_nPCTaskNum++; }
@@ -105,4 +108,7 @@ private:
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
 	static int m_nOutsideTaskNum;	// こなした外出タスクの数
 	static bool m_bTutorial;		// チュートリアルをこなしたかどうか
+
+	// [ ADD : 西尾 ] 子クラスで使いたいのでめんどいからポインタ持たせた
+	CPlayer* m_pPlayer;				// プレイヤークラスの入れ物
 };

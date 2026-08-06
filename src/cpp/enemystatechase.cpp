@@ -40,8 +40,9 @@ CEnemyStateChase::~CEnemyStateChase()
 void CEnemyStateChase::OnStart(void)
 {
 	// ‚Ü‚¸ƒŒƒxƒ‹‚ð1ã‚°‚é
-	m_pEnemy->SetMoveSpeed(1);
-	m_pEnemy->SetEyeAngle(1);
+	m_pEnemy->AddLevel(100.0f);
+
+	// ’ÇÕó‘Ô‚É‚·‚é
 	m_pEnemy->StartChase(true);
 
 	m_nStayCount = 0;

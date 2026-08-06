@@ -32,6 +32,8 @@
 #include "blockmanager.h"
 #include "enemyutility.h"
 #include "jsonmanager.h"
+#include "template.h"
+#include "particle.h"
 
 //*********************************************************
 // 定数名前空間
@@ -68,7 +70,7 @@ m_pDestCharactor(nullptr),
 m_pChaseIcon(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
-m_nLevelPoint(NULL),
+m_fLevelPoint(NULL),
 m_fEyeAngle(NULL),
 m_fMoveSpeed(NULL),
 m_playerTargetPos(VECTOR3_NULL)
@@ -454,83 +456,7 @@ void CEnemy::UpdateMovingTV(void)
 	// 目標角度をセット
 	SetRotDest(rotDest);
 }
-//========================================================
-// 敵の速度設定
-//========================================================
-void CEnemy::SetMoveSpeed(const int nLevel)
-{
-	// レベル加算
-	m_nLevelPoint += nLevel;
 
-	// レベル値によって速度の設定を変更する
-	switch (m_nLevelPoint)
-	{
-	case LEVEL_SYSTEM_0:
-		m_fMoveSpeed = EnemyInfo::SPEED;
-		break;
-
-	case LEVEL_SYSTEM_1:
-		m_fMoveSpeed = 1.5f;
-		break;
-
-	case LEVEL_SYSTEM_2:
-		m_fMoveSpeed = 2.0f;
-		break;
-
-	case LEVEL_SYSTEM_3:
-		m_fMoveSpeed = 3.0f;
-		break;
-
-	case LEVEL_SYSTEM_4:
-		m_fMoveSpeed = 3.5f;
-		break;
-
-	case LEVEL_SYSTEM_5:
-		m_fMoveSpeed = 4.0f;
-		break;
-	default:
-		m_fMoveSpeed = 5.0f;	// 最大越えたとき
-		break;
-	}
-}
-//========================================================
-// 敵の視界の範囲設定
-//========================================================
-void CEnemy::SetEyeAngle(const int nLevel)
-{
-	// レベル加算
-	m_nLevelPoint += nLevel;
-
-	// レベル値によって範囲の大きさを変更する
-	switch (m_nLevelPoint)
-	{
-	case LEVEL_SYSTEM_0:
-		m_fEyeAngle = Eyesight::EYE_ANGLE;
-		break;
-
-	case LEVEL_SYSTEM_1:
-		m_fEyeAngle = 55.0f;
-		break;
-
-	case LEVEL_SYSTEM_2:
-		m_fEyeAngle = 65.0f;
-		break;
-
-	case LEVEL_SYSTEM_3:
-		m_fEyeAngle = 75.0f;
-		break;
-
-	case LEVEL_SYSTEM_4:
-		m_fEyeAngle = 85.0f;
-		break;
-
-	case LEVEL_SYSTEM_5:
-		m_fEyeAngle = 100.0f;
-		break;
-	default:
-		break;
-	}
-}
 //========================================================
 // ステート変更処理
 //========================================================
@@ -689,17 +615,24 @@ bool CEnemy::CheckEyesight(void)
 	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
 	float cosHalfAngle = cosf(D3DXToRadian(m_fEyeAngle));
 
-	// サボり中で、かつ扇形視界に入っている場合
+	// 扇形視界に入っている場合
 	return (dot >= cosHalfAngle);
 }
 //========================================================
-// 本来の敵から見えるプレイヤーとの視界判定( レイベクトル判定,途中に障害物があったらreturn false )
+// 本来の敵から見えるプレイヤーとの視界判定
 //========================================================
 bool CEnemy::CheckRayToAngleRange(void)
-{// 一旦判定できるかを付けてみる
-
+{
 	// nullなら
 	if (!m_pDestCharactor) return false;
+
+	// 初期のタスク時間なら
+	if (!m_pDestCharactor->GetIsInitTasking())
+		return false;
+
+	// タスク中の時間だったら ( 今はパソコンタスクでのみ判定作った )
+	if (m_pDestCharactor->GetIsPcWorking())
+		return false;
 
 	// 自身の座標とターゲットへの座標
 	D3DXVECTOR3 myPos = GetPos();
@@ -725,24 +658,22 @@ bool CEnemy::CheckRayToAngleRange(void)
 	// 敵正面ベクトルを算出
 	D3DXMATRIX matRot;
 	D3DXMatrixRotationYawPitchRoll(&matRot, GetRot().y, GetRot().x, GetRot().z);
-	D3DXVECTOR3 forward(matRot._31, 0.0f, matRot._33);
+	D3DXVECTOR3 forward(-matRot._31, 0.0f, -matRot._33);
 	D3DXVec3Normalize(&forward, &forward);
 
 	// ターゲットへのベクトルを算出・正規化
 	D3DXVECTOR3 dirToTarget;
 	D3DXVec3Normalize(&dirToTarget, &diff);
 
-	// 内積判定
+	// 角度と内積計算
+	float halfAngleRad = D3DXToRadian(m_fEyeAngle * 0.5f);
+	float thresholdDot = cosf(halfAngleRad);
+
+	// 内積を計算
 	float dot = D3DXVec3Dot(&forward, &dirToTarget);
-	if (dot > 1.0f) dot = 1.0f;
-	if (dot < -1.0f) dot = -1.0f;
 
-	// ラジアンから角度へ変換
-	float angleDeg = D3DXToDegree(cosf(dot));
-
-	// 左右半分の視野角を超えているかチェック
-	float halfAngle = m_fEyeAngle * 0.5f;
-	if (angleDeg > halfAngle)
+	// 内積がしきい値より小さい
+	if (dot < thresholdDot)
 	{
 		return false; // 視野角の外
 	}
@@ -859,4 +790,83 @@ bool CEnemy::Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos)
 
 	// 当たり判定処理
 	return CCollisionBox::CollisionEx(m_pBoxColiider.get(), pOther, pOutPos);
+}
+//========================================================
+// 敵のレベル加算関数
+//========================================================
+void CEnemy::AddLevel(const float fValue)
+{
+	// 加算
+	m_fLevelPoint += fValue;
+
+	// 最大で格納できるポイントを計算(最大1000.0fまで)
+	float maxPoints = LevelConfig::MAX_LEVEL * LevelConfig::LEVELUP_NEED_POINT;
+
+	// 値の設定
+	if (m_fLevelPoint < 0.0f)
+	{
+		m_fLevelPoint = 0.0f;
+	}
+	else if (m_fLevelPoint > maxPoints)
+	{
+		m_fLevelPoint = maxPoints;
+	}
+
+	// 新規のレベル計算
+	int newLevel = static_cast<int>(m_fLevelPoint / LevelConfig::LEVELUP_NEED_POINT);
+
+	// 最大レベル制限
+	if (newLevel >= LevelConfig::MAX_LEVEL_POINT)
+	{
+		newLevel = LevelConfig::MAX_LEVEL_POINT;
+	}
+
+	// レベルが変わったらパラメータを更新
+	if (m_nLevel != newLevel)
+	{
+		m_nLevel = newLevel;
+		UpdateLevelParameters();
+	}
+}
+//========================================================
+// レベルダウン設定関数
+//========================================================
+void CEnemy::LevelDown(const float fValue)
+{
+	// 値の減算
+	AddLevel(-fValue);
+}
+//========================================================
+// パラメータ更新関数
+//========================================================
+void CEnemy::UpdateLevelParameters(void)
+{
+	// 速度と角度の設定
+	SetMoveSpeed();
+	SetEyeAngle();
+
+	// 自作パーティクルを生成
+
+}
+//========================================================
+// 敵のレベルによる速度設定
+//========================================================
+void CEnemy::SetMoveSpeed(void)
+{
+	// 割合を計算する
+	float rate = static_cast<float>(m_nLevel) / static_cast<float>(LevelConfig::MAX_LEVEL_POINT);
+
+	// 線形補完計算
+	m_fMoveSpeed = Lerp(LevelConfig::MIN_SPEED, LevelConfig::MAX_SPEED, rate);
+}
+//========================================================
+// 敵のレベルによる視界の範囲設定
+//========================================================
+void CEnemy::SetEyeAngle(void)
+{
+	// 割合計算
+	float rate = static_cast<float>(m_nLevel) / static_cast<float>(LevelConfig::MAX_LEVEL_POINT);
+
+	// 線形補完計算
+	m_fEyeAngle = Lerp(LevelConfig::MIN_EYE_ANGLE, LevelConfig::MAX_EYE_ANGLE, rate);
 }

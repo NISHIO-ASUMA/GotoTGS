@@ -61,7 +61,7 @@ public:
 	/// </summary>
 	/// <param name="nIdx">æ“¾‚·‚é”Ô†</param>
 	/// <returns></returns>
-	inline const CEnemy* GetEnemyIdx(const int& nIdx) { return m_pEnemys[nIdx]; }
+	inline CEnemy* GetEnemyIdx(const int& nIdx) { return m_pEnemys[nIdx]; }
 
 	/// <summary>
 	/// “G‚Ì’Ç‰ÁŠÖ”

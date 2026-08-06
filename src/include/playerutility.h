@@ -13,35 +13,36 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "PCdeskwork.h"				// 髙橋追加
-#include "COPYdeskwork.h"			// 髙橋追加
-#include "DOCUMENTdeskwork.h"		// 髙橋追加
-#include "vigilanceUImanager.h"		// 髙橋追加
-#include "vigilanceUImanager.h"		// 髙橋追加
-#include "gaugeneedle.h"			// 髙橋追加
+#include "PCdeskwork.h"			
+#include "COPYdeskwork.h"		
+#include "DOCUMENTdeskwork.h"	
+#include "vigilanceUImanager.h"	
+#include "vigilanceUImanager.h"	
+#include "gaugeneedle.h"		
 #include "progressgauge.h"
 #include "worldUIcollision.h"
-#include "collisionsphere.h"		// 近田追加
-#include "afkmanager.h"				// 近田追加
-#include "afktv.h"					// 近田追加
-#include "afksmoke.h"				// 近田追加
-#include "afkmagazine.h"			// 近田追加
-#include "afkeating.h"				// 近田追加
-#include "afkgamecenter.h"			// 近田追加
-#include "titleuimanager.h"			// 近田追加
-#include "score.h"					// 近田追加
-#include "afkbench.h"				// 近田追加
-#include "automaticdoormanager.h"	// 西尾追加
-#include "automatic_door.h"			// 西尾追加
-#include "autodoor_collision.h"		// 西尾追加
-#include "slideopendoormanager.h"	// 西尾追加
-#include "sideopendoor.h"			// 西尾追加
-#include "sideopendoorcollision.h"	// 西尾追加
-#include "enemymanager.h"			// 西尾追加
-#include "enemy.h"					// 西尾追加
-#include "scorepop.h"				// 西尾追加
+#include "collisionsphere.h"	
+#include "afkmanager.h"			
+#include "afktv.h"				
+#include "afksmoke.h"			
+#include "afkmagazine.h"		
+#include "afkeating.h"			
+#include "afkgamecenter.h"		
+#include "titleuimanager.h"		
+#include "score.h"				
+#include "afkbench.h"			
+#include "automaticdoormanager.h"	
+#include "automatic_door.h"			
+#include "autodoor_collision.h"		
+#include "slideopendoormanager.h"	
+#include "sideopendoor.h"			
+#include "sideopendoorcollision.h"	
+#include "enemymanager.h"			
+#include "enemy.h"					
+#include "scorepop.h"				
 #include "afk2dui.h"
 #include "afkbattime.h"
+#include "enemymanager.h"
 
 //*********************************************************
 // 基本の情報を保持している名前空間
@@ -60,19 +61,20 @@ namespace player
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 	constexpr int AFK_COOL_TIME = 600;									  // 再起動できるクールタイム時間
 	constexpr int DEATH_LIMIT_FRAME = 360;								  // 死亡時間タイマーの上限値
-	const D3DXVECTOR3 UI_POS_VALUE = { 0.0f,80.0f,0.0f };
+	constexpr int TASK_LIMIT_WORKING = 300;								  // 初期の回避時間 ( 8秒間 )
+	const D3DXVECTOR3 UI_POS_VALUE = { 0.0f,80.0f,0.0f };				  // 頭の上に出すuiの高さ
 };
 
 //*********************************************************
-// 定数名前空間 ( タスク関連時 )
+// 定数名前空間 ( サボりとタスクの時に特定の方向を設定する )
 //*********************************************************
 namespace Player_Info
 {
-	// テレビ関係
+	// テレビ
 	const D3DXVECTOR3 TV_CHARACTORPOS = { -244.0f, 10.5f,277.0f };
 	const D3DXVECTOR3 TV_DESTPOS = { -248.0f, 12.0f, 362.0f };
 
-	// デスクワーク関係
+	// PCのタスク
 	const D3DXVECTOR3 DESK_DESTPOS = { -63.0f, 16.0f, 185.0f };		// デスクワーク中の座標
 	const D3DXVECTOR3 DESK_RETURNPOS = { -100.0f, 0.0f, 175.0f };	// タスク終了時にもどる固定座標
 };
@@ -95,5 +97,6 @@ namespace Player_Bench
 	const D3DXVECTOR3 OFFICE_CHARACTORPOS = { 734.4f, 18.0f, -468.0f };		// オフィス横のベンチの座標
 	const D3DXVECTOR3 OFFICE_DESTPOS = { 834.4f, 18.0f, -468.0f };			// オフィス横のベンチの目的座標
 
+	// 最大ベンチ数
 	constexpr int BENCH_MAX = 4;
 };

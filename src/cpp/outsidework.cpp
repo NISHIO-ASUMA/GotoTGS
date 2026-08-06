@@ -45,7 +45,7 @@ COutsideWork::~COutsideWork()
 //=========================================================
 COutsideWork* COutsideWork::Create(const bool& bUse)
 {
-	// 書類タスクのポインタ
+	// 外タスクのポインタ
 	static COutsideWork pDOCUMENTDeskwork;
 
 	// 設定処理

@@ -26,6 +26,7 @@ class CInputKeyboard;
 class CJoyPad;
 class CInput;
 class CAfkCoolTimeUi;
+class CEnemyManager;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義 ( これからモーション数2個増える )
@@ -137,13 +138,20 @@ public:
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
+	//****************************
 	// 西尾追加
+	//****************************
 	void SetCatchEnemy(const bool isFlags) { m_isCatchEnemy = isFlags; }
 	void SetOutSideFlags(const bool isStartFlag) { m_isSetOutSideTask = isStartFlag; }
+	void OutSideEnemyPointer(CEnemyManager* pManager = nullptr) { m_pEnemyManagerOutSide = pManager; }
+	void AddTaskBonusTime(const int nValueTime) { m_nTaskClearBonusTime += nValueTime; }
 
+	int GetBonusTime(void) const { return m_nTaskClearBonusTime; }
 	bool GetIsCatch(void) { return m_isCatchEnemy; }
 	bool GetIsLazy(void) { return m_isEnableLazy; }
 	bool GetIsTaskOutSide(void) { return m_isSetOutSideTask; }
+	bool GetIsPcWorking(void) { return m_isPcWork; }
+	bool GetIsInitTasking(void) { return m_isInitTaskTime; }
 	bool IsTaskWorking(void) const;
 
 public:
@@ -253,6 +261,18 @@ public:
 	/// <param name=""></param>
 	void UpdateAfkUiState(void);
 
+	/// <summary>
+	/// 初期のタスク時間を減らす関数
+	/// </summary>
+	/// <param name=""></param>
+	void DecleInitTaskTime(void);
+
+	/// <summary>
+	/// 付近にいる敵の警戒度を下げる
+	/// </summary>
+	/// <param name=""></param>
+	void LowerLevelToEnemy(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -296,9 +316,15 @@ private:
 	bool m_isCatchEnemy;						// 上司に捕まってしまった判定
 	bool m_isEnableLazy;						// 「サボり中であるか」の判定変数
 	bool m_isSetOutSideTask;					// 「外回りタスクを開始したか」どうか
+	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
+	bool m_isInitTaskTime;						// 初期のタスク時間判別フラグ
+
+	int m_nInitTaskWorkingTime;					// 初期の許容時間
+	int m_nNoActiveTaskTime;					// タスク起動をしていない時間を管理する
+	int m_nTaskClearBonusTime;					// タスクが成功した時に加算される時間
+	int  m_nDeathTimer;							// 死亡カウントダウンタイマー
+
 	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];	// 通常サボり用
 	CAfkCoolTimeUi* m_pCoolTimeUiBench[4];		// ベンチ4箇所用
-
-	int  m_nDeathTimer;							// 死亡カウントダウンタイマー
-	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
+	CEnemyManager* m_pEnemyManagerOutSide;		// 敵管理クラスの格納ポインタ
 };
