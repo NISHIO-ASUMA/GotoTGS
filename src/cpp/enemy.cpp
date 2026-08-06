@@ -681,9 +681,11 @@ bool CEnemy::CheckEyesight(void)
 	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
 	D3DXVec3Normalize(&enemyForward, &enemyForward);
 
+	// ç∑ï™ÉxÉNÉgÉã
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
+	// ì‡êœîªíË
 	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
 	float cosHalfAngle = cosf(D3DXToRadian(m_fEyeAngle));
 

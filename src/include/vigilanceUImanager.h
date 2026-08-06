@@ -60,6 +60,7 @@ private:
 		static constexpr const char* ICON_BOSS = "BOSS.png";		// ボスのテクスチャ
 		static constexpr const char* ICON_POLICE = "POLICE.png";	// 警察のテクスチャ
 		static constexpr const char* ICON_AUDITOR = "Auditor.png";	// 監査役のテクスチャ
+		static constexpr const char* ICON_ENEMY = "Enemy.png";		// 上司役のテクスチャ
 
 		// レベルの定数
 		static constexpr float LEVEL_WIDTH = 30.0f;		// 横幅

@@ -284,11 +284,17 @@ void CObject2D::SetCenter(void)
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
+	//ピクセル補正
+	float fLeft = m_pos.x - m_fWidth - 0.5f;
+	float fRight = m_pos.x + m_fWidth - 0.5f;
+	float fTop = m_pos.y - m_fHeight - 0.5f;
+	float fBottom = m_pos.y + m_fHeight - 0.5f;
+
 	// 頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
+	pVtx[0].pos = D3DXVECTOR3(fLeft, fTop, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(fRight, fTop, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(fLeft, fBottom, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(fRight, fBottom, 0.0f);
 
 	// rhwの設定
 	pVtx[0].rhw =
