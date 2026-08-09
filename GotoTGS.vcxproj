@@ -185,6 +185,7 @@
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
     <ClCompile Include="src\cpp\camera.cpp" />
     <ClCompile Include="src\cpp\client.cpp" />
+    <ClCompile Include="src\cpp\clientmanager.cpp" />
     <ClCompile Include="src\cpp\collider.cpp" />
     <ClCompile Include="src\cpp\collision.cpp" />
     <ClCompile Include="src\cpp\collisionbox.cpp" />
@@ -311,6 +312,7 @@
     <ClCompile Include="src\cpp\scene.cpp" />
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\scorepop.cpp" />
+    <ClCompile Include="src\cpp\searchicon.cpp" />
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
     <ClCompile Include="src\cpp\sideopendoor.cpp" />
@@ -377,6 +379,7 @@
     <ClInclude Include="src\include\boxtospherecollision.h" />
     <ClInclude Include="src\include\camera.h" />
     <ClInclude Include="src\include\client.h" />
+    <ClInclude Include="src\include\clientmanager.h" />
     <ClInclude Include="src\include\clientutility.h" />
     <ClInclude Include="src\include\collider.h" />
     <ClInclude Include="src\include\collision.h" />
@@ -503,6 +506,7 @@
     <ClInclude Include="src\include\scene.h" />
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\scorepop.h" />
+    <ClInclude Include="src\include\searchicon.h" />
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
     <ClInclude Include="src\include\sideopendoor.h" />

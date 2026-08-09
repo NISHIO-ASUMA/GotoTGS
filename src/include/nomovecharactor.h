@@ -42,6 +42,8 @@ public:
 	virtual void Uninit(void) override;
 	virtual void Update(void) override;
 	virtual void Draw(void) override;
+
+	void UpdateMotionOnly(void);
 	void MotionLoad(const char* pScriptName, int nDestMotions, const bool isShadow);
 
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }

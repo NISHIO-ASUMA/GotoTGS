@@ -30,10 +30,10 @@
 #include "billboard.h"
 #include "jsonmanager.h"
 #include "blockmanager.h"
-#include "enemyutility.h"
 #include "jsonmanager.h"
 #include "template.h"
 #include "particle.h"
+#include "enemyutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -472,7 +472,7 @@ void CEnemy::ChangeState(CEnemyStateBase* pState, int nID)
 	m_pMachine->ChangeState(pState);
 }
 //========================================================
-// 視界の扇形の描画処理
+// 視界の扇形の描画処理 ( デスゾーン )
 //========================================================
 void CEnemy::DrawEyeSight(void)
 {
@@ -844,9 +844,6 @@ void CEnemy::UpdateLevelParameters(void)
 	// 速度と角度の設定
 	SetMoveSpeed();
 	SetEyeAngle();
-
-	// 自作パーティクルを生成
-
 }
 //========================================================
 // 敵のレベルによる速度設定

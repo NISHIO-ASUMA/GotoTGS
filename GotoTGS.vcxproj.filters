@@ -963,6 +963,12 @@
     <ClCompile Include="src\cpp\client.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\client</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\clientmanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\searchicon.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1537,6 +1543,12 @@
     </ClInclude>
     <ClInclude Include="src\include\clientutility.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\clientmanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\searchicon.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

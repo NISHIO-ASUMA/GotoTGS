@@ -151,7 +151,7 @@ public:
 		static constexpr float MIN_EYE_ANGLE = 70.0f; 
 		static constexpr float MAX_EYE_ANGLE = 110.0f;
 
-		static constexpr int MAX_LEVEL_POINT = 10;	// 最大レベル10
+		static constexpr int MAX_LEVEL_POINT = 10;			// 最大レベル10
 		static constexpr float LEVELUP_NEED_POINT = 100.0f;	// 1レベル上がるのに必要なポイント数
 	};
 
@@ -187,7 +187,7 @@ public:
 	void AddLevel(const float fValue);
 	void LevelDown(const float fValue = 0.1f);
 	
-	// 各種設定の個別・一括更新
+	// 各種設定の個別と一括更新
 	void UpdateLevelParameters(void);
 
 	int  GetStopTime(void) const { return m_nStopTime; }
@@ -208,6 +208,7 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
 
+private:
 	CBillboard* m_pChaseIcon;							// 追跡アイコンのビルボード
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	CPlayer* m_pDestCharactor;							// 判定先のキャラクターポインタ

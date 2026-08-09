@@ -359,7 +359,7 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 oldpos = GetOldPos();
 
 	// 速度の調整値
-	float MoveSpeed = m_isTaskMaxOver ? 2.0f : player::fSpeed;
+	float MoveSpeed = m_isTaskMaxOver ? 1.5f : player::fSpeed;
 	float PadLStick = m_isTaskMaxOver ? 1.75f : 3.75f;
 
 	if (m_nControlTypes == CONTROLTYPE_KEY)
@@ -1561,11 +1561,12 @@ bool CPlayer::IsTaskWorking(void) const
 	if (m_isPcWork) return true;
 
 	// タスク起動中
-	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+	CDeskwork* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 
 	// nullじゃないなら
 	if (pDesk)
 	{
+		// タスクの種類を取得
 		auto type = pDesk->GetTaskType();
 
 		// 作業タスク画面に入っているか

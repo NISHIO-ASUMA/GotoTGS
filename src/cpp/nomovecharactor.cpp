@@ -162,7 +162,23 @@ void CNoMoveCharactor::Draw(void)
 	// カリングを戻す
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
+//=========================================================
+// モーションのみ更新
+//=========================================================
+void CNoMoveCharactor::UpdateMotionOnly(void)
+{
+	// ステンシルシャドウ更新
+	if (m_pShadowS)
+	{
+		// オブジェクト設定
+		m_pShadowS->SetPos(m_pos);
+		m_pShadowS->SetRot(m_rot);
+	}
 
+	// モーション更新
+	if (m_pMotion)
+		m_pMotion->Update(m_pModel);
+}
 //=========================================================
 // モーション読み込み
 //=========================================================

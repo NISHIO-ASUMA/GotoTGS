@@ -96,8 +96,8 @@ void CClient::Update(void)
 
 		if (m_nChangeTime >= NULL)
 		{
-			// 親クラスの更新のみ
-			CNoMoveCharactor::Update();
+			// モーション更新のみ
+			CNoMoveCharactor::UpdateMotionOnly();
 			return;
 		}
 
