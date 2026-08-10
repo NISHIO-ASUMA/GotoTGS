@@ -409,6 +409,12 @@
     <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\client">
       <UniqueIdentifier>{e2f29736-a165-492a-901e-3e4f997a6c3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\overworkman">
+      <UniqueIdentifier>{b63b1d8a-1acb-4d38-8799-43046c170b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman">
+      <UniqueIdentifier>{2a90c779-7fc2-46b9-a08f-16a10df2fa40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -968,6 +974,9 @@
     </ClCompile>
     <ClCompile Include="src\cpp\searchicon.cpp">
       <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkman.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1549,6 +1558,9 @@
     </ClInclude>
     <ClInclude Include="src\include\searchicon.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkman.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

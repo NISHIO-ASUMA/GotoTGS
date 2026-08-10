@@ -20,8 +20,7 @@
 #include "ui.h"
 #include "meshfield.h"
 #include "light.h"
-
-// #include "overworkman.h"
+#include "overworkman.h"
 
 //=========================================================
 // コンストラクタ
@@ -55,7 +54,7 @@ HRESULT COverWorkResultObject::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 1000.0f, 1000.0f,30,30, "data/TEXTURE/field00.jpg");
 
 	// 倒れているキャラクターを生成
-
+	COverWorkMan::Create(D3DXVECTOR3(0.0f,0.0f,40.0f), VECTOR3_NULL);
 
 	return S_OK;
 }
@@ -64,5 +63,6 @@ HRESULT COverWorkResultObject::Init(void)
 //=========================================================
 void COverWorkResultObject::Uninit(void)
 {
+	// ポインタの破棄
 	m_pBlock.reset();
 }

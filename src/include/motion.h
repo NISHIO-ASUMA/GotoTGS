@@ -40,9 +40,10 @@ public:
 	void Debug(void);
 	bool CheckFrame(int nStartMotion, int nEndMotion, int nMotionType);
 
-	void SetMotion(int motiontype);
-	void SetMotion(int nMotionType, bool isBlend, int nBlendFrame);
+	void SetMotion(int motiontype,bool isLoop = true);
+	void SetMotion(int nMotionType, bool isBlend, int nBlendFrame,bool isLoop = true);
 	void SetFinishMotion(const bool& isFinish) { m_isFinishMotion = isFinish; }
+	void SetLoop(bool isLoop) { m_isLooping = isLoop; }
 
 	inline void SetResetFrame(int nFrame) { m_nCounterMotion = nFrame;}
 	inline int GetMotionType(void) { return m_motiontype; }
@@ -111,6 +112,7 @@ private:
 	bool m_isBlendMotion;	// ブレンドがあるかどうか
 	bool m_isFinishMotion;	// モーションが終わったかどうか
 	bool m_isFirstMotion;	// モーションが始まったフラグ
+	bool m_isLooping;		// ループするかどうかを決定する意思フラグ
 
 	static constexpr int NEUTRAL = 0; // ニュートラル番号
 
