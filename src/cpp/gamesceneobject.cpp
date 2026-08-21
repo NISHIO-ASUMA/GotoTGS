@@ -171,9 +171,6 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
-	// 試しに生成 ( 検証完了 )
-	// CSearchIcon::Create(D3DXVECTOR3(0.0f,60.0f,150.0f),60.0f,60.0f,"enemyserchface.png",m_pPlayer->GetPos());
-
 //**********************************
 // ADD 西尾 : クラスに格納するポインタ等の設定
 //**********************************

@@ -14,11 +14,12 @@
 // インクルードファイル
 //*********************************************************
 #include "template.h"
+#include "manager.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEnemyDoubtGauge::CEnemyDoubtGauge(int nPriority) : CBillboardMulti(nPriority),
+CEnemyDoubtGauge::CEnemyDoubtGauge(int nPriority) : CObject2DMulti(nPriority),
 m_fRatio(NULL),
 m_isDraw(false),
 m_isComplete(false),
@@ -67,7 +68,8 @@ CEnemyDoubtGauge* CEnemyDoubtGauge::Create
 HRESULT CEnemyDoubtGauge::Init(void)
 {
 	// 親クラスの初期化処理
-	CBillboardMulti::Init();
+	CObject2DMulti::Init();
+
 	return S_OK;
 }
 //=========================================================
@@ -76,18 +78,15 @@ HRESULT CEnemyDoubtGauge::Init(void)
 void CEnemyDoubtGauge::Uninit(void)
 {
 	// 親クラスの終了処理
-	CBillboardMulti::Uninit();
+	CObject2DMulti::Uninit();
 }
 //=========================================================
-// 更新処理
+// 更新処理 ( 変換入れると描画されないんです )
 //=========================================================
 void CEnemyDoubtGauge::Update(void)
 {
 	// フラグがoffなら
 	if (!m_isDraw) return;
-
-	// 親クラスの更新処理
-	CBillboardMulti::Update();
 
 	// 比率を増やす
 	if (m_isUpGauge)
@@ -109,7 +108,69 @@ void CEnemyDoubtGauge::Update(void)
 	}
 
 	// テクスチャのUVを比率分動かす
-	CBillboardMulti::SetUV(m_fRatio);
+	CObject2DMulti::SetUV(m_fRatio);
+
+	//-----------------------------------------------------
+	// 3Dワールド座標 -> 2Dスクリーン座標変換
+	//-----------------------------------------------------
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+	if (pDevice)
+	{
+		D3DXMATRIX matView, matProj;
+		D3DVIEWPORT9 viewport;
+
+		pDevice->GetTransform(D3DTS_VIEW, &matView);
+		pDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+		pDevice->GetViewport(&viewport);
+
+		// m_TargetPos（敵の3D位置）をスクリーン座標へ変換
+		D3DXVECTOR3 screenPos;
+		D3DXVec3Project(&screenPos, &m_TargetPos, &viewport, &matProj, &matView, nullptr);
+
+		float fCenterX = viewport.Width * 0.5f;
+		float fCenterY = viewport.Height * 0.5f;
+
+		D3DXVECTOR2 dir(screenPos.x - fCenterX, screenPos.y - fCenterY);
+
+		if (screenPos.z > 1.0f || screenPos.z < 0.0f)
+		{
+			dir *= -1.0f;
+		}
+
+		float fRange = 60.0f;
+		float fMinX = fRange;
+		float fMaxX = viewport.Width - fRange;
+		float fMinY = fRange;
+		float fMaxY = viewport.Height - fRange;
+
+		bool bIsOffScreen = (screenPos.z > 1.0f || screenPos.z < 0.0f ||
+			screenPos.x < fMinX || screenPos.x > fMaxX ||
+			screenPos.y < fMinY || screenPos.y > fMaxY);
+
+		D3DXVECTOR3 finalGaugePos;
+
+		if (bIsOffScreen)
+		{
+			float fScaleX = (dir.x != 0.0f) ? (fCenterX - fRange) / fabsf(dir.x) : 1e5f;
+			float fScaleY = (dir.y != 0.0f) ? (fCenterY - fRange) / fabsf(dir.y) : 1e5f;
+
+			float fScale = (std::min)(fScaleX, fScaleY);
+
+			finalGaugePos.x = fCenterX + dir.x * fScale;
+			finalGaugePos.y = fCenterY + dir.y * fScale;
+			finalGaugePos.z = 0.0f;
+		}
+		else
+		{
+			finalGaugePos = D3DXVECTOR3(screenPos.x, screenPos.y, 0.0f);
+		}
+
+		// 2Dスクリーン座標を自身に設定
+		SetPos(finalGaugePos);
+	}
+
+	// 更新
+	CObject2DMulti::Update();
 }
 //=========================================================
 // 描画処理
@@ -120,7 +181,7 @@ void CEnemyDoubtGauge::Draw(void)
 	if (!m_isDraw) return;
 
 	// 親クラスの描画
-	CBillboardMulti::Draw();
+	CObject2DMulti::Draw();
 }
 //=========================================================
 // 割合値の変更

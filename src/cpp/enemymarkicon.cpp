@@ -1,14 +1,14 @@
 //========================================================
 //
-// 敵のアイコン処理 [ searchicon.cpp ]
+// 敵のアイコン処理 [ enemymarkicon.cpp ]
 // Author: Asuma Nishio
-// 参考例 : これはよくある敵がこっちにいますよーっていうアイコンを出す2duiクラス 
+//
 //========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "searchicon.h"
+#include "enemymarkicon.h"
 
 //*********************************************************
 // インクルードファイル
@@ -19,7 +19,7 @@
 //========================================================
 // コンストラクタ
 //========================================================
-CSearchIcon::CSearchIcon(int nPriority) : CObject2D(nPriority),
+CEnemyMarkIcon::CEnemyMarkIcon(int nPriority) : CObject2DMulti(nPriority),
 m_TargetPos(VECTOR3_NULL),
 m_fRange(NULL),
 m_isDraw(false)
@@ -29,33 +29,35 @@ m_isDraw(false)
 //========================================================
 // デストラクタ
 //========================================================
-CSearchIcon::~CSearchIcon()
+CEnemyMarkIcon::~CEnemyMarkIcon()
 {
 
 }
 //========================================================
 // 生成処理
 //========================================================
-CSearchIcon* CSearchIcon::Create
+CEnemyMarkIcon* CEnemyMarkIcon::Create
 (
 	const D3DXVECTOR3& pos,
 	const float& fWidth,
 	const float& fHeight,
 	const char* Filename,
+	const char* FileMultiTex,
 	const D3DXVECTOR3& TargetPos
 )
 {
 	// インスタンス生成
-	CSearchIcon* pIcon = new CSearchIcon;
+	CEnemyMarkIcon* pIcon = new CEnemyMarkIcon;
 	if (pIcon == nullptr) return nullptr;
 
 	// 初期化失敗時
 	if (FAILED(pIcon->Init())) return nullptr;
-	
+
 	// オブジェクト設定
 	pIcon->SetPos(pos);
 	pIcon->SetSize(fWidth, fHeight);
-	pIcon->SetTexture(Filename);
+	pIcon->SetTexture(Filename,0);
+	pIcon->SetTexture(FileMultiTex,1);
 	pIcon->SetTargetPos(TargetPos);
 
 	return pIcon;
@@ -63,31 +65,38 @@ CSearchIcon* CSearchIcon::Create
 //========================================================
 // 初期化処理
 //========================================================
-HRESULT CSearchIcon::Init(void)
+HRESULT CEnemyMarkIcon::Init(void)
 {
 	// 親クラスの初期化
-	CObject2D::Init();
+	CObject2DMulti::Init();
 
 	// 境界線の距離を設定
 	m_fRange = 60.0f;
-	m_isDraw = true;
 
 	return S_OK;
 }
 //========================================================
 // 終了処理
 //========================================================
-void CSearchIcon::Uninit(void)
+void CEnemyMarkIcon::Uninit(void)
 {
 	// 親クラスの終了処理
-	CObject2D::Uninit();
+	CObject2DMulti::Uninit();
 }
 //========================================================
 // 更新処理
 //========================================================
-void CSearchIcon::Update(void)
+void CEnemyMarkIcon::Update(void)
 {
+	// フラグ設定
 	if (!m_isDraw) return;
+
+	// 値のアップ設定
+
+
+
+
+
 
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -153,15 +162,15 @@ void CSearchIcon::Update(void)
 	SetPos(finalIconPos);
 
 	// 親クラスの更新処理
-	CObject2D::Update();
+	CObject2DMulti::Update();
 }
 //========================================================
 // 描画処理
 //========================================================
-void CSearchIcon::Draw(void)
+void CEnemyMarkIcon::Draw(void)
 {
 	if (!m_isDraw) return;
 
 	// 親クラスの描画処理
-	CObject2D::Draw();
+	CObject2DMulti::Draw();
 }

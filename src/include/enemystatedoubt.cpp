@@ -41,15 +41,23 @@ CEnemyStateDoubt::~CEnemyStateDoubt()
 //=========================================================
 void CEnemyStateDoubt::OnStart(void)
 {
-	// ui生成
+	// ui生成 ( ？のゲージ )
 	auto CreatePos = D3DXVECTOR3(m_pEnemy->GetPos().x, m_pEnemy->GetPos().y + 80.0f, m_pEnemy->GetPos().z);
-	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, 10.0f, 10.0f, "hatena.png", "gauge_enemyside.png");
+	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, 50.0f, 50.0f, "hatena.png", "gauge_enemyside.png");
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CEnemyStateDoubt::OnUpdate(void)
 {
+	// 位置の更新
+	if (m_pGauge && m_pEnemy)
+	{
+		D3DXVECTOR3 headPos = m_pEnemy->GetPos();
+		headPos.y += 80.0f;
+		m_pGauge->SetTargetPos(headPos);
+	}
+
 	// フラグoff
 	const auto& icon = m_pEnemy->GetChaseIcon();
 	if (icon)

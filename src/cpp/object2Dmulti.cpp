@@ -37,11 +37,10 @@ m_nColorCount(NULL),
 m_nDrawType(NULL),
 m_nIdxTexture(-1),
 m_apTexture{},
-m_nAnchorType(ANCHORTYPE_NONE)
+m_nAnchorType(ANCHORTYPE_CENTER)
 {
 
 }
-
 //==========================================================
 // デストラクタ
 //==========================================================
@@ -49,7 +48,6 @@ CObject2DMulti::~CObject2DMulti()
 {
 	m_apTexture.clear();
 }
-
 //==========================================================
 // 生成処理
 //==========================================================
@@ -78,7 +76,6 @@ CObject2DMulti* CObject2DMulti::Create
 
 	return pMulti;
 }
-
 //==========================================================
 // 初期化処理
 //==========================================================
@@ -135,7 +132,6 @@ HRESULT CObject2DMulti::Init(void)
 
 	return S_OK;
 }
-
 //==========================================================
 // 終了処理
 //==========================================================
@@ -154,7 +150,6 @@ void CObject2DMulti::Uninit(void)
 	// 自身の破棄
 	CObject::Release();
 }
-
 //==========================================================
 // 更新処理
 //==========================================================
@@ -176,10 +171,10 @@ void CObject2DMulti::Update(void)
 	pVtx[2].col = 
 	pVtx[3].col = m_col;
 
+
 	// アンロック
 	m_pVtxBuff->Unlock();
 }
-
 //==========================================================
 // 描画処理
 //==========================================================
@@ -214,15 +209,15 @@ void CObject2DMulti::Draw(void)
 		}
 		else
 		{
-			// 2枚目の設定
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_BLENDTEXTUREALPHA);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE); // 2枚目の赤
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT); // 1枚目の円
+			// 2枚目の色と1枚目の結果を乗算（カラー）
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLOROP, D3DTOP_MODULATE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG1, D3DTA_TEXTURE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_COLORARG2, D3DTA_CURRENT);
 
-			// 透明にする
+			// アルファ値も乗算
 			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_CURRENT);
-			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_TEXTURE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+			pDevice->SetTextureStageState(static_cast<DWORD>(nCnt), D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 		}
 	}
 
@@ -258,7 +253,6 @@ void CObject2DMulti::Draw(void)
 		pDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 	}
 }
-
 //==========================================================
 // アンカーポイントに合わせた座標設定
 //==========================================================
@@ -268,12 +262,18 @@ void CObject2DMulti::SetAnchorPoint(VERTEX_2D_MULTI* pVtx)
 	{
 	// 中心
 	case ANCHORTYPE_CENTER:
+	{
+		//ピクセル補正
+		float fLeft = m_pos.x - m_fWidth - 0.5f;
+		float fRight = m_pos.x + m_fWidth - 0.5f;
+		float fTop = m_pos.y - m_fHeight - 0.5f;
+		float fBottom = m_pos.y + m_fHeight - 0.5f;
 
-		pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
-		pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
-		pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
-		pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
-
+		pVtx[0].pos = D3DXVECTOR3(fLeft, fTop, 0.0f);
+		pVtx[1].pos = D3DXVECTOR3(fRight, fTop, 0.0f);
+		pVtx[2].pos = D3DXVECTOR3(fLeft, fBottom, 0.0f);
+		pVtx[3].pos = D3DXVECTOR3(fRight, fBottom, 0.0f);
+	}
 		break;
 
 	// 左寄り
@@ -316,9 +316,7 @@ void CObject2DMulti::SetAnchorPoint(VERTEX_2D_MULTI* pVtx)
 
 		break;
 	}
-
 }
-
 //==========================================================
 // テクスチャ設定
 //==========================================================
