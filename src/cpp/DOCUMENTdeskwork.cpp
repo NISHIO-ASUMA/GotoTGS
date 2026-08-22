@@ -23,6 +23,7 @@
 #include "tutorialobject.h"
 #include "tutoriallines.h"
 #include "particle.h"
+#include "receptionist.h"
 
 //*********************************************************
 // 名前空間(パーティクル)
@@ -170,5 +171,12 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
+
+		// 受付人に持たせる
+		CReceptionist* pReception = CGameSceneObject::GetInstance()->GetReception();
+		if (pReception == nullptr) return;
+
+		// 値をセットする
+		pReception->SetTaskPaperNum(GetDOCUMENTTaskNum());
 	}
 }

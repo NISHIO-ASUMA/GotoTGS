@@ -25,6 +25,7 @@
 //=========================================================
 CClient::CClient(int nPriority) : CNoMoveCharactor(nPriority),
 m_nChangeTime(NULL),
+m_isChange(false),
 m_pSphereCollider(nullptr)
 {
 

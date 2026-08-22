@@ -33,7 +33,8 @@ namespace RECEPTION_INFO
 //========================================================
 CReceptionist::CReceptionist(int nPriority) : CNoMoveCharactor(nPriority),
 m_pBoxColiider(nullptr),
-m_pSphereColiider(nullptr)
+m_pSphereColiider(nullptr),
+m_nGetTaskPaperNum(NULL)
 {
 }
 //========================================================

@@ -42,19 +42,19 @@ CEnemyStateDoubt::~CEnemyStateDoubt()
 void CEnemyStateDoubt::OnStart(void)
 {
 	// ui生成 ( ？のゲージ )
-	auto CreatePos = D3DXVECTOR3(m_pEnemy->GetPos().x, m_pEnemy->GetPos().y + 80.0f, m_pEnemy->GetPos().z);
-	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, 50.0f, 50.0f, "hatena.png", "gauge_enemyside.png");
+	auto CreatePos = D3DXVECTOR3(m_pEnemy->GetPos().x, m_pEnemy->GetPos().y + Config::VALUE_HEIGHT, m_pEnemy->GetPos().z);
+	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE, "hatena.png", "gauge_enemyside.png");
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CEnemyStateDoubt::OnUpdate(void)
 {
-	// 位置の更新
+	// 頭上のゲージの位置の更新
 	if (m_pGauge && m_pEnemy)
 	{
 		D3DXVECTOR3 headPos = m_pEnemy->GetPos();
-		headPos.y += 80.0f;
+		headPos.y += Config::VALUE_HEIGHT;
 		m_pGauge->SetTargetPos(headPos);
 	}
 
@@ -77,7 +77,7 @@ void CEnemyStateDoubt::OnUpdate(void)
 		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT, true, 3);
 
 		// この時にレベルを徐徐に加算する
-		m_pEnemy->AddLevel(0.1f);
+		m_pEnemy->AddLevel(0.2f);
 	}
 	else
 	{
@@ -106,9 +106,9 @@ void CEnemyStateDoubt::OnUpdate(void)
 //=========================================================
 void CEnemyStateDoubt::OnExit(void)
 {
-	// リセット
+	// カウントリセット
 	m_nDoubtCount = 0;
 
-	// 破棄する
+	// uiを破棄する
 	m_pGauge->Uninit();
 }

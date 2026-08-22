@@ -11,6 +11,14 @@
 #include "overworkman.h"
 #include "motion.h"
 
+//*********************************************************
+// 定数名前空間
+//*********************************************************
+namespace OverWorkInfo
+{
+	constexpr const char* SCRIPT = "data/MOTION/Player/LoseResultPlayerMotion.txt";
+};
+
 //========================================================
 // コンストラクタ
 //========================================================
@@ -53,7 +61,7 @@ HRESULT COverWorkMan::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーションロード
-	MotionLoad("data/MOTION/Player/LoseResultPlayerMotion.txt", MOTION::MAX, true);
+	MotionLoad(OverWorkInfo::SCRIPT, MOTION::MAX, true);
 
 	// モーションセット
 	GetMotion()->SetMotion(MOTION::DEATH, true, 3,false);

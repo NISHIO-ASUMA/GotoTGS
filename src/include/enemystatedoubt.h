@@ -43,5 +43,7 @@ private:
 	struct Config
 	{
 		static constexpr int MAX_DOUBT_COUNT = 120; // 2•b”»’è
+		static constexpr float VALUE_HEIGHT = 80.0f;
+		static constexpr float SIZE = 50.0f;
 	};
 };

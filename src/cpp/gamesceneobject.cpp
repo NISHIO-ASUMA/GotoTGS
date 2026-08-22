@@ -57,7 +57,7 @@
 #include "gaugeneedle.h"
 #include "fade.h"
 #include "result.h"
-#include <searchicon.h>
+#include "searchicon.h"
 
 //*********************************************************
 // 定数名前空間
@@ -171,9 +171,9 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
-//**********************************
+//*********************************************
 // ADD 西尾 : クラスに格納するポインタ等の設定
-//**********************************
+//*********************************************
 	// ドア用UIの生成
 	CDoorUI::Create(m_pPlayer);
 

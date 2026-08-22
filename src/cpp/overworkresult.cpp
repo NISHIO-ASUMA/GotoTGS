@@ -66,8 +66,10 @@ void COverWorkResult::Update(void)
 	// フェード取得
 	CFade* pFade = CManager::GetInstance()->GetFade();
 
-	// トリガーで遷移
-	if (pFade != nullptr && (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_RETURN) ||
+	// シーン遷移
+	if (pFade != nullptr && 
+		(CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_RETURN) ||
+		CManager::GetInstance()->GetMouse()->GetTriggerDown(CInputMouse::MOUSE_LEFT) ||
 		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A) || 
 		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START)))
 	{
