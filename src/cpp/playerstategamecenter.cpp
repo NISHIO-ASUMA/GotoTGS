@@ -72,7 +72,6 @@ void CPlayerStateGameCenter::OnUpdate()
 		m_pPlayer->ChangeState(new CPlayerStateNeutral(), ID_NEUTRAL);
 	}
 }
-
 //=========================================================
 // èÛë‘èIóπ
 //=========================================================

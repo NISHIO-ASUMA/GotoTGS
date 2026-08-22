@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "number.h"
 #include "template.h"
+#include "camera.h"
 
 //=========================================================
 // コンストラクタ
@@ -171,6 +172,12 @@ void CGametime::Uninit(void)
 //=========================================================
 void CGametime::Update(void)
 {
+	// アニメーション中なら
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	{
+		return;
+	}
+
 	// 最大時間が0なら処理を通さない
 	if (m_nAllTime <= 0)
 	{

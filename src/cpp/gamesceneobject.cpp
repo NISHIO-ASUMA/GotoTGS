@@ -185,6 +185,8 @@ HRESULT CGameSceneObject::Init(void)
 	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
+	//// アニメーション再生関数を設定する
+	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 	return S_OK;
 }
 

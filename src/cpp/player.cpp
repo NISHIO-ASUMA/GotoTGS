@@ -203,6 +203,17 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
+	// 更新だけしてreturn
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	{
+		// ui表示の設定
+		UpdateAfkUiState();
+
+		// 親クラスの更新
+		CMoveCharactor::Update();
+		return;
+	}
+
 	// もし上司に捕まってしまったら
 	if (m_isCatchEnemy == true)
 	{

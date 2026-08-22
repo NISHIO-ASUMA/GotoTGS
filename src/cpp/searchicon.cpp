@@ -70,7 +70,6 @@ HRESULT CSearchIcon::Init(void)
 
 	// 境界線の距離を設定
 	m_fRange = 60.0f;
-	m_isDraw = true;
 
 	return S_OK;
 }
@@ -113,7 +112,7 @@ void CSearchIcon::Update(void)
 	// 画面中心からターゲットへの方向ベクトル
 	D3DXVECTOR2 dir(screenPos.x - fCenterX, screenPos.y - fCenterY);
 
-	// カメラの後方に敵がいる場合、負の設定
+	// カメラの後方にいる場合、負の設定
 	if (screenPos.z > 1.0f || screenPos.z < 0.0f)
 	{
 		dir *= -1.0f;

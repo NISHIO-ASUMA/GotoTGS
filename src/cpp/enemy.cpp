@@ -33,6 +33,7 @@
 #include "jsonmanager.h"
 #include "template.h"
 #include "particle.h"
+#include "camera.h"
 #include "enemyutility.h"
 
 //*********************************************************
@@ -174,6 +175,13 @@ void CEnemy::Uninit(void)
 //========================================================
 void CEnemy::Update(void)
 {
+	// アニメーション中なら
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	{
+		UpdateMotionOnly();
+		return;
+	}
+
 	// ステートの更新
 	m_pMachine->Update();
 

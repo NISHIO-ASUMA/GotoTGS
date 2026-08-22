@@ -706,8 +706,8 @@ void CCamera::UpdateAnim(void)
 				m_pCamera.nCntAnim = 0;
 				m_isAnimating = false;
 
-				// 編集モード
-				SetMode(MODE_NONE);
+				//// 編集モード
+				//SetMode(MODE_THIRD);
 			}
 		}
 	}
@@ -824,6 +824,9 @@ HRESULT CCamera::LoadAnimation(const std::string& path)
 	{
 		// 現在のデータに入れる
 		m_currentAnim = tempAnim;
+		m_isAnimating = true;
+		m_pCamera.nMode = CCamera::MODE_ANIM;
+
 		return S_OK;
 	}
 
