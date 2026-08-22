@@ -132,6 +132,9 @@ HRESULT CGameSceneObject::Init(void)
 	// テレビ用ポリゴンの生成
 	CAfkTVPolygon::Create();
 
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
+
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
@@ -144,8 +147,6 @@ HRESULT CGameSceneObject::Init(void)
 	// ゲーセンの上のビル
 	CBlock::Create(D3DXVECTOR3(1656.0f, 322.0f, 122.0f), VECTOR3_NULL, D3DXVECTOR3(0.85f, 0.25f, 1.85f), "STAGEOBJ/bill01.x");
 
-	// プレイヤー生成
-	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
 	// 敵管理クラス生成
 	CEnemyManager::GetInstance()->Init(m_pPlayer);
@@ -318,7 +319,7 @@ void CGameSceneObject::CreatePointer(void)
 	m_pBlocks->Init();
 
 	// タスクの生成 Misaki
-	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f),m_pPlayer);
 
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);

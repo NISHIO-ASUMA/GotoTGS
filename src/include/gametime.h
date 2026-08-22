@@ -38,7 +38,7 @@ public:
 		static constexpr int DIVIDE = 10;						// 桁分割の値
 		static constexpr int CARVETIME = 60;					// カウント上限
 #ifdef _DEBUG
-		static constexpr int NUMTIME = 40;						// 最大タイマー
+		static constexpr int NUMTIME = 300;						// 最大タイマー ( デバッグ状態時 )
 #else
 		static constexpr int NUMTIME = 150;						// 最大タイマー ( 一旦2分半で見てみる )
 #endif // _DEBUG

@@ -88,7 +88,7 @@ HRESULT CTutorialObject::Init(void)
 	m_plines->SetPlayer(m_pTutoPlayer);
 
 	// É^ÉXÉNÇÃê∂ê¨ Misaki
-	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f), nullptr);
 
 	return S_OK;
 }

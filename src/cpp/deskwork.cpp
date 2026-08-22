@@ -33,7 +33,8 @@ CWorldUICollision::TYPE CDeskwork::m_TaskType = CWorldUICollision::TYPE_NONE;
 CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
 m_pPCDeskUI(nullptr),
 m_pCOPYDeskUI(nullptr),
-m_pDOCUMENTDesk(nullptr)
+m_pDOCUMENTDesk(nullptr),
+m_pPlayer(nullptr)
 {
 
 }
@@ -49,7 +50,7 @@ CDeskwork::~CDeskwork()
 //=========================================================
 // 生成処理処理
 //=========================================================
-CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
+CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos,CPlayer * pPlayer)
 {
 	// ポインタ生成
 	CDeskwork* pDeskwork = new CDeskwork;
@@ -62,6 +63,7 @@ CDeskwork* CDeskwork::Create(const D3DXVECTOR3& pos)
 	pDeskwork->SetSize(Config::PC_WIDTH, Config::PC_HEIGHT);	// サイズ設定
 	pDeskwork->SetCol(COLOR_WHITE);								// カラー設定
 	pDeskwork->SetTexture(Config::PC_TEXNAME);					// テクスチャ設定
+	pDeskwork->SetPtrForOutPlayer(pPlayer);
 
 	// 初期化が失敗した場合
 	if (FAILED(pDeskwork->Init())) return nullptr;
@@ -87,12 +89,15 @@ HRESULT CDeskwork::Init(void)
 
 	// PCタスクUIの生成
 	m_pPCDeskUI = CPCDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT - Config::PC_VALUE_Y, 0.0f));
+	m_pPCDeskUI->SetPlayerPointer(m_pPlayer);
 
 	// コピー機タスクUIの生成
 	m_pCOPYDeskUI = CCOPYDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + Config::COPY_VALUE_Y, 0.0f));
+	m_pCOPYDeskUI->SetPlayerPointer(m_pPlayer);
 
 	// 書類タスクの生成
 	m_pDOCUMENTDesk = CDOCUMENTDeskwork::Create();
+	m_pDOCUMENTDesk->SetPlayerPointer(m_pPlayer);
 
 	// タスクをしていない状態にする
 	m_TaskType = CWorldUICollision::TYPE_NONE;

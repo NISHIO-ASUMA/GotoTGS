@@ -140,7 +140,7 @@ HRESULT CEnemy::Init(void)
 	}
 
 	// アイコン生成
-	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,10.0f,10.0f,"ui_chaseicon.png");
+	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,20.0f,20.0f,"ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
 
 	// 初期値を設定

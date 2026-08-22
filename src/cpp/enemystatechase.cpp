@@ -70,8 +70,9 @@ void CEnemyStateChase::OnUpdate(void)
 		// 2•bŠÔŒo‰ß‚µ‚½‚çƒjƒ…[ƒgƒ‰ƒ‹‚Ö‘JˆÚ
 		if (m_nStayCount >= 120)
 		{
+			m_pEnemy->StartChase(false);	// ƒtƒ‰ƒO‰Šú‰»
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
-			m_pEnemy->StartChase(false);
+			return;
 		}
 		return; // ’â~ˆÛ
 	}
