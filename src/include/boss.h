@@ -25,6 +25,9 @@
 //*********************************************************
 class CSphereCollider;
 class CBoxCollider;
+class CBillboard;
+class CPlayer;
+class CStateMachine;
 
 //*********************************************************
 // ボスキャラクタークラスを定義
@@ -46,6 +49,9 @@ public:
 
 	void DrawEyeSight(void);
 	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+	void SetCharactorPointer(CPlayer* pCharactor) { m_pDestCharactor = pCharactor; }
+
+	bool GetInOfficeFlag(void) { return m_isOfficeMove; }
 
 	/// <summary>
 	/// 生成処理
@@ -63,7 +69,10 @@ public:
 	enum MOTION
 	{
 		NEUTRAL,	// ニュートラル
-		MOVE,		// 移動	
+		MOVE,		// 移動
+		DOUBT,		// 疑い
+		CHASEDASH,	// 追いかけモーション
+		CATCH,		// 捕まえるモーション
 		MAX
 	};
 
@@ -84,7 +93,7 @@ private:
 	struct Eyesight
 	{
 		static constexpr float EYE_RADIUS = 100.0f;		// 視界の届く距離
-		static constexpr float EYE_ANGLE = 45.0f;		// 視野角
+		static constexpr float EYE_ANGLE = 60.0f;		// 視野角
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
@@ -93,11 +102,17 @@ private:
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
 
 private:
-	int m_nViewIdx;							// ビューポイントの巡回インデックス番号
-	int m_nOfficeViewIdx;					// オフィス内の巡回インデックス番号
-	int m_nCoolTime;						// セットポジションについた時のクールタイム
+	int m_nViewIdx;										// ビューポイントの巡回インデックス番号
+	int m_nOfficeViewIdx;								// オフィス内の巡回インデックス番号
+	int m_nCoolTime;									// セットポジションについた時のクールタイム
 
 private:
-	bool m_isOutSideIn;						// 外から移動しているフラグ
-	bool m_isOfficeMove;					// オフィス内で移動するフラグ
+	bool m_isOutSideIn;									// 外から移動しているフラグ
+	bool m_isOfficeMove;								// オフィス内で移動するフラグ
+
+private:
+	CBillboard* m_pChaseIcon;							// 追いかけアイコン
+	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
+	CPlayer* m_pDestCharactor;							// 判定先のキャラクターポインタ
+	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
 };

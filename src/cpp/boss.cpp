@@ -13,10 +13,13 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
+#include "manager.h"
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "template.h"
-#include "manager.h"
+#include "billboard.h"
+#include "statemachine.h"
+#include "player.h"
 
 //*********************************************************
 // 定数名前空間
@@ -79,7 +82,11 @@ m_nViewIdx(NULL),
 m_nOfficeViewIdx(NULL),
 m_nCoolTime(NULL),
 m_isOutSideIn(true),
-m_isOfficeMove(false)
+m_isOfficeMove(false),
+m_pChaseIcon(nullptr),
+m_pDestCharactor(nullptr),
+m_playerTargetPos(VECTOR3_NULL),
+m_pMachine(nullptr)
 {
 
 }
@@ -121,6 +128,10 @@ HRESULT CBoss::Init(void)
 	// モーションロード
 	MotionLoad("data/MOTION/Boss/BossMotion.txt", MOTION::MAX, false);
 
+	// アイコン生成
+	m_pChaseIcon = CBillboard::Create(GetPos(), VECTOR3_NULL, 20.0f, 20.0f, "ui_chaseicon.png");
+	m_pChaseIcon->SetDrawFlags(false);
+
 	return S_OK;
 }
 //========================================================
@@ -145,50 +156,6 @@ void CBoss::Update(void)
 	if (m_isOfficeMove)
 		MoveOfficePoint(pos); // オフィス内で巡回する処理
 
-#if 0
-	// 取得
-	auto pos = GetPos();
-
-	// 移動処理
-	D3DXVECTOR3 vec = BOSS_INFO::Destpos - pos;
-
-	// 目的地までの距離を計算
-	float distance = D3DXVec3Length(&vec);
-
-	// 到着判定
-	if (distance <= 5.0f)
-	{
-		// 座標を目的地に合わせる
-		SetPos(BOSS_INFO::Destpos);
-
-		// 目的地に到着した瞬間にモーションを切り替える
-		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
-		return;
-	}
-
-	// ベクトルを正規化
-	D3DXVECTOR3 moveVec;
-	D3DXVec3Normalize(&moveVec, &vec);
-
-	// 移動量
-	moveVec *= 2.0f;
-	SetMove(moveVec);
-
-	// 移動モーションを設定
-	GetMotion()->SetMotion(MOTION::MOVE);
-
-	// 角度を計算
-	float angleY = atan2(-moveVec.x, -moveVec.z);
-
-	// 現在の目標角度
-	D3DXVECTOR3 rotDest = GetRotDest();
-
-	// 角度を正規化
-	rotDest.y = NormalAngle(angleY);
-
-	// 目標角度をセット
-	SetRotDest(rotDest);
-#endif
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
 
@@ -208,8 +175,7 @@ void CBoss::Draw(void)
 
 	if (!m_isOfficeMove) return;
 
-	// 扇形の描画処理
-
+	// TODO : ボスに捕まるかどうかを決める
 }
 //========================================================
 // 扇形の描画処理
@@ -419,7 +385,7 @@ void CBoss::MoveInOffice(const D3DXVECTOR3& pos)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.0f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -442,6 +408,9 @@ void CBoss::MoveInOffice(const D3DXVECTOR3& pos)
 //========================================================
 void CBoss::MoveOfficePoint(const D3DXVECTOR3& pos)
 {
+	// 外から移動の時はreturn
+	if (!m_isOutSideIn) return;
+
 	// 停止カウント中の処理
 	if (m_nCoolTime > 0)
 	{
@@ -484,7 +453,7 @@ void CBoss::MoveOfficePoint(const D3DXVECTOR3& pos)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.0f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定

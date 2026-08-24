@@ -144,6 +144,7 @@ void CWalkFriend::Update(void)
 		CMoveCharactor::Update();
 		return;
 	}
+
 	// ŠeˆÚ“®•ûŒü‚É‰‚¶‚½ˆ—
 	UpdateMovingType();
 
