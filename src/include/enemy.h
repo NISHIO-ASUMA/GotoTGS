@@ -61,20 +61,6 @@ public:
 		MOVETYPE_MAX
 	};
 
-	//***************************
-	// “G‚ÌƒŒƒxƒ‹
-	//***************************
-	enum LEVEL_SYSTEM
-	{
-		LEVEL_SYSTEM_0,
-		LEVEL_SYSTEM_1,
-		LEVEL_SYSTEM_2,
-		LEVEL_SYSTEM_3,
-		LEVEL_SYSTEM_4,
-		LEVEL_SYSTEM_5,
-		LEVEL_SYSTEM_MAX
-	};
-
 public:
 
 	CEnemy(int nPriority = static_cast<int>(CObject::PRIORITY::CHARACTOR));

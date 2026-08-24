@@ -420,6 +420,7 @@ void CEnemy::UpdateMovingTV(void)
 
 	// 目的地へのベクトルを計算
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
 
 	// 目的地までの距離を計算
 	float distance = D3DXVec3Length(&vecToTarget);

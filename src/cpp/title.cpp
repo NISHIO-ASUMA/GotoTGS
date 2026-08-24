@@ -61,7 +61,7 @@ HRESULT CTitle::Init(void)
 //=========================================================
 void CTitle::Uninit(void)
 {
-	// mマネージャー終了処理
+	// マネージャー終了処理
 	CTitleManager::GetInstance()->Uninit();
 
 	// タイトルオブジェクト終了処理
