@@ -64,9 +64,9 @@ CSmokeFriend* CSmokeFriend::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& ro
 	// オブジェクト設定
 	pSmoke->SetPos(pos);
 	pSmoke->SetRot(rot);
-	pSmoke->m_pMotionName = Path;
 	pSmoke->SetUseOutLine(true);
 	pSmoke->SetOutLineColor(D3DXVECTOR4(1.0f,0.0f,1.0f,1.0f));
+	pSmoke->m_pMotionName = Path;
 
 	// 初期化失敗時
 	if (FAILED(pSmoke->Init())) return nullptr;
