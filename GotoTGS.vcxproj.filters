@@ -894,9 +894,6 @@
     <ClCompile Include="src\cpp\gaugeneedle.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Progressgauge</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\vigilancelevel.cpp">
-      <Filter>ソース ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\receptionist.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\Reception</Filter>
     </ClCompile>
@@ -1465,9 +1462,6 @@
     </ClInclude>
     <ClInclude Include="src\include\gaugeneedle.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Progressgauge</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\vigilancelevel.h">
-      <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
     </ClInclude>
     <ClInclude Include="src\include\receptionist.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Reception</Filter>
