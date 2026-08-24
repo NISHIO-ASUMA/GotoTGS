@@ -28,6 +28,7 @@ class CBoxCollider;
 class CBillboard;
 class CPlayer;
 class CStateMachine;
+class CBossStateBase;
 
 //*********************************************************
 // ボスキャラクタークラスを定義
@@ -46,12 +47,18 @@ public:
 
 	void MoveInOffice(const D3DXVECTOR3& pos);
 	void MoveOfficePoint(const D3DXVECTOR3& pos);
+	void NormalMoving(void);
+	void ChangeState(CBossStateBase* pState, int nID);
 
 	void DrawEyeSight(void);
 	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+	bool CheckRayToAngleRange(void);
+	bool CheckObstacle(void);
+
 	void SetCharactorPointer(CPlayer* pCharactor) { m_pDestCharactor = pCharactor; }
 
 	bool GetInOfficeFlag(void) { return m_isOfficeMove; }
+	CBillboard* GetChaseIcon(void) { return m_pChaseIcon; }
 
 	/// <summary>
 	/// 生成処理
@@ -92,8 +99,8 @@ private:
 	//***************************
 	struct Eyesight
 	{
-		static constexpr float EYE_RADIUS = 100.0f;		// 視界の届く距離
-		static constexpr float EYE_ANGLE = 60.0f;		// 視野角
+		static constexpr float EYE_RADIUS = 300.0f;		// 視界の届く距離
+		static constexpr float EYE_ANGLE = 90.0f;		// 視野角
 		static constexpr float EYE_HEIGHT = 50.0f;		// 視界の高さ制限
 	};
 
@@ -109,6 +116,9 @@ private:
 private:
 	bool m_isOutSideIn;									// 外から移動しているフラグ
 	bool m_isOfficeMove;								// オフィス内で移動するフラグ
+
+private:
+	float m_fEyeAngle;									// 角度値
 
 private:
 	CBillboard* m_pChaseIcon;							// 追いかけアイコン

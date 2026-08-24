@@ -20,6 +20,10 @@
 #include "billboard.h"
 #include "statemachine.h"
 #include "player.h"
+#include "blockmanager.h"
+#include "jsonmanager.h"
+#include "bossstatebase.h"
+#include "bossstateneutral.h"
 
 //*********************************************************
 // 定数名前空間
@@ -86,7 +90,8 @@ m_isOfficeMove(false),
 m_pChaseIcon(nullptr),
 m_pDestCharactor(nullptr),
 m_playerTargetPos(VECTOR3_NULL),
-m_pMachine(nullptr)
+m_pMachine(nullptr),
+m_fEyeAngle(NULL)
 {
 
 }
@@ -128,9 +133,18 @@ HRESULT CBoss::Init(void)
 	// モーションロード
 	MotionLoad("data/MOTION/Boss/BossMotion.txt", MOTION::MAX, false);
 
+	// ステート生成
+	m_pMachine = new CStateMachine;
+
+	// ステート設定
+	ChangeState(new CBossStateNeutral(), CBossStateBase::ID_NEUTRAL);
+
 	// アイコン生成
 	m_pChaseIcon = CBillboard::Create(GetPos(), VECTOR3_NULL, 20.0f, 20.0f, "ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
+
+	// アングル設定
+	m_fEyeAngle = Eyesight::EYE_ANGLE;
 
 	return S_OK;
 }
@@ -139,6 +153,14 @@ HRESULT CBoss::Init(void)
 //========================================================
 void CBoss::Uninit(void)
 {
+	// ステートマシンの破棄
+	if (m_pMachine)
+	{
+		m_pMachine->OnExit();
+		delete m_pMachine;
+		m_pMachine = nullptr;
+	}
+
 	// キャラクター終了
 	CMoveCharactor::Uninit();
 }
@@ -147,14 +169,14 @@ void CBoss::Uninit(void)
 //========================================================
 void CBoss::Update(void)
 {
-	// 現在地の座標を取得
-	auto pos = GetPos();
+	//// 現在地の座標を取得
+	//auto pos = GetPos();
 
-	if (m_isOutSideIn)
-		MoveInOffice(pos); // オフィス内に来る
+	//if (m_isOutSideIn)
+	//	MoveInOffice(pos); // オフィス内に来る
 
-	if (m_isOfficeMove)
-		MoveOfficePoint(pos); // オフィス内で巡回する処理
+	//if (m_isOfficeMove)
+	//	MoveOfficePoint(pos); // オフィス内で巡回する処理
 
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
@@ -470,4 +492,194 @@ void CBoss::MoveOfficePoint(const D3DXVECTOR3& pos)
 
 	// 目標角度をセット
 	SetRotDest(rotDest);
+}
+//========================================================
+// 移動処理関連の関数
+//========================================================
+void CBoss::NormalMoving(void)
+{
+	// 現在地の座標を取得
+	auto pos = GetPos();
+
+	if (m_isOutSideIn)
+		MoveInOffice(pos); // オフィス内に来る
+
+	if (m_isOfficeMove)
+		MoveOfficePoint(pos); // オフィス内で巡回する処理
+}
+//========================================================
+// ステート変更処理
+//========================================================
+void CBoss::ChangeState(CBossStateBase* pState, int nID)
+{
+	// 自分自身のポインタを設定
+	pState->SetOwner(this);
+
+	// IDの設定
+	pState->SetID(nID);
+
+	// ステート変更
+	m_pMachine->ChangeState(pState);
+}
+//========================================================
+// 本来の敵から見えるプレイヤーとの視界判定
+//========================================================
+bool CBoss::CheckRayToAngleRange(void)
+{
+	// nullなら
+	if (!m_pDestCharactor) return false;
+
+	// 初期のタスク時間なら
+	if (!m_pDestCharactor->GetIsInitTasking())
+		return false;
+
+	// タスク中の時間だったら
+	if (m_pDestCharactor->GetIsPcWorking() || m_pDestCharactor->GetIsCopyWorking())
+		return false;
+
+	// 自身の座標とターゲットへの座標
+	D3DXVECTOR3 myPos = GetPos();
+	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 高低差判定
+	float heightDiff = fabsf(targetPos.y - myPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT)
+	{
+		return false;
+	}
+
+	// 距離制限
+	D3DXVECTOR3 diff = targetPos - myPos;
+	diff.y = 0.0f;
+
+	float distance = D3DXVec3Length(&diff);
+	if (distance > Eyesight::EYE_RADIUS || distance <= 0.0001f)
+	{
+		return false; // 視界距離外
+	}
+
+	// 敵正面ベクトルを算出
+	D3DXMATRIX matRot;
+	D3DXMatrixRotationYawPitchRoll(&matRot, GetRot().y, GetRot().x, GetRot().z);
+	D3DXVECTOR3 forward(-matRot._31, 0.0f, -matRot._33);
+	D3DXVec3Normalize(&forward, &forward);
+
+	// ターゲットへのベクトルを算出・正規化
+	D3DXVECTOR3 dirToTarget;
+	D3DXVec3Normalize(&dirToTarget, &diff);
+
+	// 角度と内積計算
+	float halfAngleRad = D3DXToRadian(m_fEyeAngle * 0.5f);
+	float thresholdDot = cosf(halfAngleRad);
+
+	// 内積を計算
+	float dot = D3DXVec3Dot(&forward, &dirToTarget);
+
+	// 内積がしきい値より小さい
+	if (dot < thresholdDot)
+	{
+		return false; // 視野角の外
+	}
+
+	// 障害物判定
+	if (CheckObstacle())
+	{
+		return false; // 障害物に遮られている
+	}
+
+	return true; // 視界内にプレイヤーを発見
+}
+//========================================================
+// 判別する際に障害物が存在しているかどうか
+//========================================================
+bool CBoss::CheckObstacle(void)
+{
+	// ブロック管理クラスの取得
+	CBlockManager* pManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (!pManager) return false;
+
+	// 始点と終点
+	D3DXVECTOR3 rayStart = GetPos();
+	D3DXVECTOR3 rayEnd = m_pDestCharactor->GetPos();
+
+	// 目線の高さ補正
+	rayStart.y += 20.0f;
+	rayEnd.y += 20.0f;
+
+	// レイの方向ベクトルと距離を計算
+	D3DXVECTOR3 rayDir = rayEnd - rayStart;
+	float maxDistance = D3DXVec3Length(&rayDir);
+	if (maxDistance <= 0.0001f) return false;
+
+	// 正規化
+	D3DXVec3Normalize(&rayDir, &rayDir);
+
+	// 登録されている全ブロックとの衝突確認
+	int blockCount = pManager->GetAll();
+	for (int nCnt = 0; nCnt < blockCount; nCnt++)
+	{
+		// 単ブロックを取得
+		CBlock* pBlock = pManager->GetBlock(nCnt);
+		if (!pBlock) continue;
+
+		// CBlockからコライダーを取得
+		auto* pBoxCollider = pBlock->GetCollider();
+		if (!pBoxCollider) continue;
+
+		// ブロックのAABB座標範囲を取得
+		D3DXVECTOR3 bPos = pBlock->GetPos();
+		D3DXVECTOR3 bScale = pBlock->GetScale();
+
+		D3DXVECTOR3 minBound = bPos - (bScale * 0.5f);
+		D3DXVECTOR3 maxBound = bPos + (bScale * 0.5f);
+
+		// 線分の交差判定
+		float tMin = 0.0f;
+		float tMax = maxDistance;
+
+		bool hit = true;
+
+		for (int axis = 0; axis < 3; ++axis)
+		{
+			float origin = ((float*)&rayStart)[axis];
+			float dir = ((float*)&rayDir)[axis];
+			float bMin = ((float*)&minBound)[axis];
+			float bMax = ((float*)&maxBound)[axis];
+
+			if (fabsf(dir) < 0.00001f)
+			{
+				// レイがこの軸と平行な場合、軸上の範囲外にあれば衝突しない
+				if (origin < bMin || origin > bMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+			else
+			{
+				float invD = 1.0f / dir;
+				float t1 = (bMin - origin) * invD;
+				float t2 = (bMax - origin) * invD;
+
+				if (t1 > t2) std::swap(t1, t2);
+
+				tMin = (t1 > tMin) ? t1 : tMin;
+				tMax = (t2 < tMax) ? t2 : tMax;
+
+				if (tMin > tMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+		}
+
+		// 障害物が存在する
+		if (hit)
+		{
+			return true; // 障害物あり
+		}
+	}
+
+	return false; // 障害物なし
 }
