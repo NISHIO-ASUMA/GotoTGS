@@ -102,9 +102,6 @@ void COutsideWork::SetOutside(void)
 {
 	// 外出できる状態にする
 	bGoOut = true;
-
-	// タスク中の状態にする
-	bTask = true;
 }
 
 //=========================================================
@@ -119,14 +116,14 @@ void COutsideWork::GoOut(void)
 	//CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 	//if (pScore == nullptr || pGaugeneedle == nullptr) return;
 
-	//// タスク中ではないなら
+	//// タスク中なら
 	//if (bTask != false)
 	//{
 	//	// 書類タスクの数の加算処理
 	//	AddDOCUMENTTask();
 
-	//	// 外出できない状態にする
-	//	bGoOut = false;
+	//	// タスクできない状態にする
+	//	bTask = false;
 
 	//	return;
 	//}
