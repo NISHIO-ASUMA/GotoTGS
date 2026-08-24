@@ -1,6 +1,6 @@
 //=========================================================
 //
-// プレイヤーを疑っている状態のクラス [ enemystatedoubt.cpp ]
+// 社長がプレイヤーを疑っている状態のクラス [ bossstatedoubt.cpp ]
 // Author: Asuma Nishio
 //
 //=========================================================
@@ -8,21 +8,21 @@
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "enemystatedoubt.h"
+#include "bossstatedoubt.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "enemy.h"
+#include "boss.h"
 #include "manager.h"
-#include "enemystateneutral.h"
-#include "enemystatechase.h"
+#include "bossstateneutral.h"
 #include "billboard.h"
+//#include "bossstatechase.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEnemyStateDoubt::CEnemyStateDoubt() : CEnemyStateBase(),
+CBossStateDoubt::CBossStateDoubt() : CBossStateBase(),
 m_nDoubtCount(0),
 m_pGauge(nullptr)
 {
@@ -32,39 +32,39 @@ m_pGauge(nullptr)
 //=========================================================
 // デストラクタ
 //=========================================================
-CEnemyStateDoubt::~CEnemyStateDoubt()
+CBossStateDoubt::~CBossStateDoubt()
 {
 
 }
 //=========================================================
 // 開始関数
 //=========================================================
-void CEnemyStateDoubt::OnStart(void)
+void CBossStateDoubt::OnStart(void)
 {
-	// ui生成 ( ？のゲージ )
-	auto CreatePos = D3DXVECTOR3(m_pEnemy->GetPos().x, m_pEnemy->GetPos().y + Config::VALUE_HEIGHT, m_pEnemy->GetPos().z);
+	// ui生成 ( ?のゲージ )
+	auto CreatePos = D3DXVECTOR3(m_pBoss->GetPos().x, m_pBoss->GetPos().y + Config::VALUE_HEIGHT, m_pBoss->GetPos().z);
 	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE, "hatena.png", "gauge_enemyside.png");
 }
 //=========================================================
 // 更新関数
 //=========================================================
-void CEnemyStateDoubt::OnUpdate(void)
+void CBossStateDoubt::OnUpdate(void)
 {
 	// 頭上のゲージの位置の更新
-	if (m_pGauge && m_pEnemy)
+	if (m_pGauge && m_pBoss)
 	{
-		D3DXVECTOR3 headPos = m_pEnemy->GetPos();
+		D3DXVECTOR3 headPos = m_pBoss->GetPos();
 		headPos.y += Config::VALUE_HEIGHT;
 		m_pGauge->SetTargetPos(headPos);
 	}
 
 	// フラグoff
-	const auto& icon = m_pEnemy->GetChaseIcon();
+	const auto& icon = m_pBoss->GetChaseIcon();
 	if (icon)
 		icon->SetDrawFlags(false);
 
 	// もし視界内に入っていたら
-	if (m_pEnemy->CheckRayToAngleRange())
+	if (m_pBoss->CheckRayToAngleRange())
 	{
 		// カウントを加算
 		m_nDoubtCount++;
@@ -74,21 +74,18 @@ void CEnemyStateDoubt::OnUpdate(void)
 		m_pGauge->SetUpGauge(true);
 
 		// 疑いモーションセット
-		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT, true, 3);
-
-		// この時にレベルを徐徐に加算する
-		m_pEnemy->AddLevel(0.2f);
+		m_pBoss->GetMotion()->SetMotion(CBoss::MOTION::DOUBT, true, 3);
 	}
 	else
 	{
 		// ゲージのクリア
 		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0040f);
+		m_pGauge->SetRatio(0.0020f);
 
 		// もし完全クリアなら状態を元に戻す
 		if (m_pGauge->GetNormalFlag())
 		{
-			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
+			m_pBoss->ChangeState(new CBossStateNeutral(), ID_NEUTRAL);
 			return;
 		}
 	}
@@ -97,14 +94,14 @@ void CEnemyStateDoubt::OnUpdate(void)
 	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && m_pGauge->GetIsComplete())
 	{
 		// 猛追ステートに変更する
-		m_pEnemy->ChangeState(new CEnemyStateChase(), ID_CHASE);
+		// m_pBoss->ChangeState(new CBossStateChase(), ID_CHASE);
 		return;
 	}
 }
 //=========================================================
 // 終了関数
 //=========================================================
-void CEnemyStateDoubt::OnExit(void)
+void CBossStateDoubt::OnExit(void)
 {
 	// カウントリセット
 	m_nDoubtCount = 0;
