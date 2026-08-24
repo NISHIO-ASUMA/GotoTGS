@@ -57,8 +57,6 @@ public:
 	};
 
 private:
-
-private:
 	int m_nChangeCount;			// モーション切り替えカウント
 	int m_nNextChangeCount;		// 次の変更までのカウント
 	int m_nLoopCount;			// 現在のモーション再生回数
