@@ -151,6 +151,7 @@ public:
 	bool GetIsLazy(void) { return m_isEnableLazy; }
 	bool GetIsTaskOutSide(void) { return m_isSetOutSideTask; }
 	bool GetIsPcWorking(void) { return m_isPcWork; }
+	bool GetIsCopyWorking(void) { return m_isCopyMachine; }
 	bool GetIsInitTasking(void) { return m_isInitTaskTime; }
 	bool IsTaskWorking(void) const;
 
@@ -311,6 +312,7 @@ private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類
 	bool m_isPcWork;						  // デスクワークかどうか
+	bool m_isCopyMachine;						// コピー機起動中
 
 	// 西尾追加
 	bool m_isCatchEnemy;						// 上司に捕まってしまった判定

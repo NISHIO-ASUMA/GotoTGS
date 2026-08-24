@@ -67,7 +67,8 @@ m_nInitTaskWorkingTime(NULL),
 m_nNoActiveTaskTime(NULL),
 m_nTaskClearBonusTime(NULL),
 m_isTaskMaxOver(false),
-m_isInitTaskTime(false)
+m_isInitTaskTime(false),
+m_isCopyMachine(false)
 {
 	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
@@ -358,6 +359,13 @@ void CPlayer::Update(void)
 			m_isPcWork = false;
 		}
 
+		// コピー機なら
+		if (pDesk->GetTaskType() == CWorldUICollision::TYPE_COPY)
+		{
+			// フラグリセット
+			m_isCopyMachine = false;
+		}
+
 		// 起動したタスクを非アクティブにする [add 髙橋]
 		pDesk->SetTaskType(pDesk->GetTaskType());
 
@@ -461,6 +469,21 @@ void CPlayer::Update(void)
 				switch (Colliders->nType)
 				{
 				case CWorldUICollision::TYPE_NONE: // タスクをしていない状態[add 髙橋]
+					break;
+
+				case CWorldUICollision::TYPE_COPY:	// コピー機なら
+										// nullじゃない状態
+					if (pDesk)
+					{
+						// デスクワーク時
+						if (Colliders->nType == CWorldUICollision::TYPE_COPY)
+						{
+							m_isCopyMachine = true;
+						}
+
+						// タスクを起動する
+						pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
+					}
 					break;
 
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add 髙橋]
@@ -1569,6 +1592,7 @@ bool CPlayer::IsTaskWorking(void) const
 {
 	// PCデスク作業中
 	if (m_isPcWork) return true;
+	if (m_isCopyMachine) return true;
 
 	// タスク起動中
 	CDeskwork* pDesk = CGameSceneObject::GetInstance()->GetDesk();

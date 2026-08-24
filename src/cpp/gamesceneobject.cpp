@@ -57,7 +57,6 @@
 #include "gaugeneedle.h"
 #include "fade.h"
 #include "result.h"
-#include "searchicon.h"
 
 //*********************************************************
 // ’è”–¼‘O‹óŠÔ

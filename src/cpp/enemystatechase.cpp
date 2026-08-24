@@ -78,7 +78,7 @@ void CEnemyStateChase::OnUpdate(void)
 	}
 
 	// 追跡中の処理
-	if (pPlayer->IsTaskWorking())
+	if (pPlayer->IsTaskWorking() == true)
 	{
 		// タスク起動を検知
 		m_isDoubt = true;

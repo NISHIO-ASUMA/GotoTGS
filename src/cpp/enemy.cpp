@@ -638,8 +638,8 @@ bool CEnemy::CheckRayToAngleRange(void)
 	if (!m_pDestCharactor->GetIsInitTasking())
 		return false;
 
-	// タスク中の時間だったら ( 今はパソコンタスクでのみ判定作った )
-	if (m_pDestCharactor->GetIsPcWorking())
+	// タスク中の時間だったら
+	if (m_pDestCharactor->GetIsPcWorking() || m_pDestCharactor->GetIsCopyWorking())
 		return false;
 
 	// 自身の座標とターゲットへの座標
