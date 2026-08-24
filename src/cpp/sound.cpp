@@ -254,6 +254,7 @@ void CSound::Uninit(void)
 //==============================================================
 HRESULT CSound::Play(SOUND_LABEL label)
 {
+#if 0
 	XAUDIO2_VOICE_STATE xa2state;
 	XAUDIO2_BUFFER buffer;
 
@@ -281,7 +282,7 @@ HRESULT CSound::Play(SOUND_LABEL label)
 
 	// Ä¶
 	m_apSourceVoice[label]->Start(0);
-
+#endif
 	return S_OK;
 }
 //======================================================================

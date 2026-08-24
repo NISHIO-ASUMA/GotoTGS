@@ -419,7 +419,7 @@ void CMotionManager::SetPartsMotion(std::ifstream& file, int nCntMotion)
 		if (token == "LOOP")
 		{
 			std::string eq;
-			int loopFlag;
+			int loopFlag = 0;
 			motionss >> eq >> loopFlag;
 
 			// "="‚ð“Ç‚ÝŽæ‚Á‚½

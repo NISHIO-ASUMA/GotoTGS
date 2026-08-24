@@ -22,6 +22,7 @@
 #include "renderer.h"
 #include "template.h"
 #include "texture.h"
+#include "easing.h"
 
 //=========================================================
 // コンストラクタ
@@ -242,7 +243,7 @@ void CObject2D::SetUV(float TexU, float TexV)
 	m_pVtxBuff->Unlock();
 }
 //===========================================================
-// 点滅関数
+// 点滅関数 ( イージングで点滅 )
 //===========================================================
 void CObject2D::SetFlash(const int nFirstcount, const int nEndcount, const D3DXCOLOR col)
 {
@@ -260,24 +261,11 @@ void CObject2D::SetFlash(const int nFirstcount, const int nEndcount, const D3DXC
 	if (nCycle <= 0) nCycle = 1;
 
 	// 進行度を設定
-	float fProgress = static_cast<float>((m_nColorCount - nFirstcount) % nCycle) / static_cast<float>(nCycle);
-
-	// 透明度を格納する
-	float alpha = NULL;
-
-	if (fProgress < 0.5f)
-	{
-		// 線形補間
-		alpha = Lerp(0.5f, 1.0f, fProgress * 2.0f);
-	}
-	else
-	{
-		// 線形補間
-		alpha = Lerp(1.0f, 0.5f, (fProgress - 0.5f) * 2.0f);
-	}
+	float fProgress = static_cast<float>((m_nColorCount - nFirstcount)) / static_cast<float>(nCycle);
+	float fAlpha = CEasing::EaseInOutSine(fProgress);
 
 	// カラー設定
-	D3DXCOLOR ChangeCol(col.r, col.g, col.b, alpha);
+	D3DXCOLOR ChangeCol(col.r, col.g, col.b, fAlpha);
 
 	// 現在カラーに適用
 	SetCol(ChangeCol);
@@ -296,11 +284,17 @@ void CObject2D::SetCenter(void)
 	// 頂点バッファをロックし,頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
+	//ピクセル補正
+	float fLeft = m_pos.x - m_fWidth - 0.5f;
+	float fRight = m_pos.x + m_fWidth - 0.5f;
+	float fTop = m_pos.y - m_fHeight - 0.5f;
+	float fBottom = m_pos.y + m_fHeight - 0.5f;
+
 	// 頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y - m_fHeight, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_fWidth, m_pos.y + m_fHeight, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_fWidth, m_pos.y + m_fHeight, 0.0f);
+	pVtx[0].pos = D3DXVECTOR3(fLeft, fTop, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(fRight, fTop, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(fLeft, fBottom, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(fRight, fBottom, 0.0f);
 
 	// rhwの設定
 	pVtx[0].rhw =

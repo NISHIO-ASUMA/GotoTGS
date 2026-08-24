@@ -10,9 +10,9 @@
 //*********************************************************
 #include "playerstatebase.h"
 
-//=================================================
+//*********************************************************
 // 静的メンバ変数
-//=================================================
+//*********************************************************
 CPlayerStateBase* CPlayerStateBase::m_pInstance = nullptr; // インスタンス変数
 
 //=========================================================
@@ -43,7 +43,8 @@ CPlayerStateBase::~CPlayerStateBase()
 CPlayerStateBase* CPlayerStateBase::GetInstance(void)
 {
 	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CPlayerStateBase;
+	if (m_pInstance == nullptr)
+		m_pInstance = new CPlayerStateBase;
 
 	// 生成されたインスタンスを返す
 	return m_pInstance;

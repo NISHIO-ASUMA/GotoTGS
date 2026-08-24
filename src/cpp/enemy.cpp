@@ -27,9 +27,15 @@
 #include "statemachine.h"
 #include "enemystatebase.h"
 #include "enemystateneutral.h"
-#include "enemyutility.h"
 #include "billboard.h"
 #include "jsonmanager.h"
+#include "blockmanager.h"
+#include "jsonmanager.h"
+#include "template.h"
+#include "particle.h"
+#include "camera.h"
+#include "enemyutility.h"
+
 //*********************************************************
 // 定数名前空間
 //*********************************************************
@@ -60,10 +66,14 @@ m_pSphereColiider(nullptr),
 m_pMachine(nullptr),
 m_isCheckPoint(false),
 m_isTargetChase(false),
+m_isStartChase(false),
 m_pDestCharactor(nullptr),
 m_pChaseIcon(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
+m_fLevelPoint(NULL),
+m_fEyeAngle(NULL),
+m_fMoveSpeed(NULL),
 m_playerTargetPos(VECTOR3_NULL)
 {
 
@@ -131,8 +141,12 @@ HRESULT CEnemy::Init(void)
 	}
 
 	// アイコン生成
-	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,10.0f,10.0f,"ui_chaseicon.png");
+	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,20.0f,20.0f,"ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
+
+	// 初期値を設定
+	m_fMoveSpeed = EnemyInfo::SPEED;
+	m_fEyeAngle = Eyesight::EYE_ANGLE;
 
 	return S_OK;
 }
@@ -161,11 +175,22 @@ void CEnemy::Uninit(void)
 //========================================================
 void CEnemy::Update(void)
 {
+	// アニメーション中なら
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	{
+		UpdateMotionOnly();
+		return;
+	}
+
 	// ステートの更新
 	m_pMachine->Update();
 
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
+
+	// 球形コライダー更新
+	if (m_pSphereColiider) 
+		m_pSphereColiider->SetPos(GetPos());
 
 	// キャラクター全体更新
 	CMoveCharactor::Update();
@@ -178,11 +203,15 @@ void CEnemy::Draw(void)
 	// キャラクター描画
 	CMoveCharactor::Draw();
 
-	// 扇形メッシュの描画
+	// 追跡状態がfalseなら
+	if (!m_isStartChase)
+		return;
+
+	// デスゾーンの描画
 	DrawEyeSight();
 }
 //========================================================
-// 対象を追いかける関数 (　ここでマップに配置されている物を避けて向かうアルゴリズムにしたいがどうやろうか )
+// 対象を追いかける関数
 //========================================================
 void CEnemy::ChaseMoving(void)
 {
@@ -199,12 +228,13 @@ void CEnemy::ChaseMoving(void)
 
 	// 目的地へのベクトルを計算
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
 
 	// 目的地までの距離を計算
 	float distance = D3DXVec3Length(&vecToTarget);
 
-	// 到着判定 ( ここを何とか修正してプレイヤーを捕まえるようにする )
-	if (distance <= 3.0f)
+	// 到着判定
+	if (CheckEyesight())
 	{
 		// プレイヤーを捕まえる
 		m_pDestCharactor->SetCatchEnemy(true);
@@ -219,7 +249,7 @@ void CEnemy::ChaseMoving(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED * 2.0f;
+	moveVec *= m_fMoveSpeed * 1.2f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -284,11 +314,11 @@ void CEnemy::UpdateMoveViewPoint(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
-	GetMotion()->SetMotion(MOTION::MOVE);
+	GetMotion()->SetMotion(MOTION::MOVE,true,3);
 
 	// 角度を計算
 	float angleY = atan2(-moveVec.x, -moveVec.z);
@@ -350,7 +380,7 @@ void CEnemy::UpdateMovingSmoke(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -416,7 +446,7 @@ void CEnemy::UpdateMovingTV(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= EnemyInfo::SPEED;
+	moveVec *= m_fMoveSpeed;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -434,6 +464,7 @@ void CEnemy::UpdateMovingTV(void)
 	// 目標角度をセット
 	SetRotDest(rotDest);
 }
+
 //========================================================
 // ステート変更処理
 //========================================================
@@ -449,14 +480,14 @@ void CEnemy::ChangeState(CEnemyStateBase* pState, int nID)
 	m_pMachine->ChangeState(pState);
 }
 //========================================================
-// 視界の扇形の描画処理
+// 視界の扇形の描画処理 ( デスゾーン )
 //========================================================
 void CEnemy::DrawEyeSight(void)
 {
 	// 現在の設定を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 rot = GetRot();
-	float halfAngle = D3DXToRadian(Eyesight::EYE_ANGLE / 2.0f);
+	float halfAngle = D3DXToRadian(m_fEyeAngle / 2.0f);
 
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -521,7 +552,7 @@ void CEnemy::DrawEyeSight(void)
 	for (int i = 0; i <= Config::DIVIDE; ++i)
 	{
 		float t = (float)i / (float)Config::DIVIDE;
-		float currentAngle = rot.y - halfAngle + (D3DXToRadian(Eyesight::EYE_ANGLE) * t);
+		float currentAngle = rot.y - halfAngle + (D3DXToRadian(m_fEyeAngle) * t);
 
 		D3DXVECTOR3 dir(-sinf(currentAngle), 0.0f, -cosf(currentAngle));
 
@@ -556,69 +587,206 @@ void CEnemy::DrawEyeSight(void)
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
 }
 //========================================================
-// 扇形の視界判定
+// 扇形の視界判定 ( 赤い扇型の物 )
 //========================================================
 bool CEnemy::CheckEyesight(void)
 {
-	// もしnullなら
+	// nullなら
 	if (!m_pDestCharactor) return false;
 
-	// もしサボっていなかったら
-	if (!m_pDestCharactor->GetIsLazy())
-		return false;
-
-	// 敵の現在座標を取得
+	// 敵とプレイヤーの現在座標を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 CharactorPos = m_pDestCharactor->GetPos();
 
-	// 高さの判定
+	// 高さ判定
 	float heightDiff = fabsf(CharactorPos.y - enemyPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f) return false;
 
-	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
-	{
-		return false; // 高さが範囲外
-	}
-
-	// 距離の判定
+	// 距離判定
 	D3DXVECTOR3 diff = CharactorPos - enemyPos;
 	diff.y = 0.0f;
-
-	// 距離の2乗を計算
 	float sqrDistance = D3DXVec3LengthSq(&diff);
 
-	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS)
-	{
-		return false; // 判定外
-	}
-
-	// ゼロ除算
+	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS) return false;
 	if (sqrDistance < 0.0001f) return true;
 
-	// 角度を取得
+	// 角度判定
 	D3DXVECTOR3 rot = GetRot();
-
-	// 角度から方向ベクトルを生成
 	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
 	D3DXVec3Normalize(&enemyForward, &enemyForward);
 
-	// 方向ベクトルを正規化
+	// 差分ベクトル
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
-	// 内積を計算
-	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
-
-	// 角度のコサイン値を計算
-	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
-	float cosHalfAngle = cosf(halfAngleRad);
-
 	// 内積判定
-	if (dot >= cosHalfAngle)
+	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
+	float cosHalfAngle = cosf(D3DXToRadian(m_fEyeAngle));
+
+	// 扇形視界に入っている場合
+	return (dot >= cosHalfAngle);
+}
+//========================================================
+// 本来の敵から見えるプレイヤーとの視界判定
+//========================================================
+bool CEnemy::CheckRayToAngleRange(void)
+{
+	// nullなら
+	if (!m_pDestCharactor) return false;
+
+	// 初期のタスク時間なら
+	if (!m_pDestCharactor->GetIsInitTasking())
+		return false;
+
+	// タスク中の時間だったら ( 今はパソコンタスクでのみ判定作った )
+	if (m_pDestCharactor->GetIsPcWorking())
+		return false;
+
+	// 自身の座標とターゲットへの座標
+	D3DXVECTOR3 myPos = GetPos();
+	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 高低差判定
+	float heightDiff = fabsf(targetPos.y - myPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT)
 	{
-		return true; // 視界に入っている
+		return false;
 	}
 
-	return false;
+	// 距離制限
+	D3DXVECTOR3 diff = targetPos - myPos;
+	diff.y = 0.0f;
+
+	float distance = D3DXVec3Length(&diff);
+	if (distance > Eyesight::EYE_RANGE || distance <= 0.0001f)
+	{
+		return false; // 視界距離外
+	}
+
+	// 敵正面ベクトルを算出
+	D3DXMATRIX matRot;
+	D3DXMatrixRotationYawPitchRoll(&matRot, GetRot().y, GetRot().x, GetRot().z);
+	D3DXVECTOR3 forward(-matRot._31, 0.0f, -matRot._33);
+	D3DXVec3Normalize(&forward, &forward);
+
+	// ターゲットへのベクトルを算出・正規化
+	D3DXVECTOR3 dirToTarget;
+	D3DXVec3Normalize(&dirToTarget, &diff);
+
+	// 角度と内積計算
+	float halfAngleRad = D3DXToRadian(m_fEyeAngle * 0.5f);
+	float thresholdDot = cosf(halfAngleRad);
+
+	// 内積を計算
+	float dot = D3DXVec3Dot(&forward, &dirToTarget);
+
+	// 内積がしきい値より小さい
+	if (dot < thresholdDot)
+	{
+		return false; // 視野角の外
+	}
+
+	// 障害物判定
+	if (CheckObstacle())
+	{
+		return false; // 障害物に遮られている
+	}
+
+	return true; // 視界内にプレイヤーを発見
+}
+//========================================================
+// 判別する際に障害物が存在しているかどうか
+//========================================================
+bool CEnemy::CheckObstacle(void)
+{
+	// ブロック管理クラスの取得
+	CBlockManager* pManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (!pManager) return false;
+
+	// 始点と終点
+	D3DXVECTOR3 rayStart = GetPos();
+	D3DXVECTOR3 rayEnd = m_pDestCharactor->GetPos();
+
+	// 目線の高さ補正
+	rayStart.y += 20.0f;
+	rayEnd.y += 20.0f;
+
+	// レイの方向ベクトルと距離を計算
+	D3DXVECTOR3 rayDir = rayEnd - rayStart;
+	float maxDistance = D3DXVec3Length(&rayDir);
+	if (maxDistance <= 0.0001f) return false;
+
+	// 正規化
+	D3DXVec3Normalize(&rayDir, &rayDir);
+
+	// 登録されている全ブロックとの衝突確認
+	int blockCount = pManager->GetAll();
+	for (int nCnt = 0; nCnt < blockCount; nCnt++)
+	{
+		// 単ブロックを取得
+		CBlock* pBlock = pManager->GetBlock(nCnt);
+		if (!pBlock) continue;
+
+		// CBlockからコライダーを取得
+		auto* pBoxCollider = pBlock->GetCollider();
+		if (!pBoxCollider) continue;
+
+		// ブロックのAABB座標範囲を取得
+		D3DXVECTOR3 bPos = pBlock->GetPos();
+		D3DXVECTOR3 bScale = pBlock->GetScale();
+
+		D3DXVECTOR3 minBound = bPos - (bScale * 0.5f);
+		D3DXVECTOR3 maxBound = bPos + (bScale * 0.5f);
+
+		// 線分の交差判定
+		float tMin = 0.0f;
+		float tMax = maxDistance;
+
+		bool hit = true;
+
+		for (int axis = 0; axis < 3; ++axis)
+		{
+			float origin = ((float*)&rayStart)[axis];
+			float dir = ((float*)&rayDir)[axis];
+			float bMin = ((float*)&minBound)[axis];
+			float bMax = ((float*)&maxBound)[axis];
+
+			if (fabsf(dir) < 0.00001f)
+			{
+				// レイがこの軸と平行な場合、軸上の範囲外にあれば衝突しない
+				if (origin < bMin || origin > bMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+			else
+			{
+				float invD = 1.0f / dir;
+				float t1 = (bMin - origin) * invD;
+				float t2 = (bMax - origin) * invD;
+
+				if (t1 > t2) std::swap(t1, t2);
+
+				tMin = (t1 > tMin) ? t1 : tMin;
+				tMax = (t2 < tMax) ? t2 : tMax;
+
+				if (tMin > tMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+		}
+
+		// 障害物が存在する
+		if (hit)
+		{
+			return true; // 障害物あり
+		}
+	}
+
+	return false; // 障害物なし
 }
 //========================================================
 // 矩形コリジョン判定
@@ -630,4 +798,80 @@ bool CEnemy::Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos)
 
 	// 当たり判定処理
 	return CCollisionBox::CollisionEx(m_pBoxColiider.get(), pOther, pOutPos);
+}
+//========================================================
+// 敵のレベル加算関数
+//========================================================
+void CEnemy::AddLevel(const float fValue)
+{
+	// 加算
+	m_fLevelPoint += fValue;
+
+	// 最大で格納できるポイントを計算(最大1000.0fまで)
+	float maxPoints = LevelConfig::MAX_LEVEL * LevelConfig::LEVELUP_NEED_POINT;
+
+	// 値の設定
+	if (m_fLevelPoint < 0.0f)
+	{
+		m_fLevelPoint = 0.0f;
+	}
+	else if (m_fLevelPoint > maxPoints)
+	{
+		m_fLevelPoint = maxPoints;
+	}
+
+	// 新規のレベル計算
+	int newLevel = static_cast<int>(m_fLevelPoint / LevelConfig::LEVELUP_NEED_POINT);
+
+	// 最大レベル制限
+	if (newLevel >= LevelConfig::MAX_LEVEL_POINT)
+	{
+		newLevel = LevelConfig::MAX_LEVEL_POINT;
+	}
+
+	// レベルが変わったらパラメータを更新
+	if (m_nLevel != newLevel)
+	{
+		m_nLevel = newLevel;
+		UpdateLevelParameters();
+	}
+}
+//========================================================
+// レベルダウン設定関数
+//========================================================
+void CEnemy::LevelDown(const float fValue)
+{
+	// 値の減算
+	AddLevel(-fValue);
+}
+//========================================================
+// パラメータ更新関数
+//========================================================
+void CEnemy::UpdateLevelParameters(void)
+{
+	// 速度と角度の設定
+	SetMoveSpeed();
+	SetEyeAngle();
+}
+//========================================================
+// 敵のレベルによる速度設定
+//========================================================
+void CEnemy::SetMoveSpeed(void)
+{
+	// 割合を計算する
+	float rate = static_cast<float>(m_nLevel) / static_cast<float>(LevelConfig::MAX_LEVEL_POINT);
+
+	// 線形補完計算
+	m_fMoveSpeed = Lerp(LevelConfig::MIN_SPEED, LevelConfig::MAX_SPEED, rate);
+}
+//========================================================
+// 敵のレベルによる視界の範囲設定
+//========================================================
+void CEnemy::SetEyeAngle(void)
+{
+	// 割合計算
+	float rate = static_cast<float>(m_nLevel) / static_cast<float>(LevelConfig::MAX_LEVEL_POINT);
+
+	// 線形補完計算
+	m_fEyeAngle = Lerp(LevelConfig::MIN_EYE_ANGLE, LevelConfig::MAX_EYE_ANGLE, rate);
 }

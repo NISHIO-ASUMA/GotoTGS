@@ -41,6 +41,10 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	
+	void SetTaskPaperNum(const int nPaper) { m_nGetTaskPaperNum = nPaper; }
+	int GetTaskPaperNum(void) const { return m_nGetTaskPaperNum; }
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -70,4 +74,5 @@ private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
 private:
+	int m_nGetTaskPaperNum;								// 受け取るタスクの枚数
 };

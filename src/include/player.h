@@ -25,6 +25,8 @@ class CStateMachine;
 class CInputKeyboard;
 class CJoyPad;
 class CInput;
+class CAfkCoolTimeUi;
+class CEnemyManager;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -65,12 +67,12 @@ public:
 	enum AFKTYPE
 	{
 		AFKTYPE_NONE,
-		AFKTYPE_SMOKE,
-		AFKTYPE_TV,
-		AFKTYPE_MAGAZINE,
-		AFKTYPE_GAMECENTER,
-		AFKTYPE_EATING,
-		AFKTYPE_BENCH,
+		AFKTYPE_SMOKE,		// 煙草
+		AFKTYPE_TV,			// テレビ
+		AFKTYPE_MAGAZINE,	// 雑誌読み
+		AFKTYPE_GAMECENTER,	// ゲームセンター
+		AFKTYPE_EATING,		// 食事
+		AFKTYPE_BENCH,		// 公園のベンチ
 		AFKTYPE_MAX
 	};
 
@@ -101,11 +103,11 @@ public:
 		const D3DXVECTOR3& rot
 	);
 	
+public:
+
 	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
 
-	//************************************************
 	// さぼっている時の判定用変数(ゲッター)
-	//************************************************
 	bool GetMoveCheck(void) { return m_bMove; }
 	bool GetAfkSmoke(void) { return m_bAfkSmoke; }
 	bool GetAfkTV(void) { return m_bAfkTV; }
@@ -114,9 +116,7 @@ public:
 	bool GetAfkEating(void) { return m_bAfkEating; }
 	bool GetAfkBench(int nIdx) { return m_bAfkBench[nIdx]; }
 
-	//************************************************
 	// さぼりのカウント用関数
-	//************************************************
 	void AddSmoke(void) { m_nSmoke++; }
 	void AddTV(void) { m_nTV++; }
 	void AddMagazine(void) { m_nMagazine++; }
@@ -124,9 +124,7 @@ public:
 	void AddEating(void) { m_nEating++; }
 	void AddBench(void) { m_nBench++; }
 
-	//************************************************
 	// さぼりのカウント用関数(ゲッター)
-	//************************************************
 	int GetSmoke(void) { return m_nSmoke; }
 	int GetTV(void) { return m_nTV; }
 	int GetMagazine(void) { return m_nMagazine; }
@@ -140,10 +138,21 @@ public:
 	inline CBoxCollider* GetBoxCollider(void) override { return m_pBoxCollider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
+	//****************************
 	// 西尾追加
+	//****************************
 	void SetCatchEnemy(const bool isFlags) { m_isCatchEnemy = isFlags; }
-	bool GetIsCatch(void) { return m_isCatchEnemy; } // 捕まった
+	void SetOutSideFlags(const bool isStartFlag) { m_isSetOutSideTask = isStartFlag; }
+	void OutSideEnemyPointer(CEnemyManager* pManager = nullptr) { m_pEnemyManagerOutSide = pManager; }
+	void AddTaskBonusTime(const int nValueTime) { m_nTaskClearBonusTime += nValueTime; }
+
+	int GetBonusTime(void) const { return m_nTaskClearBonusTime; }
+	bool GetIsCatch(void) { return m_isCatchEnemy; }
 	bool GetIsLazy(void) { return m_isEnableLazy; }
+	bool GetIsTaskOutSide(void) { return m_isSetOutSideTask; }
+	bool GetIsPcWorking(void) { return m_isPcWork; }
+	bool GetIsInitTasking(void) { return m_isInitTaskTime; }
+	bool IsTaskWorking(void) const;
 
 public:
 
@@ -173,7 +182,7 @@ public:
 		m_pSubItemModels->OffSetPos(offpos);
 		m_pSubItemModels->OffSetRot(rot);
 
-		// アウトラインせってい
+		// アウトラインセット
 		m_pSubItemModels->SetUseOutLine(true);
 	}
 
@@ -246,6 +255,24 @@ public:
 	/// <param name=""></param>
 	void MathBenchRotation(void);
 
+	/// <summary>
+	/// afkのui関連回りの起動関数
+	/// </summary>
+	/// <param name=""></param>
+	void UpdateAfkUiState(void);
+
+	/// <summary>
+	/// 初期のタスク時間を減らす関数
+	/// </summary>
+	/// <param name=""></param>
+	void DecleInitTaskTime(void);
+
+	/// <summary>
+	/// 付近にいる敵の警戒度を下げる
+	/// </summary>
+	/// <param name=""></param>
+	void LowerLevelToEnemy(void);
+
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
@@ -274,12 +301,30 @@ private:
 	int m_nEating;										// 飲食スペースでお菓子を食べた回数カウント用変数
 	int m_nBench;										// ベンチで寝た回数カウント用変数
 
+	//************************************************
+	// さぼりのクールタイム用
+	//************************************************
+	int m_nAfkCoolTime[AFKTYPE_MAX];	// 通常のサボり用クールタイムタイマー
+	int m_nCoolTimeBench[4];			// ベンチ専用のクールタイムタイマー
+
 private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類
-	bool m_isPcWork;						  // デスクワークか
+	bool m_isPcWork;						  // デスクワークかどうか
 
 	// 西尾追加
-	bool m_isCatchEnemy;					  // 上司に捕まってしまった
-	bool m_isEnableLazy;					  // サボり中の判定
+	bool m_isCatchEnemy;						// 上司に捕まってしまった判定
+	bool m_isEnableLazy;						// 「サボり中であるか」の判定変数
+	bool m_isSetOutSideTask;					// 「外回りタスクを開始したか」どうか
+	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
+	bool m_isInitTaskTime;						// 初期のタスク時間判別フラグ
+
+	int m_nInitTaskWorkingTime;					// 初期の許容時間
+	int m_nNoActiveTaskTime;					// タスク起動をしていない時間を管理する
+	int m_nTaskClearBonusTime;					// タスクが成功した時に加算される時間
+	int  m_nDeathTimer;							// 死亡カウントダウンタイマー
+
+	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];	// 通常サボり用
+	CAfkCoolTimeUi* m_pCoolTimeUiBench[4];		// ベンチ4箇所用
+	CEnemyManager* m_pEnemyManagerOutSide;		// 敵管理クラスの格納ポインタ
 };

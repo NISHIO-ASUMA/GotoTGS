@@ -49,10 +49,15 @@
 #include "sideopendoorcollision.h"	// 西尾追加
 #include "enemymanager.h"			// 西尾追加
 #include "mobcharactormanager.h"	// 西尾追加
+#include "afk2dui.h"
 #include "boss.h"
 #include "receptionist.h"
 #include "auditormanager.h"
 #include "enemydoubtgauge.h"
+#include "gaugeneedle.h"
+#include "fade.h"
+#include "result.h"
+#include "searchicon.h"
 
 //*********************************************************
 // 定数名前空間
@@ -76,6 +81,7 @@ m_pScoreAll(nullptr),
 m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr),
+m_pAfk2DUI(nullptr),
 m_pReception(nullptr)
 {
 
@@ -121,13 +127,13 @@ HRESULT CGameSceneObject::Init(void)
 	CAfkManager::Instance()->Init();
 
 	// さぼっているときのUIの生成
-	CAfk2DUI::Create();
-
-	// ドア用チュートリアルUIの生成
-	CDoorUI::Create();
+	m_pAfk2DUI = CAfk2DUI::Create();
 
 	// テレビ用ポリゴンの生成
 	CAfkTVPolygon::Create();
+
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
 	// 各種ポインタクラスの生成
 	CreatePointer();
@@ -141,16 +147,10 @@ HRESULT CGameSceneObject::Init(void)
 	// ゲーセンの上のビル
 	CBlock::Create(D3DXVECTOR3(1656.0f, 322.0f, 122.0f), VECTOR3_NULL, D3DXVECTOR3(0.85f, 0.25f, 1.85f), "STAGEOBJ/bill01.x");
 
-	// プレイヤー生成
-	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
 
 	// 敵管理クラス生成
 	CEnemyManager::GetInstance()->Init(m_pPlayer);
 	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
-
-	// カメラに追従するキャラクターのポインタをセット
-	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
-	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 
 	// スコア初期化
 	m_pScoreTask->DeleteScore();
@@ -172,9 +172,21 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
-	// テスト生成 ( ボス )
-	//CBoss::Create(D3DXVECTOR3(700.0f, 0.0f, 350.0f), VECTOR3_NULL);
+//*********************************************
+// ADD 西尾 : クラスに格納するポインタ等の設定
+//*********************************************
+	// ドア用UIの生成
+	CDoorUI::Create(m_pPlayer);
 
+	// 敵管理クラスのポインタセット
+	m_pPlayer->OutSideEnemyPointer(CEnemyManager::GetInstance());
+
+	// カメラに追従するキャラクターのポインタをセット
+	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
+	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
+
+	//// アニメーション再生関数を設定する
+	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 	return S_OK;
 }
 
@@ -305,10 +317,11 @@ void CGameSceneObject::CreatePointer(void)
 	jsonManager->SetBlockManager(m_pBlocks.get());
 
 	// 初期化とポインタセット
+	m_pBlocks->SetLoadFileName();
 	m_pBlocks->Init();
 
 	// タスクの生成 Misaki
-	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f),m_pPlayer);
 
 	// タイマー生成 Misaki
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
@@ -331,6 +344,6 @@ void CGameSceneObject::CreatePointer(void)
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
 
-	// 受付人を生成 ( 外に行くドア付近に生成しているよ )
+	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 }

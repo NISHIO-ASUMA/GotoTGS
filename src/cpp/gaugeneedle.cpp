@@ -26,7 +26,8 @@ m_nAFK(NULL),			// さぼりをこなした数
 m_nCount(NULL),			// 現在のカウント
 m_bStart(false),		// 動いているかどうか
 m_bDir(false),			// どの方向に進むか
-m_fOldAngle(NULL)		// 元の角度
+m_fOldAngle(NULL),		// 元の角度
+m_isFinish(false)
 {
 
 }
@@ -190,6 +191,7 @@ void CGaugeneedle::NormalizAngle(float& fAngle)
 	if (fAngle < -D3DX_PI * Config::MAX_ANGLE)
 	{// 最小
 		fAngle = -D3DX_PI * Config::MAX_ANGLE;
+		m_isFinish = true;
 	}
 	else if (fAngle > D3DX_PI * Config::MAX_ANGLE)
 	{// 最大

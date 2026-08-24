@@ -19,6 +19,7 @@
 // 前方宣言
 //*********************************************************
 class CUi;
+class CPlayer;
 
 //*********************************************************
 // タスクUIマネージャークラスを定義
@@ -51,6 +52,7 @@ public:
 	inline void SetTime(const bool& bTime) { m_bTime = bTime; }
 	inline void SetCountTime(const int& nCountTime) { m_nCountTime = nCountTime; }
 	inline void SetCan(const bool& bCan = false) { m_bCan = bCan; }
+	inline void SetPlayerPointer(CPlayer* pPlayer = nullptr) { m_pPlayer = pPlayer; }
 	static void SetTutorial(const bool& bTutorial = false) { m_bTutorial = bTutorial; }
 
 	// 情報取得処理
@@ -60,18 +62,22 @@ public:
 	inline bool GetTime(void) const { return m_bTime; }
 	inline int GetCountTime(void) const { return m_nCountTime; }
 	inline bool GetCan(void)const { return m_bCan; }
+	CPlayer* GetPlayerPointer(void) { return m_pPlayer; }
 
 	// 静的メンバ関数
 	static void AddPCTask(void) { m_nPCTaskNum++; }
 	static void AddCOPYTask(void) { m_nCOPYTaskNum++; }
 	static void AddDOCUMENTTask(void);
+	static void AddOutsideTask(void);
 	static int GetPCTaskNum(void) { return m_nPCTaskNum; }
 	static int GetCOPYTaskNum(void) { return m_nCOPYTaskNum; }
 	static int GetDOCUMENTTaskNum(void) { return m_nDOCUMENTTaskNum; }
+	static int GetOutsideTaskNum(void) { return m_nOutsideTaskNum; }
 	static bool GetTutorial(void) { return m_bTutorial; }
 	static void MinusPCTask(void) { m_nPCTaskNum--; }
 	static void MinusCOPYTask(void) { m_nCOPYTaskNum--; }
 	static void MinusDOCUMENTTask(void) { m_nDOCUMENTTaskNum--; }
+	static void MinusOutsideTask(void) { m_nOutsideTaskNum--; }
 
 public: // 西尾追加
 	//**********************
@@ -100,6 +106,9 @@ private:
 	static int m_nPCTaskNum;		// こなしたPCタスクの数
 	static int m_nCOPYTaskNum;		// こなしたコピー機タスクの数
 	static int m_nDOCUMENTTaskNum;	// こなした書類タスクの数
+	static int m_nOutsideTaskNum;	// こなした外出タスクの数
 	static bool m_bTutorial;		// チュートリアルをこなしたかどうか
 
+	// [ ADD : 西尾 ] 子クラスで使いたいのでめんどいからポインタ持たせた
+	CPlayer* m_pPlayer;				// プレイヤークラスの入れ物
 };

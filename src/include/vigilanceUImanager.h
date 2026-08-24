@@ -60,11 +60,12 @@ private:
 		static constexpr const char* ICON_BOSS = "BOSS.png";		// ボスのテクスチャ
 		static constexpr const char* ICON_POLICE = "POLICE.png";	// 警察のテクスチャ
 		static constexpr const char* ICON_AUDITOR = "Auditor.png";	// 監査役のテクスチャ
+		static constexpr const char* ICON_ENEMY = "Enemy.png";		// 上司役のテクスチャ
 
 		// レベルの定数
-		static constexpr float LEVEL_WIDTH = 30.0f;		// 横幅
-		static constexpr float LEVEL_HEIGHT = 30.0f;	// 縦幅
-		static constexpr float LEVEL_Y_VALUE = 40.0f;	// Y軸のずらす量
+		static constexpr float LEVEL_WIDTH = 30.0f;					// 横幅
+		static constexpr float LEVEL_HEIGHT = 30.0f;				// 縦幅
+		static constexpr float LEVEL_Y_VALUE = 40.0f;				// Y軸のずらす量
 
 		// ゲージの定数
 		static constexpr float GAUGE_WIDTH = 120.0f;					// 横幅

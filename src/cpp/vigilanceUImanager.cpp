@@ -95,7 +95,7 @@ HRESULT CVigilanceUIManager::Init(void)
 	icon.fHeight = fHeight;
 
 	// アイコンの生成処理
-	m_pIcon = CVigilanceicon::Create(icon, Config::ICON_BOSS);
+	m_pIcon = CVigilanceicon::Create(icon, Config::ICON_ENEMY);
 
 	// フレームの構造体
 	icon.fWidth = gauge.fWidth + 5.0f;
@@ -156,5 +156,4 @@ void CVigilanceUIManager::Draw(void)
 	m_pIcon->Draw();
 	//m_pLevel->Draw();
 	m_pGauge->Draw();
-
 }

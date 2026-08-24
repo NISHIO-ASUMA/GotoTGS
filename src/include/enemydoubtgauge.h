@@ -13,16 +13,16 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
-#include "billboardmulti.h"
+#include "object2Dmulti.h"
 
 //*********************************************************
 // 疑いゲージのマルチオブジェクトクラスを定義
 //*********************************************************
-class CEnemyDoubtGauge : public CBillboardMulti
+class CEnemyDoubtGauge : public CObject2DMulti
 {
 public:
 
-	CEnemyDoubtGauge(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
+	CEnemyDoubtGauge(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CEnemyDoubtGauge();
 
 	HRESULT Init(void) override;
@@ -66,6 +66,8 @@ public:
 	bool GetUpGauge(void) const { return m_isUpGauge; }
 	bool GetNormalFlag(void) { return m_isNormalSet; }
 
+	void SetTargetPos(const D3DXVECTOR3& targetPos) { m_TargetPos = targetPos; }
+
 private:
 
 	float m_fRatio;		// 計算割合用の変数
@@ -75,4 +77,5 @@ private:
 	bool m_isComplete;	// 達成したか
 	bool m_isUpGauge;	// 上昇するフラグ
 	bool m_isNormalSet;	// 通常に戻るフラグ
+	D3DXVECTOR3 m_TargetPos; // 追従対象（敵）の3Dワールド座標
 };

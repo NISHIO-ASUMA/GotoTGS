@@ -21,29 +21,38 @@
 #include "object2D.h"
 
 //*********************************************************
-// ブロックオブジェクトクラスを定義
+// サボりの2DUIオブジェクトクラスを定義
 //*********************************************************
-class CAfk2DUI:public CObject2D
+class CAfk2DUI : public CObject2D
 {
 public:
-	CAfk2DUI();
+
+	CAfk2DUI(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CAfk2DUI();
 
-	HRESULT Init();
-	void Uninit(void);
-	void Update(void);
-	void Draw(void);
+	HRESULT Init(void) override;
+	void Uninit(void) override;
+	void Update(void) override;
+	void Draw(void) override;
 	
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	static CAfk2DUI* Create(void);
 
-	bool GetAfkButton(void) { return m_bAfkButton; }
+public:
 
+	void SetisDisplay(const bool isDisplay) { m_bDisplay = isDisplay; }
+	bool GetIsDisplay(void) const { return m_bDisplay; }
+	bool GetAfkButton(void) const { return m_bAfkButton; }
+
+private:
 	void EasingSine(void);
-
 
 private:
 
-	D3DXVECTOR3 m_pos;		// 位置
 	float m_fCountFrame;	// イージング用フレームカウント用変数
 	float m_fMaxFrame;		// 最大フレーム変数
 	bool m_bAfkButton;		// ボタン識別判定用変数

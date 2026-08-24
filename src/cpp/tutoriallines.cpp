@@ -17,6 +17,7 @@
 #include "lines.h"
 #include "tutoriallinesBG.h"
 #include "input.h"
+#include "ui.h"
 #include "deskworkUImanager.h"
 #include "deskwork.h"
 #include "tutorialobject.h"
@@ -37,7 +38,8 @@ m_pLines(nullptr),
 m_pBG(nullptr),
 m_pTutoPlayer(nullptr),
 m_pKeyUi(nullptr),
-m_pArrow{}
+m_pArrow{},
+m_isComplite(false)
 {
 
 }
@@ -101,6 +103,8 @@ HRESULT CTutorialLines::Init(void)
 	// 矢印生成
 	CreateArrow(nIdxControl);
 
+	// フラグリセット
+	m_isComplite = false;
 	return S_OK;
 }
 
@@ -173,8 +177,8 @@ void CTutorialLines::Update(void)
 	// キー入力したかどうか
 	if (!Key->GetTrigger(DIK_RETURN) &&
 		!Mouse->GetTriggerDown(CInputMouse::MOUSE_LEFT) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_A) &&
-		!Pad->GetTrigger(CJoyPad::JOYKEY_START))
+		!Pad->GetTrigger(CJoyPad::JOYKEY_A)
+		)
 		return;
 
 	// 現在の番号を一つ進める
@@ -185,7 +189,6 @@ void CTutorialLines::Update(void)
 
 		// セリフを番号に合わせる
 		m_pLines->SetTexture(m_LinesType[m_nNowIdx]);
-
 		return;
 	}
 
@@ -231,6 +234,7 @@ void CTutorialLines::SetNextTutorial(void)
 		m_pKeyUi->SetPos(D3DXVECTOR3(150.0f, 65.0f, 360.0f));
 	}
 
+	// 対象と一致するとき ( コピー機が終わった時 )
 	if (m_nNowIdx == LINESTYPE_6)
 	{
 		// 3個目の矢印を起動
@@ -241,6 +245,7 @@ void CTutorialLines::SetNextTutorial(void)
 		m_pKeyUi->SetPos(D3DXVECTOR3(40.0f, 50.0f, 280.0f));
 	}
 
+	// 書類タスクをこなしたら
 	if (m_nNowIdx == LINESTYPE_7)
 	{
 		// 矢印の描画をなくす
@@ -248,6 +253,9 @@ void CTutorialLines::SetNextTutorial(void)
 
 		// uiの消去
 		m_pKeyUi->Uninit();
+
+		// フラグを有効化
+		m_isComplite = true;
 	}
 
 	// セリフを番号に合わせる
@@ -273,11 +281,21 @@ void CTutorialLines::CreateArrow(int& nIdx)
 	// 操作インデックスによってテクスチャ名を変更する
 	if (nIdx == 1)
 	{
+		// テクスチャ名を設定
 		TexName = "Fbutton.png";
+
+		// ガイドになるUiを生成
+		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip000.png");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 80, 100.0f, 70.0f, "stepnext_key.jpg", true, false, 0);
 	}
 	else
 	{
+		// テクスチャ名を設定
 		TexName = "startbutton.png";
+
+		// ガイドになるUiを生成
+		CUi::Create(D3DXVECTOR3(1130.0f, 70.0f, 0.0f), 0, 150.0f, 70.0f, "skip001.png");
+		CUi::Create(D3DXVECTOR3(200.0f, 650.0f, 0.0f), 80, 100.0f, 70.0f, "stepnext_button.jpg",true, false, 0);
 	}
 
 	// ビルボード生成
@@ -298,7 +316,6 @@ void CTutorialLines::CreateArrow(int& nIdx)
 						D3DXVECTOR3(HALF, HALF, HALF),
 						"STAGEOBJ/yajirusi.x")
 	);
-
 
 	// 矢印オブジェクトを生成 (提出)
 	m_pArrow.push_back(CPointObject::Create

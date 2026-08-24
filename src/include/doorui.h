@@ -1,6 +1,6 @@
 //=========================================================
 //
-// ドアUI処理 [ doorui.h ]
+// 両開きのドア表示ui処理 [ doorui.h ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -24,9 +24,10 @@
 // 前方宣言
 //*********************************************************
 class CSphereCollider;
+class CPlayer;
 
 //*********************************************************
-// ブロックオブジェクトクラスを定義
+// ドアのuiクラスを定義
 //*********************************************************
 class CDoorUI :public CObject2D
 {
@@ -34,18 +35,14 @@ public:
 	CDoorUI();
 	~CDoorUI();
 
-	HRESULT Init();
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
-	static CDoorUI* Create(void);
-
-	// インスタンス生成用関数
-	static CDoorUI* Instance(void);
-	
 	void EasingSine(void);
 	void SetUse(bool bUse) { m_bUse = bUse; }
+	void SetPlayerOwner(CPlayer* pOwner = nullptr) { m_pPlayerOwner = pOwner; }
 
 	// 当たり判定関数
 	bool CollisionSphere(CSphereCollider* pOther);
@@ -54,8 +51,14 @@ public:
 	// ゲッター
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="pPlayer">判別先のプレイヤーポインタ</param>
+	/// <returns></returns>
+	static CDoorUI* Create(CPlayer* pPlayer = nullptr);
+
 private:
-	static CDoorUI* m_pInstance;						// シングルトン変数
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 
 	D3DXVECTOR3 m_pos;									// 位置
@@ -64,7 +67,6 @@ private:
 	bool m_bEasing;										// イージング用変数
 	bool m_bDisplay;									// 表示するかの判定変数
 	bool m_bUse;										// 使用しているかの判定変数
+
+	CPlayer* m_pPlayerOwner;							// 格納するプレイヤーのポインタ
 };
-
-
-

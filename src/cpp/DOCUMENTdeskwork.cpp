@@ -22,11 +22,26 @@
 #include "titleuimanager.h"
 #include "tutorialobject.h"
 #include "tutoriallines.h"
+#include "particle.h"
+#include "receptionist.h"
+
+//*********************************************************
+// 名前空間(パーティクル)
+//*********************************************************
+namespace PARTICLE
+{
+	const D3DXVECTOR3 Pos = { 40.0f,36.0f,280.0f };		// 位置
+	const D3DXCOLOR col = { 0.5f, 0.5f, 1.0f, 0.5f };	// カラー
+	constexpr float fRadius = 15.0f;					// 範囲の半径
+	constexpr int nTime = 15;							// 表示する時間
+};
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDOCUMENTDeskwork::CDOCUMENTDeskwork() :CDeskworkUIManager()
+CDOCUMENTDeskwork::CDOCUMENTDeskwork() :CDeskworkUIManager(),
+m_pParticle(nullptr),
+m_nParticleTime(NULL)
 {
 
 }
@@ -61,6 +76,11 @@ CDOCUMENTDeskwork* CDOCUMENTDeskwork::Create(const bool& bUse)
 //=========================================================
 HRESULT CDOCUMENTDeskwork::Init(void)
 {
+	// パーティクルの生成処理
+	m_pParticle = CParticle::Create(PARTICLE::Pos, VECTOR3_NULL, PARTICLE::col, PARTICLE::fRadius, CParticle::TYPE_NONE);
+
+	// 使っていない状態にする
+	m_pParticle->SetUse(false);
 
 
 	return S_OK;
@@ -71,7 +91,10 @@ HRESULT CDOCUMENTDeskwork::Init(void)
 //=========================================================
 void CDOCUMENTDeskwork::Uninit(void)
 {
-
+	if (m_pParticle != nullptr)
+	{// パーティクルの終了処理
+		m_pParticle = nullptr;
+	}
 }
 
 //=========================================================
@@ -79,7 +102,23 @@ void CDOCUMENTDeskwork::Uninit(void)
 //=========================================================
 void CDOCUMENTDeskwork::Update(void)
 {
+	// パーティクルがOFFなら処理しない
+	if (!m_pParticle->GetUse()) return;
 
+	// 時間を進める
+	m_nParticleTime++;
+
+	if (m_pParticle != nullptr)
+	{// パーティクルの更新処理
+		m_pParticle->Update();
+	}
+
+	// 表示する時間を超えていたら
+	if (m_nParticleTime > PARTICLE::nTime)
+	{
+		// パーティクルをOFFにする
+		m_pParticle->SetUse(false);
+	}
 }
 
 //=========================================================
@@ -87,6 +126,10 @@ void CDOCUMENTDeskwork::Update(void)
 //=========================================================
 void CDOCUMENTDeskwork::Draw(void)
 {
+	if (m_pParticle != nullptr)
+	{// パーティクルの描画処理
+		m_pParticle->Draw();
+	}
 
 }
 
@@ -95,23 +138,33 @@ void CDOCUMENTDeskwork::Draw(void)
 //=========================================================
 void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 {
-	if (GetCOPYTaskNum() <= 0)
-	{// 1つもコピー機タスクをこなしていない場合
+	// 1つもコピー機タスクをこなしていない場合
+	if (GetCOPYTaskNum() <= 0) return;
+
+	// パーティクルをONにする
+	m_pParticle->SetUse(true);
+
+	// 書類タスクの数の加算処理
+	AddDOCUMENTTask();
+
+	// チュートリアルでの処理
+	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL && 
+		!CTutorialObject::GetInstance()->GetTutoriallines()->GetIsComp())
+	{
+		// チュートリアルを進める
+		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
 		return;
 	}
 
+	// もしチュートリアル以外であったなら
 	if (CManager::GetInstance()->GetScene() != CScene::MODE::MODE_TUTORIAL)
-	{// チュートリアル以外での処理
-
+	{
 		// スコアのポインタ
 		auto* pScore = CGameSceneObject::GetInstance()->GetScore();
-		// 指針のポインタ
-		auto* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
 
-		if (pScore == nullptr || pGaugeneedle == nullptr)
-		{// ヌルチェック
-			return;
-		}
+		// 指針のポインタ
+		CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+		if (pScore == nullptr || pGaugeneedle == nullptr) return;
 
 		// スコア加算
 		pScore->AddScoreMinus(-1000);
@@ -119,18 +172,11 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
 
+		// 受付人に持たせる
+		CReceptionist* pReception = CGameSceneObject::GetInstance()->GetReception();
+		if (pReception == nullptr) return;
+
+		// 値をセットする
+		pReception->SetTaskPaperNum(GetDOCUMENTTaskNum());
 	}
-
-	// 書類タスクの数の加算処理
-	AddDOCUMENTTask();
-
-	// チュートリアル以外なら処理しない
-	if (CManager::GetInstance()->GetScene() == CScene::MODE::MODE_TUTORIAL)
-	{
-		// チュートリアルを進める
-		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
-
-		return;
-	}
-
 }

@@ -25,6 +25,7 @@
 #include "sound.h"
 #include "tutorialobject.h"
 #include "tutoriallines.h"
+#include "player.h"
 
 //*********************************************************
 // 定数名前空間
@@ -385,13 +386,20 @@ void CPCDeskwork::Task(const auto& pClear)
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
-
 	}
-
 
 	// こなしたPCタスクの数を一つ増やす
 	AddPCTask();
 
+	// 対象キャラクターを取得
+	if (GetPlayerPointer() == nullptr)
+		return;
+
+	// 近くにいる上司の警戒度を下げる ( NOTE : ここの難易度設定とかは要相談 )
+	GetPlayerPointer()->LowerLevelToEnemy();
+
+	// 時間を加算する ( NOTE : いまは仮で一個のタスク成功ごとに2秒ボーナス時間の加算 )
+	GetPlayerPointer()->AddTaskBonusTime(2);
 }
 
 //=========================================================
@@ -409,10 +417,6 @@ bool CPCDeskwork::ControlResult(void)
 		return false;
 	}
 
-	//**************************************
-	// ADD 西尾 : リファクタリングと判定ロジックの修正
-	//**************************************
-	
 	// プレイヤーの操作キーインデックス取得
 	int nControl = CTitleuiManager::GetInstance()->GetSelectIdx();
 

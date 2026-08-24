@@ -1,6 +1,6 @@
 //=========================================================
 //
-// AFK2DUI処理 [ afk2dui.cpp ]
+// 両開きのドア表示ui処理 [ doorui.cpp ]
 // Author: Shouya Chikada
 //
 //=========================================================
@@ -26,7 +26,7 @@
 namespace DoorUI
 {
 	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };		// ドアUIの座標
-	const D3DXVECTOR3 DoorPos = { 482.0f, 0.0f,132.0f };		// ドアの座標
+	const D3DXVECTOR3 DoorPos = { 482.0f, 0.0f,132.0f };	// ドアの座標
 	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };				// 初期のサイズ
 	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };				// 目標のサイズ
 	constexpr float fRadius = 25.0f;						// 半径
@@ -34,12 +34,9 @@ namespace DoorUI
 	constexpr float fHeight = 75.0f;						// 縦幅
 	constexpr float fMaxFrame = 60.0f;						// マックスフレーム
 	constexpr const char* DoorUI_NAME = "dooropen.png";		// ドアUIのテクスチャ名
-};
+	constexpr const char* DoorUI_NotOpenNAME = "bloking_opnedoor.png";		// ドアUIのテクスチャ名(封鎖時)
 
-//=================================================
-// 静的メンバ変数
-//=================================================
-CDoorUI* CDoorUI::m_pInstance = nullptr; // インスタンス変数
+};
 
 //=========================================================
 // コンストラクタ
@@ -50,7 +47,8 @@ m_fMaxFrame(NULL),
 m_fCountFrame(NULL),
 m_bEasing(false),
 m_bDisplay(false),
-m_bUse(false)
+m_bUse(false),
+m_pPlayerOwner(nullptr)
 {
 
 }
@@ -64,7 +62,7 @@ CDoorUI::~CDoorUI()
 //=========================================================
 // 生成処理
 //=========================================================
-CDoorUI* CDoorUI::Create(void)
+CDoorUI* CDoorUI::Create(CPlayer * pPlayer)
 {
 	// インスタンス生成
 	CDoorUI* pDoorUI = new CDoorUI;
@@ -75,6 +73,7 @@ CDoorUI* CDoorUI::Create(void)
 	pDoorUI->SetAnchor(ANCHORTYPE_CENTER);
 	pDoorUI->SetTexture(DoorUI::DoorUI_NAME);
 	pDoorUI->SetSize(DoorUI::fWidth, DoorUI::fHeight);
+	pDoorUI->SetPlayerOwner(pPlayer);
 
 	// 初期化失敗時
 	if (FAILED(pDoorUI->Init())) return nullptr;
@@ -82,7 +81,6 @@ CDoorUI* CDoorUI::Create(void)
 	// UIのポインタを返す
 	return pDoorUI;
 }
-
 //=========================================================
 // 初期化処理
 //=========================================================
@@ -105,40 +103,53 @@ HRESULT CDoorUI::Init(void)
 //=========================================================
 void CDoorUI::Uninit(void)
 {
-	// 親クラスの終了処理
-	CObject2D::Uninit();
-
 	// スフィアコライダーの破棄
 	m_pSphereCollider.reset();
+
+	// 親クラスの終了処理
+	CObject2D::Uninit();
 }
 //=========================================================
 // 更新処理
 //=========================================================
 void CDoorUI::Update(void)
 {
-	if (m_bUse)
-	{
-		Uninit();
-		return;
-	}
-
-	// 親クラスの更新処理
-	CObject2D::Update();
-
-	// プレイヤーの情報を取得し判定を生成
-	const auto& Player = CGameSceneObject::GetInstance()->GetPlayer();
-	if (Player == nullptr) return;
+	// ポインタがnullなら
+	if (!m_pPlayerOwner) return;
 
 	// スフィアコライダー取得とnullチェック
-	CSphereCollider* SphereCollider = Player->GetSphereCollider();
+	CSphereCollider* SphereCollider = m_pPlayerOwner->GetSphereCollider();
 	if (SphereCollider == nullptr) return;
 
-	// 当たり判定の実行
-	if (CollisionSphere(SphereCollider))m_bDisplay = true;
-	else m_bDisplay = false;
+	// 当たっている時
+	if (CollisionSphere(SphereCollider))
+	{
+		// 描画する
+		m_bDisplay = true;
+
+		// タスク起動判定チェック
+		if (m_pPlayerOwner->GetIsTaskOutSide())
+		{
+			// テクスチャはいつもの
+			SetTexture(DoorUI::DoorUI_NAME);
+		}
+		else if (!m_pPlayerOwner->GetIsTaskOutSide())
+		{
+			// テクスチャを「まだ外出れない」にする
+			SetTexture(DoorUI::DoorUI_NotOpenNAME);
+		}
+	}
+	else
+	{
+		// 範囲外の時は描画しない
+		m_bDisplay = false;
+	}
 
 	// イージング
 	EasingSine();
+
+	// 親クラスの更新処理
+	CObject2D::Update();
 }
 //=========================================================
 // 描画処理
@@ -146,17 +157,6 @@ void CDoorUI::Update(void)
 void CDoorUI::Draw(void)
 {
 	if(m_bDisplay) CObject2D::Draw();
-}
-//=========================================================
-// インスタンス取得処理
-//=========================================================
-CDoorUI* CDoorUI::Instance(void)
-{
-	// nullチェック
-	if (m_pInstance == nullptr)m_pInstance = new CDoorUI;
-
-	// 生成されたインスタンスを返す
-	return m_pInstance;
 }
 //=========================================================
 // 球形当たり判定処理

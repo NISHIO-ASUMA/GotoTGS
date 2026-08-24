@@ -16,10 +16,13 @@
 #include "manager.h"
 #include "ui.h"
 
+//*********************************************************
 // 静的メンバ変数宣言
+//*********************************************************
 int CDeskworkUIManager::m_nPCTaskNum = NULL;
 int CDeskworkUIManager::m_nCOPYTaskNum = NULL;
 int CDeskworkUIManager::m_nDOCUMENTTaskNum = NULL;
+int CDeskworkUIManager::m_nOutsideTaskNum = NULL;
 bool CDeskworkUIManager::m_bTutorial = NULL;
 
 //=========================================================
@@ -28,6 +31,7 @@ bool CDeskworkUIManager::m_bTutorial = NULL;
 CDeskworkUIManager::CDeskworkUIManager() :
 m_pos(VECTOR3_NULL),
 m_pClearUI(nullptr),
+m_pPlayer(nullptr),
 m_bUse(false),
 m_bTime(false),
 m_bCan(false),
@@ -97,13 +101,27 @@ void CDeskworkUIManager::Update(void)
 }
 
 //=========================================================
-// 書類の数の加算処理
+// 書類タスクの加算処理
 //=========================================================
 void CDeskworkUIManager::AddDOCUMENTTask(void)
 {
-	// こなしたコピー機タスクの数を加算
+	// こなしたコピー機タスクの分だけ加算
 	m_nDOCUMENTTaskNum += m_nCOPYTaskNum;
 
 	//  コピー機タスクの数を初期化
 	m_nCOPYTaskNum = NULL;
+}
+
+//=========================================================
+// 外出タスクの加算処理
+//=========================================================
+void CDeskworkUIManager::AddOutsideTask(void)
+{
+#if 0
+	// こなした書類タスクの分だけ加算
+	m_nOutsideTaskNum += m_nDOCUMENTTaskNum;
+
+	// 書類タスクの数を初期化
+	m_nDOCUMENTTaskNum = NULL;
+#endif
 }

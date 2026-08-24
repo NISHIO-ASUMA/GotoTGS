@@ -43,6 +43,12 @@ public:
 	HRESULT Load(void);
 
 	/// <summary>
+	/// 読み込むファイル名を設定する
+	/// </summary>
+	/// <param name="pLoadName"></param>
+	void SetLoadFileName(const char* pLoadName = "data/JSON/GameMap.json") { m_pLoadFileName = pLoadName; }
+
+	/// <summary>
 	/// 配列のサイズを取得する
 	/// </summary>
 	/// <returns></returns>
@@ -83,6 +89,9 @@ public:
 private:
 
 	static constexpr const char* FILE_NAME = "data/JSON/GameMap.json";	// ファイル名
+
+private:
 	std::vector<CBlock*>m_pBlocks;										// 配置するブロックの動的配列
 	CMoveCharactor* m_pCharactor;										// 動くキャラクター
+	const char* m_pLoadFileName;										// 読み込むファイル名
 };

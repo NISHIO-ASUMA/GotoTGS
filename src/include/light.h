@@ -24,6 +24,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 
+	void SetLight(void);
+
 private:
 	static inline constexpr int NUMLIGHT = 4;		// İ’u‚·‚é”
 

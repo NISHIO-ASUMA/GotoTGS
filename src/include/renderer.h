@@ -43,7 +43,7 @@ public:
 	void Draw(void);
 	void OnWireFrame(void);
 	void OffWireFrame(void);
-	void SetBackBuffColor(const D3DXCOLOR& col);
+	void SetBackBuffColor(const D3DXCOLOR& col = D3DCOLOR_RGBA(102, 204, 255, 255));
 	void SetSize(UINT uWidth, UINT uHeight) { m_Width = uWidth, m_Height = uHeight; }
 	void GetFps(const int& nFps) { m_fps = nFps; }
 

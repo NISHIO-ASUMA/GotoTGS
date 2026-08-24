@@ -100,7 +100,7 @@ void CAfkBench::Update(void)
 
 	m_pParticle->SetUse(m_bDisplay);
 
-	if (m_pParticle == nullptr)return;
+	if (m_pParticle == nullptr) return;
 
 	float fColR = (float)(rand() / (RAND_MAX + 1.0f));
 	float fColG = (float)(rand() / (RAND_MAX + 1.0f));

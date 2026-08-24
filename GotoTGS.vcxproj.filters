@@ -91,12 +91,6 @@
     <Filter Include="ヘッダー ファイル\ObjectClass\XFile">
       <UniqueIdentifier>{c610c6b7-aff2-4cb3-bc7e-0a91227cf098}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Effect">
-      <UniqueIdentifier>{86c1a98c-432b-4f61-98e8-5baf8b58507c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Effect">
-      <UniqueIdentifier>{f70fbd5f-fb8a-41b3-a482-248a3c626c89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\JsonUtil">
       <UniqueIdentifier>{db469dad-13e4-4145-95d9-2b0d5bfaca49}</UniqueIdentifier>
     </Filter>
@@ -226,38 +220,8 @@
     <Filter Include="ヘッダー ファイル\Number\Score">
       <UniqueIdentifier>{317dccb2-a0e0-4a08-9229-b6b900642260}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Charactor">
-      <UniqueIdentifier>{583a06ec-ea67-4918-b764-58d30280e892}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor">
-      <UniqueIdentifier>{97497e45-38b1-4832-b440-84a43e3b1e4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\XFile">
       <UniqueIdentifier>{02b9d3d3-0c72-4684-9a08-2c6ca866057f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\Player">
-      <UniqueIdentifier>{f6dcf11d-ee5a-44fa-99ba-61c04601f1c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\Enemy">
-      <UniqueIdentifier>{052f2e9d-19da-4ca1-b15c-5035da6f2992}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\Player">
-      <UniqueIdentifier>{61b2d422-c895-469f-b808-ad12ef318882}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\Enemy">
-      <UniqueIdentifier>{9f206bbc-994f-4b44-be1b-26734d76b972}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\boss">
-      <UniqueIdentifier>{43218d2c-9988-4951-a62e-9abb5dc0bb8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\boss">
-      <UniqueIdentifier>{b8748ade-aa36-43fa-8f20-af1a9948ed15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Charactor\friend">
-      <UniqueIdentifier>{44fab2a6-d893-44b5-b6c0-ab15cdc8248f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Charactor\friend">
-      <UniqueIdentifier>{11cb81b3-aad0-4436-8d17-034cf2fb43bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\AddFile">
       <UniqueIdentifier>{cb5f10f3-5a45-4ca0-ab52-05d464a1e8c0}</UniqueIdentifier>
@@ -438,6 +402,18 @@
     </Filter>
     <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\auditor">
       <UniqueIdentifier>{24f74b2f-0a96-42b0-bc1c-acb11cb55700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\client">
+      <UniqueIdentifier>{17b36adb-290d-4f1e-9d95-c92ecf2c0241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\client">
+      <UniqueIdentifier>{e2f29736-a165-492a-901e-3e4f997a6c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\overworkman">
+      <UniqueIdentifier>{b63b1d8a-1acb-4d38-8799-43046c170b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman">
+      <UniqueIdentifier>{2a90c779-7fc2-46b9-a08f-16a10df2fa40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -966,14 +942,41 @@
     <ClCompile Include="src\cpp\billboardmulti.cpp">
       <Filter>ソース ファイル\ObjectClass\3D</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\afkbattime.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
     <ClCompile Include="src\cpp\pointobject.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\XFile</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\number3d.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Number\BaseClass</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\scorepop.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Number\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkresult.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkresultmanager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkresultobject.cpp">
+      <Filter>ソース ファイル\Scene\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\outsidework.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\client.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\clientmanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\searchicon.cpp">
+      <Filter>ソース ファイル\AddFile\Chikada\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\overworkman.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1463,17 +1466,8 @@
     <ClInclude Include="src\include\gaugeneedle.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Progressgauge</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\tutorialplayer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\vigilancelevel.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Vigilancegauge</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\afkeating.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstateeating.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\receptionist.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Reception</Filter>
@@ -1496,17 +1490,8 @@
     <ClInclude Include="src\include\createjsonauditor.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\afkbench.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\auditorutility.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\playerstatebench.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemyutility.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\enemystatedoubt.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
@@ -1517,14 +1502,65 @@
     <ClInclude Include="src\include\enemydoubtgauge.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\pointobject.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\include\playerutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkbattime.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkbench.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\afkeating.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\afk</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstatebench.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\playerstateeating.h">
+      <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemyutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\include\number3d.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Number\BaseClass</Filter>
     </ClInclude>
     <ClInclude Include="src\include\scorepop.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Number\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\pointobject.h">
+      <Filter>ヘッダー ファイル\XFile</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tutorialplayer.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresult.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresultmanager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkresultobject.h">
+      <Filter>ヘッダー ファイル\Scene\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\outsidework.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\client.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\clientutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\clientmanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\searchicon.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\overworkman.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

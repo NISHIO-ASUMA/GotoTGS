@@ -17,6 +17,7 @@
 #include "titleobject.h"
 #include "manager.h"
 #include "camera.h"
+#include "light.h"
 
 //=========================================================
 // コンストラクタ
@@ -37,6 +38,12 @@ CTitle::~CTitle()
 //=========================================================
 HRESULT CTitle::Init(void)
 {
+	// ライトの値初期化
+	CManager::GetInstance()->GetLight()->Init();
+
+	// バックバッファのカラーを戻す
+	CManager::GetInstance()->GetRenderer()->SetBackBuffColor();
+
 	// カメラ初期化
 	CManager::GetInstance()->GetCamera()->Init();
 

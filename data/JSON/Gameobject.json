@@ -25,29 +25,5 @@
     "SegmentX": 1,
     "SegmentZ": 1,
     "Texture": "data/TEXTURE/Floor.jpg"
-  },
-  {
-    "ObjectTag": "Ui",
-    "Pos": [ 160.0, 175.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 140.0,
-    "Height": 25.0,
-    "Texture": "option_task.jpg",
-    "AlphaTest": false,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
-  },
-  {
-    "ObjectTag": "Ui",
-    "Pos": [ 160.0, 235.0, 0.0 ],
-    "FlashFrame": 0,
-    "Width": 140.0,
-    "Height": 25.0,
-    "Texture": "option_lazy.jpg",
-    "AlphaTest": false,
-    "IsFlash": false,
-    "EnableAlpha": false,
-    "AlphaFrame": 0
   }
 ]

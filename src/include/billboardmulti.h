@@ -55,12 +55,12 @@ public:
 	/// <summary>
 	/// 生成処理
 	/// </summary>
-	/// <param name="pos">生成処理</param>
+	/// <param name="pos">生成座標</param>
 	/// <param name="rot">角度</param>
 	/// <param name="fWidth">横幅</param>
 	/// <param name="fHeight">高さ</param>
-	/// <param name="pTexName1">テクスチャファイル1</param>
-	/// <param name="pTexName2">テクスチャファイル2</param>
+	/// <param name="pTexName1">ベーステクスチャファイル</param>
+	/// <param name="pTexName2">マルチテクスチャファイル</param>
 	/// <returns></returns>
 	static CBillboardMulti* Create
 	(

@@ -156,7 +156,8 @@ void CCamera::Update(void)
 		// 固定カメラに設定
 		TitleCamera();
 	}
-	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT)
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_RESULT || 
+			CManager::GetInstance()->GetScene() == CScene::MODE_OVERWORK)
 	{
 		// 固定カメラに設定
 		ResultCamera();
@@ -705,8 +706,8 @@ void CCamera::UpdateAnim(void)
 				m_pCamera.nCntAnim = 0;
 				m_isAnimating = false;
 
-				// 編集モード
-				SetMode(MODE_NONE);
+				//// 編集モード
+				//SetMode(MODE_THIRD);
 			}
 		}
 	}
@@ -823,6 +824,9 @@ HRESULT CCamera::LoadAnimation(const std::string& path)
 	{
 		// 現在のデータに入れる
 		m_currentAnim = tempAnim;
+		m_isAnimating = true;
+		m_pCamera.nMode = CCamera::MODE_ANIM;
+
 		return S_OK;
 	}
 

@@ -39,7 +39,7 @@ CPlayerStateTV::~CPlayerStateTV()
 //=========================================================
 void CPlayerStateTV::OnStart(void)
 {
-	// プレイヤーの現在座標を椅子の上にセットする
+	// プレイヤーの現在座標をTVの前の椅子の上にセットする
 	m_pPlayer->MathTVRotation();
 
 	// 回数加算

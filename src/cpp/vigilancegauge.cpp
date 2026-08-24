@@ -20,6 +20,7 @@
 #include "gametime.h"
 #include "ui.h"
 #include "sound.h"
+#include "camera.h"
 
 //=========================================================
 // コンストラクタ
@@ -95,8 +96,16 @@ void CVigilancegauge::Uninit(void)
 //=========================================================
 void CVigilancegauge::Update(void)
 {
-	// 親の更新処理
-	CObject2DMulti::Update();
+	// アニメーション中はカウントをストップ
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	{
+		// テクスチャのUVを比率分動かす
+		CObject2DMulti::SetUV(m_fRatio);
+
+		// 親の更新処理
+		CObject2DMulti::Update();
+		return;
+	}
 
 	// 比率を増やす
 	m_fRatio += Config::RATIO_VALUE;
@@ -148,6 +157,9 @@ void CVigilancegauge::Update(void)
 	}
 	// テクスチャのUVを比率分動かす
 	CObject2DMulti::SetUV(m_fRatio);
+
+	// 親の更新処理
+	CObject2DMulti::Update();
 }
 
 //=========================================================

@@ -22,6 +22,7 @@
 class CPCDeskwork;
 class CCOPYDeskwork;
 class CDOCUMENTDeskwork;
+class CPlayer;
 
 //*********************************************************
 // タスククラスを定義
@@ -40,6 +41,7 @@ public:
 
 	// 設定処理
 	void SetTaskType(const CWorldUICollision::TYPE& TaskType, const bool& bUse = false);
+	void SetPtrForOutPlayer(CPlayer* pPlayer = nullptr) { m_pPlayer = pPlayer; }
 
 	// 情報取得処理
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
@@ -48,7 +50,7 @@ public:
 	static CWorldUICollision::TYPE GetTaskType(void) { return m_TaskType; }
 
 	// 生成処理
-	static CDeskwork* Create(const D3DXVECTOR3& pos);
+	static CDeskwork* Create(const D3DXVECTOR3& pos, CPlayer* pPlayer);
 
 private:
 
@@ -76,6 +78,7 @@ private:
 	CPCDeskwork* m_pPCDeskUI;				// PCタスクUIのポインタ
 	CCOPYDeskwork* m_pCOPYDeskUI;			// コピー機タスクUIのポインタ
 	CDOCUMENTDeskwork* m_pDOCUMENTDesk;		// 書類タスクのポインタ
+	CPlayer* m_pPlayer;						// 入れ子の入れ子
 
 	// 静的メンバ変数
 	static CWorldUICollision::TYPE m_TaskType;	// タスクの種類

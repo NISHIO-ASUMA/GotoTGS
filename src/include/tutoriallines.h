@@ -71,6 +71,7 @@ public:
 	CTutorialLinesBG* GetBG(void) { return m_pBG; }		// 背景のポインタ
 	CLines* GetLines(void) { return m_pLines; }			// セリフのポインタ
 	bool GetUse(void) const { return m_bUse; }			// 使用しているかどうか
+	bool GetIsComp(void) const { return m_isComplite; }
 	int GetNowIdxNumber(void) const { return m_nNowIdx; }
 
 private:
@@ -134,4 +135,5 @@ private:
 private:
 	std::vector<CPointObject*> m_pArrow;	// 矢印オブジェクト
 	CBillboard* m_pKeyUi;					// キー入力表示のui
+	bool m_isComplite;						// 全部完了した
 };

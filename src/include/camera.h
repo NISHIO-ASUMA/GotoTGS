@@ -114,6 +114,9 @@ public:
 	/// <param name="target">追従対象の座標</param>
 	void SetTargetPersonPos(const D3DXVECTOR3& target = VECTOR3_NULL) 
 	{
+		// もし、アニメーションしていたら
+		if (m_isAnimating) return;
+
 		m_pThirdPersonPos = target;  // ターゲットの値を設定
 		m_pThirdPersonPos.y = 50.0f; // 高さの値を少し上に
 		m_pCamera.nMode = MODE_THIRD;// カメラモードを切り替え
@@ -183,7 +186,7 @@ public:
 	inline D3DXVECTOR3 GetPosR(void) const { return m_pCamera.posR; }
 	inline D3DXMATRIX GetMtxProjection(void) const { return m_pCamera.mtxprojection; }
 	inline D3DXMATRIX GetView(void) const { return m_pCamera.mtxView; }
-
+	inline bool GetIsAnimTime(void) const { return m_isAnimating; }
 	int GetMode(void) const { return m_pCamera.nMode; }
 
 private:

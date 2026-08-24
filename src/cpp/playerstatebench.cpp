@@ -37,7 +37,7 @@ void CPlayerStateBench::OnStart()
 	m_pPlayer->MathBenchRotation();
 
 	// ‰ñ”‰ÁŽZ
-	m_pPlayer->AddSmoke();
+	m_pPlayer->AddBench();
 }
 
 //=========================================================

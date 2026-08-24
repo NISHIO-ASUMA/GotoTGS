@@ -49,7 +49,7 @@ public:
 	bool GetUse(void) { return m_bUse; }
 
 	// ê√ìIÉÅÉìÉoä÷êî
-	static CParticle* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius, TYPE type);
+	static CParticle* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fRadius,TYPE type, D3DXVECTOR3 move = VECTOR3_NULL);
 	static void SetTargetPos(D3DXVECTOR3 pos) { m_TargetPos = pos; }
 
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }

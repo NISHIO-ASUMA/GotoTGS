@@ -35,7 +35,8 @@ m_nCounterBlend(NULL),
 m_nMotionIdx(-1),
 m_isFinishMotion(false),
 m_isFirstMotion(false),
-m_isBlendMotion(false)
+m_isBlendMotion(false),
+m_isLooping(true)
 {
 }
 //=========================================================
@@ -80,8 +81,11 @@ void CMotion::RegisterPath(const char* pMotionName, std::vector<CModel*>& pModel
 //============================================================
 // モーションセット
 //============================================================
-void CMotion::SetMotion(int motiontype)
+void CMotion::SetMotion(int motiontype, bool isLoop)
 {
+	// フラグ格納
+	m_isLooping = isLoop;
+
 	// 一致していたら
 	if (m_motiontype == motiontype) return;
 
@@ -95,8 +99,11 @@ void CMotion::SetMotion(int motiontype)
 //=================================================================
 // ブレンドモーションセット情報
 //=================================================================
-void CMotion::SetMotion(int nMotionType, bool isBlend, int nBlendFrame)
+void CMotion::SetMotion(int nMotionType, bool isBlend, int nBlendFrame, bool isLoop)
 {
+	// フラグ格納
+	m_isLooping = isLoop;
+
 	// 一致していたら
 	if (m_motiontype == nMotionType) return;
 
@@ -156,7 +163,14 @@ void CMotion::Update(const std::vector<CModel*>& pModel)
 	}
 
 	// 次のキー番号の確定
-	m_nNextKey = (m_nKey + 1) % CurrentMotionInfo.nNumKey;
+	if (!m_isLooping && m_nKey >= CurrentMotionInfo.nNumKey - 1)
+	{
+		m_nNextKey = m_nKey; // 最後のキーの次は最後のキーのまま
+	}
+	else
+	{
+		m_nNextKey = (m_nKey + 1) % CurrentMotionInfo.nNumKey;
+	}
 
 	// モデル更新ループ
 	for (int nCnt = 0; nCnt < nModelNum; ++nCnt)
@@ -197,18 +211,27 @@ void CMotion::Update(const std::vector<CModel*>& pModel)
 		m_nCounterMotion++;
 		m_nAllFrameCount++;
 
-		// キー進行判定
 		if (m_nCounterMotion >= CurrentMotionInfo.aKeyInfo[m_nKey].nFrame)
 		{
-			m_nCounterMotion = 0;
-			m_nKey++;
-
-			// モーションループ判定
-			if (m_nKey >= CurrentMotionInfo.nNumKey)
+			// ループしない設定かつ、現在のキーが最後のキーの場合
+			if (!m_isLooping && m_nKey >= CurrentMotionInfo.nNumKey - 1)
 			{
-				m_isFinishMotion = true; // 1ループフラグ
-				m_nKey = 0;
-				m_nAllFrameCount = 0;
+				m_isFinishMotion = true;
+				// 最後のキーの最後のフレームで止めるため、カウンターを加算せずに進行を固定する
+				m_nCounterMotion = CurrentMotionInfo.aKeyInfo[m_nKey].nFrame;
+			}
+			else
+			{
+				m_nCounterMotion = 0;
+				m_nKey++;
+
+				// モーションループ判定
+				if (m_nKey >= CurrentMotionInfo.nNumKey)
+				{
+					m_isFinishMotion = true; // 1ループフラグ
+					m_nKey = 0;				// 最初のキーに戻る
+					m_nAllFrameCount = 0;
+				}
 			}
 		}
 	}

@@ -53,6 +53,7 @@ HRESULT CResultObject::Init(void)
 	jsonManager->SetBlockManager(m_pBlock.get());
 
 	// ブロック管理クラスの初期化
+	m_pBlock->SetLoadFileName();
 	m_pBlock->Init();
 #endif // NDEBUG
 

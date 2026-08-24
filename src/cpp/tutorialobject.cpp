@@ -67,6 +67,7 @@ HRESULT CTutorialObject::Init(void)
 	// ステージマップ読み込み
 	m_pBlockManager = std::make_unique<CBlockManager>();
 	pManager->SetBlockManager(m_pBlockManager.get());
+	m_pBlockManager->SetLoadFileName("data/JSON/TutoMap.json");
 	m_pBlockManager->Init();
 
 	// タスクの判定を取る球形コライダー管理クラスを生成
@@ -87,7 +88,7 @@ HRESULT CTutorialObject::Init(void)
 	m_plines->SetPlayer(m_pTutoPlayer);
 
 	// タスクの生成 Misaki
-	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f));
+	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f), nullptr);
 
 	return S_OK;
 }

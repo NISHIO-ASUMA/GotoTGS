@@ -63,6 +63,7 @@ HRESULT CRankingObject::Init(void)
 	jsonManager->SetBlockManager(m_pBlock.get());
 
 	// 初期化とポインタセット
+	m_pBlock->SetLoadFileName();
 	m_pBlock->Init();
 
 	// フィールド読み込み

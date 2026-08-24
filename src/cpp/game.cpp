@@ -23,6 +23,7 @@
 #include "fade.h"
 #include "gametime.h"
 #include "player.h"
+#include "light.h"
 
 #ifdef _DEBUG
 #include "debugproc.h"
@@ -52,6 +53,9 @@ CGame::~CGame()
 //=========================================================
 HRESULT CGame::Init(void)
 {
+	// ライトの値初期化
+	CManager::GetInstance()->GetLight()->Init();
+
 	// カーソルの非表示
 	CManager::GetInstance()->GetMouse()->SetCursorVisibility(false);
 

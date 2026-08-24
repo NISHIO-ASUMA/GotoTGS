@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="src\cpp\afk.cpp" />
     <ClCompile Include="src\cpp\afk2dui.cpp" />
+    <ClCompile Include="src\cpp\afkbattime.cpp" />
     <ClCompile Include="src\cpp\afkbench.cpp" />
     <ClCompile Include="src\cpp\afkgamecenter.cpp" />
     <ClCompile Include="src\cpp\afkmagazine.cpp" />
@@ -183,6 +184,8 @@
     <ClCompile Include="src\cpp\boxcollider.cpp" />
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
     <ClCompile Include="src\cpp\camera.cpp" />
+    <ClCompile Include="src\cpp\client.cpp" />
+    <ClCompile Include="src\cpp\clientmanager.cpp" />
     <ClCompile Include="src\cpp\collider.cpp" />
     <ClCompile Include="src\cpp\collision.cpp" />
     <ClCompile Include="src\cpp\collisionbox.cpp" />
@@ -264,6 +267,11 @@
     <ClCompile Include="src\cpp\object3D.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
+    <ClCompile Include="src\cpp\outsidework.cpp" />
+    <ClCompile Include="src\cpp\overworkman.cpp" />
+    <ClCompile Include="src\cpp\overworkresult.cpp" />
+    <ClCompile Include="src\cpp\overworkresultmanager.cpp" />
+    <ClCompile Include="src\cpp\overworkresultobject.cpp" />
     <ClCompile Include="src\cpp\particle.cpp" />
     <ClCompile Include="src\cpp\pause.cpp" />
     <ClCompile Include="src\cpp\pausemanager.cpp" />
@@ -305,6 +313,7 @@
     <ClCompile Include="src\cpp\scene.cpp" />
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\scorepop.cpp" />
+    <ClCompile Include="src\cpp\searchicon.cpp" />
     <ClCompile Include="src\cpp\shadow.cpp" />
     <ClCompile Include="src\cpp\shadowstencil.cpp" />
     <ClCompile Include="src\cpp\sideopendoor.cpp" />
@@ -343,6 +352,7 @@
   <ItemGroup>
     <ClInclude Include="src\include\afk.h" />
     <ClInclude Include="src\include\afk2dui.h" />
+    <ClInclude Include="src\include\afkbattime.h" />
     <ClInclude Include="src\include\afkbench.h" />
     <ClInclude Include="src\include\afkgamecenter.h" />
     <ClInclude Include="src\include\afkmagazine.h" />
@@ -369,6 +379,9 @@
     <ClInclude Include="src\include\boxcollider.h" />
     <ClInclude Include="src\include\boxtospherecollision.h" />
     <ClInclude Include="src\include\camera.h" />
+    <ClInclude Include="src\include\client.h" />
+    <ClInclude Include="src\include\clientmanager.h" />
+    <ClInclude Include="src\include\clientutility.h" />
     <ClInclude Include="src\include\collider.h" />
     <ClInclude Include="src\include\collision.h" />
     <ClInclude Include="src\include\collisionbox.h" />
@@ -453,6 +466,11 @@
     <ClInclude Include="src\include\object3D.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />
+    <ClInclude Include="src\include\outsidework.h" />
+    <ClInclude Include="src\include\overworkman.h" />
+    <ClInclude Include="src\include\overworkresult.h" />
+    <ClInclude Include="src\include\overworkresultmanager.h" />
+    <ClInclude Include="src\include\overworkresultobject.h" />
     <ClInclude Include="src\include\particle.h" />
     <ClInclude Include="src\include\pause.h" />
     <ClInclude Include="src\include\pausemanager.h" />
@@ -469,6 +487,7 @@
     <ClInclude Include="src\include\playerstatemove.h" />
     <ClInclude Include="src\include\playerstateneutral.h" />
     <ClInclude Include="src\include\playerstatetv.h" />
+    <ClInclude Include="src\include\playerutility.h" />
     <ClInclude Include="src\include\pointobject.h" />
     <ClInclude Include="src\include\police.h" />
     <ClInclude Include="src\include\progressgauge.h" />
@@ -489,6 +508,7 @@
     <ClInclude Include="src\include\scene.h" />
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\scorepop.h" />
+    <ClInclude Include="src\include\searchicon.h" />
     <ClInclude Include="src\include\shadow.h" />
     <ClInclude Include="src\include\shadowstencil.h" />
     <ClInclude Include="src\include\sideopendoor.h" />
