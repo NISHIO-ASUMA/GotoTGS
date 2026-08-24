@@ -30,6 +30,7 @@ CEvent::CEvent()
 //=========================================================
 CEvent::~CEvent()
 {
+
 }
 
 //=========================================================
@@ -42,7 +43,6 @@ CEvent* CEvent::Create(const D3DXVECTOR3& pos)
 
 	// ƒkƒ‹ƒ`ƒFƒbƒN
 	if (pEvent == nullptr) return nullptr;
-
 
 	// ‰Šú‰»Ž¸”sŽž
 	if (FAILED(pEvent->Init())) return nullptr;
@@ -75,7 +75,6 @@ void CEvent::Update(void)
 	auto* pAlert = CEventUI::GetAlert();
 
 	pEventCutin->SetUse();
-
 }
 
 //=========================================================

@@ -17,7 +17,7 @@
 #include "manager.h"
 #include "bossstateneutral.h"
 #include "billboard.h"
-//#include "bossstatechase.h"
+#include "bossstatechase.h"
 
 //=========================================================
 // コンストラクタ
@@ -43,7 +43,7 @@ void CBossStateDoubt::OnStart(void)
 {
 	// ui生成 ( ?のゲージ )
 	auto CreatePos = D3DXVECTOR3(m_pBoss->GetPos().x, m_pBoss->GetPos().y + Config::VALUE_HEIGHT, m_pBoss->GetPos().z);
-	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE, "hatena.png", "gauge_enemyside.png");
+	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE);
 }
 //=========================================================
 // 更新関数
@@ -58,7 +58,7 @@ void CBossStateDoubt::OnUpdate(void)
 		m_pGauge->SetTargetPos(headPos);
 	}
 
-	// フラグoff
+	// 描画フラグoff
 	const auto& icon = m_pBoss->GetChaseIcon();
 	if (icon)
 		icon->SetDrawFlags(false);
@@ -80,7 +80,7 @@ void CBossStateDoubt::OnUpdate(void)
 	{
 		// ゲージのクリア
 		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0020f);
+		m_pGauge->SetRatio(0.0040f);
 
 		// もし完全クリアなら状態を元に戻す
 		if (m_pGauge->GetNormalFlag())
@@ -94,7 +94,7 @@ void CBossStateDoubt::OnUpdate(void)
 	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && m_pGauge->GetIsComplete())
 	{
 		// 猛追ステートに変更する
-		// m_pBoss->ChangeState(new CBossStateChase(), ID_CHASE);
+		m_pBoss->ChangeState(new CBossStateChase(), ID_CHASE);
 		return;
 	}
 }

@@ -994,7 +994,10 @@
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\bossstatedoubt.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\bossstatechase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1584,7 +1587,10 @@
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
     <ClInclude Include="src\include\bossstatedoubt.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\bossstatechase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

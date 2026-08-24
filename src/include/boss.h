@@ -48,17 +48,20 @@ public:
 	void MoveInOffice(const D3DXVECTOR3& pos);
 	void MoveOfficePoint(const D3DXVECTOR3& pos);
 	void NormalMoving(void);
+	void StartChase(const bool isStartflag) { m_isStartChase = isStartflag; }
 	void ChangeState(CBossStateBase* pState, int nID);
 
 	void DrawEyeSight(void);
-	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+	void ChasePlayer(void);
+	bool CheckEyesight(void);
 	bool CheckRayToAngleRange(void);
 	bool CheckObstacle(void);
 
-	void SetCharactorPointer(CPlayer* pCharactor) { m_pDestCharactor = pCharactor; }
+	void SetCharactorPointer(CPlayer* pCharactor = nullptr) { m_pDestCharactor = pCharactor; }
 
 	bool GetInOfficeFlag(void) { return m_isOfficeMove; }
 	CBillboard* GetChaseIcon(void) { return m_pChaseIcon; }
+	CPlayer* GetInCharactor(void) { return m_pDestCharactor; }
 
 	/// <summary>
 	/// 生成処理
@@ -116,7 +119,9 @@ private:
 private:
 	bool m_isOutSideIn;									// 外から移動しているフラグ
 	bool m_isOfficeMove;								// オフィス内で移動するフラグ
+	bool m_isStartChase;								// 猛追開始フラグ
 
+	bool m_isActiveSet;									// 行動開始できるかどうか
 private:
 	float m_fEyeAngle;									// 角度値
 

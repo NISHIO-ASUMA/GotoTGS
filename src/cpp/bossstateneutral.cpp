@@ -21,6 +21,7 @@
 #include "boss.h"
 #include "manager.h"
 #include "billboard.h"
+#include "bossstatedoubt.h"
 
 //=========================================================
 // コンストラクタ
@@ -60,15 +61,13 @@ void CBossStateNeutral::OnUpdate()
 	// 通常移動とオフィス内移動
 	m_pBoss->NormalMoving();
 
-#if 1
 	// 視界内 かつ オフィス内移動の時
 	if (m_pBoss->CheckRayToAngleRange() && m_pBoss->GetInOfficeFlag() == true)
 	{
-		// ステート生成
-		//m_pBoss->ChangeState(new CBossStateDoubt(), ID_DOUBT);
+		// 疑いステート生成
+		m_pBoss->ChangeState(new CBossStateDoubt(), ID_DOUBT);
 		return;
 	}
-#endif
 }
 //=========================================================
 // 状態終了
