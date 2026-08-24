@@ -82,7 +82,6 @@ HRESULT CDOCUMENTDeskwork::Init(void)
 	// g‚Á‚Ä‚¢‚È‚¢ó‘Ô‚É‚·‚é
 	m_pParticle->SetUse(false);
 
-
 	return S_OK;
 }
 

@@ -53,6 +53,7 @@ public:
 		TYPE_PC,			// デスク作業
 		TYPE_COPY,			// コピー機作業
 		TYPE_DOCUMENT,		// 書類作業
+		TYPE_OUTSIDE,		// 外出作業
 		TYPE_MAX
 	};
 

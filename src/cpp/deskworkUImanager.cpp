@@ -40,6 +40,7 @@ m_nCountTime(NULL)
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;
 	m_nDOCUMENTTaskNum = NULL;
+	m_nOutsideTaskNum = NULL;
 	m_bTutorial = false;
 }
 
@@ -88,6 +89,7 @@ void CDeskworkUIManager::Uninit(void)
 	m_nPCTaskNum = NULL;
 	m_nCOPYTaskNum = NULL;
 	m_nDOCUMENTTaskNum = NULL;
+	m_nOutsideTaskNum = NULL;
 	m_bTutorial = false;
 }
 
@@ -117,11 +119,9 @@ void CDeskworkUIManager::AddDOCUMENTTask(void)
 //=========================================================
 void CDeskworkUIManager::AddOutsideTask(void)
 {
-#if 0
 	// こなした書類タスクの分だけ加算
 	m_nOutsideTaskNum += m_nDOCUMENTTaskNum;
 
 	// 書類タスクの数を初期化
 	m_nDOCUMENTTaskNum = NULL;
-#endif
 }

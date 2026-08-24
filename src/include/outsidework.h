@@ -16,11 +16,6 @@
 #include "deskworkUImanager.h"
 
 //*********************************************************
-// 前方宣言
-//*********************************************************
-class CParticle;
-
-//*********************************************************
 // 外出タスククラスを定義
 //*********************************************************
 class COutsideWork :public CDeskworkUIManager
@@ -35,11 +30,17 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	// 外出タスクをこなした時の設定
+	void SetOutside(void);
+
+	// 外出するときの処理
+	void GoOut(void);
+
 	// 生成処理
 	static COutsideWork* Create(const bool& bUse = false);
 
 private:
 	// メンバ変数
-	CParticle* m_pParticle;	// パーティクルのポインタ
-	int m_nParticleTime;	// パーティクルを表示する時間
+	bool bGoOut;	// 外出できるかどうか
+	bool bTask;		// タスク中かどうか
 };
