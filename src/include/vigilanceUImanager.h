@@ -16,7 +16,6 @@
 #include "object.h"
 #include "vigilanceicon.h"
 #include "vigilancegauge.h"
-#include "vigilancelevel.h"
 
 //*********************************************************
 //  警戒度UIマネージャーに対するクラスを定義
@@ -38,7 +37,6 @@ public:
 
 	// 情報取得処理
 	CVigilanceicon* GetIcon(void) const { return m_pIcon; }		// アイコン
-	//CVigilancelevel* GetLevel(void) const { return m_pLevel; }	// レベル
 	CVigilancegauge* GetGauge(void) const { return m_pGauge; }	// ゲージ
 	bool GetUse(void) { return m_bUse; }						// 使用しているかどうか
 
@@ -62,11 +60,6 @@ private:
 		static constexpr const char* ICON_AUDITOR = "Auditor.png";	// 監査役のテクスチャ
 		static constexpr const char* ICON_ENEMY = "Enemy.png";		// 上司役のテクスチャ
 
-		// レベルの定数
-		static constexpr float LEVEL_WIDTH = 30.0f;					// 横幅
-		static constexpr float LEVEL_HEIGHT = 30.0f;				// 縦幅
-		static constexpr float LEVEL_Y_VALUE = 40.0f;				// Y軸のずらす量
-
 		// ゲージの定数
 		static constexpr float GAUGE_WIDTH = 120.0f;					// 横幅
 		static constexpr float GAUGE_HEIGHT = 120.0f;					// 縦幅
@@ -78,7 +71,6 @@ private:
 
 	// メンバ変数
 	CVigilanceicon* m_pIcon;		// アイコンのポインタ
-	//CVigilancelevel* m_pLevel;		// レベルのポインタ
 	CVigilancegauge* m_pGauge;		// ゲージのポインタ
 	bool m_bUse;					// 使用するかどうか
 };

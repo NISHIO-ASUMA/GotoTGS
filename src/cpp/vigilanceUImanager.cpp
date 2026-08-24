@@ -20,7 +20,6 @@
 //=========================================================
 CVigilanceUIManager::CVigilanceUIManager(int nPriority) :CObject(nPriority),
 m_pIcon(nullptr),
-//m_pLevel(nullptr),
 m_pGauge(nullptr),
 m_bUse(false)
 {
@@ -66,16 +65,6 @@ HRESULT CVigilanceUIManager::Init(void)
 	float fWidth = Config::ICON_WIDTH;
 	float fHeight = Config::ICON_HEIGHT;
 
-	//// レベルの構造体
-	//CVigilancelevel::Level level;
-	//level.pos = icon.pos;
-	//level.pos.y += Config::LEVEL_Y_VALUE;
-	//level.fWidth = Config::LEVEL_WIDTH;
-	//level.fHeight = Config::LEVEL_HEIGHT;
-
-	//// レベルの生成処理
-	//m_pLevel = CVigilancelevel::Create(level);
-
 	// ゲージの構造体
 	CVigilancegauge::Gauge gauge;
 	gauge.pos.x = pos.x;
@@ -119,12 +108,6 @@ void CVigilanceUIManager::Uninit(void)
 		m_pIcon = nullptr;
 	}
 
-	//if (m_pLevel != nullptr)
-	//{// レベル
-	//	m_pLevel->Uninit();
-	//	m_pLevel = nullptr;
-	//}
-
 	if (m_pGauge != nullptr)
 	{// ゲージ
 		m_pGauge->Uninit();
@@ -140,11 +123,7 @@ void CVigilanceUIManager::Update(void)
 {
 	// 各ポインタの更新処理
 	m_pIcon->Update();
-	//m_pLevel->Update();
 	m_pGauge->Update();
-
-	//// レベルの数値設定処理
-	//m_pLevel->SetLevel(m_pGauge->GetLevelCount());
 }
 
 //=========================================================
@@ -154,6 +133,5 @@ void CVigilanceUIManager::Draw(void)
 {
 	// 各ポインタの更新処理
 	m_pIcon->Draw();
-	//m_pLevel->Draw();
 	m_pGauge->Draw();
 }
