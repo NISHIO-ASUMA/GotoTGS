@@ -897,7 +897,7 @@ void CPlayer::MoveKeyboard(float speed)
 		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
-		if (m_nCntAfk >= 120)
+		if (m_nCntAfk >= 60)
 		{
 			// ‚³‚Ú‚Á‚½‰ñ”‚ð‰ÁŽZ
 			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
@@ -1044,7 +1044,7 @@ void CPlayer::MoveJoypad(float speed)
 		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
-		if (m_nCntAfk >= 120)
+		if (m_nCntAfk >= 60)
 		{
 			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
@@ -1178,7 +1178,7 @@ void CPlayer::MoveCrossPadButton(float speed)
 		|| m_bAfkBench[0] || m_bAfkBench[1] || m_bAfkBench[2] || m_bAfkBench[3])
 	{
 		m_nCntAfk++;
-		if (m_nCntAfk >= 120)
+		if (m_nCntAfk >= 60)
 		{
 			CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle()->AddAFK();
 			m_nCntAfk = 0;
