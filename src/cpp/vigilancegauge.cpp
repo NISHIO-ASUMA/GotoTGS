@@ -155,6 +155,7 @@ void CVigilancegauge::Update(void)
 			m_nActiveCount = NULL;
 		}
 	}
+
 	// テクスチャのUVを比率分動かす
 	CObject2DMulti::SetUV(m_fRatio);
 

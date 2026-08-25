@@ -45,14 +45,15 @@ public:
 	};
 
 	//**********************************
-	// UIの種類
+	// タスクの種類 Misaki
 	//**********************************
 	enum TYPE
 	{
-		TYPE_NONE = -1,		// 作業をしていない状態 Misaki
+		TYPE_NONE = -1,		// 作業をしていない状態
 		TYPE_PC,			// デスク作業
 		TYPE_COPY,			// コピー機作業
 		TYPE_DOCUMENT,		// 書類作業
+		TYPE_INSIDE,		// 受付人
 		TYPE_OUTSIDE,		// 外出作業
 		TYPE_MAX
 	};

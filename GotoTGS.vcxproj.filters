@@ -993,6 +993,9 @@
     <ClCompile Include="src\cpp\bossstateneutral.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\outsideUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+	</ClCompile>
     <ClCompile Include="src\cpp\bossstatedoubt.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
@@ -1586,6 +1589,9 @@
     <ClInclude Include="src\include\bossstateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\outsideUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+	</ClInclude>
     <ClInclude Include="src\include\bossstatedoubt.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>

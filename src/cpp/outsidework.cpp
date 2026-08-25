@@ -25,8 +25,8 @@
 // コンストラクタ
 //=========================================================
 COutsideWork::COutsideWork() :CDeskworkUIManager(),
-bGoOut(false),
-bTask(false)
+m_bGoOutside(false),
+m_bTaskNow(false)
 {
 
 }
@@ -62,10 +62,10 @@ COutsideWork* COutsideWork::Create(const bool& bUse)
 HRESULT COutsideWork::Init(void)
 {
 	// 外出できない状態にする
-	bGoOut = false;
+	m_bGoOutside = false;
 
 	// タスク中ではない状態にする
-	bTask = false;
+	m_bTaskNow = false;
 
 	return S_OK;
 }
@@ -83,8 +83,7 @@ void COutsideWork::Uninit(void)
 //=========================================================
 void COutsideWork::Update(void)
 {
-	// 外出している時の処理
-	GoOut();
+
 }
 
 //=========================================================
@@ -96,47 +95,54 @@ void COutsideWork::Draw(void)
 }
 
 //=========================================================
-// こなした書類タスクの数の設定処理
+// 受付人に話しかけた時の設定処理
 //=========================================================
 void COutsideWork::SetOutside(void)
 {
 	// 外出できる状態にする
-	bGoOut = true;
+	m_bGoOutside = true;
+
+	// タスクしている状態にする
+	m_bTaskNow = true;
 }
 
 //=========================================================
-// 外出する時の処理
+// 外出から帰ってきた時の処理
 //=========================================================
-void COutsideWork::GoOut(void)
+void COutsideWork::EndOutside(void)
 {
-	//// スコアのポインタ
-	//auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+	// タスク中の状態なら
+	if (m_bTaskNow != false) return;
 
-	//// 指針のポインタ
-	//CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
-	//if (pScore == nullptr || pGaugeneedle == nullptr) return;
+	// スコアのポインタ
+	auto* pScore = CGameSceneObject::GetInstance()->GetScore();
 
-	//// タスク中なら
-	//if (bTask != false)
-	//{
-	//	// 書類タスクの数の加算処理
-	//	AddDOCUMENTTask();
+	// 指針のポインタ
+	CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+	if (pScore == nullptr || pGaugeneedle == nullptr) return;
 
-	//	// タスクできない状態にする
-	//	bTask = false;
+	// スコア加算
+	pScore->AddScoreMinus(-1000);
 
-	//	return;
-	//}
+	// こなしたタスクの数を増やす
+	pGaugeneedle->AddTask();
 
-	//// 外出できない状態なら
-	//if (bGoOut != true) return;
+	// 外出できない状態にする
+	m_bGoOutside = false;
+}
 
-	//// スコア加算
-	//pScore->AddScoreMinus(-1000);
+//=========================================================
+// タスク中の処理
+//=========================================================
+void COutsideWork::TaskSystem(void)
+{
+	// タスクをしていない状態なら処理しない
+	if (m_bTaskNow != true) return;
 
-	//// こなしたタスクの数を増やす
-	//pGaugeneedle->AddTask();
+	// 外出タスクの数の加算処理
+	AddOutsideTask();
 
-	////// 外出できない状態にする
-	//bGoOut = false;
+	// タスクをしていない状態にする
+	m_bTaskNow = false;
+
 }

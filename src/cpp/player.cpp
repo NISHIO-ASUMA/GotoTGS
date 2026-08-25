@@ -167,7 +167,7 @@ HRESULT CPlayer::Init(void)
 	// フラグの再初期化
 	m_isPcWork = false;
 	m_isCatchEnemy = false;
-	m_isSetOutSideTask = false;
+	m_isSetOutSideTask = true;
 
 	// 初期の許容時間を設定 
 	// これは最初に「仕事をしていましたよー」の時間分 最初から捕まるといやだから最初だけすぐ捕まらないようにする値
@@ -507,12 +507,34 @@ void CPlayer::Update(void)
 
 					break;
 
-				case CWorldUICollision::TYPE_OUTSIDE: // 外出タスク[add 髙橋]
+				case CWorldUICollision::TYPE_INSIDE: // 受付人[add 髙橋]
+
+					// タスクが終わっていて尚且つ外出できる状態なら
+					if (pDesk->GetOutsideDesk()->GetTaskNow() != true && pDesk->GetOutsideDesk()->GetGoOutside() != false)
+					{
+						// 外出できない状態にする
+						pDesk->GetOutsideDesk()->EndOutside();
+
+						// 扉を閉じる
+						m_isSetOutSideTask = false;
+
+						break;
+					}
 
 					// 両方がnullじゃない状態
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0))
 					{
 						pDesk->GetOutsideDesk()->SetOutside();
+					}
+
+					break;
+
+				case CWorldUICollision::TYPE_OUTSIDE: // 外出タスク[add 髙橋]
+
+					// 両方がnullじゃない状態
+					if (pDesk)
+					{
+						pDesk->GetOutsideDesk()->TaskSystem();
 					}
 
 					break;
