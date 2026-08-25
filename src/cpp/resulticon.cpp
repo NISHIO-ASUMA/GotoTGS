@@ -139,11 +139,11 @@ void CResultIcon::MathScoreTexture(const int& nScore)
 
 	if (nScore <= 3000)
 		SetTexture("ResultIcon/yesman.png");
-	else if (nScore <= 15000)
+	else if (nScore <= 35000)
 		SetTexture("ResultIcon/workman.png");
-	else if (nScore <= 45000)
+	else if (nScore <= 70000)
 		SetTexture("ResultIcon/Dalarryman.png");
-	else if (nScore <= 60000)
+	else if (nScore <= 90000)
 		SetTexture("ResultIcon/Saboriman.png");
 	else
 		SetTexture("ResultIcon/bucklehman.png");
