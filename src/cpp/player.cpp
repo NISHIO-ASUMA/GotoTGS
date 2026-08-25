@@ -650,6 +650,11 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 				}
 			}
 		}
+		else if(!bInArea)
+		{
+			// 終了
+			*pAfkFlag = false;
+		}
 	}
 
 	// ベンチのサボり処理
