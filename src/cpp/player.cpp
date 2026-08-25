@@ -30,6 +30,7 @@
 #include "outline.h"
 #include "fade.h"
 #include "playerutility.h"
+#include "outsidework.h"
 
 //=========================================================
 // コンストラクタ
@@ -489,9 +490,19 @@ void CPlayer::Update(void)
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add 髙橋]
 				
 					// 両方がnullじゃない状態
-					if (pDesk && pDesk->GetDOCUMENTDesk() && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
+					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
 					{
 						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
+					}
+
+					break;
+
+				case CWorldUICollision::TYPE_OUTSIDE: // 外出タスク[add 髙橋]
+
+					// 両方がnullじゃない状態
+					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0))
+					{
+						pDesk->GetOutsideDesk()->SetOutside();
 					}
 
 					break;

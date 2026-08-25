@@ -17,6 +17,7 @@
 #include "PCdeskwork.h"
 #include "COPYdeskwork.h"
 #include "DOCUMENTdeskwork.h"
+#include "outsidework.h"
 #include "input.h"
 #include "titleuimanager.h"
 #include "sound.h"
@@ -34,6 +35,7 @@ CDeskwork::CDeskwork(int nPriority): CObject2D(nPriority),
 m_pPCDeskUI(nullptr),
 m_pCOPYDeskUI(nullptr),
 m_pDOCUMENTDesk(nullptr),
+m_pOutsideDesk(nullptr),
 m_pPlayer(nullptr)
 {
 
@@ -79,12 +81,13 @@ HRESULT CDeskwork::Init(void)
 	// 親の初期化処理
 	CObject2D::Init();
 
-	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr || m_pDOCUMENTDesk != nullptr)
+	if (m_pPCDeskUI != nullptr || m_pCOPYDeskUI != nullptr || m_pDOCUMENTDesk != nullptr || m_pOutsideDesk != nullptr)
 	{// どれかのポインタに中身が入っているなら
 		// 全てのポインタを初期化
 		m_pPCDeskUI = nullptr;
 		m_pCOPYDeskUI = nullptr;
 		m_pDOCUMENTDesk = nullptr;
+		m_pOutsideDesk = nullptr;
 	}
 
 	// PCタスクUIの生成
@@ -98,6 +101,10 @@ HRESULT CDeskwork::Init(void)
 	// 書類タスクの生成
 	m_pDOCUMENTDesk = CDOCUMENTDeskwork::Create();
 	m_pDOCUMENTDesk->SetPlayerPointer(m_pPlayer);
+
+	// 外出タスクの生成
+	m_pOutsideDesk = COutsideWork::Create();
+	m_pOutsideDesk->SetPlayerPointer(m_pPlayer);
 
 	// タスクをしていない状態にする
 	m_TaskType = CWorldUICollision::TYPE_NONE;
@@ -131,6 +138,13 @@ void CDeskwork::Uninit(void)
 		m_pDOCUMENTDesk = nullptr;
 	}
 
+	// 外出タスクを破棄
+	if (m_pOutsideDesk)
+	{
+		m_pOutsideDesk->Uninit();
+		m_pOutsideDesk = nullptr;
+	}
+
 	// タスクをしていない状態にする
 	m_TaskType = CWorldUICollision::TYPE_NONE;
 
@@ -146,7 +160,8 @@ void CDeskwork::Update(void)
 	// ポインタがヌルなら
 	if (m_pPCDeskUI == nullptr || 
 		m_pCOPYDeskUI == nullptr ||
-		m_pDOCUMENTDesk == nullptr)
+		m_pDOCUMENTDesk == nullptr ||
+		m_pOutsideDesk == nullptr)
 	{
 		return;
 	}
@@ -188,6 +203,15 @@ void CDeskwork::Update(void)
 		m_pCOPYDeskUI->SetAlphaUI(NULL);
 
 		break;
+
+	// 外出タスクの場合
+	case CWorldUICollision::TYPE_OUTSIDE:
+
+		// 外出タスクUIの更新処理
+		m_pOutsideDesk->Update();
+
+		break;
+
 	}
 
 	// 書類タスクの更新処理

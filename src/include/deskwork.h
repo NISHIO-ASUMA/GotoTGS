@@ -22,6 +22,7 @@
 class CPCDeskwork;
 class CCOPYDeskwork;
 class CDOCUMENTDeskwork;
+class COutsideWork;
 class CPlayer;
 
 //*********************************************************
@@ -47,6 +48,7 @@ public:
 	CPCDeskwork* GetPCDeskUI(void) const { return m_pPCDeskUI; }
 	CCOPYDeskwork* GetCOPYDeskUI(void) const { return m_pCOPYDeskUI; }
 	CDOCUMENTDeskwork* GetDOCUMENTDesk(void)const { return m_pDOCUMENTDesk; }
+	COutsideWork* GetOutsideDesk(void)const { return m_pOutsideDesk; }
 	static CWorldUICollision::TYPE GetTaskType(void) { return m_TaskType; }
 
 	// 生成処理
@@ -78,6 +80,7 @@ private:
 	CPCDeskwork* m_pPCDeskUI;				// PCタスクUIのポインタ
 	CCOPYDeskwork* m_pCOPYDeskUI;			// コピー機タスクUIのポインタ
 	CDOCUMENTDeskwork* m_pDOCUMENTDesk;		// 書類タスクのポインタ
+	COutsideWork* m_pOutsideDesk;			// 外出タスクのポインタ
 	CPlayer* m_pPlayer;						// 入れ子の入れ子
 
 	// 静的メンバ変数

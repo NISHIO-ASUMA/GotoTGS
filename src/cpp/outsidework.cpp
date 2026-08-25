@@ -14,20 +14,19 @@
 // インクルードファイル
 //*********************************************************
 #include "manager.h"
-#include "input.h"
 #include "score.h"
 #include "progressgauge.h"
 #include "gaugeneedle.h"
 #include "gamesceneobject.h"
 #include "titleuimanager.h"
-#include "tutorialobject.h"
-#include "tutoriallines.h"
-#include "particle.h"
+#include "receptionist.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-COutsideWork::COutsideWork() :CDeskworkUIManager()
+COutsideWork::COutsideWork() :CDeskworkUIManager(),
+bGoOut(false),
+bTask(false)
 {
 
 }
@@ -62,6 +61,11 @@ COutsideWork* COutsideWork::Create(const bool& bUse)
 //=========================================================
 HRESULT COutsideWork::Init(void)
 {
+	// 外出できない状態にする
+	bGoOut = false;
+
+	// タスク中ではない状態にする
+	bTask = false;
 
 	return S_OK;
 }
@@ -79,7 +83,8 @@ void COutsideWork::Uninit(void)
 //=========================================================
 void COutsideWork::Update(void)
 {
-
+	// 外出している時の処理
+	GoOut();
 }
 
 //=========================================================
@@ -88,4 +93,50 @@ void COutsideWork::Update(void)
 void COutsideWork::Draw(void)
 {
 
+}
+
+//=========================================================
+// こなした書類タスクの数の設定処理
+//=========================================================
+void COutsideWork::SetOutside(void)
+{
+	// 外出できる状態にする
+	bGoOut = true;
+}
+
+//=========================================================
+// 外出する時の処理
+//=========================================================
+void COutsideWork::GoOut(void)
+{
+	//// スコアのポインタ
+	//auto* pScore = CGameSceneObject::GetInstance()->GetScore();
+
+	//// 指針のポインタ
+	//CGaugeneedle* pGaugeneedle = CGameSceneObject::GetInstance()->GetProgressgauge()->GetGaugeneedle();
+	//if (pScore == nullptr || pGaugeneedle == nullptr) return;
+
+	//// タスク中なら
+	//if (bTask != false)
+	//{
+	//	// 書類タスクの数の加算処理
+	//	AddDOCUMENTTask();
+
+	//	// タスクできない状態にする
+	//	bTask = false;
+
+	//	return;
+	//}
+
+	//// 外出できない状態なら
+	//if (bGoOut != true) return;
+
+	//// スコア加算
+	//pScore->AddScoreMinus(-1000);
+
+	//// こなしたタスクの数を増やす
+	//pGaugeneedle->AddTask();
+
+	////// 外出できない状態にする
+	//bGoOut = false;
 }

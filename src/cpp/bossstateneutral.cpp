@@ -1,86 +1,78 @@
 //=========================================================
 //
-// イベント処理 [ event.cpp ]
-// Author: Takahashi Misaki
-//
+// 社長通常状態クラス [ bossstateneutral.cpp ]
+// Author : Asuma Nishio
+// 
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "event.h"
+#include "bossstateneutral.h"
+
+//*********************************************************
+// ステート分岐クラスインクルード
+//*********************************************************
+// #include "bossstatedoubt.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
+#include "boss.h"
 #include "manager.h"
-#include "eventcutin.h"
-#include "eventUI.h"
-#include "alert.h"
+#include "billboard.h"
+#include "bossstatedoubt.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CEvent::CEvent()
-{	
+CBossStateNeutral::CBossStateNeutral()
+{
+	SetID(ID_NEUTRAL);
 }
-
 //=========================================================
 // デストラクタ
 //=========================================================
-CEvent::~CEvent()
+CBossStateNeutral::~CBossStateNeutral()
 {
 
 }
-
 //=========================================================
-// 生成処理処理
+// 状態開始
 //=========================================================
-CEvent* CEvent::Create(const D3DXVECTOR3& pos)
+void CBossStateNeutral::OnStart()
 {
-	// インスタンス生成
-	CEvent* pEvent = new CEvent;
-
-	// ヌルチェック
-	if (pEvent == nullptr) return nullptr;
-
-	// 初期化失敗時
-	if (FAILED(pEvent->Init())) return nullptr;
-
-	return pEvent;
+	// ニュートラルモーション
+	m_pBoss->GetMotion()->SetMotion(CBoss::MOTION::NEUTRAL, true, 3);
 }
-
 //=========================================================
-// 初期化処理
+// 状態更新
 //=========================================================
-HRESULT CEvent::Init(void)
+void CBossStateNeutral::OnUpdate()
 {
-	return S_OK;
+	// nullなら
+	if (!m_pBoss) return;
+
+	// フラグoff
+	const auto& icon = m_pBoss->GetChaseIcon();
+	if (icon)
+		icon->SetDrawFlags(false);
+
+	// 通常移動とオフィス内移動
+	m_pBoss->NormalMoving();
+
+	// 視界内 かつ オフィス内移動の時
+	if (m_pBoss->CheckRayToAngleRange() && m_pBoss->GetInOfficeFlag() == true)
+	{
+		// 疑いステート生成
+		m_pBoss->ChangeState(new CBossStateDoubt(), ID_DOUBT);
+		return;
+	}
 }
-
 //=========================================================
-// 終了処理
+// 状態終了
 //=========================================================
-void CEvent::Uninit(void)
-{
-
-}
-
-//=========================================================
-// 更新処理
-//=========================================================
-void CEvent::Update(void)
-{
-	auto* pEventCutin = CEventUI::GetEventcutin();
-	auto* pAlert = CEventUI::GetAlert();
-
-	pEventCutin->SetUse();
-}
-
-//=========================================================
-// 描画処理
-//=========================================================
-void CEvent::Draw(void)
+void CBossStateNeutral::OnExit()
 {
 
 }
