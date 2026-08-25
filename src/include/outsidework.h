@@ -30,17 +30,24 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
-	// 外出タスクをこなした時の設定
+	// 受付人に話しかけた時の設定
 	void SetOutside(void);
 
-	// 外出するときの処理
-	void GoOut(void);
+	// 外出から帰ってきた時の処理
+	void EndOutside(void);
+
+	// タスク中の処理
+	void TaskSystem(void);
+
+	// 情報取得処理
+	bool GetGoOutside(void) { return m_bGoOutside; }
+	bool GetTaskNow(void) { return m_bTaskNow; }
 
 	// 生成処理
 	static COutsideWork* Create(const bool& bUse = false);
 
 private:
 	// メンバ変数
-	bool bGoOut;	// 外出できるかどうか
-	bool bTask;		// タスク中かどうか
+	bool m_bGoOutside;	// 外出できるかどうか
+	bool m_bTaskNow;		// タスク中かどうか
 };
