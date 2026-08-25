@@ -328,8 +328,8 @@ void CGameSceneObject::CreatePointer(void)
  
 	// スコア生成
 	m_pScoreTask = CScore::Create(VECTOR3_NULL, 200.0f, 80.0f,false);
-	m_pScoreDitch = CScore::Create(VECTOR3_NULL, 200.0f, 80.0f,false);
-	m_pScoreAll = CScore::Create(D3DXVECTOR3(1250.0f, 650.0f, 0.0f), 200.0f, 80.0f);
+	m_pScoreDitch = CScore::Create(D3DXVECTOR3(1250.0f, 60.0f, 0.0f), 185.0f, 55.0f);		// サボりのスコア分だけ表示する
+	m_pScoreAll = CScore::Create(D3DXVECTOR3(1250.0f, 60.0f, 0.0f), 200.0f, 55.0f,false);
 
 //********************************************
 
