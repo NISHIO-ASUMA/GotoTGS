@@ -993,16 +993,14 @@
     <ClCompile Include="src\cpp\bossstateneutral.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="src\cpp\outsideUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
-=======
+	</ClCompile>
     <ClCompile Include="src\cpp\bossstatedoubt.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\bossstatechase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
->>>>>>> b38341bd169a838e76c972701421450ea8991d79
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1591,16 +1589,14 @@
     <ClInclude Include="src\include\bossstateneutral.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="src\include\outsideUI.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
-=======
+	</ClInclude>
     <ClInclude Include="src\include\bossstatedoubt.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
     <ClInclude Include="src\include\bossstatechase.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
->>>>>>> b38341bd169a838e76c972701421450ea8991d79
     </ClInclude>
   </ItemGroup>
 </Project>
