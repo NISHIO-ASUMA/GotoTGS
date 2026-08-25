@@ -269,6 +269,7 @@
     <ClCompile Include="src\cpp\object3D.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
+    <ClCompile Include="src\cpp\outsideUI.cpp" />
     <ClCompile Include="src\cpp\outsidework.cpp" />
     <ClCompile Include="src\cpp\overworkman.cpp" />
     <ClCompile Include="src\cpp\overworkresult.cpp" />
@@ -469,6 +470,7 @@
     <ClInclude Include="src\include\object3D.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />
+    <ClInclude Include="src\include\outsideUI.h" />
     <ClInclude Include="src\include\outsidework.h" />
     <ClInclude Include="src\include\overworkman.h" />
     <ClInclude Include="src\include\overworkresult.h" />
