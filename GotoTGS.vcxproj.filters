@@ -415,6 +415,18 @@
     <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman">
       <UniqueIdentifier>{2a90c779-7fc2-46b9-a08f-16a10df2fa40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Boss\State">
+      <UniqueIdentifier>{541d1588-ae26-4557-a2f6-2ca104baaaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Boss\Charactor">
+      <UniqueIdentifier>{6c6b48d9-d39c-4af1-bb44-ca6e7ec403ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Boss\State">
+      <UniqueIdentifier>{9a4669c7-29b4-4d7d-8fa9-a81af3871e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Boss\Charactor">
+      <UniqueIdentifier>{27fa5e7f-3dbb-4a35-b11c-68f018680284}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -807,9 +819,6 @@
     <ClCompile Include="src\cpp\mobcharactormanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\boss.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\friend.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
     </ClCompile>
@@ -974,6 +983,21 @@
     </ClCompile>
     <ClCompile Include="src\cpp\overworkman.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\boss.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\bossstatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\bossstateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\bossstatedoubt.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\bossstatechase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1331,9 +1355,6 @@
     <ClInclude Include="src\include\automaticdoormanager.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\boss.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\enemy.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
@@ -1555,6 +1576,21 @@
     </ClInclude>
     <ClInclude Include="src\include\overworkman.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\overworkman</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\boss.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\bossstatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\bossstateneutral.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\bossstatedoubt.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\bossstatechase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

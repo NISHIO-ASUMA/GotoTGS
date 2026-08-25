@@ -44,8 +44,8 @@ public:
 		const D3DXVECTOR3& pos, 
 		const float fWidth, 
 		const float fHeight, 
-		const char* pBaseTex, 
-		const char* pMultitexture
+		const char* pBaseTex = "hatena.png",
+		const char* pMultitexture = "gauge_enemyside.png"
 	);
 
 public:

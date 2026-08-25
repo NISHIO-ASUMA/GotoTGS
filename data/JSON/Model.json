@@ -451,5 +451,11 @@
   },
   {
     "Model": "data/MODEL/APPROVER/09_Approver_footL.x"
+  },
+  {
+    "Model": "data/MODEL/KARASU/raven_body00.x"
+  },
+  {
+    "Model": "data/MODEL/KARASU/raven_head00.x"
   }
 ]

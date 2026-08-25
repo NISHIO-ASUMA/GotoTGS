@@ -146,7 +146,6 @@ HRESULT CGameSceneObject::Init(void)
 	// ゲーセンの上のビル
 	CBlock::Create(D3DXVECTOR3(1656.0f, 322.0f, 122.0f), VECTOR3_NULL, D3DXVECTOR3(0.85f, 0.25f, 1.85f), "STAGEOBJ/bill01.x");
 
-
 	// 敵管理クラス生成
 	CEnemyManager::GetInstance()->Init(m_pPlayer);
 	CEnemyManager::GetInstance()->SetTimeContainer(m_pTimer);
@@ -345,4 +344,7 @@ void CGameSceneObject::CreatePointer(void)
 
 	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
+
+	// 西尾追加 : 社長を生成
+	m_pBoss = CBoss::Create(VECTOR3_NULL, VECTOR3_NULL);
 }
