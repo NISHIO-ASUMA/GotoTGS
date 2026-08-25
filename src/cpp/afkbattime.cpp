@@ -15,6 +15,8 @@
 //*********************************************************
 #include "manager.h"
 #include "template.h"
+#include "gametime.h"
+#include "playerutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -25,9 +27,9 @@ namespace COOLTIME_UI
 	constexpr const char* BASE_TEX = "bat_frame.png";		// ベース
 	constexpr const char* MULTI_TEX = "gauge_battime.png";	// マルチ
 	
-	constexpr float COOL_TIME_SEC = 10.0f;					// クールタイムフレーム
+	constexpr float COOL_TIME_SEC = 20.0f;					// クールタイムフレーム
 	constexpr float FPS = 60.0f;							// 対象FPS
-	constexpr float TOTAL_FRAMES = COOL_TIME_SEC * FPS;		// 全フレーム数（600）
+	constexpr float TOTAL_FRAMES = COOL_TIME_SEC * FPS;		// 全フレーム数（1200） 20秒
 	constexpr float RATIO_VALUE = 1.0f / TOTAL_FRAMES;		// 割合値
 };
 
@@ -98,8 +100,11 @@ void CAfkCoolTimeUi::Update(void)
 	// 親クラスの更新処理
 	CBillboardMulti::Update();
 
+	// クールタイム時間
+	constexpr int CoolTimeValue = player::AFK_COOL_TIME;
+
 	// 比率を減らす
-	m_fRatio -= COOLTIME_UI::RATIO_VALUE;
+	m_fRatio -= 1.0f / static_cast<float>(CoolTimeValue);
 
 	if (m_fRatio <= 0.0f)
 	{
