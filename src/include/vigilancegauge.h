@@ -63,8 +63,8 @@ private:
 	//*******************************
 	struct Config
 	{
-		static constexpr float RATIO_VALUE = 1.0f / 3600.0f;		// ‰ÁZ—Ê
-
+		static constexpr float MAX_POW = 60.0f * 60.0f;				// 30•b‚Ì’l
+		static constexpr float RATIO_VALUE = 1.0f / MAX_POW;
 	};
 
 	// ƒƒ“ƒo•Ï”
