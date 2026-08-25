@@ -53,7 +53,8 @@ HRESULT CNumber3D::Init(const D3DXVECTOR3& pos, float fwidth, float fheight)
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
 	// 3D頂点バッファの作成
-	HRESULT hr = pDevice->CreateVertexBuffer(
+	HRESULT hr = pDevice->CreateVertexBuffer
+	(
 		sizeof(VERTEX_3D) * BASEVERTEX,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_3D,
@@ -113,19 +114,23 @@ void CNumber3D::Update(void)
 {
 	if (!m_isUse) return;
 
+	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
-	D3DXMATRIX mtxView, mtxBillboard, mtxTrans, mtxWorld;
+	// 計算用のマトリックスを取得
+	D3DXMATRIX mtxView, mtxTrans, mtxWorld;
 	pDevice->GetTransform(D3DTS_VIEW, &mtxView);
 
 	// マトリックスの初期化
+	D3DXMATRIX mtxBillboard;
 	D3DXMatrixIdentity(&mtxBillboard);
 
-	mtxBillboard._11 = mtxView._11; mtxBillboard._12 = mtxView._12; mtxBillboard._13 = mtxView._13;
-	mtxBillboard._21 = mtxView._21; mtxBillboard._22 = mtxView._22; mtxBillboard._23 = mtxView._23;
-	mtxBillboard._31 = mtxView._31; mtxBillboard._32 = mtxView._32; mtxBillboard._33 = mtxView._33;
+	// ビルボード設定
+	mtxBillboard._11 = mtxView._11; mtxBillboard._12 = mtxView._21; mtxBillboard._13 = mtxView._31;
+	mtxBillboard._21 = mtxView._12; mtxBillboard._22 = mtxView._22; mtxBillboard._23 = mtxView._32;
+	mtxBillboard._31 = mtxView._13; mtxBillboard._32 = mtxView._23; mtxBillboard._33 = mtxView._33;
 
-	//
+	// 位置の反映
 	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
 
 	// ワールド行列の合成
@@ -162,7 +167,7 @@ void CNumber3D::SetMtx(void)
 	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
 }
 //=========================================================
-// 描画処理
+// 描画処理 ( これをビルボードにする )
 //=========================================================
 void CNumber3D::Draw(void)
 {
@@ -172,7 +177,36 @@ void CNumber3D::Draw(void)
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
-	// 頂点バッファをデータストリームに設定
+	// ライトの設定をoffにする
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+
+	// αテストを有効化
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 0x01);
+
+	// ビルボード用ワールド行列の設定
+	D3DXMATRIX mtxView, mtxBillboard, mtxTrans, mtxWorld;
+	pDevice->GetTransform(D3DTS_VIEW, &mtxView);
+
+	// 単位行列で初期化
+	D3DXMatrixIdentity(&mtxBillboard);
+
+	// カメラを向く設定
+	mtxBillboard._11 = mtxView._11; mtxBillboard._12 = mtxView._21; mtxBillboard._13 = mtxView._31;
+	mtxBillboard._21 = mtxView._12; mtxBillboard._22 = mtxView._22; mtxBillboard._23 = mtxView._32;
+	mtxBillboard._31 = mtxView._13; mtxBillboard._32 = mtxView._23; mtxBillboard._33 = mtxView._33;
+
+	// 位置の設定
+	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+
+	// 行列の合成
+	D3DXMatrixMultiply(&mtxWorld, &mtxBillboard, &mtxTrans);
+
+	// ワールド行列の適用
+	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
+
+	// デバイスに設定
 	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_3D));
 
 	// 頂点フォーマットの設定
@@ -183,6 +217,12 @@ void CNumber3D::Draw(void)
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+
+	// αテストを無効化
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	// ライトの設定をoonにする
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 //=========================================================
 // テクスチャ設定処理
