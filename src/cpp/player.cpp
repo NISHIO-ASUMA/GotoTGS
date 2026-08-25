@@ -650,6 +650,11 @@ void CPlayer::SetAfk(AFKTYPE AfkType, bool bInput)
 				}
 			}
 		}
+		else if(!bInArea)
+		{
+			// 終了
+			*pAfkFlag = false;
+		}
 	}
 
 	// ベンチのサボり処理
@@ -1506,16 +1511,16 @@ void CPlayer::AfkScore(void)
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 500;
+				m_nAddScore = 300;
 				break;
 			case 2:
-				m_nAddScore = 800;
+				m_nAddScore = 500;
 				break;
 			case 3:
-				m_nAddScore = 1000;
+				m_nAddScore = 800;
 				break;
 			case 4:
-				m_nAddScore = 300;
+				m_nAddScore = 1000;
 				break;
 			case 5:
 				m_nAddScore = 150;
@@ -1552,16 +1557,16 @@ void CPlayer::AfkScore(void)
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 800;
+				m_nAddScore = 500;
 				break;
 			case 2:
-				m_nAddScore = 1400;
+				m_nAddScore = 1100;
 				break;
 			case 3:
-				m_nAddScore = 2000;
+				m_nAddScore = 1500;
 				break;
 			case 4:
-				m_nAddScore = 500;
+				m_nAddScore = 2000;
 				break;
 			case 5:
 				m_nAddScore = 250;

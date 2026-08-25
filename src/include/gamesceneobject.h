@@ -59,8 +59,8 @@ public:
 	CBoss* GetBoss(void) const { return m_pBoss; }												// Asuma
 
 	CDeskwork* GetDesk(void) const { return m_pDeskwork; }										// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
 	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
 
 	/// <summary>
