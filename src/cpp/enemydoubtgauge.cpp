@@ -81,7 +81,7 @@ void CEnemyDoubtGauge::Uninit(void)
 	CObject2DMulti::Uninit();
 }
 //=========================================================
-// 更新処理 ( 変換入れると描画されないんです )
+// 更新処理
 //=========================================================
 void CEnemyDoubtGauge::Update(void)
 {

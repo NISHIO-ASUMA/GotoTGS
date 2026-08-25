@@ -182,6 +182,8 @@
     <ClCompile Include="src\cpp\blockmanager.cpp" />
     <ClCompile Include="src\cpp\boss.cpp" />
     <ClCompile Include="src\cpp\bossstatebase.cpp" />
+    <ClCompile Include="src\cpp\bossstatechase.cpp" />
+    <ClCompile Include="src\cpp\bossstatedoubt.cpp" />
     <ClCompile Include="src\cpp\bossstateneutral.cpp" />
     <ClCompile Include="src\cpp\boxcollider.cpp" />
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
@@ -379,6 +381,8 @@
     <ClInclude Include="src\include\blockmanager.h" />
     <ClInclude Include="src\include\boss.h" />
     <ClInclude Include="src\include\bossstatebase.h" />
+    <ClInclude Include="src\include\bossstatechase.h" />
+    <ClInclude Include="src\include\bossstatedoubt.h" />
     <ClInclude Include="src\include\bossstateneutral.h" />
     <ClInclude Include="src\include\boxcollider.h" />
     <ClInclude Include="src\include\boxtospherecollision.h" />

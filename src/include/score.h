@@ -83,7 +83,7 @@ private:
 		static constexpr int NUM_SCORE			= 8;							// 桁数
 		static constexpr int NUM_DIGIT			= 10;							// 表示する分割桁数の値
 		static constexpr float DIGIT_VALUE		= 2.0f;							// 加算量
-		static constexpr const char* TEX_NAME	= "number003.png";				// テクスチャ名
+		static constexpr const char* TEX_NAME	= "number_k.png";				// テクスチャ名
 	};
 
 	D3DXCOLOR m_col;	// カラー

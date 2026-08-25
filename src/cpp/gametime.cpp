@@ -2,7 +2,9 @@
 //
 // ゲームのタイマー処理 [ gametime.cpp ]
 // Author: Takahashi Misaki
-//
+// 
+// TODO : 一定時間経過したら社長の出現をする
+// 
 //=========================================================
 
 //*********************************************************
@@ -173,10 +175,7 @@ void CGametime::Uninit(void)
 void CGametime::Update(void)
 {
 	// アニメーション中なら
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
-	{
-		return;
-	}
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime()) return;
 
 	// 最大時間が0なら処理を通さない
 	if (m_nAllTime <= 0)
@@ -224,7 +223,7 @@ void CGametime::Update(void)
 	Seconds();
 	Minutes();
 
-	// 世界のカラー変更
+	// 世界の背景カラー変更
 	if (m_nMaxTime > 0)
 	{
 		// 割合

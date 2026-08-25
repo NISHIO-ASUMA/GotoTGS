@@ -49,7 +49,7 @@ namespace BOSS_INFO
 //*********************************************************
 namespace OFFICE_INFO
 {
-	constexpr int COOLTIME = 120;
+	constexpr int COOLTIME = 80;
 	constexpr int NUM_OFFICEPOINT = 18;
 
 	// ローカルビューポイント
@@ -91,7 +91,9 @@ m_pChaseIcon(nullptr),
 m_pDestCharactor(nullptr),
 m_playerTargetPos(VECTOR3_NULL),
 m_pMachine(nullptr),
-m_fEyeAngle(NULL)
+m_fEyeAngle(NULL),
+m_isStartChase(false),
+m_isActiveSet(false)
 {
 
 }
@@ -169,6 +171,8 @@ void CBoss::Uninit(void)
 //========================================================
 void CBoss::Update(void)
 {
+	if (!m_isActiveSet) return;
+
 	//// 現在地の座標を取得
 	//auto pos = GetPos();
 
@@ -177,6 +181,10 @@ void CBoss::Update(void)
 
 	//if (m_isOfficeMove)
 	//	MoveOfficePoint(pos); // オフィス内で巡回する処理
+
+	// ステート更新
+	if (m_pMachine)
+		m_pMachine->Update();
 
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
@@ -192,12 +200,14 @@ void CBoss::Update(void)
 //========================================================
 void CBoss::Draw(void)
 {
+	if (!m_isActiveSet) return;
+
 	// キャラクター描画
 	CMoveCharactor::Draw();
 
-	if (!m_isOfficeMove) return;
-
-	// TODO : ボスに捕まるかどうかを決める
+	// フラグが有効化の時,死亡範囲を描画
+	if (m_isStartChase)
+		DrawEyeSight();
 }
 //========================================================
 // 扇形の描画処理
@@ -207,7 +217,7 @@ void CBoss::DrawEyeSight(void)
 	// 現在の設定を取得
 	D3DXVECTOR3 enemyPos = GetPos();
 	D3DXVECTOR3 rot = GetRot();
-	float halfAngle = D3DXToRadian(Eyesight::EYE_ANGLE / 2.0f);
+	float halfAngle = D3DXToRadian(m_fEyeAngle / 2.0f);
 
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
@@ -269,15 +279,14 @@ void CBoss::DrawEyeSight(void)
 	vFan[0].tex = VECTOR2_NULL;
 
 	// 外周点
-	for (int nCnt = 0; nCnt <= Config::DIVIDE; ++nCnt)
+	for (int i = 0; i <= Config::DIVIDE; ++i)
 	{
-		// 角度計算
-		float t = (float)nCnt / (float)Config::DIVIDE;
-		float currentAngle = rot.y - halfAngle + (D3DXToRadian(Eyesight::EYE_ANGLE) * t);
+		float t = (float)i / (float)Config::DIVIDE;
+		float currentAngle = rot.y - halfAngle + (D3DXToRadian(m_fEyeAngle) * t);
 
 		D3DXVECTOR3 dir(-sinf(currentAngle), 0.0f, -cosf(currentAngle));
 
-		int idx = nCnt + 1;
+		int idx = i + 1;
 		vFan[idx].pos = vFan[0].pos + dir * Eyesight::EYE_RADIUS;
 		vFan[idx].nor = VECTOR3_NULL;
 		vFan[idx].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.6f);
@@ -299,72 +308,110 @@ void CBoss::DrawEyeSight(void)
 	pDevice->SetRenderState(D3DRS_DESTBLEND, oldDestBlend);
 	pDevice->SetRenderState(D3DRS_CULLMODE, oldCullMode);
 
-	// テクスチャを戻す
 	pDevice->SetTexture(0, pOldTexture);
 	if (pOldTexture) pOldTexture->Release();
 
-	// テクスチャステージチャートの再設定
 	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, oldColorOp);
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, oldColorArg2);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, oldAlphaOp);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
 }
 //========================================================
+// プレイヤーがタスクを起動するまで追いかけまわす関数
+//========================================================
+void CBoss::ChasePlayer(void)
+{
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 描画フラグがoffなら
+	if (!m_pChaseIcon->GetIsDrawFlags())
+		m_pChaseIcon->SetDrawFlags(true);
+
+	// uiアイコンの座標を更新
+	m_pChaseIcon->SetPos(D3DXVECTOR3(pos.x, pos.y + 80.0f, pos.z));
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (CheckEyesight())
+	{
+		// プレイヤーを捕まえる
+		m_pDestCharactor->SetCatchEnemy(true);
+
+		// 目的地に到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::CATCH, true, 3);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 2.0f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::CHASEDASH, true, 2);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
 // 視界との当たり判定処理
 //========================================================
-bool CBoss::CheckEyesight(const D3DXVECTOR3& TargetPos)
+bool CBoss::CheckEyesight(void)
 {
-	// 現在座標を取得
-	D3DXVECTOR3 MyPos = GetPos();
+	// nullなら
+	if (!m_pDestCharactor) return false;
 
-	// 高さの判定
-	float heightDiff = fabsf(TargetPos.y - MyPos.y);
+	// 社長とプレイヤーの現在座標を取得
+	D3DXVECTOR3 BossPos = GetPos();
+	D3DXVECTOR3 CharactorPos = m_pDestCharactor->GetPos();
 
-	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
-	{
-		return false; // 高さが範囲外
-	}
+	// 高さ判定
+	float heightDiff = fabsf(CharactorPos.y - BossPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f) return false;
 
-	// 距離の判定
-	D3DXVECTOR3 diff = TargetPos - MyPos;
+	// 距離判定
+	D3DXVECTOR3 diff = CharactorPos - BossPos;
 	diff.y = 0.0f;
-
-	// 距離の2乗を計算
 	float sqrDistance = D3DXVec3LengthSq(&diff);
 
-	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS)
-	{
-		return false; // 判定外
-	}
-
-	// ゼロ除算
+	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS) return false;
 	if (sqrDistance < 0.0001f) return true;
 
-	// 角度を取得
+	// 角度判定
 	D3DXVECTOR3 rot = GetRot();
+	D3DXVECTOR3 BossForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
+	D3DXVec3Normalize(&BossForward, &BossForward);
 
-	// 角度から方向ベクトルを生成
-	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
-	D3DXVec3Normalize(&enemyForward, &enemyForward);
-
-	// 方向ベクトルを正規化
+	// 差分ベクトル
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
-	// 内積を計算
-	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
-
-	// 角度のコサイン値を計算
-	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
-	float cosHalfAngle = cosf(halfAngleRad);
-
 	// 内積判定
-	if (dot >= cosHalfAngle)
-	{
-		return true; // 視界に入っている
-	}
+	float dot = D3DXVec3Dot(&BossForward, &diffDir);
+	float cosHalfAngle = cosf(D3DXToRadian(m_fEyeAngle));
 
-	return false;
+	// 扇形視界に入っている場合
+	return (dot >= cosHalfAngle);
 }
 //========================================================
 // オフィス内に侵入する処理
