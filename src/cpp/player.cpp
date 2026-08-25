@@ -286,6 +286,11 @@ void CPlayer::Update(void)
 	// クールタイムのカウントダウン処理
 	for (int nTime = 0; nTime < AFKTYPE_MAX; nTime++)
 	{
+		if (m_nAfkCoolTime[nTime] <= 0)
+		{
+			m_nAfkCoolTime[nTime] = 0;
+		}
+
 		if (m_nAfkCoolTime[nTime] > 0)
 		{
 			m_nAfkCoolTime[nTime]--;	// デクリメント
@@ -295,6 +300,11 @@ void CPlayer::Update(void)
 	// ベンチ用カウントダウン
 	for (int nBench = 0; nBench < Player_Bench::BENCH_MAX; nBench++)
 	{
+		if (m_nCoolTimeBench[nBench] <= 0)
+		{
+			m_nCoolTimeBench[nBench] = 0;
+		}
+
 		if (m_nCoolTimeBench[nBench] > 0)
 		{
 			m_nCoolTimeBench[nBench]--;	// デクリメント
