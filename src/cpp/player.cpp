@@ -286,6 +286,11 @@ void CPlayer::Update(void)
 	// クールタイムのカウントダウン処理
 	for (int nTime = 0; nTime < AFKTYPE_MAX; nTime++)
 	{
+		if (m_nAfkCoolTime[nTime] <= 0)
+		{
+			m_nAfkCoolTime[nTime] = 0;
+		}
+
 		if (m_nAfkCoolTime[nTime] > 0)
 		{
 			m_nAfkCoolTime[nTime]--;	// デクリメント
@@ -295,6 +300,11 @@ void CPlayer::Update(void)
 	// ベンチ用カウントダウン
 	for (int nBench = 0; nBench < Player_Bench::BENCH_MAX; nBench++)
 	{
+		if (m_nCoolTimeBench[nBench] <= 0)
+		{
+			m_nCoolTimeBench[nBench] = 0;
+		}
+
 		if (m_nCoolTimeBench[nBench] > 0)
 		{
 			m_nCoolTimeBench[nBench]--;	// デクリメント
@@ -1511,16 +1521,16 @@ void CPlayer::AfkScore(void)
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 500;
+				m_nAddScore = 300;
 				break;
 			case 2:
-				m_nAddScore = 800;
+				m_nAddScore = 500;
 				break;
 			case 3:
-				m_nAddScore = 1000;
+				m_nAddScore = 800;
 				break;
 			case 4:
-				m_nAddScore = 300;
+				m_nAddScore = 1000;
 				break;
 			case 5:
 				m_nAddScore = 150;
@@ -1557,16 +1567,16 @@ void CPlayer::AfkScore(void)
 			switch (m_nScoreCnt)
 			{
 			case 1:
-				m_nAddScore = 800;
+				m_nAddScore = 500;
 				break;
 			case 2:
-				m_nAddScore = 1400;
+				m_nAddScore = 1100;
 				break;
 			case 3:
-				m_nAddScore = 2000;
+				m_nAddScore = 1500;
 				break;
 			case 4:
-				m_nAddScore = 500;
+				m_nAddScore = 2000;
 				break;
 			case 5:
 				m_nAddScore = 250;

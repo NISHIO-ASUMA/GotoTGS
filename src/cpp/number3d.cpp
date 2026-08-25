@@ -126,9 +126,15 @@ void CNumber3D::Update(void)
 	D3DXMatrixIdentity(&mtxBillboard);
 
 	// ビルボード設定
-	mtxBillboard._11 = mtxView._11; mtxBillboard._12 = mtxView._21; mtxBillboard._13 = mtxView._31;
-	mtxBillboard._21 = mtxView._12; mtxBillboard._22 = mtxView._22; mtxBillboard._23 = mtxView._32;
-	mtxBillboard._31 = mtxView._13; mtxBillboard._32 = mtxView._23; mtxBillboard._33 = mtxView._33;
+	mtxBillboard._11 = mtxView._11;
+	mtxBillboard._12 = mtxView._21; 
+	mtxBillboard._13 = mtxView._31;
+	mtxBillboard._21 = mtxView._12; 
+	mtxBillboard._22 = mtxView._22; 
+	mtxBillboard._23 = mtxView._32;
+	mtxBillboard._31 = mtxView._13; 
+	mtxBillboard._32 = mtxView._23; 
+	mtxBillboard._33 = mtxView._33;
 
 	// 位置の反映
 	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
@@ -193,9 +199,15 @@ void CNumber3D::Draw(void)
 	D3DXMatrixIdentity(&mtxBillboard);
 
 	// カメラを向く設定
-	mtxBillboard._11 = mtxView._11; mtxBillboard._12 = mtxView._21; mtxBillboard._13 = mtxView._31;
-	mtxBillboard._21 = mtxView._12; mtxBillboard._22 = mtxView._22; mtxBillboard._23 = mtxView._32;
-	mtxBillboard._31 = mtxView._13; mtxBillboard._32 = mtxView._23; mtxBillboard._33 = mtxView._33;
+	mtxBillboard._11 = mtxView._11;
+	mtxBillboard._12 = mtxView._21;
+	mtxBillboard._13 = mtxView._31;
+	mtxBillboard._21 = mtxView._12;
+	mtxBillboard._22 = mtxView._22;
+	mtxBillboard._23 = mtxView._32;
+	mtxBillboard._31 = mtxView._13;
+	mtxBillboard._32 = mtxView._23;
+	mtxBillboard._33 = mtxView._33;
 
 	// 位置の設定
 	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
