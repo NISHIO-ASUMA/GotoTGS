@@ -530,8 +530,8 @@ void CPlayer::Update(void)
 						const auto& SideDoorManager = CSideOpenDoorManager::GetInstance();
 						if (!SideDoorManager) return;
 
-						// 扉を強制的に閉じる
-						SideDoorManager->GetSideOpenDoor()->CloseDoor();
+						// 扉を強制的に閉じる命令を出す
+						SideDoorManager->CloseDoorInOffice();
 
 						break;
 					}
@@ -540,6 +540,10 @@ void CPlayer::Update(void)
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0))
 					{
 						pDesk->GetOutsideDesk()->SetOutside();
+
+						// 扉を開ける状態にする
+						m_isSetOutSideTask = true;
+
 					}
 
 					break;
