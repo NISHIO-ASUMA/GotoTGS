@@ -110,6 +110,7 @@ public:
 	inline void SetZEneble(const bool& isenable) { m_isZTestEneble = isenable; }
 
 	void RotationDoorFlag(void);
+	void CloseDoor(void);
 
 private:
 
