@@ -74,7 +74,8 @@
 namespace GAMEOBJECT
 {
 	const D3DXVECTOR3 TimerPos		= { 1020.0f,60.0f,0.0f };						// タイマーの座標
-	const D3DXVECTOR3 PlayerPos	    = { -160.0f, 0.0f, 95.0f };						// プレイヤーの座標
+	const D3DXVECTOR3 PlayerPos	    = { -160.0f,0.0f,95.0f };						// プレイヤーの座標
+	const D3DXVECTOR3 BossPos	    = { 677.5f,0.0f,325.0f };						// ボスの座標
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";					// ゲーム内オブジェクトjsonファイル名
 	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
 };
@@ -339,12 +340,10 @@ void CGameSceneObject::CreatePointer(void)
 	m_pTimer = CGametime::Create(GAMEOBJECT::TimerPos, 60.0f, 40.0f);
 
 //********************************************
- 
 	// スコア生成
 	m_pScoreTask = CScore::Create(VECTOR3_NULL, 200.0f, 80.0f,false);
 	m_pScoreDitch = CScore::Create(D3DXVECTOR3(1250.0f, 60.0f, 0.0f), 160.0f, 55.0f);		// サボりのスコア分だけ表示する
 	m_pScoreAll = CScore::Create(D3DXVECTOR3(1250.0f, 60.0f, 0.0f), 200.0f, 55.0f,false);
-
 //********************************************
 
 	// 進捗ゲージの生成 Misaki
@@ -360,5 +359,5 @@ void CGameSceneObject::CreatePointer(void)
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 
 	// 西尾追加 : 社長を生成
-	m_pBoss = CBoss::Create(VECTOR3_NULL, VECTOR3_NULL);
+	//m_pBoss = CBoss::Create(VECTOR3_NULL, VECTOR3_NULL);
 }

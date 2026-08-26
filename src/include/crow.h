@@ -39,7 +39,8 @@ public:
 	static CCrowBird* Create
 	(
 		const D3DXVECTOR3& pos,
-		const D3DXVECTOR3& rot
+		const D3DXVECTOR3& rot,
+		const int &nMotionType
 	);
 
 public:
@@ -55,4 +56,5 @@ public:
 	};
 
 private:
+	int m_nMotionType;	// ƒ‚[ƒVƒ‡ƒ“‚Ìí—Ş
 };

@@ -18,7 +18,8 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CCrowBird::CCrowBird(int nPriority) : CNoMoveCharactor(nPriority)
+CCrowBird::CCrowBird(int nPriority) : CNoMoveCharactor(nPriority),
+m_nMotionType(NULL)
 {
 
 }
@@ -32,7 +33,7 @@ CCrowBird::~CCrowBird()
 //=========================================================
 // 生成処理
 //=========================================================
-CCrowBird* CCrowBird::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CCrowBird* CCrowBird::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot,const int &nMotionType)
 {
 	// インスタンス生成
 	CCrowBird* pBird = new CCrowBird;
@@ -41,7 +42,8 @@ CCrowBird* CCrowBird::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
 	// オブジェクト設定
 	pBird->SetPos(pos);
 	pBird->SetRot(rot);
-	pBird->SetUseStencil(true);
+	pBird->SetUseStencil(false);
+	pBird->m_nMotionType = nMotionType;
 
 	// 初期化失敗時
 	if (FAILED(pBird->Init())) return nullptr;
@@ -57,10 +59,13 @@ HRESULT CCrowBird::Init(void)
 	CNoMoveCharactor::Init();
 
 	// モーション読み込み
-	MotionLoad("data/MOTION/Crow/CrowMotion.txt", MOTION::MAX, false);
+	MotionLoad("data/MOTION/Crow/CrowMotion.txt", MOTION::MAX, true);
 
 	// 開始モーション設定
-	GetMotion()->SetMotion(MOTION::ACTION,true,3);
+	GetMotion()->SetMotion(m_nMotionType,true,3);
+
+	// サイズを下げる
+	SetScale({ 0.5f, 0.5f, 0.5f });
 	return S_OK;
 }
 //=========================================================

@@ -58,7 +58,9 @@ HRESULT COverWorkResultObject::Init(void)
 	COverWorkMan::Create(D3DXVECTOR3(0.0f,0.0f,40.0f), VECTOR3_NULL);
 
 	// ÉJÉâÉXê∂ê¨
-	CCrowBird::Create(D3DXVECTOR3(0.0f, 0.0f, 20.0f), VECTOR3_NULL);
+	//CCrowBird::Create(D3DXVECTOR3(25.0f, 0.0f, -25.0f), { 0.0f,D3DX_PI * 0.72f,0.0f },CCrowBird::MOTION::ACTION);
+	//CCrowBird::Create(D3DXVECTOR3(-25.0f, 0.0f, -25.0f), { 0.0f,-D3DX_PI * 0.72f,0.0f }, CCrowBird::MOTION::NEUTRAL);
+	// 2.26f
 
 	return S_OK;
 }
