@@ -133,3 +133,13 @@ void CSideOpenDoorManager::OpenSideDoor(const std::vector<int>& targetIndices)
 	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SIDEDOOR_SE);
 	return;
 }
+//=========================================================
+// ドアを閉じる命令を飛ばす処理
+//=========================================================
+void CSideOpenDoorManager::CloseDoorInOffice(void)
+{
+	// オフィスの外に向かうドアだけを閉じる命令にする
+	m_pSideOpenDoors[0]->CloseDoor();
+	m_pSideOpenDoors[1]->CloseDoor();
+	return;
+}
