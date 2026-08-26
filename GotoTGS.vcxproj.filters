@@ -1005,6 +1005,9 @@
     <ClCompile Include="src\cpp\outsidetasktimer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\crow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1602,6 +1605,9 @@
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
     <ClInclude Include="src\include\outsidetasktimer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\crow.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

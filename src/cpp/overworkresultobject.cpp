@@ -21,6 +21,7 @@
 #include "meshfield.h"
 #include "light.h"
 #include "overworkman.h"
+#include "crow.h"
 
 //=========================================================
 // コンストラクタ
@@ -55,6 +56,9 @@ HRESULT COverWorkResultObject::Init(void)
 
 	// 倒れているキャラクターを生成
 	COverWorkMan::Create(D3DXVECTOR3(0.0f,0.0f,40.0f), VECTOR3_NULL);
+
+	// カラス生成
+	CCrowBird::Create(D3DXVECTOR3(0.0f, 0.0f, 20.0f), VECTOR3_NULL);
 
 	return S_OK;
 }

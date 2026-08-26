@@ -228,8 +228,9 @@ void CPauseManager::SetEnablePause(void)
 	CSound* pSound = CManager::GetInstance()->GetSound();
 	if (pSound == nullptr) return;
 
-	// Pキー or Start が押された
+	// Pキー or Tabキー or StartButton が押された
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_P) ||
+		CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_TAB) || 
 		CManager::GetInstance()->GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_BACK))
 	{
 		// サウンド再生
