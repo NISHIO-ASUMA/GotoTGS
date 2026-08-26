@@ -62,6 +62,9 @@ public:
 	static COutSideTaskTimer* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
 
 private:
+	void UpdateDigitNumbers(void);
+
+private:
 
 	int m_nMaxTime;		// ŠJn‚ÌÅ‘åŠÔ
 	int m_nAllTime;		// ‘S‘Ì‚ÌŠÔ

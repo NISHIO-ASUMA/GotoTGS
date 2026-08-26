@@ -36,7 +36,6 @@ m_pos(VECTOR3_NULL)
 		m_pNumberMinutes[nDigit] = nullptr;
 	}
 }
-
 //=========================================================
 // デストラクタ
 //=========================================================
@@ -44,25 +43,24 @@ COutSideTaskTimer::~COutSideTaskTimer()
 {
 
 }
-
 //=========================================================
 // 生成処理処理
 //=========================================================
 COutSideTaskTimer* COutSideTaskTimer::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
 {
 	// インスタンス生成
-	COutSideTaskTimer* pGametime = new COutSideTaskTimer;
-	if (pGametime == nullptr) return nullptr;
+	COutSideTaskTimer* pOutSidetime = new COutSideTaskTimer;
+	if (pOutSidetime == nullptr) return nullptr;
 
 	// 引数を設定
-	pGametime->SetPos(pos);
-	pGametime->SetWidth(fWidth);
-	pGametime->SetHeight(fHeight);
+	pOutSidetime->SetPos(pos);
+	pOutSidetime->SetWidth(fWidth);
+	pOutSidetime->SetHeight(fHeight);
 
 	// 初期化が失敗した場合
-	if (FAILED(pGametime->Init())) return nullptr;
+	if (FAILED(pOutSidetime->Init())) return nullptr;
 
-	return pGametime;
+	return pOutSidetime;
 }
 //=========================================================
 // 初期化処理
@@ -78,9 +76,9 @@ HRESULT COutSideTaskTimer::Init(void)
 	// 一桁の横幅
 	float fTexpos = m_fWidth / Config::DIGIT_TIME;
 
-	// 分を生成
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
+		// 数値生成
 		m_pNumberMinutes[nDigit] = new CNumber;
 
 		// ナンバーの初期化処理
@@ -101,7 +99,6 @@ HRESULT COutSideTaskTimer::Init(void)
 
 	return S_OK;
 }
-
 //=========================================================
 // 終了処理
 //=========================================================
@@ -122,7 +119,6 @@ void COutSideTaskTimer::Uninit(void)
 	// オブジェクト自身の破棄
 	CObject::Release();
 }
-
 //=========================================================
 // 更新処理
 //=========================================================
@@ -157,12 +153,6 @@ void COutSideTaskTimer::Update(void)
 		// 全体の時間を減らす
 		m_nAllTime--;
 
-		// 現在の分数を計算
-		m_nMinutes = m_nAllTime / Config::CARVETIME;
-
-		// 現在の秒数を計算
-		m_nSeconds = m_nAllTime % Config::CARVETIME;
-
 		if (m_nAllTime <= 0)
 		{// 現在の時間が0以下になった時
 			// カウンターを0にする
@@ -173,54 +163,26 @@ void COutSideTaskTimer::Update(void)
 		m_nDecTime++;
 	}
 
-	// それぞれの数字の計算処理
-	Seconds();
-	Minutes();
-
-	// 世界の背景カラー変更
-	if (m_nMaxTime > 0)
-	{
-		// 割合
-		float rate = 1.0f - (static_cast<float>(m_nAllTime) / static_cast<float>(m_nMaxTime));
-
-		// クランプする
-		rate = Clump(rate, 0.0f, 1.0f);
-
-		// 開始のカラーの値
-		D3DXCOLOR startColor(102.0f / 255.0f, 204.0f / 255.0f, 1.0f, 1.0f);	// 水色
-
-		// 終了時のカラーの値
-		D3DXCOLOR endColor(245.0f / 255.0f, 106.0f / 255.0f, 0.0f, 1.0f);	// オレンジ
-
-		// 割合の中間色を設定する
-		D3DXCOLOR currentColor;
-		D3DXColorLerp(&currentColor, &startColor, &endColor, rate);
-
-		// バックバッファのカラーを反映
-		CManager::GetInstance()->GetRenderer()->SetBackBuffColor(currentColor);
-	}
+	// 桁数更新処理
+	UpdateDigitNumbers();
 }
-
 //=========================================================
 // 描画処理
 //=========================================================
 void COutSideTaskTimer::Draw(void)
 {// デバッグ時のみだけ出す
-#ifdef _DEBUG
+
 	// 桁数分表示
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		// ナンバーの描画処理
 		m_pNumberMinutes[nDigit]->Draw();
-		m_pNumberSeconds[nDigit]->Draw();
 	}
-#endif // _DEBUG
 }
-
 //=========================================================
-// 秒数処理
+// 桁数の更新関数
 //=========================================================
-void COutSideTaskTimer::Seconds(void)
+void COutSideTaskTimer::UpdateDigitNumbers(void)
 {
 	// 桁数ごとの分割値
 	int nTimeDate = Config::DIVIDE * Config::DIVIDE;
@@ -228,30 +190,7 @@ void COutSideTaskTimer::Seconds(void)
 
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
-		int nPosTexU = m_nSeconds % nTimeDate / nTimeDateBase;
-		nTimeDate /= Config::DIVIDE;
-		nTimeDateBase /= Config::DIVIDE;
-
-		if (m_pNumberSeconds[nDigit] != nullptr)
-		{// 秒数の更新処理
-			m_pNumberSeconds[nDigit]->Update();
-			m_pNumberSeconds[nDigit]->SetDigit(nPosTexU);
-		}
-	}
-}
-
-//=========================================================
-// 分数処理
-//=========================================================
-void COutSideTaskTimer::Minutes(void)
-{
-	// 桁数ごとの分割値
-	int nTimeDate = Config::DIVIDE * Config::DIVIDE;
-	int nTimeDateBase = Config::DIVIDE;
-
-	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
-	{
-		int nPosTexU = m_nMinutes % nTimeDate / nTimeDateBase;
+		int nPosTexU = m_nAllTime % nTimeDate / nTimeDateBase;
 		nTimeDate /= Config::DIVIDE;
 		nTimeDateBase /= Config::DIVIDE;
 

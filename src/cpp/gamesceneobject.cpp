@@ -11,7 +11,7 @@
 #include "gamesceneobject.h"
 
 //*********************************************************
-// インクルードファイル
+// インクルードファイル ( ベース )
 //*********************************************************
 #include "manager.h"
 #include "input.h"
@@ -23,32 +23,42 @@
 #include "ui.h"
 #include "meshfield.h"
 
-#include "gametime.h"				// 髙橋追加
-#include "deskwork.h"				// 髙橋追加
-#include "progressgauge.h"			// 髙橋追加
-#include "eventUI.h"				// 髙橋追加
-#include "vigilanceUImanager.h"		// 髙橋追加
+//***********************************************
+// 髙橋
+//***********************************************
+#include "gametime.h"			
+#include "deskwork.h"			
+#include "progressgauge.h"		
+#include "eventUI.h"			
+#include "vigilanceUImanager.h"	
 
-#include "player.h"					// 近田追加
-#include "friend.h"					// 近田追加
-#include "pcui.h"					// 近田追加
-#include "copyui.h"					// 近田追加
-#include "smokeui.h"				// 近田追加
-#include "afk2dui.h"				// 近田追加
-#include "tutorialuimanager.h"		// 近田追加
-#include "afkuimanager.h"			// 近田追加
-#include "afkmanager.h"				// 近田追加
-#include "doorui.h"					// 近田追加
-#include "afktvpolygon.h"			// 近田追加
+//***********************************************
+// 近田
+//***********************************************
+#include "player.h"					
+#include "friend.h"					
+#include "pcui.h"					
+#include "copyui.h"					
+#include "smokeui.h"				
+#include "afk2dui.h"				
+#include "tutorialuimanager.h"		
+#include "afkuimanager.h"			
+#include "afkmanager.h"				
+#include "doorui.h"					
+#include "afktvpolygon.h"			
 
-#include "worldUIcollision.h"		// 西尾追加
-#include "camera.h"					// 西尾追加
-#include "automaticdoormanager.h"	// 西尾追加
-#include "autodoor_collision.h"		// 西尾追加
-#include "slideopendoormanager.h"	// 西尾追加
-#include "sideopendoorcollision.h"	// 西尾追加
-#include "enemymanager.h"			// 西尾追加
-#include "mobcharactormanager.h"	// 西尾追加
+//***********************************************
+// 西尾
+//***********************************************
+#include "worldUIcollision.h"		
+#include "camera.h"					
+#include "automaticdoormanager.h"	
+#include "autodoor_collision.h"		
+#include "slideopendoormanager.h"	
+#include "sideopendoorcollision.h"	
+#include "enemymanager.h"			
+#include "mobcharactormanager.h"	
+#include "outsidetasktimer.h"		
 #include "afk2dui.h"
 #include "boss.h"
 #include "receptionist.h"
@@ -185,6 +195,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	//// アニメーション再生関数を設定する
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
+
+	// 西尾 : タスク時間を設定 ( 検証完了 )
+	//COutSideTaskTimer::Create(VECTOR3_NULL, 60.0f, 15.0f);
 	return S_OK;
 }
 
