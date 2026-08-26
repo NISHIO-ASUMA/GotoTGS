@@ -526,6 +526,13 @@ void CPlayer::Update(void)
 						// 扉を閉じる
 						m_isSetOutSideTask = false;
 
+						// サイドに開くドアの当たり判定
+						const auto& SideDoorManager = CSideOpenDoorManager::GetInstance();
+						if (!SideDoorManager) return;
+
+						// 扉を強制的に閉じる
+						SideDoorManager->GetSideOpenDoor()->CloseDoor();
+
 						break;
 					}
 
