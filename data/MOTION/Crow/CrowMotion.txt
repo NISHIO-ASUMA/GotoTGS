@@ -27,7 +27,7 @@ CHARACTERSET
 		INDEX = 0					# 体
 		PARENT = -1					# (親)NULL
 		POS = 0.0 20.0 0.0
-		ROT = 0.0 1.57 0.0
+		ROT = 0.0 0.0 0.0
 	END_PARTSSET
 
 	PARTSSET
@@ -102,7 +102,7 @@ MOTIONSET
 END_MOTIONSET
 
 #========================================
-# [1] アクションモーション
+# [2] アクションモーション
 #========================================
 MOTIONSET
 	LOOP = 0		# ループするかどうか[0:ループしない / 1:ループする]
@@ -199,4 +199,5 @@ MOTIONSET
 		END_KEY
 	END_KEYSET
 END_MOTIONSET
+
 END_SCRIPT		# この行は絶対消さないこと！
