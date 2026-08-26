@@ -49,7 +49,7 @@ HRESULT COverWorkResultObject::Init(void)
 	CManager::GetInstance()->GetCamera()->Init();
 
 	// ロゴuiを生成
-	CUi::Create(CENTERPOS, 0, 450.0f, 130.0f, "toomuchwork.png");
+	//CUi::Create(CENTERPOS, 0, 450.0f, 130.0f, "toomuchwork.png");
 	
 	// メッシュフィールド
 	CMeshField::Create(VECTOR3_NULL, 1000.0f, 1000.0f,30,30, "data/TEXTURE/field00.jpg");
