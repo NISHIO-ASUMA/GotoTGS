@@ -167,8 +167,16 @@ HRESULT CPlayer::Init(void)
 	// フラグの再初期化
 	m_isPcWork = false;
 	m_isCatchEnemy = false;
+
+// デバック状態
+#ifdef _DEBUG
 	m_isSetOutSideTask = true;
 
+// リリース状態
+#else
+	m_isSetOutSideTask = false;
+
+#endif
 	// 初期の許容時間を設定 
 	// これは最初に「仕事をしていましたよー」の時間分 最初から捕まるといやだから最初だけすぐ捕まらないようにする値
 	m_nInitTaskWorkingTime = player::TASK_LIMIT_WORKING;
