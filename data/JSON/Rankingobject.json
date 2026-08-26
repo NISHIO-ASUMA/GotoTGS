@@ -13,7 +13,7 @@
     "Pos": [ 640.0, 90.0, 0.0 ],
     "FlashFrame": 0,
     "Width": 290.0,
-    "Height": 60.0,
+    "Height": 55.0,
     "Texture": "per.png",
     "AlphaTest": false,
     "IsFlash": false,

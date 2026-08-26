@@ -34,7 +34,7 @@ m_fWidth(NULL),
 m_fHeight(NULL),
 m_pos(VECTOR3_NULL)
 {
-	// ポインタをNULLにする
+	// ポインタ初期化
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		m_pNumberMinutes[nDigit] = nullptr;
@@ -57,8 +57,6 @@ CGametime* CGametime::Create(const D3DXVECTOR3& pos, const float& fWidth, const 
 {
 	// インスタンス生成
 	CGametime* pGametime = new CGametime;
-
-	// ヌルチェック
 	if (pGametime == nullptr) return nullptr;
 
 	// 引数を設定
@@ -307,5 +305,4 @@ void CGametime::Minutes(void)
 			m_pNumberMinutes[nDigit]->SetDigit(nPosTexU);
 		}
 	}
-
 }
