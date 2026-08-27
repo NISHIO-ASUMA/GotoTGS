@@ -147,8 +147,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	if (FAILED(m_pFade->Init())) return E_FAIL;
 
 #ifdef _DEBUG
-	// デバッグ用シーンセット
+	//// デバッグ用シーンセット
 	m_pFade->SetFade(std::make_unique<CGame>());
+	//m_pFade->SetFade(std::make_unique<CResult>());
 #else
 	// シーンセット
 	//m_pFade->SetFade(std::make_unique<CGame>());

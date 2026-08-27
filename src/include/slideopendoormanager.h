@@ -65,7 +65,7 @@ public:
 	}
 
 	void OpenSideDoor(const std::vector<int>& targetIndices); // –½—ß”ò‚Î‚µ
-
+	void CloseDoorInOffice(void);
 
 private:
 

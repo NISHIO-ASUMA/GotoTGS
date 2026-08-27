@@ -1,16 +1,14 @@
 //=========================================================
 //
-// ゲームのタイマー処理 [ gametime.cpp ]
-// Author: Takahashi Misaki
-// 
-// TODO : 一定時間経過したら社長の出現をする
+// 外タスクのタイマー処理 [ outsidetasktimer.cpp ]
+// Author: Asuma Nishio
 // 
 //=========================================================
 
 //*********************************************************
 // クラス定義ヘッダーファイル
 //*********************************************************
-#include "gametime.h"
+#include "outsidetasktimer.h"
 
 //*********************************************************
 // インクルードファイル
@@ -23,10 +21,8 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CGametime::CGametime(int nPriority) : CObject(nPriority),
+COutSideTaskTimer::COutSideTaskTimer(int nPriority) : CObject(nPriority),
 m_nAllTime(NULL),
-m_nSeconds(NULL),
-m_nMinutes(NULL),
 m_nDecTime(NULL),
 m_nCounter(NULL),
 m_nMaxTime(NULL),
@@ -38,41 +34,38 @@ m_pos(VECTOR3_NULL)
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		m_pNumberMinutes[nDigit] = nullptr;
-		m_pNumberSeconds[nDigit] = nullptr;
-	}	
+	}
 }
-
 //=========================================================
 // デストラクタ
 //=========================================================
-CGametime::~CGametime()
+COutSideTaskTimer::~COutSideTaskTimer()
 {
 
 }
-
 //=========================================================
 // 生成処理処理
 //=========================================================
-CGametime* CGametime::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
+COutSideTaskTimer* COutSideTaskTimer::Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight)
 {
 	// インスタンス生成
-	CGametime* pGametime = new CGametime;
-	if (pGametime == nullptr) return nullptr;
+	COutSideTaskTimer* pOutSidetime = new COutSideTaskTimer;
+	if (pOutSidetime == nullptr) return nullptr;
 
 	// 引数を設定
-	pGametime->SetPos(pos);
-	pGametime->SetWidth(fWidth);
-	pGametime->SetHeight(fHeight);
+	pOutSidetime->SetPos(pos);
+	pOutSidetime->SetWidth(fWidth);
+	pOutSidetime->SetHeight(fHeight);
 
 	// 初期化が失敗した場合
-	if (FAILED(pGametime->Init())) return nullptr;
+	if (FAILED(pOutSidetime->Init())) return nullptr;
 
-	return pGametime;
+	return pOutSidetime;
 }
 //=========================================================
 // 初期化処理
 //=========================================================
-HRESULT CGametime::Init(void)
+HRESULT COutSideTaskTimer::Init(void)
 {
 	// 開始時の時間を格納
 	m_nMaxTime = Config::NUMTIME;
@@ -80,27 +73,21 @@ HRESULT CGametime::Init(void)
 	// 全体の時間を設定
 	m_nAllTime = Config::NUMTIME;
 
-	// 現在の分数を計算
-	m_nMinutes = m_nAllTime / Config::CARVETIME;
-
-	// 現在の秒数を計算
-	m_nSeconds = m_nAllTime % Config::CARVETIME;
-
 	// 一桁の横幅
 	float fTexpos = m_fWidth / Config::DIGIT_TIME;
 
-	// 分を生成
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
+		// 数値生成
 		m_pNumberMinutes[nDigit] = new CNumber;
 
 		// ナンバーの初期化処理
 		m_pNumberMinutes[nDigit]->Init
 		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),		// 位置
-		fTexpos,																				// 一桁分の横幅
-		m_fHeight);																				// 縦幅
+			fTexpos,																			// 一桁分の横幅
+			m_fHeight);																			// 縦幅
 
-		// サイズ設定
+			// サイズ設定
 		m_pNumberMinutes[nDigit]->SetSize(fTexpos, m_fHeight);
 
 		// カラー設定
@@ -110,38 +97,12 @@ HRESULT CGametime::Init(void)
 		m_pNumberMinutes[nDigit]->SetTexture(Config::TEXNAME);
 	}
 
-	// 位置を横にずらす
-	m_pos.x += Config::VALUE_WIDTH;
-
-	// 秒を生成
-	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
-	{
-		m_pNumberSeconds[nDigit] = new CNumber;
-
-		// ナンバーの初期化処理
-		m_pNumberSeconds[nDigit]->Init
-		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),	// 位置
-		fTexpos,																			// 一桁分の横幅
-		m_fHeight);																			// 縦幅
-
-		// サイズ設定
-		m_pNumberSeconds[nDigit]->SetSize(fTexpos, m_fHeight);
-
-		// カラー設定
-		m_pNumberSeconds[nDigit]->SetCol(COLOR_WHITE);
-
-		// テクスチャ設定
-		m_pNumberSeconds[nDigit]->SetTexture(Config::TEXNAME);
-		m_pNumberSeconds[nDigit]->SetTexture(Config::TEXNAME);
-	}
-
 	return S_OK;
 }
-
 //=========================================================
 // 終了処理
 //=========================================================
-void CGametime::Uninit(void)
+void COutSideTaskTimer::Uninit(void)
 {
 	// 桁数分破棄
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
@@ -153,24 +114,15 @@ void CGametime::Uninit(void)
 			delete m_pNumberMinutes[nDigit];
 			m_pNumberMinutes[nDigit] = nullptr;
 		}
-
-		if (m_pNumberSeconds[nDigit] != nullptr)
-		{
-			// 秒数の終了処理
-			m_pNumberSeconds[nDigit]->Uninit();
-			delete m_pNumberSeconds[nDigit];
-			m_pNumberSeconds[nDigit] = nullptr;
-		}
 	}
 
 	// オブジェクト自身の破棄
 	CObject::Release();
 }
-
 //=========================================================
 // 更新処理
 //=========================================================
-void CGametime::Update(void)
+void COutSideTaskTimer::Update(void)
 {
 	// アニメーション中なら
 	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime()) return;
@@ -194,18 +146,12 @@ void CGametime::Update(void)
 
 	if (m_nCounter >= Config::CARVETIME)
 	{// カウンターが1Fを超えたとき
-		
+
 		// カウンターを0にする
 		m_nCounter = 0;
 
 		// 全体の時間を減らす
 		m_nAllTime--;
-
-		// 現在の分数を計算
-		m_nMinutes = m_nAllTime / Config::CARVETIME;
-
-		// 現在の秒数を計算
-		m_nSeconds = m_nAllTime % Config::CARVETIME;
 
 		if (m_nAllTime <= 0)
 		{// 現在の時間が0以下になった時
@@ -217,54 +163,26 @@ void CGametime::Update(void)
 		m_nDecTime++;
 	}
 
-	// それぞれの数字の計算処理
-	Seconds();
-	Minutes();
-
-	// 世界の背景カラー変更
-	if (m_nMaxTime > 0)
-	{
-		// 割合
-		float rate = 1.0f - (static_cast<float>(m_nAllTime) / static_cast<float>(m_nMaxTime));
-
-		// クランプする
-		rate = Clump(rate, 0.0f, 1.0f);
-
-		// 開始のカラーの値
-		D3DXCOLOR startColor(102.0f / 255.0f, 204.0f / 255.0f, 1.0f, 1.0f);	// 水色
-
-		// 終了時のカラーの値
-		D3DXCOLOR endColor(245.0f / 255.0f, 106.0f / 255.0f, 0.0f, 1.0f);	// オレンジ
-
-		// 割合の中間色を設定する
-		D3DXCOLOR currentColor;
-		D3DXColorLerp(&currentColor, &startColor, &endColor, rate);
-
-		// バックバッファのカラーを反映
-		CManager::GetInstance()->GetRenderer()->SetBackBuffColor(currentColor);
-	}
+	// 桁数更新処理
+	UpdateDigitNumbers();
 }
-
 //=========================================================
 // 描画処理
 //=========================================================
-void CGametime::Draw(void)
+void COutSideTaskTimer::Draw(void)
 {// デバッグ時のみだけ出す
-#ifdef _DEBUG
+
 	// 桁数分表示
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		// ナンバーの描画処理
 		m_pNumberMinutes[nDigit]->Draw();
-		m_pNumberSeconds[nDigit]->Draw();
 	}
-#endif // _DEBUG
 }
-
 //=========================================================
-// 秒数処理
+// 桁数の更新関数
 //=========================================================
-void CGametime::Seconds(void)
+void COutSideTaskTimer::UpdateDigitNumbers(void)
 {
 	// 桁数ごとの分割値
 	int nTimeDate = Config::DIVIDE * Config::DIVIDE;
@@ -272,30 +190,7 @@ void CGametime::Seconds(void)
 
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
-		int nPosTexU = m_nSeconds % nTimeDate / nTimeDateBase;
-		nTimeDate /= Config::DIVIDE;
-		nTimeDateBase /= Config::DIVIDE;
-
-		if (m_pNumberSeconds[nDigit] != nullptr)
-		{// 秒数の更新処理
-			m_pNumberSeconds[nDigit]->Update();
-			m_pNumberSeconds[nDigit]->SetDigit(nPosTexU);
-		}
-	}
-}
-
-//=========================================================
-// 分数処理
-//=========================================================
-void CGametime::Minutes(void)
-{
-	// 桁数ごとの分割値
-	int nTimeDate = Config::DIVIDE * Config::DIVIDE;
-	int nTimeDateBase = Config::DIVIDE;
-
-	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
-	{
-		int nPosTexU = m_nMinutes % nTimeDate / nTimeDateBase;
+		int nPosTexU = m_nAllTime % nTimeDate / nTimeDateBase;
 		nTimeDate /= Config::DIVIDE;
 		nTimeDateBase /= Config::DIVIDE;
 

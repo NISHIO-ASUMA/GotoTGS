@@ -1,7 +1,7 @@
 //=========================================================
 //
-// ゲームのタイマー処理 [ gametime.h ]
-// Author: Takahashi Misaki
+// 外タスクのタイマー処理 [ outsidetasktimer.h ]
+// Author: Asuma Nishio
 //
 //=========================================================
 
@@ -21,9 +21,9 @@
 class CNumber;
 
 //*********************************************************
-// タイマークラスを定義
+// 外タスクのタイマークラスを定義
 //*********************************************************
-class CGametime :public CObject
+class COutSideTaskTimer :public CObject
 {
 public:
 	//************************************
@@ -33,54 +33,46 @@ public:
 	{
 		static constexpr float VALUE_WIDTH = 150.0f;			// 横幅の増加分
 		static constexpr float VALUE_FLOAT = 2.0f;				// ずらす基準値
-		static constexpr const char* TEXNAME = "time.png";		// テクスチャ名
+		static constexpr const char* TEXNAME = "number_k.png";	// テクスチャ名
 		static constexpr int DIGIT_TIME = 2;					// 桁数
 		static constexpr int DIVIDE = 10;						// 桁分割の値
 		static constexpr int CARVETIME = 60;					// カウント上限
-#ifdef _DEBUG
-		static constexpr int NUMTIME = 600;						// 最大タイマー ( デバッグ状態時は長めに )
-#else
-		static constexpr int NUMTIME = 240;						// 最大タイマー ( 4分のゲーム時間 )
-#endif // _DEBUG
+		static constexpr int NUMTIME = 60;						// 最大タイマー ( この最大値は仮で設定する )
 	};
 
-	CGametime(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
-	~CGametime();
+	COutSideTaskTimer(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	~COutSideTaskTimer();
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
 
-	// 各種設定処理
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_fHeight = fHeight; }
 
-	// 情報取得処理
-	inline int GetAllTime(void) const { return m_nAllTime; }
-	inline int GetNowTime(void) const { return m_nSeconds; }
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="pos">生成座標</param>
+	/// <param name="fWidth">横幅</param>
+	/// <param name="fHeight">高さ</param>
+	/// <returns></returns>
+	static COutSideTaskTimer* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
 
-	// 生成処理
-	static CGametime* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
+private:
+	void UpdateDigitNumbers(void);
 
 private:
 
-	// メンバ関数
-	void Minutes(void);	// 分数処理
-	void Seconds(void);	// 秒数処理
-
-	// メンバ変数
 	int m_nMaxTime;		// 開始時の最大時間
 	int m_nAllTime;		// 全体の時間
-	int m_nSeconds;		// 現在の時間（秒数）
-	int m_nMinutes;		// 現在の時間（分数）
 	int m_nDecTime;		// 経過時間
 	int m_nCounter;		// カウンター
 	float m_fWidth;		// 横幅
 	float m_fHeight;	// 縦幅
 
 	CNumber* m_pNumberMinutes[Config::DIGIT_TIME];		// 分数のポインタ
-	CNumber* m_pNumberSeconds[Config::DIGIT_TIME];		// 秒数のポインタ
 	D3DXVECTOR3 m_pos;									// 位置
 };

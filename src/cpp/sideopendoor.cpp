@@ -336,3 +336,11 @@ void CSideOpenDoor::RotationDoorFlag(void)
 		m_nState = STATE_OPENING;
 	}
 }
+//=========================================================
+// ドアを強制的に閉じる関数
+//=========================================================
+void CSideOpenDoor::CloseDoor(void)
+{
+	// 状態を"閉じはじめ開始"に変更する
+	m_nState = STATE_RETURN;
+}

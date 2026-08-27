@@ -138,13 +138,13 @@ void CResultIcon::MathScoreTexture(const int& nScore)
 {// ここは主に称号のテクスチャを設定する
 
 	if (nScore <= 3000)
-		SetTexture("ResultIcon/yesman.png");
+		SetTexture("ResultIcon/yesman.png");	// 星1
 	else if (nScore <= 35000)
-		SetTexture("ResultIcon/workman.png");
+		SetTexture("ResultIcon/workman.png");	// 星2
 	else if (nScore <= 70000)
-		SetTexture("ResultIcon/Dalarryman.png");
+		SetTexture("ResultIcon/Dalarryman.png");	// 星3
 	else if (nScore <= 101000)
-		SetTexture("ResultIcon/Saboriman.png");
+		SetTexture("ResultIcon/Saboriman.png");	// 星4
 	else
-		SetTexture("ResultIcon/bucklehman.png");
+		SetTexture("ResultIcon/bucklehman.png");	// 星5
 }
