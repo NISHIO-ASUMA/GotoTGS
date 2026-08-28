@@ -93,7 +93,8 @@ m_playerTargetPos(VECTOR3_NULL),
 m_pMachine(nullptr),
 m_fEyeAngle(NULL),
 m_isStartChase(false),
-m_isActiveSet(false)
+m_isActiveSet(false),
+m_isStartDraw(false)
 {
 
 }
@@ -200,6 +201,9 @@ void CBoss::Update(void)
 //========================================================
 void CBoss::Draw(void)
 {
+	// 描画フラグから見る
+	if (!m_isStartDraw) return;
+
 	// キャラクター描画
 	CMoveCharactor::Draw();
 

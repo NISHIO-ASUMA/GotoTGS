@@ -213,6 +213,7 @@ public:
 	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
 	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
 	void SetCameraMove(const bool& isMove) { m_isMove = isMove; }
+	void SetAnimFlag(const bool& isstart) { m_isAnimating = isstart; }
 	void SetAnyCharactorPointer(CMoveCharactor* pCharactor = nullptr) { m_pCharactor = pCharactor; }
 
 	inline D3DXVECTOR3 GetRot(void) const { return m_pCamera.rot; }
@@ -252,4 +253,5 @@ private:
 	D3DXVECTOR3 m_TargetRot;
 	float m_fLerpRate; // 補間率
 	int m_nBossCamWaitCount; // ボスカメラ待機用カウンタ
+	bool m_isFinishBossMovie;
 };

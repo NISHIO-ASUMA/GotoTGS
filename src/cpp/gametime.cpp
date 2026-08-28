@@ -172,8 +172,22 @@ void CGametime::Uninit(void)
 //=========================================================
 void CGametime::Update(void)
 {
-	// アニメーション中なら
+	// アニメーション関連の状態なら
 	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime()) return;
+	if (CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM) return;
+
+	// 後々解放する
+#if 0
+	// 全体時間の半分になったら
+	if (m_nMaxTime / 2 == m_nAllTime)
+	{
+		// イベントが登録されていれば実行
+		if (m_event)
+		{
+			m_event(); // ()を付けて関数起動
+		}
+	}
+#endif
 
 	// 最大時間が0なら処理を通さない
 	if (m_nAllTime <= 0)
@@ -283,7 +297,6 @@ void CGametime::Seconds(void)
 		}
 	}
 }
-
 //=========================================================
 // 分数処理
 //=========================================================

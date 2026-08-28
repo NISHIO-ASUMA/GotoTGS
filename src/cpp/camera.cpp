@@ -79,7 +79,8 @@ m_TargetPosR(VECTOR3_NULL),
 m_TargetRot(VECTOR3_NULL),
 m_fLerpRate(NULL),
 m_nBossCamWaitCount(NULL),
-m_pBoss(nullptr)
+m_pBoss(nullptr),
+m_isFinishBossMovie(false)
 {
 	
 }
@@ -138,7 +139,15 @@ void CCamera::Update(void)
 	// ボスムービーなら
 	if (m_pCamera.nMode == MODE_BOSS_SYSTEM)
 	{
+		// 追従変更
 		UpdateBossCamera();
+
+		// 有効なら
+		if (m_isFinishBossMovie == true)
+		{
+			m_pCamera.nMode = MODE_THIRD;
+			return;
+		}
 
 		if (m_pBoss->GetActiveFlags())
 		{
@@ -973,6 +982,10 @@ void CCamera::UpdateBossCamera(void)
 
 			// 三人称追従モードに戻す
 			m_pCamera.nMode = MODE_THIRD;
+
+			// 終わりのフラグ
+			m_isFinishBossMovie = true;
+			return;
 		}
 	}
 }

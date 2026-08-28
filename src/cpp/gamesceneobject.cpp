@@ -22,6 +22,7 @@
 #include "worldwallmanager.h"
 #include "ui.h"
 #include "meshfield.h"
+#include <functional>
 
 //***********************************************
 // 髙橋
@@ -195,6 +196,9 @@ HRESULT CGameSceneObject::Init(void)
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 	CManager::GetInstance()->GetCamera()->SetBoss(m_pBoss);
 
+	// イベントを登録する ( ラムダ式 )
+	m_pTimer->RegisterEvent([this]() {SetEventGameBoss();});
+
 	//// アニメーション再生関数を設定する
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 
@@ -266,11 +270,11 @@ void CGameSceneObject::Update(void)
 		// ボスなら
 		if (pCamera->GetMode() == CCamera::MODE_BOSS_SYSTEM)
 		{
-			pCamera->SetTargetPersonPosBoss(m_pBoss->GetPos());
+			if (m_pBoss) pCamera->SetTargetPersonPosBoss(m_pBoss->GetPos());
 		}
 		else if (pCamera->GetMode() != CCamera::MODE_BOSS_SYSTEM)
 		{
-			pCamera->SetTargetPersonPos(m_pPlayer->GetPos());	
+			pCamera->SetTargetPersonPos(m_pPlayer->GetPos());
 		}
 	}
 
@@ -332,15 +336,20 @@ void CGameSceneObject::Draw(void)
 	
 }
 //=========================================================
-// ゲームイベント ボス編
+// ボス出現のゲームイベント
 //=========================================================
 void CGameSceneObject::SetEventGameBoss(void)
 {
-	// カメラ関連の設定 ( 一時的にカメラを線形補完で目標の位置まで動かす )
-	// それが出来たらモードチェンジ(追従するポインタをボスに変更し後ろから追ってくるようにする )
-	// 現在から補完先の座標は 
-	// POSV = [ 668.0f,104.0f,44.0f], POSR = [ 660.0f,25.0f,225.0f] ROT = [1.85f,-0.03f,0.0f]
-	CManager::GetInstance()->GetCamera()->SetBossSysytem({ 668.0f,104.0f,44.0f }, { 660.0f,25.0f,225.0f }, { 1.85f,-0.03f,0.0f });
+	// 先に描画を起動する
+	m_pBoss->SetDrawFlags(true);
+
+	// イベントの起動
+	CManager::GetInstance()->GetCamera()->SetBossSysytem
+	(
+		{ 668.0f,104.0f,44.0f },
+		{ 660.0f,25.0f,225.0f },
+		{ 1.85f,-0.03f,0.0f }
+	);
 }
 //=========================================================
 // ポインタの生成を行う関数

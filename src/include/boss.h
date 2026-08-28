@@ -59,6 +59,7 @@ public:
 
 	void SetCharactorPointer(CPlayer* pCharactor = nullptr) { m_pDestCharactor = pCharactor; }
 	void SetActiveFlags(bool isflag) { m_isActiveSet = isflag; }
+	void SetDrawFlags(bool isDrawSet) { m_isStartDraw = isDrawSet; }
 
 	bool GetActiveFlags(void) { return m_isActiveSet; }
 	bool GetInOfficeFlag(void) { return m_isOfficeMove; }
@@ -126,6 +127,7 @@ private:
 	bool m_isStartChase;								// 猛追開始フラグ
 
 	bool m_isActiveSet;									// 行動開始できるかどうか
+	bool m_isStartDraw;									// 描画起動フラグ
 private:
 	float m_fEyeAngle;									// 角度値
 
