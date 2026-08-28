@@ -117,6 +117,9 @@ void CDOCUMENTDeskwork::Update(void)
 	{
 		// パーティクルをOFFにする
 		m_pParticle->SetUse(false);
+
+		// 時間を初期値に戻す
+		m_nParticleTime = NULL;
 	}
 }
 
