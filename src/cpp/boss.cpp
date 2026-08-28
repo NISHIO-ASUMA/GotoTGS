@@ -85,7 +85,7 @@ m_pSphereColiider(nullptr),
 m_nViewIdx(NULL),
 m_nOfficeViewIdx(NULL),
 m_nCoolTime(NULL),
-m_isOutSideIn(true),
+m_isOutSideIn(false),
 m_isOfficeMove(false),
 m_pChaseIcon(nullptr),
 m_pDestCharactor(nullptr),
@@ -171,7 +171,7 @@ void CBoss::Uninit(void)
 //========================================================
 void CBoss::Update(void)
 {
-	if (!m_isActiveSet) return;
+	//if (!m_isActiveSet) return;
 
 	//// 現在地の座標を取得
 	//auto pos = GetPos();
@@ -200,8 +200,6 @@ void CBoss::Update(void)
 //========================================================
 void CBoss::Draw(void)
 {
-	if (!m_isActiveSet) return;
-
 	// キャラクター描画
 	CMoveCharactor::Draw();
 
@@ -418,10 +416,12 @@ bool CBoss::CheckEyesight(void)
 //========================================================
 void CBoss::MoveInOffice(const D3DXVECTOR3& pos)
 {
+	if (!m_isActiveSet) return;
+
 	// もし最後のインデックスだったら
 	if (m_nViewIdx >= BOSS_INFO::NUM_OUTSIDEPOINT)
 	{
-		m_isOutSideIn = false;
+		m_isOutSideIn = true;
 		m_isOfficeMove = true;
 		return;
 	}
@@ -478,7 +478,7 @@ void CBoss::MoveInOffice(const D3DXVECTOR3& pos)
 void CBoss::MoveOfficePoint(const D3DXVECTOR3& pos)
 {
 	// 外から移動の時はreturn
-	if (!m_isOutSideIn) return;
+	if (!m_isActiveSet) return;
 
 	// 停止カウント中の処理
 	if (m_nCoolTime > 0)
@@ -548,7 +548,7 @@ void CBoss::NormalMoving(void)
 	// 現在地の座標を取得
 	auto pos = GetPos();
 
-	if (m_isOutSideIn)
+	if (m_isActiveSet)
 		MoveInOffice(pos); // オフィス内に来る
 
 	if (m_isOfficeMove)

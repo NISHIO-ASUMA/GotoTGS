@@ -37,6 +37,7 @@
 #include "jsonmanager.h"
 #include "pausemanager.h"
 #include "overworkresult.h"
+#include <testscene.h>
 
 //*********************************************************
 // 定数名前空間宣言
@@ -149,12 +150,13 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 #ifdef _DEBUG
 	//// デバッグ用シーンセット
 	m_pFade->SetFade(std::make_unique<CGame>());
+	//m_pFade->SetFade(std::make_unique<CTest>());
 	//m_pFade->SetFade(std::make_unique<CResult>());
 #else
 	// シーンセット
 	//m_pFade->SetFade(std::make_unique<CGame>());
-	m_pFade->SetFade(std::make_unique<COverWorkResult>());
-	//m_pFade->SetFade(std::make_unique<CTitle>());
+	//m_pFade->SetFade(std::make_unique<COverWorkResult>());
+	m_pFade->SetFade(std::make_unique<CTitle>());
 #endif // _DEBUG
 
 	// 乱数の種を一度宣言する

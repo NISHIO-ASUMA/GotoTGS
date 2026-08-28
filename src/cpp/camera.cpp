@@ -22,6 +22,7 @@
 #include "automatic_door.h"
 #include "sideopendoor.h"
 #include "titleuimanager.h"
+#include "boss.h"
 
 //*********************************************************
 // 定数名前空間宣言
@@ -72,7 +73,13 @@ m_pCharactor(nullptr),
 m_currentAnim{},
 m_isAnimating(false),
 m_nCurrentFrame(NULL),
-m_nTotalFrames(NULL)
+m_nTotalFrames(NULL),
+m_TargetPosV(VECTOR3_NULL),
+m_TargetPosR(VECTOR3_NULL),
+m_TargetRot(VECTOR3_NULL),
+m_fLerpRate(NULL),
+m_nBossCamWaitCount(NULL),
+m_pBoss(nullptr)
 {
 	
 }
@@ -127,6 +134,20 @@ void CCamera::Update(void)
 	// マウスでのカメラ更新
 	MouseView(CManager::GetInstance()->GetMouse());
 #endif
+
+	// ボスムービーなら
+	if (m_pCamera.nMode == MODE_BOSS_SYSTEM)
+	{
+		UpdateBossCamera();
+
+		if (m_pBoss->GetActiveFlags())
+		{
+			D3DXVECTOR3 B_pos = m_pBoss->GetPos();
+
+			UpdateFollowBoss({ B_pos.x,B_pos .y + 50.0f,B_pos .z});
+		}
+		return;
+	}
 
 	// もしアニメーションモードだったら
 	if (m_pCamera.nMode == CCamera::MODE_ANIM && m_isAnimating)
@@ -885,4 +906,86 @@ void CCamera::FollowJoyPad(void)
 	// X軸（上下回転）の制限
 	if (m_pCamera.rot.x <= 1.0f)  m_pCamera.rot.x = 1.0f;
 	if (m_pCamera.rot.x >= 2.6f)  m_pCamera.rot.x = 2.6f;
+}
+//==============================================================
+// ボス関連のシステム設定 ( 基本派この関数の中で設定する)
+//==============================================================
+void CCamera::SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& targetPosR, const D3DXVECTOR3& targetRot)
+{
+	// モードを一時的に変更
+	m_pCamera.nMode = MODE_BOSS_SYSTEM;
+
+	// カメラの値設定
+	m_TargetPosV = targetPosV;
+	m_TargetPosR = targetPosR;
+	m_TargetRot = targetRot;
+	m_fLerpRate = 0.0f;
+}
+//==============================================================
+// ボスの時のカメラ更新
+//==============================================================
+void CCamera::UpdateBossCamera(void)
+{
+	const float fLerpFactor = 0.05f;
+
+	D3DXVec3Lerp(&m_pCamera.posV, &m_pCamera.posV, &m_TargetPosV, fLerpFactor);
+	D3DXVec3Lerp(&m_pCamera.posR, &m_pCamera.posR, &m_TargetPosR, fLerpFactor);
+	D3DXVec3Lerp(&m_pCamera.rot, &m_pCamera.rot, &m_TargetRot, fLerpFactor);
+
+	// 目標座標への到着判定
+	D3DXVECTOR3 diff = m_TargetPosV - m_pCamera.posV;
+	float fDistanceSq = D3DXVec3LengthSq(&diff);
+
+	// 距離の2乗が一定値以下かつ、まだボスが未起動の場合
+	if (fDistanceSq < 1.0f)
+	{
+		if (m_pBoss && !m_pBoss->GetActiveFlags())
+		{
+			// ボス行動開始
+			m_pBoss->SetActiveFlags(true);
+
+			// 追従対象を一時的にボスにする場合
+			UpdateFollowBoss(m_pBoss->GetPos());
+		}
+	}
+
+	// 通常追従に戻す
+	if (m_pBoss && m_pBoss->GetOutSideIn())
+	{
+		// 120カウント待機処理
+		const int WAIT_MAX = 120;
+
+		if (m_nBossCamWaitCount < WAIT_MAX)
+		{
+			m_nBossCamWaitCount++;
+		}
+		else
+		{
+			// 指定カウント到達後にプレイヤー追従へ復帰
+			if (m_pCharactor)
+			{
+				// ターゲットを"プレイヤー"に戻す
+				SetTargetPersonPos(m_pCharactor->GetPos());
+			}
+
+			// カウンタリセット
+			m_nBossCamWaitCount = 0;
+
+			// 三人称追従モードに戻す
+			m_pCamera.nMode = MODE_THIRD;
+		}
+	}
+}
+//==============================================================
+// 単純にボスを追従するカメラ
+//==============================================================
+void CCamera::UpdateFollowBoss(const D3DXVECTOR3& FollowtargetPos)
+{
+	// 注視点設定
+	m_pCamera.posR = FollowtargetPos;
+
+	//カメラの設定
+	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 }

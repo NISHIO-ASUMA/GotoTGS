@@ -58,8 +58,12 @@ public:
 	bool CheckObstacle(void);
 
 	void SetCharactorPointer(CPlayer* pCharactor = nullptr) { m_pDestCharactor = pCharactor; }
+	void SetActiveFlags(bool isflag) { m_isActiveSet = isflag; }
 
+	bool GetActiveFlags(void) { return m_isActiveSet; }
 	bool GetInOfficeFlag(void) { return m_isOfficeMove; }
+	bool GetOutSideIn(void) { return m_isOutSideIn; }
+
 	CBillboard* GetChaseIcon(void) { return m_pChaseIcon; }
 	CPlayer* GetInCharactor(void) { return m_pDestCharactor; }
 
