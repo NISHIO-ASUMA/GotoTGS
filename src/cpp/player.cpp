@@ -510,7 +510,12 @@ void CPlayer::Update(void)
 					// 両方がnullじゃない状態
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
 					{
+						// 書類タスクの値設定処理
 						pDesk->GetDOCUMENTDesk()->SetDOCUMENTValue();
+
+						// 外出タスクの起動
+						pDesk->GetOutsideDesk()->SetOutside();
+
 					}
 
 					break;
@@ -539,8 +544,6 @@ void CPlayer::Update(void)
 					// 両方がnullじゃない状態
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0))
 					{
-						pDesk->GetOutsideDesk()->SetOutside();
-
 						// 扉を開ける状態にする
 						m_isSetOutSideTask = true;
 
