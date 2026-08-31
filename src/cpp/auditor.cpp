@@ -17,11 +17,16 @@
 #include "spherecollider.h"
 #include "manager.h"
 #include "template.h"
-#include "auditorutility.h"
 #include "blockmanager.h"
 #include "block.h"
 #include "jsonmanager.h"
+#include "billboard.h"
+#include "statemachine.h"
 #include "player.h"
+
+#include "auditorstatebase.h"
+#include "auditorstateneutral.h"
+#include "auditorutility.h"
 
 //*********************************************************
 // 定数名前空間
@@ -48,6 +53,8 @@ m_nTargetIdx(NULL),
 m_pBoxColiider(nullptr),
 m_pSphereColiider(nullptr),
 m_pDestCharactor(nullptr),
+m_pMachine(nullptr),
+m_pChaseIcon(nullptr),
 m_MoveTypeData(MOVE_POINTTYPE::OFFICENEAR)
 {
 }
@@ -90,6 +97,15 @@ HRESULT CAuditor::Init(void)
 	// モーションロード
 	MotionLoad(AUDITOR_INFO::FILENAME, MOTION::MAX, false);
 
+	// ステート生成
+	m_pMachine = new CStateMachine;
+	if (m_pMachine)
+		this->ChangeState(new CAuditorStateNeutral(),CAuditorStateBase::ID_NEUTRAL);
+
+	// アイコン生成
+	m_pChaseIcon = CBillboard::Create(GetPos(), VECTOR3_NULL, 20.0f, 20.0f, "ui_chaseicon.png");
+	m_pChaseIcon->SetDrawFlags(false);
+
 	return S_OK;
 }
 //========================================================
@@ -100,6 +116,14 @@ void CAuditor::Uninit(void)
 	// コライダー破棄
 	m_pBoxColiider.reset();
 	m_pSphereColiider.reset();
+
+	// ステートの破棄
+	if (m_pMachine)
+	{
+		m_pMachine->OnExit();
+		delete m_pMachine;
+		m_pMachine = nullptr;
+	}
 
 	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
@@ -519,6 +543,20 @@ void CAuditor::DrawEyeSight(void)
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG2, oldColorArg2);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, oldAlphaOp);
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
+}
+//========================================================
+// ステート切り替え設定
+//========================================================
+void CAuditor::ChangeState(CAuditorStateBase* pNewState, int nID)
+{
+	// 自分自身のポインタを設定
+	pNewState->SetOwner(this);
+
+	// IDの設定
+	pNewState->SetID(nID);
+
+	// 実際の切り替え
+	m_pMachine->ChangeState(pNewState);
 }
 //========================================================
 // 障害物判定

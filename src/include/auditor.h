@@ -26,6 +26,9 @@
 class CSphereCollider;
 class CBoxCollider;
 class CPlayer;
+class CBillboard;
+class CStateMachine;
+class CAuditorStateBase;
 
 //*********************************************************
 // 外にいる監査役のキャラクタークラスを定義
@@ -66,11 +69,15 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	void MovingTypeOutSide(void);
 
 	void DrawEyeSight(void);
+	void ChangeState(CAuditorStateBase* pNewState, int nID);
 	bool CheckObstacle(void);
 	bool CheckRayToAngleRange(void);
 	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+
+	CBillboard* GetChaseIcon(void) const { return m_pChaseIcon; }
 
 	/// <summary>
 	/// プレイヤーのポインタを設定する
@@ -111,7 +118,6 @@ private:
 
 private:
 
-	void MovingTypeOutSide(void);
 	void UpdateOffice(void);
 	void UpdateSoba(void);
 	void UpdateGameCenter(void);
@@ -135,4 +141,6 @@ private:
 
 private:
 	CPlayer* m_pDestCharactor;				// 対象キャラクター
+	CBillboard* m_pChaseIcon;				// 追跡アイコンのビルボード
+	CStateMachine* m_pMachine;				// ステートマシン用ポインタ変数
 };

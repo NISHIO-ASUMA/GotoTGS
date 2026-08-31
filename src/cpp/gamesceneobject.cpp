@@ -153,8 +153,8 @@ HRESULT CGameSceneObject::Init(void)
 	CreatePointer();
 
 	// 外の監査役を生成 ( Asuma )
-	CAuditorManager::GetInstance()->Init();
 	CAuditorManager::GetInstance()->SetPlayerPointer(m_pPlayer);
+	CAuditorManager::GetInstance()->Init();
 
 	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");

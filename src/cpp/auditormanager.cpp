@@ -79,5 +79,5 @@ void CAuditorManager::CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3&
 
 	// プレイヤーのポインタを設定する
 	if (m_pOutSidePlayer)
-	m_pAuditor.back()->SetPlayer(m_pOutSidePlayer);
+		m_pAuditor.back()->SetPlayer(m_pOutSidePlayer);
 }
