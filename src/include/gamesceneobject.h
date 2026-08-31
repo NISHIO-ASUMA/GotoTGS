@@ -46,7 +46,7 @@ public:
 	void Draw(void);
 
 	/// <summary>
-	/// 西尾 : ゲームでボスが追加されるときに起こすもの
+	/// 西尾 : ゲームでボスが追加されるときに起こす関数イベント
 	/// </summary>
 	/// <param name=""></param>
 	void SetEventGameBoss(void);
@@ -84,8 +84,8 @@ private:
 private:
 
 	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
-	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
-	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
+	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分、実際にゲーム中に出す ]
+	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 合計 ]
 
 private:
 	CGametime* m_pTimer;							// タイマークラスのポインタ		Misaki
@@ -97,7 +97,7 @@ private:
 private:
 	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]
 	CReceptionist* m_pReception;					// 外に行く受付人				[ Asuma Add ]
-	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI
+	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI					[ Asuma Add ]
 	CBoss* m_pBoss;									// 社長キャラクター				[ Asuma Add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ

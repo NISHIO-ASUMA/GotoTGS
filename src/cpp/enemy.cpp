@@ -632,7 +632,6 @@ bool CEnemy::CheckEyesight(void)
 //========================================================
 bool CEnemy::CheckRayToAngleRange(void)
 {
-#if 1
 	// nullÇ»ÇÁ
 	if (!m_pDestCharactor) return false;
 
@@ -695,7 +694,6 @@ bool CEnemy::CheckRayToAngleRange(void)
 	}
 	
 	return true;
-#endif
 }
 //========================================================
 // îªï Ç∑ÇÈç€Ç…è·äQï®Ç™ë∂ç›ÇµÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©

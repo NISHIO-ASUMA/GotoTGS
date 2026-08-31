@@ -18,6 +18,11 @@
 #include "auditor.h"
 
 //*********************************************************
+// 前方宣言
+//*********************************************************
+class CPlayer;
+
+//*********************************************************
 // 外の監査役を複数管理するクラスを定義
 //*********************************************************
 class CAuditorManager
@@ -72,6 +77,12 @@ public:
 	/// <returns></returns>
 	CAuditor* GetIdxAuditor(const int nIdx) const { return m_pAuditor[nIdx]; }
 
+	/// <summary>
+	/// プレイヤーの外部ポインタを設定する
+	/// </summary>
+	/// <param name="pPlayer">プレイヤークラスのポインタ</param>
+	void SetPlayerPointer(CPlayer* pPlayer = nullptr) { m_pOutSidePlayer = pPlayer; }
+
 private:
 
 	CAuditorManager();
@@ -79,4 +90,5 @@ private:
 
 private:
 	std::vector<CAuditor*> m_pAuditor;	// 外の監査役の配列
+	CPlayer* m_pOutSidePlayer;			// プレイヤーの外部ポインタ
 };
