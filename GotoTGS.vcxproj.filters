@@ -1010,9 +1010,12 @@
     </ClCompile>
     <ClCompile Include="src\cpp\receptionUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="src\cpp\testscene.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\receptionlineUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1621,6 +1624,9 @@
     </ClInclude>
     <ClInclude Include="src\include\testscene.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\receptionlineUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

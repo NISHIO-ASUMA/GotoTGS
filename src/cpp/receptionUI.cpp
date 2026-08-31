@@ -21,22 +21,25 @@
 #include "player.h"
 #include "deskwork.h"
 #include "outsidework.h"
+#include "receptionlineUI.h"
 
 //=================================================
 // 名前空間
 //=================================================
 namespace ReceptionUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };			// UIの座標
-	const D3DXVECTOR3 ReceptionPos = { 360.0f, 30.0f, 215.0f };	// 対象の座標
-	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };					// 初期のサイズ
-	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };					// 目標のサイズ
-	constexpr float fRadius = 25.0f;							// 半径
-	constexpr float fWidth = 250.0f;							// 横幅
-	constexpr float fHeight = 75.0f;							// 縦幅
-	constexpr float fMaxFrame = 60.0f;							// 最大フレーム
-	constexpr const char* OPEN_Texture = "work_outside.png";	// 開錠時のテクスチャ名
-	//constexpr const char* CLOSE_Texture = "work_outside.png";	// 閉錠時のテクスチャ名
+	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };				// UIの座標
+	const D3DXVECTOR3 ReceptionPos = { 360.0f, 30.0f, 215.0f };		// 対象の座標
+	const D3DXVECTOR3 LinePos = { 340.0f, 60.0f, 215.0f };			// セリフの座標
+	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };						// 初期のサイズ
+	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };						// 目標のサイズ
+	constexpr float fRadius = 25.0f;								// 半径
+	constexpr float fWidth = 250.0f;								// 横幅
+	constexpr float fHeight = 75.0f;								// 縦幅
+	constexpr float fMaxFrame = 60.0f;								// 最大フレーム
+	constexpr const char* OPEN_Texture = "work_outside.png";		// 開錠時のテクスチャ名
+	//constexpr const char* CLOSE_Texture = "work_outside.png";		// 閉錠時のテクスチャ名
+	constexpr const char* LINE_Texture = "start_outsidetask.png";	// セリフのテクスチャ名
 };
 
 //=========================================================
@@ -49,7 +52,8 @@ m_fCountFrame(NULL),
 m_bEasing(false),
 m_bDisplay(false),
 m_bUse(false),
-m_pPlayerOwner(nullptr)
+m_pPlayerOwner(nullptr),
+m_pLineUI(nullptr)
 {
 
 }
@@ -97,6 +101,9 @@ HRESULT CReceptionUI::Init(void)
 	// 球形コライダーを生成
 	m_pSphereCollider = CSphereCollider::Create(ReceptionUI::ReceptionPos, ReceptionUI::fRadius);
 
+	// セリフUI生成
+	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::ReceptionPos, ReceptionUI::LINE_Texture);
+
 	return S_OK;
 }
 //=========================================================
@@ -106,6 +113,9 @@ void CReceptionUI::Uninit(void)
 {
 	// スフィアコライダーの破棄
 	m_pSphereCollider.reset();
+
+	// セリフUIの破棄
+	m_pLineUI = nullptr;
 
 	// 親クラスの終了処理
 	CObject2D::Uninit();

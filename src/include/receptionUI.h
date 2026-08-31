@@ -25,6 +25,7 @@
 //*********************************************************
 class CSphereCollider;
 class CPlayer;
+class CReceptionlineUI;
 
 //*********************************************************
 // 受付人のuiクラスを定義
@@ -69,4 +70,5 @@ private:
 	bool m_bUse;										// 使用しているかの判定変数
 
 	CPlayer* m_pPlayerOwner;							// 格納するプレイヤーのポインタ
+	CReceptionlineUI* m_pLineUI;						// セリフUIのポインタ
 };
