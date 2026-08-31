@@ -632,7 +632,7 @@ bool CEnemy::CheckEyesight(void)
 //========================================================
 bool CEnemy::CheckRayToAngleRange(void)
 {
-#if 0
+#if 1
 	// nullなら
 	if (!m_pDestCharactor) return false;
 
@@ -671,7 +671,7 @@ bool CEnemy::CheckRayToAngleRange(void)
 	D3DXVECTOR3 forward(-matRot._31, 0.0f, -matRot._33);
 	D3DXVec3Normalize(&forward, &forward);
 
-	// ターゲットへのベクトルを算出・正規化
+	// ターゲットへのベクトルを算出
 	D3DXVECTOR3 dirToTarget;
 	D3DXVec3Normalize(&dirToTarget, &diff);
 
@@ -694,10 +694,8 @@ bool CEnemy::CheckRayToAngleRange(void)
 		return false; // 障害物に遮られている
 	}
 	
-#else
-	return false;
+	return true;
 #endif
-	//return true; // 視界内にプレイヤーを発見
 }
 //========================================================
 // 判別する際に障害物が存在しているかどうか
