@@ -128,8 +128,7 @@ void CReceptionUI::Update(void)
 
 	// “–‚½‚Á‚Ä‚¢‚È‚¢
 	if (!CollisionSphere(SphereCollider) || 
-		pDesk->GetOutsideDesk()->GetDOCUMENTTaskNum() <= NULL ||
-		pDesk->GetOutsideDesk()->GetOutsideTaskNum() > NULL)
+		!pDesk->GetOutsideDesk()->GetGoOutside())
 	{
 		// •`‰æ‚µ‚È‚¢
 		m_bDisplay = false;
