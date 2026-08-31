@@ -312,6 +312,7 @@
     <ClCompile Include="src\cpp\rankingobject.cpp" />
     <ClCompile Include="src\cpp\rankingscore.cpp" />
     <ClCompile Include="src\cpp\receptionist.cpp" />
+    <ClCompile Include="src\cpp\receptionlineUI.cpp" />
     <ClCompile Include="src\cpp\receptionUI.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\cpp\result.cpp" />
@@ -517,6 +518,7 @@
     <ClInclude Include="src\include\rankingobject.h" />
     <ClInclude Include="src\include\rankingscore.h" />
     <ClInclude Include="src\include\receptionist.h" />
+    <ClInclude Include="src\include\receptionlineUI.h" />
     <ClInclude Include="src\include\receptionUI.h" />
     <ClInclude Include="src\include\renderer.h" />
     <ClInclude Include="src\include\result.h" />
