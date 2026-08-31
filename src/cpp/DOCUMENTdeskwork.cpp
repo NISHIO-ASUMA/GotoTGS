@@ -155,6 +155,7 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	{
 		// チュートリアルを進める
 		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
+
 		return;
 	}
 
