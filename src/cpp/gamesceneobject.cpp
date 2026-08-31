@@ -32,6 +32,7 @@
 #include "progressgauge.h"		
 #include "eventUI.h"			
 #include "vigilanceUImanager.h"	
+#include "receptionUI.h"
 
 //***********************************************
 // 近田
@@ -187,6 +188,9 @@ HRESULT CGameSceneObject::Init(void)
 //*********************************************
 	// ドア用UIの生成
 	CDoorUI::Create(m_pPlayer);
+
+	// 受付人用UIの生成
+	CReceptionUI::Create(m_pPlayer);
 
 	// 敵管理クラスのポインタセット
 	m_pPlayer->OutSideEnemyPointer(CEnemyManager::GetInstance());
