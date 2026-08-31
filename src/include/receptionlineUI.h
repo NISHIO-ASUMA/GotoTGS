@@ -46,5 +46,10 @@ public:
 		const D3DXVECTOR3& pos,
 		const char* pTexName
 	);
+
+private:
+
+	// Œ»İ‚ÌƒJƒEƒ“ƒg
+	int m_nCount;
 };
 

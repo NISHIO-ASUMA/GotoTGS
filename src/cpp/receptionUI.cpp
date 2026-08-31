@@ -28,18 +28,18 @@
 //=================================================
 namespace ReceptionUI
 {
-	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };				// UIの座標
-	const D3DXVECTOR3 ReceptionPos = { 360.0f, 30.0f, 215.0f };		// 対象の座標
-	const D3DXVECTOR3 LinePos = { 340.0f, 60.0f, 215.0f };			// セリフの座標
-	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };						// 初期のサイズ
-	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };						// 目標のサイズ
-	constexpr float fRadius = 25.0f;								// 半径
-	constexpr float fWidth = 250.0f;								// 横幅
-	constexpr float fHeight = 75.0f;								// 縦幅
-	constexpr float fMaxFrame = 60.0f;								// 最大フレーム
-	constexpr const char* OPEN_Texture = "work_outside.png";		// 開錠時のテクスチャ名
-	//constexpr const char* CLOSE_Texture = "work_outside.png";		// 閉錠時のテクスチャ名
-	constexpr const char* LINE_Texture = "start_outsidetask.png";	// セリフのテクスチャ名
+	const D3DXVECTOR3 Pos = { 640.0f, 640.0f, 0.0f };					// UIの座標
+	const D3DXVECTOR3 ReceptionPos = { 360.0f, 30.0f, 215.0f };			// 対象の座標
+	const D3DXVECTOR3 LinePos = { 360.0f, 80.0f, 210.0f };				// セリフの座標
+	const D3DXVECTOR2 Apper = { 0.15f, 0.05f };							// 初期のサイズ
+	const D3DXVECTOR2 Dest = { 0.25f, 0.1f };							// 目標のサイズ
+	constexpr float fRadius = 25.0f;									// 半径
+	constexpr float fWidth = 250.0f;									// 横幅
+	constexpr float fHeight = 75.0f;									// 縦幅
+	constexpr float fMaxFrame = 60.0f;									// 最大フレーム
+	constexpr const char* OPEN_Texture = "work_outside.png";			// 開錠時のテクスチャ名
+	//constexpr const char* CLOSE_Texture = "work_outside.png";			// 閉錠時のテクスチャ名
+	constexpr const char* LINE_Texture = "start_outsidetask000.png";	// セリフのテクスチャ名
 };
 
 //=========================================================
@@ -102,7 +102,8 @@ HRESULT CReceptionUI::Init(void)
 	m_pSphereCollider = CSphereCollider::Create(ReceptionUI::ReceptionPos, ReceptionUI::fRadius);
 
 	// セリフUI生成
-	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::ReceptionPos, ReceptionUI::LINE_Texture);
+	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::LinePos, ReceptionUI::LINE_Texture);
+	m_pLineUI->SetDrawFlags(false);
 
 	return S_OK;
 }
@@ -155,6 +156,9 @@ void CReceptionUI::Update(void)
 		// 開錠時のテクスチャ
 		SetTexture(ReceptionUI::OPEN_Texture);
 
+		// セリフUIの更新処理
+		m_pLineUI->Update();
+
 	}
 	//else if (!pDesk->GetOutsideDesk()->GetTaskNow())
 	//{
@@ -173,6 +177,9 @@ void CReceptionUI::Update(void)
 //=========================================================
 void CReceptionUI::Draw(void)
 {
+	// セリフUIの描画処理
+	m_pLineUI->Draw();
+
 	if (m_bDisplay) CObject2D::Draw();
 }
 //=========================================================

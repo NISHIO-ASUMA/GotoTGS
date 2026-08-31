@@ -30,6 +30,7 @@ class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
 class CVigilanceUIManager;	// Misaki
+class CReceptionUI;			// Misaki
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
@@ -68,6 +69,7 @@ public:
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
 	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
+	CReceptionUI* GetReceptionUI(void) const { return m_pReceptionUI; }							// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -93,6 +95,7 @@ private:
 	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ			Misaki
 	CEventUI* m_pEventUI;							// イベントUIのポインタ			Misaki
 	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ			Misaki
+	CReceptionUI* m_pReceptionUI;					// 受付人UIのポインタ			Misaki
 
 private:
 	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]

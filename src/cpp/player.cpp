@@ -31,6 +31,8 @@
 #include "fade.h"
 #include "playerutility.h"
 #include "outsidework.h"
+#include "receptionUI.h"
+#include "receptionlineUI.h"
 
 //=========================================================
 // コンストラクタ
@@ -446,6 +448,9 @@ void CPlayer::Update(void)
 	const auto& InteractPoint = CWorldUICollision::GetInstance()->GetInteractPoints();
 	if (!&InteractPoint) return;
 
+	// 受付人UIの情報を取得
+	auto* pReceptionUI = CGameSceneObject::GetInstance()->GetReceptionUI();
+
 	// 最大数と判定をする
 	for (const auto& Colliders : InteractPoint)
 	{
@@ -547,6 +552,8 @@ void CPlayer::Update(void)
 						// 扉を開ける状態にする
 						m_isSetOutSideTask = true;
 
+						// セリフを表示する
+						pReceptionUI->GetLineUI()->SetDrawFlags(true);
 					}
 
 					break;

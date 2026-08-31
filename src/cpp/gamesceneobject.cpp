@@ -96,7 +96,8 @@ m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr),
 m_pAfk2DUI(nullptr),
-m_pReception(nullptr)
+m_pReception(nullptr),
+m_pReceptionUI(nullptr)
 {
 
 }
@@ -191,9 +192,6 @@ HRESULT CGameSceneObject::Init(void)
 //*********************************************
 	// ドア用UIの生成
 	CDoorUI::Create(m_pPlayer);
-
-	// 受付人用UIの生成
-	CReceptionUI::Create(m_pPlayer);
 
 	// 敵管理クラスのポインタセット
 	m_pPlayer->OutSideEnemyPointer(CEnemyManager::GetInstance());
@@ -369,6 +367,9 @@ void CGameSceneObject::CreatePointer(void)
 	// 初期化とポインタセット
 	m_pBlocks->SetLoadFileName();
 	m_pBlocks->Init();
+
+	// 受付人用UIの生成
+	m_pReceptionUI = CReceptionUI::Create(m_pPlayer);
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f),m_pPlayer);

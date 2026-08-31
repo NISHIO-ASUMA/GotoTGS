@@ -21,15 +21,18 @@
 //*********************************************************
 namespace ReceptionlineUI
 {
-	constexpr float fWidth = 15.0f;		// 横幅
+	constexpr float fWidth = 20.0f;		// 横幅
 	constexpr float fHeight = 15.0f;	// 縦幅
 	constexpr float fRadius = 70.0f;	// 範囲表示の半径
+	constexpr int nMaxCount = 60;	// 最大カウント
+
 };
 
 //=========================================================
 // コンストラクタ
 //=========================================================
-CReceptionlineUI::CReceptionlineUI(int nPriority) : CTutorialUI(nPriority)
+CReceptionlineUI::CReceptionlineUI(int nPriority) : CTutorialUI(nPriority),
+m_nCount(NULL)
 {
 
 }
@@ -72,6 +75,9 @@ HRESULT CReceptionlineUI::Init(void)
 	// 親クラスの初期化処理
 	CTutorialUI::Init();
 
+	// カウントを初期化
+	m_nCount = NULL;
+
 	return S_OK;
 }
 //=========================================================
@@ -87,6 +93,24 @@ void CReceptionlineUI::Uninit(void)
 //=========================================================
 void CReceptionlineUI::Update(void)
 {
+	// 描画しない状態なら更新しない
+	if (!GetIsDrawFlags()) return;
+
+	// カウントが最大値を超えていないなら
+	if (m_nCount <= ReceptionlineUI::nMaxCount)
+	{
+		// カウントを増加
+		m_nCount++;
+
+		return;
+	}
+
+	// カウントを初期化
+	m_nCount = NULL;
+
+	// 非表示にする
+	SetDrawFlags(false);
+
 	// 親クラスの更新処理
 	CTutorialUI::Update();
 }
@@ -95,6 +119,9 @@ void CReceptionlineUI::Update(void)
 //=========================================================
 void CReceptionlineUI::Draw(void)
 {
+	// 描画しない状態なら更新しない
+	if (!GetIsDrawFlags()) return;
+
 	// 親クラスの描画処理
 	CTutorialUI::Draw();
 }

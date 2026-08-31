@@ -51,6 +51,7 @@ public:
 
 	// ƒQƒbƒ^[
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
+	CReceptionlineUI* GetLineUI(void) { return m_pLineUI; }
 
 	/// <summary>
 	/// ¶¬ˆ—
