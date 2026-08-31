@@ -1005,15 +1005,12 @@
     <ClCompile Include="src\cpp\receptionUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="src\cpp\crow.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\outsidetasktimer.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
     </ClCompile>
-=======
->>>>>>> 1ec9a4f44713231e7df08c9535fadbfd918df80a
     <ClCompile Include="src\cpp\testscene.cpp">
       <Filter>ソース ファイル\Scene\SceneBase</Filter>
     </ClCompile>
