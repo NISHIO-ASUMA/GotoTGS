@@ -173,6 +173,8 @@
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\auditor.cpp" />
     <ClCompile Include="src\cpp\auditormanager.cpp" />
+    <ClCompile Include="src\cpp\auditorstatebase.cpp" />
+    <ClCompile Include="src\cpp\auditorstateneutral.cpp" />
     <ClCompile Include="src\cpp\autodoor_collision.cpp" />
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
     <ClCompile Include="src\cpp\automatic_door.cpp" />
@@ -376,6 +378,8 @@
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\auditor.h" />
     <ClInclude Include="src\include\auditormanager.h" />
+    <ClInclude Include="src\include\auditorstatebase.h" />
+    <ClInclude Include="src\include\auditorstateneutral.h" />
     <ClInclude Include="src\include\auditorutility.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
     <ClInclude Include="src\include\automaticdoormanager.h" />

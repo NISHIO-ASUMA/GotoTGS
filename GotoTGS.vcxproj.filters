@@ -1002,16 +1002,22 @@
     <ClCompile Include="src\cpp\bossstatechase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\outsidetasktimer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\crow.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\receptionUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\crow.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\outsidetasktimer.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
     <ClCompile Include="src\cpp\testscene.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstatebase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstateneutral.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\receptionlineUI.cpp">
@@ -1613,16 +1619,22 @@
     <ClInclude Include="src\include\bossstatechase.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\outsidetasktimer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\crow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\receptionUI.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\crow.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\mob</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\outsidetasktimer.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
     <ClInclude Include="src\include\testscene.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstatebase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstateneutral.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\include\receptionlineUI.h">
