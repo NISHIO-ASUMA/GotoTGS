@@ -18,6 +18,9 @@
 #include "manager.h"
 #include "camera.h"
 #include "light.h"
+#include "fade.h"
+#include "input.h"
+#include <testscene.h>
 
 //=========================================================
 // コンストラクタ
@@ -77,6 +80,17 @@ void CTitle::Update(void)
 
 	// タイトルオブジェクト更新処理
 	CTitleObject::GetInstance()->Update();
+
+#ifdef _DEBUG
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_F2))
+	{
+		// テスト遷移
+		CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CTest>());
+		return;
+	}
+
+#endif // _DEBUG
+
 }
 //=========================================================
 // 描画処理

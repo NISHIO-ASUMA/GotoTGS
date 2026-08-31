@@ -25,6 +25,7 @@ class CBlock;
 class CAutoMaticDoor;
 class CSideOpenDoor;
 class CMoveCharactor;
+class CBoss;
 
 //*********************************************************
 // カメラクラスを定義
@@ -42,6 +43,7 @@ public:
 		MODE_THIRD,
 		MODE_MOUSE,
 		MODE_ANIM,
+		MODE_BOSS_SYSTEM,
 		MODE_MAX
 	};
 
@@ -85,7 +87,7 @@ public:
 	void WheelMouse(int nDelta);
 
 	/// <summary>
-	/// 
+	/// 三人称視点
 	/// </summary>
 	/// <param name=""></param>
 	void ThirdPersonView(void);
@@ -109,10 +111,24 @@ public:
 	void RankingCamera(void);
 
 	/// <summary>
+	/// 西尾追加 : ボス設定関数
+	/// </summary>
+	/// <param name="targetPosV">視点</param>
+	/// <param name="targetPosR">注視点</param>
+	/// <param name="targetRot">角度</param>
+	void SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& targetPosR, const D3DXVECTOR3& targetRot);
+
+	/// <summary>
+	/// 西尾追加 : ボスカメラの更新関数
+	/// </summary>
+	/// <param name=""></param>
+	void UpdateBossCamera(void);
+
+	/// <summary>
 	/// 西尾追加 : 三人称カメラに関する設定処理
 	/// </summary>
 	/// <param name="target">追従対象の座標</param>
-	void SetTargetPersonPos(const D3DXVECTOR3& target = VECTOR3_NULL) 
+	void SetTargetPersonPos(const D3DXVECTOR3& target = VECTOR3_NULL)
 	{
 		// もし、アニメーションしていたら
 		if (m_isAnimating) return;
@@ -122,6 +138,24 @@ public:
 		m_pCamera.nMode = MODE_THIRD;// カメラモードを切り替え
 		m_pCamera.fDistance = 130.0f;// 距離を設定
 	}
+
+	void SetTargetPersonPosBoss(const D3DXVECTOR3& target = VECTOR3_NULL)
+	{
+		// もし、アニメーションしていたら
+		if (m_isAnimating) return;
+
+		m_pThirdPersonPos = target;  // ターゲットの値を設定
+		m_pThirdPersonPos.y = 50.0f; // 高さの値を少し上に
+		m_pCamera.fDistance = 130.0f;// 距離を設定
+	}
+
+	void UpdateFollowBoss(const D3DXVECTOR3& FollowtargetPos);
+
+	/// <summary>
+	/// ボスの設定
+	/// </summary>
+	/// <param name="pBoss">ボスの外部ポインタ</param>
+	void SetBoss(CBoss* pBoss) { m_pBoss = pBoss; }
 
 	/// <summary>
 	/// 西尾追加 : カメラから見たプレイヤーとの透過オブジェクト判定
@@ -179,6 +213,7 @@ public:
 	void SetMode(const int& nMode) { m_pCamera.nMode = nMode; }
 	void SetRot(const D3DXVECTOR3 &rot) { m_pCamera.rot = rot; }
 	void SetCameraMove(const bool& isMove) { m_isMove = isMove; }
+	void SetAnimFlag(const bool& isstart) { m_isAnimating = isstart; }
 	void SetAnyCharactorPointer(CMoveCharactor* pCharactor = nullptr) { m_pCharactor = pCharactor; }
 
 	inline D3DXVECTOR3 GetRot(void) const { return m_pCamera.rot; }
@@ -197,6 +232,7 @@ private:
 
 	Camera m_pCamera;				// カメラ構造体変数
 	CMoveCharactor* m_pCharactor;	// キャラクターのポインタ
+	CBoss* m_pBoss;					// 格納するボス
 	D3DXVECTOR3 m_pThirdPersonPos;	// 三人称座標
 	int m_nControlTypes;			// 操作種類
 	bool m_isMove;					// カメラ動かせるかどうかのフラグ
@@ -211,4 +247,11 @@ private: // アニメーション関連事項
 	int m_nCurrentFrame;		// 現在の再生フレームカウンター
 	int m_nTotalFrames;			// アニメーションの総フレーム数
 
+private:
+	D3DXVECTOR3 m_TargetPosV;
+	D3DXVECTOR3 m_TargetPosR;
+	D3DXVECTOR3 m_TargetRot;
+	float m_fLerpRate; // 補間率
+	int m_nBossCamWaitCount; // ボスカメラ待機用カウンタ
+	bool m_isFinishBossMovie;
 };

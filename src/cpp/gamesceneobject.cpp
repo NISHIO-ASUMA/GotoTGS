@@ -22,6 +22,7 @@
 #include "worldwallmanager.h"
 #include "ui.h"
 #include "meshfield.h"
+#include <functional>
 
 //***********************************************
 // 髙橋
@@ -197,6 +198,10 @@ HRESULT CGameSceneObject::Init(void)
 	// カメラに追従するキャラクターのポインタをセット
 	CManager::GetInstance()->GetCamera()->SetAnyCharactorPointer(m_pPlayer);
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
+	CManager::GetInstance()->GetCamera()->SetBoss(m_pBoss);
+
+	// イベントを登録する ( ラムダ式 )
+	m_pTimer->RegisterEvent([this]() {SetEventGameBoss();});
 
 	//// アニメーション再生関数を設定する
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
@@ -262,8 +267,20 @@ void CGameSceneObject::Uninit(void)
 //=========================================================
 void CGameSceneObject::Update(void)
 {
-	// カメラの追従ターゲット設定
-	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
+	// カメラ取得
+	CCamera * pCamera = CManager::GetInstance()->GetCamera();
+	if (pCamera)
+	{
+		// ボスなら
+		if (pCamera->GetMode() == CCamera::MODE_BOSS_SYSTEM)
+		{
+			if (m_pBoss) pCamera->SetTargetPersonPosBoss(m_pBoss->GetPos());
+		}
+		else if (pCamera->GetMode() != CCamera::MODE_BOSS_SYSTEM)
+		{
+			pCamera->SetTargetPersonPos(m_pPlayer->GetPos());
+		}
+	}
 
 	// タスクの判定を取る球形コライダー管理クラスを更新
 	CWorldUICollision::GetInstance()->Update();
@@ -308,11 +325,10 @@ void CGameSceneObject::Update(void)
 		m_pScoreDitch->AddScore(99990000);
 	}
 
-	// スコアの保存処理の検証
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_B))
+	// ボス関連の設定
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_L))
 	{
-		// 書き出し処理
-		m_pScoreTask->SaveScore("data/SCORE/LazyScore.bin");
+		SetEventGameBoss();
 	}
 #endif // _DEBUG
 }
@@ -322,6 +338,22 @@ void CGameSceneObject::Update(void)
 void CGameSceneObject::Draw(void)
 {
 	
+}
+//=========================================================
+// ボス出現のゲームイベント
+//=========================================================
+void CGameSceneObject::SetEventGameBoss(void)
+{
+	// 先に描画を起動する
+	m_pBoss->SetDrawFlags(true);
+
+	// イベントの起動
+	CManager::GetInstance()->GetCamera()->SetBossSysytem
+	(
+		{ 668.0f,104.0f,44.0f },
+		{ 660.0f,25.0f,225.0f },
+		{ 1.85f,-0.03f,0.0f }
+	);
 }
 //=========================================================
 // ポインタの生成を行う関数
@@ -362,6 +394,7 @@ void CGameSceneObject::CreatePointer(void)
 	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
 	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 
-	// 西尾追加 : 社長を生成
-	//m_pBoss = CBoss::Create(VECTOR3_NULL, VECTOR3_NULL);
+	// 西尾追加 : 社長を生成する
+	m_pBoss = CBoss::Create({ 677.5f,0.0f,325.0f }, VECTOR3_NULL);
+	m_pBoss->SetCharactorPointer(m_pPlayer);
 }

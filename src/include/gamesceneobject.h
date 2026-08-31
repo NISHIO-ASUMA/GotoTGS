@@ -45,6 +45,12 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	/// <summary>
+	/// 西尾 : ゲームでボスが追加されるときに起こすもの
+	/// </summary>
+	/// <param name=""></param>
+	void SetEventGameBoss(void);
+
 //*********************************
 // 西尾 : スコア関連の取得
 	CScore* GetScore(void) const { return m_pScoreTask; }		// タスクのスコアの物

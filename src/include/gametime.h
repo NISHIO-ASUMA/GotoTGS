@@ -11,6 +11,11 @@
 #pragma once
 
 //*********************************************************
+// システムインクルードファイル
+//*********************************************************
+#include <functional>
+
+//*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "object.h"
@@ -61,6 +66,12 @@ public:
 	inline int GetAllTime(void) const { return m_nAllTime; }
 	inline int GetNowTime(void) const { return m_nSeconds; }
 
+	/// <summary>
+	/// イベントの登録関数
+	/// </summary>
+	/// <param name="Event"></param>
+	void RegisterEvent(std::function<void(void)> Event) { m_event = Event; }
+
 	// 生成処理
 	static CGametime* Create(const D3DXVECTOR3& pos, const float& fWidth, const float& fHeight);
 
@@ -83,4 +94,7 @@ private:
 	CNumber* m_pNumberMinutes[Config::DIGIT_TIME];		// 分数のポインタ
 	CNumber* m_pNumberSeconds[Config::DIGIT_TIME];		// 秒数のポインタ
 	D3DXVECTOR3 m_pos;									// 位置
+
+private:
+	std::function<void(void)>m_event;					// 死亡時に呼ばれる関数イベント
 };

@@ -632,6 +632,7 @@ bool CEnemy::CheckEyesight(void)
 //========================================================
 bool CEnemy::CheckRayToAngleRange(void)
 {
+#if 0
 	// nullなら
 	if (!m_pDestCharactor) return false;
 
@@ -692,8 +693,11 @@ bool CEnemy::CheckRayToAngleRange(void)
 	{
 		return false; // 障害物に遮られている
 	}
-
-	return true; // 視界内にプレイヤーを発見
+	
+#else
+	return false;
+#endif
+	//return true; // 視界内にプレイヤーを発見
 }
 //========================================================
 // 判別する際に障害物が存在しているかどうか

@@ -64,7 +64,7 @@ HRESULT CCrowBird::Init(void)
 	// 開始モーション設定
 	GetMotion()->SetMotion(m_nMotionType,true,3);
 
-	// サイズを下げる
+	// サイズを小さくする
 	SetScale({ 0.5f, 0.5f, 0.5f });
 	return S_OK;
 }
