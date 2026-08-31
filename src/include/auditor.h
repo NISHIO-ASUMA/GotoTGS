@@ -25,6 +25,7 @@
 //*********************************************************
 class CSphereCollider;
 class CBoxCollider;
+class CPlayer;
 
 //*********************************************************
 // 外にいる監査役のキャラクタークラスを定義
@@ -40,6 +41,9 @@ public:
 	{
 		NEUTRAL,	// ニュートラル
 		MOVE,		// 移動
+		DOUBT,		// 疑い
+		CHASEDASH,	// 追いかけ
+		CATCH,		// 捕まえる
 		MAX
 	};
 
@@ -64,7 +68,15 @@ public:
 	void Draw(void) override;
 
 	void DrawEyeSight(void);
+	bool CheckObstacle(void);
+	bool CheckRayToAngleRange(void);
 	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+
+	/// <summary>
+	/// プレイヤーのポインタを設定する
+	/// </summary>
+	/// <param name="pPlayer">外部で生成されたポインタ</param>
+	void SetPlayer(CPlayer* pPlayer = nullptr) { m_pDestCharactor = pPlayer; }
 
 	/// <summary>
 	/// 生成処理
@@ -80,9 +92,11 @@ private:
 	//***************************
 	struct Config
 	{
-		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
-		static constexpr float BOX_RANGE = 50.0f;	 // 矩形範囲
-		static constexpr int DIVIDE = 16;			 // メッシュの分割数
+		static constexpr float SPHERE_RANGE = 80.0f;		// 球形範囲
+		static constexpr float BOX_RANGE = 50.0f;			// 矩形範囲
+		static constexpr int DIVIDE = 16;					// メッシュの分割数
+		static constexpr int COOL_TIME = 60;				// クールタイム
+		static constexpr int COOL_TIME_DOUBLE = 120;		// 2倍のクールタイム
 	};
 
 	//***************************
@@ -113,4 +127,12 @@ private:
 	int m_nOfficeViewIdx;					// オフィス内の巡回インデックス番号
 	int m_nCoolTime;						// セットポジションについた時のクールタイム
 	int m_nTargetIdx;						// ターゲットID
+	int m_nStopTime;						// 停止しているカウント
+
+private:
+	bool m_isTargetChase;					// 追跡判定
+	bool m_isStartChase;					// チェイス開始判定フラグ
+
+private:
+	CPlayer* m_pDestCharactor;				// 対象キャラクター
 };

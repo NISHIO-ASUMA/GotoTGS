@@ -80,6 +80,8 @@ namespace GAMEOBJECT
 	const D3DXVECTOR3 BossPos	    = { 677.5f,0.0f,325.0f };						// ボスの座標
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";					// ゲーム内オブジェクトjsonファイル名
 	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
+	constexpr const char* TaskFile = "data/SCORE/TaskScore.bin";					// タスク書き出し
+	constexpr const char* LazyFile = "data/SCORE/LazyScore.bin";					// サボり書き出し
 };
 
 //=========================================================
@@ -152,6 +154,7 @@ HRESULT CGameSceneObject::Init(void)
 
 	// 外の監査役を生成 ( Asuma )
 	CAuditorManager::GetInstance()->Init();
+	CAuditorManager::GetInstance()->SetPlayerPointer(m_pPlayer);
 
 	// 上司のデスクのかご
 	CBlock::Create(D3DXVECTOR3(40.0f,36.0f,280.0f),VECTOR3_NULL,INITSCALE,"STAGEOBJ/basket.x");
@@ -218,12 +221,10 @@ void CGameSceneObject::Uninit(void)
 {
 	// 破棄される前に書き出し実行
 	if (m_pScoreDitch)
-		m_pScoreDitch->SaveScore("data/SCORE/LazyScore.bin");		// サボり
+		m_pScoreDitch->SaveScore(GAMEOBJECT::LazyFile);		// サボりスコア
 
 	if (m_pScoreTask)
-	{
-		m_pScoreTask->SaveScoreMinus("data/SCORE/TaskScore.bin");	// タスク
-	}
+		m_pScoreTask->SaveScoreMinus(GAMEOBJECT::TaskFile);	// タスクスコア
 
 	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
