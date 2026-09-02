@@ -22,6 +22,7 @@
 #include "deskwork.h"
 #include "outsidework.h"
 #include "receptionlineUI.h"
+#include "pointobject.h"
 
 //=================================================
 // 名前空間
@@ -37,8 +38,8 @@ namespace ReceptionUI
 	constexpr float fWidth = 250.0f;									// 横幅
 	constexpr float fHeight = 75.0f;									// 縦幅
 	constexpr float fMaxFrame = 60.0f;									// 最大フレーム
-	constexpr const char* OPEN_Texture = "work_outside.png";			// 開錠時のテクスチャ名
-	//constexpr const char* CLOSE_Texture = "work_outside.png";			// 閉錠時のテクスチャ名
+	constexpr const char* OPEN_Texture = "work_outside000.png";			// 外出時のテクスチャ名
+	constexpr const char* CLOSE_Texture = "work_outside001.png";		// 報告時のテクスチャ名
 	constexpr const char* LINE_Texture = "start_outsidetask000.png";	// セリフのテクスチャ名
 };
 
@@ -103,7 +104,16 @@ HRESULT CReceptionUI::Init(void)
 
 	// セリフUI生成
 	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::LinePos, ReceptionUI::LINE_Texture);
+	// 非表示にする
 	m_pLineUI->SetDrawFlags(false);
+
+	// クライアントの位置を示す矢印の生成
+	m_pPointObject = CPointObject::Create(D3DXVECTOR3(1245.20f, 130.0f, 461.35f),
+										D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+										D3DXVECTOR3(HALF, HALF, HALF),
+										"STAGEOBJ/yajirusi.x");
+	// 非表示にする
+	m_pPointObject->SetIsDraw(false);
 
 	return S_OK;
 }
@@ -115,8 +125,9 @@ void CReceptionUI::Uninit(void)
 	// スフィアコライダーの破棄
 	m_pSphereCollider.reset();
 
-	// セリフUIの破棄
+	// ポインタの破棄
 	m_pLineUI = nullptr;
+	m_pPointObject = nullptr;
 
 	// 親クラスの終了処理
 	CObject2D::Uninit();
@@ -153,18 +164,18 @@ void CReceptionUI::Update(void)
 	// 外に出ていない場合
 	if (!pDesk->GetOutsideDesk()->GetGoOutside())
 	{
-		// 開錠時のテクスチャ
+		// 外出時のテクスチャ
 		SetTexture(ReceptionUI::OPEN_Texture);
 
 		// セリフUIの更新処理
 		m_pLineUI->Update();
 
 	}
-	//else if (!pDesk->GetOutsideDesk()->GetTaskNow())
-	//{
-	//	// 閉錠時のテクスチャ
-	//	SetTexture(ReceptionUI::CLOSE_Texture);
-	//}
+	else if (!pDesk->GetOutsideDesk()->GetTaskNow())
+	{
+		// 報告時のテクスチャ
+		SetTexture(ReceptionUI::CLOSE_Texture);
+	}
 
 	// イージング
 	EasingSine();

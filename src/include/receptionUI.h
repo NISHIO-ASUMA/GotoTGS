@@ -26,6 +26,7 @@
 class CSphereCollider;
 class CPlayer;
 class CReceptionlineUI;
+class CPointObject;
 
 //*********************************************************
 // 受付人のuiクラスを定義
@@ -52,6 +53,7 @@ public:
 	// ゲッター
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereCollider.get(); }
 	CReceptionlineUI* GetLineUI(void) { return m_pLineUI; }
+	CPointObject* GetPointObject(void) { return m_pPointObject; }
 
 	/// <summary>
 	/// 生成処理
@@ -63,13 +65,14 @@ public:
 private:
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
 
-	D3DXVECTOR3 m_pos;									// 位置
-	float m_fCountFrame;								// イージング用フレームカウント用変数
-	float m_fMaxFrame;									// 最大フレーム変数
-	bool m_bEasing;										// イージング用変数
-	bool m_bDisplay;									// 表示するかの判定変数
-	bool m_bUse;										// 使用しているかの判定変数
+	D3DXVECTOR3 m_pos;				// 位置
+	float m_fCountFrame;			// イージング用フレームカウント用変数
+	float m_fMaxFrame;				// 最大フレーム変数
+	bool m_bEasing;					// イージング用変数
+	bool m_bDisplay;				// 表示するかの判定変数
+	bool m_bUse;					// 使用しているかの判定変数
 
-	CPlayer* m_pPlayerOwner;							// 格納するプレイヤーのポインタ
-	CReceptionlineUI* m_pLineUI;						// セリフUIのポインタ
+	CPlayer* m_pPlayerOwner;		// 格納するプレイヤーのポインタ
+	CReceptionlineUI* m_pLineUI;	// セリフUIのポインタ
+	CPointObject* m_pPointObject;	// クライアントの位置を示す矢印のポインタ
 };
