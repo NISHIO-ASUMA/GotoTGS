@@ -731,9 +731,6 @@ void CCamera::UpdateAnim(void)
 				m_nCurrentFrame = 0;
 				m_pCamera.nCntAnim = 0;
 				m_isAnimating = false;
-
-				//// 編集モード
-				//SetMode(MODE_THIRD);
 			}
 		}
 	}
@@ -818,23 +815,28 @@ HRESULT CCamera::LoadAnimation(const std::string& path)
 			// 各トークンごとの処理
 			if (token == "FRAME")
 			{
-				char equal; ss >> equal >> currentKey.nAnimFrame;
+				char equal; 
+				ss >> equal >> currentKey.nAnimFrame;
 			}
 			else if (token == "POSV")
 			{
-				char equal; ss >> equal >> currentKey.posV.x >> currentKey.posV.y >> currentKey.posV.z;
+				char equal; 
+				ss >> equal >> currentKey.posV.x >> currentKey.posV.y >> currentKey.posV.z;
 			}
 			else if (token == "POSR")
 			{
-				char equal; ss >> equal >> currentKey.posR.x >> currentKey.posR.y >> currentKey.posR.z;
+				char equal;
+				ss >> equal >> currentKey.posR.x >> currentKey.posR.y >> currentKey.posR.z;
 			}
 			else if (token == "ROT")
 			{
-				char equal; ss >> equal >> currentKey.rot.x >> currentKey.rot.y >> currentKey.rot.z;
+				char equal; 
+				ss >> equal >> currentKey.rot.x >> currentKey.rot.y >> currentKey.rot.z;
 			}
 			else if (token == "DISTANCE")
 			{
-				char equal; ss >> equal >> currentKey.fDistance;
+				char equal; 
+				ss >> equal >> currentKey.fDistance;
 			}
 		}
 
