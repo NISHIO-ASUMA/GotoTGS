@@ -22,6 +22,7 @@
 #include "deskwork.h"
 #include "outsidework.h"
 #include "receptionlineUI.h"
+#include "pointobject.h"
 
 //=================================================
 // 名前空間
@@ -103,7 +104,16 @@ HRESULT CReceptionUI::Init(void)
 
 	// セリフUI生成
 	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::LinePos, ReceptionUI::LINE_Texture);
+	// 非表示にする
 	m_pLineUI->SetDrawFlags(false);
+
+	// クライアントの位置を示す矢印の生成
+	m_pPointObject = CPointObject::Create(D3DXVECTOR3(1245.20f, 130.0f, 461.35f),
+										D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+										D3DXVECTOR3(HALF, HALF, HALF),
+										"STAGEOBJ/yajirusi.x");
+	// 非表示にする
+	m_pPointObject->SetIsDraw(false);
 
 	return S_OK;
 }
@@ -115,8 +125,9 @@ void CReceptionUI::Uninit(void)
 	// スフィアコライダーの破棄
 	m_pSphereCollider.reset();
 
-	// セリフUIの破棄
+	// ポインタの破棄
 	m_pLineUI = nullptr;
+	m_pPointObject = nullptr;
 
 	// 親クラスの終了処理
 	CObject2D::Uninit();

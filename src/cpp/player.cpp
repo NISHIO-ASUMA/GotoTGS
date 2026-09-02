@@ -33,6 +33,7 @@
 #include "outsidework.h"
 #include "receptionUI.h"
 #include "receptionlineUI.h"
+#include "pointobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -543,6 +544,9 @@ void CPlayer::Update(void)
 						// 扉を強制的に閉じる命令を出す
 						SideDoorManager->CloseDoorInOffice();
 
+						// 矢印を非表示する
+						pReceptionUI->GetPointObject()->SetIsDraw(false);
+
 						break;
 					}
 
@@ -554,6 +558,9 @@ void CPlayer::Update(void)
 
 						// セリフを表示する
 						pReceptionUI->GetLineUI()->SetDrawFlags(true);
+
+						// 矢印を表示する
+						pReceptionUI->GetPointObject()->SetIsDraw(true);
 					}
 
 					break;
