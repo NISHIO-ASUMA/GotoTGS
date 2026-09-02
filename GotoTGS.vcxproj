@@ -174,6 +174,8 @@
     <ClCompile Include="src\cpp\auditor.cpp" />
     <ClCompile Include="src\cpp\auditormanager.cpp" />
     <ClCompile Include="src\cpp\auditorstatebase.cpp" />
+    <ClCompile Include="src\cpp\auditorstatechase.cpp" />
+    <ClCompile Include="src\cpp\auditorstatedoubt.cpp" />
     <ClCompile Include="src\cpp\auditorstateneutral.cpp" />
     <ClCompile Include="src\cpp\autodoor_collision.cpp" />
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
@@ -249,6 +251,7 @@
     <ClCompile Include="src\cpp\light.cpp" />
     <ClCompile Include="src\cpp\lines.cpp" />
     <ClCompile Include="src\cpp\load.cpp" />
+    <ClCompile Include="src\cpp\loselazyresult.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\manager.cpp" />
     <ClCompile Include="src\cpp\meetingfriend.cpp" />
@@ -379,6 +382,8 @@
     <ClInclude Include="src\include\auditor.h" />
     <ClInclude Include="src\include\auditormanager.h" />
     <ClInclude Include="src\include\auditorstatebase.h" />
+    <ClInclude Include="src\include\auditorstatechase.h" />
+    <ClInclude Include="src\include\auditorstatedoubt.h" />
     <ClInclude Include="src\include\auditorstateneutral.h" />
     <ClInclude Include="src\include\auditorutility.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
@@ -459,6 +464,7 @@
     <ClInclude Include="src\include\light.h" />
     <ClInclude Include="src\include\lines.h" />
     <ClInclude Include="src\include\load.h" />
+    <ClInclude Include="src\include\loselazyresult.h" />
     <ClInclude Include="src\include\main.h" />
     <ClInclude Include="src\include\manager.h" />
     <ClInclude Include="src\include\meetingfriend.h" />

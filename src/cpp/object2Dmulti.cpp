@@ -339,7 +339,7 @@ void CObject2DMulti::SetTexture(const char* pRegisterName, const int& nIdx)
 	if (nIdxTexture == -1) return;
 
 	// 配列サイズを設定
-	if (nIdx >= m_apTexture.size())
+	if (nIdx >= static_cast<int>(m_apTexture.size()))
 	{
 		m_apTexture.resize(nIdx + 1, -1);
 	}

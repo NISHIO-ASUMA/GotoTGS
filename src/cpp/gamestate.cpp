@@ -19,6 +19,8 @@
 #include "result.h"
 #include "gamemanager.h"
 #include "score.h"
+#include "overworkresult.h"
+#include "loselazyresult.h"
 
 //*********************************************************
 // 定数名前空間
@@ -113,7 +115,29 @@ void CGameState::OnUpdate()
 			if (pFade != nullptr)
 			{
 				// リザルトシーンに遷移
-				pFade->SetFade(std::make_unique<CResult>());
+				pFade->SetFade(std::make_unique<COverWorkResult>());
+			}
+		}
+		break;
+
+	case PROGRESS_CATCH:	// シンプルに捕まった時に出るリザルト
+
+		// カウントを加算
+		m_nCount++;
+
+		if (m_nCount >= GAMESTATE::STATECOUNT)
+		{
+			// カウンターを初期化
+			m_nCount = NULL;
+
+			// 60フレーム経過
+			m_Progress = PROGRESS_NONE;
+
+			// フェードが取得できたら
+			if (pFade != nullptr)
+			{
+				// 捕まったリザルトシーンに遷移
+				pFade->SetFade(std::make_unique<CLoseLazyResult>());
 			}
 		}
 		break;

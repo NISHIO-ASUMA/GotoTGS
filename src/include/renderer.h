@@ -50,13 +50,11 @@ public:
 	LPDIRECT3DDEVICE9 GetDevice(void) { return m_pD3DDevice; }
 	UINT GetWidth(void) { return m_Width; }
 	UINT GetHeight(void) { return m_Height; }
-	static CDebugproc* GetDebug(void) { return m_pDebug; }
 
 private:
 
 	LPDIRECT3D9 m_pD3D;					// Direct3Dオブジェクトへのポインタ
 	LPDIRECT3DDEVICE9 m_pD3DDevice;		// Direct3Dデバイスへのポインタ
-	static CDebugproc* m_pDebug;		// デバッグ
 	int m_fps;							// fps
 	bool m_isDeviceLost;				// デバイスロスト対処
 

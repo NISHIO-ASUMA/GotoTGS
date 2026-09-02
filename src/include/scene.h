@@ -32,6 +32,7 @@ public:
 		MODE_LOSERESULT,// 失敗リザルト
 		MODE_RANKING,	// ランキング
 		MODE_TEST,		// テスト用( 値のチェック用とかに使う ) 西尾
+		MODE_LOSELAZY,	// サボりバレた
 		MODE_MAX
 	};
 

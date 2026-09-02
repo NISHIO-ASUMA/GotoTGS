@@ -364,12 +364,6 @@ void CMeshImpact::Draw(void)
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-#ifdef _DEBUG
-	// デバッグフォント
-	CDebugproc::Print("衝撃波の座標 { %.2f,%.2f,%.2f }", m_pos.x, m_pos.y, m_pos.z);
-	CDebugproc::Draw(1000, 180);
-#endif // _DEBUG
 }
 //=========================================================
 // 当たり判定処理

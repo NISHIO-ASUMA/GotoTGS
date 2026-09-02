@@ -129,7 +129,8 @@ void CGame::Update(void)
 	}
 	
 	// falseの時に更新
-	if (!CPauseManager::GetInstance()->GetPause() && State == m_pState->PROGRESS_NORMAL)
+	if (!CPauseManager::GetInstance()->GetPause() && 
+		State == m_pState->PROGRESS_NORMAL)
 	{
 		// ゲームマネージャー更新
 		CGameManager::GetInstance()->Update();
@@ -140,7 +141,7 @@ void CGame::Update(void)
 		// 時間が0になったら
 		if (CGameSceneObject::GetInstance()->GetTime()->GetAllTime() <= 0)
 		{
-			// ゲーム終了状態に設定
+			// ゲーム終了状態に設定(通常終了)
 			m_pState->SetProgress(CGameState::PROGRESS_END);
 			return;
 		}
@@ -149,7 +150,7 @@ void CGame::Update(void)
 		if (CGameSceneObject::GetInstance()->GetPlayer()->GetIsCatch() == true)
 		{
 			// ゲーム終了状態に設定
-			m_pState->SetProgress(CGameState::PROGRESS_END);
+			m_pState->SetProgress(CGameState::PROGRESS_CATCH);
 			return;
 		}
 

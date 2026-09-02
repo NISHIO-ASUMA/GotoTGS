@@ -30,11 +30,6 @@ namespace RENDERINFO
 	const UINT MAX_INSTANCE = 2048; // 最大インスタンス数
 };
 
-//*********************************************************
-// 静的メンバ変数宣言
-//*********************************************************
-CDebugproc* CRenderer::m_pDebug = nullptr;	// デバッグプロセスへのポインタ
-
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -134,8 +129,7 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 
 	// デバッグフォント初期化
-	m_pDebug = new CDebugproc;
-	m_pDebug->Init();
+	CDebugproc::GetInstance()->Init();
 
 	return S_OK;
 }
@@ -144,13 +138,8 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 //=========================================================
 void CRenderer::Uninit(void)
 {
-	// デバッグプロセスの終了処理
-	if (m_pDebug != nullptr)
-	{
-		m_pDebug->Uninit();
-		delete m_pDebug;
-		m_pDebug = nullptr;
-	}
+	// デバッグフォント初期化
+	CDebugproc::GetInstance()->Uninit();
 
 	// 全オブジェクト破棄
 	CObject::ReleaseAll();
@@ -182,7 +171,7 @@ void CRenderer::Uninit(void)
 void CRenderer::Update(void)
 {
 	// デバッグ情報の更新処理
-	m_pDebug->Update();
+	CDebugproc::GetInstance()->Update();
 
 	// 全オブジェクト更新処理
 	CObject::UpdateAll();
@@ -203,6 +192,9 @@ void CRenderer::Update(void)
 		// ワイヤーフレームOFF
 		OffWireFrame();
 	}
+
+	// FPSフォントセット
+	CDebugproc::GetInstance()->Print("FPS : %d\n", m_fps);
 
 #endif // _DEBUG
 }
@@ -230,11 +222,8 @@ void CRenderer::Draw(void)
 		// シーンの描画
 		if (pScene != nullptr) pScene->Draw();
 
-		// フォントセット
-		m_pDebug->Print("FPS : %d\n", m_fps);
-
 		// デバッグフォントの描画
-		m_pDebug->Draw(0, 0);
+		CDebugproc::GetInstance()->Draw(0, 0);
 
 		// フェード描画
 		CManager::GetInstance()->GetFade()->Draw();

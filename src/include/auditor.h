@@ -70,14 +70,17 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	void MovingTypeOutSide(void);
+	void ChaseMove(void);
 
 	void DrawEyeSight(void);
 	void ChangeState(CAuditorStateBase* pNewState, int nID);
 	bool CheckObstacle(void);
 	bool CheckRayToAngleRange(void);
-	bool CheckEyesight(const D3DXVECTOR3& TargetPos);
+	bool CheckEyesight(void);
 
+	void StartChase(bool isStart) { m_isStartChase = isStart; }
 	CBillboard* GetChaseIcon(void) const { return m_pChaseIcon; }
+	CPlayer* GetPlayer(void) const { return m_pDestCharactor; }
 
 	/// <summary>
 	/// プレイヤーのポインタを設定する

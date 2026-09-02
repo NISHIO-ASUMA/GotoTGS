@@ -9,15 +9,12 @@
 // クラス定義ヘッダーファイル
 //*********************************************************
 #include "auditorstateneutral.h"
-//#include "enemystateserch.h"
-//#include "enemystatedoubt.h"
+#include "auditorstatedoubt.h"
 
 //*********************************************************
 // インクルードファイル
 //*********************************************************
 #include "auditor.h"
-#include "manager.h"
-#include "input.h"
 #include "billboard.h"
 
 //=========================================================
@@ -55,7 +52,6 @@ void CAuditorStateNeutral::OnUpdate()
 	if (icon)
 		icon->SetDrawFlags(false);
 
-#if 0
 	// もし自身の視界内に入っていたら
 	if (m_pAuditor->CheckRayToAngleRange())
 	{
@@ -66,7 +62,6 @@ void CAuditorStateNeutral::OnUpdate()
 
 	// 基本の通常移動
 	m_pAuditor->MovingTypeOutSide();
-#endif
 }
 //=========================================================
 // 状態終了

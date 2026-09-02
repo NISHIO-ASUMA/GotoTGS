@@ -31,6 +31,7 @@ public:
 		PROGRESS_NORMAL,	// 通常状態
 		PROGRESS_END,		// ゲーム終了
 		PROGRESS_LOSE,		// 挑戦失敗
+		PROGRESS_CATCH,		// シンプルに捕まった時
 		PROGRESS_MAX
 	};
 
