@@ -119,6 +119,12 @@ public:
 	void SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& targetPosR, const D3DXVECTOR3& targetRot);
 
 	/// <summary>
+	/// 西尾追加 : キャストカメラ
+	/// </summary>
+	/// <param name=""></param>
+	void CastCamera(void);
+
+	/// <summary>
 	/// 西尾追加 : ボスカメラの更新関数
 	/// </summary>
 	/// <param name=""></param>

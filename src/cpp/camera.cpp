@@ -62,6 +62,18 @@ namespace RANKINGCAMERAINFO
 	constexpr float Distance = 10.0f;							// 初期の距離
 }
 
+//*********************************************************
+// 失敗リザルト用の定数名前空間宣言
+//*********************************************************
+namespace CATCHINFO
+{
+	const D3DXVECTOR3 InitPosV = { -4.0f,106.0f, 145.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitPosR = { 0.8f,-143.0f, 620.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitRot = { VECTOR3_NULL };			// カメラ初期角度
+	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
+	constexpr float Distance = 540.0f;							// 初期の距離
+}
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -196,6 +208,11 @@ void CCamera::Update(void)
 	{
 		// 固定カメラに設定
 		RankingCamera();
+	}
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_LOSELAZY)
+	{
+		// 固定カメラに設定
+		CastCamera();
 	}
 
 	// 角度の正規化
@@ -927,6 +944,17 @@ void CCamera::SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& t
 	m_TargetPosR = targetPosR;
 	m_TargetRot = targetRot;
 	m_fLerpRate = 0.0f;
+}
+//==============================================================
+// 捕まった時のカメ設定
+//==============================================================
+void CCamera::CastCamera(void)
+{
+	m_pCamera.posV = CATCHINFO::InitPosV;			// カメラの位置
+	m_pCamera.posR = CATCHINFO::InitPosR;			// カメラの見ている位置
+	m_pCamera.vecU = CATCHINFO::InitVecU;			// 上方向ベクトル
+	m_pCamera.rot = CATCHINFO::InitRot;				// 角度
+	m_pCamera.fDistance = CATCHINFO::Distance;		// 距離
 }
 //==============================================================
 // ボスの時のカメラ更新

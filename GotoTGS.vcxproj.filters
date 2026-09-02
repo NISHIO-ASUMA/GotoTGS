@@ -1054,6 +1054,12 @@
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\loselazyresult.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultlazycast.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultcastmanager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1680,6 +1686,12 @@
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\include\loselazyresult.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultlazycast.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultcastmanager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

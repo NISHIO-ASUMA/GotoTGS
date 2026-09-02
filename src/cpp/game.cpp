@@ -24,6 +24,7 @@
 #include "gametime.h"
 #include "player.h"
 #include "light.h"
+#include "loselazyresult.h"
 
 #ifdef _DEBUG
 #include "debugproc.h"
@@ -169,7 +170,7 @@ void CGame::Update(void)
 	{
 		// ‰æ–Ê‘JˆÚ
 		auto fade = CManager::GetInstance()->GetFade();
-		fade->SetFade(std::make_unique<CResult>());
+		fade->SetFade(std::make_unique<CLoseLazyResult>());
 		return;
 	}
 #endif // _DEBUG

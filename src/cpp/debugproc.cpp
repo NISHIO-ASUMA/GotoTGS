@@ -19,7 +19,7 @@
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDebugproc::CDebugproc() : m_isUse(true),
+CDebugproc::CDebugproc() : m_isUse(false),
 m_aStr{},
 m_pFont(nullptr),
 m_nNowIdx(NULL)

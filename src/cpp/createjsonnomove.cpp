@@ -22,6 +22,7 @@
 #include "friend.h"
 #include "smokefriend.h"
 #include "meetingfriend.h"
+#include "resultlazycast.h"
 
 //===================================================================
 // 生成処理
@@ -40,6 +41,9 @@ void CJsonCreateNoMove::Create(const JsonNoMove::json& Jsondata)
 	// パス情報の設定
 	std::string str = CJsonConverter::ConverterPath(Jsondata, "MotionName");
 
+	// タイプ番号の設定
+	int nMotionType = CJsonConverter::ConverterInt(Jsondata, "MotionType");
+
 	if (type == "Friend")
 	{// 同僚生成
 		CFriend::Create(pos, rot, str);
@@ -51,5 +55,9 @@ void CJsonCreateNoMove::Create(const JsonNoMove::json& Jsondata)
 	else if (type == "MeetingFriend")
 	{// 会議室キャラクター
 		CMeetingFriend::Create(pos,rot,str.c_str());
+	}
+	else if (type == "ResultLazy")
+	{// 捕まった時のキャラクター
+		CResultCast::Create(pos, rot, nMotionType,str.c_str());
 	}
 }

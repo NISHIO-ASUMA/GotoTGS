@@ -73,7 +73,7 @@ void CMobCharactorManager::LoadJson(void)
 	// jsonmanagerを取得
 	const auto& json = CManager::GetInstance()->GetJsonManager();
 
-	// 敵を実際に読み込む
+	// キャラクターを実際に読み込む
 	json->Load(MOB_MANAGER::FILE);
 }
 //=========================================================

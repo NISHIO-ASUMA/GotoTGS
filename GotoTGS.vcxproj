@@ -319,7 +319,9 @@
     <ClCompile Include="src\cpp\receptionUI.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\cpp\result.cpp" />
+    <ClCompile Include="src\cpp\resultcastmanager.cpp" />
     <ClCompile Include="src\cpp\resulticon.cpp" />
+    <ClCompile Include="src\cpp\resultlazycast.cpp" />
     <ClCompile Include="src\cpp\resultmanager.cpp" />
     <ClCompile Include="src\cpp\resultobject.cpp" />
     <ClCompile Include="src\cpp\resultscore.cpp" />
@@ -528,7 +530,9 @@
     <ClInclude Include="src\include\receptionUI.h" />
     <ClInclude Include="src\include\renderer.h" />
     <ClInclude Include="src\include\result.h" />
+    <ClInclude Include="src\include\resultcastmanager.h" />
     <ClInclude Include="src\include\resulticon.h" />
+    <ClInclude Include="src\include\resultlazycast.h" />
     <ClInclude Include="src\include\resultmanager.h" />
     <ClInclude Include="src\include\resultobject.h" />
     <ClInclude Include="src\include\resultscore.h" />
