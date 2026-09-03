@@ -543,9 +543,6 @@ void CPlayer::Update(void)
 						// ”à‚ð‹­§“I‚É•Â‚¶‚é–½—ß‚ðo‚·
 						SideDoorManager->CloseDoorInOffice();
 
-						// –îˆó‚ð”ñ•\Ž¦‚·‚é
-						pReceptionUI->GetPointObject()->SetIsDraw(false);
-
 						break;
 					}
 

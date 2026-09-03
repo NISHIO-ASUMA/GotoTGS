@@ -104,6 +104,7 @@ HRESULT CReceptionUI::Init(void)
 
 	// ƒZƒŠƒtUI¶¬
 	m_pLineUI = CReceptionlineUI::Create(ReceptionUI::LinePos, ReceptionUI::LINE_Texture);
+
 	// ”ñ•\Ž¦‚É‚·‚é
 	m_pLineUI->SetDrawFlags(false);
 
