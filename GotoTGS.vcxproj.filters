@@ -1065,6 +1065,9 @@
     <ClCompile Include="src\cpp\cameraui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\documentUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1699,6 +1702,9 @@
     </ClInclude>
     <ClInclude Include="src\include\cameraui.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\documentUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
