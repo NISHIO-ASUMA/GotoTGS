@@ -124,6 +124,9 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 //=========================================================
 HRESULT CGameSceneObject::Init(void)
 {
+	// 再初期化
+	CManager::GetInstance()->GetCamera()->Init();
+
 	// ゲームで使うオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(GAMEOBJECT::LoadName);

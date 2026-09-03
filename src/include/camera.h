@@ -44,6 +44,7 @@ public:
 		MODE_MOUSE,
 		MODE_ANIM,
 		MODE_BOSS_SYSTEM,
+		MODE_LAZYMISS,
 		MODE_MAX
 	};
 
@@ -229,6 +230,7 @@ public:
 	inline D3DXMATRIX GetView(void) const { return m_pCamera.mtxView; }
 	inline bool GetIsAnimTime(void) const { return m_isAnimating; }
 	int GetMode(void) const { return m_pCamera.nMode; }
+	int GetCount(void) const { return m_nBossCamWaitCount; }
 
 private:
 

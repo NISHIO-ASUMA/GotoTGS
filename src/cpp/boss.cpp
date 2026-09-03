@@ -24,6 +24,7 @@
 #include "jsonmanager.h"
 #include "bossstatebase.h"
 #include "bossstateneutral.h"
+#include "camera.h"
 
 //*********************************************************
 // 定数名前空間
@@ -172,17 +173,6 @@ void CBoss::Uninit(void)
 //========================================================
 void CBoss::Update(void)
 {
-	//if (!m_isActiveSet) return;
-
-	//// 現在地の座標を取得
-	//auto pos = GetPos();
-
-	//if (m_isOutSideIn)
-	//	MoveInOffice(pos); // オフィス内に来る
-
-	//if (m_isOfficeMove)
-	//	MoveOfficePoint(pos); // オフィス内で巡回する処理
-
 	// ステート更新
 	if (m_pMachine)
 		m_pMachine->Update();
@@ -577,6 +567,11 @@ void CBoss::ChangeState(CBossStateBase* pState, int nID)
 //========================================================
 bool CBoss::CheckRayToAngleRange(void)
 {
+	// もしイベント中なら
+	if (CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM || 
+		CManager::GetInstance()->GetCamera()->GetCount() >= 0)
+		return false;
+
 	// nullなら
 	if (!m_pDestCharactor) return false;
 
