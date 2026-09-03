@@ -989,7 +989,7 @@ void CCamera::UpdateBossCamera(void)
 	// 通常追従に戻す
 	if (m_pBoss && m_pBoss->GetOutSideIn())
 	{
-		// 軽い停止時間
+		// 軽い停止時間カウント用変数
 		const int MAXTIME = 10;
 
 		// インクリメント

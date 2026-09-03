@@ -25,6 +25,7 @@ class CAfk2DUI;				// Asuma
 class CPlayer;				// Asuma
 class CReceptionist;		// Asuma
 class CBoss;				// Asuma
+class COutSideTaskTimer;	// Asuma
 
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
@@ -59,7 +60,8 @@ public:
 	CScore* GetScoreAllGame(void) const { return m_pScoreAll; }	// 今現在ゲームで表示している物
 //*********************************
 
-	CGametime* GetTime(void) const { return m_pTimer; }
+	CGametime* GetTime(void) const { return m_pTimer; }											// Asuma
+	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }
 	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// Asuma
 	CReceptionist* GetReception(void) const { return m_pReception; }							// Asuma
 	CAfk2DUI* GetAfk2DUIPointer(void) const { return m_pAfk2DUI; }								// Asuma
@@ -102,6 +104,7 @@ private:
 	CReceptionist* m_pReception;					// 外に行く受付人				[ Asuma Add ]
 	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI					[ Asuma Add ]
 	CBoss* m_pBoss;									// 社長キャラクター				[ Asuma Add ]
+	COutSideTaskTimer* m_pOutSideTime;				// 外タスク時間					[ Asuma Add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ
 };
