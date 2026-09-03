@@ -25,6 +25,7 @@ namespace TutorialUIManager
 {
 	const D3DXVECTOR3 PcUIPos = { -45.0f, 75.0f, 170.0f };			// PCUIの座標
 	const D3DXVECTOR3 CopyUIPos = { 150.0f, 75.0f, 355.0f };		// コピー機UIの座標
+	const D3DXVECTOR3 DocumentUIPos = { 40.0f,60.0f,280.0f };		// 書類タスクUIの座標
 	const D3DXVECTOR3 OutsideUIPos = { 1245.20f, 75.0f, 461.35f };	// 外出タスクUIの座標
 	constexpr const char* UI_FBUTTON = "Fbutton.png";				// (キーボード)uiのテクスチャ名
 	constexpr const char* UI_STARTBUTTON = "startbutton.png";		// (パッド)uiのテクスチャ名
@@ -65,8 +66,11 @@ HRESULT CTutorialUIManager::Init(void)
 		CCopyUI::Create(TutorialUIManager::CopyUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
 		// パソコン用チュートリアルUIの生成
 		CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
+		// 書類タスク用チュートリアルUIの生成
+		COutsideUI::Create(TutorialUIManager::DocumentUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
 		// 外出タスク用チュートリアルUIの生成
 		COutsideUI::Create(TutorialUIManager::OutsideUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
+
 	}
 	// ジョイパッド操作
 	else if (m_nControlTypes == CONTROLTYPE_PAD)
@@ -75,6 +79,8 @@ HRESULT CTutorialUIManager::Init(void)
 		CCopyUI::Create(TutorialUIManager::CopyUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
 		// パソコン用チュートリアルUIの生成
 		CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
+		// 書類タスク用チュートリアルUIの生成
+		COutsideUI::Create(TutorialUIManager::DocumentUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
 		// 外出タスク用チュートリアルUIの生成
 		COutsideUI::Create(TutorialUIManager::OutsideUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
 
