@@ -124,6 +124,7 @@ HRESULT CCamera::Init(void)
 	// 移動フラグ
 	m_currentAnim.AnimData.clear();
 	m_isMove = false;
+	m_isFinishBossMovie = false;
 
 	// 操作の種類を設定する (パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
@@ -151,9 +152,6 @@ void CCamera::Update(void)
 	// ボスムービーなら
 	if (m_pCamera.nMode == MODE_BOSS_SYSTEM)
 	{
-		// 追従変更
-		UpdateBossCamera();
-
 		// 有効なら
 		if (m_isFinishBossMovie == true)
 		{
@@ -161,10 +159,13 @@ void CCamera::Update(void)
 			return;
 		}
 
+		// 追従変更
+		UpdateBossCamera();
+
+		// 追従関係の更新処理
 		if (m_pBoss->GetActiveFlags())
 		{
 			D3DXVECTOR3 B_pos = m_pBoss->GetPos();
-
 			UpdateFollowBoss({ B_pos.x,B_pos .y + 50.0f,B_pos .z});
 		}
 		return;
@@ -209,7 +210,8 @@ void CCamera::Update(void)
 		// 固定カメラに設定
 		RankingCamera();
 	}
-	else if (CManager::GetInstance()->GetScene() == CScene::MODE_LOSELAZY)
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_LOSELAZY ||
+			m_pCamera.nMode == MODE_LAZYMISS)
 	{
 		// 固定カメラに設定
 		CastCamera();
@@ -987,24 +989,17 @@ void CCamera::UpdateBossCamera(void)
 	// 通常追従に戻す
 	if (m_pBoss && m_pBoss->GetOutSideIn())
 	{
-		// 120カウント待機処理
-		const int WAIT_MAX = 60;
+		// 軽い停止時間
+		const int MAXTIME = 10;
 
-		// カウント加算
-		if (m_nBossCamWaitCount < WAIT_MAX)
+		// インクリメント
+		if (m_nBossCamWaitCount < MAXTIME)
 		{
 			m_nBossCamWaitCount++;
 		}
 		else
 		{
-			// 指定カウント到達後にプレイヤー追従へ復帰
-			if (m_pCharactor)
-			{
-				// ターゲットを"プレイヤー"に戻す
-				SetTargetPersonPos(m_pCharactor->GetPos());
-			}
-
-			// カウンタリセット
+			// カウント初期化
 			m_nBossCamWaitCount = 0;
 
 			// 三人称追従モードに戻す

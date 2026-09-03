@@ -45,7 +45,7 @@ public:
 #ifdef _DEBUG
 		static constexpr int NUMTIME = 600;						// 最大タイマー ( デバッグ状態時は長めに )
 #else
-		static constexpr int NUMTIME = 180;						// 最大タイマー ( 3分のゲーム時間 )
+		static constexpr int NUMTIME = 60;					// 最大タイマー ( 3分のゲーム時間 )
 #endif // _DEBUG
 	};
 

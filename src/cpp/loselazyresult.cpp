@@ -48,6 +48,7 @@ HRESULT CLoseLazyResult::Init(void)
 {
 	// カメラの設定を変更する
 	CManager::GetInstance()->GetCamera()->Init();
+	CManager::GetInstance()->GetCamera()->SetMode(CCamera::MODE_LAZYMISS);
 
 	// メッシュ生成
 	CMeshField::Create(VECTOR3_NULL, 1000.0f, 1000.0f, 1, 1, "data/TEXTURE/field00.jpg");
