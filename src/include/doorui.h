@@ -32,6 +32,7 @@ class CPlayer;
 class CDoorUI :public CObject2D
 {
 public:
+
 	CDoorUI();
 	~CDoorUI();
 
@@ -60,13 +61,13 @@ public:
 
 private:
 	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
+	CPlayer* m_pPlayerOwner;							// 格納するプレイヤーのポインタ
 
+private:
 	D3DXVECTOR3 m_pos;									// 位置
 	float m_fCountFrame;								// イージング用フレームカウント用変数
 	float m_fMaxFrame;									// 最大フレーム変数
 	bool m_bEasing;										// イージング用変数
 	bool m_bDisplay;									// 表示するかの判定変数
 	bool m_bUse;										// 使用しているかの判定変数
-
-	CPlayer* m_pPlayerOwner;							// 格納するプレイヤーのポインタ
 };

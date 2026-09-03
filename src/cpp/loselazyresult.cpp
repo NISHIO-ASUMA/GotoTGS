@@ -20,15 +20,17 @@
 #include "jsonmanager.h"
 #include "input.h"
 #include "fade.h"
-#include "ranking.h"
+#include "title.h"
 #include "resultcastmanager.h"
 #include "ui.h"
+#include "load.h"
 
 //=========================================================
 // オーバーロードコンストラクタ
 //=========================================================
 CLoseLazyResult::CLoseLazyResult() : CScene(CScene::MODE_LOSELAZY),
-m_pBlock(nullptr)
+m_pBlock(nullptr),
+m_pLoad(nullptr)
 {
 
 }
@@ -37,7 +39,7 @@ m_pBlock(nullptr)
 //=========================================================
 CLoseLazyResult::~CLoseLazyResult()
 {
-
+	Uninit();
 }
 //=========================================================
 // 初期化処理
@@ -59,6 +61,10 @@ HRESULT CLoseLazyResult::Init(void)
 	m_pBlock->SetLoadFileName();
 	m_pBlock->Init();
 
+	// ポインタ生成
+	m_pLoad = std::make_unique<CLoad>();
+	m_pLoad->SaveInt("data/SCORE/ResultScore.bin", 0);
+
 	// キャラクター生成
 	CResultCastManager::GetInstance()->Init();
 
@@ -76,10 +82,13 @@ HRESULT CLoseLazyResult::Init(void)
 //=========================================================
 void CLoseLazyResult::Uninit(void)
 {
+	// ロードクラスの破棄
+	m_pLoad.reset();
+
 	// ポインタの破棄
 	m_pBlock.reset();
 
-	// キャラクター生成
+	// キャラクター破棄
 	CResultCastManager::GetInstance()->Uninit();
 }
 //=========================================================
@@ -108,7 +117,7 @@ void CLoseLazyResult::Update(void)
 		if (pFade != nullptr)
 		{
 			// ランキングシーン遷移
-			pFade->SetFade(std::make_unique <CRanking>());
+			pFade->SetFade(std::make_unique <CTitle>());
 			return;
 		}
 	}

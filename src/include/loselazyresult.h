@@ -24,6 +24,7 @@
 // 前方宣言
 //*********************************************************
 class CBlockManager;
+class CLoad;
 
 //*********************************************************
 // 捕まった時のリザルトシーンクラスを定義
@@ -42,4 +43,5 @@ public:
 
 private:
 	std::unique_ptr<CBlockManager> m_pBlock;	// ブロック管理クラス
+	std::unique_ptr<CLoad> m_pLoad;				// ロード管理クラス
 };

@@ -49,8 +49,6 @@ CVigilancegauge* CVigilancegauge::Create(const Gauge& gauge, const char* BTEXTUR
 {
 	// インスタンス生成
 	CVigilancegauge* pGauge = new CVigilancegauge;
-
-	// ヌルチェック
 	if (pGauge == nullptr) return nullptr;
 
 	// 初期化が失敗したとき
@@ -97,7 +95,8 @@ void CVigilancegauge::Uninit(void)
 void CVigilancegauge::Update(void)
 {
 	// アニメーション中はカウントをストップ
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() ||
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM)
 	{
 		// テクスチャのUVを比率分動かす
 		CObject2DMulti::SetUV(m_fRatio);
@@ -143,6 +142,7 @@ void CVigilancegauge::Update(void)
 		m_fRatio = 0.0f;
 	}
 
+	// UIを表示中なら
 	if (m_pActiveUi->GetUse())
 	{
 		// カウントを加算

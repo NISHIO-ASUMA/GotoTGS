@@ -521,7 +521,6 @@ void CPlayer::Update(void)
 
 						// 外出タスクの起動
 						pDesk->GetOutsideDesk()->SetOutside();
-
 					}
 
 					break;

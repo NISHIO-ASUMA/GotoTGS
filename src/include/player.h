@@ -47,6 +47,7 @@ public:
 		GAME,			// ゲーセン
 		FOOD,			// 飲食
 		BENCH,			// ベンチ
+		DOCUMENT,		// 書類運び
 		MAX
 	};
 

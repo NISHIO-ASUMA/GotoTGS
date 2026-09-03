@@ -176,7 +176,8 @@ void CEnemy::Uninit(void)
 void CEnemy::Update(void)
 {
 	// アニメーション中なら
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() ||
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM)
 	{
 		UpdateMotionOnly();
 		return;

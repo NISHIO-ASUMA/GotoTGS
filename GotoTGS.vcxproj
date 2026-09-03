@@ -192,6 +192,7 @@
     <ClCompile Include="src\cpp\boxcollider.cpp" />
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
     <ClCompile Include="src\cpp\camera.cpp" />
+    <ClCompile Include="src\cpp\cameraui.cpp" />
     <ClCompile Include="src\cpp\client.cpp" />
     <ClCompile Include="src\cpp\clientmanager.cpp" />
     <ClCompile Include="src\cpp\collider.cpp" />
@@ -403,6 +404,7 @@
     <ClInclude Include="src\include\boxcollider.h" />
     <ClInclude Include="src\include\boxtospherecollision.h" />
     <ClInclude Include="src\include\camera.h" />
+    <ClInclude Include="src\include\cameraui.h" />
     <ClInclude Include="src\include\client.h" />
     <ClInclude Include="src\include\clientmanager.h" />
     <ClInclude Include="src\include\clientutility.h" />
