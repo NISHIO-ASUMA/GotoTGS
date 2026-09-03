@@ -87,7 +87,7 @@ HRESULT COutSideTaskTimer::Init(void)
 			fTexpos,																			// 一桁分の横幅
 			m_fHeight);																			// 縦幅
 
-			// サイズ設定
+		// サイズ設定
 		m_pNumberMinutes[nDigit]->SetSize(fTexpos, m_fHeight);
 
 		// カラー設定
@@ -125,7 +125,9 @@ void COutSideTaskTimer::Uninit(void)
 void COutSideTaskTimer::Update(void)
 {
 	// アニメーション中なら
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime()) return;
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() || 
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM) 
+		return;
 
 	// 最大時間が0なら処理を通さない
 	if (m_nAllTime <= 0)
@@ -170,8 +172,7 @@ void COutSideTaskTimer::Update(void)
 // 描画処理
 //=========================================================
 void COutSideTaskTimer::Draw(void)
-{// デバッグ時のみだけ出す
-
+{
 	// 桁数分表示
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
