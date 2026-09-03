@@ -988,7 +988,7 @@ void CCamera::UpdateBossCamera(void)
 	if (m_pBoss && m_pBoss->GetOutSideIn())
 	{
 		// 120カウント待機処理
-		const int WAIT_MAX = 100;
+		const int WAIT_MAX = 60;
 
 		// カウント加算
 		if (m_nBossCamWaitCount < WAIT_MAX)
