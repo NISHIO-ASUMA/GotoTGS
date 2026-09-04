@@ -79,4 +79,5 @@ private:
 
 private:
 	std::vector<CClient*> m_pClient;	// 外のクライアント役の配列
+
 };
