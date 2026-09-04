@@ -27,7 +27,8 @@ namespace AUDITOR_INFO
 //========================================================
 // コンストラクタ
 //========================================================
-CAuditorManager::CAuditorManager() : m_pAuditor{}
+CAuditorManager::CAuditorManager() : m_pAuditor{},
+m_pOutSidePlayer(nullptr)
 {
 
 }
@@ -75,4 +76,8 @@ void CAuditorManager::CreateInManager(const D3DXVECTOR3& pos, const D3DXVECTOR3&
 {
 	// 新規追加生成
 	m_pAuditor.push_back(CAuditor::Create(pos, rot, type));
+
+	// プレイヤーのポインタを設定する
+	if (m_pOutSidePlayer)
+		m_pAuditor.back()->SetPlayer(m_pOutSidePlayer);
 }

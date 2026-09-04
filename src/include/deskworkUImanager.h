@@ -91,7 +91,6 @@ public: // ¼”ö’Ç‰Á
 		CONTROL_MAX
 	};
 
-
 private:
 
 	// ƒƒ“ƒo•Ï”

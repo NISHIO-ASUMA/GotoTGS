@@ -48,7 +48,6 @@ public:
 		LINESTYPE_8,		// セリフ8
 		LINESTYPE_9,		// セリフ9
 		LINESTYPE_10,		// セリフ10
-		LINESTYPE_11,		// セリフ11
 		LINESTYPE_MAX		// セリフの総数
 	};
 
@@ -97,7 +96,6 @@ private:
 		static constexpr const char* LINES_008 = "Tutoriallines008.png";	// セリフ8
 		static constexpr const char* LINES_009 = "Tutoriallines009.png";	// セリフ9
 		static constexpr const char* LINES_010 = "Tutoriallines010.png";	// セリフ10
-		static constexpr const char* LINES_011 = "Tutoriallines011.png";	// セリフ11
 
 	};
 
@@ -115,7 +113,6 @@ private:
 		{Config::LINES_008},
 		{Config::LINES_009},
 		{Config::LINES_010},
-		{Config::LINES_011},
 
 	};
 	

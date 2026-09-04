@@ -37,6 +37,17 @@
     "IsFlash": false,
     "EnableAlpha": false,
     "AlphaFrame": 0
+  },
+  {
+    "ObjectTag": "Ui",
+    "Pos": [ 130.0,450.0, 0.0 ],
+    "FlashFrame": 0,
+    "Width": 65.0,
+    "Height": 30.0,
+    "Texture": "next.png",
+    "AlphaTest": false,
+    "IsFlash": false,
+    "EnableAlpha": false,
+    "AlphaFrame": 0
   }
-
 ]

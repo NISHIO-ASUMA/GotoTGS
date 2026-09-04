@@ -31,6 +31,9 @@
 #include "fade.h"
 #include "playerutility.h"
 #include "outsidework.h"
+#include "receptionUI.h"
+#include "receptionlineUI.h"
+#include "pointobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -446,6 +449,9 @@ void CPlayer::Update(void)
 	const auto& InteractPoint = CWorldUICollision::GetInstance()->GetInteractPoints();
 	if (!&InteractPoint) return;
 
+	// 受付人UIの情報を取得
+	auto* pReceptionUI = CGameSceneObject::GetInstance()->GetReceptionUI();
+
 	// 最大数と判定をする
 	for (const auto& Colliders : InteractPoint)
 	{
@@ -515,7 +521,6 @@ void CPlayer::Update(void)
 
 						// 外出タスクの起動
 						pDesk->GetOutsideDesk()->SetOutside();
-
 					}
 
 					break;
@@ -547,6 +552,11 @@ void CPlayer::Update(void)
 						// 扉を開ける状態にする
 						m_isSetOutSideTask = true;
 
+						// セリフを表示する
+						pReceptionUI->GetLineUI()->SetDrawFlags(true);
+
+						// 矢印を表示する
+						pReceptionUI->GetPointObject()->SetIsDraw(true);
 					}
 
 					break;
@@ -599,6 +609,11 @@ void CPlayer::Update(void)
 	// 自動ドアとの判定
 	UpdateAutoDoorCollision(UpdatePos);
 
+#ifdef _DEBUG
+	// プレイヤー座標のデバッグ表示
+	CDebugproc::GetInstance()->Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }\n", GetPos().x, GetPos().y, GetPos().z);
+#endif // _DEBUG
+
 	// 親クラスの更新処理
 	CMoveCharactor::Update();
 }
@@ -640,13 +655,9 @@ void CPlayer::Draw(void)
 		CManager::GetInstance()->GetRenderer()->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	}
 
-	// プレイヤー座標のデバッグ表示
-	CDebugproc::Print("[プレイヤーの位置] : { %.2f,%.2f,%.2f }", GetPos().x, GetPos().y, GetPos().z);
-	CDebugproc::Draw(0, 180);
-
 #ifdef _DEBUG
 	// モーションのデバッグ表示
-	GetMotion()->Debug();
+	//GetMotion()->Debug();
 #endif
 }
 //=========================================================

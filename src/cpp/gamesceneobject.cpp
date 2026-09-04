@@ -80,6 +80,8 @@ namespace GAMEOBJECT
 	const D3DXVECTOR3 BossPos	    = { 677.5f,0.0f,325.0f };						// ボスの座標
 	constexpr const char* LoadName	= "data/JSON/Gameobject.json";					// ゲーム内オブジェクトjsonファイル名
 	constexpr const char* CharactorLoadName	= "data/JSON/GameCharactorData.json";	// キャラ読み込みjsonファイル名
+	constexpr const char* TaskFile = "data/SCORE/TaskScore.bin";					// タスク書き出し
+	constexpr const char* LazyFile = "data/SCORE/LazyScore.bin";					// サボり書き出し
 };
 
 //=========================================================
@@ -94,7 +96,8 @@ m_pDeskwork(nullptr),
 m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr),
 m_pAfk2DUI(nullptr),
-m_pReception(nullptr)
+m_pReception(nullptr),
+m_pReceptionUI(nullptr)
 {
 
 }
@@ -121,6 +124,9 @@ CGameSceneObject* CGameSceneObject::GetInstance(void)
 //=========================================================
 HRESULT CGameSceneObject::Init(void)
 {
+	// 再初期化
+	CManager::GetInstance()->GetCamera()->Init();
+
 	// ゲームで使うオブジェクトの読み込み
 	auto jsonmanager = CManager::GetInstance()->GetJsonManager();
 	jsonmanager->Load(GAMEOBJECT::LoadName);
@@ -151,6 +157,7 @@ HRESULT CGameSceneObject::Init(void)
 	CreatePointer();
 
 	// 外の監査役を生成 ( Asuma )
+	CAuditorManager::GetInstance()->SetPlayerPointer(m_pPlayer);
 	CAuditorManager::GetInstance()->Init();
 
 	// 上司のデスクのかご
@@ -189,9 +196,6 @@ HRESULT CGameSceneObject::Init(void)
 	// ドア用UIの生成
 	CDoorUI::Create(m_pPlayer);
 
-	// 受付人用UIの生成
-	CReceptionUI::Create(m_pPlayer);
-
 	// 敵管理クラスのポインタセット
 	m_pPlayer->OutSideEnemyPointer(CEnemyManager::GetInstance());
 
@@ -218,12 +222,10 @@ void CGameSceneObject::Uninit(void)
 {
 	// 破棄される前に書き出し実行
 	if (m_pScoreDitch)
-		m_pScoreDitch->SaveScore("data/SCORE/LazyScore.bin");		// サボり
+		m_pScoreDitch->SaveScore(GAMEOBJECT::LazyFile);		// サボりスコア
 
 	if (m_pScoreTask)
-	{
-		m_pScoreTask->SaveScoreMinus("data/SCORE/TaskScore.bin");	// タスク
-	}
+		m_pScoreTask->SaveScoreMinus(GAMEOBJECT::TaskFile);	// タスクスコア
 
 	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
@@ -368,6 +370,9 @@ void CGameSceneObject::CreatePointer(void)
 	// 初期化とポインタセット
 	m_pBlocks->SetLoadFileName();
 	m_pBlocks->Init();
+
+	// 受付人用UIの生成
+	m_pReceptionUI = CReceptionUI::Create(m_pPlayer);
 
 	// タスクの生成 Misaki
 	m_pDeskwork = CDeskwork::Create(D3DXVECTOR3(HALFWIDTH, HALFHEIGHT + 50.0f, 0.0f),m_pPlayer);

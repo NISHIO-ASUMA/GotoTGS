@@ -25,11 +25,13 @@ class CAfk2DUI;				// Asuma
 class CPlayer;				// Asuma
 class CReceptionist;		// Asuma
 class CBoss;				// Asuma
+class COutSideTaskTimer;	// Asuma
 
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
 class CVigilanceUIManager;	// Misaki
+class CReceptionUI;			// Misaki
 
 //*********************************************************
 // ゲームシーンで使うオブジェクト管理クラスを定義
@@ -46,7 +48,7 @@ public:
 	void Draw(void);
 
 	/// <summary>
-	/// 西尾 : ゲームでボスが追加されるときに起こすもの
+	/// 西尾 : ゲームでボスが追加されるときに起こす関数イベント
 	/// </summary>
 	/// <param name=""></param>
 	void SetEventGameBoss(void);
@@ -58,7 +60,8 @@ public:
 	CScore* GetScoreAllGame(void) const { return m_pScoreAll; }	// 今現在ゲームで表示している物
 //*********************************
 
-	CGametime* GetTime(void) const { return m_pTimer; }
+	CGametime* GetTime(void) const { return m_pTimer; }											// Asuma
+	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }
 	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// Asuma
 	CReceptionist* GetReception(void) const { return m_pReception; }							// Asuma
 	CAfk2DUI* GetAfk2DUIPointer(void) const { return m_pAfk2DUI; }								// Asuma
@@ -68,6 +71,7 @@ public:
 	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
 	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
 	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
+	CReceptionUI* GetReceptionUI(void) const { return m_pReceptionUI; }							// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -84,8 +88,8 @@ private:
 private:
 
 	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
-	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分 ]
-	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 実際のゲームで表示するもの ]
+	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分、実際にゲーム中に出す ]
+	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 合計 ]
 
 private:
 	CGametime* m_pTimer;							// タイマークラスのポインタ		Misaki
@@ -93,12 +97,14 @@ private:
 	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ			Misaki
 	CEventUI* m_pEventUI;							// イベントUIのポインタ			Misaki
 	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ			Misaki
+	CReceptionUI* m_pReceptionUI;					// 受付人UIのポインタ			Misaki
 
 private:
 	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]
 	CReceptionist* m_pReception;					// 外に行く受付人				[ Asuma Add ]
-	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI
+	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI					[ Asuma Add ]
 	CBoss* m_pBoss;									// 社長キャラクター				[ Asuma Add ]
+	COutSideTaskTimer* m_pOutSideTime;				// 外タスク時間					[ Asuma Add ]
 
 	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ
 };

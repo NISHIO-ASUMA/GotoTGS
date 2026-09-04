@@ -173,6 +173,10 @@
     <ClCompile Include="src\cpp\animationobject2d.cpp" />
     <ClCompile Include="src\cpp\auditor.cpp" />
     <ClCompile Include="src\cpp\auditormanager.cpp" />
+    <ClCompile Include="src\cpp\auditorstatebase.cpp" />
+    <ClCompile Include="src\cpp\auditorstatechase.cpp" />
+    <ClCompile Include="src\cpp\auditorstatedoubt.cpp" />
+    <ClCompile Include="src\cpp\auditorstateneutral.cpp" />
     <ClCompile Include="src\cpp\autodoor_collision.cpp" />
     <ClCompile Include="src\cpp\automaticdoormanager.cpp" />
     <ClCompile Include="src\cpp\automatic_door.cpp" />
@@ -188,6 +192,7 @@
     <ClCompile Include="src\cpp\boxcollider.cpp" />
     <ClCompile Include="src\cpp\boxtospherecollision.cpp" />
     <ClCompile Include="src\cpp\camera.cpp" />
+    <ClCompile Include="src\cpp\cameraui.cpp" />
     <ClCompile Include="src\cpp\client.cpp" />
     <ClCompile Include="src\cpp\clientmanager.cpp" />
     <ClCompile Include="src\cpp\collider.cpp" />
@@ -213,6 +218,7 @@
     <ClCompile Include="src\cpp\deskworkUI.cpp" />
     <ClCompile Include="src\cpp\deskworkUImanager.cpp" />
     <ClCompile Include="src\cpp\DOCUMENTdeskwork.cpp" />
+    <ClCompile Include="src\cpp\documentUI.cpp" />
     <ClCompile Include="src\cpp\doorui.cpp" />
     <ClCompile Include="src\cpp\easing.cpp" />
     <ClCompile Include="src\cpp\effect.cpp" />
@@ -247,6 +253,7 @@
     <ClCompile Include="src\cpp\light.cpp" />
     <ClCompile Include="src\cpp\lines.cpp" />
     <ClCompile Include="src\cpp\load.cpp" />
+    <ClCompile Include="src\cpp\loselazyresult.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\manager.cpp" />
     <ClCompile Include="src\cpp\meetingfriend.cpp" />
@@ -310,10 +317,13 @@
     <ClCompile Include="src\cpp\rankingobject.cpp" />
     <ClCompile Include="src\cpp\rankingscore.cpp" />
     <ClCompile Include="src\cpp\receptionist.cpp" />
+    <ClCompile Include="src\cpp\receptionlineUI.cpp" />
     <ClCompile Include="src\cpp\receptionUI.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\cpp\result.cpp" />
+    <ClCompile Include="src\cpp\resultcastmanager.cpp" />
     <ClCompile Include="src\cpp\resulticon.cpp" />
+    <ClCompile Include="src\cpp\resultlazycast.cpp" />
     <ClCompile Include="src\cpp\resultmanager.cpp" />
     <ClCompile Include="src\cpp\resultobject.cpp" />
     <ClCompile Include="src\cpp\resultscore.cpp" />
@@ -375,6 +385,10 @@
     <ClInclude Include="src\include\animationobject2d.h" />
     <ClInclude Include="src\include\auditor.h" />
     <ClInclude Include="src\include\auditormanager.h" />
+    <ClInclude Include="src\include\auditorstatebase.h" />
+    <ClInclude Include="src\include\auditorstatechase.h" />
+    <ClInclude Include="src\include\auditorstatedoubt.h" />
+    <ClInclude Include="src\include\auditorstateneutral.h" />
     <ClInclude Include="src\include\auditorutility.h" />
     <ClInclude Include="src\include\autodoor_collision.h" />
     <ClInclude Include="src\include\automaticdoormanager.h" />
@@ -391,6 +405,7 @@
     <ClInclude Include="src\include\boxcollider.h" />
     <ClInclude Include="src\include\boxtospherecollision.h" />
     <ClInclude Include="src\include\camera.h" />
+    <ClInclude Include="src\include\cameraui.h" />
     <ClInclude Include="src\include\client.h" />
     <ClInclude Include="src\include\clientmanager.h" />
     <ClInclude Include="src\include\clientutility.h" />
@@ -417,6 +432,7 @@
     <ClInclude Include="src\include\deskworkUI.h" />
     <ClInclude Include="src\include\deskworkUImanager.h" />
     <ClInclude Include="src\include\DOCUMENTdeskwork.h" />
+    <ClInclude Include="src\include\documentUI.h" />
     <ClInclude Include="src\include\doorui.h" />
     <ClInclude Include="src\include\easing.h" />
     <ClInclude Include="src\include\effect.h" />
@@ -454,6 +470,7 @@
     <ClInclude Include="src\include\light.h" />
     <ClInclude Include="src\include\lines.h" />
     <ClInclude Include="src\include\load.h" />
+    <ClInclude Include="src\include\loselazyresult.h" />
     <ClInclude Include="src\include\main.h" />
     <ClInclude Include="src\include\manager.h" />
     <ClInclude Include="src\include\meetingfriend.h" />
@@ -513,10 +530,13 @@
     <ClInclude Include="src\include\rankingobject.h" />
     <ClInclude Include="src\include\rankingscore.h" />
     <ClInclude Include="src\include\receptionist.h" />
+    <ClInclude Include="src\include\receptionlineUI.h" />
     <ClInclude Include="src\include\receptionUI.h" />
     <ClInclude Include="src\include\renderer.h" />
     <ClInclude Include="src\include\result.h" />
+    <ClInclude Include="src\include\resultcastmanager.h" />
     <ClInclude Include="src\include\resulticon.h" />
+    <ClInclude Include="src\include\resultlazycast.h" />
     <ClInclude Include="src\include\resultmanager.h" />
     <ClInclude Include="src\include\resultobject.h" />
     <ClInclude Include="src\include\resultscore.h" />

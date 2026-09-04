@@ -17,21 +17,35 @@ class CDebugproc
 {
 public:
 
-	CDebugproc();
 	~CDebugproc();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
+	void Draw(int PosX, int PosY,const D3DXCOLOR& color = COLOR_WHITE);
+	void Print(const char* fmt, ...);
+	void End(void) { m_nNowIdx = 0; }
 
-	static void Draw(int PosX, int PosY,const D3DXCOLOR& color = COLOR_WHITE);
-	static void Print(const char* fmt, ...);
+	/// <summary>
+	/// シングルトン取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	static CDebugproc* GetInstance(void)
+	{
+		static CDebugproc Instance;
+		return &Instance;
+	}
 
 private:
+	CDebugproc();	// シングルトン
 
+private:
 	static constexpr int FONTSIZE = 20;		// フォントサイズ
 
-	static LPD3DXFONT m_pFont;				// デバッグフォント
-	static char m_aStr[MAX_WORD];			// 文字列格納バッファ
-	static bool m_isUse;					// 使用しているかフラグ
+private:
+	LPD3DXFONT m_pFont;				// デバッグフォント
+	int m_nNowIdx;					// 現在のインデックス
+	char m_aStr[MAX_WORD];			// 文字列格納バッファ
+	bool m_isUse;					// 使用しているかフラグ
 };

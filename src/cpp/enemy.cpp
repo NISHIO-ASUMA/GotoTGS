@@ -176,7 +176,8 @@ void CEnemy::Uninit(void)
 void CEnemy::Update(void)
 {
 	// アニメーション中なら
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() ||
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM)
 	{
 		UpdateMotionOnly();
 		return;
@@ -632,7 +633,6 @@ bool CEnemy::CheckEyesight(void)
 //========================================================
 bool CEnemy::CheckRayToAngleRange(void)
 {
-#if 1
 	// nullなら
 	if (!m_pDestCharactor) return false;
 
@@ -695,7 +695,6 @@ bool CEnemy::CheckRayToAngleRange(void)
 	}
 	
 	return true;
-#endif
 }
 //========================================================
 // 判別する際に障害物が存在しているかどうか

@@ -344,11 +344,8 @@ void CMotion::UpdateBlendOptimized(const CMotionManager::MOTIONFILE& info, CMode
 void CMotion::Debug(void)
 {
 #ifdef _DEBUG
-	CDebugproc::Print("[現在フレームカウント] %d /  [ 最大モーションフレーム ] %d", m_nAllFrameCount, m_nNumAllFrame);
-	CDebugproc::Draw(800, 320);
-
-	CDebugproc::Print("[ブレンドフレーム] %d / [ブレンドカウント] %d", m_nFrameBlend, m_nCounterBlend);
-	CDebugproc::Draw(800, 340);
+	CDebugproc::GetInstance()->Print("[現在フレームカウント] %d /  [ 最大モーションフレーム ] %d\n", m_nAllFrameCount, m_nNumAllFrame);
+	CDebugproc::GetInstance()->Print("[ブレンドフレーム] %d / [ブレンドカウント] %d\n", m_nFrameBlend, m_nCounterBlend);
 #endif // _DEBUG
 }
 //=================================================================

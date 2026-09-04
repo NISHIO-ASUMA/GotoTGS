@@ -17,6 +17,15 @@
 #include "spherecollider.h"
 #include "manager.h"
 #include "template.h"
+#include "blockmanager.h"
+#include "block.h"
+#include "jsonmanager.h"
+#include "billboard.h"
+#include "statemachine.h"
+#include "player.h"
+
+#include "auditorstatebase.h"
+#include "auditorstateneutral.h"
 #include "auditorutility.h"
 
 //*********************************************************
@@ -25,13 +34,13 @@
 namespace AUDITOR_INFO
 {
 	constexpr const char* FILENAME = "data/MOTION/Auditor/AuditorMotion.txt"; // モーションファイル
-	constexpr float RANGE = 2.0f;											  // 判別判定
+	constexpr float RANGE = 2.0f;											  // 距離判定
 };
 
 //*********************************************************
 // 使用する名前空間
 //*********************************************************
-using namespace AuditorUtility;	// ポイントデータの配列情報の格納先
+using namespace AuditorUtility;					// ポイントデータの配列情報の格納先の名前空間
 
 //========================================================
 // コンストラクタ
@@ -43,6 +52,11 @@ m_nViewIdx(NULL),
 m_nTargetIdx(NULL),
 m_pBoxColiider(nullptr),
 m_pSphereColiider(nullptr),
+m_pDestCharactor(nullptr),
+m_pMachine(nullptr),
+m_pChaseIcon(nullptr),
+m_isStartChase(false),
+m_isTargetChase(false),
 m_MoveTypeData(MOVE_POINTTYPE::OFFICENEAR)
 {
 }
@@ -85,6 +99,15 @@ HRESULT CAuditor::Init(void)
 	// モーションロード
 	MotionLoad(AUDITOR_INFO::FILENAME, MOTION::MAX, false);
 
+	// ステート生成
+	m_pMachine = new CStateMachine;
+	if (m_pMachine)
+		this->ChangeState(new CAuditorStateNeutral(),CAuditorStateBase::ID_NEUTRAL);
+
+	// アイコン生成
+	m_pChaseIcon = CBillboard::Create(GetPos(), VECTOR3_NULL, 20.0f, 20.0f, "ui_chaseicon.png");
+	m_pChaseIcon->SetDrawFlags(false);
+
 	return S_OK;
 }
 //========================================================
@@ -96,6 +119,14 @@ void CAuditor::Uninit(void)
 	m_pBoxColiider.reset();
 	m_pSphereColiider.reset();
 
+	// ステートの破棄
+	if (m_pMachine)
+	{
+		m_pMachine->OnExit();
+		delete m_pMachine;
+		m_pMachine = nullptr;
+	}
+
 	// 親クラスの終了処理
 	CMoveCharactor::Uninit();
 }
@@ -104,8 +135,9 @@ void CAuditor::Uninit(void)
 //========================================================
 void CAuditor::Update(void)
 {
-	// ポイント間座標の更新
-	MovingTypeOutSide();
+	// ステートの更新処理
+	if (m_pMachine)
+		m_pMachine->Update();
 
 	// 座標の更新
 	CMoveCharactor::UpdatePosition();
@@ -120,6 +152,10 @@ void CAuditor::Draw(void)
 {
 	// 親クラスの描画処理
 	CMoveCharactor::Draw();
+
+	// 追跡状態がfalseなら
+	if (!m_isStartChase)
+		return;
 
 	// 扇形の描画
 	DrawEyeSight();
@@ -146,6 +182,63 @@ void CAuditor::MovingTypeOutSide(void)
 	default:
 		break;
 	}
+}
+//========================================================
+// 追いかける移動処理
+//========================================================
+void CAuditor::ChaseMove(void)
+{
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 描画フラグがoffなら
+	if (!m_pChaseIcon->GetIsDrawFlags())
+		m_pChaseIcon->SetDrawFlags(true);
+
+	// uiアイコンの座標を更新
+	m_pChaseIcon->SetPos(D3DXVECTOR3(pos.x, pos.y + 80.0f, pos.z));
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (CheckEyesight())
+	{
+		// プレイヤーを捕まえる
+		m_pDestCharactor->SetCatchEnemy(true);
+
+		// 目的地に到着した瞬間にモーションを切り替える
+		GetMotion()->SetMotion(MOTION::CATCH, true, 3);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 3.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::CHASEDASH, true, 2);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
 }
 //========================================================
 // オフィス周りの更新
@@ -220,6 +313,7 @@ void CAuditor::UpdateSoba(void)
 	// 停止カウント中の処理
 	if (m_nCoolTime > 0)
 	{
+		// デクリメント
 		m_nCoolTime--;
 
 		// 待機中はニュートラルモーション
@@ -515,59 +609,218 @@ void CAuditor::DrawEyeSight(void)
 	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, oldAlphaArg2);
 }
 //========================================================
-// 視界との判定
+// ステート切り替え設定
 //========================================================
-bool CAuditor::CheckEyesight(const D3DXVECTOR3& TargetPos)
+void CAuditor::ChangeState(CAuditorStateBase* pNewState, int nID)
 {
-	// 現在座標を取得
-	D3DXVECTOR3 MyPos = GetPos();
+	// 自分自身のポインタを設定
+	pNewState->SetOwner(this);
 
-	// 高さの判定
-	float heightDiff = fabsf(TargetPos.y - MyPos.y);
+	// IDの設定
+	pNewState->SetID(nID);
 
-	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f)
+	// 実際の切り替え
+	m_pMachine->ChangeState(pNewState);
+}
+//========================================================
+// 障害物判定
+//========================================================
+bool CAuditor::CheckObstacle(void)
+{
+	// ブロック管理クラスの取得
+	CBlockManager* pManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (!pManager) return false;
+
+	// 始点と終点
+	D3DXVECTOR3 rayStart = GetPos();
+	D3DXVECTOR3 rayEnd = m_pDestCharactor->GetPos();
+
+	// 目線の高さ補正
+	rayStart.y += 20.0f;
+	rayEnd.y += 20.0f;
+
+	// レイの方向ベクトルと距離を計算
+	D3DXVECTOR3 rayDir = rayEnd - rayStart;
+	float maxDistance = D3DXVec3Length(&rayDir);
+	if (maxDistance <= 0.0001f) return false;
+
+	// 正規化
+	D3DXVec3Normalize(&rayDir, &rayDir);
+
+	// 登録されている全ブロックとの衝突確認
+	int blockCount = pManager->GetAll();
+	for (int nCnt = 0; nCnt < blockCount; nCnt++)
 	{
-		return false; // 高さが範囲外
+		// 単ブロックを取得
+		CBlock* pBlock = pManager->GetBlock(nCnt);
+		if (!pBlock) continue;
+
+		// CBlockからコライダーを取得
+		auto* pBoxCollider = pBlock->GetCollider();
+		if (!pBoxCollider) continue;
+
+		// ブロックのAABB座標範囲を取得
+		D3DXVECTOR3 bPos = pBlock->GetPos();
+		D3DXVECTOR3 bScale = pBlock->GetScale();
+
+		D3DXVECTOR3 minBound = bPos - (bScale * 0.5f);
+		D3DXVECTOR3 maxBound = bPos + (bScale * 0.5f);
+
+		// 線分の交差判定
+		float tMin = 0.0f;
+		float tMax = maxDistance;
+
+		bool hit = true;
+
+		for (int axis = 0; axis < 3; ++axis)
+		{
+			float origin = ((float*)&rayStart)[axis];
+			float dir = ((float*)&rayDir)[axis];
+			float bMin = ((float*)&minBound)[axis];
+			float bMax = ((float*)&maxBound)[axis];
+
+			if (fabsf(dir) < 0.00001f)
+			{
+				// レイがこの軸と平行な場合、軸上の範囲外にあれば衝突しない
+				if (origin < bMin || origin > bMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+			else
+			{
+				float invD = 1.0f / dir;
+				float t1 = (bMin - origin) * invD;
+				float t2 = (bMax - origin) * invD;
+
+				if (t1 > t2) std::swap(t1, t2);
+
+				tMin = (t1 > tMin) ? t1 : tMin;
+				tMax = (t2 < tMax) ? t2 : tMax;
+
+				if (tMin > tMax)
+				{
+					hit = false;
+					break;
+				}
+			}
+		}
+
+		// 障害物が存在する
+		if (hit)
+		{
+			return true; // 障害物あり
+		}
 	}
 
-	// 距離の判定
-	D3DXVECTOR3 diff = TargetPos - MyPos;
+	return false; // 障害物なし
+}
+//========================================================
+// 実際の視界との距離判定
+//========================================================
+bool CAuditor::CheckRayToAngleRange(void)
+{
+	// nullなら
+	if (!m_pDestCharactor) return false;
+
+	// 初期のタスク時間なら
+	if (!m_pDestCharactor->GetIsInitTasking())
+		return false;
+
+	// タスク中の時間だったら
+	if (m_pDestCharactor->GetIsPcWorking() || m_pDestCharactor->GetIsCopyWorking())
+		return false;
+
+	// 自身の座標とターゲットへの座標
+	D3DXVECTOR3 myPos = GetPos();
+	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
+
+	// 高低差判定
+	float heightDiff = fabsf(targetPos.y - myPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT)
+	{
+		return false;
+	}
+
+	// 距離制限
+	D3DXVECTOR3 diff = targetPos - myPos;
 	diff.y = 0.0f;
 
-	// 距離の2乗を計算
-	float sqrDistance = D3DXVec3LengthSq(&diff);
-
-	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS)
+	float distance = D3DXVec3Length(&diff);
+	if (distance > 300.0f|| distance <= 0.0001f)
 	{
-		return false; // 判定外
+		return false; // 視界距離外
 	}
 
-	// ゼロ除算
+	// 敵正面ベクトルを算出
+	D3DXMATRIX matRot;
+	D3DXMatrixRotationYawPitchRoll(&matRot, GetRot().y, GetRot().x, GetRot().z);
+	D3DXVECTOR3 forward(-matRot._31, 0.0f, -matRot._33);
+	D3DXVec3Normalize(&forward, &forward);
+
+	// ターゲットへのベクトルを算出
+	D3DXVECTOR3 dirToTarget;
+	D3DXVec3Normalize(&dirToTarget, &diff);
+
+	// 角度と内積計算
+	float halfAngleRad = D3DXToRadian(70.0f * 0.5f);
+	float thresholdDot = cosf(halfAngleRad);
+
+	// 内積を計算
+	float dot = D3DXVec3Dot(&forward, &dirToTarget);
+
+	// 内積がしきい値より小さい
+	if (dot < thresholdDot)
+	{
+		return false; // 視野角の外
+	}
+
+	// 障害物判定
+	if (CheckObstacle())
+	{
+		return false; // 障害物に遮られている
+	}
+
+	return true;
+}
+//========================================================
+// 視界との判定
+//========================================================
+bool CAuditor::CheckEyesight(void)
+{
+	// nullなら
+	if (!m_pDestCharactor) return false;
+
+	// 敵とプレイヤーの現在座標を取得
+	D3DXVECTOR3 enemyPos = GetPos();
+	D3DXVECTOR3 CharactorPos = m_pDestCharactor->GetPos();
+
+	// 高さ判定
+	float heightDiff = fabsf(CharactorPos.y - enemyPos.y);
+	if (heightDiff > Eyesight::EYE_HEIGHT / 2.0f) return false;
+
+	// 距離判定
+	D3DXVECTOR3 diff = CharactorPos - enemyPos;
+	diff.y = 0.0f;
+	float sqrDistance = D3DXVec3LengthSq(&diff);
+
+	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS) return false;
 	if (sqrDistance < 0.0001f) return true;
 
-	// 角度を取得
+	// 角度判定
 	D3DXVECTOR3 rot = GetRot();
-
-	// 角度から方向ベクトルを生成
 	D3DXVECTOR3 enemyForward(-sinf(rot.y), 0.0f, -cosf(rot.y));
 	D3DXVec3Normalize(&enemyForward, &enemyForward);
 
-	// 方向ベクトルを正規化
+	// 差分ベクトル
 	D3DXVECTOR3 diffDir;
 	D3DXVec3Normalize(&diffDir, &diff);
 
-	// 内積を計算
-	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
-
-	// 角度のコサイン値を計算
-	float halfAngleRad = D3DXToRadian(Eyesight::EYE_ANGLE);
-	float cosHalfAngle = cosf(halfAngleRad);
-
 	// 内積判定
-	if (dot >= cosHalfAngle)
-	{
-		return true; // 視界に入っている
-	}
+	float dot = D3DXVec3Dot(&enemyForward, &diffDir);
+	float cosHalfAngle = cosf(D3DXToRadian(70.0f));
 
-	return false;
+	// 扇形視界に入っている場合
+	return (dot >= cosHalfAngle);
 }

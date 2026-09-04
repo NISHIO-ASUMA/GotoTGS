@@ -16,17 +16,13 @@
 #include "manager.h"
 #include "input.h"
 
-//*********************************************************
-// 静的メンバ変数
-//*********************************************************
-LPD3DXFONT CDebugproc::m_pFont = nullptr;	// フォントへのポインタ
-char CDebugproc::m_aStr[MAX_WORD] = {};		// 文字列を格納するバッファ
-bool CDebugproc::m_isUse = false;			// 使用しているか
-
 //=========================================================
 // コンストラクタ
 //=========================================================
-CDebugproc::CDebugproc()
+CDebugproc::CDebugproc() : m_isUse(false),
+m_aStr{},
+m_pFont(nullptr),
+m_nNowIdx(NULL)
 {
 
 }
@@ -109,6 +105,9 @@ void CDebugproc::Draw(int PosX,int PosY, const D3DXCOLOR& color)
 
 		// バッファのクリア
 		memset(m_aStr, 0, sizeof(m_aStr));
+
+		// 描画インデックスのクリア
+		End();
 	}
 #endif // _DEBUG
 }
@@ -129,13 +128,18 @@ void CDebugproc::Print(const char* fmt, ...)
 	// 描画開始
 	va_start(list, fmt);
 
-	// 描画の種類分け
-	vsprintf_s(m_aStr, sizeof(m_aStr), fmt, list);
+	// 今の文字の位置が最大数より大きかったら
+	if (m_nNowIdx > MAX_WORD)
+	{
+		// 今の文字の位置をゼロに戻す
+		m_nNowIdx = 0;
+		return;
+	}
 
-	// 終了
+	// バッファに積み上げる
+	m_nNowIdx += vsprintf(&m_aStr[m_nNowIdx], fmt, list);
+
+	// 描画終了
 	va_end(list);
-
-	// 文字列にコピー
-	va_copy(list, m_aStr);
 #endif // _DEBUG
 }

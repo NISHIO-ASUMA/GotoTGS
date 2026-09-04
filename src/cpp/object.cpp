@@ -208,6 +208,12 @@ void CObject::UpdateAll(void)
 			pObject = pObjeNext;
 		}
 	}
+
+#ifdef _DEBUG
+	// デバッグフォント
+	CDebugproc::GetInstance()->Print("現在の総オブジェクト数 : %d\n", m_nNumAll);
+#endif // _DEBUG
+
 }
 //=========================================================
 // 全描画処理
@@ -242,10 +248,4 @@ void CObject::DrawAll(void)
 			pObject = pObjeNext;
 		}
 	}
-
-#ifdef _DEBUG
-	// デバッグフォント
-	CDebugproc::Print("現在の総オブジェクト数 : %d", m_nNumAll);
-	CDebugproc::Draw(0, 60);
-#endif // _DEBUG
 }

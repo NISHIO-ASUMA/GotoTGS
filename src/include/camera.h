@@ -44,6 +44,7 @@ public:
 		MODE_MOUSE,
 		MODE_ANIM,
 		MODE_BOSS_SYSTEM,
+		MODE_LAZYMISS,
 		MODE_MAX
 	};
 
@@ -117,6 +118,12 @@ public:
 	/// <param name="targetPosR">注視点</param>
 	/// <param name="targetRot">角度</param>
 	void SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& targetPosR, const D3DXVECTOR3& targetRot);
+
+	/// <summary>
+	/// 西尾追加 : キャストカメラ
+	/// </summary>
+	/// <param name=""></param>
+	void CastCamera(void);
 
 	/// <summary>
 	/// 西尾追加 : ボスカメラの更新関数
@@ -223,6 +230,7 @@ public:
 	inline D3DXMATRIX GetView(void) const { return m_pCamera.mtxView; }
 	inline bool GetIsAnimTime(void) const { return m_isAnimating; }
 	int GetMode(void) const { return m_pCamera.nMode; }
+	int GetCount(void) const { return m_nBossCamWaitCount; }
 
 private:
 

@@ -20,6 +20,8 @@
 #include "gamesceneobject.h"
 #include "titleuimanager.h"
 #include "receptionist.h"
+#include "receptionUI.h"
+#include "pointobject.h"
 
 //=========================================================
 // コンストラクタ
@@ -129,6 +131,7 @@ void COutsideWork::EndOutside(void)
 
 	// 外出できない状態にする
 	m_bGoOutside = false;
+
 }
 
 //=========================================================
@@ -144,5 +147,11 @@ void COutsideWork::TaskSystem(void)
 
 	// タスクをしていない状態にする
 	m_bTaskNow = false;
+
+	// 受付人UIの情報を取得
+	auto* pReceptionUI = CGameSceneObject::GetInstance()->GetReceptionUI();
+
+	// 矢印を非表示する
+	pReceptionUI->GetPointObject()->SetIsDraw(false);
 
 }

@@ -427,6 +427,30 @@
     <Filter Include="ヘッダー ファイル\AddFile\Nishio\Boss\Charactor">
       <UniqueIdentifier>{27fa5e7f-3dbb-4a35-b11c-68f018680284}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\auditor\Base">
+      <UniqueIdentifier>{5f5e66f4-eb17-447f-80dd-2b9d94597958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\auditor\State">
+      <UniqueIdentifier>{78cf8b9d-13f6-45cb-aec0-ce985e2e5532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\enemy\Base">
+      <UniqueIdentifier>{ef599e7f-d297-4536-85b3-c7c8fa968822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\enemy\State">
+      <UniqueIdentifier>{b4ad8030-e06c-4d5e-ad30-6304dd0c98b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\Base">
+      <UniqueIdentifier>{7519d645-0718-4cd1-b6ca-7a40483db71f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\State">
+      <UniqueIdentifier>{439f7d3a-fd68-4498-90c5-3f3510864b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\Base">
+      <UniqueIdentifier>{6bf6ea3d-90ab-4930-b4f0-2d3ddaa5e00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State">
+      <UniqueIdentifier>{855ecc7d-9d0a-4345-8b7e-f41546366ea3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -753,18 +777,6 @@
     <ClCompile Include="src\cpp\sideopendoor.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\SideOpenDoor</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\enemy.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemymanager.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemystatebase.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemystateneutral.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\automaticdoormanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\AutoDoor</Filter>
     </ClCompile>
@@ -806,12 +818,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\createjsonenemy.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemystatechase.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\enemystateserch.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\meetingfriend.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\freind</Filter>
@@ -906,9 +912,6 @@
     <ClCompile Include="src\cpp\receptionist.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\Reception</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\auditor.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\rankinggraph.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
     </ClCompile>
@@ -920,9 +923,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\resulticon.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\auditormanager.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\createjsonauditor.cpp">
       <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
@@ -938,9 +938,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp\tutorialplayer.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\enemystatedoubt.cpp">
-      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\enemydoubtgauge.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
@@ -1002,17 +999,74 @@
     <ClCompile Include="src\cpp\bossstatechase.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\outsidetasktimer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\crow.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\receptionUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
-	</ClCompile>
+    </ClCompile>
+    <ClCompile Include="src\cpp\crow.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\outsidetasktimer.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
     <ClCompile Include="src\cpp\testscene.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\receptionlineUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditor.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditormanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemy.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemymanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystatechase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\include\enemystatedoubt.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\enemystateserch.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstatebase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstatechase.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstatedoubt.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\auditorstateneutral.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\loselazyresult.cpp">
+      <Filter>ソース ファイル\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultlazycast.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultcastmanager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\cameraui.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\documentUI.cpp">
+      <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1370,24 +1424,6 @@
     <ClInclude Include="src\include\automaticdoormanager.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\autodoor</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\enemy.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemymanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystatebase.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystatechase.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystateneutral.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystateserch.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\meetingfriend.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Friend</Filter>
     </ClInclude>
@@ -1511,20 +1547,8 @@
     <ClInclude Include="src\include\resulticon.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\auditor.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\auditormanager.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\createjsonauditor.h">
       <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\auditorutility.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemystatedoubt.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\include\billboardmulti.h">
       <Filter>ヘッダー ファイル\ObjectClass\3D</Filter>
@@ -1549,9 +1573,6 @@
     </ClInclude>
     <ClInclude Include="src\include\playerstateeating.h">
       <Filter>ヘッダー ファイル\AddFile\Chikada\player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\enemyutility.h">
-      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\include\number3d.h">
       <Filter>ヘッダー ファイル\Number\BaseClass</Filter>
@@ -1610,17 +1631,80 @@
     <ClInclude Include="src\include\bossstatechase.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\Boss\State</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\outsidetasktimer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\crow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\receptionUI.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\crow.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\mob</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\outsidetasktimer.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
     <ClInclude Include="src\include\testscene.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\receptionlineUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditor.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditormanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstatechase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstatedoubt.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\auditorstateneutral.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\auditor\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemy.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemymanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatebase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatechase.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystatedoubt.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystateneutral.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemystateserch.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\enemyutility.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\loselazyresult.h">
+      <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultlazycast.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultcastmanager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\cameraui.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\documentUI.h">
+      <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -62,6 +62,18 @@ namespace RANKINGCAMERAINFO
 	constexpr float Distance = 10.0f;							// 初期の距離
 }
 
+//*********************************************************
+// 失敗リザルト用の定数名前空間宣言
+//*********************************************************
+namespace CATCHINFO
+{
+	const D3DXVECTOR3 InitPosV = { -4.0f,106.0f, 145.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitPosR = { 0.8f,-143.0f, 620.0f };		// カメラ初期座標
+	const D3DXVECTOR3 InitRot = { VECTOR3_NULL };			// カメラ初期角度
+	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
+	constexpr float Distance = 540.0f;							// 初期の距離
+}
+
 //=========================================================
 // コンストラクタ
 //=========================================================
@@ -112,6 +124,7 @@ HRESULT CCamera::Init(void)
 	// 移動フラグ
 	m_currentAnim.AnimData.clear();
 	m_isMove = false;
+	m_isFinishBossMovie = false;
 
 	// 操作の種類を設定する (パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
@@ -139,9 +152,6 @@ void CCamera::Update(void)
 	// ボスムービーなら
 	if (m_pCamera.nMode == MODE_BOSS_SYSTEM)
 	{
-		// 追従変更
-		UpdateBossCamera();
-
 		// 有効なら
 		if (m_isFinishBossMovie == true)
 		{
@@ -149,10 +159,13 @@ void CCamera::Update(void)
 			return;
 		}
 
+		// 追従変更
+		UpdateBossCamera();
+
+		// 追従関係の更新処理
 		if (m_pBoss->GetActiveFlags())
 		{
 			D3DXVECTOR3 B_pos = m_pBoss->GetPos();
-
 			UpdateFollowBoss({ B_pos.x,B_pos .y + 50.0f,B_pos .z});
 		}
 		return;
@@ -197,6 +210,12 @@ void CCamera::Update(void)
 		// 固定カメラに設定
 		RankingCamera();
 	}
+	else if (CManager::GetInstance()->GetScene() == CScene::MODE_LOSELAZY ||
+			m_pCamera.nMode == MODE_LAZYMISS)
+	{
+		// 固定カメラに設定
+		CastCamera();
+	}
 
 	// 角度の正規化
 	if (m_pCamera.rot.y > D3DX_PI)
@@ -209,6 +228,13 @@ void CCamera::Update(void)
 	{// D3DX_PIより小さくなったら
 		m_pCamera.rot.y += CAMERAINFO::NorRot;
 	}
+
+#ifdef _DEBUG
+	// デバッグ表示
+	CDebugproc::GetInstance()->Print("Camera : PosV [ %.2f, %.2f, %.2f ]\n", m_pCamera.posV.x, m_pCamera.posV.y, m_pCamera.posV.z);
+	CDebugproc::GetInstance()->Print("Camera : PosR [ %.2f, %.2f, %.2f ]\n", m_pCamera.posR.x, m_pCamera.posR.y, m_pCamera.posR.z);
+	CDebugproc::GetInstance()->Print("Camera : Rot [ %.2f, %.2f, %.2f ]\n", m_pCamera.rot.x, m_pCamera.rot.y, m_pCamera.rot.z);
+#endif // _DEBUG
 }
 //=========================================================
 // カメラをセット
@@ -243,17 +269,6 @@ void CCamera::SetCamera(void)
 	// プロジェクションマトリックスの設定
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_pCamera.mtxprojection);
 
-#ifdef _DEBUG
-	// デバッグ表示
-	CDebugproc::Print("Camera : PosV [ %.2f, %.2f, %.2f ]\n", m_pCamera.posV.x, m_pCamera.posV.y, m_pCamera.posV.z);
-	CDebugproc::Draw(0, 20);
-
-	CDebugproc::Print("Camera : PosR [ %.2f, %.2f, %.2f ]\n", m_pCamera.posR.x, m_pCamera.posR.y, m_pCamera.posR.z);
-	CDebugproc::Draw(0, 40);
-
-	CDebugproc::Print("Camera : Rot [ %.2f, %.2f, %.2f ]\n", m_pCamera.rot.x, m_pCamera.rot.y, m_pCamera.rot.z);
-	CDebugproc::Draw(0, 80);
-#endif // _DEBUG
 }
 //==============================================================
 // マウス操作の視点移動
@@ -735,9 +750,6 @@ void CCamera::UpdateAnim(void)
 				m_nCurrentFrame = 0;
 				m_pCamera.nCntAnim = 0;
 				m_isAnimating = false;
-
-				//// 編集モード
-				//SetMode(MODE_THIRD);
 			}
 		}
 	}
@@ -822,23 +834,28 @@ HRESULT CCamera::LoadAnimation(const std::string& path)
 			// 各トークンごとの処理
 			if (token == "FRAME")
 			{
-				char equal; ss >> equal >> currentKey.nAnimFrame;
+				char equal; 
+				ss >> equal >> currentKey.nAnimFrame;
 			}
 			else if (token == "POSV")
 			{
-				char equal; ss >> equal >> currentKey.posV.x >> currentKey.posV.y >> currentKey.posV.z;
+				char equal; 
+				ss >> equal >> currentKey.posV.x >> currentKey.posV.y >> currentKey.posV.z;
 			}
 			else if (token == "POSR")
 			{
-				char equal; ss >> equal >> currentKey.posR.x >> currentKey.posR.y >> currentKey.posR.z;
+				char equal;
+				ss >> equal >> currentKey.posR.x >> currentKey.posR.y >> currentKey.posR.z;
 			}
 			else if (token == "ROT")
 			{
-				char equal; ss >> equal >> currentKey.rot.x >> currentKey.rot.y >> currentKey.rot.z;
+				char equal; 
+				ss >> equal >> currentKey.rot.x >> currentKey.rot.y >> currentKey.rot.z;
 			}
 			else if (token == "DISTANCE")
 			{
-				char equal; ss >> equal >> currentKey.fDistance;
+				char equal; 
+				ss >> equal >> currentKey.fDistance;
 			}
 		}
 
@@ -931,6 +948,17 @@ void CCamera::SetBossSysytem(const D3DXVECTOR3& targetPosV, const D3DXVECTOR3& t
 	m_fLerpRate = 0.0f;
 }
 //==============================================================
+// 捕まった時のカメ設定
+//==============================================================
+void CCamera::CastCamera(void)
+{
+	m_pCamera.posV = CATCHINFO::InitPosV;			// カメラの位置
+	m_pCamera.posR = CATCHINFO::InitPosR;			// カメラの見ている位置
+	m_pCamera.vecU = CATCHINFO::InitVecU;			// 上方向ベクトル
+	m_pCamera.rot = CATCHINFO::InitRot;				// 角度
+	m_pCamera.fDistance = CATCHINFO::Distance;		// 距離
+}
+//==============================================================
 // ボスの時のカメラ更新
 //==============================================================
 void CCamera::UpdateBossCamera(void)
@@ -961,23 +989,17 @@ void CCamera::UpdateBossCamera(void)
 	// 通常追従に戻す
 	if (m_pBoss && m_pBoss->GetOutSideIn())
 	{
-		// 120カウント待機処理
-		const int WAIT_MAX = 120;
+		// 軽い停止時間カウント用変数
+		const int MAXTIME = 10;
 
-		if (m_nBossCamWaitCount < WAIT_MAX)
+		// インクリメント
+		if (m_nBossCamWaitCount < MAXTIME)
 		{
 			m_nBossCamWaitCount++;
 		}
 		else
 		{
-			// 指定カウント到達後にプレイヤー追従へ復帰
-			if (m_pCharactor)
-			{
-				// ターゲットを"プレイヤー"に戻す
-				SetTargetPersonPos(m_pCharactor->GetPos());
-			}
-
-			// カウンタリセット
+			// カウント初期化
 			m_nBossCamWaitCount = 0;
 
 			// 三人称追従モードに戻す

@@ -48,22 +48,22 @@ COutsideUI::~COutsideUI()
 COutsideUI* COutsideUI::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const char* pTexName)
 {
 	// インスタンス生成
-	COutsideUI* pCpUI = new COutsideUI;
-	if (pCpUI == nullptr) return nullptr;
+	COutsideUI* pOutsideUI = new COutsideUI;
+	if (pOutsideUI == nullptr) return nullptr;
 
 	// オブジェクトセット
-	pCpUI->SetPos(pos);
-	pCpUI->SetSize(OutsideUI::fWidth, OutsideUI::fHeight);
-	pCpUI->SetRot(rot);
-	pCpUI->SetRadius(OutsideUI::fRadius);
-	pCpUI->SetTexture(pTexName);
-	pCpUI->SetEnableZtest(true);
+	pOutsideUI->SetPos(pos);
+	pOutsideUI->SetSize(OutsideUI::fWidth, OutsideUI::fHeight);
+	pOutsideUI->SetRot(rot);
+	pOutsideUI->SetRadius(OutsideUI::fRadius);
+	pOutsideUI->SetTexture(pTexName);
+	pOutsideUI->SetEnableZtest(true);
 
 	// 初期化失敗時
-	if (FAILED(pCpUI->Init())) return nullptr;
+	if (FAILED(pOutsideUI->Init())) return nullptr;
 
 	// チュートリアルUIのポインタを返す
-	return pCpUI;
+	return pOutsideUI;
 }
 //=========================================================
 // 初期化処理
