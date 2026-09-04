@@ -15,6 +15,7 @@
 //*********************************************************
 #include "manager.h"
 #include "jsonmanager.h"
+#include "auditorstatechase.h"
 
 //*********************************************************
 // 定数名前空間
@@ -68,6 +69,18 @@ void CAuditorManager::Uninit(void)
 void CAuditorManager::Update(void)
 {
 
+}
+//========================================================
+// 全体の動きのシステム変更
+//========================================================
+void CAuditorManager::ChangeSystem(void)
+{
+	// ステートを"猛追"に変更
+	for (int nCnt = 0; nCnt < static_cast<int>(m_pAuditor.size()); nCnt++)
+	{
+		if (m_pAuditor[nCnt])
+			m_pAuditor[nCnt]->ChangeState(new CAuditorStateChase(), CAuditorStateBase::ID_CHASE);
+	}
 }
 //========================================================
 // ポインタ生成と配列追加関数

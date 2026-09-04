@@ -67,13 +67,8 @@ private:
 		static constexpr float RATIO_VALUE = 1.0f / MAX_POW;
 	};
 
-	// メンバ変数
-	float m_fRatio;		// 現在の比率
-
-private:	// 西尾追加 : 生成する物の関数わけ
-	void CreateCharactor(const int nNumber);
-
 private:
 	CUi* m_pActiveUi;		// 出現したときに通知するui
+	float m_fRatio;			// 現在の比率
 	int m_nActiveCount;		// 表示カウント
 };
