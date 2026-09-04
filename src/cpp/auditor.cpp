@@ -23,6 +23,8 @@
 #include "billboard.h"
 #include "statemachine.h"
 #include "player.h"
+#include "camera.h"
+#include "manager.h"
 
 #include "auditorstatebase.h"
 #include "auditorstateneutral.h"
@@ -135,6 +137,14 @@ void CAuditor::Uninit(void)
 //========================================================
 void CAuditor::Update(void)
 {
+	// アニメーション中なら
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() ||
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM)
+	{
+		UpdateMotionOnly();
+		return;
+	}
+
 	// ステートの更新処理
 	if (m_pMachine)
 		m_pMachine->Update();
@@ -816,7 +826,7 @@ bool CAuditor::CheckRayToAngleRange(void)
 	diff.y = 0.0f;
 
 	float distance = D3DXVec3Length(&diff);
-	if (distance > 300.0f|| distance <= 0.0001f)
+	if (distance > 350.0f || distance <= 0.0001f)
 	{
 		return false; // 視界距離外
 	}

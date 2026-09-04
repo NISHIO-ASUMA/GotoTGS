@@ -216,8 +216,9 @@ void CPlayer::Uninit(void)
 //=========================================================
 void CPlayer::Update(void)
 {
-	// 更新だけしてreturn
-	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime())
+	// 特定の期間中は動かさず、その場で更新のみをする
+	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() ||
+		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM)
 	{
 		// ui表示の設定
 		UpdateAfkUiState();
