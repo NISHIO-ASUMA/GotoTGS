@@ -107,7 +107,7 @@ private:
 		static constexpr int DIGIT_TIME = 2;					// 桁数
 		static constexpr int DIVIDE = 10;						// 桁分割の値
 		static constexpr int CARVETIME = 60;					// カウント上限
-		static constexpr int NUMTIME = 15;						// 最大タイマー
+		static constexpr int NUMTIME = 30;						// 最大タイマー
 
 		static constexpr int EASE_MAX_FRAME = 120;			// 1回にかかるフレーム数
 		static constexpr float EFFECT_MAX_SCALE = 1.8f;		// エフェクトが広がる最大倍率

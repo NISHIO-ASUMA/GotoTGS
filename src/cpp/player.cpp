@@ -501,7 +501,7 @@ void CPlayer::Update(void)
 					break;
 
 				case CWorldUICollision::TYPE_COPY:	// コピー機なら
-										// nullじゃない状態
+					// nullじゃない状態
 					if (pDesk)
 					{
 						// デスクワーク時
