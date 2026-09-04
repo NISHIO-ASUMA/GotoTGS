@@ -451,6 +451,12 @@
     <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\Enemy\State">
       <UniqueIdentifier>{855ecc7d-9d0a-4345-8b7e-f41546366ea3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\AddFile\Nishio\Charactor\resultcast">
+      <UniqueIdentifier>{4f017755-a90f-466e-bc3f-100c465919cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\resultcast">
+      <UniqueIdentifier>{af65760b-239a-4e39-80f4-8639067a12f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -1056,20 +1062,20 @@
     <ClCompile Include="src\cpp\loselazyresult.cpp">
       <Filter>ソース ファイル\Scene\SceneBase</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\resultlazycast.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\resultcastmanager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cpp\cameraui.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\documentUI.cpp">
       <Filter>ソース ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\cameraui.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
     <ClCompile Include="src\cpp\returnofficeui.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultcastmanager.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\resultcast</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\resultlazycast.cpp">
+      <Filter>ソース ファイル\AddFile\Nishio\Charactor\resultcast</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1697,20 +1703,20 @@
     <ClInclude Include="src\include\loselazyresult.h">
       <Filter>ヘッダー ファイル\Scene\BaseClass</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\resultlazycast.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\resultcastmanager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\cameraui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\documentUI.h">
       <Filter>ヘッダー ファイル\AddFile\Takahashi\Deskwork\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\resultlazycast.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\resultcast</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\resultcastmanager.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\Charactor\resultcast</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\cameraui.h">
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
     <ClInclude Include="src\include\returnofficeui.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
