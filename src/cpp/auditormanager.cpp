@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "jsonmanager.h"
 #include "auditorstatechase.h"
+#include "auditorstateneutral.h"
 
 //*********************************************************
 // 定数名前空間
@@ -80,6 +81,18 @@ void CAuditorManager::ChangeSystem(void)
 	{
 		if (m_pAuditor[nCnt])
 			m_pAuditor[nCnt]->ChangeState(new CAuditorStateChase(), CAuditorStateBase::ID_CHASE);
+	}
+}
+//========================================================
+// 全体の動きのシステム変更
+//========================================================
+void CAuditorManager::ChangeSystemNeutral(void)
+{
+	// ステートを"通常"に変更
+	for (int nCnt = 0; nCnt < static_cast<int>(m_pAuditor.size()); nCnt++)
+	{
+		if (m_pAuditor[nCnt])
+			m_pAuditor[nCnt]->ChangeState(new CAuditorStateNeutral(), CAuditorStateBase::ID_NEUTRAL);
 	}
 }
 //========================================================

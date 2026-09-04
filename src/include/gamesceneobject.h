@@ -61,7 +61,7 @@ public:
 //*********************************
 
 	CGametime* GetTime(void) const { return m_pTimer; }											// Asuma
-	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }
+	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }							// Asuma
 	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// Asuma
 	CReceptionist* GetReception(void) const { return m_pReception; }							// Asuma
 	CAfk2DUI* GetAfk2DUIPointer(void) const { return m_pAfk2DUI; }								// Asuma
@@ -86,7 +86,6 @@ private:
 	void CreatePointer(void);	// 初期化処理関数分け
 
 private:
-
 	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
 	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分、実際にゲーム中に出す ]
 	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 合計 ]

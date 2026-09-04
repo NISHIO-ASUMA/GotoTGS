@@ -328,6 +328,7 @@
     <ClCompile Include="src\cpp\resultobject.cpp" />
     <ClCompile Include="src\cpp\resultscore.cpp" />
     <ClCompile Include="src\cpp\resultscoremanager.cpp" />
+    <ClCompile Include="src\cpp\returnofficeui.cpp" />
     <ClCompile Include="src\cpp\scene.cpp" />
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\scorepop.cpp" />
@@ -541,6 +542,7 @@
     <ClInclude Include="src\include\resultobject.h" />
     <ClInclude Include="src\include\resultscore.h" />
     <ClInclude Include="src\include\resultscoremanager.h" />
+    <ClInclude Include="src\include\returnofficeui.h" />
     <ClInclude Include="src\include\scene.h" />
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\scorepop.h" />

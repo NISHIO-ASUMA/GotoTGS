@@ -1002,6 +1002,9 @@ void CCamera::UpdateBossCamera(void)
 			// カウント初期化
 			m_nBossCamWaitCount = 0;
 
+			// 全体に警戒度アップを適用する
+			m_pBoss->UpperLevel();
+
 			// 三人称追従モードに戻す
 			m_pCamera.nMode = MODE_THIRD;
 

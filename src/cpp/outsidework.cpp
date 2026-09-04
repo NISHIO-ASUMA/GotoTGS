@@ -22,6 +22,7 @@
 #include "receptionist.h"
 #include "receptionUI.h"
 #include "pointobject.h"
+#include "outsidetasktimer.h"
 
 //=========================================================
 // コンストラクタ

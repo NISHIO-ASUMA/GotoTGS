@@ -42,6 +42,12 @@ public:
 	void ChangeSystem(void);
 
 	/// <summary>
+	/// 動きの全体変更
+	/// </summary>
+	/// <param name=""></param>
+	void ChangeSystemNeutral(void);
+
+	/// <summary>
 	/// シングルトン取得処理
 	/// </summary>
 	/// <param name=""></param>

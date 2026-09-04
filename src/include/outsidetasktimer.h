@@ -25,6 +25,8 @@
 //*********************************************************
 class CNumber;
 class CPlayer;
+class CUi;
+class CReturnOfficeUi;
 
 //*********************************************************
 // 外タスクのタイマークラスを定義
@@ -45,7 +47,7 @@ public:
 		TIMESTATE_MAX
 	};
 
-	COutSideTaskTimer(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	COutSideTaskTimer(int nPriority = static_cast<int>(CObject::PRIORITY::NUMBERSET));
 	~COutSideTaskTimer();
 
 	HRESULT Init(void) override;
@@ -63,6 +65,8 @@ public:
 	/// </summary>
 	/// <param name="Event"></param>
 	void RegisterEvent(std::function<void(void)> Event) { m_event = Event; }
+
+	CReturnOfficeUi* GetReturnUi(void) { return m_pReturnUi; }
 
 	inline void SetActiveFlag(bool isFlags) { m_isActive = isFlags; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
@@ -123,6 +127,8 @@ private:
 private:
 	CNumber* m_pNumberMinutes[Config::DIGIT_TIME];		// 分数のポインタ
 	CPlayer* m_pPlayerOwner;							// プレイヤーポインタ
+	CUi* m_pUi;											// uiクラス
+	CReturnOfficeUi* m_pReturnUi;						// 帰ってくる警告uiクラス
 	D3DXVECTOR3 m_pos;									// 位置
 	TIMESTATE m_State;									// 状態変更
 

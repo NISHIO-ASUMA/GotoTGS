@@ -34,6 +34,9 @@
 #include "receptionUI.h"
 #include "receptionlineUI.h"
 #include "pointobject.h"
+#include "outsidetasktimer.h"
+#include "returnofficeui.h"
+#include "auditormanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -544,6 +547,15 @@ void CPlayer::Update(void)
 						// 扉を強制的に閉じる命令を出す
 						SideDoorManager->CloseDoorInOffice();
 
+						// 外の監査人の状態を一括変更する
+						CAuditorManager::GetInstance()->ChangeSystemNeutral();
+
+						// タイマーからのuiの表示をoffにする
+						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
+						if (!pTimer) return;
+						auto* ui = pTimer->GetReturnUi();
+						ui->SetUse(false);
+
 						break;
 					}
 
@@ -558,6 +570,12 @@ void CPlayer::Update(void)
 
 						// 矢印を表示する
 						pReceptionUI->GetPointObject()->SetIsDraw(true);
+
+						// タイマー起動
+						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
+						if (!pTimer) return;
+						pTimer->Start();
+
 					}
 
 					break;
@@ -569,7 +587,6 @@ void CPlayer::Update(void)
 					{
 						pDesk->GetOutsideDesk()->TaskSystem();
 					}
-
 					break;
 
 				default:
