@@ -36,6 +36,12 @@ public:
 	void Update(void);
 
 	/// <summary>
+	/// 動きの全体変更
+	/// </summary>
+	/// <param name=""></param>
+	void ChangeSystem(void);
+
+	/// <summary>
 	/// シングルトン取得処理
 	/// </summary>
 	/// <param name=""></param>

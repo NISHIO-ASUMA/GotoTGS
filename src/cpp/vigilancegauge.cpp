@@ -74,7 +74,7 @@ HRESULT CVigilancegauge::Init(void)
 	CObject2DMulti::Init();
 
 	// ui生成
-	m_pActiveUi = CUi::Create(D3DXVECTOR3(640.0f, 90.0f, 0.0f), 0, 300.0f, 65.0f, "addchar00.png");
+	m_pActiveUi = CUi::Create(D3DXVECTOR3(640.0f, 640.0f, 0.0f), 0, 240.0f, 65.0f, "addchar00.png");
 	m_pActiveUi->SetUse(false);
 
 	return S_OK;
@@ -170,26 +170,4 @@ void CVigilancegauge::Draw(void)
 {
 	// 親の描画処理
 	CObject2DMulti::Draw();
-}
-
-//=========================================================
-// 生成するものを変化させる処理 ( 後々改良案件 )
-//=========================================================
-void CVigilancegauge::CreateCharactor(const int nNumber)
-{
-	switch (nNumber)
-	{
-	case 0:
-		// 敵を生成
-		//CEnemyManager::GetInstance()->CreateManager(VECTOR3_NULL, VECTOR3_NULL);
-		break;
-
-	case 1:
-		// ボス ( 社長 )を生成 → これは一回だけかな
-
-		break;
-
-	default:
-		break;
-	}
 }
