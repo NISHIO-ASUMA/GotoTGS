@@ -193,8 +193,8 @@ void CResultScore::UpdateAnimScore(void)
 		// 桁数ごとに分割する値を計算
 		int nDigit = nScore % Config::NUM_DIGIT;
 
-		// ナンバーの更新
-		m_pNumber[nCntScore]->Update();
+		//// ナンバーの更新
+		//m_pNumber[nCntScore]->Update();
 
 		// 桁更新
 		m_pNumber[nCntScore]->SetDigit(nDigit);

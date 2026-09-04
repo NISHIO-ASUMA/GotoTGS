@@ -179,6 +179,9 @@ void CAuditor::MovingTypeOutSide(void)
 	case CAuditor::MAPLEFT:		// マップ左側
 		UpdateMapLeft();
 		break;
+	case CAuditor::BIGOUTSIDE:	// 大外回り
+		UpdateBigPoint();
+		break;
 	default:
 		break;
 	}
@@ -472,6 +475,71 @@ void CAuditor::UpdateMapLeft(void)
 
 		// インデックス設定
 		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, LEFTSIDE_POINT - 1);
+
+		// 目的地に到着したらモーションを切り替える
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// ベクトルを正規化
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+
+	// 移動量
+	moveVec *= 1.5f;
+	SetMove(moveVec);
+
+	// 移動モーションを設定
+	GetMotion()->SetMotion(MOTION::MOVE);
+
+	// 角度を計算
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+
+	// 現在の目標角度
+	D3DXVECTOR3 rotDest = GetRotDest();
+
+	// 角度を正規化
+	rotDest.y = NormalAngle(angleY);
+
+	// 目標角度をセット
+	SetRotDest(rotDest);
+}
+//========================================================
+// 大外回りの動きの更新
+//========================================================
+void CAuditor::UpdateBigPoint(void)
+{
+	// 停止カウント中の処理
+	if (m_nCoolTime > 0)
+	{
+		m_nCoolTime--;
+
+		// 待機中はニュートラルモーション
+		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);
+		return;
+	}
+
+	// 現在の座標とターゲットの座標を取得
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 targetPos = BigOutSidePoint[m_nTargetIdx];
+
+	// 目的地へのベクトルを計算
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+
+	// 目的地までの距離を計算
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// 到着判定
+	if (distance <= AUDITOR_INFO::RANGE)
+	{
+		// 座標を目的地に合わせる
+		SetPos(targetPos);
+
+		// 停止時間を設定
+		m_nCoolTime = 60;
+
+		// インデックス設定
+		m_nTargetIdx = Wrap(m_nTargetIdx + 1, 0, BIG_POINT - 1);
 
 		// 目的地に到着したらモーションを切り替える
 		GetMotion()->SetMotion(MOTION::NEUTRAL, true, 5);

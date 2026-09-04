@@ -326,7 +326,7 @@ void CGameSceneObject::Update(void)
 	// 
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
 	{
-		//m_pOutSideTime->SetState(COutSideTaskTimer::TIMESTATE_END);
+		// ‚È‚ñ‚©‚ÌŒŸØ—p
 	}
 
 	// 
