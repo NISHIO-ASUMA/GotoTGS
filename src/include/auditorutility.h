@@ -66,4 +66,17 @@ namespace AuditorUtility
 		{2178.0f, 0.0f,612.0f},
 		{2137.0f, 0.0f, 1140.0f}
 	};
+
+	// ‘åŠO‰ñ‚è
+	constexpr int BIG_POINT = 7;
+	const D3DXVECTOR3 BigOutSidePoint[BIG_POINT] =
+	{
+		{1381.0f, 0.0f, 113.0f},
+		{1120.0f, 0.0f, 223.0f},
+		{1124.0f, 0.0f, -115.0f},
+		{1362.0f, 0.0f, -115.0f},
+		{1124.0f, 0.0f, -115.0f},
+		{1120.0f, 0.0f, 113.0f},
+		{1424.0f, 0.0f, 110.0f},
+	};
 };

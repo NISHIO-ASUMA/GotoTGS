@@ -97,7 +97,8 @@ m_pEventUI(nullptr),
 m_pVigilanceUImanager(nullptr),
 m_pAfk2DUI(nullptr),
 m_pReception(nullptr),
-m_pReceptionUI(nullptr)
+m_pReceptionUI(nullptr),
+m_pOutSideTime(nullptr)
 {
 
 }
@@ -207,11 +208,13 @@ HRESULT CGameSceneObject::Init(void)
 	// イベントを登録する ( ラムダ式 )
 	m_pTimer->RegisterEvent([this]() {SetEventGameBoss();});
 
+	// 西尾 : タスク時間を設定
+	m_pOutSideTime = COutSideTaskTimer::Create({640.0f,-30.0f,0.0f}, 70.0f, 50.0f);
+	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
+	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
+
 	//// アニメーション再生関数を設定する
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
-
-	// 西尾 : タスク時間を設定 ( 検証完了 )
-	//COutSideTaskTimer::Create(VECTOR3_NULL, 60.0f, 15.0f);
 	return S_OK;
 }
 
@@ -320,17 +323,17 @@ void CGameSceneObject::Update(void)
 	if (m_pBlocks) m_pBlocks->Update();
 
 #ifdef _DEBUG
-	// スコアの保存処理の検証
+	// 
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
 	{
-		// 加算 ( サボり )
-		m_pScoreDitch->AddScore(99990000);
+		// なんかの検証用
 	}
 
-	// ボス関連の設定
+	// 
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_L))
 	{
-		SetEventGameBoss();
+		// 開始デバッグキー
+		m_pOutSideTime->Start();
 	}
 #endif // _DEBUG
 }

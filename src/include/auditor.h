@@ -59,6 +59,7 @@ public:
 		GAMECENTER,		// ゲーセン
 		SOBAANDBAR,		// 蕎麦と居酒屋
 		MAPLEFT,		// マップの左側
+		BIGOUTSIDE,		// 大外回り
 		MOVE_POINTTYPE_MAX
 	};
 
@@ -125,6 +126,7 @@ private:
 	void UpdateSoba(void);
 	void UpdateGameCenter(void);
 	void UpdateMapLeft(void);
+	void UpdateBigPoint(void);
 
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー

@@ -17,6 +17,8 @@
 #include "number.h"
 #include "template.h"
 #include "camera.h"
+#include "easing.h"
+#include "player.h"
 
 //=========================================================
 // コンストラクタ
@@ -28,7 +30,10 @@ m_nCounter(NULL),
 m_nMaxTime(NULL),
 m_fWidth(NULL),
 m_fHeight(NULL),
-m_pos(VECTOR3_NULL)
+m_nEffectFrame(NULL),
+m_pos(VECTOR3_NULL),
+m_pPlayerOwner(nullptr),
+m_event{}
 {
 	// ポインタ初期化
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
@@ -83,9 +88,9 @@ HRESULT COutSideTaskTimer::Init(void)
 
 		// ナンバーの初期化処理
 		m_pNumberMinutes[nDigit]->Init
-		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),		// 位置
-			fTexpos,																			// 一桁分の横幅
-			m_fHeight);																			// 縦幅
+		(D3DXVECTOR3(m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit), m_pos.y, 0.0f),// 位置
+			fTexpos,																	// 一桁分の横幅
+			m_fHeight);																	// 縦幅
 
 		// サイズ設定
 		m_pNumberMinutes[nDigit]->SetSize(fTexpos, m_fHeight);
@@ -124,6 +129,9 @@ void COutSideTaskTimer::Uninit(void)
 //=========================================================
 void COutSideTaskTimer::Update(void)
 {
+	// フラグがoffなら
+	if (!m_isActive) return;
+
 	// アニメーション中なら
 	if (CManager::GetInstance()->GetCamera()->GetIsAnimTime() || 
 		CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM) 
@@ -132,6 +140,11 @@ void COutSideTaskTimer::Update(void)
 	// 最大時間が0なら処理を通さない
 	if (m_nAllTime <= 0)
 	{
+		// 状態リセット関数
+		End();
+		UpdateState();
+
+		// 最大時間のクリア
 		m_nAllTime = 0;
 		return;
 	}
@@ -160,10 +173,10 @@ void COutSideTaskTimer::Update(void)
 			// カウンターを0にする
 			m_nCounter = 0;
 		}
-
-		// 経過時間を増やす
-		m_nDecTime++;
 	}
+
+	// 状態更新
+	UpdateState();
 
 	// 桁数更新処理
 	UpdateDigitNumbers();
@@ -173,12 +186,40 @@ void COutSideTaskTimer::Update(void)
 //=========================================================
 void COutSideTaskTimer::Draw(void)
 {
+	// フラグがoffなら
+	if (!m_isActive) return;
+
 	// 桁数分表示
 	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
 	{
 		// ナンバーの描画処理
 		m_pNumberMinutes[nDigit]->Draw();
 	}
+}
+//=========================================================
+// 開始関数
+//=========================================================
+void COutSideTaskTimer::Start(void)
+{
+	// フラグ起動
+	m_isActive = true;
+
+	// 状態変更
+	m_State = TIMESTATE_START;
+
+	// 最大時間の再設定
+	m_nAllTime = Config::NUMTIME;
+}
+//=========================================================
+// 終了関数
+//=========================================================
+void COutSideTaskTimer::End(void)
+{
+	// 状態変更
+	m_State = TIMESTATE_END;
+
+	// 最大時間をリセット
+	m_nAllTime = 0;
 }
 //=========================================================
 // 桁数の更新関数
@@ -199,6 +240,134 @@ void COutSideTaskTimer::UpdateDigitNumbers(void)
 		{// 分数の更新処理
 			m_pNumberMinutes[nDigit]->Update();
 			m_pNumberMinutes[nDigit]->SetDigit(nPosTexU);
+		}
+	}
+}
+//=========================================================
+// 状態ごとの更新処理
+//=========================================================
+void COutSideTaskTimer::UpdateState(void)
+{
+	// 状態ごとに動く処理
+	switch (m_State)
+	{
+	case COutSideTaskTimer::TIMESTATE_NONE:		// 初期
+		break;
+
+	case COutSideTaskTimer::TIMESTATE_START:	// 開始時
+
+		// 下側に移動する
+		m_pos.y += Config::MOVE_Y;
+		SetPos(m_pos);
+
+		// 上限値に達したら
+		if (m_pos.y >= Config::MAX_POS_Y)
+		{
+			m_pos.y = Config::MAX_POS_Y;
+			SetPos(m_pos);
+			m_State = TIMESTATE_STOP;
+			break;
+		}
+		break;
+
+	case COutSideTaskTimer::TIMESTATE_STOP:		// 停止継続中
+		SetPos(m_pos);
+		break;
+
+	case COutSideTaskTimer::TIMESTATE_END:		// 状態終了
+
+		// 上側に移動する
+		m_pos.y -= Config::MOVE_Y;
+		SetPos(m_pos);
+
+		// 上限値に達したら
+		if (m_pos.y <= Config::MAX_POS_RETURN_Y)
+		{
+			m_pos.y = Config::MAX_POS_RETURN_Y;
+			SetPos(m_pos);
+			m_State = TIMESTATE_NONE;
+			m_isActive = false;
+
+			// イベントがある かつ プレイヤーがまだ外タスクをしているのなら
+			if (m_event && m_pPlayerOwner->GetIsTaskOutSide() == true)
+				m_event();
+
+			break;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	// 座標が反映された後に数字の位置を更新
+	float fTexpos = m_fWidth / Config::DIGIT_TIME;
+
+	for (int nDigit = 0; nDigit < Config::DIGIT_TIME; nDigit++)
+	{
+		if (m_pNumberMinutes[nDigit] != nullptr)
+		{
+			// 座標の更新設定
+			m_pNumberMinutes[nDigit]->SetPos
+			(
+				D3DXVECTOR3
+				(
+				m_pos.x + (fTexpos * Config::VALUE_FLOAT * nDigit),
+				m_pos.y,
+				0.0f
+				)
+			);
+
+			// もし10秒以下なら色を変更する
+			if (m_nAllTime <= 10)
+			{
+				// カウンターを更新
+				m_nEffectFrame++;
+				if (m_nEffectFrame >= Config::EASE_MAX_FRAME)
+				{
+					m_nEffectFrame = 0;
+				}
+
+				// イージング設定
+				float t = CEasing::SetEase(m_nEffectFrame, Config::EASE_MAX_FRAME);
+
+				float effectEase = CEasing::EaseOutCubic(t);
+
+				float effectScale = 1.0f + (Config::EFFECT_MAX_SCALE - 1.0f) * effectEase;
+				float effectWidth = fTexpos * effectScale;
+				float effectHeight = m_fHeight * effectScale;
+
+				float alpha = 1.0f;
+				float fadeStartT = 0.5f;
+
+				if (t > fadeStartT)
+				{
+					float fadeProgress = (t - fadeStartT) / (1.0f - fadeStartT);
+					alpha = 1.0f - fadeProgress;
+				}
+
+				float bodyPulseT = sinf(t * D3DX_PI);
+				float bodyEase = CEasing::EaseOutQuad(bodyPulseT);
+				float bodyScale = 1.0f + (Config::BODY_MAX_SCALE - 1.0f) * bodyEase;
+
+				// 描画設定
+				m_pNumberMinutes[nDigit]->SetSize(fTexpos * bodyScale, m_fHeight * bodyScale);
+
+				// カラー設定
+				D3DXCOLOR colRed = COLOR_RED;
+				colRed.a = alpha;
+				m_pNumberMinutes[nDigit]->SetCol(colRed);
+			}
+			else
+			{
+				// カラー更新設定
+				m_pNumberMinutes[nDigit]->SetCol(COLOR_WHITE);
+				m_pNumberMinutes[nDigit]->SetSize(fTexpos, m_fHeight);
+				m_nEffectFrame = 0;
+			}
+
+			// 数字の更新
+			m_pNumberMinutes[nDigit]->Update();
 		}
 	}
 }
