@@ -146,6 +146,7 @@ HRESULT CPlayer::Init(void)
 
 	// スフィアコライダーの生成
 	m_pSphereCollider = CSphereCollider::Create(GetPos(), player::SphereSize);
+	m_pTaskSphereCollider = CSphereCollider::Create(GetPos(), player::SphereSizeToEnemyDown);
 
 	// 操作の種類を設定する(パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
@@ -435,6 +436,12 @@ void CPlayer::Update(void)
 	if (m_pSphereCollider)
 	{
 		m_pSphereCollider->SetPos(pos);
+	}
+
+	// スフィアコライダー座標の更新
+	if (m_pTaskSphereCollider)
+	{
+		m_pTaskSphereCollider->SetPos(pos);
 	}
 
 	// 座標の更新処理
@@ -875,6 +882,17 @@ bool CPlayer::CollisionSphere(CSphereCollider* pOther)
 
 	// 矩形同士の当たり判定を返す
 	return CCollisionSphere::Collision(m_pSphereCollider.get(), pOther);
+}
+//=========================================================
+// 球形当たり判定
+//=========================================================
+bool CPlayer::CollisionSphereTaskEvent(CSphereCollider* pOther)
+{
+	// nullチェック
+	if (m_pTaskSphereCollider == nullptr) return false;
+
+	// 矩形同士の当たり判定を返す
+	return CCollisionSphere::Collision(m_pTaskSphereCollider.get(), pOther);
 }
 //=========================================================
 // ステート変更処理
@@ -1476,7 +1494,7 @@ void CPlayer::LowerLevelToEnemy(void)
 		if (!pEnemy) continue;
 
 		// 球形範囲に当たっていたら
-		if (this->CollisionSphere(pEnemy->GetSphereCollider()))
+		if (this->CollisionSphereTaskEvent(pEnemy->GetSphereCollider()))
 		{
 			// 敵のレベルポイントを下げ,警戒度によるパラメーターを下げる
 			pEnemy->LevelDown(10.0f);

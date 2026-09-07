@@ -87,6 +87,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	bool CollisionSphereTaskEvent(CSphereCollider* pOther);
 	void ChangeState(CPlayerStateBase* pState, int nID);
 	void MoveKeyboard(float speed);
 	void MoveJoypad(float speed);
@@ -276,9 +277,11 @@ public:
 	void LowerLevelToEnemy(void);
 
 private:
+	std::unique_ptr<CBoxCollider> m_pBoxCollider;			// 矩形のコライダー
+	std::unique_ptr<CSphereCollider> m_pSphereCollider;		// 球形のコライダー
+	std::unique_ptr<CSphereCollider> m_pTaskSphereCollider;	// 上司の警戒度を下げる球
 
-	std::unique_ptr<CBoxCollider> m_pBoxCollider;		// 矩形のコライダー
-	std::unique_ptr<CSphereCollider> m_pSphereCollider;	// 球形のコライダー
+private:
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	D3DXVECTOR3 m_posOld;								// 過去の位置
 	int m_nCntAfk;										// さぼっているときのゲージの加算
