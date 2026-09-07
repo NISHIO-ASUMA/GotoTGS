@@ -37,6 +37,12 @@ public:
 	void Update(void);
 
 	/// <summary>
+	/// 全体のレベルアップ処理
+	/// </summary>
+	/// <param name=""></param>
+	void SetLevleUpper(void);
+
+	/// <summary>
 	/// タイマークラスのポインタを受け取る
 	/// </summary>
 	/// <param name="pTime"></param>

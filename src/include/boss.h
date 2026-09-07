@@ -56,6 +56,7 @@ public:
 	bool CheckEyesight(void);
 	bool CheckRayToAngleRange(void);
 	bool CheckObstacle(void);
+	void UpperLevel(void);
 
 	void SetCharactorPointer(CPlayer* pCharactor = nullptr) { m_pDestCharactor = pCharactor; }
 	void SetActiveFlags(bool isflag) { m_isActiveSet = isflag; }

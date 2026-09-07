@@ -46,6 +46,7 @@ public:
 		BILLBOARD,		// ビルボード
 		EFFECT,			// エフェクト
 		UI,				// 2DUI
+		NUMBERSET,		// 数値
 		PAUSE,			// ポーズ
 		PRIORITY_MAX	// 最大数
 	};

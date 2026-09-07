@@ -207,7 +207,7 @@ public:
 	//**********************************
 	struct AnimData
 	{
-		std::vector<AnimDataKey> AnimData; // 構造体の動的配列
+		std::vector<AnimDataKey> AnimData;	// 構造体の動的配列
 		bool isLoop;						// ループするかどうか
 	};
 
@@ -234,7 +234,7 @@ public:
 
 private:
 
-	Camera ClearDefault(void);	// クリア用関数
+	Camera ClearDefault(void);		// クリア用関数
 
 private:
 
@@ -259,7 +259,7 @@ private:
 	D3DXVECTOR3 m_TargetPosV;
 	D3DXVECTOR3 m_TargetPosR;
 	D3DXVECTOR3 m_TargetRot;
-	float m_fLerpRate; // 補間率
+	float m_fLerpRate;		 // 補間率
 	int m_nBossCamWaitCount; // ボスカメラ待機用カウンタ
 	bool m_isFinishBossMovie;
 };

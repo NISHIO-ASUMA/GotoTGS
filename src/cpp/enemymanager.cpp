@@ -108,6 +108,18 @@ void CEnemyManager::Update(void)
 	if (!m_pTimeContainer) return;
 }
 //=========================================================
+// 敵のレベルアップ処理
+//=========================================================
+void CEnemyManager::SetLevleUpper(void)
+{
+	// 出現している敵だけレベルアップする
+	for (int nCnt = 0; nCnt < static_cast<int>(m_pEnemys.size()); nCnt++)
+	{
+		// 加算
+		m_pEnemys[nCnt]->AddLevel(100.0f);
+	}
+}
+//=========================================================
 // 敵の生成追加関数
 //=========================================================
 void CEnemyManager::AddEnemy(const D3DXVECTOR3& pos)

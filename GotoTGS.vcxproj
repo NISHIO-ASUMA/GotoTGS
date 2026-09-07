@@ -269,6 +269,8 @@
     <ClCompile Include="src\cpp\motioninstancing.cpp" />
     <ClCompile Include="src\cpp\motionmanager.cpp" />
     <ClCompile Include="src\cpp\movecharactor.cpp" />
+    <ClCompile Include="src\cpp\myeffect.cpp" />
+    <ClCompile Include="src\cpp\myparticle.cpp" />
     <ClCompile Include="src\cpp\nomovecharactor.cpp" />
     <ClCompile Include="src\cpp\number.cpp" />
     <ClCompile Include="src\cpp\number3d.cpp" />
@@ -328,6 +330,7 @@
     <ClCompile Include="src\cpp\resultobject.cpp" />
     <ClCompile Include="src\cpp\resultscore.cpp" />
     <ClCompile Include="src\cpp\resultscoremanager.cpp" />
+    <ClCompile Include="src\cpp\returnofficeui.cpp" />
     <ClCompile Include="src\cpp\scene.cpp" />
     <ClCompile Include="src\cpp\score.cpp" />
     <ClCompile Include="src\cpp\scorepop.cpp" />
@@ -486,6 +489,8 @@
     <ClInclude Include="src\include\motioninstancing.h" />
     <ClInclude Include="src\include\motionmanager.h" />
     <ClInclude Include="src\include\movecharactor.h" />
+    <ClInclude Include="src\include\myeffect.h" />
+    <ClInclude Include="src\include\myparticle.h" />
     <ClInclude Include="src\include\nomovecharactor.h" />
     <ClInclude Include="src\include\number.h" />
     <ClInclude Include="src\include\number3d.h" />
@@ -541,6 +546,7 @@
     <ClInclude Include="src\include\resultobject.h" />
     <ClInclude Include="src\include\resultscore.h" />
     <ClInclude Include="src\include\resultscoremanager.h" />
+    <ClInclude Include="src\include\returnofficeui.h" />
     <ClInclude Include="src\include\scene.h" />
     <ClInclude Include="src\include\score.h" />
     <ClInclude Include="src\include\scorepop.h" />

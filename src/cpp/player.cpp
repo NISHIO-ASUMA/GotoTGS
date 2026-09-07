@@ -499,7 +499,7 @@ void CPlayer::Update(void)
 					break;
 
 				case CWorldUICollision::TYPE_COPY:	// コピー機なら
-										// nullじゃない状態
+					// nullじゃない状態
 					if (pDesk)
 					{
 						// デスクワーク時
@@ -545,6 +545,15 @@ void CPlayer::Update(void)
 						// 扉を強制的に閉じる命令を出す
 						SideDoorManager->CloseDoorInOffice();
 
+						// 外の監査人の状態を一括変更する
+						CAuditorManager::GetInstance()->ChangeSystemNeutral();
+
+						// タイマーからのuiの表示をoffにする
+						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
+						if (!pTimer) return;
+						auto* ui = pTimer->GetReturnUi();
+						ui->SetUse(false);
+
 						break;
 					}
 
@@ -570,7 +579,6 @@ void CPlayer::Update(void)
 					{
 						pDesk->GetOutsideDesk()->TaskSystem();
 					}
-
 					break;
 
 				default:
@@ -1469,6 +1477,9 @@ void CPlayer::LowerLevelToEnemy(void)
 		{
 			// 敵のレベルポイントを下げ,警戒度によるパラメーターを下げる
 			pEnemy->LevelDown(10.0f);
+
+			// TODO : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
+			//CMyParticle::Create({ pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}
 	}

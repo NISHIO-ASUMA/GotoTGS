@@ -25,6 +25,8 @@
 //*********************************************************
 class CNumber;
 class CPlayer;
+class CUi;
+class CReturnOfficeUi;
 
 //*********************************************************
 // 外タスクのタイマークラスを定義
@@ -45,7 +47,7 @@ public:
 		TIMESTATE_MAX
 	};
 
-	COutSideTaskTimer(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
+	COutSideTaskTimer(int nPriority = static_cast<int>(CObject::PRIORITY::NUMBERSET));
 	~COutSideTaskTimer();
 
 	HRESULT Init(void) override;
@@ -63,6 +65,8 @@ public:
 	/// </summary>
 	/// <param name="Event"></param>
 	void RegisterEvent(std::function<void(void)> Event) { m_event = Event; }
+
+	CReturnOfficeUi* GetReturnUi(void) { return m_pReturnUi; }
 
 	inline void SetActiveFlag(bool isFlags) { m_isActive = isFlags; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
@@ -103,7 +107,7 @@ private:
 		static constexpr int DIGIT_TIME = 2;					// 桁数
 		static constexpr int DIVIDE = 10;						// 桁分割の値
 		static constexpr int CARVETIME = 60;					// カウント上限
-		static constexpr int NUMTIME = 15;						// 最大タイマー
+		static constexpr int NUMTIME = 30;						// 最大タイマー
 
 		static constexpr int EASE_MAX_FRAME = 120;			// 1回にかかるフレーム数
 		static constexpr float EFFECT_MAX_SCALE = 1.8f;		// エフェクトが広がる最大倍率
@@ -123,6 +127,8 @@ private:
 private:
 	CNumber* m_pNumberMinutes[Config::DIGIT_TIME];		// 分数のポインタ
 	CPlayer* m_pPlayerOwner;							// プレイヤーポインタ
+	CUi* m_pUi;											// uiクラス
+	CReturnOfficeUi* m_pReturnUi;						// 帰ってくる警告uiクラス
 	D3DXVECTOR3 m_pos;									// 位置
 	TIMESTATE m_State;									// 状態変更
 

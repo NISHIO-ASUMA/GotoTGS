@@ -21,7 +21,12 @@
 #include "titleuimanager.h"
 #include "receptionist.h"
 #include "receptionUI.h"
+<<<<<<< HEAD
 #include "clientmanager.h"
+=======
+#include "pointobject.h"
+#include "outsidetasktimer.h"
+>>>>>>> 7413f8d335a62c194474358996baee41cccc84ab
 
 //=========================================================
 // コンストラクタ

@@ -19,6 +19,8 @@
 #include "camera.h"
 #include "easing.h"
 #include "player.h"
+#include "ui.h"
+#include "returnofficeui.h"
 
 //=========================================================
 // コンストラクタ
@@ -33,6 +35,8 @@ m_fHeight(NULL),
 m_nEffectFrame(NULL),
 m_pos(VECTOR3_NULL),
 m_pPlayerOwner(nullptr),
+m_pReturnUi(nullptr),
+m_pUi(nullptr),
 m_event{}
 {
 	// ポインタ初期化
@@ -77,6 +81,14 @@ HRESULT COutSideTaskTimer::Init(void)
 
 	// 全体の時間を設定
 	m_nAllTime = Config::NUMTIME;
+
+	// 背景ui生成
+	m_pUi = CUi::Create({640.0f,60.0f,0.0f,}, 0, 115.0f, 55.0f, "Limit_frame.png");
+	m_pUi->SetUse(false);
+
+	// 警告ui生成
+	m_pReturnUi = CReturnOfficeUi::Create({ 640.0f,60.0f,0.0f, },10, 115.0f, 55.0f, "return_office.png");
+	m_pReturnUi->SetUse(false);
 
 	// 一桁の横幅
 	float fTexpos = m_fWidth / Config::DIGIT_TIME;
@@ -266,6 +278,10 @@ void COutSideTaskTimer::UpdateState(void)
 			m_pos.y = Config::MAX_POS_Y;
 			SetPos(m_pos);
 			m_State = TIMESTATE_STOP;
+
+			// 背景ui描画起動
+			m_pUi->SetUse(true);
+
 			break;
 		}
 		break;
@@ -287,11 +303,24 @@ void COutSideTaskTimer::UpdateState(void)
 			SetPos(m_pos);
 			m_State = TIMESTATE_NONE;
 			m_isActive = false;
+			m_pUi->SetUse(false);
 
 			// イベントがある かつ プレイヤーがまだ外タスクをしているのなら
-			if (m_event && m_pPlayerOwner->GetIsTaskOutSide() == true)
-				m_event();
+			if (m_event)
+			{
+				if (m_pPlayerOwner->GetIsTaskOutSide() == true)
+				{
+					m_event();
 
+					// ui起動
+					m_pReturnUi->SetUse(true);
+				}
+				else
+				{
+					// 警告ui起動
+					m_pReturnUi->SetUse(false);
+				}
+			}
 			break;
 		}
 		break;

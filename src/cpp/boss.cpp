@@ -25,6 +25,7 @@
 #include "bossstatebase.h"
 #include "bossstateneutral.h"
 #include "camera.h"
+#include "enemymanager.h"
 
 //*********************************************************
 // 定数名前空間
@@ -728,4 +729,12 @@ bool CBoss::CheckObstacle(void)
 	}
 
 	return false; // 障害物なし
+}
+//========================================================
+// 敵のレベルアップ適用処理
+//========================================================
+void CBoss::UpperLevel(void)
+{
+	// 関数起動
+	CEnemyManager::GetInstance()->SetLevleUpper();
 }

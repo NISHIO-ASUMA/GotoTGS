@@ -69,6 +69,7 @@
 #include "gaugeneedle.h"
 #include "fade.h"
 #include "result.h"
+#include "myparticle.h"
 
 //*********************************************************
 // 定数名前空間
@@ -213,7 +214,7 @@ HRESULT CGameSceneObject::Init(void)
 	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
 
-	//// アニメーション再生関数を設定する
+	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 	return S_OK;
 }
@@ -326,7 +327,8 @@ void CGameSceneObject::Update(void)
 	// 
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
 	{
-		// なんかの検証用
+		// パーティクル ( これはレベルアップ、ダウンしたとき敵に付けたりして演出させる )
+		CMyParticle::Create({ 0.0f,60.0f,0.0f }, COLOR_RED, 30, 30, 120, 300);
 	}
 
 	// 

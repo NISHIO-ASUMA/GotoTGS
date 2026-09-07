@@ -25,13 +25,12 @@ public:
 	//****************************
 	// 移動の種類列挙型
 	//****************************
-	enum MOVEMENT
+	enum MOVEMENT_STATE
 	{
-		MOVEMENT_NONE,	// 初期化状態
-		MOVEMENT_START,	// 開始状態
-		MOVEMENT_STOP,	// 停止状態(継続状態)
-		MOVEMENT_END,	// 終了に向かう状態
-		MOVEMENT_MAX
+		MOVEMENT_NONE,
+		MOVEMENT_START, // 中央へ移動中
+		MOVEMENT_STOP,  // 画面内で停止待機中
+		MOVEMENT_END	// 画面外へ退場中
 	};
 
 public:
@@ -43,6 +42,10 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	
+	void SetMoveType(const int nType) { m_Movement = static_cast<MOVEMENT_STATE>(nType); }
+	void SetTypeDir(const int nDirType) { m_nDirType = nDirType; }
+	void SetInterval(const int nInterval) { m_nLifeInterval = nInterval; }
 
 	/// <summary>
 	/// ポインタ生成関数
@@ -53,6 +56,7 @@ public:
 	/// <param name="Filename">テクスチャ名</param>
 	/// <param name="nMaxInterval">最大生存時間</param>
 	/// <param name="nMoveStartSetNumber">初期の移動方向の種類</param>
+	/// <param name="nDirType">方向の種類</param>
 	/// <returns></returns>
 	static CCameraUI* Create
 	(
@@ -61,10 +65,13 @@ public:
 		const float& fHeight,
 		const char* Filename,
 		const int& nMaxInterval,
-		const int& nMoveStartSetNumber
+		const int& nMoveStartSetNumber,
+		const int& nDirType
 	);
 
 private:
-	int m_nLifeInterval;	// 生存時間
-	int m_Movement;			// 移動の種類
+	MOVEMENT_STATE m_Movement;	// アニメーション状態
+	D3DXVECTOR3 m_TargetPos;	// 目標停止座標
+	int m_nLifeInterval;		// 停止待機時間
+	int m_nDirType;				// 移動方向タイプ[0: 下から上へ, 1: 上から下へ]
 };

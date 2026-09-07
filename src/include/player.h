@@ -39,15 +39,15 @@ public:
 	//************************
 	enum MOTION
 	{
-		NEUTRAL,		// 通常
-		MOVE,			// 移動
-		SMOKE,			// 煙草
-		TV,				// テレビ
-		MAGAZINE,		// 雑誌
-		GAME,			// ゲーセン
-		FOOD,			// 飲食
-		BENCH,			// ベンチ
-		DOCUMENT,		// 書類運び
+		NEUTRAL,			// 通常
+		MOVE,				// 移動
+		SMOKE,				// 煙草
+		TV,					// テレビ
+		MAGAZINE,			// 雑誌
+		GAME,				// ゲーセン
+		FOOD,				// 飲食
+		BENCH,				// ベンチ
+		DOCUMENT,			// 書類運び
 		MAX
 	};
 
