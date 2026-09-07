@@ -21,8 +21,12 @@
 #include "titleuimanager.h"
 #include "receptionist.h"
 #include "receptionUI.h"
+<<<<<<< HEAD
+#include "clientmanager.h"
+=======
 #include "pointobject.h"
 #include "outsidetasktimer.h"
+>>>>>>> 7413f8d335a62c194474358996baee41cccc84ab
 
 //=========================================================
 // コンストラクタ
@@ -152,7 +156,7 @@ void COutsideWork::TaskSystem(void)
 	// 受付人UIの情報を取得
 	auto* pReceptionUI = CGameSceneObject::GetInstance()->GetReceptionUI();
 
-	// 矢印を非表示する
-	pReceptionUI->GetPointObject()->SetIsDraw(false);
+	// クライアントを非表示する
+	pReceptionUI->GetClientManager()->ClearClient();
 
 }

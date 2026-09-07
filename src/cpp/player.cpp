@@ -34,10 +34,7 @@
 #include "receptionUI.h"
 #include "receptionlineUI.h"
 #include "pointobject.h"
-#include "outsidetasktimer.h"
-#include "returnofficeui.h"
-#include "auditormanager.h"
-#include "myparticle.h"
+#include "clientmanager.h"
 
 //=========================================================
 // コンストラクタ
@@ -569,14 +566,8 @@ void CPlayer::Update(void)
 						// セリフを表示する
 						pReceptionUI->GetLineUI()->SetDrawFlags(true);
 
-						// 矢印を表示する
-						pReceptionUI->GetPointObject()->SetIsDraw(true);
-
-						// タイマー起動
-						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
-						if (!pTimer) return;
-						pTimer->Start();
-
+						// クライアントを表示する
+						pReceptionUI->GetClientManager()->SetClient();
 					}
 
 					break;

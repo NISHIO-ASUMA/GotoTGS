@@ -68,8 +68,6 @@ HRESULT CTutorialUIManager::Init(void)
 		CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
 		// 書類タスク用チュートリアルUIの生成
 		COutsideUI::Create(TutorialUIManager::DocumentUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
-		// 外出タスク用チュートリアルUIの生成
-		COutsideUI::Create(TutorialUIManager::OutsideUIPos, VECTOR3_NULL, TutorialUIManager::UI_FBUTTON);
 
 	}
 	// ジョイパッド操作
@@ -81,8 +79,6 @@ HRESULT CTutorialUIManager::Init(void)
 		CPcUI::Create(TutorialUIManager::PcUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
 		// 書類タスク用チュートリアルUIの生成
 		COutsideUI::Create(TutorialUIManager::DocumentUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
-		// 外出タスク用チュートリアルUIの生成
-		COutsideUI::Create(TutorialUIManager::OutsideUIPos, VECTOR3_NULL, TutorialUIManager::UI_STARTBUTTON);
 
 	}
 

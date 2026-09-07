@@ -22,7 +22,7 @@
 #include "deskwork.h"
 #include "outsidework.h"
 #include "receptionlineUI.h"
-#include "pointobject.h"
+#include "clientmanager.h"
 
 //=================================================
 // 名前空間
@@ -54,7 +54,8 @@ m_bEasing(false),
 m_bDisplay(false),
 m_bUse(false),
 m_pPlayerOwner(nullptr),
-m_pLineUI(nullptr)
+m_pLineUI(nullptr),
+m_pClientManager(nullptr)
 {
 
 }
@@ -108,13 +109,9 @@ HRESULT CReceptionUI::Init(void)
 	// 非表示にする
 	m_pLineUI->SetDrawFlags(false);
 
-	// クライアントの位置を示す矢印の生成
-	m_pPointObject = CPointObject::Create(D3DXVECTOR3(1245.20f, 130.0f, 461.35f),
-										D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
-										D3DXVECTOR3(HALF, HALF, HALF),
-										"STAGEOBJ/yajirusi.x");
-	// 非表示にする
-	m_pPointObject->SetIsDraw(false);
+	// クライアント管理クラス生成 [髙橋追加]
+	m_pClientManager = CClientManager::GetInstance();
+	m_pClientManager->Init();
 
 	return S_OK;
 }
@@ -128,7 +125,9 @@ void CReceptionUI::Uninit(void)
 
 	// ポインタの破棄
 	m_pLineUI = nullptr;
-	m_pPointObject = nullptr;
+
+	// クライアント管理クラスの終了 [髙橋追加]
+	m_pClientManager->Uninit();
 
 	// 親クラスの終了処理
 	CObject2D::Uninit();
@@ -180,6 +179,9 @@ void CReceptionUI::Update(void)
 
 	// イージング
 	EasingSine();
+
+	// クライアント管理クラスの更新 [髙橋追加]
+	m_pClientManager->Update();
 
 	// 親クラスの更新処理
 	CObject2D::Update();
