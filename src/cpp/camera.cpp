@@ -23,6 +23,7 @@
 #include "sideopendoor.h"
 #include "titleuimanager.h"
 #include "boss.h"
+#include "cameraui.h"
 
 //*********************************************************
 // 定数名前空間宣言
@@ -69,7 +70,7 @@ namespace CATCHINFO
 {
 	const D3DXVECTOR3 InitPosV = { -4.0f,106.0f, 145.0f };		// カメラ初期座標
 	const D3DXVECTOR3 InitPosR = { 0.8f,-143.0f, 620.0f };		// カメラ初期座標
-	const D3DXVECTOR3 InitRot = { VECTOR3_NULL };			// カメラ初期角度
+	const D3DXVECTOR3 InitRot = { VECTOR3_NULL };				// カメラ初期角度
 	const D3DXVECTOR3 InitVecU = { 0.0f, 1.0f, 0.0f };			// 初期ベクトル
 	constexpr float Distance = 540.0f;							// 初期の距離
 }
@@ -123,8 +124,8 @@ HRESULT CCamera::Init(void)
 
 	// 移動フラグ
 	m_currentAnim.AnimData.clear();
-	m_isMove = false;
 	m_isFinishBossMovie = false;
+	m_isMove = false;
 
 	// 操作の種類を設定する (パッドかキーマウかどうか)
 	m_nControlTypes = CTitleuiManager::GetInstance()->GetSelectIdx();
@@ -268,7 +269,6 @@ void CCamera::SetCamera(void)
 
 	// プロジェクションマトリックスの設定
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_pCamera.mtxprojection);
-
 }
 //==============================================================
 // マウス操作の視点移動
@@ -475,11 +475,11 @@ void CCamera::TitleCamera(void)
 //==============================================================
 void CCamera::RankingCamera(void)
 {
-	m_pCamera.posV = RANKINGCAMERAINFO::InitPosV;			// カメラの位置
-	m_pCamera.posR = RANKINGCAMERAINFO::InitPosR;			// カメラの見ている位置
-	m_pCamera.vecU = RANKINGCAMERAINFO::InitVecU;			// 上方向ベクトル
-	m_pCamera.rot = RANKINGCAMERAINFO::InitRot;				// 角度
-	m_pCamera.fDistance = RANKINGCAMERAINFO::Distance;		// 距離
+	m_pCamera.posV = RANKINGCAMERAINFO::InitPosV;		// カメラの位置
+	m_pCamera.posR = RANKINGCAMERAINFO::InitPosR;		// カメラの見ている位置
+	m_pCamera.vecU = RANKINGCAMERAINFO::InitVecU;		// 上方向ベクトル
+	m_pCamera.rot = RANKINGCAMERAINFO::InitRot;			// 角度
+	m_pCamera.fDistance = RANKINGCAMERAINFO::Distance;	// 距離
 }
 //==============================================================
 // カメラから見て透過させる時の当たり判定関数
@@ -873,6 +873,10 @@ HRESULT CCamera::LoadAnimation(const std::string& path)
 		m_currentAnim = tempAnim;
 		m_isAnimating = true;
 		m_pCamera.nMode = CCamera::MODE_ANIM;
+
+		// ui生成
+		CCameraUI::Create({ 640.0f,-20.0f,0.0f }, SCREEN_WIDTH,30.0f, "CameraAnimBox.png", 1260, 1, 1);
+		CCameraUI::Create({ 640.0f,740.0f,0.0f }, SCREEN_WIDTH,30.0f, "CameraAnimBox.png", 1260, 1, 0);
 
 		return S_OK;
 	}

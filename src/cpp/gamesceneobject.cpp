@@ -213,7 +213,7 @@ HRESULT CGameSceneObject::Init(void)
 	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
 
-	//// アニメーション再生関数を設定する
+	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 	return S_OK;
 }
