@@ -15,6 +15,8 @@
 //*********************************************************
 #include <memory>
 #include <vector>
+#include <functional>
+
 #include "enemy.h"
 
 //*********************************************************
@@ -97,6 +99,26 @@ public:
 	CPlayer* GetCharactorPointer(void) const { return m_pDestCharactorPointer; }
 
 	/// <summary>
+	/// イベント関数登録
+	/// </summary>
+	/// <param name="Event"></param>
+	void RegisterManagerEvent(std::function<void(void)> Event)
+	{
+		if (!m_Event)
+			m_Event = Event;
+	}
+
+	/// <summary>
+	/// イベント起動の関数
+	/// </summary>
+	/// <param name=""></param>
+	void LevelEvent(void)
+	{
+		if (m_Event)
+			m_Event();
+	}
+
+	/// <summary>
 	/// シングルトン取得処理
 	/// </summary>
 	/// <param name=""></param>
@@ -117,6 +139,7 @@ private:
 	std::vector<CEnemy*>m_pEnemys;		// 敵の管理配列
 	CGametime* m_pTimeContainer;		// タイムクラスの入れ物
 	CPlayer* m_pDestCharactorPointer;	// 動くキャラクターのクラスの入れ物
+	std::function<void(void)> m_Event;	// 関数イベント
 
 private:
 	int m_nStageCount;		// 敵の増加時間カウント

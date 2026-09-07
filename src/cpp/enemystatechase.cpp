@@ -15,6 +15,7 @@
 //*********************************************************
 #include "enemy.h"
 #include "enemystateneutral.h"
+#include "enemydoubtgauge.h"
 #include "player.h"
 #include "billboard.h"
 
@@ -39,6 +40,9 @@ CEnemyStateChase::~CEnemyStateChase()
 //=========================================================
 void CEnemyStateChase::OnStart(void)
 {
+	// ゲージの描画off
+	m_pEnemy->GetGauge()->SetIsDraw(false);
+
 	// まずレベルを1上げる
 	m_pEnemy->AddLevel(100.0f);
 
@@ -70,7 +74,7 @@ void CEnemyStateChase::OnUpdate(void)
 		// 2秒間経過したらニュートラルへ遷移
 		if (m_nStayCount >= 120)
 		{
-			m_pEnemy->StartChase(false);	// フラグ初期化
+			m_pEnemy->StartChase(false); // フラグ初期化
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
 			return;
 		}

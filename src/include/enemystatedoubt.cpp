@@ -18,13 +18,13 @@
 #include "enemystateneutral.h"
 #include "enemystatechase.h"
 #include "billboard.h"
+#include "enemymanager.h"
 
 //=========================================================
 // コンストラクタ
 //=========================================================
 CEnemyStateDoubt::CEnemyStateDoubt() : CEnemyStateBase(),
-m_nDoubtCount(0),
-m_pGauge(nullptr)
+m_nDoubtCount(0)
 {
 	// IDセット
 	SetID(ID_DOUBT);
@@ -34,29 +34,26 @@ m_pGauge(nullptr)
 //=========================================================
 CEnemyStateDoubt::~CEnemyStateDoubt()
 {
-
+	
 }
 //=========================================================
 // 開始関数
 //=========================================================
 void CEnemyStateDoubt::OnStart(void)
 {
-	// ui生成 ( ？のゲージ )
-	auto CreatePos = D3DXVECTOR3(m_pEnemy->GetPos().x, m_pEnemy->GetPos().y + Config::VALUE_HEIGHT, m_pEnemy->GetPos().z);
-	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE, "hatena.png", "gauge_enemyside.png");
+	// 特になし
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CEnemyStateDoubt::OnUpdate(void)
 {
-	// 頭上のゲージの位置の更新
-	if (m_pGauge && m_pEnemy)
-	{
-		D3DXVECTOR3 headPos = m_pEnemy->GetPos();
-		headPos.y += Config::VALUE_HEIGHT;
-		m_pGauge->SetTargetPos(headPos);
-	}
+	// ゲージチェック
+	CEnemyDoubtGauge* pGauge = m_pEnemy->GetGauge();
+	if (!pGauge) return;
+
+	// フラグ変更
+	pGauge->SetNormal(false);
 
 	// フラグoff
 	const auto& icon = m_pEnemy->GetChaseIcon();
@@ -70,9 +67,9 @@ void CEnemyStateDoubt::OnUpdate(void)
 		m_nDoubtCount++;
 
 		// ui表示(はてなマーク)
-		m_pGauge->SetIsDraw(true);
-		m_pGauge->SetUpGauge(true);
-
+		pGauge->SetIsDraw(true);
+		pGauge->SetUpGauge(true);
+		
 		// 疑いモーションセット
 		m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::DOUBT, true, 3);
 
@@ -82,19 +79,23 @@ void CEnemyStateDoubt::OnUpdate(void)
 	else
 	{
 		// ゲージのクリア
-		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0040f);
+		pGauge->SetUpGauge(false);
+		pGauge->SetRatio(0.0010f);
 
 		// もし完全クリアなら状態を元に戻す
-		if (m_pGauge->GetNormalFlag())
+		if (pGauge->GetNormalFlag())
 		{
+			// 通常状態の設定
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
+
+			// ゲージのクリアを挟む
+			pGauge->SetRatioZero();
 			return;
 		}
 	}
 
 	// もし上限値を超えていたら
-	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && m_pGauge->GetIsComplete())
+	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && pGauge->GetIsComplete())
 	{
 		// 猛追ステートに変更する
 		m_pEnemy->ChangeState(new CEnemyStateChase(), ID_CHASE);
@@ -108,7 +109,4 @@ void CEnemyStateDoubt::OnExit(void)
 {
 	// カウントリセット
 	m_nDoubtCount = 0;
-
-	// uiを破棄する
-	m_pGauge->Uninit();
 }

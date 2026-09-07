@@ -34,6 +34,7 @@
 #include "template.h"
 #include "particle.h"
 #include "camera.h"
+#include "enemydoubtgauge.h"
 #include "enemyutility.h"
 
 //*********************************************************
@@ -69,6 +70,7 @@ m_isTargetChase(false),
 m_isStartChase(false),
 m_pDestCharactor(nullptr),
 m_pChaseIcon(nullptr),
+m_pGauge(nullptr),
 m_nStopTime(NULL),
 m_nTargetIdx(NULL),
 m_fLevelPoint(NULL),
@@ -144,6 +146,10 @@ HRESULT CEnemy::Init(void)
 	m_pChaseIcon = CBillboard::Create(GetPos(),VECTOR3_NULL,20.0f,20.0f,"ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
 
+	// ui生成 ( ?のゲージ )
+	auto CreatePos = D3DXVECTOR3(GetPos().x,GetPos().y + Config::VALUE_HEIGHT,GetPos().z);
+	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE,"hatena.png","gauge_enemyside.png");
+
 	// 初期値を設定
 	m_fMoveSpeed = EnemyInfo::SPEED;
 	m_fEyeAngle = Eyesight::EYE_ANGLE;
@@ -182,6 +188,13 @@ void CEnemy::Update(void)
 		UpdateMotionOnly();
 		return;
 	}
+
+	// 頭上のゲージの位置の更新
+	D3DXVECTOR3 headPos = this->GetPos();
+	headPos.y += Config::VALUE_HEIGHT;
+
+	// ゲージのポイント設定
+	m_pGauge->SetTargetPos(headPos);
 
 	// ステートの更新
 	m_pMachine->Update();
@@ -250,7 +263,7 @@ void CEnemy::ChaseMoving(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= m_fMoveSpeed * 1.2f;
+	moveVec *= m_fMoveSpeed * 1.5f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -845,6 +858,17 @@ void CEnemy::LevelDown(const float fValue)
 {
 	// 値の減算
 	AddLevel(-fValue);
+}
+//========================================================
+// レベルダウンイベント関数
+//========================================================
+void CEnemy::LevelDownEvent(void)
+{
+	// nullチェック
+	if (!m_pGauge) return;
+
+	// 4割くらいの減少
+	m_pGauge->SetRatioTypeEvent(0.4f);
 }
 //========================================================
 // パラメータ更新関数

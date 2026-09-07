@@ -33,7 +33,6 @@ public:
 private:
 
 	int m_nDoubtCount;			// 疑いカウントの上限
-	CEnemyDoubtGauge* m_pGauge;	// 疑いゲージ
 
 private:
 

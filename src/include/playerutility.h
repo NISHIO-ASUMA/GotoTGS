@@ -43,6 +43,7 @@
 #include "afk2dui.h"
 #include "afkbattime.h"
 #include "enemymanager.h"
+#include "enemystatebase.h"
 
 //*********************************************************
 // 基本の情報を保持している名前空間
@@ -57,7 +58,7 @@ namespace player
 	/// 西尾追加
 	/// </summary>
 	constexpr float BoxSize = 50.0f;									  // 矩形サイズ
-	constexpr float SphereSize = 60.0f;									  // 球形サイズ
+	constexpr float SphereSize = 90.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 	constexpr int AFK_COOL_TIME = 1080;									  // 再起動できるクールタイム時間 ( 18秒 )
 	constexpr int DEATH_LIMIT_FRAME = 360;								  // 死亡時間タイマーの上限値

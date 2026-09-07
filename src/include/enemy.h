@@ -14,6 +14,7 @@
 // システムインクルード
 //*********************************************************
 #include <memory>
+#include <functional>
 
 //*********************************************************
 // インクルードファイル
@@ -29,6 +30,7 @@ class CStateMachine;
 class CEnemyStateBase;
 class CPlayer;
 class CBillboard;
+class CEnemyDoubtGauge;
 
 //*********************************************************
 // 敵キャラクタークラスを定義
@@ -108,6 +110,10 @@ public:
 		static constexpr int DIVIDE = 16;					// メッシュの分割数
 		static constexpr int COOL_TIME = 60;				// クールタイム
 		static constexpr int COOL_TIME_DOUBLE = 120;		// 2倍のクールタイム
+
+		static constexpr int MAX_DOUBT_COUNT = 120; // 2秒判定
+		static constexpr float VALUE_HEIGHT = 80.0f;
+		static constexpr float SIZE = 50.0f;
 	};
 
 	//***************************
@@ -128,15 +134,12 @@ public:
 	{
 		static constexpr float MIN_LEVEL = 0.0f;
 		static constexpr float MAX_LEVEL = 5.0f;
-
 		// 速度の最小・最大値
 		static constexpr float MIN_SPEED = 1.0f; 
-		static constexpr float MAX_SPEED = 3.0f;
-
+		static constexpr float MAX_SPEED = 5.0f;
 		// 視界の最小・最大角度
 		static constexpr float MIN_EYE_ANGLE = 70.0f; 
 		static constexpr float MAX_EYE_ANGLE = 110.0f;
-
 		static constexpr int MAX_LEVEL_POINT = 10;			// 最大レベル10
 		static constexpr float LEVELUP_NEED_POINT = 100.0f;	// 1レベル上がるのに必要なポイント数
 	};
@@ -172,7 +175,8 @@ public:
 	void SetEyeAngle(void);
 	void AddLevel(const float fValue);
 	void LevelDown(const float fValue = 0.1f);
-	
+	void LevelDownEvent(void);
+
 	// 各種設定の個別と一括更新
 	void UpdateLevelParameters(void);
 
@@ -185,19 +189,23 @@ public:
 	D3DXVECTOR3 GetPlayerTargetPos(void) const { return m_playerTargetPos; }
 	MOVETYPE GetMoveType(void) const { return m_MoveType; }
 
+	CStateMachine* GetStateMachine(void) const { return m_pMachine; }
 	CPlayer* GetInCharactor(void) const { return m_pDestCharactor; }
 	CBillboard* GetChaseIcon(void) const { return m_pChaseIcon; }
+	CEnemyDoubtGauge* GetGauge(void) const { return m_pGauge; }
 	CSphereCollider* GetSphereCollider(void) override { return m_pSphereColiider.get(); }
 
 private:
 
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+	std::function<void(void)> m_Event;					// 関数イベント
 
 private:
 	CBillboard* m_pChaseIcon;							// 追跡アイコンのビルボード
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	CPlayer* m_pDestCharactor;							// 判定先のキャラクターポインタ
+	CEnemyDoubtGauge* m_pGauge;							// 敵の?ゲージ
 	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
 	MOVETYPE m_MoveType;								// 動きの種類
 
@@ -205,9 +213,13 @@ private:
 	bool m_isCheckPoint;								// ポイントに到着したかどうか
 	bool m_isTargetChase;								// 追跡判定
 	bool m_isStartChase;								// チェイス開始判定フラグ
+
+private:
 	int m_nStopTime;									// 停止しているカウント
 	int m_nTargetIdx;									// 向かう目的地のインデックス
 	int m_nLevel;										// 現在のキャラクターのレベル
+
+private:
 	float m_fLevelPoint;								// 警戒度のレベル値 ( これが変数 )
 	float m_fMoveSpeed;									// 移動速度
 	float m_fEyeAngle;									// 視界の角度の値

@@ -56,6 +56,13 @@ public:
 	/// <param name="fRatio">変更値</param>
 	void SetRatio(const float fRatio);
 
+	/// <summary>
+	/// 割合値の変更
+	/// </summary>
+	/// <param name="fRatio">変更値</param>
+	void SetRatioTypeEvent(const float fRatio);
+
+	void SetRatioZero(void) { m_fRatio = 0.0f; }
 	void SetIsDraw(const bool& isDraw) { m_isDraw = isDraw; }
 	void SetIsComplete(const bool& isDraw) { m_isComplete = isDraw; }
 	void SetUpGauge(const bool& isFlags) { m_isUpGauge = isFlags; }

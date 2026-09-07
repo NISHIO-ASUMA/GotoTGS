@@ -84,6 +84,9 @@ void CEnemyStateNeutral::OnUpdate()
 		m_pEnemy->UpdateMoveViewPoint();	// ’Êí
 		break;
 	}
+
+	// ƒQ[ƒW‚Ì•`‰æoff
+	m_pEnemy->GetGauge()->SetIsDraw(false);
 }
 //=========================================================
 // ó‘ÔI—¹

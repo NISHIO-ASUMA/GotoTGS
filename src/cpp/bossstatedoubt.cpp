@@ -80,7 +80,7 @@ void CBossStateDoubt::OnUpdate(void)
 	{
 		// ゲージのクリア
 		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0040f);
+		m_pGauge->SetRatio(0.0010f);
 
 		// もし完全クリアなら状態を元に戻す
 		if (m_pGauge->GetNormalFlag())

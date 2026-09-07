@@ -13,6 +13,7 @@
 //*********************************************************
 // インクルードファイル
 //*********************************************************
+#include "playerutility.h"
 #include "manager.h"
 #include "boxcollider.h"
 #include "spherecollider.h"
@@ -29,7 +30,6 @@
 #include "debugproc.h"
 #include "outline.h"
 #include "fade.h"
-#include "playerutility.h"
 #include "outsidework.h"
 #include "receptionUI.h"
 #include "receptionlineUI.h"
@@ -1464,7 +1464,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	}
 }
 //=========================================================
-// 付近の敵の警戒度を下げる関数
+// 付近の敵の警戒度を下げる関数 ( 警戒度もうわかんない たぶん認識のすれ違いが起きてる )
 //=========================================================
 void CPlayer::LowerLevelToEnemy(void)
 {
@@ -1487,8 +1487,14 @@ void CPlayer::LowerLevelToEnemy(void)
 			// 敵のレベルポイントを下げ,警戒度によるパラメーターを下げる
 			pEnemy->LevelDown(10.0f);
 
+			// 警戒度ゲージが出ている状態なら
+			if (pEnemy->GetStateMachine()->GetNowStateID() == CEnemyStateBase::ID_DOUBT)
+			{
+				pEnemy->LevelDownEvent();
+			}
+
 			// TODO : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
-			//CMyParticle::Create({ pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
+			//CMyParticle::Create({pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}
 	}
@@ -1539,7 +1545,7 @@ void CPlayer::MathBenchRotation(void)
 {
 	// 元の位置を保存
 	m_posOld = GetPos();
-	D3DXVECTOR3 VectorBench;
+	D3DXVECTOR3 VectorBench = VECTOR3_NULL;
 
 	// 駅のベンチ
 	if (m_bAfkBench[0])

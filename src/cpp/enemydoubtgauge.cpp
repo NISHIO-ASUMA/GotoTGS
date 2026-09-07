@@ -202,3 +202,21 @@ void CEnemyDoubtGauge::SetRatio(const float fRatio)
 		m_isNormalSet = true;
 	}
 }
+//=========================================================
+// 割合値の変更
+//=========================================================
+void CEnemyDoubtGauge::SetRatioTypeEvent(const float fRatio)
+{
+	// フラグ変更
+	m_isComplete = false;
+
+	// 少しずつ減らす
+	m_fRatio -= fRatio;
+
+	// フラグ変更
+	if (m_fRatio <= 0.0f)
+	{
+		m_fRatio = 0.0f;
+		m_isDraw = false;
+	}
+}
