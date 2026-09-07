@@ -35,6 +35,9 @@
 #include "receptionlineUI.h"
 #include "pointobject.h"
 #include "clientmanager.h"
+#include "auditormanager.h"
+#include "outsidetasktimer.h"
+#include "returnofficeui.h"
 
 //=========================================================
 // コンストラクタ
