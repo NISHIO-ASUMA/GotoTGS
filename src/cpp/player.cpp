@@ -37,6 +37,7 @@
 #include "outsidetasktimer.h"
 #include "returnofficeui.h"
 #include "auditormanager.h"
+#include "myparticle.h"
 
 //=========================================================
 // コンストラクタ
@@ -1485,6 +1486,9 @@ void CPlayer::LowerLevelToEnemy(void)
 		{
 			// 敵のレベルポイントを下げ,警戒度によるパラメーターを下げる
 			pEnemy->LevelDown(10.0f);
+
+			// TODO : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
+			//CMyParticle::Create({ pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}
 	}

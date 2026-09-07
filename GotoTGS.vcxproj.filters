@@ -457,6 +457,18 @@
     <Filter Include="ヘッダー ファイル\AddFile\Nishio\Charactor\resultcast">
       <UniqueIdentifier>{af65760b-239a-4e39-80f4-8639067a12f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Effect">
+      <UniqueIdentifier>{32fcea83-c7ea-410b-9a5b-c12ae6d23e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Effect\Nishio">
+      <UniqueIdentifier>{78d05ea9-4166-45ab-aa7e-ad2593055801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Effect">
+      <UniqueIdentifier>{f2c13678-f55d-4e65-bf0c-e62f9845a1c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Effect\Nishio">
+      <UniqueIdentifier>{fe0d8410-4bce-445f-bb22-4c2af8d3b04a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\pch.cpp">
@@ -1076,6 +1088,12 @@
     </ClCompile>
     <ClCompile Include="src\cpp\resultlazycast.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Charactor\resultcast</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\myeffect.cpp">
+      <Filter>ソース ファイル\Effect\Nishio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\myparticle.cpp">
+      <Filter>ソース ファイル\Effect\Nishio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1717,6 +1735,12 @@
     </ClInclude>
     <ClInclude Include="src\include\returnofficeui.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\myeffect.h">
+      <Filter>ヘッダー ファイル\Effect\Nishio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\myparticle.h">
+      <Filter>ヘッダー ファイル\Effect\Nishio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
