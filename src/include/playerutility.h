@@ -50,7 +50,7 @@
 //*********************************************************
 namespace player
 {
-	constexpr float fSpeed = 5.0f;			// プレイヤーの移動スピード
+	constexpr float fSpeed = 8.0f;			// プレイヤーの移動スピード
 	constexpr float fInput = 0.0001f;		// 移動処理に使うキーが入力されてるか比較する用の変数
 	constexpr float fJoyInput = 2000.0f;	// ジョイパッドのスティック入力の値
 
@@ -62,7 +62,7 @@ namespace player
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 	constexpr int AFK_COOL_TIME = 1080;									  // 再起動できるクールタイム時間 ( 18秒 )
 	constexpr int DEATH_LIMIT_FRAME = 360;								  // 死亡時間タイマーの上限値
-	constexpr int TASK_LIMIT_WORKING = 300;								  // 初期の回避時間 ( 8秒間 )
+	constexpr int TASK_LIMIT_WORKING = 250;								  // 初期の回避時間
 	const D3DXVECTOR3 UI_POS_VALUE = { 0.0f,80.0f,0.0f };				  // 頭の上に出すuiの高さ
 	constexpr float SphereSizeToEnemyDown = 90.0f;						  // 上司の下げるサイズ
 };

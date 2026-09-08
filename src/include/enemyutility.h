@@ -55,3 +55,28 @@ namespace TV_AND_EATING
 		{-114.0f,0.0f,231.0f}
 	};
 };
+//*********************************************************
+// 追ってくるウェイポイント配列
+//*********************************************************
+namespace NavInfo
+{
+	// マップ上の角や抜け道に配置したウェイポイント配列
+	const D3DXVECTOR3 WayPoints[] = 
+	{
+		D3DXVECTOR3(-130.0f, 0.0f,222.0f),
+		D3DXVECTOR3(-285.0f, 0.0f,222.0f),
+		D3DXVECTOR3(-98.0f, 0.0f,-2.0f),
+		D3DXVECTOR3(-233.0f, 0.0f,32.0f),
+		D3DXVECTOR3(-218.0f, 0.0f,-155.0f),
+		D3DXVECTOR3(78.0f, 0.0f,128.0f),
+		D3DXVECTOR3(95.0f, 0.0f,22.0f),
+		D3DXVECTOR3(118.0f, 0.0f,218.0f),
+		D3DXVECTOR3(258.0f, 0.0f,177.0f),
+		D3DXVECTOR3(405.0f, 0.0f,88.0f),
+		D3DXVECTOR3(274.0f, 0.0f,25.0f),
+		D3DXVECTOR3(258.0f, 0.0f,356.0f),
+	};
+
+	// 最大個数を設定
+	const int POINT_MAX = sizeof(WayPoints) / sizeof(WayPoints[0]);
+}

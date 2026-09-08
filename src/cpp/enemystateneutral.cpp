@@ -45,7 +45,7 @@ void CEnemyStateNeutral::OnStart()
 	m_pEnemy->GetMotion()->SetMotion(CEnemy::MOTION::NEUTRAL, true,3);
 }
 //=========================================================
-// 状態更新
+// 状態更新 ( 基本はここで更新している )
 //=========================================================
 void CEnemyStateNeutral::OnUpdate()
 {

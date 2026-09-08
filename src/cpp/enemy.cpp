@@ -3,6 +3,8 @@
 // 敵の処理 [ enemy.cpp ]
 // Author: Asuma Nishio
 // 
+// NOTE : だめだ ブロック貫通するわ 避けれへん 判定作っても
+// 
 //========================================================
 
 //*********************************************************
@@ -76,6 +78,7 @@ m_nTargetIdx(NULL),
 m_fLevelPoint(NULL),
 m_fEyeAngle(NULL),
 m_fMoveSpeed(NULL),
+m_nCurrentWayPointIdx(-1),
 m_playerTargetPos(VECTOR3_NULL)
 {
 
@@ -196,16 +199,51 @@ void CEnemy::Update(void)
 	// ゲージのポイント設定
 	m_pGauge->SetTargetPos(headPos);
 
-	// ステートの更新
+	// ステートマシンの更新
 	m_pMachine->Update();
 
 	// キャラクター座標更新
 	CMoveCharactor::UpdatePosition();
 
+	// 更新取得
+	auto UpdatePos = GetPos();
+
 	// 球形コライダー更新
 	if (m_pSphereColiider) 
 		m_pSphereColiider->SetPos(GetPos());
 
+#if 0
+	// 矩形コライダー更新
+	if (m_pBoxColiider)
+	{
+		m_pBoxColiider->SetPosOld(GetOldPos());
+		m_pBoxColiider->SetPos(UpdatePos);
+	}
+
+	// マップ内の当たり判定
+	const auto& BlockManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
+	if (!BlockManager) return;
+
+	for (int nCnt = 0; nCnt < BlockManager->GetAll(); nCnt++)
+	{
+		auto IdxBlock = BlockManager->GetBlock(nCnt);
+		if (!IdxBlock) continue;
+
+		// コライダー取得
+		CBoxCollider* Collider = IdxBlock->GetCollider();
+		if (!Collider) continue;
+
+		if (Collision(Collider, &UpdatePos))
+		{
+			// 現在座標をセット
+			SetPos(UpdatePos);
+
+			// コライダー更新
+			m_pBoxColiider->SetPos(UpdatePos);
+			m_pBoxColiider->SetPosOld(UpdatePos);
+		}
+	}
+#endif
 	// キャラクター全体更新
 	CMoveCharactor::Update();
 }
@@ -225,10 +263,11 @@ void CEnemy::Draw(void)
 	DrawEyeSight();
 }
 //========================================================
-// 対象を追いかける関数
+// 対象を追いかける関数 
 //========================================================
 void CEnemy::ChaseMoving(void)
 {
+#if 1
 	// 現在の座標とターゲットの座標を取得
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
@@ -280,6 +319,59 @@ void CEnemy::ChaseMoving(void)
 
 	// 目標角度をセット
 	SetRotDest(rotDest);
+
+#else
+	// アイコン表示
+	if (!m_pChaseIcon->GetIsDrawFlags())
+		m_pChaseIcon->SetDrawFlags(true);
+
+	D3DXVECTOR3 pos = GetPos();
+	m_pChaseIcon->SetPos(D3DXVECTOR3(pos.x, pos.y + 80.0f, pos.z));
+
+	// 捕獲判定
+	if (CheckEyesight())
+	{
+		m_pDestCharactor->SetCatchEnemy(true);
+		GetMotion()->SetMotion(MOTION::CATCH, true, 3);
+		return;
+	}
+
+	D3DXVECTOR3 playerPos = m_pDestCharactor->GetPos();
+
+	// 壁で遮られている場合はウェイポイント経由で追う
+	const D3DXVECTOR3* pWayPoints = NavInfo::WayPoints;
+	int pointMax = NavInfo::POINT_MAX;
+
+	// 現在目標にしているポイント
+	D3DXVECTOR3 targetPos = pWayPoints[m_nTargetIdx];
+
+	D3DXVECTOR3 vecToTarget = targetPos - pos;
+	vecToTarget.y = 0.0f;
+	float distance = D3DXVec3Length(&vecToTarget);
+
+	// ポイントへの到着判定
+	if (distance <= EnemyInfo::RANGE)
+	{
+		SetPos(D3DXVECTOR3(targetPos.x, pos.y, targetPos.z));
+
+		// 今のポイントを除外して次の最適なポイントを探す
+		m_nTargetIdx = GetBestWayPointToPlayer(pWayPoints, pointMax, m_nTargetIdx);
+		return;
+	}
+
+	// ポイントへ向かって移動
+	D3DXVECTOR3 moveVec;
+	D3DXVec3Normalize(&moveVec, &vecToTarget);
+	moveVec *= (m_fMoveSpeed * 1.5f);
+	SetMove(moveVec);
+
+	GetMotion()->SetMotion(MOTION::CHASEDASH, true, 2);
+
+	float angleY = atan2(-moveVec.x, -moveVec.z);
+	D3DXVECTOR3 rotDest = GetRotDest();
+	rotDest.y = NormalAngle(angleY);
+	SetRotDest(rotDest);
+#endif
 }
 //========================================================
 // 通常ビューポイント追従処理
@@ -710,65 +802,85 @@ bool CEnemy::CheckRayToAngleRange(void)
 	return true;
 }
 //========================================================
-// 判別する際に障害物が存在しているかどうか
+// オブジェクト間判定
 //========================================================
-bool CEnemy::CheckObstacle(void)
+bool CEnemy::CheckObstacleBetween(const D3DXVECTOR3& startPos, const D3DXVECTOR3& endPos)
 {
-	// ブロック管理クラスの取得
 	CBlockManager* pManager = CManager::GetInstance()->GetJsonManager()->GetBlockManager();
 	if (!pManager) return false;
 
-	// 始点と終点
-	D3DXVECTOR3 rayStart = GetPos();
-	D3DXVECTOR3 rayEnd = m_pDestCharactor->GetPos();
-
 	// 目線の高さ補正
+	D3DXVECTOR3 rayStart = startPos;
+	D3DXVECTOR3 rayEnd = endPos;
 	rayStart.y += 20.0f;
 	rayEnd.y += 20.0f;
 
-	// レイの方向ベクトルと距離を計算
-	D3DXVECTOR3 rayDir = rayEnd - rayStart;
-	float maxDistance = D3DXVec3Length(&rayDir);
+	// ワールド空間でのレイのベクトルと距離
+	D3DXVECTOR3 rayVec = rayEnd - rayStart;
+	float maxDistance = D3DXVec3Length(&rayVec);
 	if (maxDistance <= 0.0001f) return false;
 
-	// 正規化
-	D3DXVec3Normalize(&rayDir, &rayDir);
-
-	// 登録されている全ブロックとの衝突確認
 	int blockCount = pManager->GetAll();
 	for (int nCnt = 0; nCnt < blockCount; nCnt++)
 	{
-		// 単ブロックを取得
 		CBlock* pBlock = pManager->GetBlock(nCnt);
 		if (!pBlock) continue;
 
-		// CBlockからコライダーを取得
-		auto* pBoxCollider = pBlock->GetCollider();
-		if (!pBoxCollider) continue;
-
-		// ブロックのAABB座標範囲を取得
+		//----------------------------------------------------
+		// ブロックの変換行列（位置・回転）を取得して逆行列を作成
+		//----------------------------------------------------
 		D3DXVECTOR3 bPos = pBlock->GetPos();
+		D3DXVECTOR3 bRot = pBlock->GetRot();
+
+		D3DXMATRIX matWorld, matInvWorld;
+		D3DXMATRIX matTrans, matRot;
+
+		D3DXMatrixTranslation(&matTrans, bPos.x, bPos.y, bPos.z);
+		D3DXMatrixRotationYawPitchRoll(&matRot, bRot.y, bRot.x, bRot.z);
+		matWorld = matRot * matTrans; 
+
+		// 逆行列を作成
+		D3DXMatrixInverse(&matInvWorld, nullptr, &matWorld);
+
+		//----------------------------------------------------
+		// レイをブロックのローカル空間に変換
+		//----------------------------------------------------
+		D3DXVECTOR3 localStart, localEnd;
+		D3DXVec3TransformCoord(&localStart, &rayStart, &matInvWorld);
+		D3DXVec3TransformCoord(&localEnd, &rayEnd, &matInvWorld);
+
+		D3DXVECTOR3 localRayDir = localEnd - localStart;
+		float localMaxDist = D3DXVec3Length(&localRayDir);
+		if (localMaxDist <= 0.0001f) continue;
+
+		D3DXVec3Normalize(&localRayDir, &localRayDir);
+
+		// ローカル空間での箱のサイズ
 		D3DXVECTOR3 bScale = pBlock->GetScale();
+		D3DXVECTOR3 minBound = -bScale * 0.5f;
+		D3DXVECTOR3 maxBound = bScale * 0.5f;
 
-		D3DXVECTOR3 minBound = bPos - (bScale * 0.5f);
-		D3DXVECTOR3 maxBound = bPos + (bScale * 0.5f);
+		//----------------------------------------------------
+		// ローカル空間でスラブ法（レイ vs AABB）判定
+		//----------------------------------------------------
+		float startArr[3] = { localStart.x, localStart.y, localStart.z };
+		float dirArr[3] = { localRayDir.x, localRayDir.y, localRayDir.z };
+		float minArr[3] = { minBound.x, minBound.y, minBound.z };
+		float maxArr[3] = { maxBound.x, maxBound.y, maxBound.z };
 
-		// 線分の交差判定
 		float tMin = 0.0f;
-		float tMax = maxDistance;
-
+		float tMax = localMaxDist;
 		bool hit = true;
 
 		for (int axis = 0; axis < 3; ++axis)
 		{
-			float origin = ((float*)&rayStart)[axis];
-			float dir = ((float*)&rayDir)[axis];
-			float bMin = ((float*)&minBound)[axis];
-			float bMax = ((float*)&maxBound)[axis];
+			float origin = startArr[axis];
+			float dir = dirArr[axis];
+			float bMin = minArr[axis];
+			float bMax = maxArr[axis];
 
 			if (fabsf(dir) < 0.00001f)
 			{
-				// レイがこの軸と平行な場合、軸上の範囲外にあれば衝突しない
 				if (origin < bMin || origin > bMax)
 				{
 					hit = false;
@@ -794,14 +906,23 @@ bool CEnemy::CheckObstacle(void)
 			}
 		}
 
-		// 障害物が存在する
 		if (hit)
 		{
-			return true; // 障害物あり
+			return true; // 回転したブロックに衝突している
 		}
 	}
 
 	return false; // 障害物なし
+}
+//========================================================
+// 判別する際に障害物が存在しているかどうか
+//========================================================
+bool CEnemy::CheckObstacle(void)
+{
+	if (!m_pDestCharactor) return false;
+
+	// 関数で判別結果を見る
+	return CheckObstacleBetween(GetPos(), m_pDestCharactor->GetPos());
 }
 //========================================================
 // 矩形コリジョン判定
@@ -868,7 +989,7 @@ void CEnemy::LevelDownEvent(void)
 	if (!m_pGauge) return;
 
 	// 4割くらいの減少
-	m_pGauge->SetRatioTypeEvent(0.4f);
+	m_pGauge->SetRatioTypeEvent(0.35f);
 }
 //========================================================
 // パラメータ更新関数
@@ -900,4 +1021,138 @@ void CEnemy::SetEyeAngle(void)
 
 	// 線形補完計算
 	m_fEyeAngle = Lerp(LevelConfig::MIN_EYE_ANGLE, LevelConfig::MAX_EYE_ANGLE, rate);
+}
+//=========================================================
+// 自身から最も近いウェイポイントのインデックスを取得
+//=========================================================
+int CEnemy::GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount)
+{
+	if (!pPoints || maxCount <= 0) return 0;
+
+	D3DXVECTOR3 myPos = GetPos();
+	float minDistanceSq = 100.0f;
+	int nearestIdx = 0;
+
+	for (int i = 0; i < maxCount; ++i)
+	{
+		D3DXVECTOR3 diff = pPoints[i] - myPos;
+		diff.y = 0.0f;
+
+		float distSq = D3DXVec3LengthSq(&diff);
+		if (distSq < minDistanceSq)
+		{
+			minDistanceSq = distSq;
+			nearestIdx = i;
+		}
+	}
+
+	return nearestIdx;
+}
+//========================================================
+// 一番近いインデックスを自動セットする
+//========================================================
+void CEnemy::ResetTargetIdxToNearestByMoveType(void)
+{
+	const D3DXVECTOR3* pPoints = nullptr;
+	int pointMax = 0;
+
+	// MoveTypeに応じて参照する配列と要素数を切り替える
+	switch (GetMoveType())
+	{
+	case MOVETYPE_NORMAL:
+		pPoints = EnemyInfo::ViewPoint;
+		pointMax = EnemyInfo::VIEWPOINT;
+		break;
+
+	case MOVETYPE_SMOKE:
+		pPoints = SMOKE_AND_MAGAZINE::ViewPoint;
+		pointMax = SMOKE_AND_MAGAZINE::ALL_POINT;
+		break;
+
+	case MOVETYPE_TV:
+		pPoints = TV_AND_EATING::ViewPoint;
+		pointMax = TV_AND_EATING::ALL_POINT;
+		break;
+
+	default:
+		pPoints = EnemyInfo::ViewPoint;
+		pointMax = EnemyInfo::VIEWPOINT;
+		break;
+	}
+
+	// 一番近いインデックスを取得してセット
+	int nearestIdx = GetNearestWayPointIndex(pPoints, pointMax);
+	SetTargetIdx(nearestIdx);
+}
+//========================================================
+// 障害物を回避しつつ、プレイヤーに最も近いポイントを探す
+//========================================================
+int CEnemy::GetBestWayPointToPlayer(const D3DXVECTOR3* pPoints, int maxCount, int currentIdx)
+{
+	if (!pPoints || maxCount <= 0 || !m_pDestCharactor) return 0;
+
+	D3DXVECTOR3 myPos = GetPos();
+	D3DXVECTOR3 playerPos = m_pDestCharactor->GetPos();
+
+	float bestDistanceSq = 99999999.0f;
+	float bestEnemyDistSq = 99999999.0f;
+	int bestIdx = -1;
+
+	for (int i = 0; i < maxCount; ++i)
+	{
+		// 今到着したポイントは候補から外す
+		if (i == currentIdx) continue;
+
+		D3DXVECTOR3 ptPos = pPoints[i];
+
+		// 自分からそのポイントまでの間に壁が無いかチェック
+		if (!CheckObstacleBetween(myPos, ptPos))
+		{
+			// そのポイントからプレイヤーまでの距離を計算
+			D3DXVECTOR3 diffP = playerPos - ptPos;
+			diffP.y = 0.0f;
+			float distToPlayerSq = D3DXVec3LengthSq(&diffP);
+
+			// 敵からそのポイントまでの距離を計算
+			D3DXVECTOR3 diffE = myPos - ptPos;
+			diffE.y = 0.0f;
+			float distToEnemySq = D3DXVec3LengthSq(&diffE);
+
+			if (distToPlayerSq < bestDistanceSq - 0.01f)
+			{
+				bestDistanceSq = distToPlayerSq;
+				bestEnemyDistSq = distToEnemySq;
+				bestIdx = i;
+			}
+			else if (fabsf(distToPlayerSq - bestDistanceSq) <= 0.01f)
+			{
+				if (distToEnemySq < bestEnemyDistSq)
+				{
+					bestDistanceSq = distToPlayerSq;
+					bestEnemyDistSq = distToEnemySq;
+					bestIdx = i;
+				}
+			}
+		}
+	}
+
+	if (bestIdx == -1)
+	{
+		// 今いるポイント以外で一番近い場所
+		float minDistSq = 99999999.0f;
+		for (int i = 0; i < maxCount; ++i)
+		{
+			if (i == currentIdx) continue;
+			D3DXVECTOR3 diff = pPoints[i] - myPos;
+			diff.y = 0.0f;
+			float distSq = D3DXVec3LengthSq(&diff);
+			if (distSq < minDistSq)
+			{
+				minDistSq = distSq;
+				bestIdx = i;
+			}
+		}
+	}
+
+	return (bestIdx != -1) ? bestIdx : 0;
 }

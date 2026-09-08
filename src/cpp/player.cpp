@@ -135,10 +135,9 @@ HRESULT CPlayer::Init(void)
 	// 初期ステートをセット
 	ChangeState(new CPlayerStateNeutral(), CPlayerStateBase::ID_NEUTRAL);
 
+	// 回転生成
 	D3DXMATRIX matRot;
-	D3DXVECTOR3 rot = GetRot(); // オブジェクトの回転角度を取得
-
-	// X, Y, Zの回転を合成して回転行列を作成
+	D3DXVECTOR3 rot = GetRot();
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
 
 	// ボックスコライダーの生成
@@ -606,9 +605,7 @@ void CPlayer::Update(void)
 						// タスクを起動する
 						pDesk->SetTaskType(CWorldUICollision::TYPE(Colliders->nType), true);
 					}
-
 					break;
-
 				}
 
 				// タスク起動したら抜ける
@@ -1502,10 +1499,11 @@ void CPlayer::LowerLevelToEnemy(void)
 			// 警戒度ゲージが出ている状態なら
 			if (pEnemy->GetStateMachine()->GetNowStateID() == CEnemyStateBase::ID_DOUBT)
 			{
+				// ゲージの減少をする
 				pEnemy->LevelDownEvent();
 			}
 
-			// TODO : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
+			// TODO 西尾 : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
 			//CMyParticle::Create({pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}

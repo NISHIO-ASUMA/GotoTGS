@@ -18,6 +18,7 @@
 #include "enemydoubtgauge.h"
 #include "player.h"
 #include "billboard.h"
+#include "enemyutility.h"
 
 //=========================================================
 // コンストラクタ
@@ -49,6 +50,9 @@ void CEnemyStateChase::OnStart(void)
 	// 追跡状態にする
 	m_pEnemy->StartChase(true);
 
+	// 探査変更
+	m_pEnemy->ResetTargetIdxToNearestByMoveType();
+
 	m_nStayCount = 0;
 	m_isDoubt = false;
 }
@@ -75,6 +79,11 @@ void CEnemyStateChase::OnUpdate(void)
 		if (m_nStayCount >= 120)
 		{
 			m_pEnemy->StartChase(false); // フラグ初期化
+
+			// 探査変更
+			m_pEnemy->ResetTargetIdxToNearestByMoveType();
+
+			// ステート変更
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
 			return;
 		}

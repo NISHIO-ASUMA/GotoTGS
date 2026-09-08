@@ -77,10 +77,15 @@ public:
 	void ChaseMoving(void);
 	void SetTargetChaseFlag(const bool& targetflag) { m_isTargetChase = targetflag; }
 	void StartChase(const bool isStartflag) { m_isStartChase = isStartflag; }
+	void ResetTargetIdxToNearestByMoveType(void);
+
 	bool CheckEyesight(void);
 	bool CheckRayToAngleRange(void);
 	bool CheckObstacle(void);
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
+	bool CheckObstacleBetween(const D3DXVECTOR3& startPos, const D3DXVECTOR3& endPos);
+	int GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount);
+	int GetBestWayPointToPlayer(const D3DXVECTOR3* pPoints, int maxCount, int currentIdx);
 
 	/// <summary>
 	/// 生成処理
@@ -218,6 +223,7 @@ private:
 	int m_nStopTime;									// 停止しているカウント
 	int m_nTargetIdx;									// 向かう目的地のインデックス
 	int m_nLevel;										// 現在のキャラクターのレベル
+	int m_nCurrentWayPointIdx;							// 現在目指しているウェイポイントのインデックス (-1 はプレイヤーへ直進)
 
 private:
 	float m_fLevelPoint;								// 警戒度のレベル値 ( これが変数 )
