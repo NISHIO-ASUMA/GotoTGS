@@ -24,6 +24,7 @@
 #include "tutoriallines.h"
 #include "particle.h"
 #include "receptionist.h"
+#include "sound.h"
 
 //*********************************************************
 // 名前空間(パーティクル)
@@ -155,7 +156,6 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 	{
 		// チュートリアルを進める
 		CTutorialObject::GetInstance()->GetTutoriallines()->SetNextTutorial();
-
 		return;
 	}
 
@@ -174,6 +174,9 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
+
+		// サウンド再生
+		CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);
 
 		// 受付人に持たせる
 		CReceptionist* pReception = CGameSceneObject::GetInstance()->GetReception();

@@ -38,6 +38,7 @@
 #include "auditormanager.h"
 #include "outsidetasktimer.h"
 #include "returnofficeui.h"
+#include "sound.h"
 
 //=========================================================
 // コンストラクタ
@@ -577,6 +578,12 @@ void CPlayer::Update(void)
 
 						// クライアントを表示する
 						pReceptionUI->GetClientManager()->SetClient();
+
+						// タスクの時間起動
+						CGameSceneObject::GetInstance()->GetOutSideTime()->Start();
+
+						// サウンド再生
+						CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_STARTOUTSIDE_SE);
 					}
 
 					break;

@@ -50,7 +50,7 @@
 //*********************************************************
 namespace player
 {
-	constexpr float fSpeed = 8.0f;			// プレイヤーの移動スピード
+	constexpr float fSpeed = 5.0f;			// プレイヤーの移動スピード
 	constexpr float fInput = 0.0001f;		// 移動処理に使うキーが入力されてるか比較する用の変数
 	constexpr float fJoyInput = 2000.0f;	// ジョイパッドのスティック入力の値
 

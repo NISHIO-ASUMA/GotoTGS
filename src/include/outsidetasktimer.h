@@ -66,12 +66,12 @@ public:
 	/// <param name="Event"></param>
 	void RegisterEvent(std::function<void(void)> Event) { m_event = Event; }
 
-	CReturnOfficeUi* GetReturnUi(void) { return m_pReturnUi; }
-
 	inline void SetActiveFlag(bool isFlags) { m_isActive = isFlags; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetWidth(const float& fWidth) { m_fWidth = fWidth; }
 	inline void SetHeight(const float& fHeight) { m_fHeight = fHeight; }
+
+	CReturnOfficeUi* GetReturnUi(void) { return m_pReturnUi; }
 
 	/// <summary>
 	/// ê∂ê¨èàóù
