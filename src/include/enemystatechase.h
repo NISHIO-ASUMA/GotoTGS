@@ -32,5 +32,8 @@ public:
 private:
 
 	int m_nStayCount;	// 停止中のカウント
-	bool m_isDoubt;	// 疑い状態かどうか
+	bool m_isDoubt;		// 疑い状態かどうか
+
+private:
+	static constexpr int MAX_COUNT = 180;	// 最大カウント数
 };

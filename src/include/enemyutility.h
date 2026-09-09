@@ -56,25 +56,56 @@ namespace TV_AND_EATING
 	};
 };
 //*********************************************************
-// 追ってくるウェイポイント配列
+// 追ってくるウェイポイント配列 ( たくさん置く )
 //*********************************************************
 namespace NavInfo
 {
-	// マップ上の角や抜け道に配置したウェイポイント配列
+	// マップ上のに配置したウェイポイント配列
 	const D3DXVECTOR3 WayPoints[] = 
 	{
-		D3DXVECTOR3(-130.0f, 0.0f,222.0f),
-		D3DXVECTOR3(-285.0f, 0.0f,222.0f),
-		D3DXVECTOR3(-98.0f, 0.0f,-2.0f),
-		D3DXVECTOR3(-233.0f, 0.0f,32.0f),
-		D3DXVECTOR3(-218.0f, 0.0f,-155.0f),
-		D3DXVECTOR3(78.0f, 0.0f,128.0f),
-		D3DXVECTOR3(95.0f, 0.0f,22.0f),
-		D3DXVECTOR3(118.0f, 0.0f,218.0f),
-		D3DXVECTOR3(258.0f, 0.0f,177.0f),
-		D3DXVECTOR3(405.0f, 0.0f,88.0f),
-		D3DXVECTOR3(274.0f, 0.0f,25.0f),
-		D3DXVECTOR3(258.0f, 0.0f,356.0f),
+		D3DXVECTOR3(-126.0f, 0.0f,237.0f),
+		D3DXVECTOR3(-124.0f, 0.0f,167.0f),
+		D3DXVECTOR3(-210.0f, 0.0f,225.0f),
+		D3DXVECTOR3(-225.0f, 0.0f,225.0f),
+		D3DXVECTOR3(-192.0f, 0.0f,311.0f),
+		D3DXVECTOR3(-297.0f, 0.0f,323.0f),
+		D3DXVECTOR3(-122.0f, 0.0f,82.0f),
+		D3DXVECTOR3(-227.0f, 0.0f,80.0f),
+		D3DXVECTOR3(-225.0f, 0.0f,4.5f),
+		D3DXVECTOR3(-222.0f, 0.0f,-105.0f),
+		D3DXVECTOR3(-222.0f, 0.0f,-170.0f),
+		D3DXVECTOR3(-85.0f, 0.0f,-155.0f),
+		D3DXVECTOR3(-213.0f, 0.0f,-110.0f),
+		D3DXVECTOR3(-90.0f, 0.0f,-45.0f),
+		D3DXVECTOR3(-15.0f, 0.0f,40.0f),
+		D3DXVECTOR3(74.0f, 0.0f,40.0f),
+		D3DXVECTOR3(74.0f, 0.0f,-50.0f),
+		D3DXVECTOR3(77.0f, 0.0f,-135.0f),
+		D3DXVECTOR3(-7.0f, 0.0f,-152.0f),
+		D3DXVECTOR3(74.0f, 0.0f,130.0f),
+		D3DXVECTOR3(72.0f, 0.0f,235.0f),
+		D3DXVECTOR3(-2.5f, 0.0f,230.0f),
+		D3DXVECTOR3(-88.0f, 0.0f,345.0f),
+		D3DXVECTOR3(142.0f, 0.0f,277.0f),
+		D3DXVECTOR3(152.0f, 0.0f,132.0f),
+		D3DXVECTOR3(134.0f, 0.0f,51.0f),
+		D3DXVECTOR3(265.0f, 0.0f,170.0f),
+		D3DXVECTOR3(260.0f, 0.0f,260.0f),
+		D3DXVECTOR3(273.0f, 0.0f,351.0f),
+		D3DXVECTOR3(345.0f, 0.0f,174.0f),
+		D3DXVECTOR3(421.0f, 0.0f,100.0f),
+		D3DXVECTOR3(421.0f, 0.0f,153.0f),
+		D3DXVECTOR3(405.0f, 0.0f,44.0f),
+		D3DXVECTOR3(330.0f, 0.0f,30.0f),
+		D3DXVECTOR3(255.0f, 0.0f,30.0f),
+		D3DXVECTOR3(185.0f, 0.0f,25.0f),
+		D3DXVECTOR3(168.0f, 0.0f,-75.0f),
+		D3DXVECTOR3(109.0f, 0.0f,110.0f),
+		D3DXVECTOR3(90.0f, 0.0f,-65.0f),
+		D3DXVECTOR3(-140.0f, 0.0f,-90.0f),
+		D3DXVECTOR3(-18.0f, 0.0f,-153.0f),
+		D3DXVECTOR3(-80.0f, 0.0f,25.0f),
+		D3DXVECTOR3(88.0f, 0.0f,315.0f),
 	};
 
 	// 最大個数を設定

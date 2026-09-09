@@ -267,7 +267,7 @@ void CEnemy::Draw(void)
 //========================================================
 void CEnemy::ChaseMoving(void)
 {
-#if 1
+#if 0
 	// 現在の座標とターゲットの座標を取得
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 targetPos = m_pDestCharactor->GetPos();
@@ -336,37 +336,42 @@ void CEnemy::ChaseMoving(void)
 		return;
 	}
 
-	D3DXVECTOR3 playerPos = m_pDestCharactor->GetPos();
-
-	// 壁で遮られている場合はウェイポイント経由で追う
+	// 追跡用ウェイポイント配列
 	const D3DXVECTOR3* pWayPoints = NavInfo::WayPoints;
 	int pointMax = NavInfo::POINT_MAX;
 
-	// 現在目標にしているポイント
+	// 現在目標にしているポイントの座標
 	D3DXVECTOR3 targetPos = pWayPoints[m_nTargetIdx];
 
 	D3DXVECTOR3 vecToTarget = targetPos - pos;
 	vecToTarget.y = 0.0f;
 	float distance = D3DXVec3Length(&vecToTarget);
 
+	//----------------------------------------------------
 	// ポイントへの到着判定
+	//----------------------------------------------------
 	if (distance <= EnemyInfo::RANGE)
 	{
+		// 座標補正
 		SetPos(D3DXVECTOR3(targetPos.x, pos.y, targetPos.z));
 
-		// 今のポイントを除外して次の最適なポイントを探す
+		// 最適ポイントを探してセット
 		m_nTargetIdx = GetBestWayPointToPlayer(pWayPoints, pointMax, m_nTargetIdx);
 		return;
 	}
 
-	// ポイントへ向かって移動
+	//----------------------------------------------------
+	// 目標ポイントへ向かって移動
+	//----------------------------------------------------
 	D3DXVECTOR3 moveVec;
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
-	moveVec *= (m_fMoveSpeed * 1.5f);
+	moveVec *= (m_fMoveSpeed * 1.8f);
 	SetMove(moveVec);
 
+	// モーション設定
 	GetMotion()->SetMotion(MOTION::CHASEDASH, true, 2);
 
+	// 向きの回転計算
 	float angleY = atan2(-moveVec.x, -moveVec.z);
 	D3DXVECTOR3 rotDest = GetRotDest();
 	rotDest.y = NormalAngle(angleY);
@@ -1023,19 +1028,18 @@ void CEnemy::SetEyeAngle(void)
 	m_fEyeAngle = Lerp(LevelConfig::MIN_EYE_ANGLE, LevelConfig::MAX_EYE_ANGLE, rate);
 }
 //=========================================================
-// 自身から最も近いウェイポイントのインデックスを取得
+// 自身から最も近いウェイポイントのインデックスを取得 ( 変更案件 )
 //=========================================================
-int CEnemy::GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount)
+int CEnemy::GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount, const D3DXVECTOR3& targetPos)
 {
 	if (!pPoints || maxCount <= 0) return 0;
 
-	D3DXVECTOR3 myPos = GetPos();
-	float minDistanceSq = 100.0f;
+	float minDistanceSq = 99999999.0f;
 	int nearestIdx = 0;
 
 	for (int i = 0; i < maxCount; ++i)
 	{
-		D3DXVECTOR3 diff = pPoints[i] - myPos;
+		D3DXVECTOR3 diff = pPoints[i] - targetPos;
 		diff.y = 0.0f;
 
 		float distSq = D3DXVec3LengthSq(&diff);
@@ -1081,11 +1085,11 @@ void CEnemy::ResetTargetIdxToNearestByMoveType(void)
 	}
 
 	// 一番近いインデックスを取得してセット
-	int nearestIdx = GetNearestWayPointIndex(pPoints, pointMax);
+	int nearestIdx = GetNearestWayPointIndex(pPoints, pointMax,GetPos());
 	SetTargetIdx(nearestIdx);
 }
 //========================================================
-// 障害物を回避しつつ、プレイヤーに最も近いポイントを探す
+// 障害物を回避しつつ、プレイヤーに最も近いポイントを探す ( 変更案件 )
 //========================================================
 int CEnemy::GetBestWayPointToPlayer(const D3DXVECTOR3* pPoints, int maxCount, int currentIdx)
 {
@@ -1094,65 +1098,99 @@ int CEnemy::GetBestWayPointToPlayer(const D3DXVECTOR3* pPoints, int maxCount, in
 	D3DXVECTOR3 myPos = GetPos();
 	D3DXVECTOR3 playerPos = m_pDestCharactor->GetPos();
 
-	float bestDistanceSq = 99999999.0f;
-	float bestEnemyDistSq = 99999999.0f;
+	// 1. 【プレイヤーに一番近いポイント（最終目的地）を取得】
+	int playerTargetIdx = GetNearestWayPointIndex(pPoints, maxCount, playerPos);
+	D3DXVECTOR3 playerTargetPos = pPoints[playerTargetIdx];
+
+	// 敵から「プレイヤーの最終ポイント」までの距離
+	D3DXVECTOR3 diffToPlayerPt = playerTargetPos - myPos;
+	diffToPlayerPt.y = 0.0f;
+	float distToPlayerPtSq = D3DXVec3LengthSq(&diffToPlayerPt);
+
+	// ★修正: 到達判定の閾値（ EnemyInfo::RANGE 等の実際の到着半径（例: 20.0f）に合わせる）
+	float arrivalThresholdSq = EnemyInfo::RANGE * EnemyInfo::RANGE;
+
+	// 敵がすでにプレイヤーの最終ポイントに到達しているなら、そのポイントに留まる
+	if (distToPlayerPtSq <= arrivalThresholdSq)
+	{
+		return playerTargetIdx;
+	}
+
+	// 自身の球形コライダーの半径（周囲を探す範囲）
+	float searchRadiusSq = 1000.0f * 1000.0f;
+
+	float bestDistToFinalSq = 99999999.0f; // 最終地点までの残り距離
+	float bestEnemyDistSq = 99999999.0f;   // 敵からそのポイントまでの距離
 	int bestIdx = -1;
 
+	// 2. 自分の周囲のポイントから、最終地点（playerTargetPos）に一番近づくポイントを選択
 	for (int i = 0; i < maxCount; ++i)
 	{
-		// 今到着したポイントは候補から外す
+		// 今到着したポイント（現在地）は絶対除外
 		if (i == currentIdx) continue;
 
 		D3DXVECTOR3 ptPos = pPoints[i];
 
-		// 自分からそのポイントまでの間に壁が無いかチェック
-		if (!CheckObstacleBetween(myPos, ptPos))
+		// 敵からの距離チェック（コライダー範囲内か）
+		D3DXVECTOR3 diffE = ptPos - myPos;
+		diffE.y = 0.0f;
+		float distToEnemySq = D3DXVec3LengthSq(&diffE);
+
+		if (distToEnemySq > searchRadiusSq)
 		{
-			// そのポイントからプレイヤーまでの距離を計算
-			D3DXVECTOR3 diffP = playerPos - ptPos;
-			diffP.y = 0.0f;
-			float distToPlayerSq = D3DXVec3LengthSq(&diffP);
+			continue; // コライダー範囲外は無視
+		}
 
-			// 敵からそのポイントまでの距離を計算
-			D3DXVECTOR3 diffE = myPos - ptPos;
-			diffE.y = 0.0f;
-			float distToEnemySq = D3DXVec3LengthSq(&diffE);
+		// そのポイントから「プレイヤーの最終ポイント」までの残り距離
+		D3DXVECTOR3 diffFinal = playerTargetPos - ptPos;
+		diffFinal.y = 0.0f;
+		float distToFinalSq = D3DXVec3LengthSq(&diffFinal);
 
-			if (distToPlayerSq < bestDistanceSq - 0.01f)
+		// ★現在の自分の位置よりプレイヤーから遠ざかるポイントは除外する
+		if (distToFinalSq >= distToPlayerPtSq)
+		{
+			continue;
+		}
+
+		// 最終地点に一番近づくポイントを採用
+		if (distToFinalSq < bestDistToFinalSq - 0.01f)
+		{
+			bestDistToFinalSq = distToFinalSq;
+			bestEnemyDistSq = distToEnemySq;
+			bestIdx = i;
+		}
+		// 距離が同等なら、より敵から近いポイントを優先
+		else if (fabsf(distToFinalSq - bestDistToFinalSq) <= 0.01f)
+		{
+			if (distToEnemySq < bestEnemyDistSq)
 			{
-				bestDistanceSq = distToPlayerSq;
+				bestDistToFinalSq = distToFinalSq;
 				bestEnemyDistSq = distToEnemySq;
 				bestIdx = i;
 			}
-			else if (fabsf(distToPlayerSq - bestDistanceSq) <= 0.01f)
-			{
-				if (distToEnemySq < bestEnemyDistSq)
-				{
-					bestDistanceSq = distToPlayerSq;
-					bestEnemyDistSq = distToEnemySq;
-					bestIdx = i;
-				}
-			}
 		}
 	}
 
+	// 3. 【フォールバック】前進できるポイントが見つからない場合
 	if (bestIdx == -1)
 	{
-		// 今いるポイント以外で一番近い場所
-		float minDistSq = 99999999.0f;
+		// コライダー内で、とにかく一番プレイヤーの最終ポイントに近いポイントを選ぶ
 		for (int i = 0; i < maxCount; ++i)
 		{
 			if (i == currentIdx) continue;
-			D3DXVECTOR3 diff = pPoints[i] - myPos;
-			diff.y = 0.0f;
-			float distSq = D3DXVec3LengthSq(&diff);
-			if (distSq < minDistSq)
+
+			D3DXVECTOR3 ptPos = pPoints[i];
+			D3DXVECTOR3 diffFinal = playerTargetPos - ptPos;
+			diffFinal.y = 0.0f;
+			float distToFinalSq = D3DXVec3LengthSq(&diffFinal);
+
+			if (distToFinalSq < bestDistToFinalSq)
 			{
-				minDistSq = distSq;
+				bestDistToFinalSq = distToFinalSq;
 				bestIdx = i;
 			}
 		}
 	}
 
-	return (bestIdx != -1) ? bestIdx : 0;
+	return (bestIdx != -1) ? bestIdx : playerTargetIdx;
 }

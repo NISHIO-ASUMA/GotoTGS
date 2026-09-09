@@ -84,7 +84,7 @@ public:
 	bool CheckObstacle(void);
 	bool Collision(CBoxCollider* pOther, D3DXVECTOR3* pOutPos);
 	bool CheckObstacleBetween(const D3DXVECTOR3& startPos, const D3DXVECTOR3& endPos);
-	int GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount);
+	int GetNearestWayPointIndex(const D3DXVECTOR3* pPoints, int maxCount, const D3DXVECTOR3& targetPos);
 	int GetBestWayPointToPlayer(const D3DXVECTOR3* pPoints, int maxCount, int currentIdx);
 
 	/// <summary>

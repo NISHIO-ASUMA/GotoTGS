@@ -50,9 +50,6 @@ void CEnemyStateChase::OnStart(void)
 	// 追跡状態にする
 	m_pEnemy->StartChase(true);
 
-	// 探査変更
-	m_pEnemy->ResetTargetIdxToNearestByMoveType();
-
 	m_nStayCount = 0;
 	m_isDoubt = false;
 }
@@ -75,10 +72,11 @@ void CEnemyStateChase::OnUpdate(void)
 		// アイコンオフ
 		m_pEnemy->GetChaseIcon()->SetDrawFlags(false);
 
-		// 2秒間経過したらニュートラルへ遷移
-		if (m_nStayCount >= 120)
+		// 3秒間経過したらニュートラルへ遷移
+		if (m_nStayCount >= MAX_COUNT)
 		{
-			m_pEnemy->StartChase(false); // フラグ初期化
+			// フラグ初期化
+			m_pEnemy->StartChase(false);
 
 			// 探査変更
 			m_pEnemy->ResetTargetIdxToNearestByMoveType();
