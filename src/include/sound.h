@@ -22,43 +22,40 @@ public:
 	//***************************
 	enum SOUND_LABEL
 	{
-		SOUND_LABEL_TITLE_BGM,		// タイトルBGM
-		SOUND_LABEL_GAMEBGM,		// ゲームBGM
-		SOUND_LABEL_RESULTBGM,		// リザルトBGM
-		SOUND_LABEL_TUTORIALBGM,	// チュートリアルBGM
-		SOUND_LABEL_LOSERESULTBGM,	// 敗北リザルト
-		SOUND_LABEL_RANKING,		// ランキングBGM
-		SOUND_LABEL_SELECT,			// キー選択SE
-		SOUND_LABEL_RETURN,			// 決定キーSE
-		SOUND_LABEL_ITEM,			// アイテムSE
-		SOUND_LABEL_ALART,			// 警告音SE
-		SOUND_LABEL_BULLET,			// 通常弾SE
-		SOUND_LABEL_LASER,			// レーザーSE
-		SOUND_LABEL_LIFE,			// 回復SE
-		SOUND_LABEL_DAMAGE,			// ダメージSE
-		SOUND_LABEL_CIRCLE,			// メッシュ攻撃SE
-		SOUND_LABEL_CLEAR,			// タスク完了SE
-		SOUND_LABEL_GUARD,			// ガード音SE
-		SOUND_LABEL_EXPLOSION,		// 衝撃音SE
-		SOUND_LABEL_BOSS,			// ボス叫びSE
-		SOUND_LABEL_CHANGEWEPON,	// 武器切り替え
-		SOUND_LABEL_AVOID,			// 回避SE
-		SOUND_LABEL_TITLEENTER,		// タイトルキー
-		SOUND_LABEL_PAUSESTART,		// 開始音
-		SOUND_LABEL_QUEEN,			// 女王ヒット
-		SOUND_LABEL_START,			// ゲーム開始音
-
-
-		// ****************** ここから今回の追加SE ****************
-		SOUND_LABEL_TASKCLEAR_SE,	// タスク成功音
-		SOUND_LABEL_KEY_CLEAR_SE,	// キー入力成功音
-		SOUND_LABEL_TASKMISS_SE,	// タスクキー入力ミス音
-		SOUND_LABEL_COPYTASK_SE,	// コピー機の音
-		SOUND_LABEL_SIDEDOOR_SE,	// 両開きのドアの音
-		SOUND_LABEL_AUTODOOR_SE,	// 自動ドアの音
-
-		SOUND_LABEL_PCSTART_SE,		// パソコンの音
+		SOUND_LABEL_TITLE_BGM,			// タイトルBGM
+		SOUND_LABEL_GAMEBGM,			// ゲームBGM
+		SOUND_LABEL_RESULTBGM,			// リザルトBGM
+		SOUND_LABEL_TUTORIALBGM,		// チュートリアルBGM
+		SOUND_LABEL_LOSERESULTBGM,		// 敗北リザルト
+		SOUND_LABEL_RANKING,			// ランキングBGM
+		SOUND_LABEL_SELECT,				// キー選択SE
+		SOUND_LABEL_RETURN,				// 決定キーSE
+		SOUND_LABEL_ITEM,				// アイテムSE
+		SOUND_LABEL_ALART,				// 警告音SE
+		SOUND_LABEL_BULLET,				// 通常弾SE
+		SOUND_LABEL_LASER,				// レーザーSE
+		SOUND_LABEL_LIFE,				// 回復SE
+		SOUND_LABEL_DAMAGE,				// ダメージSE
+		SOUND_LABEL_CIRCLE,				// メッシュ攻撃SE
+		SOUND_LABEL_CLEAR,				// タスク完了SE
+		SOUND_LABEL_GUARD,				// ガード音SE
+		SOUND_LABEL_EXPLOSION,			// 衝撃音SE
+		SOUND_LABEL_BOSS,				// ボス叫びSE
+		SOUND_LABEL_CHANGEWEPON,		// 武器切り替え
+		SOUND_LABEL_AVOID,				// 回避SE
+		SOUND_LABEL_TITLEENTER,			// タイトルキー
+		SOUND_LABEL_PAUSESTART,			// 開始音
+		SOUND_LABEL_QUEEN,				// 女王ヒット
+		SOUND_LABEL_START,				// ゲーム開始音
+		SOUND_LABEL_TASKCLEAR_SE,		// タスク成功音
+		SOUND_LABEL_KEY_CLEAR_SE,		// キー入力成功音
+		SOUND_LABEL_TASKMISS_SE,		// タスクキー入力ミス音
+		SOUND_LABEL_COPYTASK_SE,		// コピー機の音
+		SOUND_LABEL_SIDEDOOR_SE,		// 両開きのドアの音
+		SOUND_LABEL_AUTODOOR_SE,		// 自動ドアの音
+		SOUND_LABEL_PCSTART_SE,			// パソコンの音
 		SOUND_LABEL_ACTIVECHARACTOR_SE,	// 敵追加出現音
+		SOUND_LABEL_STARTOUTSIDE_SE,	// 外タスク開始の音
 		SOUND_LABEL_MAX
 	};
 
@@ -118,11 +115,12 @@ private:
 		{"data/SE/TaskComp.wav",0},			 // タスク成功音
 		{"data/SE/typeSE.wav",0},			 // タスクキー入力成功音
 		{"data/SE/typemissSE.wav",0},		 // タスクキー入力失敗音
-		{"data/SE/copySE.wav",0},			 // タスクキー入力失敗音
-		{"data/SE/officedoorSE.wav",0},			 // 両開きの音
-		{"data/SE/automaticSE.wav",0},		// 自動ドアの音
-		{"data/SE/pcSE.wav",0},				// パソコン開始の音
-		{"data/SE/ActiveCharactor.wav",0}	// 敵追加の音
+		{"data/SE/copySE.wav",0},			 // コピー入力失敗音
+		{"data/SE/officedoorSE.wav",0},		 // 両開きの音
+		{"data/SE/automaticSE.wav",0},		 // 自動ドアの音
+		{"data/SE/pcSE.wav",0},				 // パソコン開始の音
+		{"data/SE/ActiveCharactor.wav",0},	 // 敵追加の音
+		{"data/SE/startoutsideSE.wav",0}	 // 外タスク開始の音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス
@@ -132,5 +130,4 @@ private:
 	DWORD m_aSizeAudio[SOUND_LABEL_MAX];					// オーディオデータサイズ
 	int m_SoundCount;										// サウンドのカウント
 	int m_SoundInterval;									// インターバルカウント
-
 };
