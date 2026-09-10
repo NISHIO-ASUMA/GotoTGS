@@ -26,7 +26,7 @@ class CPlayer;				// Asuma
 class CReceptionist;		// Asuma
 class CBoss;				// Asuma
 class COutSideTaskTimer;	// Asuma
-class CMoveUi;
+
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
 class CEventUI;				// Misaki
@@ -104,7 +104,6 @@ private:
 	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI					[ Asuma Add ]
 	CBoss* m_pBoss;									// 社長キャラクター				[ Asuma Add ]
 	COutSideTaskTimer* m_pOutSideTime;				// 外タスク時間					[ Asuma Add ]
-	CMoveUi* m_pMoveUi;
 
 	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ
 };

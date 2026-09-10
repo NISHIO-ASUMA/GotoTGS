@@ -79,7 +79,7 @@ void CAuditorStateDoubt::OnUpdate(void)
 	{
 		// ゲージのクリア
 		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0040f);
+		m_pGauge->SetRatio(0.0030f);
 
 		// もし完全クリアなら状態を元に戻す
 		if (m_pGauge->GetNormalFlag())

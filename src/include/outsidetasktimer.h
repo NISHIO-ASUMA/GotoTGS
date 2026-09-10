@@ -27,6 +27,7 @@ class CNumber;
 class CPlayer;
 class CUi;
 class CReturnOfficeUi;
+class CMoveUi;
 
 //*********************************************************
 // 外タスクのタイマークラスを定義
@@ -129,6 +130,8 @@ private:
 	CPlayer* m_pPlayerOwner;							// プレイヤーポインタ
 	CUi* m_pUi;											// uiクラス
 	CReturnOfficeUi* m_pReturnUi;						// 帰ってくる警告uiクラス
+	CMoveUi* m_pMoveUi;									// 動くui
+
 	D3DXVECTOR3 m_pos;									// 位置
 	TIMESTATE m_State;									// 状態変更
 

@@ -109,14 +109,14 @@ HRESULT CMeshCylinder::Init(void)
 			float fAngle = (D3DX_PI * 2.0f) / DIGIT_X * nCntX;
 
 			// 頂点座標の設定
-			pVtx[nCnt].pos = D3DXVECTOR3(sinf((fAngle)) * m_Cylinder.fRadius, nCntZ * 400.0f, cosf((fAngle)) * m_Cylinder.fRadius);
+			pVtx[nCnt].pos = D3DXVECTOR3(sinf((fAngle)) * m_Cylinder.fRadius, nCntZ * 800.0f, cosf((fAngle)) * m_Cylinder.fRadius);
 
 			// 法線ベクトルの設定
 			nor = pVtx[nCnt].pos - m_pos;				// 各頂点から原点の値を引く
 			D3DXVec3Normalize(&pVtx[nCnt].nor, &nor);	// 法線の正規化
 
 			// 頂点カラーの設定
-			pVtx[nCnt].col = D3DCOLOR_RGBA(205,205,0,235);
+			pVtx[nCnt].col = D3DCOLOR_RGBA(195,195,0,200);
 
 			// テクスチャ座標の設定
 			pVtx[nCnt].tex = D3DXVECTOR2(fTexX * nCntX, nCntZ * fTexY);

@@ -23,6 +23,7 @@
 #include "player.h"
 #include "ui.h"
 #include "returnofficeui.h"
+#include "moveui.h"
 
 //=========================================================
 // コンストラクタ
@@ -39,6 +40,7 @@ m_pos(VECTOR3_NULL),
 m_pPlayerOwner(nullptr),
 m_pReturnUi(nullptr),
 m_pUi(nullptr),
+m_pMoveUi(nullptr),
 m_event{}
 {
 	// ポインタ初期化
@@ -91,6 +93,10 @@ HRESULT COutSideTaskTimer::Init(void)
 	// 警告ui生成
 	m_pReturnUi = CReturnOfficeUi::Create({ 640.0f,60.0f,0.0f, },10, 115.0f, 55.0f, "return_office.png");
 	m_pReturnUi->SetUse(false);
+
+	// ui生成
+	m_pMoveUi = CMoveUi::Create({ 1130.0f, 90.0f, 0.0f }, 0, 150.0f, 42.0f, "startwork.jpg");
+	m_pMoveUi->SetIsUse(false);
 
 	// 一桁の横幅
 	float fTexpos = m_fWidth / Config::DIGIT_TIME;
@@ -225,7 +231,7 @@ void COutSideTaskTimer::Start(void)
 	m_nAllTime = Config::NUMTIME;
 
 	// uiの表示の切り替え ( 外タスク中... みたいな物 めんどいからクラスで作ろうかな 移動もするし )
-	// m_pMoveUi->SetIsDraw(true);
+	m_pMoveUi->SetIsUse(true);
 }
 //=========================================================
 // 終了関数
@@ -238,8 +244,8 @@ void COutSideTaskTimer::End(void)
 	// 最大時間をリセット
 	m_nAllTime = 0;
 
-	// uiの表示の切り替え ( 外タスク中... みたいな物 めんどいからクラスで作ろうかな 移動もするし )
-	// m_pMoveUi->SetIsDraw(true);
+	// uiのstate切り替え
+	m_pMoveUi->SetState(CMoveUi::STATE::MOVE_RIGHT);
 }
 //=========================================================
 // 桁数の更新関数

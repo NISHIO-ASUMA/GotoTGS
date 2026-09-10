@@ -170,7 +170,7 @@ void CDOCUMENTDeskwork::SetDOCUMENTValue(void)
 		if (pScore == nullptr || pGaugeneedle == nullptr) return;
 
 		// スコア加算
-		pScore->AddScoreMinus(-1000);
+		pScore->AddScoreMinus(-500);
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();

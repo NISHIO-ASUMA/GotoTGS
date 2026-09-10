@@ -40,6 +40,7 @@
 #include "returnofficeui.h"
 #include "sound.h"
 #include "boss.h"
+#include "myparticle.h"
 
 //=========================================================
 // コンストラクタ
@@ -1511,7 +1512,7 @@ void CPlayer::LowerLevelToEnemy(void)
 				pEnemy->LevelDownEvent();
 			}
 
-			// TODO 西尾 : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
+			// TODO 西尾 : 当たった敵から下方向のパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
 			//CMyParticle::Create({pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}
@@ -1526,6 +1527,10 @@ void CPlayer::LowerLevelToEnemy(void)
 	{
 		// 警戒度パラメーターを下げる
 		pBoss->LevelDown();
+
+		// TODO 西尾 : 当たった敵からパーティクルとか出したい ( 検証できたから動きを変化させる 時間長めで生成する )
+		//CMyParticle::Create({pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
+
 		return;
 	}
 }

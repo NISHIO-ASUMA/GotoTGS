@@ -22,7 +22,7 @@ class CPointObject : public CObjectX
 {
 public:
 
-	CPointObject(int nPriority = static_cast<int>(CObject::PRIORITY::MODELOBJECT));
+	CPointObject(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CPointObject();
 
 	HRESULT Init(void) override;

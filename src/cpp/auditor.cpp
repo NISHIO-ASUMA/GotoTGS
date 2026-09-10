@@ -300,7 +300,7 @@ void CAuditor::UpdateOffice(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.5f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -366,7 +366,7 @@ void CAuditor::UpdateSoba(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.5f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -431,7 +431,7 @@ void CAuditor::UpdateGameCenter(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.5f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -496,7 +496,7 @@ void CAuditor::UpdateMapLeft(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.5f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定
@@ -561,7 +561,7 @@ void CAuditor::UpdateBigPoint(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// 移動量
-	moveVec *= 1.5f;
+	moveVec *= 2.0f;
 	SetMove(moveVec);
 
 	// 移動モーションを設定

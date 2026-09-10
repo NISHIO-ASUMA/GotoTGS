@@ -124,7 +124,7 @@ void CMoveUi::Update(void)
 		// 下方向へ移動 (+y)
 		pos.y += MOVE_UI::MOVE_DOWN_SPEED;
 
-		// 目標座標に到達したら停止ステートへ移行
+		// 目標座標に到達したら停止
 		if (pos.y >= m_DestPos.y)
 		{
 			pos.y = m_DestPos.y; 

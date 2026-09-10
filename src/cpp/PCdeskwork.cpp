@@ -382,7 +382,7 @@ void CPCDeskwork::Task(const auto& pClear)
 		}
 
 		// ƒXƒRƒA‰ÁŽZ
-		pScore->AddScoreMinus(-1000);
+		pScore->AddScoreMinus(-500);
 
 		// ‚±‚È‚µ‚½ƒ^ƒXƒN‚Ì”‚ð‘‚â‚·
 		pGaugeneedle->AddTask();
@@ -395,11 +395,8 @@ void CPCDeskwork::Task(const auto& pClear)
 	if (GetPlayerPointer() == nullptr)
 		return;
 
-	// ‹ß‚­‚É‚¢‚éãŽi‚ÌŒx‰ú“x‚ð‰º‚°‚é ( NOTE : ‚±‚±‚Ì“ïˆÕ“xÝ’è‚Æ‚©‚Í—v‘Š’k )
+	// ‹ß‚­‚É‚¢‚éãŽi‚ÌŒx‰ú“x‚ð‰º‚°‚é
 	GetPlayerPointer()->LowerLevelToEnemy();
-
-	// ŽžŠÔ‚ð‰ÁŽZ‚·‚é ( NOTE : ‚¢‚Ü‚Í‰¼‚ÅˆêŒÂ‚Ìƒ^ƒXƒN¬Œ÷‚²‚Æ‚É2•bƒ{[ƒiƒXŽžŠÔ‚Ì‰ÁŽZ )
-	GetPlayerPointer()->AddTaskBonusTime(2);
 }
 
 //=========================================================
