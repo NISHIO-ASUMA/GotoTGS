@@ -116,7 +116,7 @@ HRESULT CMeshCylinder::Init(void)
 			D3DXVec3Normalize(&pVtx[nCnt].nor, &nor);	// 法線の正規化
 
 			// 頂点カラーの設定
-			pVtx[nCnt].col = D3DCOLOR_RGBA(205,205,0,155);
+			pVtx[nCnt].col = D3DCOLOR_RGBA(205,205,0,235);
 
 			// テクスチャ座標の設定
 			pVtx[nCnt].tex = D3DXVECTOR2(fTexX * nCntX, nCntZ * fTexY);
