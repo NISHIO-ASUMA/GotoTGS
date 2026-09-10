@@ -81,6 +81,9 @@ void CEnemyStateChase::OnUpdate(void)
 			// 探査変更
 			m_pEnemy->ResetTargetIdxToNearestByMoveType();
 
+			// ゲージクリア
+			m_pEnemy->GetGauge()->SetRatioZero();
+
 			// ステート変更
 			m_pEnemy->ChangeState(new CEnemyStateNeutral(), ID_NEUTRAL);
 			return;

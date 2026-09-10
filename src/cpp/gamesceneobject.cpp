@@ -70,6 +70,7 @@
 #include "fade.h"
 #include "result.h"
 #include "myparticle.h"
+#include <moveui.h>
 
 //*********************************************************
 // 定数名前空間
@@ -99,7 +100,8 @@ m_pVigilanceUImanager(nullptr),
 m_pAfk2DUI(nullptr),
 m_pReception(nullptr),
 m_pReceptionUI(nullptr),
-m_pOutSideTime(nullptr)
+m_pOutSideTime(nullptr),
+m_pMoveUi(nullptr)
 {
 
 }
@@ -213,6 +215,9 @@ HRESULT CGameSceneObject::Init(void)
 	m_pOutSideTime = COutSideTaskTimer::Create({640.0f,-30.0f,0.0f}, 70.0f, 50.0f);
 	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
+
+	// 検証生成
+	m_pMoveUi = CMoveUi::Create({ 1130.0f, 90.0f, 0.0f }, 0, 150.0f, 42.0f, "startwork.jpg");
 
 	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
@@ -335,8 +340,16 @@ void CGameSceneObject::Update(void)
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_L))
 	{
 		// 開始デバッグキー
-		m_pOutSideTime->Start();
+		m_pMoveUi->SetIsUse(true);
+		
 	}
+
+	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
+	{
+		// 開始デバッグキー
+		m_pMoveUi->SetState(CMoveUi::STATE::MOVE_RIGHT);
+	}
+
 #endif // _DEBUG
 }
 //=========================================================

@@ -1480,7 +1480,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	}
 }
 //=========================================================
-// 付近の敵の警戒度を下げる関数 ( 警戒度もうわかんない たぶん認識のすれ違いが起きてる )
+// 付近の敵の警戒度を下げる関数
 //=========================================================
 void CPlayer::LowerLevelToEnemy(void)
 {

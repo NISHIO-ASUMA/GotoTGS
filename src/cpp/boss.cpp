@@ -563,14 +563,14 @@ void CBoss::ChangeState(CBossStateBase* pState, int nID)
 	// ステート変更
 	m_pMachine->ChangeState(pState);
 }
-//========================================================
+//=========================================================
 // 本来の敵から見えるプレイヤーとの視界判定
-//========================================================
+//=========================================================
 bool CBoss::CheckRayToAngleRange(void)
 {
 	// もしイベント中なら
 	if (CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM || 
-		CManager::GetInstance()->GetCamera()->GetCount() >= 0)
+		CManager::GetInstance()->GetCamera()->GetCount() > 0)
 		return false;
 
 	// nullなら
