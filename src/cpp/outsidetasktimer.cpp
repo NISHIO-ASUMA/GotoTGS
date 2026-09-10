@@ -225,7 +225,7 @@ void COutSideTaskTimer::Start(void)
 	m_nAllTime = Config::NUMTIME;
 
 	// uiの表示の切り替え ( 外タスク中... みたいな物 めんどいからクラスで作ろうかな 移動もするし )
-
+	// m_pMoveUi->SetIsDraw(true);
 }
 //=========================================================
 // 終了関数
@@ -237,6 +237,9 @@ void COutSideTaskTimer::End(void)
 
 	// 最大時間をリセット
 	m_nAllTime = 0;
+
+	// uiの表示の切り替え ( 外タスク中... みたいな物 めんどいからクラスで作ろうかな 移動もするし )
+	// m_pMoveUi->SetIsDraw(true);
 }
 //=========================================================
 // 桁数の更新関数

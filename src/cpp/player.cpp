@@ -568,7 +568,7 @@ void CPlayer::Update(void)
 					}
 
 					// —¼•û‚ªnull‚¶‚á‚È‚¢ó‘Ô
-					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0))
+					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0) && !m_isSetOutSideTask)
 					{
 						// ”à‚ğŠJ‚¯‚éó‘Ô‚É‚·‚é
 						m_isSetOutSideTask = true;
