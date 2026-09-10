@@ -36,7 +36,7 @@ public:
 		float fRadius;		// 半径
 	};
 
-	CMeshCylinder(int nPriority = static_cast<int>(CObject::PRIORITY::BILLBOARD));
+	CMeshCylinder(int nPriority = static_cast<int>(CObject::PRIORITY::IMPACT));
 	~CMeshCylinder();
 
 	HRESULT Init(void) override;
@@ -46,6 +46,8 @@ public:
 	void SetTexture(void);
 
 	void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
+	void SetIsDraw(bool isDraw) { m_isDraw = isDraw; }
+
 	inline D3DXVECTOR3 GetPos(void) { return m_pos; }
 	inline float GetRadius(void) const { return m_Cylinder.fRadius; }
 
@@ -56,11 +58,17 @@ private:
 	static constexpr int DIGIT_X = 20;		// X方向の分割数
 	static constexpr int DIGIT_Z = 1;		// Z方向への分割数
 
+private:
+
 	LPDIRECT3DINDEXBUFFER9 m_pIdx; // インデックスバッファ
 	LPDIRECT3DVERTEXBUFFER9 m_pVtx;	// 頂点バッファ
 
+private:
 	D3DXVECTOR3 m_pos;		// 座標
 	D3DXVECTOR3 m_rot;		// 角度
 	D3DXMATRIX m_mtxWorld;	// ワールドマトリックス
 	Cylinder m_Cylinder;	// 構造体変数
+
+private:
+	bool m_isDraw;			// 描画フラグ
 };

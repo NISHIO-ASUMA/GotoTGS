@@ -22,6 +22,7 @@
 #include "titleuimanager.h"
 #include "tutorialuimanager.h"
 #include "pointobject.h"
+#include "meshcylinder.h"
 
 //*********************************************************
 // 名前空間 [髙橋追加]
@@ -39,7 +40,8 @@ namespace Client
 //========================================================
 CClientManager::CClientManager() : m_pClient{},
 m_pPointObject{},
-m_pOutsideUI{}
+m_pOutsideUI{},
+m_pMeshCylinder{}
 {
 
 }
@@ -68,6 +70,9 @@ HRESULT CClientManager::Init(void)
 	{
 		// クライアントの生成
 		CreateInManager(m_pos[nCount], m_rot[nCount]);
+
+		// メッシュの生成 ( ADD : 西尾 )
+		m_pMeshCylinder[nCount] = CMeshCylinder::Create(m_pos[nCount],30.0f);
 	}
 
 	// 操作の種類を設定する(パッドかキーマウかどうか)
@@ -144,6 +149,9 @@ void CClientManager::SetClient(void)
 	// 表示する状態にする
 	m_pPointObject[nNowClient]->SetIsDraw(true);
 	m_pOutsideUI[nNowClient]->SetDrawFlags(true);
+
+	// [ADD : 西尾] メッシュの描画起動
+	m_pMeshCylinder[nNowClient]->SetIsDraw(true);
 }
 
 //========================================================
@@ -156,6 +164,9 @@ void CClientManager::ClearClient(void)
 		// 非表示の状態にする
 		m_pPointObject[nCount]->SetIsDraw(false);
 		m_pOutsideUI[nCount]->SetDrawFlags(false);
+
+		// [ADD : 西尾] メッシュの描画off
+		m_pMeshCylinder[nCount]->SetIsDraw(false);
 	}
 }
 

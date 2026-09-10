@@ -21,6 +21,7 @@
 class CClient;
 class CPointObject;
 class COutsideUI;
+class CMeshCylinder;
 
 //*********************************************************
 // クライアント役を複数管理するクラスを定義
@@ -97,10 +98,6 @@ private:
 
 private:
 
-	// メンバ変数
-	
-
-
 	// 位置情報
 	const D3DXVECTOR3 m_pos[CLIENT_MAX] =
 	{
@@ -122,5 +119,5 @@ private:
 
 	CPointObject* m_pPointObject[CLIENT_MAX];	// 矢印のポインタ
 	COutsideUI* m_pOutsideUI[CLIENT_MAX];		// UIのポインタ
-
+	CMeshCylinder* m_pMeshCylinder[CLIENT_MAX]; // 円柱の配列
 };

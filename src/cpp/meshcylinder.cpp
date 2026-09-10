@@ -26,7 +26,8 @@ m_pVtx(nullptr),
 m_pos(VECTOR3_NULL),
 m_rot(VECTOR3_NULL),
 m_Cylinder{},
-m_mtxWorld{}
+m_mtxWorld{},
+m_isDraw(false)
 {
 }
 //=========================================================
@@ -108,14 +109,14 @@ HRESULT CMeshCylinder::Init(void)
 			float fAngle = (D3DX_PI * 2.0f) / DIGIT_X * nCntX;
 
 			// 頂点座標の設定
-			pVtx[nCnt].pos = D3DXVECTOR3(sinf((fAngle)) * m_Cylinder.fRadius, nCntZ * 30.0f, cosf((fAngle)) * m_Cylinder.fRadius);
+			pVtx[nCnt].pos = D3DXVECTOR3(sinf((fAngle)) * m_Cylinder.fRadius, nCntZ * 400.0f, cosf((fAngle)) * m_Cylinder.fRadius);
 
 			// 法線ベクトルの設定
-			nor = pVtx[nCnt].pos - m_pos;	// 各頂点から原点の値を引く
+			nor = pVtx[nCnt].pos - m_pos;				// 各頂点から原点の値を引く
 			D3DXVec3Normalize(&pVtx[nCnt].nor, &nor);	// 法線の正規化
 
 			// 頂点カラーの設定
-			pVtx[nCnt].col = D3DCOLOR_RGBA(0,255,255,255);
+			pVtx[nCnt].col = D3DCOLOR_RGBA(205,205,0,155);
 
 			// テクスチャ座標の設定
 			pVtx[nCnt].tex = D3DXVECTOR2(fTexX * nCntX, nCntZ * fTexY);
@@ -191,6 +192,8 @@ void CMeshCylinder::Uninit(void)
 //=========================================================
 void CMeshCylinder::Update(void)
 {
+	if (!m_isDraw) return;
+
 	// 計算用のマトリックスを宣言
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -208,6 +211,8 @@ void CMeshCylinder::Update(void)
 //=========================================================
 void CMeshCylinder::Draw(void)
 {
+	if (!m_isDraw) return;
+
 	// デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
