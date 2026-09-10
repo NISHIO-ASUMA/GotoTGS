@@ -83,21 +83,20 @@ namespace OFFICE_INFO
 // コンストラクタ
 //========================================================
 CBoss::CBoss(int nPriority) : CMoveCharactor(nPriority),
-m_pBoxColiider(nullptr),
-m_pSphereColiider(nullptr),
 m_nViewIdx(NULL),
 m_nOfficeViewIdx(NULL),
 m_nCoolTime(NULL),
+m_fEyeAngle(NULL),
+m_playerTargetPos(VECTOR3_NULL),
 m_isOutSideIn(false),
 m_isOfficeMove(false),
-m_pChaseIcon(nullptr),
-m_pDestCharactor(nullptr),
-m_playerTargetPos(VECTOR3_NULL),
-m_pMachine(nullptr),
-m_fEyeAngle(NULL),
 m_isStartChase(false),
 m_isActiveSet(false),
 m_isStartDraw(false),
+m_pSphereColiider(nullptr),
+m_pChaseIcon(nullptr),
+m_pDestCharactor(nullptr),
+m_pMachine(nullptr),
 m_pGauge(nullptr)
 {
 
