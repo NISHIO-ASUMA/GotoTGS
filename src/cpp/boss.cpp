@@ -26,6 +26,7 @@
 #include "bossstateneutral.h"
 #include "camera.h"
 #include "enemymanager.h"
+#include "enemydoubtgauge.h"
 
 //*********************************************************
 // 定数名前空間
@@ -96,7 +97,8 @@ m_pMachine(nullptr),
 m_fEyeAngle(NULL),
 m_isStartChase(false),
 m_isActiveSet(false),
-m_isStartDraw(false)
+m_isStartDraw(false),
+m_pGauge(nullptr)
 {
 
 }
@@ -144,6 +146,14 @@ HRESULT CBoss::Init(void)
 	// ステート設定
 	ChangeState(new CBossStateNeutral(), CBossStateBase::ID_NEUTRAL);
 
+	// 球形作成
+	m_pSphereColiider = CSphereCollider::Create(GetPos(),60.0f);
+
+	// ゲージ生成
+	auto CreatePos = D3DXVECTOR3(GetPos().x,GetPos().y + Config::VALUE_HEIGHT,GetPos().z);
+	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE);
+	m_pGauge->SetIsDraw(false);
+
 	// アイコン生成
 	m_pChaseIcon = CBillboard::Create(GetPos(), VECTOR3_NULL, 20.0f, 20.0f, "ui_chaseicon.png");
 	m_pChaseIcon->SetDrawFlags(false);
@@ -166,6 +176,9 @@ void CBoss::Uninit(void)
 		m_pMachine = nullptr;
 	}
 
+	// 球形コライダーの破棄
+	m_pSphereColiider.reset();
+
 	// キャラクター終了
 	CMoveCharactor::Uninit();
 }
@@ -174,6 +187,13 @@ void CBoss::Uninit(void)
 //========================================================
 void CBoss::Update(void)
 {
+	// 頭上のゲージの位置の更新
+	D3DXVECTOR3 headPos = this->GetPos();
+	headPos.y += Config::VALUE_HEIGHT;
+
+	// ゲージの座標を設定する
+	m_pGauge->SetTargetPos(headPos);
+
 	// ステート更新
 	if (m_pMachine)
 		m_pMachine->Update();
@@ -183,6 +203,10 @@ void CBoss::Update(void)
 
 	// 更新された座標を取得
 	auto UpdatePos = GetPos();
+
+	// コライダー更新
+	if (m_pSphereColiider)
+		m_pSphereColiider->SetPos(UpdatePos);
 
 	// 親キャラクター更新
 	CMoveCharactor::Update();
@@ -737,4 +761,15 @@ void CBoss::UpperLevel(void)
 {
 	// 関数起動
 	CEnemyManager::GetInstance()->SetLevleUpper();
+}
+//========================================================
+// 自身の警戒度レベルダウン関数
+//========================================================
+void CBoss::LevelDown(void)
+{
+	// nullチェック
+	if (!m_pGauge) return;
+
+	// 4割くらいの減少
+	m_pGauge->SetRatioTypeEvent(0.35f);
 }

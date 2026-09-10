@@ -39,6 +39,7 @@
 #include "outsidetasktimer.h"
 #include "returnofficeui.h"
 #include "sound.h"
+#include "boss.h"
 
 //=========================================================
 // コンストラクタ
@@ -1514,6 +1515,18 @@ void CPlayer::LowerLevelToEnemy(void)
 			//CMyParticle::Create({pEnemy->GetPos().x,pEnemy->GetPos().y + 60.0f,pEnemy->GetPos().z},COLOR_RED,30,60,120,60);
 			break;
 		}
+	}
+
+	// ボス取得
+	CBoss* pBoss = CGameSceneObject::GetInstance()->GetBoss();
+	if (!pBoss || pBoss->GetActiveFlags() == false) return;
+
+	// ボスの球と当たった場合
+	if (this->CollisionSphereTaskEvent(pBoss->GetSphereCollider()))
+	{
+		// 警戒度パラメーターを下げる
+		pBoss->LevelDown();
+		return;
 	}
 }
 //=========================================================

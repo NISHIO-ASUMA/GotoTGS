@@ -15,6 +15,7 @@
 //*********************************************************
 #include "template.h"
 #include "manager.h"
+#include "camera.h"
 
 //=========================================================
 // コンストラクタ
@@ -85,6 +86,11 @@ void CEnemyDoubtGauge::Uninit(void)
 //=========================================================
 void CEnemyDoubtGauge::Update(void)
 {
+	// もしイベント中なら
+	if (CManager::GetInstance()->GetCamera()->GetMode() == CCamera::MODE_BOSS_SYSTEM ||
+		CManager::GetInstance()->GetCamera()->GetCount() > 0)
+		return;
+
 	// フラグがoffなら
 	if (!m_isDraw) return;
 

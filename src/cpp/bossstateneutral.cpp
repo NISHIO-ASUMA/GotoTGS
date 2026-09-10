@@ -68,6 +68,9 @@ void CBossStateNeutral::OnUpdate()
 		m_pBoss->ChangeState(new CBossStateDoubt(), ID_DOUBT);
 		return;
 	}
+
+	// ƒQ[ƒW‚Ì•`‰æoff
+	m_pBoss->GetGauge()->SetIsDraw(false);
 }
 //=========================================================
 // ó‘ÔI—¹

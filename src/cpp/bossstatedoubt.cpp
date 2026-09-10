@@ -23,8 +23,7 @@
 // コンストラクタ
 //=========================================================
 CBossStateDoubt::CBossStateDoubt() : CBossStateBase(),
-m_nDoubtCount(0),
-m_pGauge(nullptr)
+m_nDoubtCount(0)
 {
 	// IDセット
 	SetID(ID_DOUBT);
@@ -41,22 +40,19 @@ CBossStateDoubt::~CBossStateDoubt()
 //=========================================================
 void CBossStateDoubt::OnStart(void)
 {
-	// ui生成 ( ?のゲージ )
-	auto CreatePos = D3DXVECTOR3(m_pBoss->GetPos().x, m_pBoss->GetPos().y + Config::VALUE_HEIGHT, m_pBoss->GetPos().z);
-	m_pGauge = CEnemyDoubtGauge::Create(CreatePos, Config::SIZE, Config::SIZE);
+
 }
 //=========================================================
 // 更新関数
 //=========================================================
 void CBossStateDoubt::OnUpdate(void)
 {
-	// 頭上のゲージの位置の更新
-	if (m_pGauge && m_pBoss)
-	{
-		D3DXVECTOR3 headPos = m_pBoss->GetPos();
-		headPos.y += Config::VALUE_HEIGHT;
-		m_pGauge->SetTargetPos(headPos);
-	}
+	// ゲージチェック
+	CEnemyDoubtGauge* pGauge = m_pBoss->GetGauge();
+	if (!pGauge) return;
+
+	// フラグ変更
+	pGauge->SetNormal(false);
 
 	// 描画フラグoff
 	const auto& icon = m_pBoss->GetChaseIcon();
@@ -70,8 +66,8 @@ void CBossStateDoubt::OnUpdate(void)
 		m_nDoubtCount++;
 
 		// ui表示(はてなマーク)
-		m_pGauge->SetIsDraw(true);
-		m_pGauge->SetUpGauge(true);
+		pGauge->SetIsDraw(true);
+		pGauge->SetUpGauge(true);
 
 		// 疑いモーションセット
 		m_pBoss->GetMotion()->SetMotion(CBoss::MOTION::DOUBT, true, 3);
@@ -79,11 +75,11 @@ void CBossStateDoubt::OnUpdate(void)
 	else
 	{
 		// ゲージのクリア
-		m_pGauge->SetUpGauge(false);
-		m_pGauge->SetRatio(0.0010f);
+		pGauge->SetUpGauge(false);
+		pGauge->SetRatio(0.0010f);
 
 		// もし完全クリアなら状態を元に戻す
-		if (m_pGauge->GetNormalFlag())
+		if (pGauge->GetNormalFlag())
 		{
 			m_pBoss->ChangeState(new CBossStateNeutral(), ID_NEUTRAL);
 			return;
@@ -91,7 +87,7 @@ void CBossStateDoubt::OnUpdate(void)
 	}
 
 	// もし上限値を超えていたら
-	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && m_pGauge->GetIsComplete())
+	if (m_nDoubtCount >= Config::MAX_DOUBT_COUNT && pGauge->GetIsComplete())
 	{
 		// 猛追ステートに変更する
 		m_pBoss->ChangeState(new CBossStateChase(), ID_CHASE);
@@ -105,7 +101,4 @@ void CBossStateDoubt::OnExit(void)
 {
 	// カウントリセット
 	m_nDoubtCount = 0;
-
-	// uiを破棄する
-	m_pGauge->Uninit();
 }

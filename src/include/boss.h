@@ -29,6 +29,7 @@ class CBillboard;
 class CPlayer;
 class CStateMachine;
 class CBossStateBase;
+class CEnemyDoubtGauge;
 
 //*********************************************************
 // ボスキャラクタークラスを定義
@@ -57,6 +58,7 @@ public:
 	bool CheckRayToAngleRange(void);
 	bool CheckObstacle(void);
 	void UpperLevel(void);
+	void LevelDown(void);
 
 	void SetCharactorPointer(CPlayer* pCharactor = nullptr) { m_pDestCharactor = pCharactor; }
 	void SetActiveFlags(bool isflag) { m_isActiveSet = isflag; }
@@ -68,6 +70,8 @@ public:
 
 	CBillboard* GetChaseIcon(void) { return m_pChaseIcon; }
 	CPlayer* GetInCharactor(void) { return m_pDestCharactor; }
+	CEnemyDoubtGauge* GetGauge(void) { return m_pGauge; }
+	CSphereCollider* GetSphereCollider(void) override { return m_pSphereColiider.get(); }
 
 	/// <summary>
 	/// 生成処理
@@ -101,6 +105,10 @@ private:
 		static constexpr float SPHERE_RANGE = 80.0f; // 球形範囲
 		static constexpr float BOX_RANGE = 50.0f;	 // 矩形範囲
 		static constexpr int DIVIDE = 16;			 // メッシュの分割数
+
+		static constexpr int MAX_DOUBT_COUNT = 120;
+		static constexpr float VALUE_HEIGHT = 80.0f;
+		static constexpr float SIZE = 50.0f;
 	};
 
 	//***************************
@@ -137,4 +145,5 @@ private:
 	CStateMachine* m_pMachine;							// ステートマシン用ポインタ変数
 	CPlayer* m_pDestCharactor;							// 判定先のキャラクターポインタ
 	D3DXVECTOR3 m_playerTargetPos;						// プレイヤーの最新座標
+	CEnemyDoubtGauge* m_pGauge;							// 疑いゲージ ( 敵のやつそのまま流用可能 )
 };
