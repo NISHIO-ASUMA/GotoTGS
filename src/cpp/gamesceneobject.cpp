@@ -70,7 +70,8 @@
 #include "fade.h"
 #include "result.h"
 #include "myparticle.h"
-#include <moveui.h>
+#include "moveui.h"
+#include "object3drotation.h"
 
 //*********************************************************
 // 定数名前空間
@@ -219,6 +220,9 @@ HRESULT CGameSceneObject::Init(void)
 	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
 	m_pOutSideTime->SetPointer(m_pReceptionUI);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
+
+	// 検証生成
+	CObjectRotation3D::Create({ 0.0f,60.0f,0.0f }, VECTOR3_NULL);
 
 	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");

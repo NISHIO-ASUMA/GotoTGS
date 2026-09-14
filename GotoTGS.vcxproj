@@ -280,6 +280,7 @@
     <ClCompile Include="src\cpp\object2Dmulti.cpp" />
     <ClCompile Include="src\cpp\object2Drotation.cpp" />
     <ClCompile Include="src\cpp\object3D.cpp" />
+    <ClCompile Include="src\cpp\object3drotation.cpp" />
     <ClCompile Include="src\cpp\objectX.cpp" />
     <ClCompile Include="src\cpp\outline.cpp" />
     <ClCompile Include="src\cpp\outsidetasktimer.cpp" />
@@ -312,6 +313,7 @@
     <ClCompile Include="src\cpp\playerstatetv.cpp" />
     <ClCompile Include="src\cpp\pointobject.cpp" />
     <ClCompile Include="src\cpp\police.cpp" />
+    <ClCompile Include="src\cpp\polygonmanager.cpp" />
     <ClCompile Include="src\cpp\progressgauge.cpp" />
     <ClCompile Include="src\cpp\ranking.cpp" />
     <ClCompile Include="src\cpp\rankinggraph.cpp" />
@@ -501,6 +503,7 @@
     <ClInclude Include="src\include\object2Dmulti.h" />
     <ClInclude Include="src\include\object2Drotation.h" />
     <ClInclude Include="src\include\object3D.h" />
+    <ClInclude Include="src\include\object3drotation.h" />
     <ClInclude Include="src\include\objectX.h" />
     <ClInclude Include="src\include\outline.h" />
     <ClInclude Include="src\include\outsidetasktimer.h" />
@@ -529,6 +532,7 @@
     <ClInclude Include="src\include\playerutility.h" />
     <ClInclude Include="src\include\pointobject.h" />
     <ClInclude Include="src\include\police.h" />
+    <ClInclude Include="src\include\polygonmanager.h" />
     <ClInclude Include="src\include\progressgauge.h" />
     <ClInclude Include="src\include\ranking.h" />
     <ClInclude Include="src\include\rankinggraph.h" />
