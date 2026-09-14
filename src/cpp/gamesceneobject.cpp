@@ -100,7 +100,8 @@ m_pVigilanceUImanager(nullptr),
 m_pAfk2DUI(nullptr),
 m_pReception(nullptr),
 m_pReceptionUI(nullptr),
-m_pOutSideTime(nullptr)
+m_pOutSideTime(nullptr),
+m_pOutSideOneSphere(nullptr)
 {
 
 }
@@ -193,6 +194,9 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
+	// 球形コライダーを生成
+	m_pOutSideOneSphere = CSphereCollider::Create({ 765.0f,40.0f,106.0f }, 40.0f);
+
 //*********************************************
 // ADD 西尾 : クラスに格納するポインタ等の設定
 //*********************************************
@@ -207,12 +211,13 @@ HRESULT CGameSceneObject::Init(void)
 	CManager::GetInstance()->GetCamera()->SetTargetPersonPos(m_pPlayer->GetPos());
 	CManager::GetInstance()->GetCamera()->SetBoss(m_pBoss);
 
-	// イベントを登録する ( ラムダ式 )
+	// タイマーにポインタイベントを登録する ( ラムダ式 )
 	m_pTimer->RegisterEvent([this]() {SetEventGameBoss();});
 
 	// 西尾 : タスク時間を設定
 	m_pOutSideTime = COutSideTaskTimer::Create({640.0f,-30.0f,0.0f}, 70.0f, 50.0f);
 	m_pOutSideTime->SetPlayerOwner(m_pPlayer);
+	m_pOutSideTime->SetPointer(m_pReceptionUI);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
 
 	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
@@ -231,6 +236,12 @@ void CGameSceneObject::Uninit(void)
 
 	if (m_pScoreTask)
 		m_pScoreTask->SaveScoreMinus(GAMEOBJECT::TaskFile);	// タスクスコア
+
+	// コライダーの破棄
+	m_pOutSideOneSphere.reset();
+
+	// ブロック管理クラスの破棄
+	m_pBlocks.reset();
 
 	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
@@ -264,9 +275,6 @@ void CGameSceneObject::Uninit(void)
 
 	// モブキャラクター管理クラスの終了
 	CMobCharactorManager::GetInstance()->Uninit();
-
-	// ブロック管理クラスの破棄
-	m_pBlocks.reset();
 }
 
 //=========================================================
@@ -332,18 +340,11 @@ void CGameSceneObject::Update(void)
 		CMyParticle::Create({ 0.0f,60.0f,0.0f }, COLOR_RED, 30, 30, 120, 300);
 	}
 
-	// 
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_L))
-	{
-		// 開始デバッグキー
-		
-	}
-
-	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
-	{
-		// 開始デバッグキー
-		
-	}
+	//if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_M))
+	//{
+	//	// 開始デバッグキー
+	//	
+	//}
 
 #endif // _DEBUG
 }

@@ -46,6 +46,12 @@ public:
 	void SetUse(bool bUse) { m_bUse = bUse; }
 	void SetPlayerOwner(CPlayer* pOwner = nullptr) { m_pPlayerOwner = pOwner; }
 
+	/// <summary>
+	/// 変更のリセット関数
+	/// </summary>
+	/// <param name=""></param>
+	void Reset(void);
+
 	// 当たり判定関数
 	bool CollisionSphere(CSphereCollider* pOther);
 	bool GetDisplay(void) { return m_bDisplay; }

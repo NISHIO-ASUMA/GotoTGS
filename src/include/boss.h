@@ -115,9 +115,10 @@ private:
 	//***************************
 	struct Eyesight
 	{
-		static constexpr float EYE_RADIUS = 300.0f;		// ‹ŠE‚Ì“Í‚­‹——£
-		static constexpr float EYE_ANGLE = 90.0f;		// ‹–ìŠp
-		static constexpr float EYE_HEIGHT = 50.0f;		// ‹ŠE‚Ì‚‚³§ŒÀ
+		static constexpr float EYE_RADIUS = 300.0f;			// ‹ŠE‚Ì“Í‚­‹——£
+		static constexpr float EYE_RADIUS_CHAKE = 60.0f;	// Šm”F”ÍˆÍ
+		static constexpr float EYE_ANGLE = 40.0f;			// ‹–ìŠp
+		static constexpr float EYE_HEIGHT = 50.0f;			// ‹ŠE‚Ì‚‚³§ŒÀ
 	};
 
 private:

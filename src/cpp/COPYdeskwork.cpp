@@ -65,9 +65,6 @@ CCOPYDeskwork* CCOPYDeskwork::Create(const D3DXVECTOR3& pos, const bool& bUse)
 //=========================================================
 HRESULT CCOPYDeskwork::Init(void)
 {
-	// 乱数の種
-	srand((unsigned int)time(0));
-
 	for (int nCount = 0; nCount < TEXTURE_MAX; nCount++)
 	{
 		// ポインタの初期化
@@ -337,11 +334,10 @@ void CCOPYDeskwork::Task(const auto& pClear)
 		}
 
 		// スコア加算
-		pScore->AddScoreMinus(-100);
+		pScore->AddScoreMinus(-500);
 
 		// こなしたタスクの数を増やす
 		pGaugeneedle->AddTask();
-
 	}
 
 	// こなしたコピー機タスクの数を一つ増やす

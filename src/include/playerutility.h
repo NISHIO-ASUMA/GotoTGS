@@ -44,6 +44,7 @@
 #include "afkbattime.h"
 #include "enemymanager.h"
 #include "enemystatebase.h"
+#include "receptionist.h"
 
 //*********************************************************
 // Šî–{‚Ìî•ñ‚ğ•Û‚µ‚Ä‚¢‚é–¼‘O‹óŠÔ

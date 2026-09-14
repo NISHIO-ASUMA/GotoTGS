@@ -17,6 +17,7 @@
 //*********************************************************
 #include "boxcollider.h"
 #include "spherecollider.h"
+#include "motion.h"
 
 //*********************************************************
 // 定数名前空間
@@ -26,6 +27,7 @@ namespace RECEPTION_INFO
 	constexpr const char* MOTION_NAME = "data/MOTION/Reception/ReceptionMotion.txt";
 	constexpr float S_SIZE = 40.0f;
 	const D3DXVECTOR3 B_SIZE = { 50.0f,50.0f,50.0f };
+	constexpr int TIME = 80;
 };
 
 //========================================================
@@ -34,7 +36,9 @@ namespace RECEPTION_INFO
 CReceptionist::CReceptionist(int nPriority) : CNoMoveCharactor(nPriority),
 m_pBoxColiider(nullptr),
 m_pSphereColiider(nullptr),
-m_nGetTaskPaperNum(NULL)
+m_nGetTaskPaperNum(NULL),
+m_nActionTime(NULL),
+m_isChange(false)
 {
 }
 //========================================================
@@ -109,7 +113,22 @@ void CReceptionist::Uninit(void)
 void CReceptionist::Update(void)
 {
 	// モーション変更したら一定時間カウント後、元に戻す
+	if (m_isChange)
+	{
+		m_nActionTime--;
 
+		// モーション変更
+		GetMotion()->SetMotion(MOTION::ACTION, true, 3);
+
+		// 0以下
+		if (m_nActionTime <= 0)
+		{
+			m_nActionTime = 0;
+			m_isChange = false;
+			GetMotion()->SetMotion(MOTION::NEUTRAL, true, 3);
+			return;
+		}
+	}
 
 	// コライダーの位置更新
 	if (m_pSphereColiider)
@@ -131,4 +150,13 @@ void CReceptionist::Draw(void)
 {
 	// 親クラスの描画処理
 	CNoMoveCharactor::Draw();
+}
+//========================================================
+// アクション変更関数
+//========================================================
+void CReceptionist::ChangeAction(void)
+{
+	// 各種変更動作の設定
+	m_nActionTime = RECEPTION_INFO::TIME;
+	m_isChange = true;
 }

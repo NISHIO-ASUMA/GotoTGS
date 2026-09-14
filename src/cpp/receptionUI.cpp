@@ -197,6 +197,17 @@ void CReceptionUI::Draw(void)
 	if (m_bDisplay) CObject2D::Draw();
 }
 //=========================================================
+// リセット関数
+//=========================================================
+void CReceptionUI::Reset(void)
+{
+	// 報告終わっているので、テクスチャを元に戻す
+	SetTexture(ReceptionUI::OPEN_Texture);
+
+	// 描画をoffにする ( 一応 )
+	m_bDisplay = false;
+}
+//=========================================================
 // 球形当たり判定処理
 //=========================================================
 bool CReceptionUI::CollisionSphere(CSphereCollider* pOther)

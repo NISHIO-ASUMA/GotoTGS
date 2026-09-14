@@ -16,6 +16,6 @@
 namespace CLIENT_INFO
 {
 	constexpr const char* MOTIONNAME = "data/MOTION/Client/ClientMotion.txt";
-	constexpr int MAX_CHANGETIME = 180;
+	constexpr int MAX_CHANGETIME = 100;
 	constexpr float SPHERESIZE = 50.0f;
 };

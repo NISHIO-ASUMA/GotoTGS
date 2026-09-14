@@ -88,6 +88,9 @@ CManager* CManager::GetInstance(void)
 //=========================================================
 HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 {
+	// 乱数の種を生成
+	srand((unsigned int)time(0));
+
 	// キーボードオブジェクトの生成処理
 	m_pInputKeyboard = std::make_unique<CInputKeyboard>();
 	if (FAILED(m_pInputKeyboard->Init(hInstance, hWnd))) return E_FAIL;

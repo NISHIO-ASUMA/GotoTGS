@@ -73,6 +73,7 @@ m_isCatchEnemy(false),
 m_nControlTypes(CONTROLTYPE_NONE),
 m_isEnableLazy(false),
 m_isSetOutSideTask(false),
+m_isCompOpenEnable(false),
 m_nDeathTimer(NULL),
 m_nInitTaskWorkingTime(NULL),
 m_nNoActiveTaskTime(NULL),
@@ -178,9 +179,9 @@ HRESULT CPlayer::Init(void)
 	m_isPcWork = false;
 	m_isCatchEnemy = false;
 
-// デバック状態
+	// デバック状態
 #ifdef _DEBUG
-	m_isSetOutSideTask = true;
+	m_isSetOutSideTask = false;
 
 // リリース状態
 #else
@@ -545,7 +546,7 @@ void CPlayer::Update(void)
 
 					break;
 
-				case CWorldUICollision::TYPE_INSIDE: // 受付人[add 髙橋]
+				case CWorldUICollision::TYPE_INSIDE: // オフィス内の受付人 [add 髙橋]
 
 					// タスクが終わっていて尚且つ外出できる状態なら
 					if (pDesk->GetOutsideDesk()->GetTaskNow() != true && pDesk->GetOutsideDesk()->GetGoOutside() != false)
@@ -555,6 +556,7 @@ void CPlayer::Update(void)
 
 						// 扉を閉じる
 						m_isSetOutSideTask = false;
+						m_isCompOpenEnable = false;
 
 						// サイドに開くドアの当たり判定
 						const auto& SideDoorManager = CSideOpenDoorManager::GetInstance();
@@ -566,6 +568,10 @@ void CPlayer::Update(void)
 						// 外の監査人の状態を一括変更する
 						CAuditorManager::GetInstance()->ChangeSystemNeutral();
 
+						// 受付人のモーション変更
+						auto* pRecep = CGameSceneObject::GetInstance()->GetReception();
+						pRecep->ChangeAction();
+
 						// タイマーからのuiの表示をoffにする
 						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
 						if (!pTimer) return;
@@ -575,11 +581,12 @@ void CPlayer::Update(void)
 						break;
 					}
 
-					// 両方がnullじゃない状態
+					// 両方がnullじゃない状態の時、起動する
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0) && !m_isSetOutSideTask)
 					{
-						// 扉を開ける状態にする
-						m_isSetOutSideTask = true;
+						// 扉の状態変更設定
+						m_isSetOutSideTask = true;   // 行きのドア解放フラグ
+						m_isCompOpenEnable = true;   // 帰りのドア解放フラグ
 
 						// セリフを表示する
 						pReceptionUI->GetLineUI()->SetDrawFlags(true);
@@ -590,18 +597,26 @@ void CPlayer::Update(void)
 						// タスクの時間起動
 						CGameSceneObject::GetInstance()->GetOutSideTime()->Start();
 
+						// 受付人のモーション変更
+						auto* pRecep = CGameSceneObject::GetInstance()->GetReception();
+						pRecep->ChangeAction();
+
 						// サウンド再生
 						CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_STARTOUTSIDE_SE);
 					}
 
 					break;
 
-				case CWorldUICollision::TYPE_OUTSIDE: // 外出タスク[add 髙橋]
+				case CWorldUICollision::TYPE_OUTSIDE: // 外出タスク [add 髙橋]
 
-					// 両方がnullじゃない状態
+					// nullじゃなかったら
 					if (pDesk)
 					{
+						// 外タスク関連
 						pDesk->GetOutsideDesk()->TaskSystem();
+
+						// "外で報告してオフィス内のドアを開けれる"フラグを有効化する
+						m_isCompOpenEnable = true;
 					}
 					break;
 
@@ -631,6 +646,9 @@ void CPlayer::Update(void)
 
 	// AFKの2DUI更新処理
 	UpdateAfkUiState();
+
+	// 外の球との当たり判定
+	UpdateOutSideOneCollision();
 
 	// ブロックとの判定
 	UpdateBlockCollision(UpdatePos);
@@ -1443,15 +1461,21 @@ void CPlayer::UpdateAutoDoorCollision(D3DXVECTOR3 pos)
 //=========================================================
 void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad)
 {
-	// もし"外回りタスク"が起動されていないなら
+	// ドア解放フラグ による判別
 	if (!m_isSetOutSideTask)
+	{
+		return;
+	}
+
+	// 書類を渡していない場合はドアを開けられない
+	if (!m_isCompOpenEnable)
 	{
 		return;
 	}
 
 	// ポインタ取得
 	auto* pSideDoorCollision = CSideOpenDoorCollision::GetInstance();
-	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();	
+	auto* pSideDoorManager = CSideOpenDoorManager::GetInstance();
 	if (!pSideDoorCollision || !pSideDoorManager) return;
 
 	// 判定チェック
@@ -1484,6 +1508,32 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 			// 当たったコライダーのインデックスを渡して指定数のドアを開ける
 			pSideDoorManager->OpenSideDoor(ColliderData->targetDoorIndices);
 			break;
+		}
+	}
+}
+//=========================================================
+// 自動ドアの外の球との当たり判定
+//=========================================================
+void CPlayer::UpdateOutSideOneCollision(void)
+{
+	// nullチェック
+	if (!m_pSphereCollider) return;
+
+	// コライダーの取得
+	auto* pCollider = CGameSceneObject::GetInstance()->GetGameCollider();
+	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+
+	// 当たっているなら
+	if (CollisionSphere(pCollider))
+	{
+		// もしtrue かつ 書類を提出していなかったら( 1枚でも残っていたら )
+		if (m_isCompOpenEnable && pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0)
+		{
+			// フラグoff
+			m_isCompOpenEnable = false;
+
+			// オフィス内のドアを強制的に閉じる
+			CSideOpenDoorManager::GetInstance()->CloseDoorInOffice();
 		}
 	}
 }

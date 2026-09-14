@@ -41,7 +41,8 @@ namespace Client
 CClientManager::CClientManager() : m_pClient{},
 m_pPointObject{},
 m_pOutsideUI{},
-m_pMeshCylinder{}
+m_pMeshCylinder{},
+m_nNowIndex(NULL)
 {
 
 }
@@ -63,7 +64,7 @@ HRESULT CClientManager::Init(void)
 
 	//****************************************************
 	// 髙橋追加
-	//***************************************************
+	//****************************************************
 
 	// 人数分生成する
 	for (int nCount = 0; nCount < CLIENT_MAX; nCount++)
@@ -106,10 +107,13 @@ HRESULT CClientManager::Init(void)
 		pos.y = m_pos[nCount].y + Client::ARROW_HEIGHT;
 
 		// クライアントの位置を示す矢印の生成
-		m_pPointObject[nCount] = CPointObject::Create(pos,
+		m_pPointObject[nCount] = CPointObject::Create
+		(
+			pos,
 			D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
 			D3DXVECTOR3(HALF, HALF, HALF),
-			"STAGEOBJ/yajirusi.x");
+			"STAGEOBJ/yajirusi.x"
+		);
 
 		// 非表示の状態にする
 		m_pPointObject[nCount]->SetIsDraw(false);
@@ -118,7 +122,6 @@ HRESULT CClientManager::Init(void)
 	
 	return S_OK;
 }
-
 //========================================================
 // 終了処理
 //========================================================
@@ -127,7 +130,6 @@ void CClientManager::Uninit(void)
 	// ポイントのクリア
 	m_pClient.clear();
 }
-
 //========================================================
 // 更新処理
 //========================================================
@@ -135,16 +137,16 @@ void CClientManager::Update(void)
 {
 
 }
-
 //========================================================
 // クライアントの設定処理
 //========================================================
 void CClientManager::SetClient(void)
 {
-	// 乱数の種
-	srand((unsigned int)time(0));
-
+	// ランダム設定
 	int nNowClient = rand() % CLIENT_MAX;
+
+	// インデックスの番号格納
+	m_nNowIndex = nNowClient;
 
 	// 表示する状態にする
 	m_pPointObject[nNowClient]->SetIsDraw(true);
@@ -153,7 +155,6 @@ void CClientManager::SetClient(void)
 	// [ADD : 西尾] メッシュの描画起動
 	m_pMeshCylinder[nNowClient]->SetIsDraw(true);
 }
-
 //========================================================
 // クライアントの削除処理
 //========================================================
@@ -169,7 +170,14 @@ void CClientManager::ClearClient(void)
 		m_pMeshCylinder[nCount]->SetIsDraw(false);
 	}
 }
-
+//========================================================
+// アクティブなクライアントの状態変更 [ ADD : 西尾 ]
+//========================================================
+void CClientManager::ActiveChangeSystem(void)
+{
+	// 該当のキャラクターだけアクションする
+	m_pClient[m_nNowIndex]->ActionSet();
+}
 //========================================================
 // マネージャー内での生成処理
 //========================================================

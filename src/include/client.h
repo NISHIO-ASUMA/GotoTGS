@@ -35,7 +35,6 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 	void ActionSet(void);
-	void Reset(void);
 
 	/// <summary>
 	/// “–‚½‚è”»’è

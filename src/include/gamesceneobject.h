@@ -26,6 +26,7 @@ class CPlayer;				// Asuma
 class CReceptionist;		// Asuma
 class CBoss;				// Asuma
 class COutSideTaskTimer;	// Asuma
+class CSphereCollider;		// Asuma
 
 class CDeskwork;			// Misaki
 class CProgressgauge;		// Misaki
@@ -60,18 +61,19 @@ public:
 	CScore* GetScoreAllGame(void) const { return m_pScoreAll; }	// 今現在ゲームで表示している物
 //*********************************
 
-	CGametime* GetTime(void) const { return m_pTimer; }											// Asuma
-	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }							// Asuma
-	CPlayer* GetPlayer(void) const { return m_pPlayer; }										// Asuma
-	CReceptionist* GetReception(void) const { return m_pReception; }							// Asuma
-	CAfk2DUI* GetAfk2DUIPointer(void) const { return m_pAfk2DUI; }								// Asuma
-	CBoss* GetBoss(void) const { return m_pBoss; }												// Asuma
+	CBoss* GetBoss(void) const { return m_pBoss; }											// Asuma
+	CGametime* GetTime(void) const { return m_pTimer; }										// Asuma
+	CPlayer* GetPlayer(void) const { return m_pPlayer; }									// Asuma
+	COutSideTaskTimer* GetOutSideTime(void) { return m_pOutSideTime; }						// Asuma
+	CReceptionist* GetReception(void) const { return m_pReception; }						// Asuma
+	CAfk2DUI* GetAfk2DUIPointer(void) const { return m_pAfk2DUI; }							// Asuma
+	CSphereCollider* GetGameCollider(void) const { return m_pOutSideOneSphere.get(); }		// Asuma
 
-	CDeskwork* GetDesk(void) const { return m_pDeskwork; }										// Misaki
-	CEventUI* GetEventUI(void) const { return m_pEventUI; }										// Misaki
-	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }					// Misaki
-	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }		// Misaki
-	CReceptionUI* GetReceptionUI(void) const { return m_pReceptionUI; }							// Misaki
+	CDeskwork* GetDesk(void) const { return m_pDeskwork; }									// Misaki
+	CEventUI* GetEventUI(void) const { return m_pEventUI; }									// Misaki
+	CProgressgauge* GetProgressgauge(void) const { return m_pProgressgauge; }				// Misaki
+	CVigilanceUIManager* GetVigilanceUIManager(void)const { return m_pVigilanceUImanager; }	// Misaki
+	CReceptionUI* GetReceptionUI(void) const { return m_pReceptionUI; }						// Misaki
 
 	/// <summary>
 	/// インスタンス取得処理
@@ -82,8 +84,8 @@ public:
 
 private:
 
-	CGameSceneObject();			// コンストラクタ
-	void CreatePointer(void);	// 初期化処理関数分け
+	CGameSceneObject();								// コンストラクタ
+	void CreatePointer(void);						// 初期化処理関数分け
 
 private:
 	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
@@ -99,11 +101,12 @@ private:
 	CReceptionUI* m_pReceptionUI;					// 受付人UIのポインタ			Misaki
 
 private:
-	CPlayer* m_pPlayer;								// プレイヤーのクラスポインタ	[ Asuma add ]
-	CReceptionist* m_pReception;					// 外に行く受付人				[ Asuma Add ]
-	CAfk2DUI* m_pAfk2DUI;							// サボりの2DUI					[ Asuma Add ]
-	CBoss* m_pBoss;									// 社長キャラクター				[ Asuma Add ]
-	COutSideTaskTimer* m_pOutSideTime;				// 外タスク時間					[ Asuma Add ]
-
-	std::unique_ptr<CBlockManager>m_pBlocks;		// ブロックマネージャークラスのポインタ
+	CPlayer* m_pPlayer;										// プレイヤーのクラスポインタ	[ Asuma add ]
+	CReceptionist* m_pReception;							// 外に行く受付人				[ Asuma Add ]
+	CAfk2DUI* m_pAfk2DUI;									// サボりの2DUI					[ Asuma Add ]
+	CBoss* m_pBoss;											// 社長キャラクター				[ Asuma Add ]
+	COutSideTaskTimer* m_pOutSideTime;						// 外タスク時間					[ Asuma Add ]
+	
+	std::unique_ptr<CSphereCollider>m_pOutSideOneSphere;	// 外の一個の球					[ Asuma Add ]
+	std::unique_ptr<CBlockManager>m_pBlocks;				// ブロック管理クラスのポインタ [ Asuma Add ]
 };

@@ -410,7 +410,7 @@ bool CBoss::CheckEyesight(void)
 	diff.y = 0.0f;
 	float sqrDistance = D3DXVec3LengthSq(&diff);
 
-	if (sqrDistance > Eyesight::EYE_RADIUS * Eyesight::EYE_RADIUS) return false;
+	if (sqrDistance > Eyesight::EYE_RADIUS_CHAKE * Eyesight::EYE_RADIUS_CHAKE) return false;
 	if (sqrDistance < 0.0001f) return true;
 
 	// Šp“x”»’è

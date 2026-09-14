@@ -241,6 +241,12 @@ public:
 	void UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoyPad* pad);
 
 	/// <summary>
+	/// 自動ドアの先の球形との当たり判定
+	/// </summary>
+	/// <param name="pOther"></param>
+	void UpdateOutSideOneCollision(void);
+
+	/// <summary>
 	/// テレビの方を向く関数
 	/// </summary>
 	/// <param name=""></param>
@@ -316,7 +322,7 @@ private:
 	std::unique_ptr<CModel> m_pSubItemModels; // 特定動作時に持たせるモデル
 	int m_nControlTypes;					  // 操作種類
 	bool m_isPcWork;						  // デスクワークかどうか
-	bool m_isCopyMachine;						// コピー機起動中
+	bool m_isCopyMachine;					  // コピー機起動中
 
 	// 西尾追加
 	bool m_isCatchEnemy;						// 上司に捕まってしまった判定
@@ -324,6 +330,7 @@ private:
 	bool m_isSetOutSideTask;					// 「外回りタスクを開始したか」どうか
 	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
 	bool m_isInitTaskTime;						// 初期のタスク時間判別フラグ
+	bool m_isCompOpenEnable;					// ドア関係
 
 	int m_nInitTaskWorkingTime;					// 初期の許容時間
 	int m_nNoActiveTaskTime;					// タスク起動をしていない時間を管理する

@@ -133,7 +133,6 @@ void COutsideWork::EndOutside(void)
 
 	// 外出できない状態にする
 	m_bGoOutside = false;
-
 }
 
 //=========================================================
@@ -153,7 +152,9 @@ void COutsideWork::TaskSystem(void)
 	// 受付人UIの情報を取得
 	auto* pReceptionUI = CGameSceneObject::GetInstance()->GetReceptionUI();
 
-	// クライアントを非表示する
+	// クライアントについているUIを非表示する
 	pReceptionUI->GetClientManager()->ClearClient();
 
+	// 該当のキャラクターだけ演出変更
+	pReceptionUI->GetClientManager()->ActiveChangeSystem();
 }

@@ -40,7 +40,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
-
+	void ChangeAction(void);
 	
 	void SetTaskPaperNum(const int nPaper) { m_nGetTaskPaperNum = nPaper; }
 	int GetTaskPaperNum(void) const { return m_nGetTaskPaperNum; }
@@ -75,4 +75,6 @@ private:
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
 private:
 	int m_nGetTaskPaperNum;								// 受け取るタスクの枚数
+	int m_nActionTime;									// 動作時間
+	bool m_isChange;									// 変更フラグ
 };

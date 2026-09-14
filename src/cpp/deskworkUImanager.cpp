@@ -97,9 +97,7 @@ void CDeskworkUIManager::Uninit(void)
 // XVˆ—
 //=========================================================
 void CDeskworkUIManager::Update(void)
-{	
-	// —”‚Ìí
-	srand((unsigned int)time(0));
+{
 }
 
 //=========================================================

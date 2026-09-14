@@ -28,6 +28,7 @@ class CPlayer;
 class CUi;
 class CReturnOfficeUi;
 class CMoveUi;
+class CReceptionUI;
 
 //*********************************************************
 // 外タスクのタイマークラスを定義
@@ -66,6 +67,8 @@ public:
 	/// </summary>
 	/// <param name="Event"></param>
 	void RegisterEvent(std::function<void(void)> Event) { m_event = Event; }
+
+	void SetPointer(CReceptionUI* pPointer = nullptr) { m_pOutSideUiPoint = pPointer; }
 
 	inline void SetActiveFlag(bool isFlags) { m_isActive = isFlags; }
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
@@ -131,7 +134,9 @@ private:
 	CUi* m_pUi;											// uiクラス
 	CReturnOfficeUi* m_pReturnUi;						// 帰ってくる警告uiクラス
 	CMoveUi* m_pMoveUi;									// 動くui
+	CReceptionUI* m_pOutSideUiPoint;					// 外部のuiクラスのポインタ
 
+private:
 	D3DXVECTOR3 m_pos;									// 位置
 	TIMESTATE m_State;									// 状態変更
 

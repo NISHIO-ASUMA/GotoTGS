@@ -24,6 +24,7 @@
 #include "ui.h"
 #include "returnofficeui.h"
 #include "moveui.h"
+#include "receptionUI.h"
 
 //=========================================================
 // コンストラクタ
@@ -41,6 +42,7 @@ m_pPlayerOwner(nullptr),
 m_pReturnUi(nullptr),
 m_pUi(nullptr),
 m_pMoveUi(nullptr),
+m_pOutSideUiPoint(nullptr),
 m_event{}
 {
 	// ポインタ初期化
@@ -246,6 +248,9 @@ void COutSideTaskTimer::End(void)
 
 	// uiのstate切り替え
 	m_pMoveUi->SetState(CMoveUi::STATE::MOVE_RIGHT);
+
+	// 特定のuiの状態を変更する
+	m_pOutSideUiPoint->Reset();
 }
 //=========================================================
 // 桁数の更新関数

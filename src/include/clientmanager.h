@@ -30,6 +30,9 @@ class CClientManager
 {
 public:
 
+	//***********************
+	// 人数の管理列挙型
+	//***********************
 	enum CLIENT
 	{// 人数
 		CLIENT_1 = 0,	// 1人目
@@ -47,6 +50,7 @@ public:
 	// 設定処理
 	void SetClient(void);
 	void ClearClient(void);
+	void ActiveChangeSystem(void);
 
 	/// <summary>
 	/// シングルトン取得処理
@@ -114,10 +118,15 @@ private:
 		{ 0.0f,D3DX_PI * 0.5f,0.0f }
 	};
 
+private:
 	// 外のクライアント役の配列
 	std::vector<CClient*> m_pClient;
 
+private:
 	CPointObject* m_pPointObject[CLIENT_MAX];	// 矢印のポインタ
 	COutsideUI* m_pOutsideUI[CLIENT_MAX];		// UIのポインタ
 	CMeshCylinder* m_pMeshCylinder[CLIENT_MAX]; // 円柱の配列
+
+private:
+	int m_nNowIndex;							// ランダムで出された番号
 };

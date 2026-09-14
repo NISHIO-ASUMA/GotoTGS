@@ -235,7 +235,7 @@ void CAuditor::ChaseMove(void)
 	D3DXVec3Normalize(&moveVec, &vecToTarget);
 
 	// ˆÚ“®—Ê
-	moveVec *= 3.5f;
+	moveVec *= 4.0f;
 	SetMove(moveVec);
 
 	// ˆÚ“®ƒ‚[ƒVƒ‡ƒ“‚ğİ’è
