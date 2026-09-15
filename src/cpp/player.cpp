@@ -181,7 +181,7 @@ HRESULT CPlayer::Init(void)
 
 	// デバック状態
 #ifdef _DEBUG
-	m_isSetOutSideTask = true;
+	m_isSetOutSideTask = false;
 
 // リリース状態
 #else
