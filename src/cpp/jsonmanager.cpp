@@ -50,7 +50,7 @@ namespace PATH_TAGNAME
 	constexpr const char* WALL			= "Wall";		// 壁モデルパラメータ
 	constexpr const char* ENEMY			= "Enemy";		// 敵モデルパラメータ
 	constexpr const char* AUDITOR		= "Auditor";	// 監査役パラメータ
-
+	constexpr const char* POLYGON		= "3DPolygon";	// ポリゴンパラメータ
 };
 
 //=========================================================

@@ -48,7 +48,7 @@ CObjectRotation3D::~CObjectRotation3D()
 //=========================================================
 // ポインタ生成処理
 //=========================================================
-CObjectRotation3D* CObjectRotation3D::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot)
+CObjectRotation3D* CObjectRotation3D::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3DXVECTOR2& Size)
 {
 	// インスタンス生成
 	CObjectRotation3D* pObject = new CObjectRotation3D;
@@ -61,7 +61,7 @@ CObjectRotation3D* CObjectRotation3D::Create(const D3DXVECTOR3& pos, const D3DXV
 	// 各種設定
 	pObject->SetPos(pos);
 	pObject->SetRot(rot);
-	pObject->SetSize(100.0f, 100.0f);
+	pObject->SetSize(Size.x, Size.y);
 	pObject->SetTexture("arrow_base.png");
 
 	// 生成されたポインタを返す
@@ -135,7 +135,7 @@ void CObjectRotation3D::Uninit(void)
 	CObject::Release();
 }
 //=========================================================
-// 更新処理 ( 実際の適用と角度の適用とマトリックスの更新 )
+// 更新処理
 //=========================================================
 void CObjectRotation3D::Update(void)
 {
@@ -186,6 +186,9 @@ void CObjectRotation3D::Update(void)
 	// 行列計算
 	m_mtxWorld = mtxRot * mtxTrans;
 #else
+
+	if (!m_isDraw) return;
+
 	// バッファチェック
 	if (!m_pVtxBuff) return;
 
@@ -196,8 +199,8 @@ void CObjectRotation3D::Update(void)
 	if (SUCCEEDED(m_pVtxBuff->Lock(0, 0, (void**)&pVtx, D3DLOCK_DISCARD)))
 	{
 		// 半分の値
-		float fHalfW = m_fWidth * 0.5f;
-		float fHalfH = m_fHeight * 0.5f;
+		float fHalfW = m_fWidth;
+		float fHalfH = m_fHeight;
 
 		// 頂点の設定
 		pVtx[0].pos = D3DXVECTOR3(-fHalfW, 0.0f, fHalfH);
@@ -245,6 +248,8 @@ void CObjectRotation3D::Update(void)
 //=========================================================
 void CObjectRotation3D::Draw(void)
 {
+	if (!m_isDraw) return;
+
 	// デバイスポインタを宣言
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 

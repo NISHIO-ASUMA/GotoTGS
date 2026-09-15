@@ -68,7 +68,7 @@ HRESULT CSideOpenDoorManager::Init(void)
 	// トイレのドア
 	m_pSideOpenDoors.push_back(CSideOpenDoor::Create
 								(D3DXVECTOR3(609.0f, 49.0f, -122.0f),
-								(D3DXVECTOR3(0.0f, 3.14f, 0.0f)),
+								(D3DXVECTOR3(0.0f, D3DX_PI, 0.0f)),
 								(D3DXVECTOR3(3.0f, 3.0f, 1.0f)),
 								SIDEMANAGER::TOILEMODELNAME,
 								CSideOpenDoor::OPENTYPE_RIGHT));

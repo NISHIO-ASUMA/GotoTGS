@@ -27,7 +27,7 @@
 namespace SIDEDOOR_INFO
 {
 	constexpr float MAX_ROTATION = 90.0f; // 最大角度
-	constexpr int MAX_DOOR_CLOSETIME = 240; // 閉まる最大時間
+	constexpr int MAX_DOOR_CLOSETIME = 200; // 閉まる最大時間
 };
 
 //=========================================================
@@ -161,7 +161,7 @@ void CSideOpenDoor::Update(void)
 		break;
 
 	case STATE_RETURN:
-		m_fAngle -= 0.03f; // 閉じるスピード
+		m_fAngle -= 0.06f; // 閉じるスピード
 
 		if (m_fAngle <= 0.0f)
 		{
@@ -173,7 +173,7 @@ void CSideOpenDoor::Update(void)
 	case STATE_CLOSE_WAIT:
 		
 		m_nReturnCount++;
-
+		
 		if (m_nReturnCount >= 5)
 		{
 			m_nReturnCount = 0;

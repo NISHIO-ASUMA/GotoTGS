@@ -15,6 +15,7 @@
 //=========================================================
 D3DXVECTOR3 CJsonConverter::ConverterVec3(const JsonUtil::json& JsonData, const char* KeyName)
 {
+	// •Ï”éŒ¾‚Æ‰Šú‰»
 	D3DXVECTOR3 Localvec3 = VECTOR3_NULL;
 
 	// json‚©‚ç“Ç‚İæ‚Á‚½’l‚ğ”½‰f
@@ -23,6 +24,21 @@ D3DXVECTOR3 CJsonConverter::ConverterVec3(const JsonUtil::json& JsonData, const 
 	Localvec3.z = JsonData[KeyName][2];
 
 	return Localvec3;
+}
+//=========================================================
+// VECTOR2Œ^‚Ì•Ï”î•ñ‚ğ•Ô‚·
+//=========================================================
+D3DXVECTOR2 CJsonConverter::ConverterVec2(const JsonUtil::json& JsonData, const char* KeyName)
+{
+	// •Ï”éŒ¾‚Æ‰Šú‰»
+	D3DXVECTOR2 Localvec2 = VECTOR2_NULL;
+
+	// json‚©‚ç“Ç‚İæ‚Á‚½’l‚ğ”½‰f
+	Localvec2.x = JsonData[KeyName][0];
+	Localvec2.y = JsonData[KeyName][1];
+
+	// •ÏŠ·‚³‚ê‚½’l‚ğ•Ô‚·
+	return Localvec2;
 }
 //=========================================================
 // intŒ^‚Ì•Ï”î•ñ‚ğ•Ô‚·

@@ -36,8 +36,9 @@ public:
 	/// </summary>
 	/// <param name="pos">ê∂ê¨ç¿ïW</param>
 	/// <param name="rot">âÒì]</param>
+	/// <param name="Size">ëÂÇ´Ç≥</param>
 	/// <returns></returns>
-	static CObjectRotation3D* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot);
+	static CObjectRotation3D* Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& rot, const D3DXVECTOR2& Size = {50.0f,50.0f});
 
 public:
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }

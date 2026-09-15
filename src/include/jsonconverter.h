@@ -43,6 +43,14 @@ public:
 	static D3DXVECTOR3 ConverterVec3(const JsonUtil::json& JsonData, const char* KeyName);
 
 	/// <summary>
+	/// VECTOR2型の変換関数
+	/// </summary>
+	/// <param name="JsonData">jsonデータ</param>
+	/// <param name="KeyName">キーの名前</param>
+	/// <returns></returns>
+	static D3DXVECTOR2 ConverterVec2(const JsonUtil::json& JsonData, const char* KeyName);
+
+	/// <summary>
 	/// int型の変換関数
 	/// </summary>
 	/// <param name="JsonData">jsonデータ</param>

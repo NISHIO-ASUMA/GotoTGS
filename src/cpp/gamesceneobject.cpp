@@ -72,6 +72,7 @@
 #include "myparticle.h"
 #include "moveui.h"
 #include "object3drotation.h"
+#include "polygonmanager.h"
 
 //*********************************************************
 // 定数名前空間
@@ -195,8 +196,11 @@ HRESULT CGameSceneObject::Init(void)
 	// モブキャラクター管理クラスを追加
 	CMobCharactorManager::GetInstance()->Init();
 
+	// ガイドの→3dポリゴンの生成
+	CPolygonManager::GetInstance()->Init();
+
 	// 球形コライダーを生成
-	m_pOutSideOneSphere = CSphereCollider::Create({ 765.0f,40.0f,106.0f }, 40.0f);
+	m_pOutSideOneSphere = CSphereCollider::Create({ 700.0f,40.0f,100.0f }, 50.0f);
 
 //*********************************************
 // ADD 西尾 : クラスに格納するポインタ等の設定
@@ -221,9 +225,6 @@ HRESULT CGameSceneObject::Init(void)
 	m_pOutSideTime->SetPointer(m_pReceptionUI);
 	m_pOutSideTime->RegisterEvent([]() {CAuditorManager::GetInstance()->ChangeSystem();});
 
-	// 検証生成
-	CObjectRotation3D::Create({ 0.0f,60.0f,0.0f }, VECTOR3_NULL);
-
 	//// 西尾追加 : アニメーション再生関数を設定する ( これは全てが完成してから起動する )
 	//CManager::GetInstance()->GetCamera()->LoadAnimation("data/CAMERA/camera_anim.txt");
 	return S_OK;
@@ -246,6 +247,9 @@ void CGameSceneObject::Uninit(void)
 
 	// ブロック管理クラスの破棄
 	m_pBlocks.reset();
+
+	// ポリゴン管理クラスの破棄
+	CPolygonManager::GetInstance()->Uninit();
 
 	// タスクの判定を取る球形コライダー管理クラスを破棄
 	CWorldUICollision::GetInstance()->Uninit();
@@ -340,6 +344,9 @@ void CGameSceneObject::Update(void)
 	// 
 	if (CManager::GetInstance()->GetInputKeyboard()->GetTrigger(DIK_N))
 	{
+		// ポリゴン管理クラスの状態変更
+		//CPolygonManager::GetInstance()->ChangeDrawFalg(0,false);
+
 		// パーティクル ( これはレベルアップ、ダウンしたとき敵に付けたりして演出させる )
 		CMyParticle::Create({ 0.0f,60.0f,0.0f }, COLOR_RED, 30, 30, 120, 300);
 	}

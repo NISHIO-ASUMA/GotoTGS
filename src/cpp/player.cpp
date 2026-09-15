@@ -1512,7 +1512,7 @@ void CPlayer::UpdateSideDoorCollision(D3DXVECTOR3 pos, CInputKeyboard* key, CJoy
 	}
 }
 //=========================================================
-// 自動ドアの外の球との当たり判定
+// 自動ドアの「外の球」との当たり判定
 //=========================================================
 void CPlayer::UpdateOutSideOneCollision(void)
 {
