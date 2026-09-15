@@ -45,39 +45,42 @@ CPolygonManager::~CPolygonManager()
 //=========================================================
 HRESULT CPolygonManager::Init(void)
 {
-	// 配列に要素の追加を行う ( 0グループ : Left[1番遠い] )
-	AddPolygon(0, { 817.0f,5.0f,283.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 817.0f,5.0f,483.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 817.0f,5.0f,683.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 817.0f,5.0f,883.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 850.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f },{ 15.0f,45.0f });
-	AddPolygon(0, { 1050.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 1250.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 1450.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 1650.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 1850.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(0, { 2050.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	// 読み込み処理
+	Load();
 
-	// 配列に要素の追加を行う ( 1グループ : right[2番目に遠い] )
-	AddPolygon(1, { 817.0f,5.0f,-50.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 817.0f,5.0f,-250.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 880.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1080.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1280.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1400.0f,5.0f,-450.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1480.0f,5.0f,-560.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1560.0f,5.0f,-670.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(1, { 1750.0f,5.0f,-800.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
-	AddPolygon(1, { 1900.0f,5.0f,-800.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
+	//// 配列に要素の追加を行う ( 0グループ : near[一番近い] )
+	//AddPolygon(0, { 817.0f,5.0f,-50.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(0, { 817.0f,5.0f,-250.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(0, { 880.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(0, { 1040.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
+	//AddPolygon(0, { 1180.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
+	//AddPolygon(0, { 1285.0f,5.0f,-420.0f }, { 0.0f,D3DX_PI,0.0f }, { 20.0f,50.0f });
+	//AddPolygon(0, { 1285.0f,5.0f,-620.0f }, { 0.0f,D3DX_PI,0.0f }, { 20.0f,50.0f });
 
-	// 配列に要素の追加を行う ( 2グループ : near[一番近い] )
-	AddPolygon(2, { 817.0f,5.0f,-50.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
-	AddPolygon(2, { 817.0f,5.0f,-250.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
-	AddPolygon(2, { 880.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
-	AddPolygon(2, { 1040.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
-	AddPolygon(2, { 1180.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
-	AddPolygon(2, { 1285.0f,5.0f,-420.0f }, { 0.0f,D3DX_PI,0.0f }, { 20.0f,50.0f });
-	AddPolygon(2, { 1285.0f,5.0f,-620.0f }, { 0.0f,D3DX_PI,0.0f }, { 20.0f,50.0f });
+	//// 配列に要素の追加を行う ( 1グループ : right[2番目に遠い] )
+	//AddPolygon(1, { 817.0f,5.0f,-50.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 817.0f,5.0f,-250.0f }, { 0.0f,D3DX_PI,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 880.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1080.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1280.0f,5.0f,-350.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1400.0f,5.0f,-450.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1480.0f,5.0f,-560.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1560.0f,5.0f,-670.0f }, { 0.0f,2.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(1, { 1750.0f,5.0f,-800.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
+	//AddPolygon(1, { 1900.0f,5.0f,-800.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,50.0f });
+
+	//// 配列に要素の追加を行う ( 2グループ : Left[1番遠い] )
+	//AddPolygon(2, { 817.0f,5.0f,283.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 817.0f,5.0f,483.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 817.0f,5.0f,683.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 817.0f,5.0f,883.0f }, { 0.0f,0.0f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 850.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 1050.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 1250.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 1450.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 1650.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 1850.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
+	//AddPolygon(2, { 2050.0f,5.0f,1100.0f }, { 0.0f,D3DX_PI * 0.5f,0.0f }, { 15.0f,45.0f });
 
 	return S_OK;
 }
@@ -143,4 +146,15 @@ void CPolygonManager::ChangeDrawFalg(int nIdxGroup,bool isFalgs)
 			pPolygon->SetIsDraw(isFalgs);
 		}
 	}
+}
+//=========================================================
+// 外部ファイル読み込み処理
+//=========================================================
+void CPolygonManager::Load(void)
+{
+	// 管理クラスの取得
+	const auto& jsonmanager = CManager::GetInstance()->GetJsonManager();
+
+	// ファイルオープン
+	jsonmanager->Load(POLYGONMANAGER::LOADNAME);
 }

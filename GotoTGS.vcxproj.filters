@@ -1104,6 +1104,9 @@
     <ClCompile Include="src\cpp\polygonmanager.cpp">
       <Filter>ソース ファイル\AddFile\Nishio\Ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\cpp\createjsonpolygon.cpp">
+      <Filter>ソース ファイル\JsonUtil\CreateClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\pch.h">
@@ -1759,6 +1762,9 @@
     </ClInclude>
     <ClInclude Include="src\include\polygonmanager.h">
       <Filter>ヘッダー ファイル\AddFile\Nishio\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\createjsonpolygon.h">
+      <Filter>ヘッダー ファイル\JsonUtil\CreateClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

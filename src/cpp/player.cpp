@@ -578,6 +578,12 @@ void CPlayer::Update(void)
 						auto* ui = pTimer->GetReturnUi();
 						ui->SetUse(false);
 
+						// ŠÔ“à‚É‹A‚Á‚Ä—ˆ‚½‚ç,ó‘Ô‚ğ•Ï‰»‚³‚¹‚é
+						if (pTimer->GetNumAll() > 0)
+						{
+							pTimer->End();
+						}
+
 						break;
 					}
 

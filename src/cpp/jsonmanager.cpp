@@ -30,6 +30,7 @@
 #include "createjsonwall.h"
 #include "createjsonenemy.h"
 #include "createjsonauditor.h"
+#include "createjsonpolygon.h"
 
 //*********************************************************
 // json‹óŠÔ‚ðŽg—p
@@ -82,6 +83,7 @@ HRESULT CJsonManager::Init(void)
 	m_Creator[PATH_TAGNAME::WALL] = std::make_unique<CJsonCreateWall>();
 	m_Creator[PATH_TAGNAME::ENEMY] = std::make_unique<CJsonCreateEnemy>();
 	m_Creator[PATH_TAGNAME::AUDITOR] = std::make_unique<CJsonCreateAuditor>();
+	m_Creator[PATH_TAGNAME::POLYGON] = std::make_unique<CJsonCreatePolygon>();
 
 	return S_OK;
 }

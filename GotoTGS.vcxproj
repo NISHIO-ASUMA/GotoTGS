@@ -210,6 +210,7 @@
     <ClCompile Include="src\cpp\createjsonmeshfield.cpp" />
     <ClCompile Include="src\cpp\createjsonmove.cpp" />
     <ClCompile Include="src\cpp\createjsonnomove.cpp" />
+    <ClCompile Include="src\cpp\createjsonpolygon.cpp" />
     <ClCompile Include="src\cpp\createjsonui.cpp" />
     <ClCompile Include="src\cpp\createjsonwall.cpp" />
     <ClCompile Include="src\cpp\crow.cpp" />
@@ -430,6 +431,7 @@
     <ClInclude Include="src\include\createjsonmeshfield.h" />
     <ClInclude Include="src\include\createjsonmove.h" />
     <ClInclude Include="src\include\createjsonnomove.h" />
+    <ClInclude Include="src\include\createjsonpolygon.h" />
     <ClInclude Include="src\include\createjsonui.h" />
     <ClInclude Include="src\include\createjsonwall.h" />
     <ClInclude Include="src\include\crow.h" />

@@ -25,6 +25,7 @@
 #include "tutorialuimanager.h"
 #include "pointobject.h"
 #include "meshcylinder.h"
+#include <polygonmanager.h>
 
 //*********************************************************
 // 名前空間 [髙橋追加]
@@ -156,6 +157,9 @@ void CClientManager::SetClient(void)
 
 	// [ADD : 西尾] メッシュの描画起動
 	m_pMeshCylinder[nNowClient]->SetIsDraw(true);
+
+	// [ADD : 西尾] 道導の描画起動
+	CPolygonManager::GetInstance()->ChangeDrawFalg(nNowClient, true);
 }
 //========================================================
 // クライアントの削除処理
@@ -177,8 +181,11 @@ void CClientManager::ClearClient(void)
 //========================================================
 void CClientManager::ActiveChangeSystem(void)
 {
-	// 該当のキャラクターだけアクションする
+	// [ADD : 西尾] 該当のキャラクターだけアクションする
 	m_pClient[m_nNowIndex]->ActionSet();
+
+	// [ADD : 西尾] 道導の描画オフ
+	CPolygonManager::GetInstance()->ChangeDrawFalg(m_nNowIndex, false);
 
 	// サウンド再生
 	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_CLEAR);

@@ -34,7 +34,7 @@ m_fWidth(NULL),
 m_mtxWorld{},
 m_nIdxTexture(-1),
 m_pVtxBuff(nullptr),
-m_isDraw(true)
+m_isDraw(false)
 {
 
 }

@@ -82,6 +82,8 @@ public:
 private:
 	CPolygonManager();
 
+	void Load(void);
+
 private:
 	using PolygonList = std::vector<CObjectRotation3D*>;	// ポリゴン配列
 	std::array<PolygonList, TYPE_MAX> m_apArrayListGroup;	// グループ配列
