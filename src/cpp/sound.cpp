@@ -254,7 +254,7 @@ void CSound::Uninit(void)
 //==============================================================
 HRESULT CSound::Play(SOUND_LABEL label)
 {
-#if 0
+#if 1
 	XAUDIO2_VOICE_STATE xa2state;
 	XAUDIO2_BUFFER buffer;
 
