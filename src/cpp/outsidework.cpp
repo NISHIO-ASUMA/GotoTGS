@@ -103,6 +103,12 @@ void COutsideWork::Draw(void)
 //=========================================================
 void COutsideWork::SetOutside(void)
 {
+	// 提出した書類タスクが3回以下なら処理しない
+	if (GetDOCUMENTTaskNum() < 3)
+	{
+		return;
+	}
+
 	// 外出できる状態にする
 	m_bGoOutside = true;
 

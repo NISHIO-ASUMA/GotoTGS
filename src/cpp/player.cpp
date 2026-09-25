@@ -588,7 +588,7 @@ void CPlayer::Update(void)
 					}
 
 					// 両方がnullじゃない状態の時、起動する
-					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0) && !m_isSetOutSideTask)
+					if (pDesk && pDesk->GetOutsideDesk()->GetGoOutside() != false  && (pDesk->GetDOCUMENTDesk()->GetDOCUMENTTaskNum() > 0) && !m_isSetOutSideTask)
 					{
 						// 扉の状態変更設定
 						m_isSetOutSideTask = true;   // 行きのドア解放フラグ

@@ -48,6 +48,6 @@ public:
 
 private:
 	// メンバ変数
-	bool m_bGoOutside;	// 外出できるかどうか
+	bool m_bGoOutside;		// 外出できるかどうか
 	bool m_bTaskNow;		// タスク中かどうか
 };
