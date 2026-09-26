@@ -240,7 +240,7 @@ void COutSideTaskTimer::Start(void)
 void COutSideTaskTimer::End(void)
 {
 	// サウンド再生
-	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);
+	//CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_TASKCLEAR_SE);
 
 	// 状態変更
 	m_State = TIMESTATE_END;

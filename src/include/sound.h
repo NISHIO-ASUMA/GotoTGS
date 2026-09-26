@@ -56,6 +56,9 @@ public:
 		SOUND_LABEL_PCSTART_SE,			// パソコンの音
 		SOUND_LABEL_ACTIVECHARACTOR_SE,	// 敵追加出現音
 		SOUND_LABEL_STARTOUTSIDE_SE,	// 外タスク開始の音
+		SOUND_LABEL_OVERWORK_SE,		// 過労死警告音
+		SOUND_LABEL_OVERWORK_BGM,		// 過労死シーン音
+		SOUND_LABEL_CATCH_BGM,			// 捕まった時の音
 		SOUND_LABEL_MAX
 	};
 
@@ -120,7 +123,10 @@ private:
 		{"data/SE/automaticSE.wav",0},		 // 自動ドアの音
 		{"data/SE/pcSE.wav",0},				 // パソコン開始の音
 		{"data/SE/ActiveCharactor.wav",0},	 // 敵追加の音
-		{"data/SE/startoutsideSE.wav",0}	 // 外タスク開始の音
+		{"data/SE/startoutsideSE.wav",0},	 // 外タスク開始の音
+		{"data/SE/overworkse.wav",0},		 // 過労の時の音
+		{"data/BGM/overscene.wav",-1},		 // 外タスク開始の音
+		{"data/BGM/loseresultscene.wav",-1}, // 過労の時の音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

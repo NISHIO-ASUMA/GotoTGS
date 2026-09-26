@@ -42,10 +42,10 @@ public:
 	bool Collision(CBoxCollider * pOther,D3DXVECTOR3 * OutPos);
 
 	void SetZEneble(const bool& isEnable) { m_isZTestEneble = isEnable; }
+	void SetIsDraw(const bool& isDraw) { m_isDraw = isDraw; }
 
 	inline CBoxCollider* GetCollider(void) { return m_pCollider.get(); }
 	inline D3DXVECTOR3 GetSize(void) const { return m_Size; }
-
 
 	/// <summary>
 	/// ポインタ生成処理
@@ -60,7 +60,8 @@ public:
 		const D3DXVECTOR3& pos, 
 		const D3DXVECTOR3& rot, 
 		const D3DXVECTOR3& scale, 
-		const char* pModelName
+		const char* pModelName,
+		const bool& isDraw = true
 	);
 
 private:
@@ -77,5 +78,5 @@ private:
 	std::unique_ptr<CBoxCollider> m_pCollider;	// 矩形のコライダー
 	D3DXVECTOR3 m_Size;							// サイズ格納
 	bool m_isZTestEneble;						// 透明化判定を受けるかどうか
+	bool m_isDraw;								// 描画フラグ
 };
-

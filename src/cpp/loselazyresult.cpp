@@ -24,9 +24,10 @@
 #include "resultcastmanager.h"
 #include "ui.h"
 #include "load.h"
+#include "sound.h"
 
 //=========================================================
-// オーバーロードコンストラクタ
+// コンストラクタ
 //=========================================================
 CLoseLazyResult::CLoseLazyResult() : CScene(CScene::MODE_LOSELAZY),
 m_pBlock(nullptr),
@@ -74,6 +75,9 @@ HRESULT CLoseLazyResult::Init(void)
 
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "effectscreenall.png");
+
+	// サウンド再生
+	CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_CATCH_BGM);
 
 	// 初期化結果を返す
 	return S_OK;

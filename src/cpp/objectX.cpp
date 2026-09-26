@@ -324,10 +324,3 @@ void CObjectX::SetFilePass(const char* pFilePass)
 	// モデルを登録
 	m_nIdxModel = pXMgr->Register(ModelName.c_str());
 }
-//=========================================================
-// アウトラインカラー設定関数
-//=========================================================
-inline void CObjectX::SetOutLineColor(const D3DXVECTOR4& color)
-{
-	m_OutLineColor = color;
-}

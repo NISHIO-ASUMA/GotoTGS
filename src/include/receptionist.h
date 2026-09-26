@@ -25,6 +25,7 @@
 //*********************************************************
 class CSphereCollider;
 class CBoxCollider;
+class CPointObject;
 
 //*********************************************************
 // 外サボり受付役のキャラクタークラスを定義
@@ -57,6 +58,7 @@ public:
 
 	inline CBoxCollider* GetBoxCollider(void) { return m_pBoxColiider.get(); }
 	inline CSphereCollider* GetSphereCollider(void) { return m_pSphereColiider.get(); }
+	CPointObject* GetPointObject(void) { return m_pPointObject; }
 
 public:
 
@@ -73,6 +75,7 @@ public:
 private:
 	std::unique_ptr<CBoxCollider> m_pBoxColiider;		// 矩形コライダー
 	std::unique_ptr<CSphereCollider> m_pSphereColiider;	// 球形コライダー
+	CPointObject* m_pPointObject;						// 矢印オブジェクト
 private:
 	int m_nGetTaskPaperNum;								// 受け取るタスクの枚数
 	int m_nActionTime;									// 動作時間

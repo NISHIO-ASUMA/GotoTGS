@@ -27,6 +27,8 @@ class CJoyPad;
 class CInput;
 class CAfkCoolTimeUi;
 class CEnemyManager;
+class CBlock;
+class CUi;
 
 //*********************************************************
 // プレイヤーオブジェクトクラスを定義
@@ -47,7 +49,7 @@ public:
 		GAME,				// ゲーセン
 		FOOD,				// 飲食
 		BENCH,				// ベンチ
-		DOCUMENT,			// 書類運び
+		OVERWORK,			// 過労
 		MAX
 	};
 
@@ -331,6 +333,8 @@ private:
 	bool m_isTaskMaxOver;						// ゲージ上限到達中フラグ
 	bool m_isInitTaskTime;						// 初期のタスク時間判別フラグ
 	bool m_isCompOpenEnable;					// ドア関係
+	bool m_isTriggerTaskMax;					// トリガーイベントが発生したか
+	bool m_isSoundPlay;							// サウンドフラグ
 
 	int m_nInitTaskWorkingTime;					// 初期の許容時間
 	int m_nNoActiveTaskTime;					// タスク起動をしていない時間を管理する
@@ -340,4 +344,6 @@ private:
 	CAfkCoolTimeUi* m_pCoolTimeUi[AFKTYPE_MAX];	// 通常サボり用
 	CAfkCoolTimeUi* m_pCoolTimeUiBench[4];		// ベンチ4箇所用
 	CEnemyManager* m_pEnemyManagerOutSide;		// 敵管理クラスの格納ポインタ
+	CBlock* m_pDocumentObj;						// 書類モデル
+	CUi* m_pOverWorkUi;							// 過労時のUI
 };

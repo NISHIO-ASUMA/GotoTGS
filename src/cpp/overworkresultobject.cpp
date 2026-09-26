@@ -49,7 +49,7 @@ HRESULT COverWorkResultObject::Init(void)
 	CManager::GetInstance()->GetCamera()->Init();
 
 	// ロゴuiを生成
-	//CUi::Create(CENTERPOS, 0, 450.0f, 130.0f, "toomuchwork.png");
+	CUi::Create(CENTERPOS, 0, 450.0f, 130.0f, "toomuchwork.png");
 	
 	// メッシュフィールド
 	CMeshField::Create(VECTOR3_NULL, 1000.0f, 1000.0f,30,30, "data/TEXTURE/field00.jpg");
@@ -58,9 +58,8 @@ HRESULT COverWorkResultObject::Init(void)
 	COverWorkMan::Create(D3DXVECTOR3(0.0f,0.0f,40.0f), VECTOR3_NULL);
 
 	// カラス生成
-	//CCrowBird::Create(D3DXVECTOR3(25.0f, 0.0f, -25.0f), { 0.0f,D3DX_PI * 0.72f,0.0f },CCrowBird::MOTION::ACTION);
-	//CCrowBird::Create(D3DXVECTOR3(-25.0f, 0.0f, -25.0f), { 0.0f,-D3DX_PI * 0.72f,0.0f }, CCrowBird::MOTION::NEUTRAL);
-	// 2.26f
+	CCrowBird::Create(D3DXVECTOR3(25.0f, 0.0f, -25.0f), { 0.0f,D3DX_PI * 0.72f,0.0f },CCrowBird::MOTION::ACTION);
+	CCrowBird::Create(D3DXVECTOR3(-25.0f, 0.0f, -25.0f), { 0.0f,-D3DX_PI * 0.72f,0.0f }, CCrowBird::MOTION::NEUTRAL);
 
 	return S_OK;
 }

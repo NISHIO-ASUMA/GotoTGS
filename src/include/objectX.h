@@ -28,7 +28,7 @@ public:
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
-	void Draw(void); 
+	void Draw(void);
 	void DrawShadow(void);
 	void DrawOutLine(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f));
 	void SetFilePass(const char* pFilePass);
@@ -36,12 +36,15 @@ public:
 	inline void SetPos(const D3DXVECTOR3& pos) { m_pos = pos; }
 	inline void SetRot(const D3DXVECTOR3& rot = VECTOR3_NULL) { m_rot = rot; }
 	inline void SetScale(const D3DXVECTOR3& scale = INITSCALE) { m_Scale = scale; }
-	inline void SetMtxWorld(const D3DXMATRIX &mtxworld) { m_mtxWorld = mtxworld; }
+	inline void SetMtxWorld(const D3DXMATRIX& mtxworld) { m_mtxWorld = mtxworld; }
 	inline void SetCol(const D3DCOLORVALUE& color = V_COLOR_WHITE) { m_col = color; }
 	inline void SetModelIdx(const int& nIdx) { m_nIdxModel = nIdx; }
-	inline void SetShadow(const bool &isFlags) { m_isShadow = isFlags; }
+	inline void SetShadow(const bool& isFlags) { m_isShadow = isFlags; }
 	inline void SetIsOutLine(const bool& isOutLine) { m_isOutLine = isOutLine; }
-	inline void SetOutLineColor(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f));
+	inline void SetOutLineColor(const D3DXVECTOR4& color = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f))
+	{
+		m_OutLineColor = color;
+	};
 
 	inline D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	inline D3DXVECTOR3 GetRot(void) const { return m_rot; }
@@ -49,7 +52,7 @@ public:
 	inline D3DXMATRIX GetMtxWorld(void) const { return m_mtxWorld; }
 	inline D3DCOLORVALUE GetCol(void) const { return m_col; }
 	inline int GetModelIdx(void) const { return m_nIdxModel; }
-	
+
 	/// <summary>
 	/// 生成処理
 	/// </summary>
@@ -59,8 +62,8 @@ public:
 	/// <returns></returns>
 	static CObjectX* Create
 	(
-		const char* pModelName, 
-		const D3DXVECTOR3& pos, 
+		const char* pModelName,
+		const D3DXVECTOR3& pos,
 		const D3DXVECTOR3& rot = VECTOR3_NULL
 	);
 
@@ -84,5 +87,4 @@ private:
 	int m_nIdxModel;		// モデルインデックス
 	bool m_isShadow;		// 影を出すかどうか
 	bool m_isOutLine;		// アウトライン適用かどうか
-
 };

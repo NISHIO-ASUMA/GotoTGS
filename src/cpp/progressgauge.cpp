@@ -51,7 +51,7 @@ CProgressgauge* CProgressgauge::Create(const D3DXVECTOR3& pos, const float& fWid
 	pProgressgauge->SetWidth(fWidth);
 	pProgressgauge->SetHeight(fHeight);
 	pProgressgauge->SetCol(COLOR_WHITE);
-	pProgressgauge->SetTexture("progressgauge000.png");
+	pProgressgauge->SetTexture("new_progless.png");
 
 	// ‰Šú‰»‚ªŽ¸”s‚µ‚½ê‡
 	if (FAILED(pProgressgauge->Init())) return nullptr;

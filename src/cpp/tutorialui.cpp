@@ -29,7 +29,7 @@ namespace TutorialUI
 #ifdef _DEBUG
 	int nDeleteTime = 590;		// チュートリアル用UIの表示の仕方を切り替えるための時間
 #else
-	int nDeleteTime = 140;		// チュートリアル用UIの表示の仕方を切り替えるための時間
+	int nDeleteTime = 100;		// チュートリアル用UIの表示の仕方を切り替えるための時間
 #endif
 };
 

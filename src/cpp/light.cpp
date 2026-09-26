@@ -169,7 +169,7 @@ void CLight::SetLight(void)
 	}
 
 	int pIdx = 3; // インデックス
-	m_aLight[pIdx].Type = D3DLIGHT_SPOT; // ポイントに変更
+	m_aLight[pIdx].Type = D3DLIGHT_SPOT; // スポットに変更
 
 	// ライトの配置座標
 	m_aLight[pIdx].Position = D3DXVECTOR3(0.0f, 300.0f, 0.0f);
@@ -200,4 +200,47 @@ void CLight::SetLight(void)
 		// ライトを有効化
 		pDevice->LightEnable(nCnt, TRUE);
 	}
+}
+//=========================================================
+// ライトの変更
+//=========================================================
+void CLight::ChangeLight(float fRatio)
+{
+	// カラー設定
+	D3DCOLORVALUE color = {
+		COLOR_WHITE.r * fRatio,
+		COLOR_WHITE.g * fRatio,
+		COLOR_WHITE.b * fRatio,
+		1.0f
+	};
+
+	ChangeLight(color);
+}
+//=========================================================
+// ライトの個別変更
+//=========================================================
+void CLight::ChangeLight(const D3DCOLORVALUE& color)
+{
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+	if (!pDevice) return;
+
+	// 全ライトのうち、ディレクショナルライトのみ更新
+	for (int nCnt = 0; nCnt < NUMLIGHT; nCnt++)
+	{
+		if (m_aLight[nCnt].Type == D3DLIGHT_DIRECTIONAL)
+		{
+			// ディレクショナルライトの色を変更
+			m_aLight[nCnt].Diffuse = color;
+
+			// Direct3D デバイスへ再設定
+			pDevice->SetLight(nCnt, &m_aLight[nCnt]);
+		}
+	}
+}
+//=========================================================
+// ライトのリセット ( 初期化時と同じにする )
+//=========================================================
+void CLight::Reset(void)
+{
+	Init();
 }

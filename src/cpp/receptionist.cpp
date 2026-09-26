@@ -18,6 +18,7 @@
 #include "boxcollider.h"
 #include "spherecollider.h"
 #include "motion.h"
+#include "pointobject.h"
 
 //*********************************************************
 // 定数名前空間
@@ -93,6 +94,20 @@ HRESULT CReceptionist::Init(void)
 	// 球形コライダー生成
 	m_pSphereColiider = CSphereCollider::Create(GetPos(), S_SIZE);
 
+	// 受付人の位置を示す矢印の生成
+	m_pPointObject = CPointObject::Create
+	(
+		{ GetPos().x,GetPos().y + 120.0f,GetPos().z },
+		D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f),
+		D3DXVECTOR3(HALF, HALF, HALF),
+		"STAGEOBJ/yajirusi.x"
+	);
+
+	// 関連設定(矢印オブジェクト)
+	m_pPointObject->SetIsDraw(false);
+	m_pPointObject->SetIsOutLine(true);
+	m_pPointObject->SetOutLineColor(D3DXVECTOR4(0.85f, 0.0f, 0.4f, 1.0f));
+	
 	return S_OK;
 }
 //========================================================
@@ -139,6 +154,9 @@ void CReceptionist::Update(void)
 		m_pBoxColiider->SetPos(GetPos());
 		m_pBoxColiider->SetPosOld(GetPos());
 	}
+
+	// 座標の更新
+	m_pPointObject->SetPos({ GetPos().x,GetPos().y + 120.0f,GetPos().z });
 
 	// 親クラスの更新処理
 	CNoMoveCharactor::Update();

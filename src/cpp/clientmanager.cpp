@@ -184,7 +184,7 @@ void CClientManager::ActiveChangeSystem(void)
 	// [ADD : 西尾] 該当のキャラクターだけアクションする
 	m_pClient[m_nNowIndex]->ActionSet();
 
-	// [ADD : 西尾] 道導の描画オフ
+	// [ADD : 西尾] 道しるべの描画オフ
 	CPolygonManager::GetInstance()->ChangeDrawFalg(m_nNowIndex, false);
 
 	// サウンド再生

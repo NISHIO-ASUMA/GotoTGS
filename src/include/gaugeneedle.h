@@ -54,7 +54,7 @@ private:
 		static constexpr float PIVOT_X = 0.5f;		// X軸の回転基準点
 		static constexpr float PIVOT_Y = 0.9f;		// Y軸の回転基準点
 		static constexpr float MAX_ANGLE = 0.43f;	// 傾く角度の最大値
-		static constexpr float MOVE_ANGLE = 0.1f;	// 移動量
+		static constexpr float MOVE_ANGLE = 0.08f;	// 移動量
 		static constexpr int MAX_FREAM = 60;		// 移動に掛かるフレーム数
 	};
 

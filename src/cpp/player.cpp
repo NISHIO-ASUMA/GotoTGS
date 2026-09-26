@@ -41,6 +41,10 @@
 #include "sound.h"
 #include "boss.h"
 #include "myparticle.h"
+#include "light.h"
+#include "block.h"
+#include "ui.h"
+#include "overworkresult.h"
 
 //=========================================================
 // コンストラクタ
@@ -51,6 +55,8 @@ m_pSphereCollider(nullptr),
 m_pSubItemModels(nullptr),
 m_pMachine(nullptr),
 m_pEnemyManagerOutSide(nullptr),
+m_pDocumentObj(nullptr),
+m_pOverWorkUi(nullptr),
 m_posOld(VECTOR3_NULL),
 m_nCntAfk(NULL),
 m_nTimeScore(NULL),
@@ -80,7 +86,9 @@ m_nNoActiveTaskTime(NULL),
 m_nTaskClearBonusTime(NULL),
 m_isTaskMaxOver(false),
 m_isInitTaskTime(false),
-m_isCopyMachine(false)
+m_isCopyMachine(false),
+m_isTriggerTaskMax(false),
+m_isSoundPlay(false)
 {
 	for (int nCnt = 0; nCnt < Player_Bench::BENCH_MAX; nCnt++)
 	{
@@ -143,6 +151,16 @@ HRESULT CPlayer::Init(void)
 	D3DXMATRIX matRot;
 	D3DXVECTOR3 rot = GetRot();
 	D3DXMatrixRotationYawPitchRoll(&matRot, rot.y, rot.x, rot.z);
+
+	// オブジェクト生成
+	m_pDocumentObj = CBlock::Create({ GetPos().x,GetPos().y + 80.0f,GetPos().z }, VECTOR3_NULL, INITSCALE, "STAGEOBJ/document.x");
+	m_pDocumentObj->SetIsDraw(false);
+	m_pDocumentObj->SetIsOutLine(true);
+	m_pDocumentObj->SetOutLineColor(D3DXVECTOR4(0.46f, 0.81f, 1.0f, 1.0f));
+
+	// ui生成
+	m_pOverWorkUi = CUi::Create({640.0f,640.0f,0.0f},5,200.0f,80.0f,"icon_overwork.png");
+	m_pOverWorkUi->SetUse(false);
 
 	// ボックスコライダーの生成
 	m_pBoxCollider = CBoxCollider::Create(GetPos(), GetOldPos(), D3DXVECTOR3(player::BoxSize, player::BoxSize, player::BoxSize),matRot);
@@ -247,28 +265,64 @@ void CPlayer::Update(void)
 	// 初期時間減算関数
 	DecleInitTaskTime();
 
-	// NOTE : 後に西尾が担当する
-#if 0
-	// 指針の取得
+	// タスクの情報を取得
+	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
+
+#if 1
 	// ゲームシーンのオブジェクトから進捗ゲージを取得
 	auto* pProgressGauge = CGameSceneObject::GetInstance()->GetProgressgauge();
 	if (pProgressGauge)
 	{
+		// 指針関連から
 		auto* pNeedle = pProgressGauge->GetGaugeneedle();
 		if (pNeedle && pNeedle->GetIsFinish())
 		{
-			// 初めて上限に達した瞬間にタイマーをセット
-			if (!m_isTaskMaxOver)
+			// 初めて上限に達したら処理を通す
+			if (!m_isTriggerTaskMax)
 			{
-				m_isTaskMaxOver = true;
-				m_nDeathTimer = player::DEATH_LIMIT_FRAME;
+				// 一回だけ警告のサウンドを流す
+				if (!m_isSoundPlay)
+				{
+					CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_OVERWORK_SE);
+					m_isSoundPlay = true;
+				}
+
+				m_isTriggerTaskMax = true;	// 初回トリガーを引いたのでON
+				m_isTaskMaxOver = true;		// カウントダウン状態を開始
+				m_nDeathTimer = player::DEATH_LIMIT_FRAME;	// 動ける時間
 
 				// 起動中のタスクを強制終了する
+				if (pDesk && pDesk->GetTaskType() != CWorldUICollision::TYPE_NONE)
+				{
+					// タスクの非アクティブ化処理
+					pDesk->SetTaskType(pDesk->GetTaskType());
+
+					// PC作業中だった場合の各種座標・フラグの初期化
+					if (m_isPcWork)
+					{
+						SetPos(Player_Info::DESK_RETURNPOS);
+						SetRot(VECTOR3_NULL);
+						m_isPcWork = false;
+					}
+
+					m_isCopyMachine = false;
+				}
 
 				// 画面を暗くする ( ライトの明るさを落とす )
-				
+				auto* Light = CManager::GetInstance()->GetLight();
+				if (Light)
+				{
+					Light->ChangeLight(0.15f);
+				}
+
 				// uiの描画を開始
+				m_pOverWorkUi->SetUse(true);
 			}
+		}
+		else
+		{
+			m_isTriggerTaskMax = false;
+			m_isSoundPlay = false; 
 		}
 	}
 
@@ -278,25 +332,38 @@ void CPlayer::Update(void)
 		// 6秒の間にサボりを起動できたらカウント解除
 		if (m_isEnableLazy)
 		{
+			// 超過状態とタイマーを解除
 			m_isTaskMaxOver = false;
 			m_nDeathTimer = 0;
+			m_isTriggerTaskMax = false;
+			m_isEnableLazy = false;
+
+			// ライトの明るさを元に戻す
+			auto* Light = CManager::GetInstance()->GetLight();
+			if (Light)
+			{
+				Light->Reset();
+			}
+
+			// 警告UIの表示off
+			m_pOverWorkUi->SetUse(false);
 		}
 		else
 		{
 			// カウントダウン
 			m_nDeathTimer--;
 
-			// 6秒間サボれなかったらゲームオーバー
+			// 6秒間の内にサボれなかったらゲームオーバー
 			if (m_nDeathTimer <= 0)
-			{// この瞬間だけ"当たり判定をoff"にする
+			{
 				// モーション変更
-				//GetMotion()->SetMotion(CPlayer::MOTION::OVERWORK, true, 2);
+				GetMotion()->SetMotion(CPlayer::MOTION::OVERWORK, true, 2);
 
 				// モーションだけ更新
 				CMoveCharactor::UpdateMotionOnly();
 
 				// 画面遷移する
-				//CManager::GetInstance()->GetFade()->SetFade(std::make_unique<CWorkOverResult>());
+				CManager::GetInstance()->GetFade()->SetFade(std::make_unique<COverWorkResult>());
 				return;
 			}
 		}
@@ -330,9 +397,6 @@ void CPlayer::Update(void)
 			m_nCoolTimeBench[nBench]--;	// デクリメント
 		}
 	}
-
-	// タスクの情報を取得
-	auto* pDesk = CGameSceneObject::GetInstance()->GetDesk();
 
 	// キー入力取得
 	const auto& Key = CManager::GetInstance()->GetInputKeyboard();
@@ -409,8 +473,8 @@ void CPlayer::Update(void)
 	D3DXVECTOR3 oldpos = GetOldPos();
 
 	// 速度の調整値
-	float MoveSpeed = m_isTaskMaxOver ? 1.5f : player::fSpeed;
-	float PadLStick = m_isTaskMaxOver ? 1.75f : 3.75f;
+	float MoveSpeed = m_isTaskMaxOver ? 2.5f : player::fSpeed;
+	float PadLStick = m_isTaskMaxOver ? 2.05f : 3.75f;
 
 	if (m_nControlTypes == CONTROLTYPE_KEY)
 	{
@@ -432,6 +496,12 @@ void CPlayer::Update(void)
 		}
 	}
 	
+	// 書類オブジェクトの更新
+	if (m_pDocumentObj)
+	{
+		m_pDocumentObj->SetPos({ pos.x,pos.y + 80.0f,pos.z });
+	}
+
 	// ステートマシンの更新処理
 	if (m_pMachine) m_pMachine->Update();
 
@@ -528,12 +598,6 @@ void CPlayer::Update(void)
 
 				case CWorldUICollision::TYPE_DOCUMENT: // 書類タスク[add 髙橋]
 				
-					//******************************************
-					// ここの修正依頼 : 西尾より
-					// 外タスクの起動条件を「コピー機で印刷された枚数が3枚以上、それをかごに提出した場合のみ起動可能に出来る」
-					// に変更してください
-					//******************************************
-
 					// 両方がnullじゃない状態
 					if (pDesk && (pDesk->GetDOCUMENTDesk()->GetCOPYTaskNum() > 0))
 					{
@@ -542,6 +606,10 @@ void CPlayer::Update(void)
 
 						// 外出タスクの起動
 						pDesk->GetOutsideDesk()->SetOutside();
+
+						// 受付人が持っている→の描画on
+						auto* pRecep = CGameSceneObject::GetInstance()->GetReception();
+						pRecep->GetPointObject()->SetIsDraw(true);
 					}
 
 					break;
@@ -571,12 +639,16 @@ void CPlayer::Update(void)
 						// 受付人のモーション変更
 						auto* pRecep = CGameSceneObject::GetInstance()->GetReception();
 						pRecep->ChangeAction();
+						pRecep->GetPointObject()->SetIsDraw(false);
 
 						// タイマーからのuiの表示をoffにする
 						COutSideTaskTimer* pTimer = CGameSceneObject::GetInstance()->GetOutSideTime();
 						if (!pTimer) return;
 						auto* ui = pTimer->GetReturnUi();
 						ui->SetUse(false);
+
+						// 書類の描画をoffにする
+						m_pDocumentObj->SetIsDraw(false);
 
 						// 時間内に帰って来たら,状態を変化させる
 						if (pTimer->GetNumAll() > 0)
@@ -609,6 +681,9 @@ void CPlayer::Update(void)
 
 						// サウンド再生
 						CManager::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_STARTOUTSIDE_SE);
+
+						// 書類の描画をonにする
+						m_pDocumentObj->SetIsDraw(true);
 					}
 
 					break;

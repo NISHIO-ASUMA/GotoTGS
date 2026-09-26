@@ -62,7 +62,7 @@ namespace player
 	constexpr float SphereSize = 60.0f;									  // 球形サイズ
 	constexpr const char* SCRIPT = "data/MOTION/Player/PlayerMotion.txt"; // テキストファイル
 	constexpr int AFK_COOL_TIME = 1080;									  // 再起動できるクールタイム時間 ( 18秒 )
-	constexpr int DEATH_LIMIT_FRAME = 360;								  // 死亡時間タイマーの上限値
+	constexpr int DEATH_LIMIT_FRAME = 400;								  // 死亡時間タイマーの上限値
 	constexpr int TASK_LIMIT_WORKING = 250;								  // 初期の回避時間
 	const D3DXVECTOR3 UI_POS_VALUE = { 0.0f,80.0f,0.0f };				  // 頭の上に出すuiの高さ
 	constexpr float SphereSizeToEnemyDown = 90.0f;						  // 上司の下げるサイズ

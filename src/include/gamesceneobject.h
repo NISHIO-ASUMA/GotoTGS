@@ -84,24 +84,24 @@ public:
 
 private:
 
-	CGameSceneObject();								// コンストラクタ
-	void CreatePointer(void);						// 初期化処理関数分け
+	CGameSceneObject();										// コンストラクタ
+	void CreatePointer(void);								// 初期化処理関数分け
 
 private:
-	CScore* m_pScoreTask;							// スコアクラスのポインタ [ タスク分 ]
-	CScore* m_pScoreDitch;							// スコアクラスのポインタ [ サボる分、実際にゲーム中に出す ]
-	CScore* m_pScoreAll;							// スコアクラスのポインタ [ 合計 ]
+	CScore* m_pScoreTask;									// スコアクラスのポインタ [ タスク分 ]
+	CScore* m_pScoreDitch;									// スコアクラスのポインタ [ サボる分、実際にゲーム中に出す ]
+	CScore* m_pScoreAll;									// スコアクラスのポインタ [ 合計 ]
 
 private:
-	CGametime* m_pTimer;							// タイマークラスのポインタ		Misaki
-	CDeskwork* m_pDeskwork;							// タスクのポインタ				Misaki
-	CProgressgauge* m_pProgressgauge;				// 進捗ゲージのポインタ			Misaki
-	CEventUI* m_pEventUI;							// イベントUIのポインタ			Misaki
-	CVigilanceUIManager* m_pVigilanceUImanager;		// 警戒ゲージのポインタ			Misaki
-	CReceptionUI* m_pReceptionUI;					// 受付人UIのポインタ			Misaki
+	CGametime* m_pTimer;									// タイマークラスのポインタ		Misaki
+	CDeskwork* m_pDeskwork;									// タスクのポインタ				Misaki
+	CProgressgauge* m_pProgressgauge;						// 進捗ゲージのポインタ			Misaki
+	CEventUI* m_pEventUI;									// イベントUIのポインタ			Misaki
+	CVigilanceUIManager* m_pVigilanceUImanager;				// 警戒ゲージのポインタ			Misaki
+	CReceptionUI* m_pReceptionUI;							// 受付人UIのポインタ			Misaki
 
 private:
-	CPlayer* m_pPlayer;										// プレイヤーのクラスポインタ	[ Asuma add ]
+	CPlayer* m_pPlayer;										// プレイヤーのクラスポインタ	[ Asuma Add ]
 	CReceptionist* m_pReception;							// 外に行く受付人				[ Asuma Add ]
 	CAfk2DUI* m_pAfk2DUI;									// サボりの2DUI					[ Asuma Add ]
 	CBoss* m_pBoss;											// 社長キャラクター				[ Asuma Add ]

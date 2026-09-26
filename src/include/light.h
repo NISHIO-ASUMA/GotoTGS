@@ -26,6 +26,14 @@ public:
 
 	void SetLight(void);
 
+	// ディレクショナルライトの色（明るさ）を変更する窓口
+	void ChangeLight(float fRatio);
+
+	// 個別に RGBA を指定したい場合（オーバーロード）
+	void ChangeLight(const D3DCOLORVALUE& color);
+
+	void Reset(void);
+
 private:
 	static inline constexpr int NUMLIGHT = 4;		// 設置する数
 

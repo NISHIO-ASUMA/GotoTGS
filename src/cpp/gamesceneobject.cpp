@@ -156,9 +156,15 @@ HRESULT CGameSceneObject::Init(void)
 	// テレビ用ポリゴンの生成
 	CAfkTVPolygon::Create();
 
+	// ui生成
+	CUi::Create({ 130.0f,85.0f,0.0f }, 0, 210.0f, 95.0f, "gauge_back.png");
+	CUi::Create({ 165.0f,155.0f,0.0f }, 0, 35.0f, 25.0f, "word_task.png");
+	CUi::Create({ 40.0f,120.0f,0.0f }, 0, 40.0f, 40.0f, "icon_over.png");
+	CUi::Create({ 280.0f,120.0f,0.0f }, 0, 40.0f, 40.0f, "icon_lazyman.png");
+
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(GAMEOBJECT::PlayerPos, VECTOR3_NULL);
-
+	
 	// 各種ポインタクラスの生成
 	CreatePointer();
 
@@ -201,6 +207,9 @@ HRESULT CGameSceneObject::Init(void)
 
 	// 球形コライダーを生成
 	m_pOutSideOneSphere = CSphereCollider::Create({ 700.0f,40.0f,100.0f }, 50.0f);
+
+	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
+	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 
 //*********************************************
 // ADD 西尾 : クラスに格納するポインタ等の設定
@@ -412,17 +421,14 @@ void CGameSceneObject::CreatePointer(void)
 	m_pScoreAll = CScore::Create(D3DXVECTOR3(1250.0f, 60.0f, 0.0f), 200.0f, 55.0f,false);
 //********************************************
 
-	// 進捗ゲージの生成 Misaki
-	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(200.0f, 70.0f, 0.0f), 100.0f, 70.0f);
+	// 進捗ゲージの生成 Misaki ( テクスチャ差し替え )
+	m_pProgressgauge = CProgressgauge::Create(D3DXVECTOR3(165.0f, 70.0f, 0.0f), 100.0f, 70.0f);
 
 	// イベントUIの生成 Misaki
 	m_pEventUI = CEventUI::Create();
 
 	// 警戒度UIマネージャーの生成 Misaki
 	m_pVigilanceUImanager = CVigilanceUIManager::Create(true);
-
-	// 外仕事受付人を生成 ( 外に行くドア付近に生成 )
-	m_pReception = CReceptionist::Create(D3DXVECTOR3(360.0f, 0.0f, 215.0f), VECTOR3_NULL);
 
 	// 西尾追加 : 社長を生成する
 	m_pBoss = CBoss::Create({ 677.5f,0.0f,325.0f }, VECTOR3_NULL);

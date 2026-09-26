@@ -58,7 +58,7 @@ CGaugeneedle* CGaugeneedle::Create(const D3DXVECTOR3& pos, const float& fWidth, 
 	pGaugeneedle->m_fOldAngle = NULL;												// 元の角度
 	pGaugeneedle->SetCol(COLOR_WHITE);												// 色
 	pGaugeneedle->SetSize(D3DXVECTOR2(fWidth, fHeight));							// サイズ
-	pGaugeneedle->SetTexture("needle000.png");										// テクスチャ
+	pGaugeneedle->SetTexture("new_nedlee.png");										// テクスチャ
 
 	// 初期化が失敗した場合
 	if (FAILED(pGaugeneedle->Init())) return nullptr;
@@ -180,6 +180,10 @@ void CGaugeneedle::AddAFK(void)
 
 	// 右に進むようにする
 	m_bDir = true;
+
+	// 完了フラグを戻す ( もしtrueなら )
+	if (m_isFinish)
+		m_isFinish = false;
 }
 
 //=========================================================
@@ -198,6 +202,6 @@ void CGaugeneedle::NormalizAngle(float& fAngle)
 		fAngle = D3DX_PI * Config::MAX_ANGLE;
 	}
 
-	// 正規化
+	// 正規化 ( 汎用計算関数 )
 	fAngle = NormalAngle(fAngle);
 }

@@ -25,7 +25,8 @@
 CBlock::CBlock(int nPriority) : CObjectX(nPriority),
 m_pCollider(nullptr),
 m_Size(VECTOR3_NULL),
-m_isZTestEneble(false)
+m_isZTestEneble(false),
+m_isDraw(true)
 {
 	
 }
@@ -44,7 +45,8 @@ CBlock* CBlock::Create
 	const D3DXVECTOR3& pos, 
 	const D3DXVECTOR3& rot, 
 	const D3DXVECTOR3& scale, 
-	const char* pModelName
+	const char* pModelName,
+	const bool& isDraw
 )
 {
 	// インスタンス生成
@@ -56,6 +58,7 @@ CBlock* CBlock::Create
 	pBlock->SetPos(pos);
 	pBlock->SetRot(rot);
 	pBlock->SetScale(scale);
+	pBlock->SetIsDraw(isDraw);
 
 	// 初期化失敗時
 	if (FAILED(pBlock->Init())) return nullptr;
@@ -162,6 +165,9 @@ void CBlock::Update(void)
 //=========================================================
 void CBlock::Draw(void)
 {
+	// 無効なら描画しない
+	if (!m_isDraw) return;
+
 	// デバイス取得
 	const auto& pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 

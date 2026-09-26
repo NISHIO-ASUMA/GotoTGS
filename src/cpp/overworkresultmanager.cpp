@@ -40,7 +40,7 @@ HRESULT COverWorkResultManager::Init(void)
 	if (pSound == nullptr) return E_FAIL;
 
 	// ŽÀÛ‚ÌÄ¶
-	//pSound->Play(SOUND_LABEL_OVERWORK_BGM);
+	pSound->Play(CSound::SOUND_LABEL_OVERWORK_BGM);
 
 	return S_OK;
 }
